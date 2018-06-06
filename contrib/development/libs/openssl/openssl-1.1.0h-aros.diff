@@ -1,0 +1,915 @@
+Binary files openssl-1.1.0h/apps/app_rand.o and openssl-1.1.0h_aros/apps/app_rand.o differ
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/apps.c openssl-1.1.0h_aros/apps/apps.c
+--- openssl-1.1.0h/apps/apps.c	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/apps/apps.c	2018-06-04 09:30:33.420663263 +0000
+@@ -2190,6 +2190,23 @@
+ 
+     return (ret);
+ }
++#elif defined(OPENSSL_SYS_AROS)
++#include <sys/time.h>
++
++double app_tminterval(int stop,int usertime)
++{
++    double ret = 0;
++    struct timeval  now;
++    static struct timeval tmstart;
++
++    gettimeofday(&now,NULL);
++
++    if (stop==TM_START) tmstart = now;
++    else ret = ( (now.tv_sec+now.tv_usec*1e-6)
++         - (tmstart.tv_sec+tmstart.tv_usec*1e-6) );
++
++    return ret;
++}
+ 
+ #elif defined(_SC_CLK_TCK)      /* by means of unistd.h */
+ # include <sys/times.h>
+@@ -2565,6 +2582,7 @@
+ 
+ void wait_for_async(SSL *s)
+ {
++    extern struct Library *SocketBase;
+     /* On Windows select only works for sockets, so we simply don't wait  */
+ #ifndef OPENSSL_SYS_WINDOWS
+     int width = 0;
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/apps.h openssl-1.1.0h_aros/apps/apps.h
+--- openssl-1.1.0h/apps/apps.h	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/apps/apps.h	2018-06-04 09:30:33.420663263 +0000
+@@ -33,6 +33,16 @@
+ #  define openssl_fdset(a,b) FD_SET(a, b)
+ # endif
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++#endif
++
++
+ /*
+  * quick macro when you need to pass an unsigned char instead of a char.
+  * this is true for some implementations of the is*() functions, for
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/ocsp.c openssl-1.1.0h_aros/apps/ocsp.c
+--- openssl-1.1.0h/apps/ocsp.c	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/apps/ocsp.c	2018-06-04 09:30:33.420663263 +0000
+@@ -35,6 +35,7 @@
+ # include <openssl/bn.h>
+ # include <openssl/x509v3.h>
+ 
++
+ # if defined(NETWARE_CLIB)
+ #  ifdef NETWARE_BSDSOCK
+ #   include <sys/socket.h>
+@@ -50,6 +51,15 @@
+ #  endif
+ # endif
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <proto/bsdsocket.h>
++extern struct Library *SocketBase;
++#endif
++
+ /* Maximum leeway in validity period: default 5 minutes */
+ # define MAX_VALIDITY_PERIOD    (5 * 60)
+ 
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/openssl.c openssl-1.1.0h_aros/apps/openssl.c
+--- openssl-1.1.0h/apps/openssl.c	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/apps/openssl.c	2018-06-04 09:30:33.420663263 +0000
+@@ -33,6 +33,11 @@
+ #define INCLUDE_FUNCTION_TABLE
+ #include "apps.h"
+ 
++#if defined(OPENSSL_SYS_AROS)
++struct Library *SocketBase = NULL;
++#endif
++
++
+ 
+ #ifdef OPENSSL_NO_CAMELLIA
+ # define FORMAT "%-15s"
+@@ -45,6 +50,17 @@
+ /* Special sentinel to exit the program. */
+ #define EXIT_THE_PROGRAM (-1)
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++extern struct Library *SocketBase;
++
++#endif
++
+ /*
+  * The LHASH callbacks ("hash" & "cmp") have been replaced by functions with
+  * the base prototypes (we cast each variable inside the function to the
+@@ -62,6 +78,14 @@
+ BIO *bio_out = NULL;
+ BIO *bio_err = NULL;
+ 
++#if defined(OPENSSL_SYS_AROS)
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++#endif
++
++
+ static int apps_startup()
+ {
+ #ifdef SIGPIPE
+@@ -135,6 +159,21 @@
+      * Replace argv[] with UTF-8 encoded strings.
+      */
+     win32_utf8argv(&argc, &argv);
++#elif defined(OPENSSL_SYS_AROS)
++        if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            OPENSSL_EXIT(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            OPENSSL_EXIT(10);
++        }
++
+ #endif
+ 
+     p = getenv("OPENSSL_DEBUG_MEMORY");
+@@ -701,3 +740,7 @@
+         (void)lh_FUNCTION_insert(ret, f);
+     return (ret);
+ }
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/s_client.c openssl-1.1.0h_aros/apps/s_client.c
+--- openssl-1.1.0h/apps/s_client.c	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/apps/s_client.c	2018-06-04 09:30:33.420663263 +0000
+@@ -54,6 +54,7 @@
+ typedef unsigned int u_int;
+ #endif
+ 
++
+ #define USE_SOCKETS
+ #include "apps.h"
+ #include <openssl/x509.h>
+@@ -73,6 +74,10 @@
+ #include "s_apps.h"
+ #include "timeouts.h"
+ 
++#if defined(OPENSSL_SYS_AROS)
++    extern struct Library *SocketBase;
++#endif
++
+ #if defined(__has_feature)
+ # if __has_feature(memory_sanitizer)
+ #  include <sanitizer/msan_interface.h>
+@@ -1727,6 +1732,7 @@
+     }
+ 
+  re_start:
++
+     if (init_client(&s, host, port, socket_family, socket_type) == 0) {
+         BIO_printf(bio_err, "connect:errno=%d\n", get_last_socket_error());
+         BIO_closesocket(s);
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/speed.c openssl-1.1.0h_aros/apps/speed.c
+--- openssl-1.1.0h/apps/speed.c	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/apps/speed.c	2018-06-04 09:30:33.424663262 +0000
+@@ -111,8 +111,13 @@
+ #endif
+ #include <openssl/modes.h>
+ 
++#if defined(OPENSSL_SYS_AROS)
++    extern struct Library *SocketBase;
++#endif
++
++
+ #ifndef HAVE_FORK
+-# if defined(OPENSSL_SYS_VMS) || defined(OPENSSL_SYS_WINDOWS)
++# if defined(OPENSSL_SYS_VMS) || defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_AROS)
+ #  define HAVE_FORK 0
+ # else
+ #  define HAVE_FORK 1
+@@ -340,8 +345,10 @@
+ static double Time_F(int s)
+ {
+     double ret = app_tminterval(s, usertime);
++#if defined(SIGALRM) && !defined(OPENSSL_SYS_AROS)
+     if (s == STOP)
+         alarm(0);
++#endif
+     return ret;
+ }
+ #endif
+@@ -2825,7 +2832,7 @@
+ 
+ static void print_message(const char *s, long num, int length)
+ {
+-#ifdef SIGALRM
++#if defined(SIGALRM) && !defined(OPENSSL_SYS_AROS)
+     BIO_printf(bio_err,
+                mr ? "+DT:%s:%d:%d\n"
+                : "Doing %s for %ds on %d size blocks: ", s, SECONDS, length);
+@@ -2842,7 +2849,7 @@
+ static void pkey_print_message(const char *str, const char *str2, long num,
+                                int bits, int tm)
+ {
+-#ifdef SIGALRM
++#if defined(SIGALRM) && !defined(OPENSSL_SYS_AROS)
+     BIO_printf(bio_err,
+                mr ? "+DTP:%d:%s:%s:%d\n"
+                : "Doing %d bit %s %s's for %ds: ", bits, str, str2, tm);
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/s_server.c openssl-1.1.0h_aros/apps/s_server.c
+--- openssl-1.1.0h/apps/s_server.c	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/apps/s_server.c	2018-06-04 09:30:33.424663262 +0000
+@@ -65,6 +65,11 @@
+ typedef unsigned int u_int;
+ #endif
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <proto/bsdsocket.h>
++extern struct Library *SocketBase;
++#endif
++
+ #include <openssl/lhash.h>
+ #include <openssl/bn.h>
+ #define USE_SOCKETS
+--- openssl-1.1.0h/apps/s_socket.c	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/apps/s_socket.c	2018-06-04 09:30:33.424663262 +0000
+@@ -36,6 +36,11 @@
+ # include <openssl/bio.h>
+ # include <openssl/err.h>
+ 
++#if defined(OPENSSL_SYS_AROS)
++    extern struct Library *SocketBase;
++#endif
++
++
+ /*
+  * init_client - helper routine to set up socket communication
+  * @sock: pointer to storage of resulting socket.
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/s_time.c openssl-1.1.0h_aros/apps/s_time.c
+--- openssl-1.1.0h/apps/s_time.c	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/apps/s_time.c	2018-06-04 09:30:33.424663262 +0000
+@@ -26,6 +26,11 @@
+ # include OPENSSL_UNISTD
+ #endif
+ 
++#if defined(OPENSSL_SYS_AROS)
++    extern struct Library *SocketBase;
++#endif
++
++
+ #define SSL_CONNECT_NAME        "localhost:4433"
+ 
+ #define SECONDS 30
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/b_addr.c openssl-1.1.0h_aros/crypto/bio/b_addr.c
+--- openssl-1.1.0h/crypto/bio/b_addr.c	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/crypto/bio/b_addr.c	2018-06-05 07:18:04.410350739 +0000
+@@ -21,6 +21,17 @@
+ CRYPTO_RWLOCK *bio_lookup_lock;
+ static CRYPTO_ONCE bio_lookup_init = CRYPTO_ONCE_STATIC_INIT;
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++extern struct Library *SocketBase;
++#endif
++
++
+ /*
+  * Throughout this file and bio_lcl.h, the existence of the macro
+  * AI_PASSIVE is used to detect the availability of struct addrinfo,
+@@ -711,6 +722,11 @@
+         static uint32_t he_fallback_address;
+         static const char *he_fallback_addresses[] =
+             { (char *)&he_fallback_address, NULL };
++#endif
++#if defined(OPENSSL_SYS_AROS)
++        static uint32_t he_fallback_address;
++        static const char *he_fallback_addresses[] =
++            { (char *)&he_fallback_address, NULL };
+ #else
+         static in_addr_t he_fallback_address;
+         static const char *he_fallback_addresses[] =
+@@ -813,7 +829,7 @@
+                 se_fallback.s_proto = proto;
+                 se = &se_fallback;
+             } else if (endp == service) {
+-                se = getservbyname(service, proto);
++                se = getservbyname((char*)service, proto);
+ 
+                 if (se == NULL) {
+ #ifndef OPENSSL_SYS_WINDOWS
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/bio_lcl.h openssl-1.1.0h_aros/crypto/bio/bio_lcl.h
+--- openssl-1.1.0h/crypto/bio/bio_lcl.h	2018-03-27 13:50:38.000000000 +0000
++++ openssl-1.1.0h_aros/crypto/bio/bio_lcl.h	2018-06-05 07:39:00.170561185 +0000
+@@ -10,6 +10,10 @@
+ #define USE_SOCKETS
+ #include "e_os.h"
+ 
++# if defined(OPENSSL_SYS_AROS)
++#  undef AI_PASSIVE
++# endif
++
+ /* BEGIN BIO_ADDRINFO/BIO_ADDR stuff. */
+ 
+ #ifndef OPENSSL_NO_SOCK
+@@ -36,7 +40,7 @@
+ /*
+  * Undefine AF_UNIX on systems that define it but don't support it.
+  */
+-# if defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_VMS)
++# if defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_VMS) || defined(OPENSSL_SYS_AROS)
+ #  undef AF_UNIX
+ # endif
+ 
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/b_sock2.c openssl-1.1.0h_aros/crypto/bio/b_sock2.c
+--- openssl-1.1.0h/crypto/bio/b_sock2.c	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/crypto/bio/b_sock2.c	2018-06-04 09:30:33.428663262 +0000
+@@ -24,6 +24,17 @@
+ #  define MAX_LISTEN  32
+ # endif
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++extern struct Library *SocketBase;
++#endif
++
++
+ /*-
+  * BIO_socket - create a socket
+  * @domain: the socket domain (AF_INET, AF_INET6, AF_UNIX, ...)
+@@ -102,7 +113,7 @@
+         }
+     }
+ 
+-    if (connect(sock, BIO_ADDR_sockaddr(addr),
++    if (connect(sock, (struct sockaddr*)BIO_ADDR_sockaddr(addr),
+                 BIO_ADDR_sockaddr_size(addr)) == -1) {
+         if (!BIO_sock_should_retry(-1)) {
+             SYSerr(SYS_F_CONNECT, get_last_socket_error());
+@@ -216,7 +227,7 @@
+     }
+ # endif
+ 
+-    if (bind(sock, BIO_ADDR_sockaddr(addr), BIO_ADDR_sockaddr_size(addr)) != 0) {
++    if (bind(sock, (struct sockaddr*)BIO_ADDR_sockaddr(addr), BIO_ADDR_sockaddr_size(addr)) != 0) {
+         SYSerr(SYS_F_BIND, get_last_socket_error());
+         BIOerr(BIO_F_BIO_LISTEN, BIO_R_UNABLE_TO_BIND_SOCKET);
+         return 0;
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/b_sock.c openssl-1.1.0h_aros/crypto/bio/b_sock.c
+--- openssl-1.1.0h/crypto/bio/b_sock.c	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/crypto/bio/b_sock.c	2018-06-04 09:30:33.428663262 +0000
+@@ -28,6 +28,17 @@
+ static int wsa_init_done = 0;
+ # endif
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++extern struct Library *SocketBase;
++#endif
++
++
+ # if OPENSSL_API_COMPAT < 0x10100000L
+ int BIO_get_host_ip(const char *str, unsigned char *ip)
+ {
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/bss_acpt.c openssl-1.1.0h_aros/crypto/bio/bss_acpt.c
+--- openssl-1.1.0h/crypto/bio/bss_acpt.c	2018-03-27 13:50:38.000000000 +0000
++++ openssl-1.1.0h_aros/crypto/bio/bss_acpt.c	2018-06-04 09:30:33.428663262 +0000
+@@ -13,6 +13,20 @@
+ 
+ #ifndef OPENSSL_NO_SOCK
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <proto/bsdsocket.h>
++#endif
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++extern struct Library *SocketBase;
++#endif
++
+ typedef struct bio_accept_st {
+     int state;
+     int accept_family;
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/bss_conn.c openssl-1.1.0h_aros/crypto/bio/bss_conn.c
+--- openssl-1.1.0h/crypto/bio/bss_conn.c	2018-03-27 13:50:38.000000000 +0000
++++ openssl-1.1.0h_aros/crypto/bio/bss_conn.c	2018-06-04 09:30:33.428663262 +0000
+@@ -14,6 +14,20 @@
+ 
+ #ifndef OPENSSL_NO_SOCK
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <proto/bsdsocket.h>
++#endif
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++extern struct Library *SocketBase;
++#endif
++
+ typedef struct bio_connect_st {
+     int state;
+     int connect_family;
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/bss_dgram.c openssl-1.1.0h_aros/crypto/bio/bss_dgram.c
+--- openssl-1.1.0h/crypto/bio/bss_dgram.c	2018-03-27 13:50:38.000000000 +0000
++++ openssl-1.1.0h_aros/crypto/bio/bss_dgram.c	2018-06-04 09:30:33.428663262 +0000
+@@ -20,6 +20,16 @@
+ #  include <sys/timeb.h>
+ # endif
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++extern struct Library *SocketBase;
++#endif
++
+ # ifndef OPENSSL_NO_SCTP
+ #  include <netinet/sctp.h>
+ #  include <fcntl.h>
+@@ -45,6 +55,10 @@
+          ((a)->s6_addr32[2] == htonl(0x0000ffff)))
+ # endif
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <proto/bsdsocket.h>
++#endif
++
+ static int dgram_write(BIO *h, const char *buf, int num);
+ static int dgram_read(BIO *h, char *buf, int size);
+ static int dgram_puts(BIO *h, const char *str);
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/bss_log.c openssl-1.1.0h_aros/crypto/bio/bss_log.c
+--- openssl-1.1.0h/crypto/bio/bss_log.c	2018-03-27 13:50:38.000000000 +0000
++++ openssl-1.1.0h_aros/crypto/bio/bss_log.c	2018-06-04 09:30:33.428663262 +0000
+@@ -45,6 +45,20 @@
+ # include <syslog.h>
+ #endif
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <proto/bsdsocket.h>
++#endif
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++extern struct Library *SocketBase;
++#endif
++
+ #include <openssl/buffer.h>
+ #include <openssl/err.h>
+ 
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/bss_sock.c openssl-1.1.0h_aros/crypto/bio/bss_sock.c
+--- openssl-1.1.0h/crypto/bio/bss_sock.c	2018-03-27 13:50:38.000000000 +0000
++++ openssl-1.1.0h_aros/crypto/bio/bss_sock.c	2018-06-04 09:30:33.428663262 +0000
+@@ -17,6 +17,21 @@
+ 
+ # include <openssl/bio.h>
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <proto/bsdsocket.h>
++#endif
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++extern struct Library *SocketBase;
++
++#endif
++
+ # ifdef WATT32
+ /* Watt-32 uses same names */
+ #  undef sock_write
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/include/internal/bn_conf.h openssl-1.1.0h_aros/crypto/include/internal/bn_conf.h
+--- openssl-1.1.0h/crypto/include/internal/bn_conf.h	1970-01-01 00:00:00.000000000 +0000
++++ openssl-1.1.0h_aros/crypto/include/internal/bn_conf.h	2018-06-05 13:45:40.196981377 +0000
+@@ -0,0 +1,28 @@
++/* WARNING: do not edit! */
++/* Generated by Makefile from crypto/include/internal/bn_conf.h.in */
++/*
++ * Copyright 2016 The OpenSSL Project Authors. All Rights Reserved.
++ *
++ * Licensed under the OpenSSL license (the "License").  You may not use
++ * this file except in compliance with the License.  You can obtain a copy
++ * in the file LICENSE in the source distribution or at
++ * https://www.openssl.org/source/license.html
++ */
++
++#ifndef HEADER_BN_CONF_H
++# define HEADER_BN_CONF_H
++
++/*
++ * The contents of this file are not used in the UEFI build, as
++ * both 32-bit and 64-bit builds are supported from a single run
++ * of the Configure script.
++ */
++
++/* Should we define BN_DIV2W here? */
++
++/* Only one for the following should be defined */
++#undef SIXTY_FOUR_BIT_LONG
++#undef SIXTY_FOUR_BIT
++#define THIRTY_TWO_BIT
++
++#endif
+Binary files openssl-1.1.0h/crypto/init.o and openssl-1.1.0h_aros/crypto/init.o differ
+Binary files openssl-1.1.0h/crypto/kdf/hkdf.o and openssl-1.1.0h_aros/crypto/kdf/hkdf.o differ
+Binary files openssl-1.1.0h/crypto/kdf/kdf_err.o and openssl-1.1.0h_aros/crypto/kdf/kdf_err.o differ
+Binary files openssl-1.1.0h/crypto/kdf/tls1_prf.o and openssl-1.1.0h_aros/crypto/kdf/tls1_prf.o differ
+Binary files openssl-1.1.0h/crypto/lhash/lhash.o and openssl-1.1.0h_aros/crypto/lhash/lhash.o differ
+Binary files openssl-1.1.0h/crypto/lhash/lh_stats.o and openssl-1.1.0h_aros/crypto/lhash/lh_stats.o differ
+Binary files openssl-1.1.0h/crypto/md2/md2_dgst.o and openssl-1.1.0h_aros/crypto/md2/md2_dgst.o differ
+Binary files openssl-1.1.0h/crypto/md2/md2_one.o and openssl-1.1.0h_aros/crypto/md2/md2_one.o differ
+Binary files openssl-1.1.0h/crypto/md4/md4_dgst.o and openssl-1.1.0h_aros/crypto/md4/md4_dgst.o differ
+Binary files openssl-1.1.0h/crypto/md4/md4_one.o and openssl-1.1.0h_aros/crypto/md4/md4_one.o differ
+Binary files openssl-1.1.0h/crypto/md5/md5_dgst.o and openssl-1.1.0h_aros/crypto/md5/md5_dgst.o differ
+Binary files openssl-1.1.0h/crypto/md5/md5_one.o and openssl-1.1.0h_aros/crypto/md5/md5_one.o differ
+Binary files openssl-1.1.0h/crypto/mdc2/mdc2dgst.o and openssl-1.1.0h_aros/crypto/mdc2/mdc2dgst.o differ
+Binary files openssl-1.1.0h/crypto/mdc2/mdc2_one.o and openssl-1.1.0h_aros/crypto/mdc2/mdc2_one.o differ
+Binary files openssl-1.1.0h/crypto/mem_clr.o and openssl-1.1.0h_aros/crypto/mem_clr.o differ
+Binary files openssl-1.1.0h/crypto/mem_dbg.o and openssl-1.1.0h_aros/crypto/mem_dbg.o differ
+Binary files openssl-1.1.0h/crypto/mem.o and openssl-1.1.0h_aros/crypto/mem.o differ
+Binary files openssl-1.1.0h/crypto/mem_sec.o and openssl-1.1.0h_aros/crypto/mem_sec.o differ
+Binary files openssl-1.1.0h/crypto/modes/cbc128.o and openssl-1.1.0h_aros/crypto/modes/cbc128.o differ
+Binary files openssl-1.1.0h/crypto/modes/ccm128.o and openssl-1.1.0h_aros/crypto/modes/ccm128.o differ
+Binary files openssl-1.1.0h/crypto/modes/cfb128.o and openssl-1.1.0h_aros/crypto/modes/cfb128.o differ
+Binary files openssl-1.1.0h/crypto/modes/ctr128.o and openssl-1.1.0h_aros/crypto/modes/ctr128.o differ
+Binary files openssl-1.1.0h/crypto/modes/cts128.o and openssl-1.1.0h_aros/crypto/modes/cts128.o differ
+Binary files openssl-1.1.0h/crypto/modes/gcm128.o and openssl-1.1.0h_aros/crypto/modes/gcm128.o differ
+Binary files openssl-1.1.0h/crypto/modes/ocb128.o and openssl-1.1.0h_aros/crypto/modes/ocb128.o differ
+Binary files openssl-1.1.0h/crypto/modes/ofb128.o and openssl-1.1.0h_aros/crypto/modes/ofb128.o differ
+Binary files openssl-1.1.0h/crypto/modes/wrap128.o and openssl-1.1.0h_aros/crypto/modes/wrap128.o differ
+Binary files openssl-1.1.0h/crypto/modes/xts128.o and openssl-1.1.0h_aros/crypto/modes/xts128.o differ
+Binary files openssl-1.1.0h/crypto/objects/obj_dat.o and openssl-1.1.0h_aros/crypto/objects/obj_dat.o differ
+Binary files openssl-1.1.0h/crypto/objects/obj_err.o and openssl-1.1.0h_aros/crypto/objects/obj_err.o differ
+Binary files openssl-1.1.0h/crypto/objects/obj_lib.o and openssl-1.1.0h_aros/crypto/objects/obj_lib.o differ
+Binary files openssl-1.1.0h/crypto/objects/obj_xref.o and openssl-1.1.0h_aros/crypto/objects/obj_xref.o differ
+Binary files openssl-1.1.0h/crypto/objects/o_names.o and openssl-1.1.0h_aros/crypto/objects/o_names.o differ
+Binary files openssl-1.1.0h/crypto/ocsp/ocsp_asn.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_asn.o differ
+Binary files openssl-1.1.0h/crypto/ocsp/ocsp_cl.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_cl.o differ
+Binary files openssl-1.1.0h/crypto/ocsp/ocsp_err.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_err.o differ
+Binary files openssl-1.1.0h/crypto/ocsp/ocsp_ext.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_ext.o differ
+Binary files openssl-1.1.0h/crypto/ocsp/ocsp_ht.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_ht.o differ
+Binary files openssl-1.1.0h/crypto/ocsp/ocsp_lib.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_lib.o differ
+Binary files openssl-1.1.0h/crypto/ocsp/ocsp_prn.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_prn.o differ
+Binary files openssl-1.1.0h/crypto/ocsp/ocsp_srv.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_srv.o differ
+Binary files openssl-1.1.0h/crypto/ocsp/ocsp_vfy.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_vfy.o differ
+Binary files openssl-1.1.0h/crypto/ocsp/v3_ocsp.o and openssl-1.1.0h_aros/crypto/ocsp/v3_ocsp.o differ
+Binary files openssl-1.1.0h/crypto/o_dir.o and openssl-1.1.0h_aros/crypto/o_dir.o differ
+Binary files openssl-1.1.0h/crypto/o_fips.o and openssl-1.1.0h_aros/crypto/o_fips.o differ
+Binary files openssl-1.1.0h/crypto/o_fopen.o and openssl-1.1.0h_aros/crypto/o_fopen.o differ
+Binary files openssl-1.1.0h/crypto/o_init.o and openssl-1.1.0h_aros/crypto/o_init.o differ
+Binary files openssl-1.1.0h/crypto/o_str.o and openssl-1.1.0h_aros/crypto/o_str.o differ
+Binary files openssl-1.1.0h/crypto/o_time.o and openssl-1.1.0h_aros/crypto/o_time.o differ
+Binary files openssl-1.1.0h/crypto/pem/pem_all.o and openssl-1.1.0h_aros/crypto/pem/pem_all.o differ
+Binary files openssl-1.1.0h/crypto/pem/pem_err.o and openssl-1.1.0h_aros/crypto/pem/pem_err.o differ
+Binary files openssl-1.1.0h/crypto/pem/pem_info.o and openssl-1.1.0h_aros/crypto/pem/pem_info.o differ
+Binary files openssl-1.1.0h/crypto/pem/pem_lib.o and openssl-1.1.0h_aros/crypto/pem/pem_lib.o differ
+Binary files openssl-1.1.0h/crypto/pem/pem_oth.o and openssl-1.1.0h_aros/crypto/pem/pem_oth.o differ
+Binary files openssl-1.1.0h/crypto/pem/pem_pk8.o and openssl-1.1.0h_aros/crypto/pem/pem_pk8.o differ
+Binary files openssl-1.1.0h/crypto/pem/pem_pkey.o and openssl-1.1.0h_aros/crypto/pem/pem_pkey.o differ
+Binary files openssl-1.1.0h/crypto/pem/pem_sign.o and openssl-1.1.0h_aros/crypto/pem/pem_sign.o differ
+Binary files openssl-1.1.0h/crypto/pem/pem_x509.o and openssl-1.1.0h_aros/crypto/pem/pem_x509.o differ
+Binary files openssl-1.1.0h/crypto/pem/pem_xaux.o and openssl-1.1.0h_aros/crypto/pem/pem_xaux.o differ
+Binary files openssl-1.1.0h/crypto/pem/pvkfmt.o and openssl-1.1.0h_aros/crypto/pem/pvkfmt.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/p12_add.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_add.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/p12_asn.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_asn.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/p12_attr.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_attr.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/p12_crpt.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_crpt.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/p12_crt.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_crt.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/p12_decr.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_decr.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/p12_init.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_init.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/p12_key.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_key.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/p12_kiss.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_kiss.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/p12_mutl.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_mutl.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/p12_npas.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_npas.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/p12_p8d.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_p8d.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/p12_p8e.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_p8e.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/p12_sbag.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_sbag.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/p12_utl.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_utl.o differ
+Binary files openssl-1.1.0h/crypto/pkcs12/pk12err.o and openssl-1.1.0h_aros/crypto/pkcs12/pk12err.o differ
+Binary files openssl-1.1.0h/crypto/pkcs7/bio_pk7.o and openssl-1.1.0h_aros/crypto/pkcs7/bio_pk7.o differ
+Binary files openssl-1.1.0h/crypto/pkcs7/pk7_asn1.o and openssl-1.1.0h_aros/crypto/pkcs7/pk7_asn1.o differ
+Binary files openssl-1.1.0h/crypto/pkcs7/pk7_attr.o and openssl-1.1.0h_aros/crypto/pkcs7/pk7_attr.o differ
+Binary files openssl-1.1.0h/crypto/pkcs7/pk7_doit.o and openssl-1.1.0h_aros/crypto/pkcs7/pk7_doit.o differ
+Binary files openssl-1.1.0h/crypto/pkcs7/pk7_lib.o and openssl-1.1.0h_aros/crypto/pkcs7/pk7_lib.o differ
+Binary files openssl-1.1.0h/crypto/pkcs7/pk7_mime.o and openssl-1.1.0h_aros/crypto/pkcs7/pk7_mime.o differ
+Binary files openssl-1.1.0h/crypto/pkcs7/pk7_smime.o and openssl-1.1.0h_aros/crypto/pkcs7/pk7_smime.o differ
+Binary files openssl-1.1.0h/crypto/pkcs7/pkcs7err.o and openssl-1.1.0h_aros/crypto/pkcs7/pkcs7err.o differ
+Binary files openssl-1.1.0h/crypto/poly1305/poly1305.o and openssl-1.1.0h_aros/crypto/poly1305/poly1305.o differ
+Binary files openssl-1.1.0h/crypto/rand/md_rand.o and openssl-1.1.0h_aros/crypto/rand/md_rand.o differ
+Binary files openssl-1.1.0h/crypto/rand/rand_egd.o and openssl-1.1.0h_aros/crypto/rand/rand_egd.o differ
+Binary files openssl-1.1.0h/crypto/rand/rand_err.o and openssl-1.1.0h_aros/crypto/rand/rand_err.o differ
+Binary files openssl-1.1.0h/crypto/rand/randfile.o and openssl-1.1.0h_aros/crypto/rand/randfile.o differ
+Binary files openssl-1.1.0h/crypto/rand/rand_lib.o and openssl-1.1.0h_aros/crypto/rand/rand_lib.o differ
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/rand/rand_unix.c openssl-1.1.0h_aros/crypto/rand/rand_unix.c
+--- openssl-1.1.0h/crypto/rand/rand_unix.c	2018-03-27 13:50:39.000000000 +0000
++++ openssl-1.1.0h_aros/crypto/rand/rand_unix.c	2018-06-04 09:30:33.432663261 +0000
+@@ -121,6 +121,23 @@
+     }
+     return 1;
+ }
++#elif defined __AROS__
++int RAND_poll(void)
++{
++	u_int32_t rnd = 0, i;
++	unsigned char buf[ENTROPY_NEEDED];
++
++	for (i = 0; i < sizeof(buf); i++) {
++		if (i % 4 == 0)
++			rnd = rand();
++		buf[i] = rnd;
++		rnd >>= 8;
++	}
++	RAND_add(buf, sizeof(buf), ENTROPY_NEEDED);
++	memset(buf, 0, sizeof(buf));
++
++	return 1;
++}
+ # elif defined __OpenBSD__
+ int RAND_poll(void)
+ {
+Binary files openssl-1.1.0h/crypto/rand/rand_unix.o and openssl-1.1.0h_aros/crypto/rand/rand_unix.o differ
+Binary files openssl-1.1.0h/crypto/rand/rand_vms.o and openssl-1.1.0h_aros/crypto/rand/rand_vms.o differ
+Binary files openssl-1.1.0h/crypto/rand/rand_win.o and openssl-1.1.0h_aros/crypto/rand/rand_win.o differ
+Binary files openssl-1.1.0h/crypto/rc2/rc2_cbc.o and openssl-1.1.0h_aros/crypto/rc2/rc2_cbc.o differ
+Binary files openssl-1.1.0h/crypto/rc2/rc2cfb64.o and openssl-1.1.0h_aros/crypto/rc2/rc2cfb64.o differ
+Binary files openssl-1.1.0h/crypto/rc2/rc2_ecb.o and openssl-1.1.0h_aros/crypto/rc2/rc2_ecb.o differ
+Binary files openssl-1.1.0h/crypto/rc2/rc2ofb64.o and openssl-1.1.0h_aros/crypto/rc2/rc2ofb64.o differ
+Binary files openssl-1.1.0h/crypto/rc2/rc2_skey.o and openssl-1.1.0h_aros/crypto/rc2/rc2_skey.o differ
+Binary files openssl-1.1.0h/crypto/rc4/rc4_enc.o and openssl-1.1.0h_aros/crypto/rc4/rc4_enc.o differ
+Binary files openssl-1.1.0h/crypto/rc4/rc4_skey.o and openssl-1.1.0h_aros/crypto/rc4/rc4_skey.o differ
+Binary files openssl-1.1.0h/crypto/rc5/rc5cfb64.o and openssl-1.1.0h_aros/crypto/rc5/rc5cfb64.o differ
+Binary files openssl-1.1.0h/crypto/rc5/rc5_ecb.o and openssl-1.1.0h_aros/crypto/rc5/rc5_ecb.o differ
+Binary files openssl-1.1.0h/crypto/rc5/rc5_enc.o and openssl-1.1.0h_aros/crypto/rc5/rc5_enc.o differ
+Binary files openssl-1.1.0h/crypto/rc5/rc5ofb64.o and openssl-1.1.0h_aros/crypto/rc5/rc5ofb64.o differ
+Binary files openssl-1.1.0h/crypto/rc5/rc5_skey.o and openssl-1.1.0h_aros/crypto/rc5/rc5_skey.o differ
+Binary files openssl-1.1.0h/crypto/ripemd/rmd_dgst.o and openssl-1.1.0h_aros/crypto/ripemd/rmd_dgst.o differ
+Binary files openssl-1.1.0h/crypto/ripemd/rmd_one.o and openssl-1.1.0h_aros/crypto/ripemd/rmd_one.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_ameth.o and openssl-1.1.0h_aros/crypto/rsa/rsa_ameth.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_asn1.o and openssl-1.1.0h_aros/crypto/rsa/rsa_asn1.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_chk.o and openssl-1.1.0h_aros/crypto/rsa/rsa_chk.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_crpt.o and openssl-1.1.0h_aros/crypto/rsa/rsa_crpt.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_depr.o and openssl-1.1.0h_aros/crypto/rsa/rsa_depr.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_err.o and openssl-1.1.0h_aros/crypto/rsa/rsa_err.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_gen.o and openssl-1.1.0h_aros/crypto/rsa/rsa_gen.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_lib.o and openssl-1.1.0h_aros/crypto/rsa/rsa_lib.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_meth.o and openssl-1.1.0h_aros/crypto/rsa/rsa_meth.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_none.o and openssl-1.1.0h_aros/crypto/rsa/rsa_none.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_null.o and openssl-1.1.0h_aros/crypto/rsa/rsa_null.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_oaep.o and openssl-1.1.0h_aros/crypto/rsa/rsa_oaep.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_ossl.o and openssl-1.1.0h_aros/crypto/rsa/rsa_ossl.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_pk1.o and openssl-1.1.0h_aros/crypto/rsa/rsa_pk1.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_pmeth.o and openssl-1.1.0h_aros/crypto/rsa/rsa_pmeth.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_prn.o and openssl-1.1.0h_aros/crypto/rsa/rsa_prn.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_pss.o and openssl-1.1.0h_aros/crypto/rsa/rsa_pss.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_saos.o and openssl-1.1.0h_aros/crypto/rsa/rsa_saos.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_sign.o and openssl-1.1.0h_aros/crypto/rsa/rsa_sign.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_ssl.o and openssl-1.1.0h_aros/crypto/rsa/rsa_ssl.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_x931g.o and openssl-1.1.0h_aros/crypto/rsa/rsa_x931g.o differ
+Binary files openssl-1.1.0h/crypto/rsa/rsa_x931.o and openssl-1.1.0h_aros/crypto/rsa/rsa_x931.o differ
+Binary files openssl-1.1.0h/crypto/seed/seed_cbc.o and openssl-1.1.0h_aros/crypto/seed/seed_cbc.o differ
+Binary files openssl-1.1.0h/crypto/seed/seed_cfb.o and openssl-1.1.0h_aros/crypto/seed/seed_cfb.o differ
+Binary files openssl-1.1.0h/crypto/seed/seed_ecb.o and openssl-1.1.0h_aros/crypto/seed/seed_ecb.o differ
+Binary files openssl-1.1.0h/crypto/seed/seed.o and openssl-1.1.0h_aros/crypto/seed/seed.o differ
+Binary files openssl-1.1.0h/crypto/seed/seed_ofb.o and openssl-1.1.0h_aros/crypto/seed/seed_ofb.o differ
+Binary files openssl-1.1.0h/crypto/sha/sha1dgst.o and openssl-1.1.0h_aros/crypto/sha/sha1dgst.o differ
+Binary files openssl-1.1.0h/crypto/sha/sha1_one.o and openssl-1.1.0h_aros/crypto/sha/sha1_one.o differ
+Binary files openssl-1.1.0h/crypto/sha/sha256.o and openssl-1.1.0h_aros/crypto/sha/sha256.o differ
+Binary files openssl-1.1.0h/crypto/sha/sha512.o and openssl-1.1.0h_aros/crypto/sha/sha512.o differ
+Binary files openssl-1.1.0h/crypto/srp/srp_lib.o and openssl-1.1.0h_aros/crypto/srp/srp_lib.o differ
+Binary files openssl-1.1.0h/crypto/srp/srp_vfy.o and openssl-1.1.0h_aros/crypto/srp/srp_vfy.o differ
+Binary files openssl-1.1.0h/crypto/stack/stack.o and openssl-1.1.0h_aros/crypto/stack/stack.o differ
+Binary files openssl-1.1.0h/crypto/threads_none.o and openssl-1.1.0h_aros/crypto/threads_none.o differ
+Binary files openssl-1.1.0h/crypto/threads_pthread.o and openssl-1.1.0h_aros/crypto/threads_pthread.o differ
+Binary files openssl-1.1.0h/crypto/threads_win.o and openssl-1.1.0h_aros/crypto/threads_win.o differ
+Binary files openssl-1.1.0h/crypto/ts/ts_asn1.o and openssl-1.1.0h_aros/crypto/ts/ts_asn1.o differ
+Binary files openssl-1.1.0h/crypto/ts/ts_conf.o and openssl-1.1.0h_aros/crypto/ts/ts_conf.o differ
+Binary files openssl-1.1.0h/crypto/ts/ts_err.o and openssl-1.1.0h_aros/crypto/ts/ts_err.o differ
+Binary files openssl-1.1.0h/crypto/ts/ts_lib.o and openssl-1.1.0h_aros/crypto/ts/ts_lib.o differ
+Binary files openssl-1.1.0h/crypto/ts/ts_req_print.o and openssl-1.1.0h_aros/crypto/ts/ts_req_print.o differ
+Binary files openssl-1.1.0h/crypto/ts/ts_req_utils.o and openssl-1.1.0h_aros/crypto/ts/ts_req_utils.o differ
+Binary files openssl-1.1.0h/crypto/ts/ts_rsp_print.o and openssl-1.1.0h_aros/crypto/ts/ts_rsp_print.o differ
+Binary files openssl-1.1.0h/crypto/ts/ts_rsp_sign.o and openssl-1.1.0h_aros/crypto/ts/ts_rsp_sign.o differ
+Binary files openssl-1.1.0h/crypto/ts/ts_rsp_utils.o and openssl-1.1.0h_aros/crypto/ts/ts_rsp_utils.o differ
+Binary files openssl-1.1.0h/crypto/ts/ts_rsp_verify.o and openssl-1.1.0h_aros/crypto/ts/ts_rsp_verify.o differ
+Binary files openssl-1.1.0h/crypto/ts/ts_verify_ctx.o and openssl-1.1.0h_aros/crypto/ts/ts_verify_ctx.o differ
+Binary files openssl-1.1.0h/crypto/txt_db/txt_db.o and openssl-1.1.0h_aros/crypto/txt_db/txt_db.o differ
+Binary files openssl-1.1.0h/crypto/ui/ui_err.o and openssl-1.1.0h_aros/crypto/ui/ui_err.o differ
+Binary files openssl-1.1.0h/crypto/ui/ui_lib.o and openssl-1.1.0h_aros/crypto/ui/ui_lib.o differ
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/ui/ui_openssl.c openssl-1.1.0h_aros/crypto/ui/ui_openssl.c
+--- openssl-1.1.0h/crypto/ui/ui_openssl.c	2018-03-27 13:50:39.000000000 +0000
++++ openssl-1.1.0h_aros/crypto/ui/ui_openssl.c	2018-06-04 09:30:33.432663261 +0000
+@@ -99,6 +99,13 @@
+ 
+ #endif
+ 
++#if defined(OPENSSL_SYS_AROS)
++#undef TERMIOS
++#undef TERMIO
++#undef SGTTY
++# define TTY_STRUCT int
++#endif
++
+ #ifdef TERMIOS
+ # include <termios.h>
+ # define TTY_STRUCT             struct termios
+@@ -162,10 +169,10 @@
+                                       * structures? */
+ static long status;
+ static unsigned short channel = 0;
+-#elif defined(_WIN32) && !defined(_WIN32_WCE)
++#elif (defined(_WIN32) && !defined(_WIN32_WCE))
+ static DWORD tty_orig, tty_new;
+ #else
+-# if !defined(OPENSSL_SYS_MSDOS) || defined(__DJGPP__)
++# if !defined(OPENSSL_SYS_MSDOS) || defined(__DJGPP__) 
+ static TTY_STRUCT tty_orig, tty_new;
+ # endif
+ #endif
+Binary files openssl-1.1.0h/crypto/ui/ui_openssl.o and openssl-1.1.0h_aros/crypto/ui/ui_openssl.o differ
+Binary files openssl-1.1.0h/crypto/ui/ui_util.o and openssl-1.1.0h_aros/crypto/ui/ui_util.o differ
+Binary files openssl-1.1.0h/crypto/uid.o and openssl-1.1.0h_aros/crypto/uid.o differ
+Binary files openssl-1.1.0h/crypto/whrlpool/wp_block.o and openssl-1.1.0h_aros/crypto/whrlpool/wp_block.o differ
+Binary files openssl-1.1.0h/crypto/whrlpool/wp_dgst.o and openssl-1.1.0h_aros/crypto/whrlpool/wp_dgst.o differ
+Binary files openssl-1.1.0h/crypto/x509/by_dir.o and openssl-1.1.0h_aros/crypto/x509/by_dir.o differ
+Binary files openssl-1.1.0h/crypto/x509/by_file.o and openssl-1.1.0h_aros/crypto/x509/by_file.o differ
+Binary files openssl-1.1.0h/crypto/x509/t_crl.o and openssl-1.1.0h_aros/crypto/x509/t_crl.o differ
+Binary files openssl-1.1.0h/crypto/x509/t_req.o and openssl-1.1.0h_aros/crypto/x509/t_req.o differ
+Binary files openssl-1.1.0h/crypto/x509/t_x509.o and openssl-1.1.0h_aros/crypto/x509/t_x509.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_att.o and openssl-1.1.0h_aros/crypto/x509/x509_att.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_cmp.o and openssl-1.1.0h_aros/crypto/x509/x509_cmp.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509cset.o and openssl-1.1.0h_aros/crypto/x509/x509cset.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_d2.o and openssl-1.1.0h_aros/crypto/x509/x509_d2.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_def.o and openssl-1.1.0h_aros/crypto/x509/x509_def.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_err.o and openssl-1.1.0h_aros/crypto/x509/x509_err.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_ext.o and openssl-1.1.0h_aros/crypto/x509/x509_ext.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_lu.o and openssl-1.1.0h_aros/crypto/x509/x509_lu.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509name.o and openssl-1.1.0h_aros/crypto/x509/x509name.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_obj.o and openssl-1.1.0h_aros/crypto/x509/x509_obj.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_r2x.o and openssl-1.1.0h_aros/crypto/x509/x509_r2x.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_req.o and openssl-1.1.0h_aros/crypto/x509/x509_req.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509rset.o and openssl-1.1.0h_aros/crypto/x509/x509rset.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_set.o and openssl-1.1.0h_aros/crypto/x509/x509_set.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509spki.o and openssl-1.1.0h_aros/crypto/x509/x509spki.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_trs.o and openssl-1.1.0h_aros/crypto/x509/x509_trs.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_txt.o and openssl-1.1.0h_aros/crypto/x509/x509_txt.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509type.o and openssl-1.1.0h_aros/crypto/x509/x509type.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_v3.o and openssl-1.1.0h_aros/crypto/x509/x509_v3.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_vfy.o and openssl-1.1.0h_aros/crypto/x509/x509_vfy.o differ
+Binary files openssl-1.1.0h/crypto/x509/x509_vpm.o and openssl-1.1.0h_aros/crypto/x509/x509_vpm.o differ
+Binary files openssl-1.1.0h/crypto/x509/x_all.o and openssl-1.1.0h_aros/crypto/x509/x_all.o differ
+Binary files openssl-1.1.0h/crypto/x509/x_attrib.o and openssl-1.1.0h_aros/crypto/x509/x_attrib.o differ
+Binary files openssl-1.1.0h/crypto/x509/x_crl.o and openssl-1.1.0h_aros/crypto/x509/x_crl.o differ
+Binary files openssl-1.1.0h/crypto/x509/x_exten.o and openssl-1.1.0h_aros/crypto/x509/x_exten.o differ
+Binary files openssl-1.1.0h/crypto/x509/x_name.o and openssl-1.1.0h_aros/crypto/x509/x_name.o differ
+Binary files openssl-1.1.0h/crypto/x509/x_pubkey.o and openssl-1.1.0h_aros/crypto/x509/x_pubkey.o differ
+Binary files openssl-1.1.0h/crypto/x509/x_req.o and openssl-1.1.0h_aros/crypto/x509/x_req.o differ
+Binary files openssl-1.1.0h/crypto/x509/x_x509a.o and openssl-1.1.0h_aros/crypto/x509/x_x509a.o differ
+Binary files openssl-1.1.0h/crypto/x509/x_x509.o and openssl-1.1.0h_aros/crypto/x509/x_x509.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/pcy_cache.o and openssl-1.1.0h_aros/crypto/x509v3/pcy_cache.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/pcy_data.o and openssl-1.1.0h_aros/crypto/x509v3/pcy_data.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/pcy_lib.o and openssl-1.1.0h_aros/crypto/x509v3/pcy_lib.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/pcy_map.o and openssl-1.1.0h_aros/crypto/x509v3/pcy_map.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/pcy_node.o and openssl-1.1.0h_aros/crypto/x509v3/pcy_node.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/pcy_tree.o and openssl-1.1.0h_aros/crypto/x509v3/pcy_tree.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_addr.o and openssl-1.1.0h_aros/crypto/x509v3/v3_addr.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_akeya.o and openssl-1.1.0h_aros/crypto/x509v3/v3_akeya.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_akey.o and openssl-1.1.0h_aros/crypto/x509v3/v3_akey.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_alt.o and openssl-1.1.0h_aros/crypto/x509v3/v3_alt.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_asid.o and openssl-1.1.0h_aros/crypto/x509v3/v3_asid.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_bcons.o and openssl-1.1.0h_aros/crypto/x509v3/v3_bcons.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_bitst.o and openssl-1.1.0h_aros/crypto/x509v3/v3_bitst.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_conf.o and openssl-1.1.0h_aros/crypto/x509v3/v3_conf.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_cpols.o and openssl-1.1.0h_aros/crypto/x509v3/v3_cpols.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_crld.o and openssl-1.1.0h_aros/crypto/x509v3/v3_crld.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_enum.o and openssl-1.1.0h_aros/crypto/x509v3/v3_enum.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3err.o and openssl-1.1.0h_aros/crypto/x509v3/v3err.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_extku.o and openssl-1.1.0h_aros/crypto/x509v3/v3_extku.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_genn.o and openssl-1.1.0h_aros/crypto/x509v3/v3_genn.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_ia5.o and openssl-1.1.0h_aros/crypto/x509v3/v3_ia5.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_info.o and openssl-1.1.0h_aros/crypto/x509v3/v3_info.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_int.o and openssl-1.1.0h_aros/crypto/x509v3/v3_int.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_lib.o and openssl-1.1.0h_aros/crypto/x509v3/v3_lib.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_ncons.o and openssl-1.1.0h_aros/crypto/x509v3/v3_ncons.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_pcia.o and openssl-1.1.0h_aros/crypto/x509v3/v3_pcia.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_pci.o and openssl-1.1.0h_aros/crypto/x509v3/v3_pci.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_pcons.o and openssl-1.1.0h_aros/crypto/x509v3/v3_pcons.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_pku.o and openssl-1.1.0h_aros/crypto/x509v3/v3_pku.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_pmaps.o and openssl-1.1.0h_aros/crypto/x509v3/v3_pmaps.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_prn.o and openssl-1.1.0h_aros/crypto/x509v3/v3_prn.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_purp.o and openssl-1.1.0h_aros/crypto/x509v3/v3_purp.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_skey.o and openssl-1.1.0h_aros/crypto/x509v3/v3_skey.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_sxnet.o and openssl-1.1.0h_aros/crypto/x509v3/v3_sxnet.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_tlsf.o and openssl-1.1.0h_aros/crypto/x509v3/v3_tlsf.o differ
+Binary files openssl-1.1.0h/crypto/x509v3/v3_utl.o and openssl-1.1.0h_aros/crypto/x509v3/v3_utl.o differ
+Binary files openssl-1.1.0h/engines/e_capi.o and openssl-1.1.0h_aros/engines/e_capi.o differ
+Binary files openssl-1.1.0h/engines/e_padlock.o and openssl-1.1.0h_aros/engines/e_padlock.o differ
+diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/e_os.h openssl-1.1.0h_aros/e_os.h
+--- openssl-1.1.0h/e_os.h	2018-03-27 13:50:40.000000000 +0000
++++ openssl-1.1.0h_aros/e_os.h	2018-06-05 07:27:08.434425255 +0000
+@@ -77,6 +77,14 @@
+ #  define NO_SYSLOG
+ # endif
+ 
++#if defined(OPENSSL_SYS_AROS)
++#  define NO_CHMOD
++#  undef  DEVRANDOM
++#  undef  AI_PASSIVE
++#  define GETPID_IS_MEANINGLESS
++//#  define PRAGMAS_SOCKET_PRAGMAS_H /* Make sure that we don't enable SocketBase calls */
++#endif
++
+ /********************************************************************
+  The Microsoft section
+  ********************************************************************/
+@@ -133,6 +141,14 @@
+ #  define closesocket(s)              close(s)
+ #  define readsocket(s,b,n)           read((s),(b),(n))
+ #  define writesocket(s,b,n)          write((s),(char *)(b),(n))
++# elif defined(__AROS__)
++#  define __BSD_VISIBLE 1
++#  define get_last_socket_error()      Errno()
++#  define clear_socket_error()		errno=0
++#  define ioctlsocket(a,b,c)   IoctlSocket(a,b,c)
++#  define closesocket(s)               CloseSocket(s)
++#  define readsocket(s,b,n)    recv((s),(b),(n),0)
++#  define writesocket(s,b,n)   send((s),(b),(n),0)
+ # else
+ #  define get_last_socket_error() errno
+ #  define clear_socket_error()    errno=0
+@@ -142,6 +158,7 @@
+ #  define writesocket(s,b,n)      write((s),(b),(n))
+ # endif
+ 
++
+ # if (defined(WINDOWS) || defined(MSDOS))
+ 
+ #  ifdef __DJGPP__
+@@ -391,6 +408,10 @@
+ 
+ #  else
+ 
++#   ifdef __AROS__
++#    define PRAGMAS_SOCKET_PRAGMAS_H /* Make sure that we don't enable SocketBase calls */
++#   endif
++
+ #   ifndef NO_SYS_PARAM_H
+ #    include <sys/param.h>
+ #   endif
+--- openssl-1.1.0h/ssl/ssl_locl.h	2018-03-27 13:50:40.000000000 +0000
++++ openssl-1.1.0h_aros/ssl/ssl_locl.h	2018-06-04 09:30:33.440663261 +0000
+@@ -47,7 +47,7 @@
+ # include <errno.h>
+ 
+ # include "e_os.h"
+-# if defined(__unix) || defined(__unix__)
++# if defined(__unix) || defined(__unix__) || defined(__aros__)
+ #  include <sys/time.h>         /* struct timeval for DTLS */
+ # endif
+ 
