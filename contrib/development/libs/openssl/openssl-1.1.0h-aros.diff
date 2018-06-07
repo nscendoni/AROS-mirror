@@ -1,5 +1,4 @@
-Binary files openssl-1.1.0h/apps/app_rand.o and openssl-1.1.0h_aros/apps/app_rand.o differ
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/apps.c openssl-1.1.0h_aros/apps/apps.c
+diff -ruN -X exclude openssl-1.1.0h/apps/apps.c openssl-1.1.0h_aros/apps/apps.c
 --- openssl-1.1.0h/apps/apps.c	2018-03-27 13:50:37.000000000 +0000
 +++ openssl-1.1.0h_aros/apps/apps.c	2018-06-04 09:30:33.420663263 +0000
 @@ -2190,6 +2190,23 @@
@@ -34,7 +33,7 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
      /* On Windows select only works for sockets, so we simply don't wait  */
  #ifndef OPENSSL_SYS_WINDOWS
      int width = 0;
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/apps.h openssl-1.1.0h_aros/apps/apps.h
+diff -ruN -X exclude openssl-1.1.0h/apps/apps.h openssl-1.1.0h_aros/apps/apps.h
 --- openssl-1.1.0h/apps/apps.h	2018-03-27 13:50:37.000000000 +0000
 +++ openssl-1.1.0h_aros/apps/apps.h	2018-06-04 09:30:33.420663263 +0000
 @@ -33,6 +33,16 @@
@@ -54,7 +53,7 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
  /*
   * quick macro when you need to pass an unsigned char instead of a char.
   * this is true for some implementations of the is*() functions, for
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/ocsp.c openssl-1.1.0h_aros/apps/ocsp.c
+diff -ruN -X exclude openssl-1.1.0h/apps/ocsp.c openssl-1.1.0h_aros/apps/ocsp.c
 --- openssl-1.1.0h/apps/ocsp.c	2018-03-27 13:50:37.000000000 +0000
 +++ openssl-1.1.0h_aros/apps/ocsp.c	2018-06-04 09:30:33.420663263 +0000
 @@ -35,6 +35,7 @@
@@ -74,10 +73,14 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
 +extern struct Library *SocketBase;
 +#endif
 +
++#if defined(OPENSSL_SYS_AROS)
++#include <proto/bsdsocket.h>
++#endif
++
  /* Maximum leeway in validity period: default 5 minutes */
  # define MAX_VALIDITY_PERIOD    (5 * 60)
  
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/openssl.c openssl-1.1.0h_aros/apps/openssl.c
+diff -ruN -X exclude openssl-1.1.0h/apps/openssl.c openssl-1.1.0h_aros/apps/openssl.c
 --- openssl-1.1.0h/apps/openssl.c	2018-03-27 13:50:37.000000000 +0000
 +++ openssl-1.1.0h_aros/apps/openssl.c	2018-06-04 09:30:33.420663263 +0000
 @@ -33,6 +33,11 @@
@@ -151,7 +154,11 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
          (void)lh_FUNCTION_insert(ret, f);
      return (ret);
  }
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/s_client.c openssl-1.1.0h_aros/apps/s_client.c
++
++
++
++
+diff -ruN -X exclude openssl-1.1.0h/apps/s_client.c openssl-1.1.0h_aros/apps/s_client.c
 --- openssl-1.1.0h/apps/s_client.c	2018-03-27 13:50:37.000000000 +0000
 +++ openssl-1.1.0h_aros/apps/s_client.c	2018-06-04 09:30:33.420663263 +0000
 @@ -54,6 +54,7 @@
@@ -181,7 +188,52 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
      if (init_client(&s, host, port, socket_family, socket_type) == 0) {
          BIO_printf(bio_err, "connect:errno=%d\n", get_last_socket_error());
          BIO_closesocket(s);
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/speed.c openssl-1.1.0h_aros/apps/speed.c
+diff -ruN -X exclude openssl-1.1.0h/apps/s_server.c openssl-1.1.0h_aros/apps/s_server.c
+--- openssl-1.1.0h/apps/s_server.c	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/apps/s_server.c	2018-06-04 09:30:33.424663262 +0000
+@@ -65,6 +65,11 @@
+ typedef unsigned int u_int;
+ #endif
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <proto/bsdsocket.h>
++extern struct Library *SocketBase;
++#endif
++
+ #include <openssl/lhash.h>
+ #include <openssl/bn.h>
+ #define USE_SOCKETS
+diff -ruN -X exclude openssl-1.1.0h/apps/s_socket.c openssl-1.1.0h_aros/apps/s_socket.c
+--- openssl-1.1.0h/apps/s_socket.c	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/apps/s_socket.c	2018-06-04 09:30:33.424663262 +0000
+@@ -36,6 +36,11 @@
+ # include <openssl/bio.h>
+ # include <openssl/err.h>
+ 
++#if defined(OPENSSL_SYS_AROS)
++    extern struct Library *SocketBase;
++#endif
++
++
+ /*
+  * init_client - helper routine to set up socket communication
+  * @sock: pointer to storage of resulting socket.
+diff -ruN -X exclude openssl-1.1.0h/apps/s_time.c openssl-1.1.0h_aros/apps/s_time.c
+--- openssl-1.1.0h/apps/s_time.c	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/apps/s_time.c	2018-06-04 09:30:33.424663262 +0000
+@@ -26,6 +26,11 @@
+ # include OPENSSL_UNISTD
+ #endif
+ 
++#if defined(OPENSSL_SYS_AROS)
++    extern struct Library *SocketBase;
++#endif
++
++
+ #define SSL_CONNECT_NAME        "localhost:4433"
+ 
+ #define SECONDS 30
+diff -ruN -X exclude openssl-1.1.0h/apps/speed.c openssl-1.1.0h_aros/apps/speed.c
 --- openssl-1.1.0h/apps/speed.c	2018-03-27 13:50:37.000000000 +0000
 +++ openssl-1.1.0h_aros/apps/speed.c	2018-06-04 09:30:33.424663262 +0000
 @@ -111,8 +111,13 @@
@@ -228,51 +280,211 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
      BIO_printf(bio_err,
                 mr ? "+DTP:%d:%s:%s:%d\n"
                 : "Doing %d bit %s %s's for %ds: ", bits, str, str2, tm);
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/s_server.c openssl-1.1.0h_aros/apps/s_server.c
---- openssl-1.1.0h/apps/s_server.c	2018-03-27 13:50:37.000000000 +0000
-+++ openssl-1.1.0h_aros/apps/s_server.c	2018-06-04 09:30:33.424663262 +0000
-@@ -65,6 +65,11 @@
- typedef unsigned int u_int;
- #endif
- 
-+#if defined(OPENSSL_SYS_AROS)
-+#include <proto/bsdsocket.h>
-+extern struct Library *SocketBase;
-+#endif
+diff -ruN -X exclude openssl-1.1.0h/apps/tsget openssl-1.1.0h_aros/apps/tsget
+--- openssl-1.1.0h/apps/tsget	1970-01-01 00:00:00.000000000 +0000
++++ openssl-1.1.0h_aros/apps/tsget	2018-06-07 16:35:07.399879781 +0000
+@@ -0,0 +1,200 @@
++#!/usr/bin/env perl
++# Copyright (c) 2002 The OpenTSA Project. All rights reserved.
++# Copyright 2002-2016 The OpenSSL Project Authors. All Rights Reserved.
++#
++# Licensed under the OpenSSL license (the "License").  You may not use
++# this file except in compliance with the License.  You can obtain a copy
++# in the file LICENSE in the source distribution or at
++# https://www.openssl.org/source/license.html
 +
- #include <openssl/lhash.h>
- #include <openssl/bn.h>
- #define USE_SOCKETS
---- openssl-1.1.0h/apps/s_socket.c	2018-03-27 13:50:37.000000000 +0000
-+++ openssl-1.1.0h_aros/apps/s_socket.c	2018-06-04 09:30:33.424663262 +0000
-@@ -36,6 +36,11 @@
- # include <openssl/bio.h>
- # include <openssl/err.h>
- 
-+#if defined(OPENSSL_SYS_AROS)
-+    extern struct Library *SocketBase;
-+#endif
++use strict;
++use IO::Handle;
++use Getopt::Std;
++use File::Basename;
++use WWW::Curl::Easy;
 +
++use vars qw(%options);
 +
- /*
-  * init_client - helper routine to set up socket communication
-  * @sock: pointer to storage of resulting socket.
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/apps/s_time.c openssl-1.1.0h_aros/apps/s_time.c
---- openssl-1.1.0h/apps/s_time.c	2018-03-27 13:50:37.000000000 +0000
-+++ openssl-1.1.0h_aros/apps/s_time.c	2018-06-04 09:30:33.424663262 +0000
-@@ -26,6 +26,11 @@
- # include OPENSSL_UNISTD
- #endif
- 
-+#if defined(OPENSSL_SYS_AROS)
-+    extern struct Library *SocketBase;
-+#endif
++# Callback for reading the body.
++sub read_body {
++    my ($maxlength, $state) = @_;
++    my $return_data = "";
++    my $data_len = length ${$state->{data}};
++    if ($state->{bytes} < $data_len) {
++	$data_len = $data_len - $state->{bytes};
++	$data_len = $maxlength if $data_len > $maxlength;
++	$return_data = substr ${$state->{data}}, $state->{bytes}, $data_len;
++	$state->{bytes} += $data_len;
++    }
++    return $return_data;
++}
 +
++# Callback for writing the body into a variable.
++sub write_body {
++    my ($data, $pointer) = @_;
++    ${$pointer} .= $data;
++    return length($data);
++}
 +
- #define SSL_CONNECT_NAME        "localhost:4433"
- 
- #define SECONDS 30
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/b_addr.c openssl-1.1.0h_aros/crypto/bio/b_addr.c
++# Initialise a new Curl object.
++sub create_curl {
++    my $url = shift;
++
++    # Create Curl object.
++    my $curl = WWW::Curl::Easy::new();
++
++    # Error-handling related options.
++    $curl->setopt(CURLOPT_VERBOSE, 1) if $options{d};
++    $curl->setopt(CURLOPT_FAILONERROR, 1);
++    $curl->setopt(CURLOPT_USERAGENT,
++        "OpenTSA tsget.pl/openssl-1.1.0h");
++
++    # Options for POST method.
++    $curl->setopt(CURLOPT_UPLOAD, 1);
++    $curl->setopt(CURLOPT_CUSTOMREQUEST, "POST");
++    $curl->setopt(CURLOPT_HTTPHEADER,
++		["Content-Type: application/timestamp-query",
++		"Accept: application/timestamp-reply,application/timestamp-response"]);
++    $curl->setopt(CURLOPT_READFUNCTION, \&read_body);
++    $curl->setopt(CURLOPT_HEADERFUNCTION, sub { return length($_[0]); });
++
++    # Options for getting the result.
++    $curl->setopt(CURLOPT_WRITEFUNCTION, \&write_body);
++
++    # SSL related options.
++    $curl->setopt(CURLOPT_SSLKEYTYPE, "PEM");
++    $curl->setopt(CURLOPT_SSL_VERIFYPEER, 1);	# Verify server's certificate.
++    $curl->setopt(CURLOPT_SSL_VERIFYHOST, 2);	# Check server's CN.
++    $curl->setopt(CURLOPT_SSLKEY, $options{k}) if defined($options{k});
++    $curl->setopt(CURLOPT_SSLKEYPASSWD, $options{p}) if defined($options{p});
++    $curl->setopt(CURLOPT_SSLCERT, $options{c}) if defined($options{c});
++    $curl->setopt(CURLOPT_CAINFO, $options{C}) if defined($options{C});
++    $curl->setopt(CURLOPT_CAPATH, $options{P}) if defined($options{P});
++    $curl->setopt(CURLOPT_RANDOM_FILE, $options{r}) if defined($options{r});
++    $curl->setopt(CURLOPT_EGDSOCKET, $options{g}) if defined($options{g});
++
++    # Setting destination.
++    $curl->setopt(CURLOPT_URL, $url);
++
++    return $curl;
++}
++
++# Send a request and returns the body back.
++sub get_timestamp {
++    my $curl = shift;
++    my $body = shift;
++    my $ts_body;
++    local $::error_buf;
++
++    # Error-handling related options.
++    $curl->setopt(CURLOPT_ERRORBUFFER, "::error_buf");
++
++    # Options for POST method.
++    $curl->setopt(CURLOPT_INFILE, {data => $body, bytes => 0});
++    $curl->setopt(CURLOPT_INFILESIZE, length(${$body}));
++
++    # Options for getting the result.
++    $curl->setopt(CURLOPT_FILE, \$ts_body);
++
++    # Send the request...
++    my $error_code = $curl->perform();
++    my $error_string;
++    if ($error_code != 0) {
++        my $http_code = $curl->getinfo(CURLINFO_HTTP_CODE);
++	$error_string = "could not get timestamp";
++	$error_string .= ", http code: $http_code" unless $http_code == 0;
++	$error_string .= ", curl code: $error_code";
++	$error_string .= " ($::error_buf)" if defined($::error_buf);
++    } else {
++        my $ct = $curl->getinfo(CURLINFO_CONTENT_TYPE);
++	if (lc($ct) ne "application/timestamp-reply"
++	    && lc($ct) ne "application/timestamp-response") {
++	    $error_string = "unexpected content type returned: $ct";
++        }
++    }
++    return ($ts_body, $error_string);
++
++}
++
++# Print usage information and exists.
++sub usage {
++
++    print STDERR "usage: $0 -h <server_url> [-e <extension>] [-o <output>] ";
++    print STDERR "[-v] [-d] [-k <private_key.pem>] [-p <key_password>] ";
++    print STDERR "[-c <client_cert.pem>] [-C <CA_certs.pem>] [-P <CA_path>] ";
++    print STDERR "[-r <file:file...>] [-g <EGD_socket>] [<request>]...\n";
++    exit 1;
++}
++
++# ----------------------------------------------------------------------
++#   Main program
++# ----------------------------------------------------------------------
++
++# Getting command-line options (default comes from TSGET environment variable).
++my $getopt_arg =  "h:e:o:vdk:p:c:C:P:r:g:";
++if (exists $ENV{TSGET}) {
++    my @old_argv = @ARGV;
++    @ARGV = split /\s+/, $ENV{TSGET};
++    getopts($getopt_arg, \%options) or usage;
++    @ARGV = @old_argv;
++}
++getopts($getopt_arg, \%options) or usage;
++
++# Checking argument consistency.
++if (!exists($options{h}) || (@ARGV == 0 && !exists($options{o}))
++    || (@ARGV > 1 && exists($options{o}))) {
++    print STDERR "Inconsistent command line options.\n";
++    usage;
++}
++# Setting defaults.
++@ARGV = ("-") unless @ARGV != 0;
++$options{e} = ".tsr" unless defined($options{e});
++
++# Processing requests.
++my $curl = create_curl $options{h};
++undef $/;   # For reading whole files.
++REQUEST: foreach (@ARGV) {
++    my $input = $_;
++    my ($base, $path) = fileparse($input, '\.[^.]*');
++    my $output_base = $base . $options{e};
++    my $output = defined($options{o}) ? $options{o} : $path . $output_base;
++
++    STDERR->printflush("$input: ") if $options{v};
++    # Read request.
++    my $body;
++    if ($input eq "-") {
++	# Read the request from STDIN;
++	$body = <STDIN>;
++    } else {
++	# Read the request from file.
++        open INPUT, "<" . $input
++	    or warn("$input: could not open input file: $!\n"), next REQUEST;
++        $body = <INPUT>;
++        close INPUT
++	    or warn("$input: could not close input file: $!\n"), next REQUEST;
++    }
++
++    # Send request.
++    STDERR->printflush("sending request") if $options{v};
++
++    my ($ts_body, $error) = get_timestamp $curl, \$body;
++    if (defined($error)) {
++	die "$input: fatal error: $error\n";
++    }
++    STDERR->printflush(", reply received") if $options{v};
++
++    # Write response.
++    if ($output eq "-") {
++	# Write to STDOUT.
++        print $ts_body;
++    } else {
++	# Write to file.
++        open OUTPUT, ">", $output
++	    or warn("$output: could not open output file: $!\n"), next REQUEST;
++        print OUTPUT $ts_body;
++        close OUTPUT
++	    or warn("$output: could not close output file: $!\n"), next REQUEST;
++    }
++    STDERR->printflush(", $output written.\n") if $options{v};
++}
++$curl->cleanup();
+diff -ruN -X exclude openssl-1.1.0h/crypto/bio/b_addr.c openssl-1.1.0h_aros/crypto/bio/b_addr.c
 --- openssl-1.1.0h/crypto/bio/b_addr.c	2018-03-27 13:50:37.000000000 +0000
 +++ openssl-1.1.0h_aros/crypto/bio/b_addr.c	2018-06-05 07:18:04.410350739 +0000
 @@ -21,6 +21,17 @@
@@ -314,30 +526,28 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
  
                  if (se == NULL) {
  #ifndef OPENSSL_SYS_WINDOWS
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/bio_lcl.h openssl-1.1.0h_aros/crypto/bio/bio_lcl.h
---- openssl-1.1.0h/crypto/bio/bio_lcl.h	2018-03-27 13:50:38.000000000 +0000
-+++ openssl-1.1.0h_aros/crypto/bio/bio_lcl.h	2018-06-05 07:39:00.170561185 +0000
-@@ -10,6 +10,10 @@
- #define USE_SOCKETS
- #include "e_os.h"
- 
-+# if defined(OPENSSL_SYS_AROS)
-+#  undef AI_PASSIVE
-+# endif
-+
- /* BEGIN BIO_ADDRINFO/BIO_ADDR stuff. */
- 
- #ifndef OPENSSL_NO_SOCK
-@@ -36,7 +40,7 @@
- /*
-  * Undefine AF_UNIX on systems that define it but don't support it.
-  */
--# if defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_VMS)
-+# if defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_VMS) || defined(OPENSSL_SYS_AROS)
- #  undef AF_UNIX
+diff -ruN -X exclude openssl-1.1.0h/crypto/bio/b_sock.c openssl-1.1.0h_aros/crypto/bio/b_sock.c
+--- openssl-1.1.0h/crypto/bio/b_sock.c	2018-03-27 13:50:37.000000000 +0000
++++ openssl-1.1.0h_aros/crypto/bio/b_sock.c	2018-06-04 09:30:33.428663262 +0000
+@@ -28,6 +28,17 @@
+ static int wsa_init_done = 0;
  # endif
  
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/b_sock2.c openssl-1.1.0h_aros/crypto/bio/b_sock2.c
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++extern struct Library *SocketBase;
++#endif
++
++
+ # if OPENSSL_API_COMPAT < 0x10100000L
+ int BIO_get_host_ip(const char *str, unsigned char *ip)
+ {
+diff -ruN -X exclude openssl-1.1.0h/crypto/bio/b_sock2.c openssl-1.1.0h_aros/crypto/bio/b_sock2.c
 --- openssl-1.1.0h/crypto/bio/b_sock2.c	2018-03-27 13:50:37.000000000 +0000
 +++ openssl-1.1.0h_aros/crypto/bio/b_sock2.c	2018-06-04 09:30:33.428663262 +0000
 @@ -24,6 +24,17 @@
@@ -376,28 +586,30 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
          SYSerr(SYS_F_BIND, get_last_socket_error());
          BIOerr(BIO_F_BIO_LISTEN, BIO_R_UNABLE_TO_BIND_SOCKET);
          return 0;
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/b_sock.c openssl-1.1.0h_aros/crypto/bio/b_sock.c
---- openssl-1.1.0h/crypto/bio/b_sock.c	2018-03-27 13:50:37.000000000 +0000
-+++ openssl-1.1.0h_aros/crypto/bio/b_sock.c	2018-06-04 09:30:33.428663262 +0000
-@@ -28,6 +28,17 @@
- static int wsa_init_done = 0;
+diff -ruN -X exclude openssl-1.1.0h/crypto/bio/bio_lcl.h openssl-1.1.0h_aros/crypto/bio/bio_lcl.h
+--- openssl-1.1.0h/crypto/bio/bio_lcl.h	2018-03-27 13:50:38.000000000 +0000
++++ openssl-1.1.0h_aros/crypto/bio/bio_lcl.h	2018-06-05 07:39:00.170561185 +0000
+@@ -10,6 +10,10 @@
+ #define USE_SOCKETS
+ #include "e_os.h"
+ 
++# if defined(OPENSSL_SYS_AROS)
++#  undef AI_PASSIVE
++# endif
++
+ /* BEGIN BIO_ADDRINFO/BIO_ADDR stuff. */
+ 
+ #ifndef OPENSSL_NO_SOCK
+@@ -36,7 +40,7 @@
+ /*
+  * Undefine AF_UNIX on systems that define it but don't support it.
+  */
+-# if defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_VMS)
++# if defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_VMS) || defined(OPENSSL_SYS_AROS)
+ #  undef AF_UNIX
  # endif
  
-+#if defined(OPENSSL_SYS_AROS)
-+#include <exec/types.h>
-+#include <exec/libraries.h>
-+#include <bsdsocket/socketbasetags.h>
-+#include <proto/exec.h>
-+#include <proto/bsdsocket.h>
-+
-+extern struct Library *SocketBase;
-+#endif
-+
-+
- # if OPENSSL_API_COMPAT < 0x10100000L
- int BIO_get_host_ip(const char *str, unsigned char *ip)
- {
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/bss_acpt.c openssl-1.1.0h_aros/crypto/bio/bss_acpt.c
+diff -ruN -X exclude openssl-1.1.0h/crypto/bio/bss_acpt.c openssl-1.1.0h_aros/crypto/bio/bss_acpt.c
 --- openssl-1.1.0h/crypto/bio/bss_acpt.c	2018-03-27 13:50:38.000000000 +0000
 +++ openssl-1.1.0h_aros/crypto/bio/bss_acpt.c	2018-06-04 09:30:33.428663262 +0000
 @@ -13,6 +13,20 @@
@@ -421,7 +633,7 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
  typedef struct bio_accept_st {
      int state;
      int accept_family;
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/bss_conn.c openssl-1.1.0h_aros/crypto/bio/bss_conn.c
+diff -ruN -X exclude openssl-1.1.0h/crypto/bio/bss_conn.c openssl-1.1.0h_aros/crypto/bio/bss_conn.c
 --- openssl-1.1.0h/crypto/bio/bss_conn.c	2018-03-27 13:50:38.000000000 +0000
 +++ openssl-1.1.0h_aros/crypto/bio/bss_conn.c	2018-06-04 09:30:33.428663262 +0000
 @@ -14,6 +14,20 @@
@@ -445,7 +657,7 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
  typedef struct bio_connect_st {
      int state;
      int connect_family;
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/bss_dgram.c openssl-1.1.0h_aros/crypto/bio/bss_dgram.c
+diff -ruN -X exclude openssl-1.1.0h/crypto/bio/bss_dgram.c openssl-1.1.0h_aros/crypto/bio/bss_dgram.c
 --- openssl-1.1.0h/crypto/bio/bss_dgram.c	2018-03-27 13:50:38.000000000 +0000
 +++ openssl-1.1.0h_aros/crypto/bio/bss_dgram.c	2018-06-04 09:30:33.428663262 +0000
 @@ -20,6 +20,16 @@
@@ -476,7 +688,7 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
  static int dgram_write(BIO *h, const char *buf, int num);
  static int dgram_read(BIO *h, char *buf, int size);
  static int dgram_puts(BIO *h, const char *str);
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/bss_log.c openssl-1.1.0h_aros/crypto/bio/bss_log.c
+diff -ruN -X exclude openssl-1.1.0h/crypto/bio/bss_log.c openssl-1.1.0h_aros/crypto/bio/bss_log.c
 --- openssl-1.1.0h/crypto/bio/bss_log.c	2018-03-27 13:50:38.000000000 +0000
 +++ openssl-1.1.0h_aros/crypto/bio/bss_log.c	2018-06-04 09:30:33.428663262 +0000
 @@ -45,6 +45,20 @@
@@ -500,7 +712,7 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
  #include <openssl/buffer.h>
  #include <openssl/err.h>
  
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/bio/bss_sock.c openssl-1.1.0h_aros/crypto/bio/bss_sock.c
+diff -ruN -X exclude openssl-1.1.0h/crypto/bio/bss_sock.c openssl-1.1.0h_aros/crypto/bio/bss_sock.c
 --- openssl-1.1.0h/crypto/bio/bss_sock.c	2018-03-27 13:50:38.000000000 +0000
 +++ openssl-1.1.0h_aros/crypto/bio/bss_sock.c	2018-06-04 09:30:33.428663262 +0000
 @@ -17,6 +17,21 @@
@@ -525,129 +737,36 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
  # ifdef WATT32
  /* Watt-32 uses same names */
  #  undef sock_write
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/include/internal/bn_conf.h openssl-1.1.0h_aros/crypto/include/internal/bn_conf.h
---- openssl-1.1.0h/crypto/include/internal/bn_conf.h	1970-01-01 00:00:00.000000000 +0000
-+++ openssl-1.1.0h_aros/crypto/include/internal/bn_conf.h	2018-06-05 13:45:40.196981377 +0000
-@@ -0,0 +1,28 @@
-+/* WARNING: do not edit! */
-+/* Generated by Makefile from crypto/include/internal/bn_conf.h.in */
+diff -ruN -X exclude openssl-1.1.0h/crypto/buildinf.h openssl-1.1.0h_aros/crypto/buildinf.h
+--- openssl-1.1.0h/crypto/buildinf.h	1970-01-01 00:00:00.000000000 +0000
++++ openssl-1.1.0h_aros/crypto/buildinf.h	2018-06-07 16:35:08.611879808 +0000
+@@ -0,0 +1,25 @@
++/* auto-generated by util/mkbuildinf.pl for crypto/cversion.c */
++#define CFLAGS cflags
 +/*
-+ * Copyright 2016 The OpenSSL Project Authors. All Rights Reserved.
-+ *
-+ * Licensed under the OpenSSL license (the "License").  You may not use
-+ * this file except in compliance with the License.  You can obtain a copy
-+ * in the file LICENSE in the source distribution or at
-+ * https://www.openssl.org/source/license.html
++ * Generate CFLAGS as an array of individual characters. This is a
++ * workaround for the situation where CFLAGS gets too long for a C90 string
++ * literal
 + */
-+
-+#ifndef HEADER_BN_CONF_H
-+# define HEADER_BN_CONF_H
-+
-+/*
-+ * The contents of this file are not used in the UEFI build, as
-+ * both 32-bit and 64-bit builds are supported from a single run
-+ * of the Configure script.
-+ */
-+
-+/* Should we define BN_DIV2W here? */
-+
-+/* Only one for the following should be defined */
-+#undef SIXTY_FOUR_BIT_LONG
-+#undef SIXTY_FOUR_BIT
-+#define THIRTY_TWO_BIT
-+
-+#endif
-Binary files openssl-1.1.0h/crypto/init.o and openssl-1.1.0h_aros/crypto/init.o differ
-Binary files openssl-1.1.0h/crypto/kdf/hkdf.o and openssl-1.1.0h_aros/crypto/kdf/hkdf.o differ
-Binary files openssl-1.1.0h/crypto/kdf/kdf_err.o and openssl-1.1.0h_aros/crypto/kdf/kdf_err.o differ
-Binary files openssl-1.1.0h/crypto/kdf/tls1_prf.o and openssl-1.1.0h_aros/crypto/kdf/tls1_prf.o differ
-Binary files openssl-1.1.0h/crypto/lhash/lhash.o and openssl-1.1.0h_aros/crypto/lhash/lhash.o differ
-Binary files openssl-1.1.0h/crypto/lhash/lh_stats.o and openssl-1.1.0h_aros/crypto/lhash/lh_stats.o differ
-Binary files openssl-1.1.0h/crypto/md2/md2_dgst.o and openssl-1.1.0h_aros/crypto/md2/md2_dgst.o differ
-Binary files openssl-1.1.0h/crypto/md2/md2_one.o and openssl-1.1.0h_aros/crypto/md2/md2_one.o differ
-Binary files openssl-1.1.0h/crypto/md4/md4_dgst.o and openssl-1.1.0h_aros/crypto/md4/md4_dgst.o differ
-Binary files openssl-1.1.0h/crypto/md4/md4_one.o and openssl-1.1.0h_aros/crypto/md4/md4_one.o differ
-Binary files openssl-1.1.0h/crypto/md5/md5_dgst.o and openssl-1.1.0h_aros/crypto/md5/md5_dgst.o differ
-Binary files openssl-1.1.0h/crypto/md5/md5_one.o and openssl-1.1.0h_aros/crypto/md5/md5_one.o differ
-Binary files openssl-1.1.0h/crypto/mdc2/mdc2dgst.o and openssl-1.1.0h_aros/crypto/mdc2/mdc2dgst.o differ
-Binary files openssl-1.1.0h/crypto/mdc2/mdc2_one.o and openssl-1.1.0h_aros/crypto/mdc2/mdc2_one.o differ
-Binary files openssl-1.1.0h/crypto/mem_clr.o and openssl-1.1.0h_aros/crypto/mem_clr.o differ
-Binary files openssl-1.1.0h/crypto/mem_dbg.o and openssl-1.1.0h_aros/crypto/mem_dbg.o differ
-Binary files openssl-1.1.0h/crypto/mem.o and openssl-1.1.0h_aros/crypto/mem.o differ
-Binary files openssl-1.1.0h/crypto/mem_sec.o and openssl-1.1.0h_aros/crypto/mem_sec.o differ
-Binary files openssl-1.1.0h/crypto/modes/cbc128.o and openssl-1.1.0h_aros/crypto/modes/cbc128.o differ
-Binary files openssl-1.1.0h/crypto/modes/ccm128.o and openssl-1.1.0h_aros/crypto/modes/ccm128.o differ
-Binary files openssl-1.1.0h/crypto/modes/cfb128.o and openssl-1.1.0h_aros/crypto/modes/cfb128.o differ
-Binary files openssl-1.1.0h/crypto/modes/ctr128.o and openssl-1.1.0h_aros/crypto/modes/ctr128.o differ
-Binary files openssl-1.1.0h/crypto/modes/cts128.o and openssl-1.1.0h_aros/crypto/modes/cts128.o differ
-Binary files openssl-1.1.0h/crypto/modes/gcm128.o and openssl-1.1.0h_aros/crypto/modes/gcm128.o differ
-Binary files openssl-1.1.0h/crypto/modes/ocb128.o and openssl-1.1.0h_aros/crypto/modes/ocb128.o differ
-Binary files openssl-1.1.0h/crypto/modes/ofb128.o and openssl-1.1.0h_aros/crypto/modes/ofb128.o differ
-Binary files openssl-1.1.0h/crypto/modes/wrap128.o and openssl-1.1.0h_aros/crypto/modes/wrap128.o differ
-Binary files openssl-1.1.0h/crypto/modes/xts128.o and openssl-1.1.0h_aros/crypto/modes/xts128.o differ
-Binary files openssl-1.1.0h/crypto/objects/obj_dat.o and openssl-1.1.0h_aros/crypto/objects/obj_dat.o differ
-Binary files openssl-1.1.0h/crypto/objects/obj_err.o and openssl-1.1.0h_aros/crypto/objects/obj_err.o differ
-Binary files openssl-1.1.0h/crypto/objects/obj_lib.o and openssl-1.1.0h_aros/crypto/objects/obj_lib.o differ
-Binary files openssl-1.1.0h/crypto/objects/obj_xref.o and openssl-1.1.0h_aros/crypto/objects/obj_xref.o differ
-Binary files openssl-1.1.0h/crypto/objects/o_names.o and openssl-1.1.0h_aros/crypto/objects/o_names.o differ
-Binary files openssl-1.1.0h/crypto/ocsp/ocsp_asn.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_asn.o differ
-Binary files openssl-1.1.0h/crypto/ocsp/ocsp_cl.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_cl.o differ
-Binary files openssl-1.1.0h/crypto/ocsp/ocsp_err.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_err.o differ
-Binary files openssl-1.1.0h/crypto/ocsp/ocsp_ext.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_ext.o differ
-Binary files openssl-1.1.0h/crypto/ocsp/ocsp_ht.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_ht.o differ
-Binary files openssl-1.1.0h/crypto/ocsp/ocsp_lib.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_lib.o differ
-Binary files openssl-1.1.0h/crypto/ocsp/ocsp_prn.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_prn.o differ
-Binary files openssl-1.1.0h/crypto/ocsp/ocsp_srv.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_srv.o differ
-Binary files openssl-1.1.0h/crypto/ocsp/ocsp_vfy.o and openssl-1.1.0h_aros/crypto/ocsp/ocsp_vfy.o differ
-Binary files openssl-1.1.0h/crypto/ocsp/v3_ocsp.o and openssl-1.1.0h_aros/crypto/ocsp/v3_ocsp.o differ
-Binary files openssl-1.1.0h/crypto/o_dir.o and openssl-1.1.0h_aros/crypto/o_dir.o differ
-Binary files openssl-1.1.0h/crypto/o_fips.o and openssl-1.1.0h_aros/crypto/o_fips.o differ
-Binary files openssl-1.1.0h/crypto/o_fopen.o and openssl-1.1.0h_aros/crypto/o_fopen.o differ
-Binary files openssl-1.1.0h/crypto/o_init.o and openssl-1.1.0h_aros/crypto/o_init.o differ
-Binary files openssl-1.1.0h/crypto/o_str.o and openssl-1.1.0h_aros/crypto/o_str.o differ
-Binary files openssl-1.1.0h/crypto/o_time.o and openssl-1.1.0h_aros/crypto/o_time.o differ
-Binary files openssl-1.1.0h/crypto/pem/pem_all.o and openssl-1.1.0h_aros/crypto/pem/pem_all.o differ
-Binary files openssl-1.1.0h/crypto/pem/pem_err.o and openssl-1.1.0h_aros/crypto/pem/pem_err.o differ
-Binary files openssl-1.1.0h/crypto/pem/pem_info.o and openssl-1.1.0h_aros/crypto/pem/pem_info.o differ
-Binary files openssl-1.1.0h/crypto/pem/pem_lib.o and openssl-1.1.0h_aros/crypto/pem/pem_lib.o differ
-Binary files openssl-1.1.0h/crypto/pem/pem_oth.o and openssl-1.1.0h_aros/crypto/pem/pem_oth.o differ
-Binary files openssl-1.1.0h/crypto/pem/pem_pk8.o and openssl-1.1.0h_aros/crypto/pem/pem_pk8.o differ
-Binary files openssl-1.1.0h/crypto/pem/pem_pkey.o and openssl-1.1.0h_aros/crypto/pem/pem_pkey.o differ
-Binary files openssl-1.1.0h/crypto/pem/pem_sign.o and openssl-1.1.0h_aros/crypto/pem/pem_sign.o differ
-Binary files openssl-1.1.0h/crypto/pem/pem_x509.o and openssl-1.1.0h_aros/crypto/pem/pem_x509.o differ
-Binary files openssl-1.1.0h/crypto/pem/pem_xaux.o and openssl-1.1.0h_aros/crypto/pem/pem_xaux.o differ
-Binary files openssl-1.1.0h/crypto/pem/pvkfmt.o and openssl-1.1.0h_aros/crypto/pem/pvkfmt.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/p12_add.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_add.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/p12_asn.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_asn.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/p12_attr.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_attr.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/p12_crpt.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_crpt.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/p12_crt.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_crt.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/p12_decr.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_decr.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/p12_init.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_init.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/p12_key.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_key.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/p12_kiss.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_kiss.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/p12_mutl.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_mutl.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/p12_npas.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_npas.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/p12_p8d.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_p8d.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/p12_p8e.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_p8e.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/p12_sbag.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_sbag.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/p12_utl.o and openssl-1.1.0h_aros/crypto/pkcs12/p12_utl.o differ
-Binary files openssl-1.1.0h/crypto/pkcs12/pk12err.o and openssl-1.1.0h_aros/crypto/pkcs12/pk12err.o differ
-Binary files openssl-1.1.0h/crypto/pkcs7/bio_pk7.o and openssl-1.1.0h_aros/crypto/pkcs7/bio_pk7.o differ
-Binary files openssl-1.1.0h/crypto/pkcs7/pk7_asn1.o and openssl-1.1.0h_aros/crypto/pkcs7/pk7_asn1.o differ
-Binary files openssl-1.1.0h/crypto/pkcs7/pk7_attr.o and openssl-1.1.0h_aros/crypto/pkcs7/pk7_attr.o differ
-Binary files openssl-1.1.0h/crypto/pkcs7/pk7_doit.o and openssl-1.1.0h_aros/crypto/pkcs7/pk7_doit.o differ
-Binary files openssl-1.1.0h/crypto/pkcs7/pk7_lib.o and openssl-1.1.0h_aros/crypto/pkcs7/pk7_lib.o differ
-Binary files openssl-1.1.0h/crypto/pkcs7/pk7_mime.o and openssl-1.1.0h_aros/crypto/pkcs7/pk7_mime.o differ
-Binary files openssl-1.1.0h/crypto/pkcs7/pk7_smime.o and openssl-1.1.0h_aros/crypto/pkcs7/pk7_smime.o differ
-Binary files openssl-1.1.0h/crypto/pkcs7/pkcs7err.o and openssl-1.1.0h_aros/crypto/pkcs7/pkcs7err.o differ
-Binary files openssl-1.1.0h/crypto/poly1305/poly1305.o and openssl-1.1.0h_aros/crypto/poly1305/poly1305.o differ
-Binary files openssl-1.1.0h/crypto/rand/md_rand.o and openssl-1.1.0h_aros/crypto/rand/md_rand.o differ
-Binary files openssl-1.1.0h/crypto/rand/rand_egd.o and openssl-1.1.0h_aros/crypto/rand/rand_egd.o differ
-Binary files openssl-1.1.0h/crypto/rand/rand_err.o and openssl-1.1.0h_aros/crypto/rand/rand_err.o differ
-Binary files openssl-1.1.0h/crypto/rand/randfile.o and openssl-1.1.0h_aros/crypto/rand/randfile.o differ
-Binary files openssl-1.1.0h/crypto/rand/rand_lib.o and openssl-1.1.0h_aros/crypto/rand/rand_lib.o differ
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/rand/rand_unix.c openssl-1.1.0h_aros/crypto/rand/rand_unix.c
++static const char cflags[] = {
++    'c','o','m','p','i','l','e','r',':',' ','i','3','8','6','-','a',
++    'r','o','s','-','g','c','c',' ','-','D','O','P','E','N','S','S',
++    'L','_','N','O','_','D','Y','N','A','M','I','C','_','E','N','G',
++    'I','N','E',' ','-','D','O','P','E','N','S','S','L','_','S','Y',
++    'S','_','A','R','O','S','=','1',' ','-','D','_','_','A','R','O',
++    'S','_','_','=','1',' ','-','D','_','_','a','r','o','s','_','_',
++    '=','1',' ','-','D','O','P','E','N','S','S','L','_','N','O','_',
++    'S','E','C','U','R','E','_','M','E','M','O','R','Y','=','1',' ',
++    '-','D','O','P','E','N','S','S','L','D','I','R','=','"','\\','"',
++    '/','D','e','v','e','l','o','p','e','r','/','e','t','c','/','s',
++    's','l','\\','"','"',' ','-','D','E','N','G','I','N','E','S','D',
++    'I','R','=','"','\\','"','/','D','e','v','e','l','o','p','e','r',
++    '/','l','i','b','/','e','n','g','i','n','e','s','-','1','.','1',
++    '\\','"','"',' ','\0'
++};
++#define PLATFORM "platform: debug"
++#define DATE "built on: Thu Jun  7 09:16:29 2018"
+diff -ruN -X exclude openssl-1.1.0h/crypto/rand/rand_unix.c openssl-1.1.0h_aros/crypto/rand/rand_unix.c
 --- openssl-1.1.0h/crypto/rand/rand_unix.c	2018-03-27 13:50:39.000000000 +0000
 +++ openssl-1.1.0h_aros/crypto/rand/rand_unix.c	2018-06-04 09:30:33.432663261 +0000
 @@ -121,6 +121,23 @@
@@ -674,75 +793,7 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
  # elif defined __OpenBSD__
  int RAND_poll(void)
  {
-Binary files openssl-1.1.0h/crypto/rand/rand_unix.o and openssl-1.1.0h_aros/crypto/rand/rand_unix.o differ
-Binary files openssl-1.1.0h/crypto/rand/rand_vms.o and openssl-1.1.0h_aros/crypto/rand/rand_vms.o differ
-Binary files openssl-1.1.0h/crypto/rand/rand_win.o and openssl-1.1.0h_aros/crypto/rand/rand_win.o differ
-Binary files openssl-1.1.0h/crypto/rc2/rc2_cbc.o and openssl-1.1.0h_aros/crypto/rc2/rc2_cbc.o differ
-Binary files openssl-1.1.0h/crypto/rc2/rc2cfb64.o and openssl-1.1.0h_aros/crypto/rc2/rc2cfb64.o differ
-Binary files openssl-1.1.0h/crypto/rc2/rc2_ecb.o and openssl-1.1.0h_aros/crypto/rc2/rc2_ecb.o differ
-Binary files openssl-1.1.0h/crypto/rc2/rc2ofb64.o and openssl-1.1.0h_aros/crypto/rc2/rc2ofb64.o differ
-Binary files openssl-1.1.0h/crypto/rc2/rc2_skey.o and openssl-1.1.0h_aros/crypto/rc2/rc2_skey.o differ
-Binary files openssl-1.1.0h/crypto/rc4/rc4_enc.o and openssl-1.1.0h_aros/crypto/rc4/rc4_enc.o differ
-Binary files openssl-1.1.0h/crypto/rc4/rc4_skey.o and openssl-1.1.0h_aros/crypto/rc4/rc4_skey.o differ
-Binary files openssl-1.1.0h/crypto/rc5/rc5cfb64.o and openssl-1.1.0h_aros/crypto/rc5/rc5cfb64.o differ
-Binary files openssl-1.1.0h/crypto/rc5/rc5_ecb.o and openssl-1.1.0h_aros/crypto/rc5/rc5_ecb.o differ
-Binary files openssl-1.1.0h/crypto/rc5/rc5_enc.o and openssl-1.1.0h_aros/crypto/rc5/rc5_enc.o differ
-Binary files openssl-1.1.0h/crypto/rc5/rc5ofb64.o and openssl-1.1.0h_aros/crypto/rc5/rc5ofb64.o differ
-Binary files openssl-1.1.0h/crypto/rc5/rc5_skey.o and openssl-1.1.0h_aros/crypto/rc5/rc5_skey.o differ
-Binary files openssl-1.1.0h/crypto/ripemd/rmd_dgst.o and openssl-1.1.0h_aros/crypto/ripemd/rmd_dgst.o differ
-Binary files openssl-1.1.0h/crypto/ripemd/rmd_one.o and openssl-1.1.0h_aros/crypto/ripemd/rmd_one.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_ameth.o and openssl-1.1.0h_aros/crypto/rsa/rsa_ameth.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_asn1.o and openssl-1.1.0h_aros/crypto/rsa/rsa_asn1.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_chk.o and openssl-1.1.0h_aros/crypto/rsa/rsa_chk.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_crpt.o and openssl-1.1.0h_aros/crypto/rsa/rsa_crpt.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_depr.o and openssl-1.1.0h_aros/crypto/rsa/rsa_depr.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_err.o and openssl-1.1.0h_aros/crypto/rsa/rsa_err.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_gen.o and openssl-1.1.0h_aros/crypto/rsa/rsa_gen.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_lib.o and openssl-1.1.0h_aros/crypto/rsa/rsa_lib.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_meth.o and openssl-1.1.0h_aros/crypto/rsa/rsa_meth.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_none.o and openssl-1.1.0h_aros/crypto/rsa/rsa_none.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_null.o and openssl-1.1.0h_aros/crypto/rsa/rsa_null.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_oaep.o and openssl-1.1.0h_aros/crypto/rsa/rsa_oaep.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_ossl.o and openssl-1.1.0h_aros/crypto/rsa/rsa_ossl.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_pk1.o and openssl-1.1.0h_aros/crypto/rsa/rsa_pk1.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_pmeth.o and openssl-1.1.0h_aros/crypto/rsa/rsa_pmeth.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_prn.o and openssl-1.1.0h_aros/crypto/rsa/rsa_prn.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_pss.o and openssl-1.1.0h_aros/crypto/rsa/rsa_pss.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_saos.o and openssl-1.1.0h_aros/crypto/rsa/rsa_saos.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_sign.o and openssl-1.1.0h_aros/crypto/rsa/rsa_sign.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_ssl.o and openssl-1.1.0h_aros/crypto/rsa/rsa_ssl.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_x931g.o and openssl-1.1.0h_aros/crypto/rsa/rsa_x931g.o differ
-Binary files openssl-1.1.0h/crypto/rsa/rsa_x931.o and openssl-1.1.0h_aros/crypto/rsa/rsa_x931.o differ
-Binary files openssl-1.1.0h/crypto/seed/seed_cbc.o and openssl-1.1.0h_aros/crypto/seed/seed_cbc.o differ
-Binary files openssl-1.1.0h/crypto/seed/seed_cfb.o and openssl-1.1.0h_aros/crypto/seed/seed_cfb.o differ
-Binary files openssl-1.1.0h/crypto/seed/seed_ecb.o and openssl-1.1.0h_aros/crypto/seed/seed_ecb.o differ
-Binary files openssl-1.1.0h/crypto/seed/seed.o and openssl-1.1.0h_aros/crypto/seed/seed.o differ
-Binary files openssl-1.1.0h/crypto/seed/seed_ofb.o and openssl-1.1.0h_aros/crypto/seed/seed_ofb.o differ
-Binary files openssl-1.1.0h/crypto/sha/sha1dgst.o and openssl-1.1.0h_aros/crypto/sha/sha1dgst.o differ
-Binary files openssl-1.1.0h/crypto/sha/sha1_one.o and openssl-1.1.0h_aros/crypto/sha/sha1_one.o differ
-Binary files openssl-1.1.0h/crypto/sha/sha256.o and openssl-1.1.0h_aros/crypto/sha/sha256.o differ
-Binary files openssl-1.1.0h/crypto/sha/sha512.o and openssl-1.1.0h_aros/crypto/sha/sha512.o differ
-Binary files openssl-1.1.0h/crypto/srp/srp_lib.o and openssl-1.1.0h_aros/crypto/srp/srp_lib.o differ
-Binary files openssl-1.1.0h/crypto/srp/srp_vfy.o and openssl-1.1.0h_aros/crypto/srp/srp_vfy.o differ
-Binary files openssl-1.1.0h/crypto/stack/stack.o and openssl-1.1.0h_aros/crypto/stack/stack.o differ
-Binary files openssl-1.1.0h/crypto/threads_none.o and openssl-1.1.0h_aros/crypto/threads_none.o differ
-Binary files openssl-1.1.0h/crypto/threads_pthread.o and openssl-1.1.0h_aros/crypto/threads_pthread.o differ
-Binary files openssl-1.1.0h/crypto/threads_win.o and openssl-1.1.0h_aros/crypto/threads_win.o differ
-Binary files openssl-1.1.0h/crypto/ts/ts_asn1.o and openssl-1.1.0h_aros/crypto/ts/ts_asn1.o differ
-Binary files openssl-1.1.0h/crypto/ts/ts_conf.o and openssl-1.1.0h_aros/crypto/ts/ts_conf.o differ
-Binary files openssl-1.1.0h/crypto/ts/ts_err.o and openssl-1.1.0h_aros/crypto/ts/ts_err.o differ
-Binary files openssl-1.1.0h/crypto/ts/ts_lib.o and openssl-1.1.0h_aros/crypto/ts/ts_lib.o differ
-Binary files openssl-1.1.0h/crypto/ts/ts_req_print.o and openssl-1.1.0h_aros/crypto/ts/ts_req_print.o differ
-Binary files openssl-1.1.0h/crypto/ts/ts_req_utils.o and openssl-1.1.0h_aros/crypto/ts/ts_req_utils.o differ
-Binary files openssl-1.1.0h/crypto/ts/ts_rsp_print.o and openssl-1.1.0h_aros/crypto/ts/ts_rsp_print.o differ
-Binary files openssl-1.1.0h/crypto/ts/ts_rsp_sign.o and openssl-1.1.0h_aros/crypto/ts/ts_rsp_sign.o differ
-Binary files openssl-1.1.0h/crypto/ts/ts_rsp_utils.o and openssl-1.1.0h_aros/crypto/ts/ts_rsp_utils.o differ
-Binary files openssl-1.1.0h/crypto/ts/ts_rsp_verify.o and openssl-1.1.0h_aros/crypto/ts/ts_rsp_verify.o differ
-Binary files openssl-1.1.0h/crypto/ts/ts_verify_ctx.o and openssl-1.1.0h_aros/crypto/ts/ts_verify_ctx.o differ
-Binary files openssl-1.1.0h/crypto/txt_db/txt_db.o and openssl-1.1.0h_aros/crypto/txt_db/txt_db.o differ
-Binary files openssl-1.1.0h/crypto/ui/ui_err.o and openssl-1.1.0h_aros/crypto/ui/ui_err.o differ
-Binary files openssl-1.1.0h/crypto/ui/ui_lib.o and openssl-1.1.0h_aros/crypto/ui/ui_lib.o differ
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/crypto/ui/ui_openssl.c openssl-1.1.0h_aros/crypto/ui/ui_openssl.c
+diff -ruN -X exclude openssl-1.1.0h/crypto/ui/ui_openssl.c openssl-1.1.0h_aros/crypto/ui/ui_openssl.c
 --- openssl-1.1.0h/crypto/ui/ui_openssl.c	2018-03-27 13:50:39.000000000 +0000
 +++ openssl-1.1.0h_aros/crypto/ui/ui_openssl.c	2018-06-04 09:30:33.432663261 +0000
 @@ -99,6 +99,13 @@
@@ -772,85 +823,7 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
  static TTY_STRUCT tty_orig, tty_new;
  # endif
  #endif
-Binary files openssl-1.1.0h/crypto/ui/ui_openssl.o and openssl-1.1.0h_aros/crypto/ui/ui_openssl.o differ
-Binary files openssl-1.1.0h/crypto/ui/ui_util.o and openssl-1.1.0h_aros/crypto/ui/ui_util.o differ
-Binary files openssl-1.1.0h/crypto/uid.o and openssl-1.1.0h_aros/crypto/uid.o differ
-Binary files openssl-1.1.0h/crypto/whrlpool/wp_block.o and openssl-1.1.0h_aros/crypto/whrlpool/wp_block.o differ
-Binary files openssl-1.1.0h/crypto/whrlpool/wp_dgst.o and openssl-1.1.0h_aros/crypto/whrlpool/wp_dgst.o differ
-Binary files openssl-1.1.0h/crypto/x509/by_dir.o and openssl-1.1.0h_aros/crypto/x509/by_dir.o differ
-Binary files openssl-1.1.0h/crypto/x509/by_file.o and openssl-1.1.0h_aros/crypto/x509/by_file.o differ
-Binary files openssl-1.1.0h/crypto/x509/t_crl.o and openssl-1.1.0h_aros/crypto/x509/t_crl.o differ
-Binary files openssl-1.1.0h/crypto/x509/t_req.o and openssl-1.1.0h_aros/crypto/x509/t_req.o differ
-Binary files openssl-1.1.0h/crypto/x509/t_x509.o and openssl-1.1.0h_aros/crypto/x509/t_x509.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_att.o and openssl-1.1.0h_aros/crypto/x509/x509_att.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_cmp.o and openssl-1.1.0h_aros/crypto/x509/x509_cmp.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509cset.o and openssl-1.1.0h_aros/crypto/x509/x509cset.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_d2.o and openssl-1.1.0h_aros/crypto/x509/x509_d2.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_def.o and openssl-1.1.0h_aros/crypto/x509/x509_def.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_err.o and openssl-1.1.0h_aros/crypto/x509/x509_err.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_ext.o and openssl-1.1.0h_aros/crypto/x509/x509_ext.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_lu.o and openssl-1.1.0h_aros/crypto/x509/x509_lu.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509name.o and openssl-1.1.0h_aros/crypto/x509/x509name.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_obj.o and openssl-1.1.0h_aros/crypto/x509/x509_obj.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_r2x.o and openssl-1.1.0h_aros/crypto/x509/x509_r2x.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_req.o and openssl-1.1.0h_aros/crypto/x509/x509_req.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509rset.o and openssl-1.1.0h_aros/crypto/x509/x509rset.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_set.o and openssl-1.1.0h_aros/crypto/x509/x509_set.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509spki.o and openssl-1.1.0h_aros/crypto/x509/x509spki.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_trs.o and openssl-1.1.0h_aros/crypto/x509/x509_trs.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_txt.o and openssl-1.1.0h_aros/crypto/x509/x509_txt.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509type.o and openssl-1.1.0h_aros/crypto/x509/x509type.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_v3.o and openssl-1.1.0h_aros/crypto/x509/x509_v3.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_vfy.o and openssl-1.1.0h_aros/crypto/x509/x509_vfy.o differ
-Binary files openssl-1.1.0h/crypto/x509/x509_vpm.o and openssl-1.1.0h_aros/crypto/x509/x509_vpm.o differ
-Binary files openssl-1.1.0h/crypto/x509/x_all.o and openssl-1.1.0h_aros/crypto/x509/x_all.o differ
-Binary files openssl-1.1.0h/crypto/x509/x_attrib.o and openssl-1.1.0h_aros/crypto/x509/x_attrib.o differ
-Binary files openssl-1.1.0h/crypto/x509/x_crl.o and openssl-1.1.0h_aros/crypto/x509/x_crl.o differ
-Binary files openssl-1.1.0h/crypto/x509/x_exten.o and openssl-1.1.0h_aros/crypto/x509/x_exten.o differ
-Binary files openssl-1.1.0h/crypto/x509/x_name.o and openssl-1.1.0h_aros/crypto/x509/x_name.o differ
-Binary files openssl-1.1.0h/crypto/x509/x_pubkey.o and openssl-1.1.0h_aros/crypto/x509/x_pubkey.o differ
-Binary files openssl-1.1.0h/crypto/x509/x_req.o and openssl-1.1.0h_aros/crypto/x509/x_req.o differ
-Binary files openssl-1.1.0h/crypto/x509/x_x509a.o and openssl-1.1.0h_aros/crypto/x509/x_x509a.o differ
-Binary files openssl-1.1.0h/crypto/x509/x_x509.o and openssl-1.1.0h_aros/crypto/x509/x_x509.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/pcy_cache.o and openssl-1.1.0h_aros/crypto/x509v3/pcy_cache.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/pcy_data.o and openssl-1.1.0h_aros/crypto/x509v3/pcy_data.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/pcy_lib.o and openssl-1.1.0h_aros/crypto/x509v3/pcy_lib.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/pcy_map.o and openssl-1.1.0h_aros/crypto/x509v3/pcy_map.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/pcy_node.o and openssl-1.1.0h_aros/crypto/x509v3/pcy_node.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/pcy_tree.o and openssl-1.1.0h_aros/crypto/x509v3/pcy_tree.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_addr.o and openssl-1.1.0h_aros/crypto/x509v3/v3_addr.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_akeya.o and openssl-1.1.0h_aros/crypto/x509v3/v3_akeya.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_akey.o and openssl-1.1.0h_aros/crypto/x509v3/v3_akey.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_alt.o and openssl-1.1.0h_aros/crypto/x509v3/v3_alt.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_asid.o and openssl-1.1.0h_aros/crypto/x509v3/v3_asid.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_bcons.o and openssl-1.1.0h_aros/crypto/x509v3/v3_bcons.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_bitst.o and openssl-1.1.0h_aros/crypto/x509v3/v3_bitst.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_conf.o and openssl-1.1.0h_aros/crypto/x509v3/v3_conf.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_cpols.o and openssl-1.1.0h_aros/crypto/x509v3/v3_cpols.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_crld.o and openssl-1.1.0h_aros/crypto/x509v3/v3_crld.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_enum.o and openssl-1.1.0h_aros/crypto/x509v3/v3_enum.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3err.o and openssl-1.1.0h_aros/crypto/x509v3/v3err.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_extku.o and openssl-1.1.0h_aros/crypto/x509v3/v3_extku.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_genn.o and openssl-1.1.0h_aros/crypto/x509v3/v3_genn.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_ia5.o and openssl-1.1.0h_aros/crypto/x509v3/v3_ia5.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_info.o and openssl-1.1.0h_aros/crypto/x509v3/v3_info.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_int.o and openssl-1.1.0h_aros/crypto/x509v3/v3_int.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_lib.o and openssl-1.1.0h_aros/crypto/x509v3/v3_lib.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_ncons.o and openssl-1.1.0h_aros/crypto/x509v3/v3_ncons.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_pcia.o and openssl-1.1.0h_aros/crypto/x509v3/v3_pcia.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_pci.o and openssl-1.1.0h_aros/crypto/x509v3/v3_pci.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_pcons.o and openssl-1.1.0h_aros/crypto/x509v3/v3_pcons.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_pku.o and openssl-1.1.0h_aros/crypto/x509v3/v3_pku.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_pmaps.o and openssl-1.1.0h_aros/crypto/x509v3/v3_pmaps.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_prn.o and openssl-1.1.0h_aros/crypto/x509v3/v3_prn.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_purp.o and openssl-1.1.0h_aros/crypto/x509v3/v3_purp.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_skey.o and openssl-1.1.0h_aros/crypto/x509v3/v3_skey.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_sxnet.o and openssl-1.1.0h_aros/crypto/x509v3/v3_sxnet.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_tlsf.o and openssl-1.1.0h_aros/crypto/x509v3/v3_tlsf.o differ
-Binary files openssl-1.1.0h/crypto/x509v3/v3_utl.o and openssl-1.1.0h_aros/crypto/x509v3/v3_utl.o differ
-Binary files openssl-1.1.0h/engines/e_capi.o and openssl-1.1.0h_aros/engines/e_capi.o differ
-Binary files openssl-1.1.0h/engines/e_padlock.o and openssl-1.1.0h_aros/engines/e_padlock.o differ
-diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/e_os.h openssl-1.1.0h_aros/e_os.h
+diff -ruN -X exclude openssl-1.1.0h/e_os.h openssl-1.1.0h_aros/e_os.h
 --- openssl-1.1.0h/e_os.h	2018-03-27 13:50:40.000000000 +0000
 +++ openssl-1.1.0h_aros/e_os.h	2018-06-05 07:27:08.434425255 +0000
 @@ -77,6 +77,14 @@
@@ -902,6 +875,160 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
  #   ifndef NO_SYS_PARAM_H
  #    include <sys/param.h>
  #   endif
+diff -ruN -X exclude openssl-1.1.0h/fuzz/driver.c openssl-1.1.0h_aros/fuzz/driver.c
+--- openssl-1.1.0h/fuzz/driver.c	2018-03-27 13:50:40.000000000 +0000
++++ openssl-1.1.0h_aros/fuzz/driver.c	2018-06-06 16:31:06.979537618 +0000
+@@ -15,6 +15,16 @@
+ 
+ #ifndef OPENSSL_NO_FUZZ_LIBFUZZER
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++#endif
++
+ int LLVMFuzzerInitialize(int *argc, char ***argv)
+ {
+     if (FuzzerInitialize)
+@@ -32,6 +42,13 @@
+ 
+ int main(int argc, char** argv)
+ {
++#if defined(OPENSSL_SYS_AROS)
++        if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            OPENSSL_EXIT(10);
++        }
++#endif
++
+     if (FuzzerInitialize)
+         FuzzerInitialize(&argc, &argv);
+ 
+@@ -42,6 +59,16 @@
+         FuzzerTestOneInput(buf, size);
+         free(buf);
+     }
++#if defined(OPENSSL_SYS_AROS)
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            OPENSSL_EXIT(10);
++        }
++#endif
+     return 0;
+ }
+ 
+diff -ruN -X exclude openssl-1.1.0h/fuzz/test-corpus.c openssl-1.1.0h_aros/fuzz/test-corpus.c
+--- openssl-1.1.0h/fuzz/test-corpus.c	2018-03-27 13:50:40.000000000 +0000
++++ openssl-1.1.0h_aros/fuzz/test-corpus.c	2018-06-06 17:08:37.028478117 +0000
+@@ -20,7 +20,42 @@
+ #include <openssl/crypto.h>
+ #include "fuzzer.h"
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++
++int errno;
++#endif
++
++
+ int main(int argc, char **argv) {
++
++#if defined(OPENSSL_SYS_AROS)
++        if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
++
+     int n;
+ 
+     FuzzerInitialize(&argc, &argv);
+diff -ruN -X exclude openssl-1.1.0h/libcrypto.pc openssl-1.1.0h_aros/libcrypto.pc
+--- openssl-1.1.0h/libcrypto.pc	1970-01-01 00:00:00.000000000 +0000
++++ openssl-1.1.0h_aros/libcrypto.pc	2018-06-07 16:35:08.647879808 +0000
+@@ -0,0 +1,12 @@
++prefix=/Developer
++exec_prefix=${prefix}
++libdir=${exec_prefix}/lib
++includedir=${prefix}/include
++enginesdir=${libdir}/engines-1.1
++
++Name: OpenSSL-libcrypto
++Description: OpenSSL cryptography library
++Version: 1.1.0h
++Libs: -L${libdir} libcrypto.a
++Libs.private: 
++Cflags: -I${includedir}
+diff -ruN -X exclude openssl-1.1.0h/libssl.pc openssl-1.1.0h_aros/libssl.pc
+--- openssl-1.1.0h/libssl.pc	1970-01-01 00:00:00.000000000 +0000
++++ openssl-1.1.0h_aros/libssl.pc	2018-06-07 16:35:08.647879808 +0000
+@@ -0,0 +1,11 @@
++prefix=/Developer
++exec_prefix=${prefix}
++libdir=${exec_prefix}/lib
++includedir=${prefix}/include
++
++Name: OpenSSL-libssl
++Description: Secure Sockets Layer and cryptography libraries
++Version: 1.1.0h
++Requires.private: libcrypto
++Libs: -L${libdir} libssl.a
++Cflags: -I${includedir}
+diff -ruN -X exclude openssl-1.1.0h/openssl.pc openssl-1.1.0h_aros/openssl.pc
+--- openssl-1.1.0h/openssl.pc	1970-01-01 00:00:00.000000000 +0000
++++ openssl-1.1.0h_aros/openssl.pc	2018-06-07 16:35:08.647879808 +0000
+@@ -0,0 +1,9 @@
++prefix=/Developer
++exec_prefix=${prefix}
++libdir=${exec_prefix}/lib
++includedir=${prefix}/include
++
++Name: OpenSSL
++Description: Secure Sockets Layer and cryptography libraries and tools
++Version: 1.1.0h
++Requires: libssl libcrypto
+diff -ruN -X exclude openssl-1.1.0h/ssl/d1_srtp.c openssl-1.1.0h_aros/ssl/d1_srtp.c
+--- openssl-1.1.0h/ssl/d1_srtp.c	2018-03-27 13:50:40.000000000 +0000
++++ openssl-1.1.0h_aros/ssl/d1_srtp.c	2018-06-04 09:30:33.440663261 +0000
+@@ -17,6 +17,8 @@
+ #include <openssl/objects.h>
+ #include "ssl_locl.h"
+ 
++
++
+ #ifndef OPENSSL_NO_SRTP
+ 
+ static SRTP_PROTECTION_PROFILE srtp_known_profiles[] = {
+diff -ruN -X exclude openssl-1.1.0h/ssl/ssl_locl.h openssl-1.1.0h_aros/ssl/ssl_locl.h
 --- openssl-1.1.0h/ssl/ssl_locl.h	2018-03-27 13:50:40.000000000 +0000
 +++ openssl-1.1.0h_aros/ssl/ssl_locl.h	2018-06-04 09:30:33.440663261 +0000
 @@ -47,7 +47,7 @@
@@ -913,3 +1040,2636 @@ diff -ruN -x Makefile -x Config -x 'config*' -x '*.swp' -x MyFix openssl-1.1.0h/
  #  include <sys/time.h>         /* struct timeval for DTLS */
  # endif
  
+diff -ruN -X exclude openssl-1.1.0h/test/asynciotest.c openssl-1.1.0h_aros/test/asynciotest.c
+--- openssl-1.1.0h/test/asynciotest.c	2018-03-27 13:50:40.000000000 +0000
++++ openssl-1.1.0h_aros/test/asynciotest.c	2018-06-06 17:35:50.556879964 +0000
+@@ -17,6 +17,25 @@
+ 
+ #include "ssltestlib.h"
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++
++
++#endif
++
++
+ /* Should we fragment records or not? 0 = no, !0 = yes*/
+ static int fragment = 0;
+ 
+@@ -238,6 +257,22 @@
+ 
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     SSL_CTX *serverctx = NULL, *clientctx = NULL;
+     SSL *serverssl = NULL, *clientssl = NULL;
+     BIO *s_to_c_fbio = NULL, *c_to_s_fbio = NULL;
+diff -ruN -X exclude openssl-1.1.0h/test/asynctest.c openssl-1.1.0h_aros/test/asynctest.c
+--- openssl-1.1.0h/test/asynctest.c	2018-03-27 13:50:40.000000000 +0000
++++ openssl-1.1.0h_aros/test/asynctest.c	2018-06-06 17:38:00.504916581 +0000
+@@ -16,6 +16,22 @@
+ #include <openssl/async.h>
+ #include <openssl/crypto.h>
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ static int ctr = 0;
+ static ASYNC_JOB *currjob = NULL;
+ 
+@@ -271,6 +287,22 @@
+ 
+ int main(int argc, char **argv)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     if (!ASYNC_is_capable()) {
+         fprintf(stderr,
+                 "OpenSSL build is not ASYNC capable - skipping async tests\n");
+diff -ruN -X exclude openssl-1.1.0h/test/bad_dtls_test.c openssl-1.1.0h_aros/test/bad_dtls_test.c
+--- openssl-1.1.0h/test/bad_dtls_test.c	2018-03-27 13:50:40.000000000 +0000
++++ openssl-1.1.0h_aros/test/bad_dtls_test.c	2018-06-06 17:41:27.332977656 +0000
+@@ -41,6 +41,22 @@
+ #include "../ssl/packet_locl.h"
+ #include "../e_os.h" /* for OSSL_NELEM() */
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++
++int errno;
++#endif
++
+ /* For DTLS1_BAD_VER packets the MAC doesn't include the handshake header */
+ #define MAC_OFFSET (DTLS1_RT_HEADER_LENGTH + DTLS1_HM_HEADER_LENGTH)
+ 
+@@ -445,6 +461,22 @@
+ 
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     SSL_SESSION *sess;
+     SSL_CTX *ctx;
+     SSL *con;
+diff -ruN -X exclude openssl-1.1.0h/test/bio_enc_test.c openssl-1.1.0h_aros/test/bio_enc_test.c
+--- openssl-1.1.0h/test/bio_enc_test.c	2018-03-27 13:50:40.000000000 +0000
++++ openssl-1.1.0h_aros/test/bio_enc_test.c	2018-06-06 18:22:30.669433228 +0000
+@@ -12,8 +12,40 @@
+ #include <openssl/bio.h>
+ #include <openssl/rand.h>
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ int main()
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     BIO *b;
+     static const unsigned char key[16] = { 0 };
+     static unsigned char inp[1024] = { 0 };
+diff -ruN -X exclude openssl-1.1.0h/test/bioprinttest.c openssl-1.1.0h_aros/test/bioprinttest.c
+--- openssl-1.1.0h/test/bioprinttest.c	2018-03-27 13:50:40.000000000 +0000
++++ openssl-1.1.0h_aros/test/bioprinttest.c	2018-06-06 18:23:39.541449714 +0000
+@@ -86,6 +86,22 @@
+     /*  69 */ { "6.6667e+04", "66666.6667", "6.667e+04", "6.6667E+04", "6.667E+04" },
+ };
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ static void dofptest(int test, double val, char *width, int prec, int *fail)
+ {
+     char format[80], result[80];
+@@ -140,6 +156,23 @@
+ 
+ int main(int argc, char **argv)
+ {
++
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     int test = 0;
+     int i;
+     int fail = 0;
+diff -ruN -X exclude openssl-1.1.0h/test/bntest.c openssl-1.1.0h_aros/test/bntest.c
+--- openssl-1.1.0h/test/bntest.c	2018-03-27 13:50:40.000000000 +0000
++++ openssl-1.1.0h_aros/test/bntest.c	2018-06-06 18:24:24.557460524 +0000
+@@ -33,6 +33,22 @@
+ #include <openssl/x509.h>
+ #include <openssl/err.h>
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ /*
+  * In bn_lcl.h, bn_expand() is defined as a static ossl_inline function.
+  * This is fine in itself, it will end up as an unused static function in
+@@ -104,6 +120,22 @@
+ 
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     BN_CTX *ctx;
+     BIO *out;
+     char *outfile = NULL;
+diff -ruN -X exclude openssl-1.1.0h/test/cipherlist_test.c openssl-1.1.0h_aros/test/cipherlist_test.c
+--- openssl-1.1.0h/test/cipherlist_test.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/cipherlist_test.c	2018-06-06 18:25:41.389479097 +0000
+@@ -20,6 +20,22 @@
+ #include "e_os.h"
+ #include "testutil.h"
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ typedef struct cipherlist_test_fixture {
+     const char *test_case_name;
+     SSL_CTX *server;
+@@ -188,6 +204,22 @@
+ 
+ int main(int argc, char **argv)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     int result = 0;
+ 
+     ADD_TEST(test_default_cipherlist_implicit);
+diff -ruN -X exclude openssl-1.1.0h/test/clienthellotest.c openssl-1.1.0h_aros/test/clienthellotest.c
+--- openssl-1.1.0h/test/clienthellotest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/clienthellotest.c	2018-06-06 18:26:20.985488691 +0000
+@@ -18,6 +18,22 @@
+ 
+ #include "../ssl/packet_locl.h"
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ #define CLIENT_VERSION_LEN      2
+ 
+ 
+@@ -31,6 +47,22 @@
+ 
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     SSL_CTX *ctx = NULL;
+     SSL *con = NULL;
+     BIO *rbio;
+diff -ruN -X exclude openssl-1.1.0h/test/crltest.c openssl-1.1.0h_aros/test/crltest.c
+--- openssl-1.1.0h/test/crltest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/crltest.c	2018-06-06 18:27:11.009500876 +0000
+@@ -18,6 +18,22 @@
+ 
+ #include "testutil.h"
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #define PARAM_TIME 1474934400 /* Sep 27th, 2016 */
+ 
+ static const char *kCRLTestRoot[] = {
+@@ -373,6 +389,22 @@
+ 
+ int main()
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     ADD_TEST(test_crl);
+     return run_tests("crltest");
+ }
+diff -ruN -X exclude openssl-1.1.0h/test/ct_test.c openssl-1.1.0h_aros/test/ct_test.c
+--- openssl-1.1.0h/test/ct_test.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/ct_test.c	2018-06-06 18:27:51.949520638 +0000
+@@ -20,6 +20,21 @@
+ #include <openssl/x509v3.h>
+ #include "testutil.h"
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ #ifndef OPENSSL_NO_CT
+ 
+ /* Used when declaring buffers to read text files into */
+@@ -560,6 +575,22 @@
+ 
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     int result = 0;
+     char *tmp_env = NULL;
+ 
+diff -ruN -X exclude openssl-1.1.0h/test/d2i_test.c openssl-1.1.0h_aros/test/d2i_test.c
+--- openssl-1.1.0h/test/d2i_test.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/d2i_test.c	2018-06-06 18:28:36.365543433 +0000
+@@ -25,6 +25,21 @@
+ #endif
+ #include "e_os.h"
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ static const ASN1_ITEM *item_type;
+ static const char *test_file;
+ 
+@@ -142,6 +157,22 @@
+  */
+ int main(int argc, char **argv)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     int result = 0;
+     const char *test_type_name;
+     const char *expected_error_string;
+diff -ruN -X exclude openssl-1.1.0h/test/danetest.c openssl-1.1.0h_aros/test/danetest.c
+--- openssl-1.1.0h/test/danetest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/danetest.c	2018-06-06 18:29:20.577565290 +0000
+@@ -25,6 +25,22 @@
+ 
+ #include "../e_os.h"
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #define _UC(c) ((unsigned char)(c))
+ 
+ static const char *progname;
+@@ -426,6 +442,22 @@
+ 
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     BIO *f;
+     BIO *bio_err;
+     SSL_CTX *ctx = NULL;
+diff -ruN -X exclude openssl-1.1.0h/test/destest.c openssl-1.1.0h_aros/test/destest.c
+--- openssl-1.1.0h/test/destest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/destest.c	2018-06-06 18:36:45.645751492 +0000
+@@ -26,9 +26,41 @@
+ #endif
+ #include <string.h>
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ #ifdef OPENSSL_NO_DES
++
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     printf("No DES support\n");
+     return (0);
+ }
+diff -ruN -X exclude openssl-1.1.0h/test/dhtest.c openssl-1.1.0h_aros/test/dhtest.c
+--- openssl-1.1.0h/test/dhtest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/dhtest.c	2018-06-06 18:42:50.061876851 +0000
+@@ -19,9 +19,42 @@
+ #include <openssl/rand.h>
+ #include <openssl/err.h>
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #ifdef OPENSSL_NO_DH
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     printf("No DH support\n");
+     return (0);
+ }
+diff -ruN -X exclude openssl-1.1.0h/test/dsatest.c openssl-1.1.0h_aros/test/dsatest.c
+--- openssl-1.1.0h/test/dsatest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/dsatest.c	2018-06-06 18:43:37.841892298 +0000
+@@ -21,9 +21,42 @@
+ #include <openssl/err.h>
+ #include <openssl/bn.h>
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #ifdef OPENSSL_NO_DSA
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     printf("No DSA support\n");
+     return (0);
+ }
+diff -ruN -X exclude openssl-1.1.0h/test/dtlstest.c openssl-1.1.0h_aros/test/dtlstest.c
+--- openssl-1.1.0h/test/dtlstest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/dtlstest.c	2018-06-06 18:44:36.981911178 +0000
+@@ -21,6 +21,22 @@
+ #define NUM_TESTS   2
+ 
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #define DUMMY_CERT_STATUS_LEN  12
+ 
+ static unsigned char certstatus[] = {
+@@ -107,6 +123,22 @@
+ 
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     BIO *err = NULL;
+     int testresult = 1;
+ 
+diff -ruN -X exclude openssl-1.1.0h/test/dtlsv1listentest.c openssl-1.1.0h_aros/test/dtlsv1listentest.c
+--- openssl-1.1.0h/test/dtlsv1listentest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/dtlsv1listentest.c	2018-06-06 18:45:15.337923301 +0000
+@@ -17,6 +17,21 @@
+ #endif
+ #include "e_os.h"
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ #ifndef OPENSSL_NO_SOCK
+ 
+ /* Just a ClientHello without a cookie */
+@@ -326,6 +341,22 @@
+ 
+ int main(void)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+ #ifndef OPENSSL_NO_SOCK
+     SSL_CTX *ctx = NULL;
+     SSL *ssl = NULL;
+diff -ruN -X exclude openssl-1.1.0h/test/ecdsatest.c openssl-1.1.0h_aros/test/ecdsatest.c
+--- openssl-1.1.0h/test/ecdsatest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/ecdsatest.c	2018-06-06 18:48:27.325982738 +0000
+@@ -27,9 +27,41 @@
+ 
+ #include <openssl/opensslconf.h> /* To see if OPENSSL_NO_EC is defined */
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #ifdef OPENSSL_NO_EC
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     puts("Elliptic curves are disabled.");
+     return 0;
+ }
+diff -ruN -X exclude openssl-1.1.0h/test/ectest.c openssl-1.1.0h_aros/test/ectest.c
+--- openssl-1.1.0h/test/ectest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/ectest.c	2018-06-06 18:49:05.801994451 +0000
+@@ -31,9 +31,40 @@
+ #include <string.h>
+ #include <time.h>
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ #ifdef OPENSSL_NO_EC
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     puts("Elliptic curves are disabled.");
+     return 0;
+ }
+diff -ruN -X exclude openssl-1.1.0h/test/enginetest.c openssl-1.1.0h_aros/test/enginetest.c
+--- openssl-1.1.0h/test/enginetest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/enginetest.c	2018-06-06 18:49:44.122006052 +0000
+@@ -11,9 +11,41 @@
+ #include <string.h>
+ #include <openssl/e_os2.h>
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ #ifdef OPENSSL_NO_ENGINE
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     printf("No ENGINE support\n");
+     return (0);
+ }
+diff -ruN -X exclude openssl-1.1.0h/test/evp_extra_test.c openssl-1.1.0h_aros/test/evp_extra_test.c
+--- openssl-1.1.0h/test/evp_extra_test.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/evp_extra_test.c	2018-06-06 18:50:30.526020029 +0000
+@@ -16,6 +16,23 @@
+ #include <openssl/rsa.h>
+ #include <openssl/x509.h>
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ /*
+  * kExampleRSAKeyDER is an RSA private key in ASN.1, DER format. Of course, you
+  * should never use this key anywhere but in an example.
+@@ -360,6 +377,22 @@
+ 
+ int main(void)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     CRYPTO_set_mem_debug(1);
+     CRYPTO_mem_ctrl(CRYPTO_MEM_CHECK_ON);
+ 
+diff -ruN -X exclude openssl-1.1.0h/test/evp_test.c openssl-1.1.0h_aros/test/evp_test.c
+--- openssl-1.1.0h/test/evp_test.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/evp_test.c	2018-06-06 18:51:07.726031183 +0000
+@@ -19,6 +19,22 @@
+ #include <openssl/kdf.h>
+ #include "internal/numbers.h"
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ /* Remove spaces from beginning and end of a string */
+ 
+ static void remove_space(char **pval)
+@@ -652,6 +668,22 @@
+ 
+ int main(int argc, char **argv)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     BIO *in = NULL;
+     char buf[10240];
+     struct evp_test t;
+diff -ruN -X exclude openssl-1.1.0h/test/exdatatest.c openssl-1.1.0h_aros/test/exdatatest.c
+--- openssl-1.1.0h/test/exdatatest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/exdatatest.c	2018-06-06 18:51:53.082044729 +0000
+@@ -12,6 +12,21 @@
+ #include <stdlib.h>
+ #include <openssl/crypto.h>
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ static long saved_argl;
+ static void *saved_argp;
+ static int saved_idx;
+@@ -183,6 +198,22 @@
+ 
+ int main()
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     MYOBJ *t1, *t2, *t3;
+     MYOBJ_EX_DATA *ex_data;
+     const char *cp;
+diff -ruN -X exclude openssl-1.1.0h/test/exptest.c openssl-1.1.0h_aros/test/exptest.c
+--- openssl-1.1.0h/test/exptest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/exptest.c	2018-06-06 18:52:21.106053067 +0000
+@@ -18,6 +18,22 @@
+ #include <openssl/rand.h>
+ #include <openssl/err.h>
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #define NUM_BITS        (BN_BITS2 * 4)
+ 
+ static const char rnd_seed[] =
+@@ -136,6 +152,22 @@
+ 
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     BN_CTX *ctx;
+     BIO *out = NULL;
+     int i, ret;
+diff -ruN -X exclude openssl-1.1.0h/test/fatalerrtest.c openssl-1.1.0h_aros/test/fatalerrtest.c
+--- openssl-1.1.0h/test/fatalerrtest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/fatalerrtest.c	2018-06-06 18:52:53.390062645 +0000
+@@ -13,6 +13,22 @@
+ #include "testutil.h"
+ #include <string.h>
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ static char *cert = NULL;
+ static char *privkey = NULL;
+ 
+@@ -92,6 +108,22 @@
+ 
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     BIO *err = NULL;
+     int testresult = 1;
+ 
+diff -ruN -X exclude openssl-1.1.0h/test/hmactest.c openssl-1.1.0h_aros/test/hmactest.c
+--- openssl-1.1.0h/test/hmactest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/hmactest.c	2018-06-06 18:53:46.338078306 +0000
+@@ -13,6 +13,22 @@
+ 
+ #include "../e_os.h"
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ # include <openssl/hmac.h>
+ # include <openssl/sha.h>
+ # ifndef OPENSSL_NO_MD5
+@@ -81,6 +97,22 @@
+ 
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+ # ifndef OPENSSL_NO_MD5
+     int i;
+     char *p;
+diff -ruN -X exclude openssl-1.1.0h/test/igetest.c openssl-1.1.0h_aros/test/igetest.c
+--- openssl-1.1.0h/test/igetest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/igetest.c	2018-06-06 18:54:24.634089594 +0000
+@@ -15,6 +15,23 @@
+ #include <assert.h>
+ #include "e_os.h"
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #define TEST_SIZE       128
+ #define BIG_TEST_SIZE 10240
+ 
+@@ -230,6 +247,22 @@
+ 
+ int main(int argc, char **argv)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     unsigned char rkey[16];
+     unsigned char rkey2[16];
+     AES_KEY key;
+diff -ruN -X exclude openssl-1.1.0h/test/md2test.c openssl-1.1.0h_aros/test/md2test.c
+--- openssl-1.1.0h/test/md2test.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/md2test.c	2018-06-06 18:56:25.126124908 +0000
+@@ -13,9 +13,41 @@
+ 
+ #include "../e_os.h"
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #ifdef OPENSSL_NO_MD2
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     printf("No MD2 support\n");
+     return (0);
+ }
+diff -ruN -X exclude openssl-1.1.0h/test/md4test.c openssl-1.1.0h_aros/test/md4test.c
+--- openssl-1.1.0h/test/md4test.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/md4test.c	2018-06-06 18:57:03.030135966 +0000
+@@ -13,9 +13,41 @@
+ 
+ #include "../e_os.h"
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #ifdef OPENSSL_NO_MD4
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     printf("No MD4 support\n");
+     return (0);
+ }
+diff -ruN -X exclude openssl-1.1.0h/test/md5test.c openssl-1.1.0h_aros/test/md5test.c
+--- openssl-1.1.0h/test/md5test.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/md5test.c	2018-06-06 18:57:38.410146262 +0000
+@@ -13,9 +13,41 @@
+ 
+ #include "../e_os.h"
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #ifdef OPENSSL_NO_MD5
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     printf("No MD5 support\n");
+     return (0);
+ }
+diff -ruN -X exclude openssl-1.1.0h/test/mdc2test.c openssl-1.1.0h_aros/test/mdc2test.c
+--- openssl-1.1.0h/test/mdc2test.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/mdc2test.c	2018-06-06 18:58:25.258159879 +0000
+@@ -13,6 +13,22 @@
+ 
+ #include "../e_os.h"
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #if defined(OPENSSL_NO_DES) && !defined(OPENSSL_NO_MDC2)
+ # define OPENSSL_NO_MDC2
+ #endif
+@@ -20,6 +36,22 @@
+ #ifdef OPENSSL_NO_MDC2
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     printf("No MDC2 support\n");
+     return (0);
+ }
+diff -ruN -X exclude openssl-1.1.0h/test/ocspapitest.c openssl-1.1.0h_aros/test/ocspapitest.c
+--- openssl-1.1.0h/test/ocspapitest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/ocspapitest.c	2018-06-06 18:59:05.362171513 +0000
+@@ -18,6 +18,21 @@
+ 
+ #include "testutil.h"
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ static const char *certstr;
+ static const char *privkeystr;
+ 
+@@ -135,6 +150,22 @@
+ 
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     int testresult = 1;
+     BIO *err = NULL;
+ 
+diff -ruN -X exclude openssl-1.1.0h/test/p5_crpt2_test.c openssl-1.1.0h_aros/test/p5_crpt2_test.c
+--- openssl-1.1.0h/test/p5_crpt2_test.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/p5_crpt2_test.c	2018-06-06 18:59:52.730185223 +0000
+@@ -17,6 +17,23 @@
+ #include <openssl/err.h>
+ #include <openssl/conf.h>
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ typedef struct {
+     const char *pass;
+     int passlen;
+@@ -134,6 +151,22 @@
+ 
+ int main(int argc, char **argv)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     int i;
+     testdata *test = test_cases;
+ 
+diff -ruN -X exclude openssl-1.1.0h/test/packettest.c openssl-1.1.0h_aros/test/packettest.c
+--- openssl-1.1.0h/test/packettest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/packettest.c	2018-06-06 19:00:30.278196067 +0000
+@@ -9,6 +9,23 @@
+ 
+ #include "../ssl/packet_locl.h"
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #define BUF_LEN 255
+ 
+ static int test_PACKET_remaining(unsigned char buf[BUF_LEN])
+@@ -499,6 +516,22 @@
+ 
+ int main(int argc, char **argv)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     unsigned char buf[BUF_LEN];
+     unsigned int i;
+ 
+diff -ruN -X exclude openssl-1.1.0h/test/pbelutest.c openssl-1.1.0h_aros/test/pbelutest.c
+--- openssl-1.1.0h/test/pbelutest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/pbelutest.c	2018-06-06 19:01:02.694205430 +0000
+@@ -11,6 +11,22 @@
+ #include <stdio.h>
+ #include <string.h>
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ /*
+  * Password based encryption (PBE) table ordering test.
+  * Attempt to look up all supported algorithms.
+@@ -18,6 +34,22 @@
+ 
+ int main(int argc, char **argv)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     size_t i;
+     int rv = 0;
+     int pbe_type, pbe_nid;
+diff -ruN -X exclude openssl-1.1.0h/test/randtest.c openssl-1.1.0h_aros/test/randtest.c
+--- openssl-1.1.0h/test/randtest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/randtest.c	2018-06-06 19:01:31.034213371 +0000
+@@ -13,11 +13,44 @@
+ 
+ #include "../e_os.h"
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ /* some FIPS 140-1 random number test */
+ /* some simple tests */
+ 
+ int main(int argc, char **argv)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     unsigned char buf[2500];
+     int i, j, k, s, sign, nsign, err = 0;
+     unsigned long n1;
+diff -ruN -X exclude openssl-1.1.0h/test/rmdtest.c openssl-1.1.0h_aros/test/rmdtest.c
+--- openssl-1.1.0h/test/rmdtest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/rmdtest.c	2018-06-06 19:02:00.838220616 +0000
+@@ -13,9 +13,42 @@
+ 
+ #include "../e_os.h"
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #ifdef OPENSSL_NO_RMD160
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     printf("No ripemd support\n");
+     return (0);
+ }
+diff -ruN -X exclude openssl-1.1.0h/test/rsa_test.c openssl-1.1.0h_aros/test/rsa_test.c
+--- openssl-1.1.0h/test/rsa_test.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/rsa_test.c	2018-06-06 19:02:34.074228767 +0000
+@@ -14,6 +14,22 @@
+ 
+ #include "e_os.h"
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ #include <openssl/crypto.h>
+ #include <openssl/err.h>
+ #include <openssl/rand.h>
+@@ -21,6 +37,22 @@
+ #ifdef OPENSSL_NO_RSA
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     printf("No RSA support\n");
+     return (0);
+ }
+diff -ruN -X exclude openssl-1.1.0h/test/sha1test.c openssl-1.1.0h_aros/test/sha1test.c
+--- openssl-1.1.0h/test/sha1test.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/sha1test.c	2018-06-06 19:03:04.774236354 +0000
+@@ -15,6 +15,23 @@
+ #include <openssl/evp.h>
+ #include <openssl/sha.h>
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #ifdef CHARSET_EBCDIC
+ # include <openssl/ebcdic.h>
+ #endif
+@@ -34,6 +51,22 @@
+ static char *pt(unsigned char *md);
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     unsigned int i;
+     int err = 0;
+     char **R;
+diff -ruN -X exclude openssl-1.1.0h/test/sha256t.c openssl-1.1.0h_aros/test/sha256t.c
+--- openssl-1.1.0h/test/sha256t.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/sha256t.c	2018-06-06 19:03:43.046245896 +0000
+@@ -14,6 +14,23 @@
+ #include <openssl/sha.h>
+ #include <openssl/evp.h>
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ static const unsigned char app_b1[SHA256_DIGEST_LENGTH] = {
+     0xba, 0x78, 0x16, 0xbf, 0x8f, 0x01, 0xcf, 0xea,
+     0x41, 0x41, 0x40, 0xde, 0x5d, 0xae, 0x22, 0x23,
+@@ -58,6 +75,22 @@
+ 
+ int main(int argc, char **argv)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     unsigned char md[SHA256_DIGEST_LENGTH];
+     int i;
+     EVP_MD_CTX *evp;
+diff -ruN -X exclude openssl-1.1.0h/test/sha512t.c openssl-1.1.0h_aros/test/sha512t.c
+--- openssl-1.1.0h/test/sha512t.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/sha512t.c	2018-06-06 19:04:18.342254771 +0000
+@@ -15,6 +15,24 @@
+ #include <openssl/evp.h>
+ #include <openssl/crypto.h>
+ 
++
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ static const unsigned char app_c1[SHA512_DIGEST_LENGTH] = {
+     0xdd, 0xaf, 0x35, 0xa1, 0x93, 0x61, 0x7a, 0xba,
+     0xcc, 0x41, 0x73, 0x49, 0xae, 0x20, 0x41, 0x31,
+@@ -77,6 +95,22 @@
+ 
+ int main(int argc, char **argv)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     unsigned char md[SHA512_DIGEST_LENGTH];
+     int i;
+     EVP_MD_CTX *evp;
+diff -ruN -X exclude openssl-1.1.0h/test/srptest.c openssl-1.1.0h_aros/test/srptest.c
+--- openssl-1.1.0h/test/srptest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/srptest.c	2018-06-06 19:06:24.750287050 +0000
+@@ -8,6 +8,23 @@
+  */
+ 
+ #include <openssl/opensslconf.h>
++
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ #ifdef OPENSSL_NO_SRP
+ 
+ # include <stdio.h>
+@@ -276,6 +293,22 @@
+ 
+ int main(int argc, char **argv)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     BIO *bio_err;
+     bio_err = BIO_new_fp(stderr, BIO_NOCLOSE | BIO_FP_TEXT);
+ 
+diff -ruN -X exclude openssl-1.1.0h/test/ssl_test.c openssl-1.1.0h_aros/test/ssl_test.c
+--- openssl-1.1.0h/test/ssl_test.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/ssl_test.c	2018-06-06 19:07:11.990299286 +0000
+@@ -18,6 +18,23 @@
+ #include "ssl_test_ctx.h"
+ #include "testutil.h"
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ static CONF *conf = NULL;
+ 
+ /* Currently the section names are of the form test-<number>, e.g. test-15. */
+@@ -350,6 +367,22 @@
+ 
+ int main(int argc, char **argv)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     int result = 0;
+     long num_tests;
+ 
+diff -ruN -X exclude openssl-1.1.0h/test/ssl_test_ctx_test.c openssl-1.1.0h_aros/test/ssl_test_ctx_test.c
+--- openssl-1.1.0h/test/ssl_test_ctx_test.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/ssl_test_ctx_test.c	2018-06-06 19:08:59.066327331 +0000
+@@ -23,6 +23,23 @@
+ #include <openssl/conf.h>
+ #include <openssl/ssl.h>
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ static CONF *conf = NULL;
+ 
+ typedef struct ssl_test_ctx_test_fixture {
+@@ -315,6 +332,23 @@
+ 
+ int main(int argc, char **argv)
+ {
++
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     int result = 0;
+ 
+     if (argc != 2)
+diff -ruN -X exclude openssl-1.1.0h/test/sslapitest.c openssl-1.1.0h_aros/test/sslapitest.c
+--- openssl-1.1.0h/test/sslapitest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/sslapitest.c	2018-06-06 19:09:58.354343004 +0000
+@@ -19,6 +19,23 @@
+ #include "testutil.h"
+ #include "e_os.h"
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ static char *cert = NULL;
+ static char *privkey = NULL;
+ 
+@@ -1210,6 +1227,23 @@
+ 
+ int main(int argc, char *argv[])
+ {
++
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     BIO *err = NULL;
+     int testresult = 1;
+ 
+diff -ruN -X exclude openssl-1.1.0h/test/sslcorrupttest.c openssl-1.1.0h_aros/test/sslcorrupttest.c
+--- openssl-1.1.0h/test/sslcorrupttest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/sslcorrupttest.c	2018-06-06 19:11:24.774366019 +0000
+@@ -10,6 +10,23 @@
+ #include "ssltestlib.h"
+ #include "testutil.h"
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ static void copy_flags(BIO *bio)
+ {
+     int flags;
+@@ -246,6 +263,22 @@
+ 
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     BIO *err = NULL;
+     int testresult = 1;
+ 
+diff -ruN -X exclude openssl-1.1.0h/test/ssltest_old.c openssl-1.1.0h_aros/test/ssltest_old.c
+--- openssl-1.1.0h/test/ssltest_old.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/ssltest_old.c	2018-06-06 19:12:04.118376559 +0000
+@@ -55,6 +55,22 @@
+ #include <string.h>
+ #include <time.h>
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ #define USE_SOCKETS
+ #include "e_os.h"
+ 
+@@ -951,6 +967,22 @@
+ 
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     const char *CApath = NULL, *CAfile = NULL;
+     int badop = 0;
+     enum { BIO_MEM, BIO_PAIR, BIO_IPV4, BIO_IPV6 } bio_type = BIO_MEM;
+diff -ruN -X exclude openssl-1.1.0h/test/v3ext.c openssl-1.1.0h_aros/test/v3ext.c
+--- openssl-1.1.0h/test/v3ext.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/v3ext.c	2018-06-06 19:12:32.494384177 +0000
+@@ -13,8 +13,40 @@
+ #include <openssl/pem.h>
+ #include <openssl/err.h>
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ int main(int ac, char **av)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     X509 *x = NULL;
+     BIO *b = NULL;
+     long pathlen;
+diff -ruN -X exclude openssl-1.1.0h/test/v3nametest.c openssl-1.1.0h_aros/test/v3nametest.c
+--- openssl-1.1.0h/test/v3nametest.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/v3nametest.c	2018-06-06 19:13:06.654393367 +0000
+@@ -12,6 +12,22 @@
+ #include "../e_os.h"
+ #include <string.h>
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
+ static const char *const names[] = {
+     "a", "b", ".", "*", "@",
+     ".a", "a.", ".b", "b.", ".*", "*.", "*@", "@*", "a@", "@a", "b@", "..",
+@@ -332,6 +348,22 @@
+ 
+ int main(void)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     const struct set_name_fn *pfn = name_fns;
+     while (pfn->name) {
+         const char *const *pname = names;
+diff -ruN -X exclude openssl-1.1.0h/test/verify_extra_test.c openssl-1.1.0h_aros/test/verify_extra_test.c
+--- openssl-1.1.0h/test/verify_extra_test.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/verify_extra_test.c	2018-06-06 19:13:41.862402870 +0000
+@@ -14,6 +14,22 @@
+ #include <openssl/pem.h>
+ #include <openssl/err.h>
+ 
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ static STACK_OF(X509) *load_certs_from_file(const char *filename)
+ {
+     STACK_OF(X509) *certs;
+@@ -139,6 +155,22 @@
+ 
+ int main(int argc, char **argv)
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     CRYPTO_set_mem_debug(1);
+     CRYPTO_mem_ctrl(CRYPTO_MEM_CHECK_ON);
+ 
+diff -ruN -X exclude openssl-1.1.0h/test/x509aux.c openssl-1.1.0h_aros/test/x509aux.c
+--- openssl-1.1.0h/test/x509aux.c	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/x509aux.c	2018-06-06 19:14:20.330413279 +0000
+@@ -19,6 +19,23 @@
+ 
+ #include "../e_os.h"
+ 
++
++#if defined(OPENSSL_SYS_AROS)
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++#endif
++
++
+ static const char *progname;
+ 
+ static void test_usage(void)
+@@ -179,6 +196,22 @@
+ 
+ int main(int argc, char *argv[])
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\n");
++            exit(10);
++        }
++#endif
++
+     BIO *bio_err;
+     const char *p;
+     int ret = 1;
+diff -ruN -X exclude openssl-1.1.0h/util/shlib_wrap.sh openssl-1.1.0h_aros/util/shlib_wrap.sh
+--- openssl-1.1.0h/util/shlib_wrap.sh	1970-01-01 00:00:00.000000000 +0000
++++ openssl-1.1.0h_aros/util/shlib_wrap.sh	2018-06-07 16:35:07.351879780 +0000
+@@ -0,0 +1,112 @@
++#!/bin/sh
++
++# To test this OpenSSL version's applications against another version's
++# shared libraries, simply set
++#
++#     OPENSSL_REGRESSION=/path/to/other/OpenSSL/build/tree
++if [ -n "$OPENSSL_REGRESSION" ]; then
++    shlibwrap="$OPENSSL_REGRESSION/util/shlib_wrap.sh"
++    if [ -x "$shlibwrap" ]; then
++        # We clear OPENSSL_REGRESSION to avoid a loop, should the shlib_wrap.sh
++        # we exec also support that mechanism...
++        OPENSSL_REGRESSION= exec "$shlibwrap" "$@"
++    else
++        if [ -f "$shlibwrap" ]; then
++            echo "Not permitted to run $shlibwrap" >&2
++        else
++            echo "No $shlibwrap, perhaps OPENSSL_REGRESSION isn't properly set?" >&2
++        fi
++        exit 1
++    fi
++fi
++
++[ $# -ne 0 ] || set -x		# debug mode without arguments:-)
++
++THERE="`echo $0 | sed -e 's|[^/]*$||' 2>/dev/null`.."
++[ -d "${THERE}" ] || exec "$@"	# should never happen...
++
++# Alternative to this is to parse ${THERE}/Makefile...
++LIBCRYPTOSO="${THERE}/libcrypto.so"
++if [ -f "$LIBCRYPTOSO" ]; then
++    while [ -h "$LIBCRYPTOSO" ]; do
++	LIBCRYPTOSO="${THERE}/`ls -l "$LIBCRYPTOSO" | sed -e 's|.*\-> ||'`"
++    done
++    SOSUFFIX=`echo ${LIBCRYPTOSO} | sed -e 's|.*\.so||' 2>/dev/null`
++    LIBSSLSO="${THERE}/libssl.so${SOSUFFIX}"
++fi
++
++SYSNAME=`(uname -s) 2>/dev/null`;
++case "$SYSNAME" in
++SunOS|IRIX*)
++	# SunOS and IRIX run-time linkers evaluate alternative
++	# variables depending on target ABI...
++	rld_var=LD_LIBRARY_PATH
++	case "`(/usr/bin/file "$LIBCRYPTOSO") 2>/dev/null`" in
++	*ELF\ 64*SPARC*|*ELF\ 64*AMD64*)
++		[ -n "$LD_LIBRARY_PATH_64" ] && rld_var=LD_LIBRARY_PATH_64
++		LD_PRELOAD_64="$LIBCRYPTOSO $LIBSSLSO"; export LD_PRELOAD_64
++		preload_var=LD_PRELOAD_64
++		;;
++	*ELF\ 32*SPARC*|*ELF\ 32*80386*)
++		# We only need to change LD_PRELOAD_32 and LD_LIBRARY_PATH_32
++		# on a multi-arch system.  Otherwise, trust the fallbacks.
++		if [ -f /lib/64/ld.so.1 ]; then
++		    [ -n "$LD_LIBRARY_PATH_32" ] && rld_var=LD_LIBRARY_PATH_32
++		    LD_PRELOAD_32="$LIBCRYPTOSO $LIBSSLSO"; export LD_PRELOAD_32
++		    preload_var=LD_PRELOAD_32
++		fi
++		;;
++	# Why are newly built .so's preloaded anyway? Because run-time
++	# .so lookup path embedded into application takes precedence
++	# over LD_LIBRARY_PATH and as result application ends up linking
++	# to previously installed .so's. On IRIX instead of preloading
++	# newly built .so's we trick run-time linker to fail to find
++	# the installed .so by setting _RLD_ROOT variable.
++	*ELF\ 32*MIPS*)
++		#_RLD_LIST="$LIBCRYPTOSO:$LIBSSLSO:DEFAULT"; export _RLD_LIST
++		_RLD_ROOT=/no/such/dir; export _RLD_ROOT
++		eval $rld_var=\"/usr/lib'${'$rld_var':+:$'$rld_var'}'\"
++		preload_var=_RLD_LIST
++		;;
++	*ELF\ N32*MIPS*)
++		[ -n "$LD_LIBRARYN32_PATH" ] && rld_var=LD_LIBRARYN32_PATH
++		#_RLDN32_LIST="$LIBCRYPTOSO:$LIBSSLSO:DEFAULT"; export _RLDN32_LIST
++		_RLDN32_ROOT=/no/such/dir; export _RLDN32_ROOT
++		eval $rld_var=\"/usr/lib32'${'$rld_var':+:$'$rld_var'}'\"
++		preload_var=_RLDN32_LIST
++		;;
++	*ELF\ 64*MIPS*)
++		[ -n "$LD_LIBRARY64_PATH"  ] && rld_var=LD_LIBRARY64_PATH
++		#_RLD64_LIST="$LIBCRYPTOSO:$LIBSSLSO:DEFAULT"; export _RLD64_LIST
++		_RLD64_ROOT=/no/such/dir; export _RLD64_ROOT
++		eval $rld_var=\"/usr/lib64'${'$rld_var':+:$'$rld_var'}'\"
++		preload_var=_RLD64_LIST
++		;;
++	esac
++	eval $rld_var=\"${THERE}'${'$rld_var':+:$'$rld_var'}'\"; export $rld_var
++	unset rld_var
++	;;
++*)	LD_LIBRARY_PATH="${THERE}:$LD_LIBRARY_PATH"	# Linux, ELF HP-UX
++	DYLD_LIBRARY_PATH="${THERE}:$DYLD_LIBRARY_PATH"	# MacOS X
++	SHLIB_PATH="${THERE}:$SHLIB_PATH"		# legacy HP-UX
++	LIBPATH="${THERE}:$LIBPATH"			# AIX, OS/2
++	export LD_LIBRARY_PATH DYLD_LIBRARY_PATH SHLIB_PATH LIBPATH
++	# Even though $PATH is adjusted [for Windows sake], it doesn't
++	# necessarily does the trick. Trouble is that with introduction
++	# of SafeDllSearchMode in XP/2003 it's more appropriate to copy
++	# .DLLs in vicinity of executable, which is done elsewhere...
++	if [ "$OSTYPE" != msdosdjgpp ]; then
++		PATH="${THERE}:$PATH"; export PATH
++	fi
++	;;
++esac
++
++
++
++cmd="$1"; [ -x "$cmd" ] || cmd="$cmd${EXE_EXT}"
++shift
++if [ $# -eq 0 ]; then
++	exec "$cmd"	# old sh, such as Tru64 4.x, fails to expand empty "$@"
++else
++	exec "$cmd" "$@"
++fi
+--- openssl-1.1.0h/test/generate_buildtest.pl	2018-03-27 13:50:41.000000000 +0000
++++ openssl-1.1.0h_aros/test/generate_buildtest.pl	2018-06-07 09:13:08.225208816 +0000
+@@ -20,6 +20,26 @@
+  * program builds.
+  */
+ #include <openssl/opensslconf.h>
++
++
++#if defined(OPENSSL_SYS_AROS)
++#include <stdlib.h>
++
++#include <exec/types.h>
++#include <exec/libraries.h>
++#include <bsdsocket/socketbasetags.h>
++#include <proto/exec.h>
++#include <proto/bsdsocket.h>
++
++struct Library *SocketBase = NULL;
++static void aros_bsdsocket_close(void) {
++    CloseLibrary(SocketBase);
++    SocketBase = NULL;
++}
++int errno;
++
++#endif
++
+ #ifndef OPENSSL_NO_STDIO
+ # include <stdio.h>
+ #endif
+@@ -29,6 +49,22 @@
+ 
+ int main()
+ {
++#if defined(OPENSSL_SYS_AROS)
++   if ((SocketBase = OpenLibrary("bsdsocket.library", 0)) == NULL) {
++            fprintf(stderr, "Couldn't open bsdsocket.library. Is a TCP/IP stack running?\\n");
++            exit(10);
++        }
++
++        atexit(aros_bsdsocket_close);
++
++        if(SocketBaseTags(SBTM_SETVAL(SBTC_ERRNOPTR(sizeof(errno))), (IPTR) &errno,
++                          SBTM_SETVAL(SBTC_LOGTAGPTR),               (IPTR) "openssl",
++                          TAG_DONE)) {
++            fprintf(stderr, "Error initialising bsdsocket.library\\n");
++            exit(10);
++        }
++#endif
++
+     return 0;
+ }
+ _____
