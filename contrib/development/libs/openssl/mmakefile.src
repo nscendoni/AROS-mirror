@@ -41,7 +41,8 @@ contrib-openssl-setup : $(OPENSSL_BUILD_DIR)/.links-created
 $(OPENSSL_BUILD_DIR)/.build-configured : $(OPENSSL_BUILD_DIR)/.links-created
 	$(RM) $@
 	cd $(OPENSSL_BUILD_DIR); \
-	env -i PATH=$(PATH) AROS_CC="$(TARGET_CC) $(TARGET_SYSROOT)" AROS_CFLAGS="$(CONFIG_CFLAGS) $(NOWARN_FLAGS)" AROS_RANLIB="$(RANLIB)" ./Configure debug enable-mdc2 enable-md2 enable-rc5 no-makedepend no-shared no-threads --cross-compile-prefix=i386-aros- --debug --prefix=/$(AROS_DIR_DEVELOPER) --openssldir=/$(AROS_DIR_DEVELOPER)/etc/ssl -DOPENSSL_SYS_AROS=1 -D__AROS__=1 -D__aros__=1 -DOPENSSL_NO_SECURE_MEMORY=1; \
+	if [[ $TARGET_CFLAGS=-m32 =~ .*DEBUG.* ]]; then SSLDEBUG=-debug; fi ; \
+	env -i PATH=$(PATH) AROS_CC="$(TARGET_CC) $(TARGET_SYSROOT)" AROS_CFLAGS="$(CONFIG_CFLAGS) $(NOWARN_FLAGS)" AROS_RANLIB="$(RANLIB)" ./Configure debug enable-mdc2 enable-md2 enable-rc5 no-makedepend no-shared --cross-compile-prefix=$(AROS_TARGET_CPU)-aros- ${SSLDEBUG} --prefix=/$(AROS_DIR_DEVELOPER) --openssldir=/$(AROS_DIR_DEVELOPER)/etc/ssl -DOPENSSL_SYS_AROS=1 -DOPENSSL_NO_SECURE_MEMORY=1; \
 	sed -i s/-lcrypto/libcrypto.a/ Makefile ; \
 	sed -i s/-lssl/libssl.a/ Makefile ; \
 
