@@ -1,0 +1,9 @@
+#   $Id: mmakefile.src 52307 2016-03-28 12:37:35Z NicJA $
+
+include $(SRCDIR)/config/aros.cfg
+
+FILES := Package-Startup Package-Shutdown
+
+#MM- AROS : compiler-startup
+
+%copy_files_q mmake=compiler-startup dst=$(AROSDIR)/Development/S

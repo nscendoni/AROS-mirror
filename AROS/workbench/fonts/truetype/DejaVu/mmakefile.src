@@ -1,0 +1,9 @@
+# Copyright © 2006, The AROS Development Team. All rights reserved.
+# $Id: mmakefile.src 52302 2016-03-28 03:42:13Z NicJA $
+
+include $(SRCDIR)/config/aros.cfg
+
+#MM- workbench-fonts : workbench-fonts-truetype-cpy
+
+%copy_files_q mmake=workbench-fonts-truetype-cpy files="$(call WILDCARD, *.ttf)" \
+    dst=$(AROSDIR)/Fonts/TrueType

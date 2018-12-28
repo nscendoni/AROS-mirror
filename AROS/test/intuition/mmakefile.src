@@ -1,0 +1,23 @@
+#   $Id: mmakefile.src 52305 2016-03-28 11:24:34Z NicJA $
+#
+#   Makefile for AROS intuition.library tests
+
+include $(SRCDIR)/config/aros.cfg
+
+FILES := \
+    customscreen \
+    displayalert \
+    drawinfoattr \
+    gamma \
+    monitorclass \
+    pubscreen \
+    screenclass \
+    screentest \
+    scrollerwin 
+
+EXEDIR := $(AROS_TESTS)/intuition
+
+%build_progs mmake=test-intuition \
+    files=$(FILES) targetdir=$(EXEDIR)
+
+%common

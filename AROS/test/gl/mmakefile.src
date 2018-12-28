@@ -1,0 +1,20 @@
+#   $Id: mmakefile.src 52305 2016-03-28 11:24:34Z NicJA $
+#
+
+include $(SRCDIR)/config/aros.cfg
+
+GLTESTFILES 	    := \
+        glsimplerendering \
+        glgetprocaddress
+
+EXEDIR      := $(AROSDIR)/Tests/graphics/gl
+
+#MM- test : test-gl
+
+#MM test-gl : includes linklibs workbench-libs-gl-includes
+
+%build_progs mmake=test-gl \
+    targetdir=$(EXEDIR) \
+    files="$(GLTESTFILES)" uselibs="GL"
+
+%common

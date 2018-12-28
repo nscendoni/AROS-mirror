@@ -1,0 +1,13 @@
+# $Id: mmakefile.src 52306 2016-03-28 11:39:31Z NicJA $
+
+include $(SRCDIR)/config/aros.cfg
+
+FILES	:=	\
+	vesagfx_init \
+	vesagfxclass \
+	hardware \
+	bitmap
+
+%build_module mmake=kernel-hidd-vesa \
+  modname=vesagfx modtype=hidd \
+  files=$(FILES)

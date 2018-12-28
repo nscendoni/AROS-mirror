@@ -1,0 +1,20 @@
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
+
+include $(SRCDIR)/config/aros.cfg
+
+USER_LDFLAGS := -static
+
+FILES	:=	\
+	videocoregfx_init \
+	videocoregfx_class \
+	videocoregfx_memory \
+	videocoregfx_sdtv \
+	videocoregfx_hdmi \
+	videocoregfx_hardware \
+	videocoregfx_pixfmts \
+	videocoregfx_onbitmap
+
+%build_module mmake=hidd-videocoregfx \
+  modname=videocoregfx modtype=hidd \
+  files=$(FILES) \
+  uselibs="hiddstubs"

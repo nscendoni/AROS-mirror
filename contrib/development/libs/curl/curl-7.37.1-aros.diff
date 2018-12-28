@@ -814,3 +814,452 @@ diff -ruN curl-7.37.1/src/tool_sleep.c curl-7.37.1-aros/src/tool_sleep.c
  #include "tool_sleep.h"
  
  #include "memdebug.h" /* keep this as LAST include */
+--- curl-7.37.1/lib/vtls/openssl.c	2014-06-11 23:58:27.000000000 +0200
++++ curl-7.37.1-aros/lib/vtls/openssl.c	2018-11-05 18:48:56.693466836 +0100
+@@ -1,4 +1,4 @@
+-/***************************************************************************
++/*******
+  *                                  _   _ ____  _
+  *  Project                     ___| | | |  _ \| |
+  *                             / __| | | | |_) | |
+@@ -63,6 +63,7 @@
+ #include <openssl/err.h>
+ #include <openssl/md5.h>
+ #include <openssl/conf.h>
++#include <openssl/evp.h>
+ #else
+ #include <rand.h>
+ #include <x509v3.h>
+@@ -740,8 +741,9 @@
+   if(!SSLeay_add_ssl_algorithms())
+     return 0;
+ 
+-  OpenSSL_add_all_algorithms();
+-  OPENSSL_config(NULL);
++  //Nicola: not required
++  //OpenSSL_add_all_algorithms();
++  //OPENSSL_config(); 
+ 
+   return 1;
+ }
+@@ -771,7 +773,8 @@
+ 
+   /* Free thread local error state, destroying hash upon zero refcount */
+ #ifdef HAVE_ERR_REMOVE_THREAD_STATE
+-  ERR_remove_thread_state(NULL);
++  //Nicola: not required since deprecated
++  //ERR_remove_thread_state(NULL);
+ #else
+   ERR_remove_state(0);
+ #endif
+@@ -1150,7 +1153,7 @@
+       /* only check alternatives of the same type the target is */
+       if(check->type == target) {
+         /* get data and length */
+-        const char *altptr = (char *)ASN1_STRING_data(check->d.ia5);
++        const char *altptr = (char *)ASN1_STRING_get0_data(check->d.ia5);
+         size_t altlen = (size_t) ASN1_STRING_length(check->d.ia5);
+ 
+         switch(target) {
+@@ -1232,7 +1235,7 @@
+           if(j >= 0) {
+             peer_CN = OPENSSL_malloc(j+1);
+             if(peer_CN) {
+-              memcpy(peer_CN, ASN1_STRING_data(tmp), j);
++              memcpy(peer_CN, ASN1_STRING_get0_data(tmp), j);
+               peer_CN[j] = '\0';
+             }
+           }
+@@ -1290,7 +1293,7 @@
+ 
+ static const char *ssl_msg_type(int ssl_ver, int msg)
+ {
+-  if(ssl_ver == SSL2_VERSION_MAJOR) {
++  /* if(ssl_ver == SSL2_VERSION) {
+     switch (msg) {
+       case SSL2_MT_ERROR:
+         return "Error";
+@@ -1312,7 +1315,8 @@
+         return "Client CERT";
+     }
+   }
+-  else if(ssl_ver == SSL3_VERSION_MAJOR) {
++  else */
++  if(ssl_ver == SSL3_VERSION_MAJOR) {
+     switch (msg) {
+       case SSL3_MT_HELLO_REQUEST:
+         return "Hello request";
+@@ -1368,8 +1372,7 @@
+ 
+   data = conn->data;
+   ssl_ver >>= 8;
+-  ver = (ssl_ver == SSL2_VERSION_MAJOR ? '2' :
+-         ssl_ver == SSL3_VERSION_MAJOR ? '3' : '?');
++  ver = (ssl_ver == SSL3_VERSION_MAJOR ? '3' : '?');
+ 
+   /* SSLv2 doesn't seem to have TLS record-type headers, so OpenSSL
+    * always pass-up content-type as 0. But the interesting message-type
+@@ -1459,7 +1462,7 @@
+   if(NULL == session)
+     return "";
+ 
+-  switch(session->ssl_version) {
++  switch(SSL_SESSION_get_protocol_version(session)) {
+ #if OPENSSL_VERSION_NUMBER >= 0x1000100FL
+   case TLS1_2_VERSION:
+     return "TLSv1.2";
+@@ -1536,12 +1539,14 @@
+     break;
+ #endif
+   case CURL_SSLVERSION_SSLv3:
++      return CURLE_SSL_CONNECT_ERROR;
++/*
+ #ifdef USE_TLS_SRP
+     if(data->set.ssl.authtype == CURL_TLSAUTH_SRP)
+       return CURLE_SSL_CONNECT_ERROR;
+ #endif
+     req_method = SSLv3_client_method();
+-    use_sni(FALSE);
++    use_sni(FALSE); */
+     break;
+   }
+ 
+@@ -2070,6 +2075,43 @@
+   }
+ }
+ 
++#define print_pubkey_BN(_type, _name, _num)              \
++pubkey_show(data, mem, _num, #_type, #_name, _name)
++
++#define push_certinfo(_label, _num) \
++do {                              \
++  long info_len = BIO_get_mem_data(mem, &ptr); \
++  Curl_ssl_push_certinfo_len(data, _num, _label, ptr, info_len); \
++  if(1 != BIO_reset(mem))                                        \
++    break;                                                       \
++} WHILE_FALSE
++
++/*
++static void pubkey_show(struct Curl_easy *data,
++                        BIO *mem,
++                        int num,
++                        const char *type,
++                        const char *name,
++#ifdef HAVE_OPAQUE_RSA_DSA_DH
++                        const
++#endif
++                        BIGNUM *bn)
++{
++  char *ptr;
++  char namebuf[32];
++
++  snprintf(namebuf, sizeof(namebuf), "%s(%s)", type, name);
++
++  if(bn)
++    BN_print(mem, bn);
++  push_certinfo(namebuf, num);
++}
++
++#define print_pubkey_BN(_type, _name, _num) \
++  pubkey_show(data, mem, _num, #_type, #_name, _name)
++
++*/
++/*
+ #define print_pubkey_BN(_type, _name, _num)    \
+ do {                              \
+   if(pubkey->pkey._type->_name != NULL) { \
+@@ -2081,6 +2123,7 @@
+     } \
+   } \
+ } WHILE_FALSE
++*/
+ 
+ static int X509V3_ext(struct SessionHandle *data,
+                       int certnum,
+@@ -2113,7 +2156,9 @@
+           X509_EXTENSION_get_critical(ext)?"(critical)":"");
+ 
+     if(!X509V3_EXT_print(bio_out, ext, 0, 0))
+-      M_ASN1_OCTET_STRING_print(bio_out, ext->value);
++      //M_ASN1_OCTET_STRING_print(bio_out, ext->value);
++      //M_ASN1_OCTET_STRING_print(bio_out, X509_EXTENSION_get_data(ext));
++      ASN1_STRING_print(bio_out, (ASN1_STRING *)X509_EXTENSION_get_data(ext));
+ 
+     BIO_get_mem_ptr(bio_out, &biomem);
+ 
+@@ -2182,149 +2227,140 @@
+  */
+ #define CERTBUFFERSIZE 8192
+ 
++#define ARG2_X509_signature_print
+ static CURLcode get_cert_chain(struct connectdata *conn,
+                                struct ssl_connect_data *connssl)
+ 
+ {
+   STACK_OF(X509) *sk;
+   int i;
+-  char *bufp;
+-  struct SessionHandle *data = conn->data;
+   int numcerts;
+ 
+-  bufp = malloc(CERTBUFFERSIZE);
+-  if(!bufp)
+-    return CURLE_OUT_OF_MEMORY;
+ 
+   sk = SSL_get_peer_cert_chain(connssl->handle);
++//----
++
++  CURLcode result;
++  //STACK_OF(X509) *sk;
++  //int i;
++  struct Curl_easy *data = conn->data;
++  //int numcerts;
++  BIO *mem;
++
++  //sk = SSL_get_peer_cert_chain(BACKEND->handle);
+   if(!sk) {
+-    free(bufp);
+     return CURLE_OUT_OF_MEMORY;
+   }
+ 
+   numcerts = sk_X509_num(sk);
+-  if(Curl_ssl_init_certinfo(data, numcerts)) {
+-    free(bufp);
+-    return CURLE_OUT_OF_MEMORY;
++
++  result = Curl_ssl_init_certinfo(data, numcerts);
++  if(result) {
++    return result;
+   }
+ 
+-  infof(data, "--- Certificate chain\n");
+-  for(i=0; i<numcerts; i++) {
+-    long value;
+-    ASN1_INTEGER *num;
+-    ASN1_TIME *certdate;
++  mem = BIO_new(BIO_s_mem());
+ 
+-    /* get the certs in "importance order" */
+-#if 0
+-    X509 *x = sk_X509_value(sk, numcerts - i - 1);
+-#else
++  for(i = 0; i < numcerts; i++) {
++    ASN1_INTEGER *num;
+     X509 *x = sk_X509_value(sk, i);
+-#endif
+-
+-    X509_CINF *cinf;
+-    EVP_PKEY *pubkey=NULL;
++    EVP_PKEY *pubkey = NULL;
+     int j;
+     char *ptr;
++    const ASN1_BIT_STRING *psig = NULL;
+ 
+-    (void)x509_name_oneline(X509_get_subject_name(x), bufp, CERTBUFFERSIZE);
+-    infof(data, "%2d Subject: %s\n", i, bufp);
+-    Curl_ssl_push_certinfo(data, i, "Subject", bufp);
+-
+-    (void)x509_name_oneline(X509_get_issuer_name(x), bufp, CERTBUFFERSIZE);
+-    infof(data, "   Issuer: %s\n", bufp);
+-    Curl_ssl_push_certinfo(data, i, "Issuer", bufp);
+-
+-    value = X509_get_version(x);
+-    infof(data, "   Version: %lu (0x%lx)\n", value+1, value);
+-    snprintf(bufp, CERTBUFFERSIZE, "%lx", value);
+-    Curl_ssl_push_certinfo(data, i, "Version", bufp); /* hex */
+-
+-    num=X509_get_serialNumber(x);
+-    if(num->length <= 4) {
+-      value = ASN1_INTEGER_get(num);
+-      infof(data,"   Serial Number: %ld (0x%lx)\n", value, value);
+-      snprintf(bufp, CERTBUFFERSIZE, "%lx", value);
+-    }
+-    else {
+-      int left = CERTBUFFERSIZE;
+-
+-      ptr = bufp;
+-      *ptr++ = 0;
+-      if(num->type == V_ASN1_NEG_INTEGER)
+-        *ptr++='-';
+-
+-      for(j=0; (j<num->length) && (left>=4); j++) {
+-        /* TODO: length restrictions */
+-        snprintf(ptr, 3, "%02x%c",num->data[j],
+-                 ((j+1 == num->length)?'\n':':'));
+-        ptr += 3;
+-        left-=4;
+-      }
+-      if(num->length)
+-        infof(data,"   Serial Number: %s\n", bufp);
+-      else
+-        bufp[0]=0;
+-    }
+-    if(bufp[0])
+-      Curl_ssl_push_certinfo(data, i, "Serial Number", bufp); /* hex */
+-
+-    cinf = x->cert_info;
++    X509_NAME_print_ex(mem, X509_get_subject_name(x), 0, XN_FLAG_ONELINE);
++    push_certinfo("Subject", i);
+ 
+-    j = asn1_object_dump(cinf->signature->algorithm, bufp, CERTBUFFERSIZE);
+-    if(!j) {
+-      infof(data, "   Signature Algorithm: %s\n", bufp);
+-      Curl_ssl_push_certinfo(data, i, "Signature Algorithm", bufp);
+-    }
++    X509_NAME_print_ex(mem, X509_get_issuer_name(x), 0, XN_FLAG_ONELINE);
++    push_certinfo("Issuer", i);
+ 
+-    certdate = X509_get_notBefore(x);
+-    asn1_output(certdate, bufp, CERTBUFFERSIZE);
+-    infof(data, "   Start date: %s\n", bufp);
+-    Curl_ssl_push_certinfo(data, i, "Start date", bufp);
++    BIO_printf(mem, "%lx", X509_get_version(x));
++    push_certinfo("Version", i);
++
++    num = X509_get_serialNumber(x);
++    if(num->type == V_ASN1_NEG_INTEGER)
++      BIO_puts(mem, "-");
++    for(j = 0; j < num->length; j++)
++      BIO_printf(mem, "%02x", num->data[j]);
++    push_certinfo("Serial Number", i);
++
++      const X509_ALGOR *palg = NULL;
++      ASN1_STRING *a = ASN1_STRING_new();
++      if(a) {
++        X509_get0_signature(&psig, &palg, x);
++        X509_signature_print(mem, ARG2_X509_signature_print palg, a);
++        ASN1_STRING_free(a);
++
++        if(palg) {
++          i2a_ASN1_OBJECT(mem, palg->algorithm);
++          push_certinfo("Public Key Algorithm", i);
++        }
++      }
++      X509V3_ext(data, i, X509_get0_extensions(x));
+ 
+-    certdate = X509_get_notAfter(x);
+-    asn1_output(certdate, bufp, CERTBUFFERSIZE);
+-    infof(data, "   Expire date: %s\n", bufp);
+-    Curl_ssl_push_certinfo(data, i, "Expire date", bufp);
++    ASN1_TIME_print(mem, X509_get0_notBefore(x));
++    push_certinfo("Start date", i);
+ 
+-    j = asn1_object_dump(cinf->key->algor->algorithm, bufp, CERTBUFFERSIZE);
+-    if(!j) {
+-      infof(data, "   Public Key Algorithm: %s\n", bufp);
+-      Curl_ssl_push_certinfo(data, i, "Public Key Algorithm", bufp);
+-    }
++    ASN1_TIME_print(mem, X509_get0_notAfter(x));
++    push_certinfo("Expire date", i);
+ 
+     pubkey = X509_get_pubkey(x);
+     if(!pubkey)
+       infof(data, "   Unable to load public key\n");
+     else {
+-      switch(pubkey->type) {
++      int pktype;
++      pktype = EVP_PKEY_id(pubkey);
++      switch(pktype) {
+       case EVP_PKEY_RSA:
+-        infof(data,  "   RSA Public Key (%d bits)\n",
+-              BN_num_bits(pubkey->pkey.rsa->n));
+-        snprintf(bufp, CERTBUFFERSIZE, "%d", BN_num_bits(pubkey->pkey.rsa->n));
+-        Curl_ssl_push_certinfo(data, i, "RSA Public Key", bufp);
+-
+-        print_pubkey_BN(rsa, n, i);
+-        print_pubkey_BN(rsa, e, i);
+-        print_pubkey_BN(rsa, d, i);
+-        print_pubkey_BN(rsa, p, i);
+-        print_pubkey_BN(rsa, q, i);
+-        print_pubkey_BN(rsa, dmp1, i);
+-        print_pubkey_BN(rsa, dmq1, i);
+-        print_pubkey_BN(rsa, iqmp, i);
++      {
++        RSA *rsa;
++        rsa = EVP_PKEY_get0_RSA(pubkey);
++          const BIGNUM *n;
++          const BIGNUM *e;
++
++          RSA_get0_key(rsa, &n, &e, NULL);
++          BN_print(mem, n);
++          push_certinfo("RSA Public Key", i);
++          print_pubkey_BN(rsa, n, i);
++          print_pubkey_BN(rsa, e, i);
++
+         break;
++      }
+       case EVP_PKEY_DSA:
+-        print_pubkey_BN(dsa, p, i);
+-        print_pubkey_BN(dsa, q, i);
+-        print_pubkey_BN(dsa, g, i);
+-        print_pubkey_BN(dsa, priv_key, i);
+-        print_pubkey_BN(dsa, pub_key, i);
++      {
++        DSA *dsa;
++        dsa = EVP_PKEY_get0_DSA(pubkey);
++          const BIGNUM *p;
++          const BIGNUM *q;
++          const BIGNUM *g;
++          const BIGNUM *pub_key;
++
++          DSA_get0_pqg(dsa, &p, &q, &g);
++          DSA_get0_key(dsa, &pub_key, NULL);
++
++          print_pubkey_BN(dsa, p, i);
++          print_pubkey_BN(dsa, q, i);
++          print_pubkey_BN(dsa, g, i);
++          print_pubkey_BN(dsa, pub_key, i);
+         break;
++      }
+       case EVP_PKEY_DH:
+-        print_pubkey_BN(dh, p, i);
+-        print_pubkey_BN(dh, g, i);
+-        print_pubkey_BN(dh, priv_key, i);
+-        print_pubkey_BN(dh, pub_key, i);
++      {
++        DH *dh;
++        dh = EVP_PKEY_get0_DH(pubkey);
++          const BIGNUM *p;
++          const BIGNUM *q;
++          const BIGNUM *g;
++          const BIGNUM *pub_key;
++          DH_get0_pqg(dh, &p, &q, &g);
++          DH_get0_key(dh, &pub_key, NULL);
++          print_pubkey_BN(dh, p, i);
++          print_pubkey_BN(dh, q, i);
++          print_pubkey_BN(dh, g, i);
++          print_pubkey_BN(dh, pub_key, i);
+         break;
++      }
+ #if 0
+       case EVP_PKEY_EC: /* symbol not present in OpenSSL 0.9.6 */
+         /* left TODO */
+@@ -2334,18 +2370,22 @@
+       EVP_PKEY_free(pubkey);
+     }
+ 
+-    X509V3_ext(data, i, cinf->extensions);
+-
+-    X509_signature(data, i, x->signature);
++    if(psig) {
++      for(j = 0; j < psig->length; j++)
++        BIO_printf(mem, "%02x:", psig->data[j]);
++      push_certinfo("Signature", i);
++    }
+ 
+-    dumpcert(data, x, i);
++    PEM_write_bio_X509(mem, x);
++    push_certinfo("Cert", i);
+   }
+ 
+-  free(bufp);
++  BIO_free(mem);
+ 
+-  return CURLE_OK;
++return CURLE_OK;
+ }
+ 
++
+ /*
+  * Get the server cert, verify it and show it etc, only call failf() if the
+  * 'strict' argument is TRUE as otherwise all this is for informational

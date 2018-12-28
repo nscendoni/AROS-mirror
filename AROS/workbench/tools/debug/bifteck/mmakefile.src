@@ -1,0 +1,14 @@
+#   $Id: mmakefile.src 52302 2016-03-28 03:42:13Z NicJA $
+#
+#   Makefile for Bifteck.
+
+include $(SRCDIR)/config/aros.cfg
+
+#MM- workbench : workbench-tools
+#MM workbench-tools : includes linklibs
+
+%build_prog mmake=workbench-tools \
+    progname=Bifteck targetdir=$(AROSDIR)/Tools/Debug \
+    files=Bifteck
+
+%common

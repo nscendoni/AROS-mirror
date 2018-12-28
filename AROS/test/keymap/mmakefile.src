@@ -1,0 +1,18 @@
+# Copyright © 2016, The AROS Development Team. All rights reserved.
+# $Id: mmakefile.src 52305 2016-03-28 11:24:34Z NicJA $
+
+include $(SRCDIR)/config/aros.cfg
+
+FILES := \
+ keymaptest \
+ printnativekeytable \
+
+EXEDIR := $(AROS_TESTS)/keymap
+
+#MM- test : test-keymap
+#MM- test-quick : test-keymap-quick
+
+%build_progs mmake=test-keymap \
+    files=$(FILES) targetdir=$(EXEDIR)
+
+%common

@@ -1,0 +1,50 @@
+/*
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: peropenervalue.c 53132 2016-12-29 10:32:06Z deadwood $
+*/
+
+#include <aros/libcall.h>
+#include "peropenerbase.h"
+
+struct Library * __aros_getbase_PeropenerBase();
+
+void PeropenerSetValueStack(int value)
+{
+    struct PeropenerBase *PeropenerBase = (struct PeropenerBase *)__aros_getbase_PeropenerBase();
+
+    PeropenerBase->value = value;
+}
+
+
+int PeropenerGetValueStack(void)
+{
+    struct PeropenerBase *PeropenerBase = (struct PeropenerBase *)__aros_getbase_PeropenerBase();
+
+    return PeropenerBase->value;
+}
+
+AROS_LH1(void, PeropenerSetValueReg,
+AROS_LHA(int, value, D0),
+struct Library *, PeropenerBase, 7, Peropener)
+{
+    AROS_LIBFUNC_INIT
+
+    struct PeropenerBase *PeropenerBase = (struct PeropenerBase *)__aros_getbase_PeropenerBase();
+
+    PeropenerBase->value = value;
+
+    AROS_LIBFUNC_EXIT
+}
+
+AROS_LH0(int, PeropenerGetValueReg,
+struct Library *, PeropenerBase, 8, Peropener)
+{
+    AROS_LIBFUNC_INIT
+
+    struct PeropenerBase *PeropenerBase = (struct PeropenerBase *)__aros_getbase_PeropenerBase();
+
+    return PeropenerBase->value;
+
+    AROS_LIBFUNC_EXIT
+}
+

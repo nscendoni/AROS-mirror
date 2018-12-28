@@ -1,0 +1,45 @@
+/*
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: graphics_init.c 51029 2015-08-29 22:47:37Z NicJA $
+
+    Desc: Graphics hidd initialization code.
+    Lang: English.
+*/
+#include <stddef.h>
+#include <exec/types.h>
+
+#include <proto/exec.h>
+
+#include <aros/symbolsets.h>
+
+#include "graphics_intern.h"
+
+#include LC_LIBDEFS_FILE
+
+#undef  SDEBUG
+#undef  DEBUG
+#define DEBUG 0
+#include <aros/debug.h>
+
+#undef csd
+
+static int GFX_Init(LIBBASETYPEPTR LIBBASE)
+{
+    struct class_static_data *csd = &LIBBASE->hdg_csd;
+    
+    EnterFunc(bug("GfxHIDD_Init()\n"));
+
+    D(bug("[HiddGfx] GC class @ 0x%p\n", csd->gcclass));
+    D(bug("[HiddGfx] BitMap class @ 0x%p\n", csd->bitmapclass));
+
+    csd->cs_GfxBase = NULL;
+    NEWLIST(&csd->pflist);
+    InitSemaphore(&csd->sema);
+    InitSemaphore(&csd->pfsema);
+    InitSemaphore(&csd->rgbconvertfuncs_sem);
+
+    ReturnInt("GfxHIDD_Init", ULONG, TRUE);
+}
+
+ADD2INITLIB(GFX_Init, -2)
+

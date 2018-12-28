@@ -1,0 +1,18 @@
+# Copyright © 2012, The AROS Development Team. All rights reserved.
+# $Id: mmakefile.src 52305 2016-03-28 11:24:34Z NicJA $
+
+include $(SRCDIR)/config/aros.cfg
+
+FILES           := version
+EXEDIR          := $(AROS_TESTS)/bz2
+
+#MM- test : test-bz2
+#MM- test-quick : test-bz2-quick
+
+#MM test-bz2 : includes linklibs external-bz2
+
+%build_progs mmake=test-bz2 \
+    files=$(FILES) targetdir=$(EXEDIR) \
+    uselibs="bz2"
+
+%common

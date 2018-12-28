@@ -1,0 +1,19 @@
+# $Id: mmakefile.src 52305 2016-03-28 11:24:34Z NicJA $
+
+include $(SRCDIR)/config/aros.cfg
+
+EXEDIR      := $(AROS_TESTS)/hidds/graphics
+
+FILES := \
+ convertpixels \
+ hiddmodeid \
+ modeid
+
+#MM- test : test-hidd-graphics
+#MM test-hidd-graphics : includes linklibs
+
+%build_progs mmake=test-hidd-graphics \
+    files=$(FILES) targetdir=$(EXEDIR) \
+    uselibs="hiddstubs"
+	
+%common

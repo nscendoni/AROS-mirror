@@ -1,0 +1,21 @@
+# Copyright © 2016, The AROS Development Team. All rights reserved.
+# $Id: mmakefile.src 52305 2016-03-28 11:24:34Z NicJA $
+
+include $(SRCDIR)/config/aros.cfg
+
+FILES := \
+ localetest \
+ openlocale
+
+EXEDIR := $(AROS_TESTS)/locale
+
+#MM- test : test-locale
+#MM- test-quick : test-locale-quick
+#MM  test-locale : test-locale-miscfiles
+
+%build_progs mmake=test-locale \
+    files=$(FILES) targetdir=$(EXEDIR)
+
+%copy_files_q mmake=test-locale-miscfiles files="openlocale.prefs" dst=$(EXEDIR)
+
+%common

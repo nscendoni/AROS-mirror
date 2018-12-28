@@ -1,0 +1,47 @@
+#   $Id: mmakefile.src 53132 2016-12-29 10:32:06Z deadwood $
+#
+#   Makefile for AROS exec.library tests
+
+include $(SRCDIR)/config/aros.cfg
+
+FILES :=		\
+    alert		\
+    allocmem		\
+    allocxxx        \
+    avltest		\
+    childstatus		\
+    childwait		\
+    copymem		\
+    crashtest		\
+    dumpmem		\
+    enqueue		\
+    exceptiontest	\
+    exceptiontest2	\
+    messagetest		\
+    openlib	 	\
+    portsend		\
+    portreceive		\
+    makelib		\
+    pool		\
+    rawdofmt		\
+    semaphoretest	\
+    semtorture		\
+    stackswap 		\
+    signaltest		\
+    supertest		\
+    tasktest		\
+    tasktest2		\
+    timeport \
+    traptest		\
+    vblank
+
+EXEDIR := $(AROS_TESTS)/exec
+
+USER_CFLAGS := -D__AROS_GIMME_DEPRECATED_STACKSWAP__
+
+#MM test-exec : includes includes-copy linklibs kernel
+
+%build_progs mmake=test-exec \
+    files=$(FILES) targetdir=$(EXEDIR)
+
+%common

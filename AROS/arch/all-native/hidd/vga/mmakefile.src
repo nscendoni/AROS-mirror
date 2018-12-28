@@ -1,0 +1,13 @@
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
+
+include $(SRCDIR)/config/aros.cfg
+
+FILES := vga_init vgaclass vgahw bitmap
+
+USER_LDFLAGS := -static
+
+%build_module mmake=kernel-hidd-vga \
+  modname=vgah modtype=hidd \
+  files=$(FILES) uselibs=acpica
+
+%common
