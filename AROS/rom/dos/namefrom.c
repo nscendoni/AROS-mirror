@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: namefrom.c 46942 2013-03-15 20:57:45Z NicJA $
 
     Desc: Retrieve the full pathname from a lock or a filehandle.
     Lang: english

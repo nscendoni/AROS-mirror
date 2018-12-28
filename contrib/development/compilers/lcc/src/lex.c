@@ -2,7 +2,7 @@
 #include <float.h>
 #include <errno.h>
 
-static char rcsid[] = "$Id$";
+static char rcsid[] = "$Id: lex.c 30794 2009-03-08 02:19:07Z neil $";
 
 #define MAXTOKEN 32
 

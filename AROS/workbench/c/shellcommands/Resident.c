@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Resident.c 52028 2016-03-17 04:36:20Z jmcmullan $
 
     Desc: Resident CLI command
     Lang: English
@@ -119,9 +119,7 @@ AROS_SHA(BOOL, ,SYSTEM,/S,FALSE))
 	    struct Segment *found;
 
 	    Forbid();
-	    found = FindSegment(name, NULL, FALSE);
-	    if (!found)
-	        found = FindSegment(name, NULL, TRUE);
+	    found = FindSegment(name, NULL, TRUE);
 	    if (!found)
 	    {
 	        Permit();
@@ -139,7 +137,7 @@ AROS_SHA(BOOL, ,SYSTEM,/S,FALSE))
 	    if (IoErr())
 	    {
 	        PrintFault(IoErr(), SHArg(NAME));
-		return RETURN_WARN;
+		return RETURN_FAIL;
 	    }
 
 	    return RETURN_OK;

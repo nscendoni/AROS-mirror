@@ -2,8 +2,8 @@
 #define AROS_M68K_GENMODULE_H
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2012, The AROS Development Team. All rights reserved.
+    $Id: genmodule.h 47619 2013-07-02 18:27:20Z neil $
 
     Desc:CPU-specific genmodule definitions for Motorola m68k processors
     Lang: english

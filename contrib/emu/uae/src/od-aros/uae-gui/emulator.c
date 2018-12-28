@@ -1,6 +1,6 @@
 /*
     Copyright © 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: emulator.c 43433 2012-01-01 20:16:02Z jmcmullan $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

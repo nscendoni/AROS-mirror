@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: layouticon.c 45383 2012-08-03 14:42:09Z jmcmullan $
 */
 
 #include <aros/debug.h>

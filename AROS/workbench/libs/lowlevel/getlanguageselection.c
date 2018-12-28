@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getlanguageselection.c 49682 2014-10-02 17:25:09Z deadwood $
 
     Desc: 
     Lang: english

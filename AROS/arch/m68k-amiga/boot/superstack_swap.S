@@ -1,6 +1,6 @@
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: superstack_swap.S 36648 2011-01-17 14:31:59Z neil $
 
     Desc: SuperstackSwap() - set up a new supervisor stack
     Lang: english

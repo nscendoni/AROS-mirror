@@ -1,15 +1,18 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: disable.c 51383 2016-01-21 00:29:44Z NicJA $
 
     Desc: Disable() - Stop interrupts from occurring.
     Lang: english
 */
 
+#define DEBUG 0
+
 #include <exec/types.h>
 #include <exec/execbase.h>
 #include <aros/libcall.h>
 #include <aros/atomic.h>
+#include <proto/kernel.h>
 
 #include "exec_intern.h"
 
@@ -28,7 +31,7 @@
 	struct ExecBase *, SysBase, 20, Exec)
 
 /*  FUNCTION
-	This function will prevent interrupts from occuring (*). You can
+	This function will prevent interrupts from occuring. You can
 	start the interrupts again with a call to Enable().
 
 	Note that calls to Disable() nest, and for every call to
@@ -36,11 +39,15 @@
 
 	***** WARNING *****
 
-	Using this function is considered very harmful, and it should only
-	ever be used to protect data that could also be accessed in interrupts.
+	Using this function is considered very harmful, and it is
+	not recommended to use this function for ** ANY ** reason.
 
 	It is quite possible to either crash the system, or to prevent
 	normal activities (disk/port i/o) from occuring.
+
+	Note: As taskswitching is driven by the interrupts subsystem,
+	      this function has the side effect of disabling
+	      multitasking.
 
     INPUTS
 
@@ -53,17 +60,8 @@
 	To prevent deadlocks calling Wait() in disabled state breaks
 	the disable - thus interrupts may happen again.
 
-	As the schedulers pre-emption is interrupt driven,
-	this function has the side effect of disabling
-	multitasking.
-
-	(*) On EXECSMP builds, Disable() only aplies to the processor
-	    it is called from (and needs to be re-enabled there also)
-	    Data which needs to be protected from parallel access will
-	    also require a spinlock.            
-
     EXAMPLE
-	In most userspace code, you will not want to use this function.
+	No you DEFINITELY don't want to use this function.
 
     BUGS
 	The only architecture that you can rely on the registers being

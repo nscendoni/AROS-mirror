@@ -16,7 +16,7 @@
 
  TextEditor class Support Site:  http://www.sf.net/projects/texteditor-mcc
 
- $Id$
+ $Id: ObjectCreator.c 51624 2016-03-06 22:41:51Z mazze $
 
 ***************************************************************************/
 

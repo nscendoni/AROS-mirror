@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: intern.h 42014 2011-10-24 14:33:48Z jmcmullan $
 
     Desc:
     Lang: english

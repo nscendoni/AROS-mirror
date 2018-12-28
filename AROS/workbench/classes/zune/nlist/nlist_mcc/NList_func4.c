@@ -19,7 +19,7 @@
 
  NList classes Support Site:  http://www.sf.net/projects/nlist-classes
 
- $Id$
+ $Id: NList_func4.c 53132 2016-12-29 10:32:06Z deadwood $
 
 ***************************************************************************/
 
@@ -814,12 +814,16 @@ ULONG NL_DeleteImage(struct NLData *data,APTR listimg)
 
         if((parent = (Object *)xget(imgobj, MUIA_Parent)) && (parent == data->NL_Group))
         {
+#if 0
+          /* ABI_V0 compatibility */
+          /* Due to changes in group.c, 827 */
           if (data->SETUP && DoMethod(data->NL_Group,MUIM_Group_InitChange))
           {
             DoMethod(data->NL_Group,OM_REMMEMBER,imgobj);
             DoMethod(data->NL_Group,MUIM_Group_ExitChange);
           }
           else
+#endif
             DoMethod(data->NL_Group,OM_REMMEMBER,imgobj);
         }
       }

@@ -1,6 +1,6 @@
 /*
     Copyright © 2006-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: main.c 44303 2012-02-29 23:54:36Z olivieradam $
 
     Desc: Executes programs in sys:WBStartup
     Lang: English

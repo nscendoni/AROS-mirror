@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu_i386.h 42230 2011-11-03 10:24:58Z sonic $
 */
 
 #include <aros/i386/cpucontext.h>

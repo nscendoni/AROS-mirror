@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2010-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: size_t.h 50458 2015-04-24 14:53:27Z neil $
 
     size_t
 */

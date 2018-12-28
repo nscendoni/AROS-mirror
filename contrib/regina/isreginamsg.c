@@ -1,6 +1,6 @@
 /*
     Copyright © 2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: isreginamsg.c 30794 2009-03-08 02:19:07Z neil $
 */
 
 #include <exec/types.h>

@@ -3,7 +3,7 @@
 
 /*
     Copyright (C) 2006 by Michal Schulz
-    $Id$
+    $Id: usb.h 36648 2011-01-17 14:31:59Z neil $
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Library General Public License as

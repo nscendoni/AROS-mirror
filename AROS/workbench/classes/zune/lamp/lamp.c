@@ -1,6 +1,6 @@
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: lamp.c 44094 2012-02-18 17:46:09Z deadwood $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

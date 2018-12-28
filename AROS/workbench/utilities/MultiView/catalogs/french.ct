@@ -1,4 +1,4 @@
-## version $VER: multiview.catalog 2.0 (03.01.2018)
+## version $VER: multiview.catalog 2.0 (30.03.2016)
 ## codeset 0
 ## language français
 ;
@@ -145,7 +145,4 @@ Continuer
 ;
 MSG_OK
 Ok
-;
-MSG_SHORTCUT_EDITOR
-E
 ;

@@ -1,7 +1,7 @@
 // https://upload.wikimedia.org/wikipedia/en/8/8a/Hebrew_keyboard_layout.png
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pc104_il.c 51577 2016-02-29 18:51:41Z polluks $
 
     Desc: Hebrew PC104/PC101 Keymap
     Lang: English

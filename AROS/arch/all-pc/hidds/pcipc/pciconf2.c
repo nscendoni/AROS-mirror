@@ -1,6 +1,6 @@
 /*
-    Copyright © 2004-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2004-2016, The AROS Development Team. All rights reserved.
+    $Id: pciconf2.c 52756 2016-06-10 17:06:26Z neil $
 
     Desc: PCI configuration mechanism 2 access functions
     Lang: English
@@ -50,7 +50,7 @@ static void WriteConfig2Long(UBYTE bus, UBYTE dev, UBYTE sub, UWORD reg, ULONG v
     }
 }
 
-static inline BOOL SanityCheck(struct pcipc_staticdata *psd)
+static inline BOOL SanityCheck(struct pci_staticdata *psd)
 {
     UWORD temp;
 
@@ -63,7 +63,7 @@ static inline BOOL SanityCheck(struct pcipc_staticdata *psd)
     return FALSE;
 }
 
-static BOOL PCIPC_ProbeMech1Conf(struct pcipc_staticdata *psd)
+static BOOL ProbeMech1(struct pci_staticdata *psd)
 {
     ULONG temp = inl(PCI_AddressPort);
     ULONG val;
@@ -86,15 +86,15 @@ static BOOL PCIPC_ProbeMech1Conf(struct pcipc_staticdata *psd)
     return FALSE;
 }
 
-void PCIPC_ProbeConfMech(struct pcipc_staticdata *psd)
+void ProbePCI(struct pci_staticdata *psd)
 {
     /*
-     * All newer boards support at least mechanism 1.
-     * We probe for it first, because on some machines (e.g. MacMini), PCI_MechSelect is
-     * used by the chipset as a reset register (and perhaps some other proprietary control).
-     * Writing 0x01 to it makes the machine's cold reboot mechanism stop working.
+     * All new board support only mechanism 1. So we probe for it first.
+     * We do it because on some machines (MacMini) PCI_MechSelect is
+     * used by chipset as a reset register (and perhaps some other proprietary control).
+     * Writing 0x01 to it makes machine cold reboot not working.
      */
-    if (PCIPC_ProbeMech1Conf(psd))
+    if (ProbeMech1(psd))
     	return;
 
     /*
@@ -102,7 +102,7 @@ void PCIPC_ProbeConfMech(struct pcipc_staticdata *psd)
      * Perhaps it's Intel Neptune or alike board. We can try to switch it to Mech1.
      */
     outb(0x01, PCI_MechSelect);
-    if (PCIPC_ProbeMech1Conf(psd))
+    if (ProbeMech1(psd))
     	return;
 
     /* Completely no support. Try mechanism 2. */
@@ -125,7 +125,7 @@ void PCIPC_ProbeConfMech(struct pcipc_staticdata *psd)
     }
 
     /*
-     * Newer systems may have an empty bus 0. In this case SanityCheck() will fail. We
+     * Newer systems may have empty bus 0. In this case SanityCheck() will fail. We
      * assume configuration type 1 for such systems.
      * Probably SanityCheck() should be revised or removed at all.
      */

@@ -4,8 +4,7 @@ package: Paket
 documentation: Dokumentation
 sources: Källkod
 binaries: Binaries
-developer-tools: ABI-v1 Utvecklingsverktyg
-development-tools: ABI-v0 Utvecklingsverktyg
+development-tools: Utvecklingsverktyg
 date: Datum
 
 [links]
@@ -80,9 +79,6 @@ pc-x86_64-boot-iso:
     The native version for 64-bit (x86_64, amd64) PC computers.
     This is the bootable CDROM ISO image, which
     contains all AROS system and contributed programs.
-smp-pc-x86_64-boot-iso:
-    This is a highly experimental SMP build for pc-x86_64.
-    Only recommended for Developers. This is a bootable CD-ROM ISO image.
 pc-x86_64-contrib:
     This archive contains all the contributed programs
     compiled for the x86_64 architecture, for use with the

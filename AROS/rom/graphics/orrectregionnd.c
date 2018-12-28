@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: orrectregionnd.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Graphics function AndRectRegion()
     Lang: english
@@ -24,7 +24,7 @@
 	AROS_LHA(struct Rectangle *, Rect, A1),
 
 /*  LOCATION */
-	struct GfxBase *, GfxBase, 188, Graphics)
+	struct GfxBase *, GfxBase, 123, Graphics)
 
 /*  FUNCTION
 	Add the given Rectangle to the given Region (if not

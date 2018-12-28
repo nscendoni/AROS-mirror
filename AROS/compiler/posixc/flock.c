@@ -1,6 +1,6 @@
 /*
     Copyright © 2008-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: flock.c 51632 2016-03-07 16:39:55Z neil $
 
     4.4BSD function flock().
 */

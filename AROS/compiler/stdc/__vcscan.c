@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __vcscan.c 51002 2015-08-10 20:59:59Z NicJA $
 
     Function to scan a string like scanf().
 */

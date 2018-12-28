@@ -1,6 +1,6 @@
 /*
     Copyright © 2009, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: timer.h 47063 2013-03-24 01:06:19Z neil $
 
     Desc:
     Lang: English

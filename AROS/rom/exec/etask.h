@@ -2,15 +2,12 @@
 #define _ETASK_H
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2012, The AROS Development Team. All rights reserved.
+    $Id: etask.h 50721 2015-05-20 01:07:11Z NicJA $
 
     Desc: Internal description of the ETask structure
     Lang: english
 */
-
-#include <aros/config.h>
-#include <aros/types/timespec_s.h>
 
 #include <exec/interrupts.h>
 #include <exec/tasks.h>
@@ -19,10 +16,6 @@
 #include <exec_platform.h>
 
 #include "alertextra.h"
-
-#if defined(__AROSEXEC_SMP__)
-#include <aros/types/spinlock_s.h>
-#endif
 
 /* Known alert context types */
 #define AT_NONE     0x00
@@ -45,24 +38,21 @@ struct IntETask
 {
     struct ETask       iet_ETask;
     APTR                iet_RT;                 /* Structure for resource tracking         */
-    struct timespec     iet_StartTime;          /* time the task was launched              */
-    struct timespec     iet_CpuTime;            /* time the task has spent running         */
-    ULONG               iet_CpuUsage;           /* CPU Usage of this task                  */
+#if defined(__AROSEXEC_SMP__)
+    spinlock_t          iet_TaskLock;
+    IPTR                iet_CpuNumber;          /* core this task is currently running on  */
+    IPTR                iet_CpuAffinity;        /* bitmap of cores this task can run on    */
+    spinlock_t          *iet_SpinLock;          /* pointer to spinlock task is spinning on */
+#endif
+    struct timeval      iet_StartTime;          /* time the task was launched              */
+    struct timeval      iet_CpuTime;            /* time the task has spent running         */
     UQUAD               iet_private1;
-    UQUAD               iet_private2;
     ULONG               iet_AlertCode;          /* Alert code for crash handler            */
     UBYTE               iet_AlertType;          /* Type of the alert context               */
     UBYTE               iet_AlertFlags;         /* See below                               */
     APTR                iet_AlertLocation;      /* Alert location for crash handler        */
     APTR                iet_AlertStack;         /* Frame pointer for stack backtrace       */
     struct AlertContext iet_AlertData;          /* Extra data coming with the crash        */
-#if defined(__AROSEXEC_SMP__)
-    void                *iet_Session;
-    spinlock_t          iet_TaskLock;
-    IPTR                iet_CpuNumber;          /* core this task is currently running on  */
-    cpumask_t           *iet_CpuAffinity;        /* bitmap of cores this task can run on    */
-    spinlock_t          *iet_SpinLock;          /* pointer to spinlock task is spinning on */
-#endif
 #ifdef DEBUG_ETASK
     STRPTR              iet_Me;
 #endif

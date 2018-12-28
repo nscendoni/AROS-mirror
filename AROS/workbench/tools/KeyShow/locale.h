@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: locale.h 44239 2012-02-25 14:08:43Z mazze $
 */
 
 #include <exec/types.h>

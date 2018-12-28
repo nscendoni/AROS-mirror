@@ -6,7 +6,7 @@
     Copyright © 2002-2012, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: family.h 45798 2012-09-14 19:47:19Z neil $
 */
 
 /*** Name *******************************************************************/

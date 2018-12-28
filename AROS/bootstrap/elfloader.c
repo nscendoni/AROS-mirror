@@ -1,6 +1,6 @@
 /*
  Copyright (C) 2006-2011 The AROS Development Team. All rights reserved.
- $Id$
+ $Id: elfloader.c 52733 2016-05-16 15:46:04Z schulz $
  
  Desc: ELF loader extracted from our internal_load_seg_elf in dos.library.
  Lang: English

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpucontext.h 37974 2011-04-01 06:37:44Z sonic $
 
     Desc: CPU context definition for PowerPC processors
     Lang: english

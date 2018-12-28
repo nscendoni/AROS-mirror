@@ -8,7 +8,7 @@
  * Created: Wed Aug  5 18:57:25 1992 too
  * Last modified: Wed Jun 16 19:16:02 1993 too
  * 
- * $Id$
+ * $Id: charread.h 30794 2009-03-08 02:19:07Z neil $
  *
  * HISTORY
  * $Log$

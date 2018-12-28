@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vbe.h 37914 2011-03-30 12:48:50Z sonic $
  
     Desc: VESA BIOS information structures
     Lang: english

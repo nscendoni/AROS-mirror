@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$    $Log
+    $Id: polydraw.c 37502 2011-03-13 11:36:00Z twilen $    $Log
 
     Desc: Graphics function PolyDraw()
     Lang: english

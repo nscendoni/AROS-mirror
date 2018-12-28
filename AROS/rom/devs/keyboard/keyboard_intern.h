@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: keyboard_intern.h 49713 2014-10-24 16:53:13Z neil $
 
     Desc:
     Lang: English

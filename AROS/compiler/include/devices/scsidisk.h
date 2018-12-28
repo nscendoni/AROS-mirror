@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: scsidisk.h 31834 2009-09-26 18:00:02Z neil $
 
     Desc: Definitions for scsi.device
     Lang: english

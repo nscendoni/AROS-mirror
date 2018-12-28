@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: loadseg.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: DOS function LoadSeg()
     Lang: english
@@ -23,7 +23,7 @@ static AROS_UFH4(LONG, ReadFunc,
 {
     AROS_USERFUNC_INIT
 
-    return FRead(file, buffer, 1, length);
+    return Read(file, buffer, length);
 
     AROS_USERFUNC_EXIT
 }

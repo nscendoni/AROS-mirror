@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: main.c 51719 2016-03-09 23:23:20Z NicJA $
 */
 
 //#define DEBUG 1

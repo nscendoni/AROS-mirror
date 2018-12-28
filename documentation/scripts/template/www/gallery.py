@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright © 2002, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: gallery.py 51116 2015-09-27 13:25:57Z mazze $
 
 import os
 from html import *

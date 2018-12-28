@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hungary.c 52798 2016-07-22 16:59:37Z deadwood $
 
     Country data for Magyarország (Hungary).
           based on the Amiga Developer CD 2.1 file -: 

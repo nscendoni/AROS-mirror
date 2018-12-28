@@ -15,7 +15,7 @@
 
  NList classes Support Site:  http://www.sf.net/projects/nlist-classes
 
- $Id$
+ $Id: library.c 47857 2013-08-23 17:01:29Z mazze $
 
 ***************************************************************************/
 

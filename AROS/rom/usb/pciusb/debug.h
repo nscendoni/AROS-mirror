@@ -6,9 +6,8 @@
 #define DB_LEVEL 200
 #endif
 
-#define DEBUG 1
+//#define DEBUG 1
 
-#include <aros/debug.h>
 #include <proto/debug.h>
 
 // DEBUG 0 should equal undefined DEBUG

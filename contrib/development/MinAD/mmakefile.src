@@ -1,9 +1,9 @@
-# $Id$
+# $Id: mmakefile.src 52576 2016-04-11 06:47:58Z mazze $
 # Makefile to make MinAD.
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
-EXEDIR := $(AROS_CONTRIB)/$(AROS_DIR_DEVELOPER)/MinAD
+EXEDIR := $(AROS_CONTRIB)/Development/MinAD
 
 #MM- contrib-development-minad : \
 #MM    contrib-development-minad-files \

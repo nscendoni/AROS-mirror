@@ -1,7 +1,7 @@
 #ifndef XADMASTER_ZIP_C
 #define XADMASTER_ZIP_C
 
-/*  $Id$
+/*  $Id: Zip.c 52513 2016-04-02 01:20:25Z NicJA $
     Zip file archiver client
 
     XAD library system for archive handling

@@ -1,8 +1,8 @@
-#$Id$
+#$Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
-FILES := class_init probe gayleata_busclass fastata_busclass interface_pio 
+FILES := class_init probe bus_class interface_pio 
 
 %build_module mmake=kernel-hidd-gayleata \
     modname=ata_gayle modtype=hidd \

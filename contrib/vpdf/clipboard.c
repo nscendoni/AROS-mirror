@@ -4,7 +4,7 @@
  *  Copyright © 2007-2011 Ilkka Lehtoranta <ilkleht@yahoo.com>
  *  All rights reserved.
  *  
- *  $Id$
+ *  $Id: clipboard.c 49574 2014-09-01 23:15:41Z mazze $
  */
 
 #warning "!!!!!!!REPLACE THIS WITH SOME SYSTEM SOLUTION!!!!!!!"

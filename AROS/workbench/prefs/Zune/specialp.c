@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: specialp.c 53623 2017-02-13 17:55:17Z neil $
 */
 
 #include <graphics/gfx.h>

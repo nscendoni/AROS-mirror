@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bltbitmap.c 47717 2013-07-18 11:50:05Z neil $
 
     Desc: Copy a rectangle in a bitmap to another place or another bitmap.
     Lang: english

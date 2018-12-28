@@ -1,7 +1,7 @@
 #ifndef DROPARC_H
 #define DROPARC_H
 
-/*  $Id$
+/*  $Id: DropArc.h 30794 2009-03-08 02:19:07Z neil $
     definitions for DropArc
 
     XAD library system for archive handling

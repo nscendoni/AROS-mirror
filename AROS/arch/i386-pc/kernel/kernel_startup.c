@@ -1,60 +1,36 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: kernel_startup.c 52052 2016-03-18 15:29:56Z NicJA $
 
     Desc: i386-pc kernel startup code
     Lang: english
 */
 
+#include <aros/kernel.h>
 #include <aros/multiboot.h>
 #include <asm/cpu.h>
-#include <asm/io.h>
-#include <aros/symbolsets.h>
-#include <exec/lists.h>
-#include <exec/memory.h>
 #include <exec/resident.h>
-#include <utility/tagitem.h>
 #include <proto/arossupport.h>
 #include <proto/exec.h>
 
 #include <bootconsole.h>
-#include <inttypes.h>
 #include <string.h>
 
 #include "boot_utils.h"
 #include "kernel_base.h"
-#include "kernel_intern.h"
 #include "kernel_bootmem.h"
 #include "kernel_debug.h"
+#include "kernel_intern.h"
 #include "kernel_mmap.h"
 #include "kernel_romtags.h"
 
-#define D(x)
+#define D(x) x
 
 static char boot_stack[];
 
 static void kernel_boot(const struct TagItem *msg);
 void core_Kick(struct TagItem *msg, void *target);
 void kernel_cstart(const struct TagItem *msg);
-
-/* Common IBM PC memory layout (32bit version) */
-static const struct MemRegion PC_Memory[] =
-{
-    /*
-     * Low memory has a bit lower priority -:
-     * - This helps the kernel/exec locate its MemHeader.
-     * - We explicitly need low memory for SMP bootstrap.
-     */
-    {0x00000000, 0x000a0000, "Low memory"    , -6, MEMF_PUBLIC|MEMF_LOCAL|MEMF_KICK|MEMF_CHIP|MEMF_31BIT|MEMF_24BITDMA},
-    {0x00100000, 0x01000000, "ISA DMA memory", -5, MEMF_PUBLIC|MEMF_LOCAL|MEMF_KICK|MEMF_CHIP|MEMF_31BIT|MEMF_24BITDMA},
-    /*
-     * 64-bit machines can expose RAM at addresses up to 0xD0000000 (giving 3.5 GB total).
-     * All MMIO sits beyond this border. AROS intentionally specifies a 4GB limit, in case some
-     * devices expose even more RAM in this space. This allows all the RAM to be usable.
-     */
-    {0x01000000, 0xFFFFFFFF, "High memory"   ,  0, MEMF_PUBLIC|MEMF_LOCAL|MEMF_KICK|MEMF_CHIP|MEMF_31BIT	      },
-    {0         , 0         , NULL            ,  0, 0                                                                  }
-};
 
 /*
  * Here the history starts. We are already in flat, 32bit mode. All protections
@@ -124,14 +100,33 @@ void core_Kick(struct TagItem *msg, void *target)
     		 "call *%2\n"::"r"(msg), "r"(boot_stack + STACK_SIZE), "r"(target));
 }
 
+/* Common IBM PC memory layout */
+static const struct MemRegion PC_Memory[] =
+{
+    /*
+     * Give low memory a bit lower priority. This will help us to locate its MemHeader (the last one in the list).
+     * We explicitly need low memory for SMP bootstrap.
+     */
+    {0x00000000, 0x000a0000, "Low memory"    , -6, MEMF_PUBLIC|MEMF_LOCAL|MEMF_KICK|MEMF_CHIP|MEMF_31BIT|MEMF_24BITDMA},
+    {0x00100000, 0x01000000, "ISA DMA memory", -5, MEMF_PUBLIC|MEMF_LOCAL|MEMF_KICK|MEMF_CHIP|MEMF_31BIT|MEMF_24BITDMA},
+    /*
+     * EXPERIMENTAL: Some (or all?) 64-bit machines expose RAM at addresses up to
+     * 0xD0000000 (giving 3.5 GB total). All MMIO sits beyond this border. We
+     * intentionally specify 4GB as limit, just in case if some machine exhibits
+     * even more RAM in this space. We want all the RAM to be usable.
+     */
+    {0x01000000, 0xFFFFFFFF, "High memory"   ,  0, MEMF_PUBLIC|MEMF_LOCAL|MEMF_KICK|MEMF_CHIP|MEMF_31BIT	      },
+    {0         , 0         , NULL            ,  0, 0                                                                  }
+};
+
 /*
  * Our transient data.
  * They must survive warm restart, so we put them into .data section.
  * We also have SysBase here, this way we move it away from zero page,
  * making it harder to trash it.
  */
-__attribute__((section(".data"))) struct KernBootPrivate *__KernBootPrivate = NULL;
 __attribute__((section(".data"))) IPTR kick_end = 0;
+__attribute__((section(".data"))) struct segment_desc *GDT = NULL;
 __attribute__((section(".data"))) struct ExecBase *SysBase = NULL;
 
 /*
@@ -161,7 +156,7 @@ void kernel_cstart(const struct TagItem *msg)
     struct mb_mmap *mmap = NULL;
     unsigned long mmap_len = 0;
     IPTR kick_start = 0;
-    struct segment_selector gdtr;
+    struct table_desc gdtr;
     struct MinList memList;
     struct MemHeader *mh, *mh2;
     UWORD *ranges[] = {NULL, NULL, (UWORD *)-1};
@@ -172,11 +167,11 @@ void kernel_cstart(const struct TagItem *msg)
     D(bug("[Kernel] Transient kickstart end 0x%p, BootMsg 0x%p\n", kick_end, BootMsg));
     D(bug("[Kernel] Boot stack: 0x%p - 0x%p\n", boot_stack, boot_stack + STACK_SIZE));
 
-    /* If __KernBootPrivate is not set, this is our first start. */
-    if (__KernBootPrivate == NULL)
+    if (!kick_end)
     {
         struct vbe_mode *vmode = NULL;
 
+    	/* If kick_end is not set, this is our first start. */
 	tag = LibFindTagItem(KRN_KernelHighest, msg);
         if (!tag)
 	    krnPanic(KernelBase, "Incomplete information from the bootstrap\n"
@@ -227,40 +222,18 @@ void kernel_cstart(const struct TagItem *msg)
 	    }
 	}
 
-	/* Now allocate KernBootPrivate */
-	__KernBootPrivate = krnAllocBootMem(sizeof(struct KernBootPrivate));
+	/* Allocate space for GDT */
+	GDT = krnAllocBootMemAligned(sizeof(GDT_Table), 128);
 
 	vesahack_Init(cmdline, vmode);
-    }
 
-    if (!__KernBootPrivate->BOOTGDT)
-    {
-        /* Allocate space for GDT */
-	__KernBootPrivate->BOOTGDT = krnAllocBootMemAligned(sizeof(GDT_Table), 128);
-
-        /* Create global descriptor table */
-        krnCopyMem(GDT_Table, __KernBootPrivate->BOOTGDT, sizeof(GDT_Table));
-    }
-
-    if (!__KernBootPrivate->TSS)
-        __KernBootPrivate->TSS = krnAllocBootMemAligned(sizeof(struct tss), 64);
-
-    if (!__KernBootPrivate->BOOTIDT)
-        __KernBootPrivate->BOOTIDT = krnAllocBootMemAligned(sizeof(apicidt_t) * 256, 256);
-
-    D(bug("[Kernel] BOOT GDT @ 0x%p, LDT @ 0x%p, TSS @ 0x%p\n", __KernBootPrivate->BOOTGDT, __KernBootPrivate->BOOTIDT, __KernBootPrivate->TSS));
-
-    if (!kick_end)
-    {
 	/*
 	 * Set new kickstart end address.
 	 * Kickstart area now includes boot taglist with all its contents.
-	 */        
-        D(bug("[Kernel] Boot-time setup complete\n"));
-    	kick_end = AROS_ROUNDUP2((IPTR)BootMemPtr, PAGE_SIZE);
+	 */
+	kick_end = (IPTR)BootMemPtr;
+	D(bug("[Kernel] Boot-time setup complete, end of kickstart area 0x%p\n", kick_end));
     }
-
-    D(bug("[Kernel] End of kickstart area 0x%p\n", kick_end));
 
     /*
      * Obtain the needed data from the boot taglist.
@@ -302,13 +275,17 @@ void kernel_cstart(const struct TagItem *msg)
     if (cmdline && strstr(cmdline, "notlsf"))
         allocator = ALLOCATOR_STD;
 
+
+    /* Create global descriptor table */
+    krnCopyMem(GDT_Table, GDT, sizeof(GDT_Table));
+
     /*
      * Initial CPU setup. Load the GDT and segment registers.
      * AROS uses only CS SS DS and ES. FS and GS are set to 0
      * so we can generate GP if someone uses them.
      */
     gdtr.size = sizeof(GDT_Table) - 1;
-    gdtr.base = (unsigned long)__KernBootPrivate->BOOTGDT;
+    gdtr.base = (unsigned long)GDT;
     asm
     (
 	"	lgdt	%0\n"
@@ -322,7 +299,7 @@ void kernel_cstart(const struct TagItem *msg)
 	::"m"(gdtr),"r"(KERNEL_DS),"r"(0),"i"(KERNEL_CS)
     );
 
-    D(bug("[Kernel] GDT reloaded\n"));
+    D(bug("[Kernel] GDT @ 0x%p reloaded\n", GDT));
 
     /*
      * Explore memory map and create MemHeaders
@@ -410,7 +387,20 @@ void kernel_cstart(const struct TagItem *msg)
      */
     PlatformPostInit();
 
-    krnLeaveSupervisorRing(FLAGS_INTENABLED);
+#    define _stringify(x) #x
+#    define stringify(x) _stringify(x)
+
+    asm("movl $" stringify(USER_DS) ",%%eax\n\t"
+        "mov %%eax,%%ds\n\t"                         /* User DS */
+	"mov %%eax,%%es\n\t"                         /* User ES */
+	"movl %%esp,%%ebx\n\t"			/* Hold the esp value before pushing! */
+	"pushl %%eax\n\t"                           /* User SS */
+	"pushl %%ebx\n\t"                           /* Stack frame */
+	"pushl $0x3002\n\t"                        /* IOPL:3 */
+	"pushl $" stringify(USER_CS) "\n\t"        /* User CS */
+	"pushl $1f\n\t"                            /* Entry address */
+	"iret\n"                                   /* Go down to the user mode */
+	"1:":::"eax","ebx");
 
     InitCode(RTF_COLDSTART, 0);
 	

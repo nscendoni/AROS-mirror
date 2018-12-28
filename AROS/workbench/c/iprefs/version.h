@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: version.h 48796 2014-02-02 22:35:56Z neil $
 
     Desc:
     Lang: English
@@ -8,6 +8,6 @@
 
 
 #define VERSION 	1
-#define REVISION 	4
-#define DATESTR 	"21.2.2017"
-#define VERSIONSTR	"$VER: IPrefs 1.4 (" DATESTR ")"
+#define REVISION 	3
+#define DATESTR 	"2.2.2014"
+#define VERSIONSTR	"$VER: IPrefs 1.3 (" DATESTR ")"

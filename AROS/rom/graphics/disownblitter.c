@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: disownblitter.c 46616 2013-02-16 00:00:27Z jmcmullan $
 
     Desc: Release the bitter from private usage
     Lang: english

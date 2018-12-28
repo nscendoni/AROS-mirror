@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gadtools_init.c 45547 2012-08-13 03:44:21Z jmcmullan $
 
     Desc: GadTools initialization code.
     Lang: English.

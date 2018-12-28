@@ -4,8 +4,8 @@ AROS 1.0 roadmap
 
 :Authors:   Adam Chodorowski, Sergey Mineychev, William Ouwehand (NL)
 :Copyright: Copyright Š 2003, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 30800 $
+:Date:      $Date: 2009-03-08 18:28:50 +0100 (Sun, 08 Mar 2009) $
 
 :Abstract:  
     Deze roadmap bevat de eisen waaraan een AROS versie 1.0 moet voldoen voordat

@@ -1,8 +1,8 @@
 /*
  *  screen.c - Functions for grabbing and creating public screens
  *
- * $Date$
- * $Revision$
+ * $Date: 2013-12-01 23:08:26 +0100 (Sun, 01 Dec 2013) $
+ * $Revision: 48481 $
  *
  *  0.1
  *  20010717 DM Created - only a function for finding public screens ATM

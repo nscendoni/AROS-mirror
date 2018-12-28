@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mccprefs.c 45798 2012-09-14 19:47:19Z neil $
 */
 
 #include <clib/alib_protos.h>

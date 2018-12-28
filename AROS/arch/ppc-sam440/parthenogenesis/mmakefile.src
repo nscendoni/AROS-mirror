@@ -1,6 +1,6 @@
 # parthenogenesis: Tool to make a bootable USB device for Sam4xx machines
 # 
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 

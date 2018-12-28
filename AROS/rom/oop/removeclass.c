@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: removeclass.c 35081 2010-11-02 13:43:39Z jmcmullan $
 
     Desc:
     Lang: english

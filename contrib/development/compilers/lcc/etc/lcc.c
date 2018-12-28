@@ -2,7 +2,7 @@
  * lcc [ option ]... [ file | -llib ]...
  * front end for the ANSI C compiler
  */
-static char rcsid[] = "$Id$";
+static char rcsid[] = "$Id: lcc.c 30794 2009-03-08 02:19:07Z neil $";
 
 #include <stdio.h>
 #include <stdarg.h>

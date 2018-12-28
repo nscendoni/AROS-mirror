@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getsystemattr.c 50765 2015-05-29 14:45:34Z neil $
 
     Desc:
 */

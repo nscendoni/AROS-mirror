@@ -362,10 +362,10 @@ static const UWORD rawputchar_m68k[] =
 
 void
 MyKPrintFArgs( UBYTE*           fmt, 
-	       IPTR *           args,
+	       ULONG*           args,
 	       struct DriverBase* AHIsubBase )
 {
-  RawDoFmt( fmt, (RAWARG)args, (void(*)(void)) rawputchar_m68k, SysBase );
+  RawDoFmt( fmt, args, (void(*)(void)) rawputchar_m68k, SysBase );
 }
 
 #endif

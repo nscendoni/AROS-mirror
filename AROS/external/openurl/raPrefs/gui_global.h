@@ -14,7 +14,7 @@
 
  openurl.library project: http://sourceforge.net/projects/openurllib/
 
- $Id$
+ $Id: gui_global.h 49589 2014-09-08 18:47:02Z mazze $
 
 ***************************************************************************/
 

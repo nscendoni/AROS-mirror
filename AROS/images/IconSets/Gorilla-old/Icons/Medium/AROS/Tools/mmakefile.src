@@ -1,7 +1,7 @@
 # Copyright © 2004, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 30839 2009-03-11 14:30:37Z NicJA $
 
-include $(SRCDIR)/config/aros.cfg
+include $(TOP)/config/make.cfg
 
 ICONS := Calculator HDToolBox PCITool InstallAROS Editor Commodities Debug WiMP \
          ScreenGrabber

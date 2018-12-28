@@ -1,6 +1,6 @@
 /*
-    Copyright © 2012-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2012-2016, The AROS Development Team. All rights reserved.
+    $Id: __posixc_intbase.h 52849 2016-08-10 05:03:15Z deadwood $
 
     This file defines the private part of PosixCBase.
     This should only be used internally in posixc.library code so
@@ -14,11 +14,9 @@
 #include <exec/lists.h>
 #include <dos/dos.h>
 
-#include <limits.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <sys/stat.h>
-#include <pwd.h>
 
 /* Some private structs */
 struct random_state;
@@ -36,17 +34,6 @@ struct PosixCIntBase
 
     /* random.c */
     struct random_state *rs;
-
-    /* getpwuid.c */
-    struct passwd pwd;
-
-    /* getpass.c */
-    char passbuffer[PASS_MAX];
-#if (0)
-    /* sigprocmask.c */
-    sigset_t   sigmask;
-    sigset_t   signals;
-#endif
 
     /* __posixc_environ.c; don't use this field outside that file */
     char ***environptr;
@@ -91,9 +78,6 @@ struct PosixCIntBase
     /* setuid.c/getuid.c */
     uid_t uid; /* Real user id of process */
     uid_t euid; /* Effective user id of process */
-    /* set(e)gid.c/get(e)gid.c */
-    gid_t gid; /* Real group id of process */
-    gid_t egid; /* Effective group id of process */
 };
 
 /* flags; values of flags are power of two so they can be ORed together */

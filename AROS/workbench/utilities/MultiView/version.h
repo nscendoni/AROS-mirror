@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: version.h 51481 2016-02-13 22:31:10Z mazze $
 
     Desc:
     Lang: English

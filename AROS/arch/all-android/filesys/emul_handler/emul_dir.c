@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: emul_dir.c 49667 2014-09-30 17:35:27Z neil $
 */
 
 /* These two are needed for some definitions in emul_host.h */

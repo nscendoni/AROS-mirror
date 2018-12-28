@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: vmwaresvgaclass.c 52023 2016-03-17 04:35:11Z jmcmullan $
 
     Desc: Class for VMWare.
     Lang: English.
@@ -20,7 +20,7 @@
 #include <exec/memory.h>
 #include <hardware/custom.h>
 #include <hidd/hidd.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <oop/oop.h>
 #include <clib/alib_protos.h>
 #include <string.h>
@@ -32,7 +32,6 @@
 
 #include LC_LIBDEFS_FILE
 
-static OOP_AttrBase HiddAttrBase; 
 static OOP_AttrBase HiddBitMapAttrBase;  
 static OOP_AttrBase HiddPixFmtAttrBase;
 static OOP_AttrBase HiddGfxAttrBase;
@@ -42,7 +41,6 @@ static OOP_AttrBase HiddVMWareSVGABitMapAttrBase;
 
 static struct OOP_ABDescr attrbases[] =
 {
-    {IID_Hidd,           &HiddAttrBase             },
     {IID_Hidd_BitMap,           &HiddBitMapAttrBase             },
     {IID_Hidd_VMWareSVGABitMap, &HiddVMWareSVGABitMapAttrBase   },
     {IID_Hidd_VMWareSVGA,       &HiddVMWareSVGAAttrBase         },
@@ -175,9 +173,6 @@ D(bug("[VMWareSVGA] %s: Setting Sync Mode %d for Display %d\n", __PRETTY_FUNCTIO
     struct TagItem yourtags[] =
     {
         {aHidd_Gfx_ModeTags,    (IPTR)modetags  },
-        { aHidd_Name            , (IPTR)"VMWareSVGA"     },
-        { aHidd_HardwareName    , (IPTR)"VMWare SVGA Gfx Adaptor"   },
-        { aHidd_ProducerName    , (IPTR)"VMWare Inc"  },
         {TAG_MORE,              0UL             }
     };
     struct pRoot_New yourmsg;

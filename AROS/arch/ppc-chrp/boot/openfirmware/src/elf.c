@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: elf.c 45432 2012-08-10 04:58:13Z jmcmullan $
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as

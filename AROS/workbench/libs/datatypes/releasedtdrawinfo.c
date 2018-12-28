@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: releasedtdrawinfo.c 31823 2009-09-24 18:10:18Z mazze $
 
     Desc:
     Lang: English

@@ -1,6 +1,6 @@
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: chipset.h 45693 2012-08-30 16:13:34Z neil $
 
     Desc: Amiga(tm) chipset control macros
     Lang: english

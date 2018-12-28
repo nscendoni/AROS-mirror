@@ -3,7 +3,7 @@
 #include "c.h"
 
 #define I(f) s_##f
-static char rcsid[] = "$Id$";
+static char rcsid[] = "$Id: symbolic.c 30794 2009-03-08 02:19:07Z neil $";
 
 static Node *tail;
 static int off, maxoff, uid = 0, verbose = 0, html = 0;

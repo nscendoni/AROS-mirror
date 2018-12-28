@@ -1,4 +1,3 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 #MM- distfiles-pc-i386 : bootiso
-#MM- distfiles-quick-pc-i386 : bootiso-quick

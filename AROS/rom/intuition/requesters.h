@@ -4,7 +4,7 @@
 /*
     Copyright © 2002-2011 The AROS Development Team, All Rights Reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: requesters.h 41732 2011-10-03 08:02:34Z sonic $
 */
 
 #include <exec/types.h>

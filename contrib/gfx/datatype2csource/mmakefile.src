@@ -1,7 +1,7 @@
 # Copyright © 2016 The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 52617 2016-04-12 15:00:09Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES   := main
 EXEDIR  := $(AROS_CONTRIB)/MultiMedia/Gfx/DatatypeToCSource

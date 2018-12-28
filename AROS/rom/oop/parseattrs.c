@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: parseattrs.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Parse a set of attributes in a single interface
     Lang: english

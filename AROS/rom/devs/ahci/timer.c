@@ -1,6 +1,6 @@
 /*
     Copyright © 2009, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: timer.c 48559 2013-12-10 04:04:04Z jmcmullan $
 
     Desc:
     Lang: English

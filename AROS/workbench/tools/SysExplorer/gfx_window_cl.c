@@ -1,13 +1,13 @@
 /*
-    Copyright (C) 2013-2017, The AROS Development Team.
-    $Id$
+    Copyright (C) 2013, The AROS Development Team.
+    $Id: gfx_window_cl.c 51948 2016-03-14 19:21:58Z neil $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG
 
 #include <exec/memory.h>
 #include <hidd/hidd.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <libraries/mui.h>
 #include <mui/NFloattext_mcc.h>
 #include <utility/tagitem.h>

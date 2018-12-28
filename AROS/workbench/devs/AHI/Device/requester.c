@@ -1,6 +1,5 @@
 /*
      AHI - Hardware independent audio subsystem
-     Copyright (C) 2017 The AROS Dev Team
      Copyright (C) 1996-2005 Martin Blom <martin@blom.org>
      
      This library is free software; you can redistribute it and/or
@@ -188,7 +187,7 @@ LONG IndexToFrequency( struct Gadget *gad, WORD level )
 
 static void FillReqStruct(struct AHIAudioModeRequesterExt *req, struct TagItem *tags)
 {
-  IPTR obsolete_userdata;
+  ULONG obsolete_userdata;
 
 // Check all known tags
   req->SrcWindow=(struct Window *)GetTagData(AHIR_Window,(IPTR)req->SrcWindow,tags);
@@ -684,8 +683,7 @@ static BOOL HandleReq( struct AHIAudioModeRequesterExt *req )
 
 {
   BOOL done=FALSE,rc=TRUE;
-  ULONG class,sec,oldsec=0,micro,oldmicro=0;
-  IPTR oldid=AHI_INVALID_ID;
+  ULONG class,sec,oldsec=0,micro,oldmicro=0,oldid=AHI_INVALID_ID;
   UWORD code;
   UWORD qual;
   struct Gadget *pgsel;
@@ -1264,7 +1262,7 @@ _AHI_AllocAudioRequestA( struct TagItem* tags,
 *
 *       AHIR_InitialHeight (WORD) - Suggested height of requesting window.
 *
-*       AHIR_InitialAudioID (IPTR) - Initial setting of the Mode list view
+*       AHIR_InitialAudioID (ULONG) - Initial setting of the Mode list view
 *           gadget (ahiam_AudioID). Default is ~0 (AHI_INVALID_ID), which
 *           means that no mode will be selected.
 *
@@ -1297,7 +1295,7 @@ _AHI_AllocAudioRequestA( struct TagItem* tags,
 *           in the file list, otherwise it is rejected and not displayed. The
 *           function receives the following parameters:
 *               A0 - (struct Hook *)
-*               A1 - (IPTR) mode id
+*               A1 - (ULONG) mode id
 *               A2 - (struct AHIAudioModeRequester *)
 *
 *       AHIR_FilterTags (struct TagItem *) - A pointer to a tag list used to
@@ -1348,7 +1346,7 @@ _AHI_AudioRequestA( struct AHIAudioModeRequester* req_in,
     struct IDnode *node = NULL, *node2 = NULL;
     struct Screen *pub_screen = NULL;
     struct Screen *screen     = NULL;
-    IPTR id=AHI_INVALID_ID;
+    ULONG id=AHI_INVALID_ID;
     BOOL  rc=TRUE;
     struct Requester lockreq;
     BOOL  locksuxs = FALSE;

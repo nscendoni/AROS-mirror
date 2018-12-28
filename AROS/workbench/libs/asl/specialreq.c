@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: specialreq.c 48109 2013-09-19 19:52:44Z mazze $
 
     Desc: Special requesters needed for things like Delete in File Requester.
     Lang: english

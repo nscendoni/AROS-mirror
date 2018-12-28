@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vc_mb.h 50385 2015-04-14 17:13:22Z NicJA $
 */
 
 #ifndef VC_MB_H

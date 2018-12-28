@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: io.h 37974 2011-04-01 06:37:44Z sonic $
 */
 
 #ifndef ASM_I386_IO_H

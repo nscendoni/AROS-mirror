@@ -2,7 +2,7 @@
 #define _NET_IF_TUN_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: if_tun.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: if_tun.h,v 1.8 1998/08/02 07:17:44 brian Exp $	*/

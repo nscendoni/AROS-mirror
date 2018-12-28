@@ -1,5 +1,5 @@
 # Copyright © 2001-2003, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: Makefile.aros 32101 2009-12-18 11:20:28Z sonic $
 #
 # Makefile to build the ADF library.
 

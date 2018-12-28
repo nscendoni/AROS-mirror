@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: string.h 51121 2015-09-30 13:19:15Z NicJA $
 
     C99 & POSIX.1-2008 header file string.h with extra SAS/C and other extensions
     Also the POSIX.1-2008 extension to string.h will be included in

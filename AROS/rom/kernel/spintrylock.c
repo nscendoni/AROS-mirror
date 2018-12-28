@@ -1,6 +1,6 @@
 /*
     Copyright © 2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: spintrylock.c 50720 2015-05-19 23:23:22Z neil $
 
     Desc:
 */
@@ -23,7 +23,7 @@
 	AROS_LHA(ULONG, mode, D0),
 
 /*  LOCATION */
-	struct KernelBase *, KernelBase, 51, Kernel)
+	struct KernelBase *, KernelBase, 42, Kernel)
 
 /*  FUNCTION
 

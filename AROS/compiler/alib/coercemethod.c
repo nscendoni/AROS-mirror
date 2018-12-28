@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: coercemethod.c 41534 2011-09-22 06:26:54Z sonic $
 */
 
 #define ALIB_NO_INLINE_STDARG

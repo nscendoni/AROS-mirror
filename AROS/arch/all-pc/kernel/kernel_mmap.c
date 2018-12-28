@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: kernel_mmap.c 51515 2016-02-23 22:31:35Z schulz $
 */
 
 /*
@@ -24,7 +24,7 @@
 
 #include "memory.h"
 
-#define D(x)
+#define D(x) x
 
 /*
  * Append a single chunk to a MemHeader.
@@ -320,11 +320,6 @@ IPTR mmap_LargestAddress(struct mb_mmap *mmap, unsigned long len)
 
     while(len >= sizeof(struct mb_mmap))
     {
-        // break here if memory map is comprised (size is smaller then the size of mmap)
-        // Apparently conversion between grub2 mmap and old style mmap is not perfect...
-        if (mmap->size < sizeof(struct mb_mmap) - 4)
-            break;
-
         if (mmap->type == MMAP_TYPE_RAM)
         {
             D(bug("type %02x ", mmap->type));

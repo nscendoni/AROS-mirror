@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: EndSkip.c 51632 2016-03-07 16:39:55Z neil $
 
     Desc: 
     Lang: English

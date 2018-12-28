@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lobject.c 47953 2013-09-02 05:00:46Z mazze $
 ** Some generic functions over Lua objects
 ** See Copyright Notice in lua.h
 */

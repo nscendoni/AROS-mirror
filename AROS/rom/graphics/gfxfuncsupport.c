@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gfxfuncsupport.c 52222 2016-03-24 15:06:08Z stegerg $
 */
 
 /****************************************************************************************/

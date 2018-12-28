@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: subtime.c 38306 2011-04-22 07:57:15Z sonic $
 
     Desc: SubTime - subtract two timevals from each other.
     Lang: english

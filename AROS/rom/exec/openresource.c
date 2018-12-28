@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2007, The AROS Development Team. All rights reserved.
+    $Id: openresource.c 36692 2011-01-22 08:54:42Z agreppin $
 
     Desc: Open a resource.
     Lang: english
@@ -10,10 +10,6 @@
 #include <aros/libcall.h>
 #include <exec/libraries.h>
 #include <proto/exec.h>
-
-#include "exec_intern.h"
-#include "exec_debug.h"
-#include "exec_locks.h"
 
 /*****************************************************************************
 
@@ -55,14 +51,13 @@
     APTR resource;
 
     /* Arbitrate for the resource list */
-    EXEC_LOCK_LIST_READ_AND_FORBID(&SysBase->ResourceList);
+    Forbid();
 
     /* Look for the resource in our list */
     resource = (APTR) FindName (&SysBase->ResourceList, resName);
 
     /* All done. */
-    EXEC_UNLOCK_LIST_AND_PERMIT(&SysBase->ResourceList);
-
+    Permit();
     return resource;
     AROS_LIBFUNC_EXIT
 } /* OpenResource */

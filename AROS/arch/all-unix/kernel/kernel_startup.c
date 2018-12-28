@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kernel_startup.c 50587 2015-05-02 15:21:44Z jmcmullan $
 */
 
 #include <aros/kernel.h>
@@ -50,8 +50,7 @@ struct HostInterface *HostIFace;
 THIS_PROGRAM_HANDLES_SYMBOLSET(STARTUP)
 DEFINESET(STARTUP);
 
-#define CHIPMEMSIZE                     (16 * 1024 * 1024)
-#define STACKINRANGE(ptr, start, length)     (((IPTR)ptr > start) && ((IPTR)ptr <= (start + length)))
+#define CHIPMEMSIZE    (16 * 1024 * 1024)
 
 /*
  * Kickstart entry point. Note that our code area is already made read-only by the bootstrap.
@@ -71,7 +70,7 @@ int __startup startup(struct TagItem *msg, ULONG magic)
     struct HostInterface *hif = NULL;
     struct mb_mmap *mmap = NULL;
     unsigned long mmap_len = 0;
-    BOOL mem_tlsf = FALSE, host_stack = TRUE, sysb_safe = FALSE;
+    BOOL mem_tlsf = FALSE;
 
     UWORD *ranges[] = {NULL, NULL, (UWORD *)-1};
 
@@ -177,36 +176,24 @@ int __startup startup(struct TagItem *msg, ULONG magic)
     	return -1;
     }
 
-    /*
-     * The first memory map entry represents low 
-     * (32bit) memory, so we allocate the "chip"
-     * memory from it.
-    */
+    /* We know that memory map has only one memory range */
     chipmh = (struct MemHeader *)(IPTR)mmap->addr;
     memsize = mmap->len > CHIPMEMSIZE ? CHIPMEMSIZE : mmap->len;
 
-    if (STACKINRANGE(_stack, mmap->addr, mmap->len))
-        host_stack = FALSE;
-    if (((IPTR)SysBase > mmap->addr) && ((IPTR)SysBase + sizeof(struct ExecBase) < mmap->addr + mmap->len))
-        sysb_safe = TRUE;
-
-    /* Prepare the chip memory's header... */
+    /* Prepare the simulated mem headers */
+    /* NOTE: two mem headers are created to cover more cases of memory system */
     krnCreateMemHeader("CHIP RAM", -5, chipmh, memsize, MEMF_CHIP|MEMF_PUBLIC|MEMF_LOCAL|MEMF_KICK|ARCH_31BIT);
     if (mem_tlsf)
         chipmh = krnConvertMemHeaderToTLSF(chipmh);
     bootmh = chipmh;
 
-    /* If there is sufficient space left after the chip mem block, register it as fast ram... */
-    if (mmap->len > (memsize + sizeof(struct MemHeader)))
+    if (mmap->len > memsize)
     {
         fastmh = (struct MemHeader *)(mmap->addr + memsize);
         memsize = mmap->len - memsize;
-
         krnCreateMemHeader("Fast RAM", 0, fastmh , memsize, MEMF_FAST|MEMF_PUBLIC|MEMF_LOCAL|MEMF_KICK|ARCH_31BIT);
         if (mem_tlsf)
             fastmh = krnConvertMemHeaderToTLSF(fastmh);
-
-        /* if its larger than 1MB, use it for the boot mem */
         if (memsize > (1024 * 1024))
             bootmh = fastmh;
     }
@@ -216,19 +203,12 @@ int __startup startup(struct TagItem *msg, ULONG magic)
     if (mmap_len > sizeof(struct mb_mmap))
     {
         struct mb_mmap *mmapnxt = &mmap[1];
-        highmh = (void *)mmapnxt->addr;
 
-        if (STACKINRANGE(_stack, mmapnxt->addr, mmapnxt->len))
-            host_stack = FALSE;
-        if (((IPTR)SysBase > mmapnxt->addr) && ((IPTR)SysBase + sizeof(struct ExecBase) < mmapnxt->addr + mmapnxt->len))
-            sysb_safe = TRUE;
+        highmh = (void *)mmapnxt->addr;
 
         krnCreateMemHeader("Fast RAM", 0, highmh, mmapnxt->len, MEMF_FAST|MEMF_PUBLIC|MEMF_LOCAL|MEMF_KICK);
         if (mem_tlsf)
             highmh = krnConvertMemHeaderToTLSF(highmh);
-
-        if ((bootmh == chipmh) && (mmapnxt->len > (1024 * 1024)))
-            bootmh = highmh;
     }
 #endif
 
@@ -236,7 +216,7 @@ int __startup startup(struct TagItem *msg, ULONG magic)
      * SysBase pre-validation after a warm restart.
      * This makes sure that it points to a valid accessible memory region.
      */
-    if (!sysb_safe)
+    if (((IPTR)SysBase < mmap->addr) || ((IPTR)SysBase + sizeof(struct ExecBase) > mmap->addr + mmap->len))
     	SysBase = NULL;
 
     /* Create SysBase. After this we can use basic exec services, like memory allocation, lists, etc */
@@ -268,16 +248,12 @@ int __startup startup(struct TagItem *msg, ULONG magic)
      */
     krnCreateROMHeader("Kickstart ROM", ranges[0], ranges[1]);
 
-    if (host_stack)
-    {
-        nbug("[KRN] Protecting host process stack (0x%p - 0x%p)\n", _stack - AROS_STACKSIZE, _stack);
-        /*
-         * Stack memory header. This special memory header covers a little part of the programs
-         * stack so that TypeOfMem() will not return 0 for addresses pointing into the stack
-         * during initialization.
-         */
-        krnCreateROMHeader("Boot stack", _stack - AROS_STACKSIZE, _stack);
-    }
+    /*
+     * Stack memory header. This special memory header covers a little part of the programs
+     * stack so that TypeOfMem() will not return 0 for addresses pointing into the stack
+     * during initialization.
+     */
+    krnCreateROMHeader("Boot stack", _stack - AROS_STACKSIZE, _stack);
 
     /* The following is a typical AROS bootup sequence */
     InitCode(RTF_SINGLETASK, 0);	/* Initialize early modules. This includes hostlib.resource. */

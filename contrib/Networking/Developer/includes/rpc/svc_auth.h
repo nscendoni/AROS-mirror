@@ -2,7 +2,7 @@
 #define RPC_SVC_AUTH_H
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: svc_auth.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /* @(#)svc_auth.h	2.1 88/07/29 4.0 RPCSRC */

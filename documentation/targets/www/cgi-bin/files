@@ -29,7 +29,7 @@ else:
 if dltype == "nightly":
     colorTH      = Color( 0xFF, 0xE0, 0xA0 )  # Table headers
 elif dltype == "nightly2":
-    colorTH      = Color( 0x91, 0xAB, 0xC6 )  # Table headers
+    colorTH      = Color( 0xA0, 0x00, 0xFF )  # Table headers
 elif dltype == "snapshots":
     colorTH      = Color( 0xA0, 0xE0, 0xFF )  # Table headers
 elif dltype == "snapshots2":
@@ -69,7 +69,7 @@ def formatSize( size ):
         if size <= 1000:
            return '%.2f %s' % (size, unit )
         else:
-           size = size / 1000
+	   size = size / 1000
 
 ## Process files #############################################################
 
@@ -89,31 +89,31 @@ for date in dates:
         # "logs", in which case we don't consider it.
         if group != 'logs' and stat.S_ISDIR( os.stat( os.path.join( root, date, group ) )[0] ):
             if not groups.has_key( group ):
-                groups[group] = {}
+	        groups[group] = {}
 
-            for package in os.listdir( os.path.join( root, date, group ) ):
+	    for package in os.listdir( os.path.join( root, date, group ) ):
                 # Skip MD5 checksum files.
                 if package[-4:] == '.md5': continue
 
                 if package[-4:] == '.php':
-                    package = package[14:][:-4]
+		    package = package[14:][:-4]
                 elif package[-8:] == '.tar.bz2':
-                    # Remove the 'AROS-YYYYMMDD-' prefix and '.tar.bz2' suffix.
+	            # Remove the 'AROS-YYYYMMDD-' prefix and '.tar.bz2' suffix.
                     package = package[14:][:-8]
                 elif package[-4:] == '.zip':
-                    # Remove the 'AROS-YYYYMMDD-' prefix and '.zip' suffix.
+	            # Remove the 'AROS-YYYYMMDD-' prefix and '.zip' suffix.
                     package = package[14:][:-4]
                 elif package[-4:] == '.lha':
-                    # Remove the 'AROS-YYYYMMDD-' prefix and '.lha' suffix.
+	            # Remove the 'AROS-YYYYMMDD-' prefix and '.lha' suffix.
                     package = package[14:][:-4]
                 else:
                     continue
 
 
-                if not groups[group].has_key( package ):
-                    groups[group][package] = []
+		if not groups[group].has_key( package ):
+		    groups[group][package] = []
 
-                groups[group][package].append( date )
+		groups[group][package].append( date )
 
 ## Output HTML ###############################################################
 
@@ -127,10 +127,10 @@ downloadLabel = descriptions.get( 'links', 'download', '' )
 md5Label = descriptions.get( 'links', 'md5', '' )
 
 print '''
-    <table class="layout nightly" border="0" cellpadding="2" cellspacing="1" bgcolor="%(colorFrame)s">
-        <tr class="layout nightly" bgcolor="%(colorTH)s">
-            <td class="layout invis" width="35%%" rowspan="2"></td>
-            <td class="layout padded" align="center" colspan="%(span)d"><b>%(dateHeading)s</b></td>
+    <table class="layout" border="0" cellpadding="2" cellspacing="1" bgcolor="%(colorFrame)s">
+        <tr class="layout" bgcolor="%(colorTH)s">
+            <td class="layout" width="35%%" rowspan="2"><b>%(packageHeading)s</b></td>
+            <td class="layout" align="center" colspan="%(span)d"><b>%(dateHeading)s</b></td>
         </tr>
         <tr class="layout" bgcolor="%(colorTH)s">
 ''' % vars()
@@ -144,21 +144,21 @@ for date in dates:
 
     if dltype == "nightly":
         print '''
-                    <td class="layout nightly" align="center" bgcolor="%(color)s">
+                    <td class="layout" align="center" bgcolor="%(color)s">
                         <b>%(year)s-%(month)s-%(day)s</b><br>
                         [<a href="http://aros.sourceforge.net/downloads/nightly/%(date)s/logs/">%(logsLabel)s</a>]
                     </td>
         ''' % vars()
     if dltype == "nightly2":
         print '''
-                    <td class="layout nightly" align="center" bgcolor="%(color)s">
+                    <td class="layout" align="center" bgcolor="%(color)s">
                         <b>%(year)s-%(month)s-%(day)s</b><br>
                         [<a href="http://aros.sourceforge.net/downloads/nightly2/%(date)s/logs/">%(logsLabel)s</a>]
                     </td>
         ''' % vars()
     elif dltype == "snapshots" or dltype == "snapshots2":
         print '''
-                    <td class="layout nightly" align="center" bgcolor="%(color)s">
+                    <td class="layout" align="center" bgcolor="%(color)s">
                         <b>%(year)s-%(month)s-%(day)s</b>
                     </td>
         ''' % vars()
@@ -167,90 +167,85 @@ for date in dates:
 
 print '''         </tr>'''
 
-for group in sorted(groups.keys()):
+for group in groups.keys():
     groupSpan    = span + 1
+    groupKey = string.replace(group, '_', '-').lower()
+    groupHeading = descriptions.get( 'headings', groupKey, '' )
 
-    try:
-        groupKey = string.replace(group, '_', '-').lower()
-        groupHeading = descriptions.get( 'headings', groupKey, '' )
+    print '''
+            <tr class="layout" bgcolor="%(colorTH)s">
+                <td class="layout" align="left" colspan="%(groupSpan)s"><b>%(groupHeading)s</b></td>
+            </tr>    ''' % vars()
+
+    for package in sorted(groups[group].keys()):
+        description = descriptions.get( 'descriptions', package, '' )
 
         print '''
-                <tr class="layout nightly" bgcolor="%(colorTH)s">
-                    <td class="layout padded" align="left" colspan="%(groupSpan)s"><b>%(groupHeading)s</b></td>
-                </tr>    ''' % vars()
+                <tr class="layout" valign="middle" bgcolor="%(colorTD)s">
+                    <td class="layout" valign="top">
+                        <p><i>%(package)s</i></p>
+                        <p><font size="-1">%(description)s</font></p>
+                    </td>
+        ''' % vars()
 
-        for package in sorted(groups[group].keys()):
-            description = descriptions.get( 'descriptions', package, '' )
+        column = span
+
+        for date in dates:
+            if date in groups[group][package]:
+                colorBlended = Color.blend( colorFileDL, colorBG, span, column )
+            else:
+                colorBlended = Color.blend( colorFileNA, colorBG, span, column )
 
             print '''
-                    <tr class="layout nightly" valign="middle" bgcolor="%(colorTD)s">
-                        <td class="layout padded" valign="top">
-                            <p><i>%(package)s</i></p>
-                            <p><font size="-1">%(description)s</font></p>
-                        </td>
+                        <td class="layout" align="center" bgcolor="%(colorBlended)s">
             ''' % vars()
 
-            column = span
-
-            for date in dates:
-                if date in groups[group][package]:
-                    colorBlended = Color.blend( colorFileDL, colorBG, span, column )
-                else:
-                    colorBlended = Color.blend( colorFileNA, colorBG, span, column )
-
+            if date in groups[group][package]:
+                file = 'AROS-' + date + '-' + package
+		path = os.path.join( root, date, group, file )
+                
+		if os.access(path + '.tar.bz2', os.F_OK):
+		    path = path + '.tar.bz2'
+		    file = file + '.tar.bz2'
+		elif os.access(path + '.zip', os.F_OK):
+		    path = path + '.zip'
+		    file = file + '.zip'
+		elif os.access(path + '.lha', os.F_OK):
+		    path = path + '.lha'
+		    file = file + '.lha'
+		else:
+		    path = path + '.php'
+		    file = file + '.php'
+		
+		#url  = 'http://aros.sourceforge.net/cgi-bin/%s-download?%s/%s/%s' % (dltype, date, group, file)
+		url  = 'http://netcologne.dl.sourceforge.net/project/aros/%s/%s/%s/%s' % (dltype, date, group, file)
+                size = formatSize( os.path.getsize( path ) )
                 print '''
-                            <td class="layout nightly" align="center" bgcolor="%(colorBlended)s">
+                <table class="layout" border="0" cellspacing="0" cellpadding="0">
+                 <tr class="layout"><td class="layout"></td>
+                  <td class="layout" align="center">
+                   <span style="float:left">
+                    <a href="%(url)s"><img border="0" src="/images/disk.png" alt="[floppy disk]"></a>
+                   </span>
+                   <span>
+                    <b><a href="%(url)s">%(downloadLabel)s</a></b><br>
+                    %(size)s<br>
+                    <a href="%(url)s.md5">%(md5Label)s</a>&nbsp;
+                   </span>
+                  </td>
+                  <td class="layout"></td>
+                 </tr>
+                </table>
                 ''' % vars()
+            else:
+                print '''
+                <font color="%(colorGhosted)s">not available</font>
+                ''' % vars()
+            print '''</td>'''
 
-                if date in groups[group][package]:
-                    file = 'AROS-' + date + '-' + package
-                    path = os.path.join( root, date, group, file )
-                    
-                    if os.access(path + '.tar.bz2', os.F_OK):
-                        path = path + '.tar.bz2'
-                        file = file + '.tar.bz2'
-                    elif os.access(path + '.zip', os.F_OK):
-                        path = path + '.zip'
-                        file = file + '.zip'
-                    elif os.access(path + '.lha', os.F_OK):
-                        path = path + '.lha'
-                        file = file + '.lha'
-                    else:
-                        path = path + '.php'
-                        file = file + '.php'
-                    
-                    #url  = 'http://aros.sourceforge.net/cgi-bin/%s-download?%s/%s/%s' % (dltype, date, group, file)
-                    url  = 'http://netcologne.dl.sourceforge.net/project/aros/%s/%s/%s/%s' % (dltype, date, group, file)
-                    size = formatSize( os.path.getsize( path ) )
-                    print '''
-                    <table class="layout" border="0" cellspacing="0" cellpadding="0">
-                     <tr class="layout"><td class="layout"></td>
-                      <td class="layout" align="center">
-                       <span style="float:left">
-                        <a href="%(url)s"><img border="0" src="/images/disk.png" alt="[floppy disk]"></a>
-                       </span>
-                       <span>
-                        <b><a href="%(url)s">%(downloadLabel)s</a></b><br>
-                        %(size)s<br>
-                        <a href="%(url)s.md5">%(md5Label)s</a>&nbsp;
-                       </span>
-                      </td>
-                      <td class="layout"></td>
-                     </tr>
-                    </table>
-                    ''' % vars()
-                else:
-                    print '''
-                    <font color="%(colorGhosted)s">not available</font>
-                    ''' % vars()
-                print '''</td>'''
+            column = column - 1
 
-                column = column - 1
-
-            print '''        </tr>'''
-
-    except Exception: 
-        pass
+        print '''        </tr>'''
 
 print '''
     </table>

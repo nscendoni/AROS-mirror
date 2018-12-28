@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: global.h 51431 2016-01-26 23:25:37Z NicJA $
 */
 
 #ifndef GLOBAL_H

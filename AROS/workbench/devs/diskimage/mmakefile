@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile 44887 2012-05-27 09:19:39Z mazze $
 
 #MM- workbench-devs-diskimage : workbench-devs-diskimage-prefs workbench-devs-diskimage-device \
 #MM  workbench-devs-diskimage-gui workbench-devs-diskimage-mountdiskimage workbench-devs-diskimage-mounthdf \

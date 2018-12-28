@@ -1,5 +1,5 @@
 # Copyright © 2003, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: Makefile 50042 2015-02-06 21:51:25Z NicJA $
 
 include $(TOP)/config/make.cfg
 

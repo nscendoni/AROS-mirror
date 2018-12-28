@@ -1,7 +1,7 @@
 #ifndef XADMASTER_DCS_C
 #define XADMASTER_DCS_C
 
-/*  $Id$
+/*  $Id: DCS.c 36659 2011-01-18 13:26:51Z neil $
     DCS disk archiver client
 
     XAD library system for archive handling

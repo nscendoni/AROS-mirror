@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bltrastportbitmap.c 45159 2012-07-04 13:44:48Z twilen $
 
     Desc: Blit the content of a rastport into a bitmap
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright � 2013-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vc_fb.c 50385 2015-04-14 17:13:22Z NicJA $
 
     Desc: VideoCore framebuffer routines
     Lang: english

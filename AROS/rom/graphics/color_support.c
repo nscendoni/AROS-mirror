@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: color_support.c 46173 2012-12-30 09:39:11Z neil $
 
     Desc: 
     Lang: english

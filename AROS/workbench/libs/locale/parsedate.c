@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: parsedate.c 52869 2016-08-20 19:03:47Z polluks $
 */
 
 #include <exec/types.h>
@@ -48,8 +48,7 @@ BOOL _getnum(LONG numchars,
         be used to direct the parse.
 
     INPUTS
-        locale      -   the locale to use for the formatting or NULL for
-                        the system default locale.
+        locale      -   the locale to use for the formatting
         date        -   where to put the converted date. If this is NULL,
                         then this function can be used to verify a date
                         string.
@@ -105,22 +104,11 @@ BOOL _getnum(LONG numchars,
     LONG day = 0, month = 0, hour = 0, min = 0, sec = 0;
     LONG year = 1978;
     BOOL leap, am = FALSE, pm = FALSE, checkEOF = TRUE;
-    struct Locale *def_locale = NULL;
-    BOOL retval = FALSE;
-
     if ((fmtTemplate == NULL)
         || (getCharFunc == NULL)
-        || (*fmtTemplate == '\0'))
+        || (locale == NULL) || (*fmtTemplate == '\0'))
         return FALSE;
 
-    if (locale == NULL)
-    {
-        locale = OpenLocale(NULL);
-        if (locale == NULL)
-            return FALSE;
-        def_locale = (struct Locale *)locale;
-    }
-    
 #define GetChar()\
         AROS_UFC3(ULONG, getCharFunc->h_Entry, \
                 AROS_UFCA(const struct Hook *, getCharFunc, A0), \
@@ -173,14 +161,14 @@ BOOL _getnum(LONG numchars,
                     /* End of stream in wrong place, or invalid */
                     if (((c == '\0') && *fmtTemplate)
                         || (c != *fmtTemplate))
-                        goto end;
+                        return FALSE;
 
                     /* If we didn't get a valid day, fail */
                     i = 0;
                     while ((i < 7) && !dayOk[i++])
                         ;
                     if ((i == 7) && !dayOk[6])
-                        goto end;
+                        return FALSE;
 
                     if (*fmtTemplate)
                         fmtTemplate++;
@@ -230,12 +218,12 @@ BOOL _getnum(LONG numchars,
 
                     /* If we didn't get a valid month, fail */
                     if (month == 0)
-                        goto end;
+                        return FALSE;
 
                     /* End of stream in wrong place, or invalid */
                     if (((c == '\0') && *fmtTemplate)
                         || (c != *fmtTemplate))
-                        goto end;
+                        return FALSE;
 
                     if (*fmtTemplate)
                         fmtTemplate++;
@@ -249,9 +237,9 @@ BOOL _getnum(LONG numchars,
                 day = 0;
                 c = GetChar();
                 if (!get2num(&day))
-                    goto end;
+                    return FALSE;
                 if (day-- == 0)
-                    goto end;
+                    return FALSE;
 
                 break;
                 /* Day no., leading spaces. */
@@ -261,9 +249,9 @@ BOOL _getnum(LONG numchars,
                 while (IsSpace(locale, c))
                     c = GetChar();
                 if (!get2num(&day))
-                    goto end;
+                    return FALSE;
                 if (day-- == 0)
-                    goto end;
+                    return FALSE;
 
                 break;
 
@@ -272,37 +260,37 @@ BOOL _getnum(LONG numchars,
                 am = pm = FALSE;
                 c = GetChar();
                 if (!get2num(&hour))
-                    goto end;
+                    return FALSE;
                 if (hour > 23)
-                    goto end;
+                    return FALSE;
                 break;
 
                 /* hour 12-hr style */
             case 'I':
                 c = GetChar();
                 if (!get2num(&hour))
-                    goto end;
+                    return FALSE;
                 if ((hour > 12) || (hour == 0))
-                    goto end;
+                    return FALSE;
                 break;
 
                 /* month num */
             case 'm':
                 c = GetChar();
                 if (!get2num(&month))
-                    goto end;
+                    return FALSE;
                 if ((month > 12) || (month == 0))
-                    goto end;
+                    return FALSE;
                 break;
 
                 /* minutes */
             case 'M':
                 c = GetChar();
                 if (!get2num(&min))
-                    goto end;
+                    return FALSE;
 
                 if (min > 59)
-                    goto end;
+                    return FALSE;
                 break;
 
                 /* AM or PM string */
@@ -334,7 +322,7 @@ BOOL _getnum(LONG numchars,
 
                     /* End of stream in wrong place, or invalid */
                     if (c != *fmtTemplate)
-                        goto end;
+                        return FALSE;
 
                     /* Check whether we got AM or PM */
                     am = amOk;
@@ -350,19 +338,19 @@ BOOL _getnum(LONG numchars,
             case 'S':
                 c = GetChar();
                 if (!get2num(&sec))
-                    goto end;
+                    return FALSE;
                 if (sec > 59)
-                    goto end;
+                    return FALSE;
                 break;
 
                 /* the year using two or four digits */
             case 'y':
                 c = GetChar();
                 if (!get4num(&year))
-                    goto end;
+                    return FALSE;
 
                 if (year >= 100 && year < 1978)
-                    goto end;
+                    return FALSE;
                 if (year < 78)
                     year += 100;
                 if (year < 1900)
@@ -373,30 +361,30 @@ BOOL _getnum(LONG numchars,
             case 'Y':
                 c = GetChar();
                 if (IsDigit(locale, c) == FALSE)
-                    goto end;
+                    return FALSE;
                 year = (c - '0') * 1000;
 
                 c = GetChar();
                 if (IsDigit(locale, c) == FALSE)
-                    goto end;
+                    return FALSE;
                 year += (c - '0') * 100;
 
                 c = GetChar();
                 if (IsDigit(locale, c) == FALSE)
-                    goto end;
+                    return FALSE;
                 year += (c - '0') * 10;
 
                 c = GetChar();
                 if (IsDigit(locale, c) == FALSE)
-                    goto end;
+                    return FALSE;
                 year += (c - '0');
 
                 if (year < 1978)
-                    goto end;
+                    return FALSE;
                 break;
 
             default:
-                goto end;
+                return FALSE;
                 break;
             } /* switch() */
         } /* if (char == '%') */
@@ -404,14 +392,14 @@ BOOL _getnum(LONG numchars,
         {
             c = GetChar();
             if (c != *fmtTemplate++)
-                goto end;
+                return FALSE;
         }
     } /* while (*fmtTemplate) */
 
     /* Reached end of fmtTemplate, end of input stream? */
     if (checkEOF)
         if ((GetChar() != 0))
-            goto end;
+            return FALSE;
 
     /* Is this year a leap year ? */
     leap = (((year % 400) == 0) ||
@@ -421,7 +409,7 @@ BOOL _getnum(LONG numchars,
     if (month != 0 && day >=
         (monthday[month - 1] + ((leap && (month == 2)) ? 1 : 0)))
     {
-        goto end;
+        return FALSE;
     }
 
     if (date)
@@ -454,12 +442,7 @@ BOOL _getnum(LONG numchars,
             date->ds_Minute += 720;
         date->ds_Tick = sec * TICKS_PER_SECOND;
     }
-    retval = TRUE;
-
-end:
-    CloseLocale(def_locale);
-
-    return retval;
+    return TRUE;
 
     AROS_LIBFUNC_EXIT
 }

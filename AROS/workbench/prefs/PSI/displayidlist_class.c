@@ -3,7 +3,7 @@
     Copyright © 2009-2010, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: displayidlist_class.c 36833 2011-01-27 00:49:20Z mazze $
 */
 
 #define DEBUG 0

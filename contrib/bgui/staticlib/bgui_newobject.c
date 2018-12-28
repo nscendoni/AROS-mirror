@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2000, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bgui_newobject.c 43264 2011-12-28 04:37:38Z jmcmullan $
 
     Desc:
     Lang: english

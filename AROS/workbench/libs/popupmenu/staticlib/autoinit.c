@@ -2,7 +2,7 @@
     Copyright © 2010, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: autoinit.c 36648 2011-01-17 14:31:59Z neil $
 */
 
 #include <proto/popupmenu.h>

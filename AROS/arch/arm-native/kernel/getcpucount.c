@@ -1,6 +1,6 @@
 /*
     Copyright © 2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getcpucount.c 50776 2015-05-31 21:59:00Z neil $
 */
 
 #include <aros/kernel.h>

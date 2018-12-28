@@ -6,7 +6,6 @@
 
 #include <intuition/intuition.h>            /* Std types */
 #include <devices/inputevent.h>             /* For raw keymap conversion */
-#include <libraries/asl.h>
 #include <dos/dos.h>
 #include "Jed.h"
 #include "Utility.h"
@@ -22,14 +21,9 @@
 #define  CATCOMP_NUMBERS   /* String ID for ErrMsg() */
 #include "strings.h"
 
-#define DEBUG 0
-#include <aros/debug.h>
-
 static struct InputEvent   ie = {0,IECLASS_RAWKEY}; /* Keyboard translation map */
 extern struct IntuiMessage msgbuf;
 extern Project edit;
-
-struct FileRequester *fr;
 
 UBYTE record = 0;
 
@@ -187,8 +181,7 @@ void handle_kbd(Project p)
 			return;
 #endif
 
-// Changed from DEBUG to DEBUG_EDIT to avoid conflicts with <aros/debug.h>
-#if	DEBUG_EDIT
+#if	DEBUG
 		case F1_KEY:
 			printf("mask = 0x%02x\n", RP->Mask); return;
 		case F2_KEY:
@@ -294,14 +287,13 @@ void handle_menu( LONG MenuID )
 			WakeUp(Wnd);
 		}	break;
 		case 102:	/* Split open */
-		{	
-            /* Ask a new file name, using the same working directory as current document */
-			if(NULL != (fr = (struct FileRequester *) ask_load(Wnd, (AskArgs *)&edit->path, FALSE, GetMenuText(102))))
+		{	STRPTR path;
+			/* Ask a new file name, using the same working directory as current document */
+			if(NULL != (path = ask_load(Wnd, (AskArgs *)&edit->path, FALSE, GetMenuText(102))))
 			{
 				Project new;
-                
 				/* Use current project if it is empty and unmodified */
-                if( (new = load_and_activate_fr(edit, (APTR) fr, (edit->path == NULL && (edit->state & MODIFIED) == 0) ? 2 : 3) ) )
+				if( (new = load_and_activate(edit, path, (edit->path == NULL && (edit->state & MODIFIED) == 0) ? 2 : 3) ) )
 					edit = new;
 			}
 		}	break;
@@ -312,10 +304,8 @@ void handle_menu( LONG MenuID )
 				{
 					STRPTR path;
 					if(NULL != (path = ask_load(Wnd, (AskArgs *)&edit->path, TRUE, GetMenuText(103))))
-                    {
-                        load_and_activate(edit, path, 1);
-                    }
-                }
+						load_and_activate(edit, path, 1);
+				}
 				else reload_project( edit );
 			}	break;
 		case 105:	/* Save */

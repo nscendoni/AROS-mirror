@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: oss_init.c 36386 2011-01-04 21:32:36Z sonic $
 */
 
 #include <stddef.h>

@@ -15,7 +15,7 @@
 
  NList classes Support Site:  http://www.sf.net/projects/nlist-classes
 
- $Id$
+ $Id: Pointer.c 51722 2016-03-09 23:41:04Z NicJA $
 
 ***************************************************************************/
 

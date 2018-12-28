@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -7,7 +7,5 @@ INCLUDE_FILES := $(call WILDCARD, aros/*.h)
 
 INCLUDE_FILES := $(call WILDCARD, asm/*.h)
 %copy_includes mmake=compiler-includes path=asm/x86_64 dir=asm
-
-#MM- compiler-includes: compiler-includes-pc
 
 %common

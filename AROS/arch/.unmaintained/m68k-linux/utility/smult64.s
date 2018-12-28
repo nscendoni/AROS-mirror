@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: smult64.s 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Utility 64 bit multiplication routines. m68k version.
     Lang: english

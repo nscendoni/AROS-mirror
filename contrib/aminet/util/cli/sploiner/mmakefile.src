@@ -1,7 +1,5 @@
 
-include $(SRCDIR)/config/aros-contrib.cfg
-
-USER_CFLAGS := $(NOWARN_IMPLICIT_INT)
+include $(SRCDIR)/config/aros.cfg
 
 FILES  := getbuff getopt join repair split sploiner usage
 EXEDIR := $(AROS_CONTRIB)/Misc/aminet

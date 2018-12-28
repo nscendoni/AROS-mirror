@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: screen_fb.c 50314 2015-04-09 17:07:24Z schulz $
 
     Desc: Graphical framebuffer console.
 */

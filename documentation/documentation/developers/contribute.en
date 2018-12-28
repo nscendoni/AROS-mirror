@@ -3,9 +3,9 @@ Contribute
 ==========
 
 :Authors:   Adam Chodorowski, Neil Cafferkey
-:Copyright: Copyright © 1995-2017, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Copyright: Copyright © 1995-2015, The AROS Development Team
+:Version:   $Revision: 50056 $
+:Date:      $Date: 2015-02-09 03:19:14 +0100 (Mon, 09 Feb 2015) $
 :Status:    Done.
 
 .. Contents::
@@ -49,17 +49,13 @@ Programming
 
     + Native graphics optimisations
 
-  - AROS/arm-raspi
-
-    + Native USB Chipset Driver
-    + Native graphics optimisations
-
   - Generic printer support.
 
 + Porting to other architectures. Some examples of hardware for which no
   maintained AROS port exists or has been started:
 
   - AmigaOne
+  - Raspberry Pi
   - Macintosh, both m68k and PowerPC.
 
 + Implementing missing Preferences editors:
@@ -67,7 +63,7 @@ Programming
   - Overscan
   - Palette
 
-+ Improving the C standard library
++ Improving the C link library
 
   This means implementing missing ANSI (and some POSIX) functions in the clib,
   to make it easier to port Unix software (e.g. GCC, make and binutils). The
@@ -133,7 +129,7 @@ Other
 -----
 
 + Coordinating GUI design for AROS programs, such as prefs programs,
-  tools and utilities using the Zune toolkit.
+  tools and utilities.
 
 
 Joining the Team
@@ -161,10 +157,7 @@ The Subversion repository
 
 The AROS repository is running on a password protected Subversion server,
 which means that you need to request access to it to be able to collaborate in
-the development (however, if you just want to browse the sources, there is a
-`read-only access`__.
-
-__ svn#alternative-access
+the development.
 
 Please email your request to the `Subversion administrator`__. Your 
 mail should include your real name and preferred user name. An account 

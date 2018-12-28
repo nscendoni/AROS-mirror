@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2007, The AROS Development Team. All rights reserved.
+    $Id: kprintf.c 42637 2011-11-28 21:20:01Z jmcmullan $
 
     Desc: Formats a message and makes sure the user will see it.
     Lang: english
@@ -17,12 +17,6 @@
 #undef kprintf
 #undef vkprintf
 #include <exec/execbase.h>
-
-#if defined(__AROSEXEC_SMP__)
-#include <aros/atomic.h>
-#include <asm/cpu.h>
-extern volatile ULONG   safedebug;
-#endif
 
 /* Can't use ctype.h *sigh* */
 #define isdigit(x)      ((x) >= '0' && (x) <= '9')
@@ -120,29 +114,11 @@ int vkprintf (const char * fmt, va_list args)
 
     if (!fmt)
     {
-#if defined(__AROSEXEC_SMP__)
-    if (safedebug & 1)
-    {
-        while (bit_test_and_set_long((ULONG*)&safedebug, 1)) { asm volatile("pause"); };
-    }
-#endif
-	RawPutChars ((const UBYTE *)"(null)", 6);
-#if defined(__AROSEXEC_SMP__)
-    if (safedebug & 1)
-    {
-        __AROS_ATOMIC_AND_L(safedebug, ~(1 << 1));
-    }
-#endif
+	RawPutChars ("(null)", 6);
 	return 6;
     }
 
     ret = 0;
-#if defined(__AROSEXEC_SMP__)
-    if (safedebug & 1)
-    {
-        while (bit_test_and_set_long((ULONG*)&safedebug, 1)) { asm volatile("pause"); };
-    }
-#endif
 
     while (*fmt)
     {
@@ -237,7 +213,7 @@ int vkprintf (const char * fmt, va_list args)
 		else
 		    len = my_strlen (str);
 
-		RawPutChars ((const UBYTE *)str, len);
+		RawPutChars (str, len);
 		ret += len;
 
 		if (*fmt == 'S')
@@ -261,7 +237,7 @@ int vkprintf (const char * fmt, va_list args)
 		    val >>= 4;
 		}
 
-		RawPutChars ((const UBYTE *)puffer, sizeof (void *)*2);
+		RawPutChars (puffer, sizeof (void *)*2);
 
 		break; }
 
@@ -274,7 +250,7 @@ int vkprintf (const char * fmt, va_list args)
 		    RawPutChar (c);
 		else
 		{
-		    RawPutChars ((const UBYTE *)"'\\0x", 4);
+		    RawPutChars ("'\\0x", 4);
 		    RawPutChar (lhex[c / 16]);
 		    RawPutChar (lhex[c & 15]);
 		    RawPutChar ('\'');
@@ -311,7 +287,7 @@ print_int:
 
 		    while (width > 0)
 		    {
-			RawPutChars ((const UBYTE *)fill, (width < 8) ? width : 8);
+			RawPutChars (fill, (width < 8) ? width : 8);
 			width -= 8;
 		    }
 
@@ -368,11 +344,11 @@ print_int:
 
 		while (width > 0)
 		{
-		    RawPutChars ((const UBYTE *)fill, (width < 8) ? width : 8);
+		    RawPutChars (fill, (width < 8) ? width : 8);
 		    width -= 8;
 		}
 
-		RawPutChars ((const UBYTE *)&puffer[t], 32-t);
+		RawPutChars (&puffer[t], 32-t);
 		ret += 32-t;
 
 		break; }
@@ -402,12 +378,7 @@ print_int:
 
 	fmt ++; /* Next char */
     } /* while (*fmt); */
-#if defined(__AROSEXEC_SMP__)
-    if (safedebug & 1)
-    {
-        __AROS_ATOMIC_AND_L(safedebug, ~(1 << 1));
-    }
-#endif
+
     return ret;
 } /* vkprintf */
 

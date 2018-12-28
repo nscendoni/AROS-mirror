@@ -1,7 +1,7 @@
 /******************************************************************************
 
     MODUL
-	$Id$
+	$Id: drexx.c 36659 2011-01-18 13:26:51Z neil $
 
     DESCRIPTION
 	Another AREXX interface for the XDME. Uses HRexx.c, some tools, I

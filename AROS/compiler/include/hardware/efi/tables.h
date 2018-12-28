@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: tables.h 48674 2014-01-02 17:51:04Z neil $
 
     Desc: Basic definitions for EFI tables
     Lang: english

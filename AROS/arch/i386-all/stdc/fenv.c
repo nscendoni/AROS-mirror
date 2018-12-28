@@ -26,14 +26,14 @@
  * $FreeBSD: src/lib/msun/i387/fenv.c,v 1.3 2007/01/05 07:15:26 das Exp $
  */
 
-#define __BSD_VISIBLE 1
 #include "fenv.h"
 
-#define	__INITIAL_FPUCW_I386__	0x127F
-#define	__INITIAL_NPXCW__	__INITIAL_FPUCW_I386__
-
 const fenv_t __fe_dfl_env = {
+#ifndef __AROS__
 	__INITIAL_NPXCW__,
+#else
+        0x127F,
+#endif
 	0x0000,
 	0x0000,
 	0x1f80,
@@ -42,14 +42,53 @@ const fenv_t __fe_dfl_env = {
 	  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff }
 };
 
-extern inline int feclearexcept(int __excepts);
-extern inline int fegetexceptflag(fexcept_t *__flagp, int __excepts);
+enum __sse_support __has_sse =
+#ifdef __SSE__
+	__SSE_YES;
+#else
+	__SSE_UNK;
+#endif
+
+#define	getfl(x)	__asm __volatile("pushfl\n\tpopl %0" : "=mr" (*(x)))
+#define	setfl(x)	__asm __volatile("pushl %0\n\tpopfl" : : "g" (x))
+#define	cpuid_dx(x)	__asm __volatile("pushl %%ebx\n\tmovl $1, %%eax\n\t"  \
+					 "cpuid\n\tpopl %%ebx"		      \
+					: "=d" (*(x)) : : "eax", "ecx")
+
+/*
+ * Test for SSE support on this processor.  We need to do this because
+ * we need to use ldmxcsr/stmxcsr to get correct results if any part
+ * of the program was compiled to use SSE floating-point, but we can't
+ * use SSE on older processors.
+ */
+int
+__test_sse(void)
+{
+	int flag, nflag;
+	int dx_features;
+
+	/* Am I a 486? */
+	getfl(&flag);
+	nflag = flag ^ 0x200000;
+	setfl(nflag);
+	getfl(&nflag);
+	if (flag != nflag) {
+		/* Not a 486, so CPUID should work. */
+		cpuid_dx(&dx_features);
+		if (dx_features & 0x2000000) {
+			__has_sse = __SSE_YES;
+			return (1);
+		}
+	}
+	__has_sse = __SSE_NO;
+	return (0);
+}
 
 int
 fesetexceptflag(const fexcept_t *flagp, int excepts)
 {
 	fenv_t env;
-	uint32_t mxcsr;
+	int mxcsr;
 
 	__fnstenv(&env);
 	env.__status &= ~excepts;
@@ -76,14 +115,10 @@ feraiseexcept(int excepts)
 	return (0);
 }
 
-extern inline int fetestexcept(int __excepts);
-extern inline int fegetround(void);
-extern inline int fesetround(int __round);
-
 int
 fegetenv(fenv_t *envp)
 {
-	uint32_t mxcsr;
+	int mxcsr;
 
 	__fnstenv(envp);
 	/*
@@ -101,7 +136,7 @@ fegetenv(fenv_t *envp)
 int
 feholdexcept(fenv_t *envp)
 {
-	uint32_t mxcsr;
+	int mxcsr;
 
 	__fnstenv(envp);
 	__fnclex();
@@ -115,14 +150,12 @@ feholdexcept(fenv_t *envp)
 	return (0);
 }
 
-extern inline int fesetenv(const fenv_t *__envp);
-
 int
 feupdateenv(const fenv_t *envp)
 {
-	uint32_t mxcsr;
-	uint16_t status;
-
+	int mxcsr;
+        short status;
+        
 	__fnstsw(&status);
 	if (__HAS_SSE())
 		__stmxcsr(&mxcsr);
@@ -134,10 +167,9 @@ feupdateenv(const fenv_t *envp)
 }
 
 int
-__feenableexcept(int mask)
+feenableexcept(int mask)
 {
-	uint32_t mxcsr, omask;
-	uint16_t control;
+	int mxcsr, control, omask;
 
 	mask &= FE_ALL_EXCEPT;
 	__fnstcw(&control);
@@ -145,21 +177,20 @@ __feenableexcept(int mask)
 		__stmxcsr(&mxcsr);
 	else
 		mxcsr = 0;
-	omask = ~(control | mxcsr >> _SSE_EMASK_SHIFT) & FE_ALL_EXCEPT;
+	omask = (control | mxcsr >> _SSE_EMASK_SHIFT) & FE_ALL_EXCEPT;
 	control &= ~mask;
 	__fldcw(control);
 	if (__HAS_SSE()) {
 		mxcsr &= ~(mask << _SSE_EMASK_SHIFT);
 		__ldmxcsr(mxcsr);
 	}
-	return (omask);
+	return (~omask);
 }
 
 int
-__fedisableexcept(int mask)
+fedisableexcept(int mask)
 {
-	uint32_t mxcsr, omask;
-	uint16_t control;
+	int mxcsr, control, omask;
 
 	mask &= FE_ALL_EXCEPT;
 	__fnstcw(&control);
@@ -167,18 +198,12 @@ __fedisableexcept(int mask)
 		__stmxcsr(&mxcsr);
 	else
 		mxcsr = 0;
-	omask = ~(control | mxcsr >> _SSE_EMASK_SHIFT) & FE_ALL_EXCEPT;
+	omask = (control | mxcsr >> _SSE_EMASK_SHIFT) & FE_ALL_EXCEPT;
 	control |= mask;
 	__fldcw(control);
 	if (__HAS_SSE()) {
 		mxcsr |= mask << _SSE_EMASK_SHIFT;
 		__ldmxcsr(mxcsr);
 	}
-	return (omask);
+	return (~omask);
 }
-
-AROS_MAKE_ASM_SYM(typeof(feenableexcept), feenableexcept, AROS_CSYM_FROM_ASM_NAME(feenableexcept), AROS_CSYM_FROM_ASM_NAME(__feenableexcept));
-AROS_EXPORT_ASM_SYM(AROS_CSYM_FROM_ASM_NAME(feenableexcept));
-
-AROS_MAKE_ASM_SYM(typeof(fedisableexcept), fedisableexcept, AROS_CSYM_FROM_ASM_NAME(fedisableexcept), AROS_CSYM_FROM_ASM_NAME(__fedisableexcept));
-AROS_EXPORT_ASM_SYM(AROS_CSYM_FROM_ASM_NAME(fedisableexcept));

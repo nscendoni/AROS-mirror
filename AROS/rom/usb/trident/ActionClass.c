@@ -35,9 +35,8 @@ extern struct DosLibrary *DOSBase;
 #define USE_NEPTUNE8_COLORS
 #include "neptune8logo.c"
 
-#define CLASSPATH       "SYS:Classes/USB"
-#define STACKLOADER     "Sys/poseidon.prefs"
-#define CLASSNAMEMAX    128
+#define CLASSPATH "SYS:Classes/USB"
+#define STACKLOADER "Sys/poseidon.prefs"
 
 /* /// "Some strings" */
 static STRPTR mainpanels[] =
@@ -3427,7 +3426,7 @@ IPTR Action_HW_Info(struct IClass *cl, Object *obj, Msg msg)
                     HA_Copyright, &copyright,
                     TAG_END);
 
-        textbuf1 = psdCopyStrFmt("%s\n%ld\nV%ld.%ld\n%s\n%s\n%s\n%s",
+        textbuf1 = psdCopyStrFmt("%s\n%ld\n%V%ld.%ld\n%s\n%s\n%s\n%s",
                         devname, unitnr, version, revision, prodname,
                         manufacturer, description, copyright);
         hlnode->infowindow = WindowObject,
@@ -4618,11 +4617,11 @@ IPTR Action_Cls_Scan(struct IClass *cl, Object *obj, Msg msg)
     struct ExAllControl *exall;
     BPTR lock;
     struct ExAllData *exdata;
-    ULONG ents, namelen;
+    ULONG ents;
     struct List *puclist;
     UBYTE buf[1024];
-    UBYTE sbuf[CLASSNAMEMAX];
-    BOOL                exready, isvalid;
+    UBYTE sbuf[128];
+    BOOL exready;
 
     psdGetAttrs(PGA_STACK, NULL, PA_ClassList, &puclist, TAG_END);
     if((exall = AllocDosObject(DOS_EXALLCONTROL, NULL)))
@@ -4639,26 +4638,11 @@ IPTR Action_Cls_Scan(struct IClass *cl, Object *obj, Msg msg)
                 ents = exall->eac_Entries;
                 while(ents--)
                 {
-                    isvalid = TRUE;
-                    psdSafeRawDoFmt(sbuf, CLASSNAMEMAX, CLASSPATH "/%s", exdata->ed_Name);
+                    psdSafeRawDoFmt(sbuf, 128, CLASSPATH "/%s", exdata->ed_Name);
 
-                    namelen = strlen(sbuf);
-                    if (((namelen > 4) && (!strcmp(&sbuf[namelen-4], ".dbg"))) || ((namelen > 5) && (!strcmp(&sbuf[namelen-5], ".info"))))
-                        isvalid = FALSE;
-
-                    if (isvalid)
+                    if(!FindName(puclist, exdata->ed_Name))
                     {
-                        if(namelen > 4)
-                        {
-                            if(!strcmp(&sbuf[namelen-4], ".elf"))
-                            {
-                                sbuf[namelen-4] = 0;
-                            }
-                        }
-                        if(!FindName(puclist, exdata->ed_Name))
-                        {
-                            psdAddClass(sbuf, 0);
-                        }
+                        psdAddClass(sbuf, 0);
                     }
                     exdata = exdata->ed_Next;
                 }

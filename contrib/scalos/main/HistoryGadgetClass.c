@@ -1,6 +1,6 @@
 // HistoryGadgetClass.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-24 02:18:21 +0100 (Thu, 24 Mar 2016) $
+// $Revision: 52218 $
 
 
 #include <exec/types.h>

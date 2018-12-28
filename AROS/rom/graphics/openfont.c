@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$    $Log
+    $Id: openfont.c 42985 2011-12-16 06:15:23Z jmcmullan $    $Log
 
     Desc: Graphics function OpenFont()
     Lang: english

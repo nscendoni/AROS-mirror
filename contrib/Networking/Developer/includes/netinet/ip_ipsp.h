@@ -2,7 +2,7 @@
 #define _NETINET_IPSP_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ip_ipsp.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ip_ipsp.h,v 1.64 2000/04/19 03:37:36 angelos Exp $	*/

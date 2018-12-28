@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: scanvars.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc:
     Lang: English
@@ -26,7 +26,7 @@
         AROS_LHA(APTR,           userdata, D3),
 
 /*  LOCATION */
-        struct DosLibrary *, DOSBase, 169, Dos)
+        struct DosLibrary *, DOSBase, 167, Dos)
 
 /*  FUNCTION
         Scan local and/or global variables accordingly to specified flags. For

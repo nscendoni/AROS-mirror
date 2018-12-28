@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2016, The AROS Development Team. All rights reserved.
+    $Id: getdeviceproc.c 52807 2016-07-28 01:51:35Z neil $
 
     Desc: GetDeviceProc() - Find the filesystem for a path.
     Lang: english
@@ -322,7 +322,7 @@ static struct DevProc *deviceproc_internal(struct DosLibrary *DOSBase, CONST_STR
         FreeMem(dp, sizeof(struct DevProc));
         kprintf("%s:%d: DosList entry 0x%p has unknown type %d. Probably a bug, report it!\n"
                 "    GetDeviceProc() called for '%s'\n",
-                __SRCFILENAME__, __LINE__, dl, dl->dol_Type, name);
+                __FILE__, __LINE__, dl, dl->dol_Type, name);
         SetIoErr(ERROR_BAD_NUMBER);
         return NULL;
     }

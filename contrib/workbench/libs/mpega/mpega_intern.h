@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mpega_intern.h 43842 2012-02-04 01:29:45Z neil $
 
     Desc: Internal mpega.library definitions.
     Lang: English.

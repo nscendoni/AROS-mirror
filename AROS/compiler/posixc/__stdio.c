@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __stdio.c 48048 2013-09-08 21:19:29Z verhaegs $
 
     Desc: stdio internals
     Lang: English

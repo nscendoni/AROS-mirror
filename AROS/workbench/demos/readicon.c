@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readicon.c 51727 2016-03-09 23:49:28Z NicJA $
 
     Desc: Read an icon from an .info file
     Lang: english
@@ -236,11 +236,8 @@ int main (int argc, char ** argv)
 	FreeArgs (rda);
     }
     else
-    {
-        PrintFault(IoErr(), argv[0]);
 	rc = 10;
-    }
-    
+
     return rc;
 } /* main */
 

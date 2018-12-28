@@ -19,7 +19,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *   
- * $Id$
+ * $Id: idfunction.c 43432 2012-01-01 20:15:00Z jmcmullan $
  */
 
 #include <proto/utility.h>
@@ -278,7 +278,7 @@ static struct LibNode *loadFD(struct List *libList, CONST_STRPTR libname, struct
         D(bug("[idfunction/loadFD] out of mem for filename\n"));
         goto bailout;
     }
-    sprintf(fileName, "Developer:fd/%s_lib.fd", libNameStripped);
+    sprintf(fileName, "Development:fd/%s_lib.fd", libNameStripped);
 
     D(bug("[idfunction/loadFD] libnamestripped %s filename %s\n", libNameStripped, fileName));
 

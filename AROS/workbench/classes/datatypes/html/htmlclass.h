@@ -1,6 +1,6 @@
 /*
     Copyright © 2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: htmlclass.h 33378 2010-05-29 13:35:32Z mazze $
 */
 
 /*******************************************************************************************/

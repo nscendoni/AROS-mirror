@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Calltips_mcc.h 50720 2015-05-19 23:23:22Z neil $
 */
 
 #define MUIC_Calltips  "Calltips.mcc"

@@ -16,7 +16,7 @@
 
  TextEditor class Support Site:  http://www.sf.net/projects/texteditor-mcc
 
- $Id$
+ $Id: Debug.h 47847 2013-08-23 12:46:19Z mazze $
 
 ***************************************************************************/
 

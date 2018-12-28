@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: expansionbase.h 49958 2015-01-28 02:12:46Z neil $
 
     Desc: Publicly visible ExpansionBase data.
     Lang: english

@@ -55,7 +55,7 @@
  */
 
 /*
- *	$Id$
+ *	$Id: nameser.h 40121 2011-07-14 16:15:02Z jmcmullan $
  */
 
 #ifndef _ARPA_NAMESER_H_

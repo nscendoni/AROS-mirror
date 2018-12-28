@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: snipmapconclass.c 51702 2016-03-09 22:03:29Z NicJA $
 
     Desc: Code for CONU_SNIPMAP console units.
 */

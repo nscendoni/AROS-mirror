@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: execstubs.s 42579 2011-11-23 13:54:10Z sonic $
 
     Desc: Stubs to call C functions while preserving all registers, x86-64 version
     Lang: english

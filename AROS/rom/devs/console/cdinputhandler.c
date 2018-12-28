@@ -1,6 +1,6 @@
 /*
-    Copyright ï¿½ 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: cdinputhandler.c 49195 2014-07-31 14:16:31Z neil $
 
     Desc: console.device function CDInputHandler()
     Lang: english
@@ -258,12 +258,10 @@ struct Interrupt *initCDIH(struct ConsoleBase *ConsoleDevice)
                 {
                     struct MsgPort *port;
                     port =
-                        CreateMsgPort();
+                        AllocMem(sizeof(struct MsgPort),
+                        MEMF_PUBLIC | MEMF_CLEAR);
                     if (port)
                     {
-                        /* Free the signal allocated for msgport by exec */
-                        FreeSignal(port->mp_SigBit);
-
                         /* Initialize port */
                         port->mp_Flags = PA_SIGNAL;
                         port->mp_SigBit = SIGB_INTUITION;
@@ -272,6 +270,9 @@ struct Interrupt *initCDIH(struct ConsoleBase *ConsoleDevice)
                            time used, because the CDInputHandler might be
                            called by an app
                          */
+
+                        NEWLIST(&(port->mp_MsgList));
+
                         cdihdata->cdihReplyPort = port;
 
                         /* Initialize Message struct */
@@ -315,9 +316,7 @@ VOID cleanupCDIH(struct Interrupt *cdihandler,
 
     cdihdata = (struct cdihData *)cdihandler->is_Data;
 
-    /* Reset mp_SigBit, since we were not using it */
-    cdihdata->cdihReplyPort->mp_SigBit = -1;
-    DeleteMsgPort(cdihdata->cdihReplyPort);
+    FreeMem(cdihdata->cdihReplyPort, sizeof(struct MsgPort));
 
     FreeMem(cdihdata->cdihMsg, sizeof(struct cdihMessage));
 

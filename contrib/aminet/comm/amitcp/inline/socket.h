@@ -2,7 +2,7 @@
 #define _INLINE_SOCKET_H
 
 /*
- * $Id$
+ * $Id: socket.h 30794 2009-03-08 02:19:07Z neil $
  * $Release$
  *
  * Gcc inlines for bsdsocket.library. 

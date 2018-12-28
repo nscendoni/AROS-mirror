@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: addhead.c 46105 2012-11-24 03:48:39Z neil $
 
     Desc: Add a node to the head of a list
     Lang: english

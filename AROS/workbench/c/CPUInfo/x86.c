@@ -1,6 +1,6 @@
 /*
     Copyright © 2000, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: x86.c 48533 2013-12-06 21:24:19Z jmcmullan $
 
     Desc: Probe installed x86 compatable CPUs and display relevant information
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright  2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: systemp.c 53623 2017-02-13 17:55:17Z neil $
 */
 
 #include <graphics/gfx.h>

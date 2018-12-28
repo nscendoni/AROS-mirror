@@ -1,6 +1,6 @@
 /*
-    Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright Â© 2004, The AROS Development Team. All rights reserved.
+    $Id: radeon_driver.c 40143 2011-07-14 20:34:08Z jmcmullan $
 */
 
 #include "ati.h"

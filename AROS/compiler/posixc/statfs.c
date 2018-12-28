@@ -1,6 +1,6 @@
 /*
     Copyright © 2008-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: statfs.c 48034 2013-09-08 21:16:47Z verhaegs $
 */
 
 #include <string.h>

@@ -1,13 +1,13 @@
-# $Id$
+# $Id: mmakefile.src 34053 2010-08-07 05:57:59Z mazze $
 #
 # Makefile for Mason's workbench icons
 
-include $(SRCDIR)/config/aros.cfg
+include $(TOP)/config/make.cfg
 
-ICONS     := Commodities Calculator HDToolBox WiMP
+ICONS     := Debug Commodities Calculator HDToolBox WiMP
 ICONDIR   := $(AROSDIR)/Tools
 
-#MM- iconset-Mason-wbench-icons-aros : iconset-Mason-wbench-icons-aros-tools
+#MM- iconset-Mason-icons : masonworkbenchtoolicons
 
-%build_icons mmake=iconset-Mason-wbench-icons-aros-tools icons=$(ICONS) \
+%build_icons mmake=masonworkbenchtoolicons icons=$(ICONS) \
              dir=$(ICONDIR)

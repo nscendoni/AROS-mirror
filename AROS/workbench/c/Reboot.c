@@ -1,6 +1,6 @@
 /*
     Copyright  1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Reboot.c 34428 2010-09-13 07:59:32Z neil $
  
     Desc: Reboot CLI command
     Lang: English              

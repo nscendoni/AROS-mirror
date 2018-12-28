@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bestcmodeidtaglist.c 47072 2013-03-25 09:22:32Z neil $
 
     Desc:
     Lang: english

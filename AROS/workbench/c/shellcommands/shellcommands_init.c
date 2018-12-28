@@ -1,6 +1,6 @@
 /*
     Copyright (C) 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: shellcommands_init.c 45547 2012-08-13 03:44:21Z jmcmullan $
 
     The shell program.
 */

@@ -1,6 +1,6 @@
-#   $Id$
+#   $Id: mmakefile.src 52348 2016-03-29 14:28:20Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 COREFILES :=	lapi lcode lctype ldebug ldo ldump lfunc lgc llex \
 		lmem lobject lopcodes lparser lstate lstring ltable \
@@ -27,7 +27,7 @@ AMILUAFILES :=	amilua $(COREFILES)
 
 HEADERS :=	lua.h luaconf.h lualib.h lauxlib.h lsiamigalib.h lmuilib.h
 
-EXEDIR :=	$(AROS_CONTRIB)/$(AROS_DIR_DEVELOPER)/Lua
+EXEDIR :=	$(AROS_CONTRIB)/Development/Lua
 
 USER_INCLUDES := -I$(SRCDIR)/$(CURDIR)/../luafilesystem/src -I$(SRCDIR)/$(CURDIR)/../lua-xmlreader-0.1
 

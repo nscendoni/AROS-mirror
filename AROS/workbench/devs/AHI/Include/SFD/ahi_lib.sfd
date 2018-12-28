@@ -1,5 +1,5 @@
 ==copyright Copyright © 1994-2005 Martin Blom
-==id $Id$
+==id $Id: ahi_lib.sfd 30794 2009-03-08 02:19:07Z neil $
 ==base _AHIBase
 ==basetype struct Library *
 ==libname ahi.device

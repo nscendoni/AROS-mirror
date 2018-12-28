@@ -1,11 +1,11 @@
-# Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-# $Id$
+# Copyright © 2004, The AROS Development Team. All rights reserved.
+# $Id: mmakefile.src 48094 2013-09-12 22:42:41Z NicJA $
 
-include $(SRCDIR)/config/aros.cfg
+include $(TOP)/config/make.cfg
 
 ICONS := Patterns Themes
 
-#MM- iconset-Gorilla-wbench-icons-aros-clean : iconset-Gorilla-wbench-icons-aros-prefs-presets-clean
-#MM- iconset-Gorilla-wbench-icons-aros : iconset-Gorilla-wbench-icons-aros-prefs-presets
-%build_icons mmake=iconset-Gorilla-wbench-icons-aros-prefs-presets icons=$(ICONS) \
+#MM- iconset-Gorilla-icons-aros-clean : iconset-Gorilla-icons-aros-prefs-presets-clean
+#MM- iconset-Gorilla-icons-aros : iconset-Gorilla-icons-aros-prefs-presets
+%build_icons mmake=iconset-Gorilla-icons-aros-prefs-presets icons=$(ICONS) \
              dir=$(AROS_PREFS)/Presets

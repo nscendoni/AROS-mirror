@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: monitor.h 44384 2012-03-09 21:59:47Z jmcmullan $
 
     Desc: Monitor definitions
     Lang: english

@@ -22,7 +22,7 @@
 
  Mailtext OpenSource project :  http://sourceforge.net/projects/mailtext/
 
- $Id$
+ $Id: show_mailtext.c 37243 2011-02-28 05:53:53Z jmcmullan $
 
  Example for Mailtext.mcc
 

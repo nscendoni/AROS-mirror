@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: trackdiskprefs.c 48796 2014-02-02 22:35:56Z neil $
 */
 
 #include <devices/trackdisk.h>

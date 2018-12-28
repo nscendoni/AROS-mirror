@@ -37,7 +37,7 @@
  * SUCH DAMAGE.
  *
  *	@(#)kern_subr.c	8.3 (Berkeley) 1/21/94
- * $Id$
+ * $Id: kern_subr.c 36648 2011-01-17 14:31:59Z neil $
  */
 
 #include <sys/param.h>

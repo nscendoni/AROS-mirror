@@ -53,12 +53,10 @@ void readhelp()
     if (in=Open(helpfilename,MODE_OLDFILE))
      {
       Read(in, &id, 4);
-      if ((id == MAKE_ID('P','X','2','0')) || (id == MAKE_ID('P','P','1','1')) || (id == MAKE_ID('P','P','2','0'))) // FIXME: endiannes?
+      if ((id == 'PX20') || (id == 'PP11') || (id == 'PP20'))
        {
-#ifndef __AROS__
         struct PPBase *PPBase;
         char *pptemp;
-#endif
 
         Close(in);
 #ifndef __AROS__
@@ -145,7 +143,7 @@ D(bug("dohelpmsg: %s\n",text));
         }
         else buf[a]=text[a];
     }
-    if (!(helpbuf=LAllocRemember(&key,(lines+2)*sizeof(APTR),MEMF_CLEAR))) {
+    if (!(helpbuf=LAllocRemember(&key,(lines+2)*4,MEMF_CLEAR))) {
         LFreeRemember(&key);
         return;
     }
@@ -320,8 +318,8 @@ void load_clips()
         if ((Read(file,(char *)&clip,sizeof(struct Clip)))<sizeof(struct Clip))
             break;
         if (clip.func.function &&
-            (funcbuf=LAllocRemember(&clipkey,(long)clip.func.function,0))) {
-            if ((Read(file,funcbuf,(long)clip.func.function))<(long)clip.func.function)
+            (funcbuf=LAllocRemember(&clipkey,(int)clip.func.function,0))) {
+            if ((Read(file,funcbuf,(int)clip.func.function))<(int)clip.func.function)
                 break;
         }
         else funcbuf=NULL;
@@ -340,7 +338,7 @@ void load_clips()
 
 void save_clips()
 {
-    BPTR file;
+    int file;
     struct Clip *clip;
     char *function;
 
@@ -353,7 +351,7 @@ void save_clips()
         if ((Write(file,(char *)clip,sizeof(struct Clip)))<sizeof(struct Clip))
             break;
         if (function &&
-            ((Write(file,(char *)function,(long)clip->func.function))<(long)clip->func.function))
+            ((Write(file,(char *)function,(int)clip->func.function))<(int)clip->func.function))
             break;
         clip=clip->next;
     }
@@ -361,7 +359,7 @@ void save_clips()
     Close(file);
 }
 
-int readfile(name,buf,size)
+readfile(name,buf,size)
 char *name,**buf;
 int *size;
 {

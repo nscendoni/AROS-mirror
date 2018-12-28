@@ -1,12 +1,12 @@
-#   $Id$
+#   $Id: mmakefile.src 52813 2016-07-30 11:59:49Z wawa $
 #
 #   Makefile to make False.
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES  := false_int 
 
-EXEDIR := $(AROS_CONTRIB)/$(AROS_DIR_DEVELOPER)/False
+EXEDIR := $(AROS_CONTRIB)/Development/False
 
 #MM- contrib-development : contrib-development-false-$(CPU)
 

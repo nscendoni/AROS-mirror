@@ -3,7 +3,7 @@
     This file is part of the PrefsEditor class, which is distributed under
     the terms of version 2.1 of the GNU Lesser General Public License.
     
-    $Id$
+    $Id: support.c 37261 2011-02-28 05:56:29Z jmcmullan $
 */
 
 #include <exec/types.h>

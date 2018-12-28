@@ -1,7 +1,7 @@
 /******************************************************************************
 
     MODUL
-	$Id$
+	$Id: filereq.c 36659 2011-01-18 13:26:51Z neil $
 
     DESCRIPTION
 	All routines that handle file-requesters. We try to open ASL and

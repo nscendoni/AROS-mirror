@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: newcreatetaska.c 43432 2012-01-01 20:15:00Z jmcmullan $
 
     Desc: Create a new task, improved version
     Lang: english

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2007-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: uuid_private.h 37826 2011-03-27 19:15:57Z verhaegs $
 */
 
 #include <inttypes.h>

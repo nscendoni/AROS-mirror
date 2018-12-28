@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: textfit.c 46023 2012-11-08 16:05:13Z neil $
 
     Desc: Tell how many characters will fit into a box.
     Lang: english

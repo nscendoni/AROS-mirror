@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: releaseattrbases.c 39208 2011-06-14 14:14:11Z jmcmullan $
 
     Desc: OOP function OOP_ReleaseAttrBases
     Lang: english

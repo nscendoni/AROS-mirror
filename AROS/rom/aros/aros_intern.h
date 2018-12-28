@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: aros_intern.h 34543 2010-09-29 13:50:06Z sonic $
 
     Desc: Internal information for aros.library.
     Lang:

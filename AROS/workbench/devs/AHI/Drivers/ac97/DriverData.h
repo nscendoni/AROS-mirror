@@ -11,21 +11,15 @@
 
 #include "DriverBase.h"
 
-#define ALIGN_AC97OUT 8
-#define ALIGN_AC97(x) ((x + ALIGN_AC97OUT) & ~(ALIGN_AC97OUT-1))
-
 struct ac97Base
 {
     struct DriverBase	driverbase;
     struct Library*	dosbase;
     struct OOPBase*	oopbase;
     struct ExecBase*	sysbase;
-#if defined(__AROS__) && (__WORDSIZE==64)
-    APTR                buffer;
-#endif
     BOOL		cardfound;
-    APTR		mixerbase;
-    APTR		dmabase;
+    ULONG		mixerbase;
+    ULONG		dmabase;
     ULONG		irq_num;
 
     /* card specific data */
@@ -35,7 +29,7 @@ struct ac97Base
     /* card specific data ends */
 
     struct {
-	ULONG		sample_address;
+	APTR		sample_address;
 	ULONG		sample_size;
     }			*PCM_out;
 

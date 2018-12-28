@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: locklayer.c 38442 2011-04-30 06:48:12Z neil $
 
     Desc:
     Lang: english

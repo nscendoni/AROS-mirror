@@ -1,6 +1,6 @@
 /*
     Copyright © 1998-2009, The AROS Development Team. All rights reserved. 
-    $Id$
+    $Id: clipboard.c 52028 2016-03-17 04:36:20Z jmcmullan $
 
     Clipboard device.
 */

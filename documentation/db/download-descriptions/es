@@ -4,8 +4,7 @@ package: Paquete
 documentation: Documentación
 sources: Fuentes
 binaries: Binarios
-developer-tools: ABI-v1 Herramientas de desarrollo
-development-tools: ABI-v0 Herramientas de desarrollo
+development-tools: Herramientas de desarrollo
 date: Fecha
 
 [links]
@@ -77,9 +76,6 @@ pc-x86_64-boot-iso:
     La versión nativa para las computadoras PC de 64-bit (amd64, x86_64).
     Ésta es la imagen ISO de CDROM de arranque, que 
     contiene todo el sistema AROS más los programas contribuídos.
-smp-pc-x86_64-boot-iso:
-    This is a highly experimental SMP build for pc-x86_64.
-    Only recommended for Developers. This is a bootable CD-ROM ISO image.
 pc-i386-contrib:
     Este archivo contiene todos los programas contribuídos
     compilados para la arquitectura i386. Éstos funcionarán en

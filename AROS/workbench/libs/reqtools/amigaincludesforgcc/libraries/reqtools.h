@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: reqtools.h 34214 2010-08-19 08:36:25Z mazze $
 
     Desc: Definitions for reqtools.library
     Lang: English
@@ -12,7 +12,7 @@
 /*
 **	$Filename: libraries/reqtools.h $
 **	$Release: 2.5 $
-**	$Revision$
+**	$Revision: 34214 $
 **
 **	reqtools.library definitions
 **

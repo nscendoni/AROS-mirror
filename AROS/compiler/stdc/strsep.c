@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: strsep.c 48038 2013-09-08 21:17:58Z verhaegs $
 
     BSD function strsep().
 */

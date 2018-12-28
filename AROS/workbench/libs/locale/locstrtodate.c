@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: locstrtodate.c 43360 2011-12-29 23:57:38Z neil $
 
     Desc: LocStrToDate - locale.library's private replacement
           of dos.library/StrToDate function. IPrefs will install

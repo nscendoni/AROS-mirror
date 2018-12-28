@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: dhcpctl.h 36648 2011-01-17 14:31:59Z neil $
 
    Subroutines providing general support for objects. */
 

@@ -10,9 +10,8 @@
  * ====================================================
  */
 
-__FBSDID("$FreeBSD: src/lib/msun/src/s_remquo.c,v 1.2 2008/03/30 20:47:26 das Exp $");
+__FBSDID("$FreeBSD: src/lib/msun/src/s_remquo.c,v 1.1 2005/03/25 04:40:44 das Exp $");
 
-#include <float.h>
 #include "math.h"
 #include "math_private.h"
 
@@ -49,7 +48,7 @@ remquo(double x, double y, int *quo)
 		goto fixup;	/* |x|<|y| return x or x-y */
 	    }
 	    if(lx==ly) {
-		*quo = (sxy ? -1 : 1);
+		*quo = 1;
 		return Zero[(uint32_t)sx>>31];	/* |x|=|y| return x*0*/
 	    }
 	}
@@ -112,7 +111,6 @@ remquo(double x, double y, int *quo)
 
     /* convert back to floating value and restore the sign */
 	if((hx|lx)==0) {			/* return sign(x)*0 */
-	    q &= 0x7fffffff;
 	    *quo = (sxy ? -q : q);
 	    return Zero[(uint32_t)sx>>31];
 	}
@@ -128,9 +126,9 @@ remquo(double x, double y, int *quo)
 		lx = (lx>>n)|((uint32_t)hx<<(32-n));
 		hx >>= n;
 	    } else if (n<=31) {
-		lx = (hx<<(32-n))|(lx>>n); hx = 0;
+		lx = (hx<<(32-n))|(lx>>n); hx = sx;
 	    } else {
-		lx = hx>>(n-32); hx = 0;
+		lx = hx>>(n-32); hx = sx;
 	    }
 	}
 fixup:
@@ -151,8 +149,3 @@ fixup:
 	*quo = (sxy ? -q : q);
 	return x;
 }
-
-#if LDBL_MANT_DIG == 53
-AROS_MAKE_ASM_SYM(typeof(remquol), remquol, AROS_CSYM_FROM_ASM_NAME(remquol), AROS_CSYM_FROM_ASM_NAME(remquo));
-AROS_EXPORT_ASM_SYM(AROS_CSYM_FROM_ASM_NAME(remquol));
-#endif

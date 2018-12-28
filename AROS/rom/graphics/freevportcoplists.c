@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: freevportcoplists.c 47536 2013-06-10 16:46:27Z jmcmullan $
 
     Desc: Graphics function FreeVPortCopLists()
     Lang: english
@@ -9,7 +9,7 @@
 #include <aros/debug.h>
 #include <graphics/copper.h>
 #include <graphics/view.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <proto/exec.h>
 #include <proto/oop.h>
 

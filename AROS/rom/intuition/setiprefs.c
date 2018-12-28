@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: setiprefs.c 51194 2015-11-03 15:51:38Z NicJA $
 */
 
 #include <proto/exec.h>

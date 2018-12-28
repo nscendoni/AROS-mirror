@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prefs.h 37772 2011-03-25 06:23:48Z sonic $
 
     Desc:
     Lang: English

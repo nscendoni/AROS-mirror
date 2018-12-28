@@ -1,6 +1,6 @@
 /*
     Copyright © 2015-2016, The AROS Development	Team. All rights reserved.
-    $Id$
+    $Id: animationclass.c 52509 2016-04-02 00:04:52Z NicJA $
 */
 
 #ifndef DEBUG

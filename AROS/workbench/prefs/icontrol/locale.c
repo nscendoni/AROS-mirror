@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: locale.c 34393 2010-09-11 09:32:54Z mazze $
 */
 
 #include <exec/types.h>

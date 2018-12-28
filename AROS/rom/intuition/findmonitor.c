@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: findmonitor.c 48424 2013-11-18 09:28:30Z neil $
 
     Internal monitor database functions
 */

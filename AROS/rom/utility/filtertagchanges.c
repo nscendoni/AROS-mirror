@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: filtertagchanges.c 50584 2015-05-02 15:21:35Z jmcmullan $
 
     Desc: FilterTagChanges() - filter unchanged tags from a list.
     Lang: english

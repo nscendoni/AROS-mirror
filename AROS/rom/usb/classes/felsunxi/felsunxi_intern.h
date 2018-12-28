@@ -1,6 +1,6 @@
 /*
     Copyright © 2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: felsunxi_intern.h 49646 2014-09-18 16:58:44Z DizzyOfCRN $
 
     Desc:
     Lang: english

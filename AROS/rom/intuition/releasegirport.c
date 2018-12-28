@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: releasegirport.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <proto/graphics.h>
@@ -45,6 +45,7 @@
 {
     AROS_LIBFUNC_INIT
 
+    struct GfxBase *GfxBase = GetPrivIBase(IntuitionBase)->GfxBase;
     struct LayersBase *LayersBase = GetPrivIBase(IntuitionBase)->LayersBase;
     DEBUG_RELEASEGIRPORT(dprintf("ReleaseGIRPort: RPort 0x%lx\n", rp));
 

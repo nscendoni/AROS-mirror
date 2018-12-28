@@ -1,6 +1,6 @@
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: main.c 45782 2012-09-12 21:35:53Z mazze $
 */
 
 #define DEBUG 0

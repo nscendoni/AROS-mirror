@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getsystime.c 47740 2013-07-20 11:30:00Z mazze $
 
     Desc: GetSysTime() - Find out what time it is.
     Lang: english

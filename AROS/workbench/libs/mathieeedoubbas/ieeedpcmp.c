@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2003, The AROS Development Team. All rights reserved.
+    $Id: ieeedpcmp.c 47354 2013-05-04 17:12:25Z mazze $
 */
 
 #include "mathieeedoubbas_intern.h"
@@ -19,31 +19,21 @@
         struct MathIeeeDoubBasBase *, MathIeeeDoubBasBase, 7, MathIeeeDoubBas)
 
 /*  FUNCTION
-	Compares two IEEE double precision numbers.
+	Compares two IEEE double precision numbers
 
     INPUTS
-        y - IEEE double precision floating point number.
-        z - IEEE double precision floating point number.
 
     RESULT
-        c -
-            +1: y > z
-             0: y = z
-            -1: y < z
+       +1 : y > z
+	0 : y = z
+       -1 : y < z
 
 	Flags:
 	  zero	   : y = z
 	  negative : y < z
 	  overflow : 0
 
-    NOTES
-
-    EXAMPLE
-
     BUGS
-
-    SEE ALSO
-        IEEEDPTst()
 
     INTERNALS
 

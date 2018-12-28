@@ -1,6 +1,6 @@
 /*
     Copyright © 2000-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: main.c 48533 2013-12-06 21:24:19Z jmcmullan $
 
     Desc: Probe installed CPUs and display relevant information
     Lang: english

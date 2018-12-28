@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: amilua.c 48369 2013-11-02 14:33:07Z deadwood $
 ** Lua stand-alone interpreter
 ** See Copyright Notice in lua.h
 */

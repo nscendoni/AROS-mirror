@@ -1,5 +1,4 @@
 #include "debug.h"
-#include <proto/exec.h>
 
 #ifdef DEBUG
 void dumpmem(void *mem, unsigned long int len)

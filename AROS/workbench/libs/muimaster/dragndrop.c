@@ -2,7 +2,7 @@
     Copyright © 2002-2011, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: dragndrop.c 47653 2013-07-12 00:55:32Z jmcmullan $
 */
 
 #include <stdio.h>

@@ -100,13 +100,13 @@ void initstrings(void)
 int __saveds DoReadStringFile(register struct StringData *stringdata __asm("a0"), register char *filename __asm("a1"))
 {
     int a;
-    const struct DefaultString *defstr;
+    struct DefaultString *defstr;
 //    BPTR file;
 
 //D(bug("ReadStringFile(%lx,%s)\n",stringdata,filename);Delay(50));
     if (!stringdata) return(0);
     if (!stringdata->string_table) {
-        if (!(stringdata->string_table=AllocMem(stringdata->string_count*sizeof(APTR),MEMF_CLEAR)))
+        if (!(stringdata->string_table=AllocMem(stringdata->string_count*4,MEMF_CLEAR)))
             return(0);
     }
 //D(bug("ReadStringFile(%s)\n",filename));
@@ -241,7 +241,7 @@ void __saveds DoFreeStringFile(register struct StringData *stringdata __asm("a0"
         }
         if (stringdata->string_table) {
 //D(bug("FreeStringFile:free table\n");Delay(50));
-            FreeMem(stringdata->string_table,stringdata->string_count*sizeof(APTR));
+            FreeMem(stringdata->string_table,stringdata->string_count*4);
             stringdata->string_table=NULL;
         }
 // JRZ: begin

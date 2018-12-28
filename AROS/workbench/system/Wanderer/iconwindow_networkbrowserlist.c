@@ -1,6 +1,6 @@
 /*
   Copyright  2004-2013, The AROS Development Team. All rights reserved.
-  $Id$
+  $Id: iconwindow_networkbrowserlist.c 48185 2013-09-30 20:40:28Z deadwood $
 */
 
 #include "portable_macros.h"

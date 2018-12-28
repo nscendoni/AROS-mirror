@@ -1,6 +1,6 @@
 /*
     Copyright © 2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pcixhci_controller.h 50630 2015-05-09 06:56:17Z dizzyofcrn $
 
     Desc:
     Lang: English
@@ -8,6 +8,13 @@
 #ifndef PCIXHCICONTROLLER_H
 #define PCIXHCICONTROLLER_H
 
+#ifndef __packed
+#ifdef __GNUC__
+#define __packed __attribute__((__packed__))
+#else
+#define __packed
+#endif
+#endif
 
 /*
  *----------------------------------------------------------------------------

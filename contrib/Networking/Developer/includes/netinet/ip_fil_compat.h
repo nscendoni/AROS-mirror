@@ -2,7 +2,7 @@
 #define	__IP_COMPAT_H__
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ip_fil_compat.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ip_fil_compat.h,v 1.16 2000/05/01 06:16:47 kjell Exp $	*/

@@ -1,6 +1,6 @@
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getpagesize.c 47619 2013-07-02 18:27:20Z neil $
 
     Desc: Query UNIX host OS for memory page size
     Lang: english

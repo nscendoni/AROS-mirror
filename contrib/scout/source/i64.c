@@ -22,8 +22,8 @@
   You can email the author, Doug Sauder, at dwsauder@erols.com.
 
   $RCSfile: i64.c,v $
-  $Revision$
-  $Date$
+  $Revision: 31940 $
+  $Date: 2009-10-27 21:14:49 +0100 (Tue, 27 Oct 2009) $
 \*--------------------------------------------------------------------------*/
 
 #include <ctype.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setoutlinepen.c 48424 2013-11-18 09:28:30Z neil $
 
     Desc: Graphics function SetOutlinePen()
     Lang: english

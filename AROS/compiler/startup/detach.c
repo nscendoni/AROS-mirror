@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2012, The AROS Development Team. All rights reserved.
+    $Id: detach.c 45720 2012-09-02 16:46:15Z jmcmullan $
 
     Desc: Common startup code
     Lang: english
@@ -114,7 +114,7 @@ static void __startup_detach(struct ExecBase *SysBase)
         D(bug("__detached_return_value = %d.\n", __detached_return_value));
         if (__detached_return_value != RETURN_OK)
         {
-            PutStr((CONST_STRPTR)FindTask(NULL)->tc_Node.ln_Name); PutStr((CONST_STRPTR)": Failed to detach.\n");
+            PutStr(FindTask(NULL)->tc_Node.ln_Name); PutStr(": Failed to detach.\n");
         }
     
         if (newproc)

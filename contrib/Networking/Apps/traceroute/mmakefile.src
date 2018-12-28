@@ -1,8 +1,8 @@
-# $Id$
+# $Id: mmakefile.src 52373 2016-03-29 16:40:07Z NicJA $
 #
 # Makefile for traceroute
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES  := socket_autoinit traceroute
 DOCFILES := traceroute.guide traceroute.guide.info

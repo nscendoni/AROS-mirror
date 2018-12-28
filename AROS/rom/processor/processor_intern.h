@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: processor_intern.h 47660 2013-07-12 01:45:50Z neil $
 
     Desc: Internal data structures for processor.resource
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 2009-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: RequestString.c 34922 2010-10-24 15:44:56Z mazze $
 
     Desc: Request string from user
 */

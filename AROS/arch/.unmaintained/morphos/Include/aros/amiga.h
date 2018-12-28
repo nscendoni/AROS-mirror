@@ -4,7 +4,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: amiga.h 36647 2011-01-17 14:01:23Z neil $
 
     Desc: Amiga-specific things
     Lang: english

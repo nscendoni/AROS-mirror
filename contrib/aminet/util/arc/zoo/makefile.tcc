@@ -1,5 +1,5 @@
 # $Source$
-# $Id$
+# $Id: makefile.tcc 30794 2009-03-08 02:19:07Z neil $
 # Make Zoo -- works with Turbo C++ 1.0 under MS-DOS and
 # Don Kneller's NDMAKE version 4.31.
 #

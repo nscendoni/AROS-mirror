@@ -29,23 +29,47 @@ __FBSDID("$FreeBSD: src/lib/msun/src/s_scalbln.c,v 1.2 2005/03/07 04:57:50 das E
 #include <limits.h>
 #include <math.h>
 
-#define	NMAX	65536
-#define	NMIN	-65536
-
 double
 scalbln (double x, long n)
 {
-	return (scalbn(x, (n > NMAX) ? NMAX : (n < NMIN) ? NMIN : (int)n));
+	int in;
+
+	in = (int)n;
+	if (in != n) {
+		if (n > 0)
+			in = INT_MAX;
+		else
+			in = INT_MIN;
+	}
+	return (scalbn(x, in));
 }
 
 float
 scalblnf (float x, long n)
 {
-	return (scalbnf(x, (n > NMAX) ? NMAX : (n < NMIN) ? NMIN : (int)n));
+	int in;
+
+	in = (int)n;
+	if (in != n) {
+		if (n > 0)
+			in = INT_MAX;
+		else
+			in = INT_MIN;
+	}
+	return (scalbnf(x, in));
 }
 
 long double
 scalblnl (long double x, long n)
 {
-	return (scalbnl(x, (n > NMAX) ? NMAX : (n < NMIN) ? NMIN : (int)n));
+	int in;
+
+	in = (int)n;
+	if (in != n) {
+		if (n > 0)
+			in = INT_MAX;
+		else
+			in = INT_MIN;
+	}
+	return (scalbnl(x, (int)n));
 }

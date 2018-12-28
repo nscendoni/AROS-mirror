@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: diskobjio.c 48123 2013-09-25 02:08:10Z neil $
 
     Read an icon from an .info file
 */

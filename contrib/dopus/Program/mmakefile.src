@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 52371 2016-03-29 16:31:33Z NicJA $
 
 include $(SRCDIR)/$(CURDIR)/../make.cfg
 
@@ -9,16 +9,14 @@ FILES := about arbiter main main1 main2 main3 main4 main5 main6 main7\
          icondata iffload rexx protectdata renamedata select selectdata\
          strings tasks view screendata dopusfunctions\
          launchexternal searchdata complete remember parentmulti\
-         dirtree getusage assembly\
+         dirtree getusage assembly dummy_asyncio\
          archive makelinkdata
 
 EXEDIR := $(DOPUSDIR)
 
-#MM- DirOpus : dopus-library \
-#MM     workbench-libs-rexxsyslib-linklib \
-#MM     workbench-libs-asyncio-linklib
+#MM- DirOpus : dopus-library workbench-libs-rexxsyslib-linklib
 
-USER_CFLAGS := -I$(DOPUSDIR)/$(AROS_DIR_DEVELOPER)/include \
+USER_CFLAGS := -I$(DOPUSDIR)/Development/include \
     -I$(SRCDIR)/$(CURDIR)/../include \
     -D__REXXSYSLIB_STDLIBBASE__ \
     -D__UTILITY_STDLIBBASE__ \
@@ -30,6 +28,6 @@ USER_CFLAGS += -Wno-error
 
 %build_prog mmake=DirOpus \
     progname=DirectoryOpus targetdir=$(EXEDIR) \
-    files=$(FILES) uselibs="rexxsyslib asyncio"
+    files=$(FILES) uselibs="rexxsyslib"
 
 %common

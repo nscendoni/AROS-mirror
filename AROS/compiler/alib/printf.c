@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2001, The AROS Development Team. All rights reserved.
+    $Id: printf.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Varargs stub for Printf()
     Lang: english
@@ -15,9 +15,7 @@ LONG Printf(STRPTR fmt, ...)
 {
     LONG retval;
 
-    AROS_SLOWSTACKFORMAT_PRE(fmt);
-    retval = VFPrintf(Output(), fmt, AROS_SLOWSTACKFORMAT_ARG(fmt));
-    AROS_SLOWSTACKFORMAT_POST(fmt);
+    retval = VFPrintf(Output(), fmt, &fmt+1);
 
     return retval;
 }

@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lua.h 47953 2013-09-02 05:00:46Z mazze $
 ** Lua - A Scripting Language
 ** Lua.org, PUC-Rio, Brazil (http://www.lua.org)
 ** See Copyright Notice at the end of this file

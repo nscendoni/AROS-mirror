@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: serscript_pragmas.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /* serscript.library functions */

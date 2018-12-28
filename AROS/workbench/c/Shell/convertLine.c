@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: convertLine.c 49185 2014-07-29 17:50:32Z neil $
  */
 
 #include <exec/lists.h>

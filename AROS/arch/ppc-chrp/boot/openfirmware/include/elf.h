@@ -2,7 +2,7 @@
 #define ELF_H_
 
 /*
- * $Id$
+ * $Id: elf.h 40707 2011-08-13 16:49:19Z sonic $
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __env.h 48031 2013-09-08 21:16:04Z verhaegs $
 
     Desc: internal header file for environment variables handling
     Lang: english

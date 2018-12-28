@@ -32,7 +32,7 @@
  *
  * Changes by Sebastian Bauer <sebauer@t-online.de> 
  *
- * $Id$
+ * $Id: sio.c 30794 2009-03-08 02:19:07Z neil $
  */
 
 #include "lwip/debug.h"

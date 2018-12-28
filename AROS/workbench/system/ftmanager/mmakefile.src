@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 52302 2016-03-28 03:42:13Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -6,7 +6,7 @@ include $(SRCDIR)/config/aros.cfg
 #MM workbench-system-ftmanager : workbench-libs-freetype-module workbench-libs-codesets \
 #MM workbench-system-ftmanager-catalogs
 
-FILES  := ftmanager cli fontbitmap_class fontinfo_class fontlist_class fontwindow_class locale
+FILES  := ftmanager fontbitmap_class fontinfo_class fontlist_class fontwindow_class locale
 EXEDIR := $(AROS_SYSTEM)
 
 %build_prog mmake=workbench-system-ftmanager \

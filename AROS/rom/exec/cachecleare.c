@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cachecleare.c 40201 2011-07-18 08:30:00Z sonic $
 
     Desc: CacheClearE() - Clear the caches with extended control.
     Lang: english

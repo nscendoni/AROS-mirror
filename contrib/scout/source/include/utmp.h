@@ -5,7 +5,7 @@
  *                       Network Solutions Development, Inc.
  *                       All rights reserved.
  *
- *	    $Id$
+ *	    $Id: utmp.h 36659 2011-01-18 13:26:51Z neil $
  */
 
 #ifndef	_UTMP_H_

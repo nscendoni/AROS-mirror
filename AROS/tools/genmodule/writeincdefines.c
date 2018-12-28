@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2016, The AROS Development Team. All rights reserved.
+    $Id: writeincdefines.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Function to write defines/modulename.h. Part of genmodule.
 */
@@ -40,37 +40,10 @@ void writeincdefines(struct config *cfg)
             "#include <exec/types.h>\n"
             "#include <aros/symbolsets.h>\n"
             "#include <aros/preprocessor/variadic/cast2iptr.hpp>\n"
+            "\n"
+            "__BEGIN_DECLS\n"
             "\n",
             cfg->includenameupper, cfg->includenameupper, banner, cfg->modulename
-    );
-    if ((cfg->options & OPTION_RELLINKLIB) || (cfg->options & OPTION_DUPBASE))
-    {
-        fprintf(out,
-                "#if !defined(__%s_LIBBASE)\n"
-                "#  if !defined(__NOLIBBASE__) && !defined(__%s_NOLIBBASE__)\n"
-                "#    define __%s_LIBBASE __aros_getbase_%s()\n"
-                "#  else\n"
-                "#    define __%s_LIBBASE %s\n"
-                "#  endif\n"
-                "#endif\n"
-                "\n",
-                cfg->includenameupper, cfg->includenameupper,
-                cfg->includenameupper, cfg->libbase,
-                cfg->includenameupper, cfg->libbase
-        );
-    }
-    else
-        fprintf(out,
-                "#if !defined(__%s_LIBBASE)\n"
-                "#    define __%s_LIBBASE %s\n"
-                "#endif\n"
-                "\n",
-                cfg->includenameupper,
-                cfg->includenameupper, cfg->libbase
-        );
-    fprintf(out,
-            "__BEGIN_DECLS\n"
-            "\n"
     );
     freeBanner(banner);
 
@@ -164,6 +137,14 @@ void writeincdefines(struct config *cfg)
                 }
             }
 
+            if (funclistit->hidden)
+            {
+                fprintf(out,
+                        "\n"
+                        "#if defined(__ENABLE_HIDDEN_LIBAPI__)"
+                        "\n");
+            }
+
             writedefineregister(out, funclistit, cfg, isvararg);
             if (!funclistit->novararg && isvararg)
             {
@@ -171,6 +152,14 @@ void writeincdefines(struct config *cfg)
                 free(varargname);
             }
             writealiases(out, funclistit, cfg);
+
+            if (funclistit->hidden)
+            {
+                fprintf(out,
+                        "\n"
+                        "#endif /* defined(__ENABLE_HIDDEN_LIBAPI__) */"
+                        "\n");
+            }
 
             fprintf(out,
                     "\n"
@@ -244,7 +233,8 @@ writedefineregister(FILE *out, struct functionhead *funclistit, struct config *c
                 type = getargtype(arglistit);
                 assert(type != NULL);
                 fprintf(out,
-                        "                  AROS_LCA(%s,(__arg%d),%s), \\\n",
+                        "                  AROS_LCA(%s%s,(__arg%d),%s), \\\n",
+                        ((isvararg) && (!arglistit->next)) ? "const " : "",
                         type, count, arglistit->reg
                 );
                 free(type);
@@ -280,13 +270,15 @@ writedefineregister(FILE *out, struct functionhead *funclistit, struct config *c
             if (quad2 != NULL) {
                 *quad2 = 0;
                 fprintf(out,
-                        "         AROS_LCAQUAD(%s, (__arg%d), %s, %s), \\\n",
+                        "         AROS_LCAQUAD(%s%s, (__arg%d), %s, %s), \\\n",
+                        ((isvararg) && (!arglistit->next)) ? "const " : "",
                         type, count, arglistit->reg, quad2+1
                 );
                 *quad2 = '/';
             } else {
                 fprintf(out,
-                        "         AROS_LCA(%s, (__arg%d), %s), \\\n",
+                        "         AROS_LCA(%s%s, (__arg%d), %s), \\\n",
+                        ((isvararg) && (!arglistit->next)) ? "const " : "",
                         type, count, arglistit->reg
                 );
             }
@@ -308,8 +300,8 @@ writedefineregister(FILE *out, struct functionhead *funclistit, struct config *c
             fprintf(out, ", ");
         fprintf(out, "arg%d", count);
     }
-    fprintf(out, ") \\\n    __%s_WB(__%s_LIBBASE",
-            funclistit->name, cfg->includenameupper
+    fprintf(out, ") \\\n    __%s_WB(__aros_getbase_%s()",
+            funclistit->name, cfg->libbase
     );
     for (arglistit = funclistit->arguments, count = 1;
          arglistit != NULL;
@@ -348,18 +340,6 @@ writedefinevararg(FILE *out, struct functionhead *funclistit, struct config *cfg
         fprintf(out,
                 "...) \\\n"
                 "({ \\\n"
-        );        
-        for (arglistit = funclistit->arguments, count = 1;
-             arglistit != NULL;
-             arglistit = arglistit->next, count++
-        )
-        {
-            if (arglistit->next == NULL)
-            {
-                fprintf(out, "    const IPTR %s_args[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) };\\\n", funclistit->name);
-            }
-        }
-        fprintf(out,
                 "    %s(",
                 funclistit->name
         );
@@ -375,7 +355,7 @@ writedefinevararg(FILE *out, struct functionhead *funclistit, struct config *cfg
             {
                 type = getargtype(arglistit);
                 assert(type != NULL);
-                fprintf(out, "(%s)(%s_args)", type, funclistit->name);
+                fprintf(out, "(const %s)(const IPTR []){ AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }", type);
                 free(type);
             }
             else
@@ -442,12 +422,9 @@ writedefinevararg(FILE *out, struct functionhead *funclistit, struct config *cfg
             fprintf(out, "arg%d, ", count);
         }
         fprintf(out,
-                "...) __%s_WB(",
-                varargname
+                "...) __%s_WB(%s, ",
+                varargname, cfg->libbase
         );
-        fprintf(out, "(%s)__%s_LIBBASE, ",
-                cfg->libbasetypeptrextern,
-                cfg->includenameupper);
         for (arglistit = funclistit->arguments, count = 1;
              arglistit != NULL && arglistit->next != NULL && arglistit->next->next != NULL;
              arglistit = arglistit->next, count++
@@ -522,12 +499,11 @@ writedefinevararg(FILE *out, struct functionhead *funclistit, struct config *cfg
         }
         fprintf(out,
                 "...) \\\n"
-                "    __inline_%s_%s(",
-                cfg->basename, varargname
-        );
-        fprintf(out, "(%s)__%s_LIBBASE, ",
+                "    __inline_%s_%s((%s)(%s), ",
+                cfg->basename, varargname,
                 cfg->libbasetypeptrextern,
-                cfg->includenameupper);
+                cfg->libbase
+        );
         for (arglistit = funclistit->arguments, count = 1;
              arglistit != NULL && arglistit->next != NULL && arglistit->next->next != NULL;
              arglistit = arglistit->next, count++

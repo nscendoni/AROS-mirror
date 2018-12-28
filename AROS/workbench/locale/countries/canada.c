@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: canada.c 52795 2016-07-21 16:50:20Z polluks $
 
     Desc: Country data for Canada
           based on the Amiga Developer CD 2.1 file -: 

@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2016, The AROS Development Team. All rights reserved.
+    $Id: systemtaglist.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc:
     Lang: English
@@ -27,8 +27,8 @@
         AROS_LH2(LONG, SystemTagList,
 
 /*  SYNOPSIS */
-        AROS_LHA(CONST_STRPTR, command, D1),
-        AROS_LHA(const struct TagItem *, tags, D2),
+        AROS_LHA(CONST_STRPTR    , command, D1),
+        AROS_LHA(struct TagItem *, tags,    D2),
 
 /*  LOCATION */
         struct DosLibrary *, DOSBase, 101, Dos)
@@ -124,7 +124,7 @@
     ULONG commandlen;
     LONG rc            = -1;
 
-    struct TagItem *tags2 = (struct TagItem *)tags;
+    struct TagItem *tags2 = tags;
     struct TagItem *newtags, *tag;
 
     ASSERT_VALID_PROCESS(me);
@@ -150,6 +150,7 @@
                 sos = (BPTR)tag->ti_Data;
                 break;
 
+            case (SYS_Dummy + 10): /* ABI_V0 compatibility: SYS_Error had value SYS_Dummy + 10 */
             case SYS_Error:
                 ses = (BPTR)tag->ti_Data;
                 break;

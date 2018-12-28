@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: findresident.c 40517 2011-08-03 09:42:50Z sonic $
 
     Desc: Search a resident module by name
     Lang: english

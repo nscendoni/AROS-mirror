@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: icon.h 44442 2012-03-23 03:49:25Z jmcmullan $
 */
 
 #ifndef GRAPHICS_VIEW_H

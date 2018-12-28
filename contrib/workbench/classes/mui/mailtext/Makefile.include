@@ -23,7 +23,7 @@
 #
 # Mailtext OpenSource project :  http://sourceforge.net/projects/mailtext/
 #
-# $Id$
+# $Id: Makefile.include 30794 2009-03-08 02:19:07Z neil $
 #
 # GCC Makefile for MCC_Mailtext
 #

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cxbroker.c 38350 2011-04-25 11:36:43Z mazze $
 
     Desc:
     Lang: English

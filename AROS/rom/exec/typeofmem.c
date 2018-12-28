@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: typeofmem.c 36262 2010-12-27 12:17:48Z sonic $
 
     Desc: Examine memory
     Lang: english

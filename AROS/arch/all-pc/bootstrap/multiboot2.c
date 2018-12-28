@@ -1,6 +1,6 @@
 /*
     Copyright © 2011-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: multiboot2.c 48486 2013-12-02 18:03:02Z jmcmullan $
 
     Desc: Multiboot v2 parser
     Lang: english

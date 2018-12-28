@@ -11,11 +11,10 @@
 #include <libraries/gadtools.h>
 #include <datatypes/soundclass.h>
 
-#include <proto/exec.h>
-
 #define __NOLIBBASE__
 #include <proto/alib.h>
 #include <proto/muimaster.h>
+#include <proto/exec.h>
 #include <proto/dos.h>
 #include <proto/datatypes.h>
 #include <proto/intuition.h>
@@ -33,6 +32,8 @@
 #define MUIMasterBase po->po_MUIBase
 #define DataTypesBase po->po_DTBase
 #define IntuitionBase po->po_IntBase
+
+extern struct ExecBase *SysBase;
 
 /* /// "pPoPoGUITask()" */
 AROS_UFH0(void, pPoPoGUITask)

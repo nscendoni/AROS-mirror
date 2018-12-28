@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: availmem.c 48982 2014-05-03 18:18:36Z deadwood $
 
     Desc: Tell how much memory is available.
     Lang: english

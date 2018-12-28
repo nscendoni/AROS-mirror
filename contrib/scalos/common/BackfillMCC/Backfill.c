@@ -1,6 +1,6 @@
 // Backfill.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 03:49:15 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51964 $
 
 #ifdef __AROS__
 #define MUIMASTER_YES_INLINE_STDARG

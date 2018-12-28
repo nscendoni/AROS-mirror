@@ -1,6 +1,6 @@
 /*
     Copyright  1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: wrapper.c 40998 2011-08-31 06:45:11Z sonic $
 
     Desc: Backwards compatibility display driver loader.
     Lang: english

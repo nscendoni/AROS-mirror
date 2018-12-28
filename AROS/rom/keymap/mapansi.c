@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mapansi.c 44448 2012-03-25 12:02:13Z mazze $
 
     Desc:
     Lang: english

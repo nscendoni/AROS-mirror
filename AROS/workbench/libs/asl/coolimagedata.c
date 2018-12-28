@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: coolimagedata.c 48109 2013-09-19 19:52:44Z mazze $
 */
 
 /**************************************************************************/

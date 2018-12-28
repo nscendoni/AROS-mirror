@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: debug_init.c 48618 2013-12-23 15:38:02Z deadwood $
 
     Desc:
 */

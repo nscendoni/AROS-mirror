@@ -1,7 +1,7 @@
 #ifndef XADMASTER_IFF_CDAF_C
 #define XADMASTER_IFF_CDAF_C
 
-/*  $Id$
+/*  $Id: IFF-CDAF.c 36659 2011-01-18 13:26:51Z neil $
     IFF-CDAF format archivers (XpkArchive and Shrink)
 
     XAD library system for archive handling

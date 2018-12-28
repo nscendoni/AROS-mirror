@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: remirqhandler.c 47708 2013-07-17 12:22:32Z verhaegs $
 
     Desc:
 */
@@ -59,7 +59,7 @@
 
         Disable();
         REMOVE(h);
-        if (IsListEmpty(&KERNELIRQ_LIST(irq)))
+        if (IsListEmpty(&KernelBase->kb_Interrupts[irq]))
         {
         	ictl_disable_irq(irq, KernelBase);
         }

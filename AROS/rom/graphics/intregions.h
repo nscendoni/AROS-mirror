@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: intregions.h 42076 2011-10-27 09:01:22Z sonic $
 
     Desc: Header file for intregions.c
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: libinit.c 45637 2012-08-22 13:49:29Z jmcmullan $
 
     Desc: libinit library - functions calling when opening/closing libs
 */

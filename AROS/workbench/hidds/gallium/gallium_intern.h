@@ -3,7 +3,7 @@
 
 /*
     Copyright 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gallium_intern.h 33681 2010-06-23 18:01:26Z deadwood $
 */
 
 

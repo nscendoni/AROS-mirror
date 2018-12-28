@@ -16,7 +16,7 @@
 
  codesets.library project: http://sourceforge.net/projects/codesetslib/
 
- $Id$
+ $Id: lib_protos.h 49689 2014-10-04 04:50:52Z jmcmullan $
 
 ***************************************************************************/
 

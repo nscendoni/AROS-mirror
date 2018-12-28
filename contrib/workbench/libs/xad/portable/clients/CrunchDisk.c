@@ -1,7 +1,7 @@
 #ifndef XADMASTER_CRUNCHDISK_C
 #define XADMASTER_CRUNCHDISK_C
 
-/*  $Id$
+/*  $Id: CrunchDisk.c 36659 2011-01-18 13:26:51Z neil $
     CrunchDisk disk archiver client from Klaus Deppisch
 
     XAD library system for archive handling

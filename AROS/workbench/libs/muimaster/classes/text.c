@@ -3,7 +3,7 @@
     Copyright  2002-2006, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: text.c 49519 2014-08-23 16:45:48Z mazze $
 */
 
 #include <string.h>

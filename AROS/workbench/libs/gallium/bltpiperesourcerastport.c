@@ -1,10 +1,10 @@
 /*
-    Copyright © 2011-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright 2011, The AROS Development Team. All rights reserved.
+    $Id: bltpiperesourcerastport.c 48674 2014-01-02 17:51:04Z neil $
 */
 
 #include <graphics/rastport.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <proto/alib.h>
 #include <proto/layers.h>
 #include <proto/graphics.h>
@@ -17,21 +17,20 @@
 
     NAME */
 
-      AROS_LH9(void, BltPipeResourceRastPort,
+      AROS_LH8(void, BltPipeResourceRastPort,
 
 /*  SYNOPSIS */ 
-      AROS_LHA(PipeHandle_t, pipe, A0),
-      AROS_LHA(struct pipe_resource *, srcPipeResource, A1),
+      AROS_LHA(struct pipe_resource *, srcPipeResource, A0),
       AROS_LHA(LONG                  , xSrc, D0),
       AROS_LHA(LONG                  , ySrc, D1),
-      AROS_LHA(struct RastPort *     , destRP, A2),
+      AROS_LHA(struct RastPort *     , destRP, A1),
       AROS_LHA(LONG                  , xDest, D2),
       AROS_LHA(LONG                  , yDest, D3),
       AROS_LHA(LONG                  , xSize, D4),
       AROS_LHA(LONG                  , ySize, D5),
 
 /*  LOCATION */
-      struct Library *, GalliumBase, 9, Gallium)
+      struct Library *, GalliumBase, 8, Gallium)
 
 /*  FUNCTION
         Copies part of pipe resource onto rast port. Clips output by using layers of
@@ -60,6 +59,10 @@
     struct ClipRect *CR;
     struct Rectangle renderableLayerRect;
     BOOL copied = FALSE;
+
+    struct HIDDT_WinSys * ws = (struct HIDDT_WinSys *)srcPipeResource->screen->winsys;
+    if (!ws)
+        return;
 
     if (!IsLayerVisible(L))
         return;
@@ -100,7 +103,7 @@
             {
                 /* This clip rect intersects renderable layer rect */
                 struct pHidd_Gallium_DisplayResource drmsg = {
-                mID : ((struct GalliumBase *)GalliumBase)->galliumMId_DisplayResource,
+                mID : OOP_GetMethodID(IID_Hidd_Gallium, moHidd_Gallium_DisplayResource),
                 resource : srcPipeResource,
                 srcx : xSrc + result.MinX - L->bounds.MinX - xDest, /* x in the source buffer */
                 srcy : ySrc + result.MinY - L->bounds.MinY - yDest, /* y in the source buffer */
@@ -110,7 +113,7 @@
                 width : result.MaxX - result.MinX + 1, /* width of the rect in source buffer */
                 height : result.MaxY - result.MinY + 1, /* height of the rect in source buffer */
                 };
-                OOP_DoMethod(pipe, (OOP_Msg)&drmsg);
+                OOP_DoMethod(ws->driver, (OOP_Msg)&drmsg);
                 
                 copied = TRUE;
             }
@@ -121,7 +124,7 @@
     if (copied)
     {
         struct pHidd_BitMap_UpdateRect urmsg = {
-            mID     :   ((struct GalliumBase *)GalliumBase)->galliumMId_UpdateRect,
+            mID     :   OOP_GetMethodID(IID_Hidd_BitMap, moHidd_BitMap_UpdateRect),
             x       :   renderableLayerRect.MinX,
             y       :   renderableLayerRect.MinY,
             width   :   renderableLayerRect.MaxX - renderableLayerRect.MinX + 1,

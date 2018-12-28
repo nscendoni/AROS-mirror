@@ -2,7 +2,7 @@
 #define RPC_PMAP_RMT_H
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pmap_rmt.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /* @(#)pmap_rmt.h	2.1 88/07/29 4.0 RPCSRC; from 1.2 88/02/08 SMI */

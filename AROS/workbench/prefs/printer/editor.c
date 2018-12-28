@@ -1,6 +1,6 @@
 /*
-    Copyright © 2003-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2003-2011, The AROS Development Team. All rights reserved.
+    $Id: editor.c 52935 2016-09-13 23:49:15Z mmartinka $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG
@@ -27,7 +27,7 @@
 STATIC CONST_STRPTR ui_Pages[] = {NULL,NULL,NULL};
 
 
-#define UNIT_COUNT 10
+STATIC CONST_STRPTR ui_DeviceUnits[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 
 
 #define UI_DEVICE_PARALLEL      0
@@ -105,7 +105,7 @@ STATIC CONST_STRPTR ui_Dithering[] = {NULL,NULL,NULL,NULL};
 
 struct PrinterEditor_DATA
 {
-    STRPTR UnitLabels[UNIT_COUNT];
+    STRPTR UnitLabels[10];
     int PrinterDeviceUnit;
 
     Object *child;
@@ -158,11 +158,20 @@ STATIC VOID Gadgets2PrinterPrefs(Class *CLASS, Object *self);
 /*** Methods ****************************************************************/
 Object *PrinterEditor__OM_NEW(Class *CLASS, Object *self, struct opSet *message)
 {
-    char buf[64];
-
 	ui_Pages[0] = (STRPTR)__(MSG_PRINTER_DRIVER);
 	ui_Pages[1] = (STRPTR)__(MSG_PRINTER_SETTINGS);
 
+	ui_DeviceUnits[0] = (STRPTR)__(MSG_PRINTER_DEVICE_UNIT0);
+	ui_DeviceUnits[1] = (STRPTR)__(MSG_PRINTER_DEVICE_UNIT1);
+	ui_DeviceUnits[2] = (STRPTR)__(MSG_PRINTER_DEVICE_UNIT2);
+	ui_DeviceUnits[3] = (STRPTR)__(MSG_PRINTER_DEVICE_UNIT3);
+	ui_DeviceUnits[4] = (STRPTR)__(MSG_PRINTER_DEVICE_UNIT4);
+	ui_DeviceUnits[5] = (STRPTR)__(MSG_PRINTER_DEVICE_UNIT5);
+	ui_DeviceUnits[6] = (STRPTR)__(MSG_PRINTER_DEVICE_UNIT6);
+	ui_DeviceUnits[7] = (STRPTR)__(MSG_PRINTER_DEVICE_UNIT7);
+	ui_DeviceUnits[8] = (STRPTR)__(MSG_PRINTER_DEVICE_UNIT8);
+	ui_DeviceUnits[9] = (STRPTR)__(MSG_PRINTER_DEVICE_UNIT9);
+	
 	ui_Port[0] = (STRPTR)__(MSG_PRINTER_PARALLEL);
 	ui_Port[1] = (STRPTR)__(MSG_PRINTER_SERIAL);
 	ui_Port[2] = (STRPTR)__(MSG_PRINTER_TO_FILE);
@@ -220,10 +229,8 @@ Object *PrinterEditor__OM_NEW(Class *CLASS, Object *self, struct opSet *message)
         SETUP_INST_DATA;
 
         data->PrinterDeviceUnit = 0;
-        for (i = 0; i < UNIT_COUNT; i++)
-        {
-            sprintf(buf, _(MSG_PRINTER_DEVICE_UNIT), i);
-            data->UnitLabels[i] = StrDup(buf);
+        for (i = 0; i < 10; i++) {
+            data->UnitLabels[i] = StrDup(ui_DeviceUnits[i]);
         }
 
     #if SHOWPIC
@@ -261,7 +268,6 @@ Object *PrinterEditor__OM_NEW(Class *CLASS, Object *self, struct opSet *message)
                                 MUIA_List_Format, (IPTR) "COL=0",
                                 MUIA_List_AdjustWidth, TRUE,
                                 MUIA_Dirlist_Directory, (IPTR)"DEVS:Printers",
-								MUIA_Dirlist_RejectPattern, (IPTR)"#?.dbg",
                                 MUIA_Dirlist_FilesOnly, TRUE,
                                 MUIA_Dirlist_RejectIcons, TRUE,
                             End),
@@ -496,18 +502,6 @@ Object *PrinterEditor__OM_NEW(Class *CLASS, Object *self, struct opSet *message)
     }
 
     return self;
-}
-
-IPTR PrinterEditor__OM_DISPOSE(Class *CLASS, Object *self, Msg msg)
-{
-    UWORD i;
-
-    SETUP_INST_DATA;
-
-    for (i = 0; i < UNIT_COUNT; i++)
-        FreeVec(data->UnitLabels[i]);
-
-    return DoSuperMethodA(CLASS, self, msg);
 }
 
 static inline LONG todeci(LONG units, double val)
@@ -879,11 +873,10 @@ IPTR PrinterEditor__MUIM_PrinterEditor_Refresh(Class *CLASS, Object *self, Msg m
 }
 
 /*** Setup ******************************************************************/
-ZUNE_CUSTOMCLASS_7
+ZUNE_CUSTOMCLASS_6
 (
     PrinterEditor, NULL, MUIC_PrefsEditor, NULL,
     OM_NEW,                       struct opSet *,
-    OM_DISPOSE,                   Msg,
     MUIM_PrefsEditor_ImportFH,    struct MUIP_PrefsEditor_ImportFH *,
     MUIM_PrefsEditor_ExportFH,    struct MUIP_PrefsEditor_ExportFH *,
     MUIM_PrefsEditor_SetDefaults, Msg,

@@ -1,8 +1,8 @@
-#   $Id$
+#   $Id: mmakefile.src 52361 2016-03-29 14:54:37Z NicJA $
 #
 #   Makefile for xad Tests
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 TESTFILES := \
     CreateFilenameMask \
@@ -16,7 +16,7 @@ EXEDIR := $(AROS_TESTS)/xad
 
 USER_CFLAGS     := -I$(AROS_INCLUDES)/SDI -I$(SRCDIR)/$(CURDIR)/../../../portable/include
 
-#MM- contrib-test : test-xad
+#MM- test : test-xad
 
 #MM  test-xad : includes linklibs xadmaster-includes
 

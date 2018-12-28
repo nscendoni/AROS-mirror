@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: alertextra.c 41954 2011-10-21 11:12:18Z sonic $
 
     Desc: Alert context parsing routines
     Lang: english

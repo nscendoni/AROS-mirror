@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pcideviceclass.c 52756 2016-06-10 17:06:26Z neil $
 
     Desc: PCI device class
     Lang: English
@@ -453,7 +453,7 @@ OOP_Object *PCIDev__Root__New(OOP_Class *cl, OOP_Object *o, struct pRoot_New *ms
             if (ht == PCIHT_BRIDGE)
             {
                 dev->isBridge = 1;
-                dev->secbus = getByte(cl, o, PCIBR_SECBUS);
+                dev->subbus = getByte(cl, o, PCIBR_SUBBUS);
             }
             
             /* Get all constant ID's */
@@ -723,8 +723,8 @@ static void dispatch_pci2pcibridge(OOP_Class *cl, OOP_Object *o, struct pRoot_Ge
             *msg->storage = dev->isBridge;
             break;
         
-        case aoHidd_PCIDevice_SecBus:
-            *msg->storage = dev->secbus;
+        case aoHidd_PCIDevice_SubBus:
+            *msg->storage = dev->subbus;
             break;
         
         case aoHidd_PCIDevice_MemoryBase:
@@ -864,7 +864,7 @@ static const dispatcher_t Dispatcher[num_Hidd_PCIDevice_Attrs] =
 
     /* Bridge attributes */
     [aoHidd_PCIDevice_isBridge]     = dispatch_pci2pcibridge,
-    [aoHidd_PCIDevice_SecBus]       = dispatch_pci2pcibridge,
+    [aoHidd_PCIDevice_SubBus]       = dispatch_pci2pcibridge,
     [aoHidd_PCIDevice_MemoryBase]   = dispatch_pci2pcibridge,
     [aoHidd_PCIDevice_MemoryLimit]  = dispatch_pci2pcibridge,
     [aoHidd_PCIDevice_PrefetchableBase] = dispatch_pci2pcibridge,
@@ -1129,13 +1129,6 @@ void PCIDev__Root__Set(OOP_Class *cl, OOP_Object *o, struct pRoot_Set *msg)
                         if (tag->ti_Data)
                             control |= PCICTRLF_VGAENABLE;
                         setWord(cl, o, PCIBR_CONTROL, control);
-                    }
-                    break;
-                
-                case aoHidd_PCIDevice_INTLine:
-                    {
-                        dev->INTLine = tag->ti_Data;
-                        setByte(cl, o, PCICS_INT_LINE, dev->INTLine);
                     }
                     break;
 

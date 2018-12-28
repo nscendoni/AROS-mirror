@@ -1,11 +1,11 @@
-#   $Id$
+#   $Id: mmakefile.src 52307 2016-03-28 12:37:35Z NicJA $
 #
 #   Generate the startup code.
 #
 
 include $(SRCDIR)/config/aros.cfg
 
-#MM- core-linklibs : linklibs-startup linklibs-startup-$(AROS_TARGET_CPU)
+#MM- core-linklibs : linklibs-startup
 #MM- linklibs: linklibs-startup
 #MM linklibs-startup : linklibs-startup-setup includes includes-copy \
 #MM     compiler-stdc-includes compiler-posixc-includes

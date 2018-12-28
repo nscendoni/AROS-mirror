@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: diskfontfunc.c 45382 2012-08-03 11:02:11Z twilen $
 
     Desc: Hook for handling fonts in FONTS:
     Lang: English.

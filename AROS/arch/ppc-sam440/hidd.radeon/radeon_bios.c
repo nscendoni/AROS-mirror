@@ -1,6 +1,6 @@
 /*
-    Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2004-2007, The AROS Development Team. All rights reserved.
+    $Id: radeon_bios.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: ATI radeon driver. BIOS part.
     Lang: English
@@ -14,7 +14,7 @@
 #include <exec/memory.h>
 
 #include <hidd/hidd.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #include <proto/exec.h>
 #include <proto/oop.h>

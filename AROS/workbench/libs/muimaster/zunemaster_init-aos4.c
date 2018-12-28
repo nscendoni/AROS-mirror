@@ -2,7 +2,7 @@
     Copyright (C) 2003, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: zunemaster_init-aos4.c 30792 2009-03-07 22:40:04Z neil $
     
     This file provides the library initialization for OS4
 */

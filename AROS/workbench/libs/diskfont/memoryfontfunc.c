@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: memoryfontfunc.c 37702 2011-03-21 14:14:07Z jmcmullan $
 
     Desc: Hook for getting font descriptions from memory font list in mem
     Lang: English.

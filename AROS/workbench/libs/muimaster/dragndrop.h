@@ -2,7 +2,7 @@
     Copyright © 2002-2011, The AROS Development Team.
     All rights reserved.
     
-    $Id$
+    $Id: dragndrop.h 43228 2011-12-26 20:26:48Z deadwood $
 */
 
 #ifndef _DRAGNDROP_H

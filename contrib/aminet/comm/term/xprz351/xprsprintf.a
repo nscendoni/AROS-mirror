@@ -1,9 +1,9 @@
 ;--------------------------------------------------------------------------
 ; xprsprintf.a is obviously based upon format.a by Russell McOrmond
 ; which was distributed with xprfts.library and xprclock.library sources
-; $Id$
-; $Revision$
-; $Date$
+; $Id: xprsprintf.a 30794 2009-03-08 02:19:07Z neil $
+; $Revision: 30794 $
+; $Date: 2009-03-08 03:19:07 +0100 (Sun, 08 Mar 2009) $
 ;
 ;--------------------------------------------------------------------------
 

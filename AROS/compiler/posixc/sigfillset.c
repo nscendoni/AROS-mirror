@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sigfillset.c 51634 2016-03-08 14:45:50Z NicJA $
 
     POSIX.1-2008 function sigfillset().
 */

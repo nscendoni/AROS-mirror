@@ -1,6 +1,6 @@
 /*
     Copyright © 2011-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: alloctaskstorageslot.c 51383 2016-01-21 00:29:44Z NicJA $
 */
 
 #include <aros/debug.h>
@@ -48,7 +48,7 @@
     struct Task *ThisTask = GET_THIS_TASK;
     struct TaskStorageFreeSlot *tsfs;
     LONG slot;
-    struct IntETask *iet = ThisTask ? GetIntETask(ThisTask) : NULL;
+    struct IntETask *iet = GetIntETask(ThisTask);
 
     if (!iet)
         return 0;
@@ -57,10 +57,7 @@
     tsfs = (struct TaskStorageFreeSlot *)
         GetHead(&PrivExecBase(SysBase)->TaskStorageSlots);
     if (!tsfs)
-    {
         Alert(AT_DeadEnd|AN_MemoryInsane);
-        __builtin_unreachable();
-    }
 
     slot = tsfs->FreeSlot;
 

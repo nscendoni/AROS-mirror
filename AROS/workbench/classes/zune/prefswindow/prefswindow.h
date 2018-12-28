@@ -6,7 +6,7 @@
     This file is part of the PrefsWindow class, which is distributed under
     the terms of version 2.1 of the GNU Lesser General Public License.
     
-    $Id$
+    $Id: prefswindow.h 32590 2010-02-07 10:16:54Z weissms $
 */
 
 #include <libraries/mui.h>

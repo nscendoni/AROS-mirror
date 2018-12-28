@@ -1,5 +1,5 @@
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 ##MM- contrib-complete : contrib-euae
 
@@ -12,7 +12,7 @@ PKG_VER := $(PACKAGE)-$(VERSION)
 	prefix=$(PROGDIR) \
 	package=$(PACKAGE) version=$(VERSION) patch=yes \
 	package_repo=http://www.rcdrummond.net/uae/$(PKG_VER) \
-	extraoptions="--includedir=$(AROS_INCLUDES) --with-zlib=$(AROS_DEVELOPER)" \
+	extraoptions="--includedir=$(AROS_INCLUDES) --with-zlib=$(AROS_DEVELOPMENT)" \
 	postinstall=euae-copy-files
 
 CP_SRC := $(PORTSDIR)/$(PACKAGE)/$(PKG_VER)

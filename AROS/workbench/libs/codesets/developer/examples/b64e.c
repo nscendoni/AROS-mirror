@@ -20,7 +20,7 @@
  from the source code of SimpleMail (http://www.sf.net/projects/simplemail)
  with full permissions by its authors.
 
- $Id$
+ $Id: b64e.c 51776 2016-03-10 15:08:04Z NicJA $
 
 ***************************************************************************/
 

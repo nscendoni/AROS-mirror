@@ -2,7 +2,7 @@
 #define _PCNET32_H
 
 /*
- * $Id$
+ * $Id: pcnet32.h 45948 2012-10-24 19:59:42Z neil $
  */
 
 /*

@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: bestmodeida.c 51924 2016-03-13 18:41:51Z jmcmullan $
 
     Desc: Graphics function BestModeIDA()
     Lang: english
@@ -9,7 +9,7 @@
 #include <aros/debug.h>
 #include <cybergraphx/cybergraphics.h>
 #include <graphics/modeid.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <proto/graphics.h>
 #include <proto/utility.h>
 #include <proto/oop.h>

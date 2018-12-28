@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: openmonitor.c 40454 2011-08-01 06:45:22Z sonic $
 
     Desc: Graphics function OpenMonitor()
     Lang: english

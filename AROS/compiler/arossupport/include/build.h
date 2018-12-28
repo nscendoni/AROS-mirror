@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: build.h 30792 2009-03-07 22:40:04Z neil $
 */
 
 #define AROS_BUILD_TYPE_PERSONAL  (0)

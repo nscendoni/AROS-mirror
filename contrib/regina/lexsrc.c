@@ -1846,7 +1846,7 @@ char *yytext;
 #define INITIAL 0
 #line 2 "./lexsrc.l"
 #ifndef lint
-static char *RCSid = "$Id$";
+static char *RCSid = "$Id: lexsrc.c 43446 2012-01-02 08:07:38Z jmcmullan $";
 #endif
 
 /*

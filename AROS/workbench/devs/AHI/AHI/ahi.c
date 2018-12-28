@@ -1,6 +1,5 @@
 /*
      AHI - The AHI preferences program
-     Copyright (C) 2017 The AROS Dev Team
      Copyright (C) 1996-2005 Martin Blom <martin@blom.org>
      
      This program is free software; you can redistribute it and/or
@@ -17,9 +16,6 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
-
-#define DEBUG 1
-#include <aros/debug.h>
 
 #include <config.h>
 
@@ -83,8 +79,6 @@ int main(int argc, char **argv) {
   struct RDArgs *rdargs = NULL;
   int i;
   char pubscreen[32];
-
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
 
   if(argc) {
     rdargs=ReadArgs( TEMPLATE , (SIPTR *) &args, NULL);
@@ -208,8 +202,6 @@ int main(int argc, char **argv) {
 ******************************************************************************/
 
 void NewSettings(char *name) {
-  D(bug("[AHI:Prefs] %s('%s')\n", __func__, name);)
-
   FreeVec(Units);
   FreeList(UnitList);
 
@@ -234,10 +226,8 @@ void NewSettings(char *name) {
 
 void NewUnit(int selectedunit) {
   struct UnitNode *unit;
-  IPTR id, modeselected;
+  ULONG id, modeselected;
   struct ModeNode *mode;
-
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
 
   unit = (struct UnitNode *) GetNode(selectedunit, UnitList);
 
@@ -274,13 +264,11 @@ void NewUnit(int selectedunit) {
 void NewMode(int selectedmode) {
   struct UnitNode *unit = NULL;
   struct ModeNode *mode = NULL;
-  IPTR id = AHI_INVALID_ID;
-  SIPTR MinOutVol = 0, MaxOutVol = 0, MinMonVol = 0, MaxMonVol = 0;
-  SIPTR MinGain = 0, MaxGain = 0;
+  ULONG id = AHI_INVALID_ID;
+  Fixed MinOutVol = 0, MaxOutVol = 0, MinMonVol = 0, MaxMonVol = 0;
+  Fixed MinGain = 0, MaxGain = 0;
   double Min, Max, Current;
   int offset;
-
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
 
   state.ModeSelected = selectedmode;
 
@@ -293,30 +281,28 @@ void NewMode(int selectedmode) {
 
   if( mode != NULL )
   {
-    D(bug("[AHI:Prefs] %s: Mode %08x\n", __func__, mode);)
-
     id = mode->ID;
     
     AHI_GetAudioAttrs(id, NULL,
 		      AHIDB_IndexArg,         unit->prefs.ahiup_Frequency,
-		      AHIDB_Index,            (IPTR) &state.FreqSelected,
-		      AHIDB_Frequencies,      (IPTR) &state.Frequencies,
-		      AHIDB_MaxChannels,      (IPTR) &state.Channels,
-		      AHIDB_Inputs,           (IPTR) &state.Inputs,
-		      AHIDB_Outputs,          (IPTR) &state.Outputs,
-		      AHIDB_MinOutputVolume,  (IPTR) &MinOutVol,
-		      AHIDB_MaxOutputVolume,  (IPTR) &MaxOutVol,
-		      AHIDB_MinMonitorVolume, (IPTR) &MinMonVol,
-		      AHIDB_MaxMonitorVolume, (IPTR) &MaxMonVol,
-		      AHIDB_MinInputGain,     (IPTR) &MinGain,
-		      AHIDB_MaxInputGain,     (IPTR) &MaxGain,
+		      AHIDB_Index,            (ULONG) &state.FreqSelected,
+		      AHIDB_Frequencies,      (ULONG) &state.Frequencies,
+		      AHIDB_MaxChannels,      (ULONG) &state.Channels,
+		      AHIDB_Inputs,           (ULONG) &state.Inputs,
+		      AHIDB_Outputs,          (ULONG) &state.Outputs,
+		      AHIDB_MinOutputVolume,  (ULONG) &MinOutVol,
+		      AHIDB_MaxOutputVolume,  (ULONG) &MaxOutVol,
+		      AHIDB_MinMonitorVolume, (ULONG) &MinMonVol,
+		      AHIDB_MaxMonitorVolume, (ULONG) &MaxMonVol,
+		      AHIDB_MinInputGain,     (ULONG) &MinGain,
+		      AHIDB_MaxInputGain,     (ULONG) &MaxGain,
 
 		      AHIDB_BufferLen,        128,
-		      AHIDB_Author,           (IPTR) authorBuffer,
-		      AHIDB_Copyright,        (IPTR) copyrightBuffer,
-		      AHIDB_Driver,           (IPTR) driverBuffer,
-		      AHIDB_Version,          (IPTR) versionBuffer,
-		      AHIDB_Annotation,       (IPTR) annotationBuffer,
+		      AHIDB_Author,           (ULONG) authorBuffer,
+		      AHIDB_Copyright,        (ULONG) copyrightBuffer,
+		      AHIDB_Driver,           (ULONG) driverBuffer,
+		      AHIDB_Version,          (ULONG) versionBuffer,
+		      AHIDB_Annotation,       (ULONG) annotationBuffer,
 		      TAG_DONE);
   }
 
@@ -453,8 +439,6 @@ void FillUnit() {
   struct ModeNode *mode = NULL;
   double db;
 
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   unit = (struct UnitNode *) GetNode(state.UnitSelected, UnitList);
 
   if(unit->prefs.ahiup_Unit != AHI_NO_UNIT) {
@@ -475,7 +459,7 @@ void FillUnit() {
 
     AHI_GetAudioAttrs(mode->ID, NULL,
 		      AHIDB_FrequencyArg, state.FreqSelected,
-		      AHIDB_Frequency,    (IPTR) &unit->prefs.ahiup_Frequency,
+		      AHIDB_Frequency,    (ULONG) &unit->prefs.ahiup_Frequency,
 		      TAG_DONE);
   }
 
@@ -510,13 +494,9 @@ char *getFreq(void) {
   LONG freq = 0;
   struct ModeNode *mode = NULL;
 
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   if( state.ModeSelected != ~0 )
   {
     mode = (struct ModeNode *) GetNode(state.ModeSelected, ModeList);
-  } else {
-    return NULL;
   }
 
   if( mode != NULL )
@@ -524,10 +504,8 @@ char *getFreq(void) {
     AHI_GetAudioAttrs(
       mode->ID, NULL,
       AHIDB_FrequencyArg, state.FreqSelected,
-      AHIDB_Frequency,    (IPTR) &freq,
+      AHIDB_Frequency,    (ULONG) &freq,
       TAG_DONE);
-  } else {
-    return NULL;
   }
 
   sprintf(freqBuffer, msgFreqFmt, freq);
@@ -536,8 +514,6 @@ char *getFreq(void) {
 
 
 char *getChannels(void) {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   if(state.ChannelsDisabled) {
     sprintf(chanBuffer, (char *) msgOptNoChannels);
   }
@@ -549,8 +525,6 @@ char *getChannels(void) {
 
 char *getOutVol(void) {
   int selected = state.OutVolSelected;
-
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
 
   if(state.OutVolMute) {
     if(selected == 0) {
@@ -569,8 +543,6 @@ char *getOutVol(void) {
 char *getMonVol(void) {
   int selected = state.MonVolSelected;
 
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   if(state.MonVolMute) {
     if(selected == 0) {
       sprintf(monvolBuffer, (char *) msgOptMuted);
@@ -588,14 +560,11 @@ char *getMonVol(void) {
 char *getGain(void) {
   int selected = state.GainSelected;
 
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   sprintf(gainBuffer, msgVolFmt, state.GainOffset + (selected * DBSTEP));
   return gainBuffer;
 }
 
 char *getInput(void) {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
 
   if(Inputs[0]) {
     return Inputs[state.InputSelected];
@@ -604,7 +573,6 @@ char *getInput(void) {
 }
 
 char *getOutput(void) {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
 
   if(Outputs[0]) {
     return Outputs[state.OutputSelected];
@@ -612,11 +580,10 @@ char *getOutput(void) {
   return (char *) msgOptNoOutputs;
 }
 
-IPTR getAudioMode(void) {
+ULONG getAudioMode(void) {
+
   struct ModeNode * mode = NULL;
   
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   if( state.ModeSelected == ~0 )
   {
     return AHI_INVALID_ID;
@@ -633,10 +600,8 @@ IPTR getAudioMode(void) {
 }
 
 char *getRecord(void) {
-  IPTR record = FALSE, fullduplex = FALSE;
+  ULONG record = FALSE, fullduplex = FALSE;
   struct ModeNode *mode = NULL;
-
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
 
   if( state.ModeSelected != ~0 )
   {
@@ -647,8 +612,8 @@ char *getRecord(void) {
   {
     AHI_GetAudioAttrs(
       mode->ID, NULL,
-      AHIDB_Record,     (IPTR) &record,
-      AHIDB_FullDuplex, (IPTR) &fullduplex,
+      AHIDB_Record,     (ULONG) &record,
+      AHIDB_FullDuplex, (ULONG) &fullduplex,
       TAG_DONE);
   }
   
@@ -657,27 +622,22 @@ char *getRecord(void) {
 }
 
 char *getAuthor(void) {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
   return authorBuffer;
 }
 
 char *getCopyright(void) {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
   return copyrightBuffer;
 }
 
 char *getDriver(void) {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
   return driverBuffer;
 }
 
 char *getVersion(void) {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
   return versionBuffer;
 }
 
 char *getAnnotation(void) {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
   return annotationBuffer;
 }
 

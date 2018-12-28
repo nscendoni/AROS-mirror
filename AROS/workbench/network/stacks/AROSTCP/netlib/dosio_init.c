@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: dosio_init.c 50462 2015-04-25 19:56:48Z schulz $
  *
  *      dosio_init.c - SAS C auto initialization functions for DOSIO
  *

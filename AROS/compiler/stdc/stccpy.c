@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stccpy.c 48031 2013-09-08 21:16:04Z verhaegs $
 
     SAS/C function stccpy().
 */

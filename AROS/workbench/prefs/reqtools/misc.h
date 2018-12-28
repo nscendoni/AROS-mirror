@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: misc.h 48088 2013-09-12 01:51:21Z NicJA $
 */
 
 /*** Prototypes *************************************************************/

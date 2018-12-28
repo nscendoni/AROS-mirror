@@ -27,7 +27,7 @@ static void I(stabline)(Coordinate *cp) {}
 static void I(stabsym)(Symbol p) {}
 static void I(stabtype)(Symbol p) {}
 
-static char rcsid[] = "$Id$";
+static char rcsid[] = "$Id: null.c 30794 2009-03-08 02:19:07Z neil $";
 
 Interface nullIR = {
 	1, 1, 0,	/* char */

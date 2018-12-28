@@ -1,7 +1,7 @@
 /*
     Copyright  1995-2011, The AROS Development Team. All rights reserved.
     Copyright  2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: menudecorclass.c 44221 2012-02-23 22:26:15Z mazze $
 */
 
 

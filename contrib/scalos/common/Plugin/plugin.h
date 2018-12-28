@@ -1,6 +1,6 @@
 // plugin.h
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 21:39:37 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51980 $
 
 // Include "plugin_data.h" without PLUGIN_H_INCLUDED defined to make it also work
 // when "plugin.h" is (indirectly) included from "plugin_data.h"

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getbitmapattr.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Get an attribute from a bitmap.
     Lang: english
@@ -74,7 +74,13 @@
 	case BMA_DEPTH:
 	    if (IS_HIDD_BM(bitmap))
 	    {
-	    	retval = (IPTR)HIDD_BM_REALDEPTH(bitmap);
+	        /* ABI_V0 compatibility */
+	        /* Enable GetBitMapAttr(&Screen->BitMap, BMA_DEPTH). Example: AmiStart */
+	        struct BitMap * btemp = bitmap;
+	        if (bitmap->Planes[0] == (APTR)0xfeedbaa1)
+	            btemp = (struct BitMap *)bitmap->Planes[1];
+
+	        retval = (IPTR)HIDD_BM_REALDEPTH(btemp);
 	    }
 	    else
 	    {

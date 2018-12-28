@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mathffp_intern.h 48973 2014-04-25 15:54:49Z neil $
 */
 #ifndef __MATHFFP_INTERN_H__
 #define __MATHFFP_INTERN_H__

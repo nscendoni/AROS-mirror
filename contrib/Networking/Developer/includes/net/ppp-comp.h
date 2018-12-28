@@ -2,7 +2,7 @@
 #define _NET_PPP_COMP_H
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ppp-comp.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ppp-comp.h,v 1.4 1998/05/08 05:02:01 millert Exp $	*/

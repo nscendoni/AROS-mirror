@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Break.c 46041 2012-11-14 07:14:22Z mazze $
 
     Desc: Break - send a signal to a process.
     Lang: english

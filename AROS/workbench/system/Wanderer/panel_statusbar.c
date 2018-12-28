@@ -1,6 +1,6 @@
 /*
   Copyright  2004-2013, The AROS Development Team. All rights reserved.
-  $Id$
+  $Id: panel_statusbar.c 52675 2016-04-20 23:23:06Z NicJA $
 */
 
 #include "portable_macros.h"

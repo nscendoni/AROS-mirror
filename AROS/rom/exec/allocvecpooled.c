@@ -1,6 +1,6 @@
 /*
     Copyright � 2003-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: allocvecpooled.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <aros/libcall.h>
@@ -21,7 +21,7 @@
         AROS_LHA(IPTR, memSize, D0),
 
 /*  LOCATION */
-        struct ExecBase *, SysBase, 169, Exec)
+        struct ExecBase *, SysBase, 149, Exec)
 
 /*  FUNCTION
         Allocate memory out of a private memory pool and remember the size.

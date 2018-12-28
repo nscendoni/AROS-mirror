@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: efi_init.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <aros/debug.h>
@@ -23,7 +23,8 @@ static BOOL CheckTable(struct EFI_TableHeader *t, UQUAD sig)
     return TRUE;
 }
 
-AROS_INTH1(static ResetHandler, struct EFIBase *, EFIBase)
+/* ABI_V0 compatibility */
+AROS_SOFTINTH1(static ResetHandler, struct EFIBase *, EFIBase)
 {
     AROS_INTFUNC_INIT
 

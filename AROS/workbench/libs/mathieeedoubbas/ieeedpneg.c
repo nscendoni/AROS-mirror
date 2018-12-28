@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2003, The AROS Development Team. All rights reserved.
+    $Id: ieeedpneg.c 47354 2013-05-04 17:12:25Z mazze $
 */
 
 #include "mathieeedoubbas_intern.h"
@@ -18,31 +18,23 @@
         struct MathIeeeDoubBasBase *, MathIeeeDoubBasBase, 10, MathIeeeDoubBas)
 
 /*  FUNCTION
-        Switches the sign of the given IEEE double precision floating point
-        number.
+	Switch the sign of the given IEEE double precision
+        floating point number
 
     INPUTS
-        y - IEEE double precision floating point number.
 
     RESULT
-	x - the negation of y.
+	-y
 
 	Flags:
 	  zero	   : result is zero
 	  negative : result is negative
 	  overflow : 0
 
-    NOTES
-
-    EXAMPLE
-
     BUGS
 
-    SEE ALSO
-        IEEEDPAbs()
-
     INTERNALS
-        Algorithm:
+        ALGORITHM:
 	Flip the sign-bit (even for zeroes).
 
 *****************************************************************************/

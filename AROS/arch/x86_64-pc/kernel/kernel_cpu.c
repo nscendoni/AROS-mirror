@@ -1,80 +1,41 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: kernel_cpu.c 49667 2014-09-30 17:35:27Z neil $
 */
 
-#define __KERNEL_NOLIBBASE__
-
-#include <aros/types/timespec_s.h>
 #include <exec/lists.h>
 #include <exec/tasks.h>
 #include <exec/execbase.h>
 #include <hardware/intbits.h>
 #include <proto/exec.h>
-#include <proto/kernel.h>
-
-#include "etask.h"
 
 #include "kernel_base.h"
 #include "kernel_intern.h"
-#include "kernel_debug.h"
-#include "kernel_globals.h"
-#include "kernel_scheduler.h"
 #include "kernel_intr.h"
-
-#include "apic.h"
-#include "apic_ia32.h"
-
-#define AROS_NO_ATOMIC_OPERATIONS
-#include <exec_platform.h>
-
-/*
- * NB - Enabling DSCHED() with safedebug enabled CAN cause
- * lockups!
- */
-#ifdef DEBUG
-#undef DEBUG
-#endif
-
-#define DEBUG 0
-
- #if (DEBUG > 0)
-#define DSCHED(x) x
-#else
-#define DSCHED(x)
-#endif
+#include "kernel_scheduler.h"
 
 void cpu_Dispatch(struct ExceptionContext *regs)
 {
     struct Task *task;
     struct ExceptionContext *ctx;
-#if defined(__AROSEXEC_SMP__) || (DEBUG > 0)
-    apicid_t cpunum = KrnGetCPUNumber();
-#endif
 
-    DSCHED(
-        bug("[Kernel:%03u] cpu_Dispatch()\n", cpunum);
-    )
-    
     /* 
-     * Is the list of ready tasks empty? Well, increment the idle switch count and halt CPU.
+     * Is the list of ready tasks empty? Well, increment the idle switch cound and halt CPU.
+     * It should be extended by some plugin mechanism which would put CPU and whole machine
+     * into some more sophisticated sleep states (ACPI?)
      */
     while (!(task = core_Dispatch()))
     {
-        /* Sleep until we receive an interupt....*/
-        DSCHED(
-            bug("[Kernel:%03u] cpu_Dispatch: Nothing to do .. sleeping...\n", cpunum);
-        )
-
+        /* Sleep almost forever ;) */
         __asm__ __volatile__("sti; hlt; cli");
 
         if (SysBase->SysFlags & SFF_SoftInt)
             core_Cause(INTB_SOFTINT, 1l << INTB_SOFTINT);
     }
 
-    DSCHED(
-        bug("[Kernel:%03u] cpu_Dispatch: Task to Run @ 0x%p\n", cpunum, task);
-    )
+    /* TODO: Handle exception
+    if (task->tc_Flags & TF_EXCEPT)
+        Exception(); */
 
     /* Get task's context */
     ctx = task->tc_UnionETask.tc_ETask->et_RegFrame;
@@ -86,20 +47,6 @@ void cpu_Dispatch(struct ExceptionContext *regs)
     if (ctx->Flags & ECF_FPX)
 	asm volatile("fxrstor (%0)"::"r"(ctx->FXData));
 
-#if defined(__AROSEXEC_SMP__)
-    IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuNumber = cpunum;
-#endif
-
-    /* TODO: Handle exception
-    if (task->tc_Flags & TF_EXCEPT)
-        Exception(); */
-
-    /* Store the launch time */
-    IntETask(task->tc_UnionETask.tc_ETask)->iet_private1 = RDTSC();
-
-    DSCHED(
-        bug("[Kernel:%03u] cpu_Dispatch: Leaving...\n", cpunum);
-    )
     /*
      * Leave interrupt and jump to the new task.
      * We will restore CPU state right from this buffer,
@@ -110,70 +57,26 @@ void cpu_Dispatch(struct ExceptionContext *regs)
 
 void cpu_Switch(struct ExceptionContext *regs)
 {
-    struct Task *task;
-    struct ExceptionContext *ctx;
-    UQUAD timeCur = 0;
-    struct timespec timeSpec;
-    apicid_t cpunum = KrnGetCPUNumber();
-    struct APICData *apicData;
-    apicData  = KernelBase->kb_PlatformData->kb_APIC;
+    struct Task *task = SysBase->ThisTask;
+    struct ExceptionContext *ctx = task->tc_UnionETask.tc_ETask->et_RegFrame;
 
-    DSCHED(bug("[Kernel:%03u] cpu_Switch()\n", cpunum);)
+    /*
+     * Copy current task's context into the ETask structure. Note that context on stack
+     * misses SSE data pointer.
+     */
+    CopyMemQuick(regs, ctx, sizeof(struct ExceptionContext) - sizeof(struct FPXContext *));
 
-    task = GET_THIS_TASK;
+    /*
+     * Copy the fpu, mmx, xmm state
+     * TODO: Change to the lazy saving of the XMM state!!!!
+     */
+    asm volatile("fxsave (%0)"::"r"(ctx->FXData));
 
-    if (task)
-    {
-        timeCur = RDTSC();
+    /* We have the complete data now */
+    ctx->Flags = ECF_SEGMENTS | ECF_FPX;
 
-        ctx = task->tc_UnionETask.tc_ETask->et_RegFrame;
+    /* Set task's tc_SPReg */
+    task->tc_SPReg = (APTR)regs->rsp;
 
-        /*
-        * Copy current task's context into the ETask structure. Note that context on stack
-        * misses SSE data pointer.
-        */
-        CopyMemQuick(regs, ctx, sizeof(struct ExceptionContext) - sizeof(struct FPXContext *));
-
-        /*
-        * Copy the fpu, mmx, xmm state
-        * TODO: Change to the lazy saving of the XMM state!!!!
-        */
-        asm volatile("fxsave (%0)"::"r"(ctx->FXData));
-
-        /* We have the complete data now */
-        ctx->Flags = ECF_SEGMENTS | ECF_FPX;
-
-        /* Set task's tc_SPReg */
-        task->tc_SPReg = (APTR)regs->rsp;
-
-        if (apicData && apicData->cores[cpunum].cpu_TimerFreq && timeCur)
-        {
-            /*
-            if (timeCur < IntETask(task->tc_UnionETask.tc_ETask)->iet_private1)
-                timeCur = IntETask(task->tc_UnionETask.tc_ETask)->iet_private1 - timeCur;
-            else
-                timeCur = IntETask(task->tc_UnionETask.tc_ETask)->iet_private1 + apicData->cores[cpunum].cpu_TimerFreq - timeCur;
-            */
-            timeCur -= IntETask(task->tc_UnionETask.tc_ETask)->iet_private1;
-            
-            /* Increase CPU Usage cycles */
-            IntETask(task->tc_UnionETask.tc_ETask)->iet_private2 += timeCur;
-
-            // Convert TSC cycles into nanoseconds
-            timeCur = (timeCur * 1000000000) / apicData->cores[cpunum].cpu_TSCFreq;
-
-            /* Update the task's CPU time */
-            timeSpec.tv_sec = timeCur / 1000000000;
-            timeSpec.tv_nsec = timeCur % 1000000000;
-
-            IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuTime.tv_nsec += timeSpec.tv_nsec;
-            IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuTime.tv_sec  += timeSpec.tv_sec;
-            while(IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuTime.tv_nsec >= 1000000000)
-            {
-                IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuTime.tv_nsec -= 1000000000;
-                IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuTime.tv_sec++;
-            }
-        }
-    }
     core_Switch();
 }

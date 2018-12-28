@@ -1,5 +1,5 @@
 #   Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-#   $Id$
+#   $Id: Makefile 52530 2016-04-04 18:58:47Z NicJA $
 #
 #   Desc: Makefile for ilbmtoicon
 #

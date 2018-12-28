@@ -14,7 +14,7 @@
 
  openurl.library project: http://sourceforge.net/projects/openurllib/
 
- $Id$
+ $Id: utils.c 49589 2014-09-08 18:47:02Z mazze $
 
 ***************************************************************************/
 
@@ -604,7 +604,7 @@ BOOL sendToMailer(STRPTR URL, struct List *portlist, ULONG flags, STRPTR pubScre
     struct URL_MailerNode *mn;
     STRPTR                start, end, data, address = NULL, subject = NULL, body = NULL,
                           cmd = NULL, *tag;
-    TEXT                  fileName[36];
+    TEXT                  fileName[32];
     BOOL                  res = FALSE, written = FALSE;
     UWORD                 offset, len;
 

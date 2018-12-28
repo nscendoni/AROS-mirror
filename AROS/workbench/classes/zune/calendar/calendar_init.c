@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: calendar_init.c 38039 2011-04-04 08:44:23Z sonic $
 */
 
 #include <exec/types.h>

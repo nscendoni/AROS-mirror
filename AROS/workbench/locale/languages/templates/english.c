@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: english.c 49675 2014-10-01 18:37:17Z deadwood $
 
     Desc: english.language description file.
 */

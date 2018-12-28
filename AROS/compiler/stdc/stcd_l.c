@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stcd_l.c 50953 2015-07-13 18:23:51Z jmcmullan $
 
     SAS/C function stcd_l().
 */

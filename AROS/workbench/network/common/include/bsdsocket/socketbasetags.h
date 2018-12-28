@@ -1,7 +1,7 @@
 #ifndef BSDSOCKET_SOCKETBASETAGS_H
 #define BSDSOCKET_SOCKETBASETAGS_H
 /*
- * $Id$
+ * $Id: socketbasetags.h 48699 2014-01-11 17:39:44Z jmcmullan $
  *
  * Copyright (c) 1994 AmiTCP/IP Group, <amitcp-group@hut.fi>
  *                    Helsinki University of Technology, Finland.

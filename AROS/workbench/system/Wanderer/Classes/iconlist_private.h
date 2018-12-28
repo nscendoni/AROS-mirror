@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: iconlist_private.h 48117 2013-09-23 16:50:43Z neil $
 */
 
 #ifndef _ICONLIST_PRIVATE_H_

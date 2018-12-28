@@ -3,8 +3,8 @@
 /*
 **	$VER: scalos_pattern.h 40.33 (14 Apr 2005 19:41:04)
 **
-** $Date$
-** $Revision$
+** $Date: 2016-03-19 07:18:51 +0100 (Sat, 19 Mar 2016) $
+** $Revision: 52061 $
 **
 **	File format for scalos_menu preferences
 **

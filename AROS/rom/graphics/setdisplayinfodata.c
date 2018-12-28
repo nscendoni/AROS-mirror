@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setdisplayinfodata.c 48424 2013-11-18 09:28:30Z neil $
 
     Desc: Store a display mode information in the database
     Lang: english

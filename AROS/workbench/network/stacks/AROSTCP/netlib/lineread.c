@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: lineread.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      lineread.c - functions to read lines from sockets effectively
  *

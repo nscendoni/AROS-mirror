@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2005, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stringlist.c 48665 2013-12-31 08:20:42Z mazze $
 
     Code to handle list of strings
 */

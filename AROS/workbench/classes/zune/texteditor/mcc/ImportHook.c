@@ -16,7 +16,7 @@
 
  TextEditor class Support Site:  http://www.sf.net/projects/texteditor-mcc
 
- $Id$
+ $Id: ImportHook.c 52756 2016-06-10 17:06:26Z neil $
 
 ***************************************************************************/
 

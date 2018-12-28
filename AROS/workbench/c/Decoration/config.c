@@ -1,6 +1,6 @@
 /*
     Copyright  2011-2012, The AROS Development Team.
-    $Id$
+    $Id: config.c 47969 2013-09-04 22:53:23Z NicJA $
 */
 
 #include <proto/dos.h>

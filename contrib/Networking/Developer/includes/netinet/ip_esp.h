@@ -2,7 +2,7 @@
 #define _NETINET_ESP_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ip_esp.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ip_esp.h,v 1.32 2000/03/17 10:25:22 angelos Exp $	*/

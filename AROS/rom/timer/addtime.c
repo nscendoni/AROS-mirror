@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: addtime.c 38303 2011-04-22 06:55:14Z sonic $
 
     Desc: AddTime() - add two timeval's together.
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: createmidia.c 30792 2009-03-07 22:40:04Z neil $
 */
 
 #include <proto/utility.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2005, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sliderclass.c 43432 2012-01-01 20:15:00Z jmcmullan $
 
     Internal GadTools slider class.
 */

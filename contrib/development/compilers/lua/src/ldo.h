@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: ldo.h 44506 2012-04-03 09:22:53Z mazze $
 ** Stack and Call structure of Lua
 ** See Copyright Notice in lua.h
 */

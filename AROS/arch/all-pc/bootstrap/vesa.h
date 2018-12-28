@@ -1,6 +1,6 @@
 /*
     Copyright © 2007-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vesa.h 41961 2011-10-21 19:53:35Z sonic $
 
     Desc: VBE-related definitions.
     Lang: english

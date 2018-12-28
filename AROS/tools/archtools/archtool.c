@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: archtool.c 49929 2015-01-22 20:37:19Z NicJA $
 */
 
 #include <stdio.h>

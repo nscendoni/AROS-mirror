@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2010-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: seek.h 50458 2015-04-24 14:53:27Z neil $
 
     SEEK_SET, SEEK_CUR, SEEK_END
 */

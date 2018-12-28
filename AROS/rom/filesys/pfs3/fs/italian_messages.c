@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: italian_messages.c 48424 2013-11-18 09:28:30Z neil $ */
 /* $Log: messages.c $
  * Revision 1.9  1999/03/09  10:31:35  Michiel
  * 00110: definizione numero di release

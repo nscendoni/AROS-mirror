@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setplayerattrsa.c 51341 2016-01-18 22:48:14Z NicJA $
 */
 # define  DEBUG 0
 # include <aros/debug.h>

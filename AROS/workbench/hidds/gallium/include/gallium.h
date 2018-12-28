@@ -2,8 +2,8 @@
 #define HIDD_GALLIUM_H
 
 /*
-    Copyright 2010-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright 2010-2011, The AROS Development Team. All rights reserved.
+    $Id: gallium.h 50935 2015-07-07 23:54:10Z NicJA $
 */
 
 #ifndef EXEC_TYPES_H
@@ -54,20 +54,20 @@ extern OOP_AttrBase HiddGalliumAttrBase;
 enum
 {
     moHidd_Gallium_CreatePipeScreen = 0,
+    moHidd_Gallium_DisplaySurface = 2, /* This method is OBSOLETE */
     moHidd_Gallium_DisplayResource,
-    moHidd_Gallium_DestroyPipeScreen,
 
     NUM_GALLIUM_METHODS
 };
 
 enum
 {
-    aoHidd_Gallium_InterfaceVersion = 0,
+    aoHidd_Gallium_GalliumInterfaceVersion = 0,
     
     num_Hidd_Gallium_Attrs
 };
 
-#define aHidd_Gallium_InterfaceVersion  (HiddGalliumAttrBase + aoHidd_Gallium_InterfaceVersion)
+#define aHidd_Gallium_GalliumInterfaceVersion  (HiddGalliumAttrBase + aoHidd_Gallium_GalliumInterfaceVersion)
 
 #define IS_GALLIUM_ATTR(attr, idx) \
     (((idx) = (attr) - HiddGalliumAttrBase) < num_Hidd_Gallium_Attrs)
@@ -77,10 +77,20 @@ struct pHidd_Gallium_CreatePipeScreen
     STACKED OOP_MethodID    mID;
 };
 
-struct pHidd_Gallium_DestroyPipeScreen
+struct pHidd_Gallium_DisplaySurface
 {
-    STACKED OOP_MethodID    mID;
-    STACKED APTR    screen;
+    STACKED OOP_MethodID            mID;
+    STACKED APTR                    context;
+    STACKED struct RastPort         *rastport;
+    STACKED ULONG                   left;
+    STACKED ULONG                   top;
+    STACKED ULONG                   width;
+    STACKED ULONG                   height;
+    STACKED struct pipe_surface     *surface;
+    STACKED ULONG                   absx;
+    STACKED ULONG                   absy;
+    STACKED ULONG                   relx;
+    STACKED ULONG                   rely;
 };
 
 struct pHidd_Gallium_DisplayResource

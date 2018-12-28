@@ -1,6 +1,6 @@
 /*
     Copyright © 2007-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: DiskChange.c 49254 2014-08-07 21:48:03Z polluks $
 
     Desc: DiskChange CLI command
     Lang: English

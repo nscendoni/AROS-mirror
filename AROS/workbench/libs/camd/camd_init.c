@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: camd_init.c 36648 2011-01-17 14:31:59Z neil $
 
     Camd initialization code.
 */

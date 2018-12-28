@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gfxassociate.c 33310 2010-05-19 10:54:36Z sonic $
 
     Desc:
     Lang: english

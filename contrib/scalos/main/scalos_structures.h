@@ -1,6 +1,6 @@
 // scalos_structures.h
-// $Date$
-// $Revision$
+// $Date: 2016-03-14 18:22:38 +0100 (Mon, 14 Mar 2016) $
+// $Revision: 51943 $
 
 
 #ifndef	SCALOS_STRUCTURES_H

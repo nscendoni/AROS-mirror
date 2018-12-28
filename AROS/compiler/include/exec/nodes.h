@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: nodes.h 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #ifndef EXEC_NODES_H
@@ -9,7 +9,7 @@
 /******************************************************************************
 
     MODUL
-	$Id$
+	$Id: nodes.h 53132 2016-12-29 10:32:06Z deadwood $
 
     DESCRIPTION
 	Header-file for nodes.
@@ -33,9 +33,14 @@ struct Node
 {
     struct Node * ln_Succ,
 		* ln_Pred;
+#if defined(__i386__)
+    char	* ln_Name;  /* ABI_V0 compatibility */
+#endif
     UBYTE	  ln_Type;
     BYTE	  ln_Pri;
+#if !defined(__i386__)
     char	* ln_Name;
+#endif
 };
 
 struct __mayalias MinNode;

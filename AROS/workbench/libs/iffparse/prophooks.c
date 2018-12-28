@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prophooks.c 37149 2011-02-22 18:41:29Z jmcmullan $
 
     Hook funtions needed for PropChunk().
 */

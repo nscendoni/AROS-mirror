@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: shell_helper.c 44379 2012-03-07 21:05:22Z neil $
 
     Desc:
     Lang: English

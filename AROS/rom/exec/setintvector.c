@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2001, The AROS Development Team. All rights reserved.
+    $Id: setintvector.c 47748 2013-07-21 21:40:34Z jmcmullan $
 
     Desc: Install an interrupt handler.
     Lang: english
@@ -10,9 +10,7 @@
 #include <proto/exec.h>
 #include <aros/libcall.h>
 
-#include "exec_intern.h"
 #include "exec_debug.h"
-#include "exec_locks.h"
 
 /*****************************************************************************
 
@@ -51,7 +49,7 @@
 
     ExecLog(SysBase, EXECDEBUGF_EXCEPTHANDLER, "SetIntVector: Int %d, Interrupt %p\n", intNumber, interrupt);
 
-    EXEC_LOCK_LIST_WRITE_AND_DISABLE(&SysBase->IntrList);
+    Disable ();
 
     oldint = (struct Interrupt *)SysBase->IntVects[intNumber].iv_Node;
     SysBase->IntVects[intNumber].iv_Node = ishandler ? (struct Node *)interrupt : NULL;
@@ -67,7 +65,7 @@
 	SysBase->IntVects[intNumber].iv_Code = (void *)~0;
     }
 
-    EXEC_UNLOCK_LIST_AND_ENABLE(&SysBase->IntrList);
+    Enable ();
 
     return oldint;
 

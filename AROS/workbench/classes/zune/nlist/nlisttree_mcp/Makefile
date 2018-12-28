@@ -16,7 +16,7 @@
 #
 # NList classes Support Site:  http://www.sf.net/projects/nlist-classes
 #
-# $Id$
+# $Id: Makefile 49441 2014-08-16 12:12:16Z mazze $
 #
 #***************************************************************************/
 

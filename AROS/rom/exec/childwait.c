@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: childwait.c 50724 2015-05-20 01:13:37Z NicJA $
 
     ChildWait() - Wait for a task to finish it processing.
 */
@@ -76,7 +76,7 @@
 
 	Firstly, are we a new-style Task?
     */
-    if (!ThisTask || (ThisTask->tc_Flags & TF_ETASK) == 0)
+    if ((ThisTask->tc_Flags & TF_ETASK) == 0)
 	return CHILD_NOTNEW;
 
     et = ThisTask->tc_UnionETask.tc_ETask;
@@ -87,27 +87,17 @@
            This is how we need it to be.
     */
     Forbid();
+
     /* We do not return until the condition is met */
     for (;;)
     {
-#if defined(__AROSEXEC_SMP__)
-        EXEC_SPINLOCK_LOCK(&et->et_TaskMsgPort.mp_SpinLock, NULL, SPINLOCK_MODE_READ);
-#endif
 	/* Check if it has returned already. This will also take the first. */
 	ForeachNode(&et->et_TaskMsgPort.mp_MsgList, child)
 	{
 	    if (tid == 0 || child->et_UniqueID == tid)
-            {
-#if defined(__AROSEXEC_SMP__)
-                EXEC_SPINLOCK_UNLOCK(&et->et_TaskMsgPort.mp_SpinLock);
-#endif
 		goto child_exited;
-            }
 	}
 
-#if defined(__AROSEXEC_SMP__)
-        EXEC_SPINLOCK_UNLOCK(&et->et_TaskMsgPort.mp_SpinLock);
-#endif
 	/* No matching children, we have to wait */
 	SetSignal(0, SIGF_CHILD);
 	Wait(SIGF_CHILD);

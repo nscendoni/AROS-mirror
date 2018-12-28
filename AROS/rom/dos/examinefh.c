@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: examinefh.c 51946 2016-03-14 18:20:27Z neil $
 
     Desc: dos.library function ExamineFH().
     Lang: English

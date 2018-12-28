@@ -10,9 +10,7 @@
 #include	"system.h"
 #include	"functions.h"
 #include	"timer.h"
-#if defined(__PPC__)
 #include	"altivec.h"
-#endif
 #include	"memory.h"
 
 struct	Library	*DataTypesBase;

@@ -16,7 +16,7 @@
 
  BetterString class Support Site:  http://www.sf.net/projects/bstring-mcc/
 
- $Id$
+ $Id: Dispatcher.c 47847 2013-08-23 12:46:19Z mazze $
 
 ***************************************************************************/
 

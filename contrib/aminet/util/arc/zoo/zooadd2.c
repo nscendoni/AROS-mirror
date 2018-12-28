@@ -1,6 +1,6 @@
 #ifndef LINT
 /* derived from: zooadd2.c 2.14 88/01/27 10:40:32 */
-static char sccsid[]="$Id$";
+static char sccsid[]="$Id: zooadd2.c 30794 2009-03-08 02:19:07Z neil $";
 #endif /* LINT */
 /*
 Copyright (C) 1986, 1987 Rahul Dhesi -- All rights reserved

@@ -3,7 +3,7 @@
 #define REVISION     "16"
 #define DATE         "23.09.2003"
 
-/*  $Id$
+/*  $Id: xadUnDisk.c 43430 2012-01-01 20:12:06Z jmcmullan $
     xadUnDisk - dearchives disk archives
 
     XAD library system for archive handling

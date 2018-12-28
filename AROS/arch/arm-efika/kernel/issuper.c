@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: issuper.c 47629 2013-07-03 21:42:47Z mazze $
 */
 
 #include <aros/kernel.h>

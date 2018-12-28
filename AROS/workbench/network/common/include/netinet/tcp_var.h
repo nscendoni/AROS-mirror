@@ -31,7 +31,7 @@
  * SUCH DAMAGE.
  *
  *	@(#)tcp_var.h	8.3 (Berkeley) 4/10/94
- * $Id$
+ * $Id: tcp_var.h 48699 2014-01-11 17:39:44Z jmcmullan $
  */
 
 #ifndef _NETINET_TCP_VAR_H_

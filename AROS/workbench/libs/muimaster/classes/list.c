@@ -1,6 +1,6 @@
 /*
-    Copyright © 2002-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2002-2016, The AROS Development Team. All rights reserved.
+    $Id: list.c 53081 2016-12-20 15:51:49Z neil $
 */
 
 #include <string.h>
@@ -38,10 +38,6 @@ extern struct Library *MUIMasterBase;
 
 #define BAR_WIDTH 2
 
-#define UPDATEMODE_ALL                  (1 << 0)
-#define UPDATEMODE_ENTRY                (1 << 1)
-#define UPDATEMODE_NEEDED               (1 << 2)
-
 enum
 {
     ARG_DELTA,
@@ -65,7 +61,6 @@ struct ListEntry
 };
 
 #define ENTRY_SELECTED   (1<<0)
-#define ENTRY_RENDER     (1<<1)
 
 
 struct ColumnInfo
@@ -189,8 +184,6 @@ struct MUI_ListData
     LONG def_click_column;
 
     LONG mouse_click;            /* see below if mouse is held down */
-    LONG mouse_x;
-    LONG mouse_y;
 
     /* double click */
     ULONG last_secs;
@@ -217,7 +210,6 @@ struct MUI_ListData
 #define LIST_DRAGSORTABLE  (1<<3)
 #define LIST_SHOWDROPMARKS (1<<4)
 #define LIST_QUIET         (1<<5)
-#define LIST_CHANGED    (1<<6)
 
 static BOOL IncreaseColumns(struct MUI_ListData *data, int new_columns);
 
@@ -740,7 +732,7 @@ static BOOL ParseListFormat(struct MUI_ListData *data, STRPTR format,
         /* called by MUIA_List_Format */
         if (!IncreaseColumns(data, new_columns))
         {
-            bug("[Zune:List] not enough memory for new columns!!\n");
+            bug("[List] not enough memory for new columns!!\n");
             /* FIXME: proper handling? */
             return FALSE;
         }
@@ -1145,10 +1137,6 @@ IPTR List__OM_NEW(struct IClass *cl, Object *obj, struct opSet *msg)
     data->ehn.ehn_Object = obj;
     data->ehn.ehn_Class = cl;
 
-    data->mouse_click = 0;
-    data->mouse_x = MUI_MAXMAX;
-    data->mouse_y = MUI_MAXMAX;
-
     /* HACK:
      * List is a group where part of area is rendered and part is filled
      * with other objects (inside of List dimensions). One such object is
@@ -1523,25 +1511,12 @@ IPTR List__OM_SET(struct IClass *cl, Object *obj, struct opSet *msg)
 
                     if (!data->read_only)
                     {
-                        data->entries[old]->flags |= ENTRY_RENDER;
-                        if (!(data->flags & LIST_QUIET))
-                        {
-                            data->update = UPDATEMODE_ENTRY;
-                            data->update_pos = old;
-                            MUI_Redraw(obj, MADF_DRAWUPDATE);
-                        }
-                        data->entries[data->entries_active]->flags |= ENTRY_RENDER;
-                        if (!(data->flags & LIST_QUIET))
-                        {
-                            data->update = UPDATEMODE_ENTRY;
-                            data->update_pos = data->entries_active;
-                            MUI_Redraw(obj, MADF_DRAWUPDATE);
-                        }
-                        else
-                        {
-                            data->update = UPDATEMODE_NEEDED;
-                            data->flags |= LIST_CHANGED;
-                        }
+                        data->update = 2;
+                        data->update_pos = old;
+                        MUI_Redraw(obj, MADF_DRAWUPDATE);
+                        data->update = 2;
+                        data->update_pos = data->entries_active;
+                        MUI_Redraw(obj, MADF_DRAWUPDATE);
                     }
 
                     /* Make new active entry visible (if there is one and
@@ -1558,20 +1533,14 @@ IPTR List__OM_SET(struct IClass *cl, Object *obj, struct opSet *msg)
 
         case MUIA_List_First:
             data->update_pos = data->entries_first;
+            data->update = 3;
             data->entries_first = tag->ti_Data;
-            if (!(data->flags & LIST_QUIET))
+
+            MUI_Redraw(obj, MADF_DRAWUPDATE);
+            if ((data->vertprop_first != tag->ti_Data)
+                && (!(data->flags & LIST_QUIET)))
             {
-                data->update = (UPDATEMODE_ENTRY|UPDATEMODE_ALL);
-                MUI_Redraw(obj, MADF_DRAWUPDATE);
-                if (data->vertprop_first != tag->ti_Data)
-                {
-                    set(obj, MUIA_List_VertProp_First, tag->ti_Data);
-                }
-            }
-            else
-            {
-                data->update = UPDATEMODE_ALL;
-                data->flags |= LIST_CHANGED;
+                set(obj, MUIA_List_VertProp_First, tag->ti_Data);
             }
             break;
 
@@ -1597,17 +1566,13 @@ IPTR List__OM_SET(struct IClass *cl, Object *obj, struct opSet *msg)
 
         case MUIA_List_Quiet:
             _handle_bool_tag(data->flags, tag->ti_Data, LIST_QUIET);
-            if (!(data->flags & LIST_QUIET))
+            if (!tag->ti_Data)
             {
-                if (data->flags & LIST_CHANGED)
-                {
-                    MUI_Redraw(obj, MADF_DRAWUPDATE);
-                    if (data->entries_num != XGET(obj, MUIA_List_VertProp_Entries))
-                        set(obj, MUIA_List_VertProp_Entries, data->entries_num);
-                    if (data->entries_first != XGET(obj, MUIA_List_VertProp_First))
-                        set(obj, MUIA_List_VertProp_First, data->entries_first);
-                }
-                data->flags &= ~LIST_CHANGED;
+                DoMethod(obj, MUIM_List_Redraw, MUIV_List_Redraw_All);
+                if (data->entries_num != XGET(obj, MUIA_List_VertProp_Entries))
+                    set(obj, MUIA_List_VertProp_Entries, data->entries_num);
+                if (data->entries_first != XGET(obj, MUIA_List_VertProp_First))
+                    set(obj, MUIA_List_VertProp_First, data->entries_first);
             }
             break;
 
@@ -1993,15 +1958,8 @@ IPTR List__MUIM_Draw(struct IClass *cl, Object *obj, struct MUIP_Draw *msg)
     struct MUI_ImageSpec_intern *highlight;
     IPTR ret = (IPTR)0;
 
-    D(bug("[Zune:List] %s()\n", __func__);)
-
     if (data->flags & LIST_QUIET)
-        return ret;
-
-    D(
-        bug("[Zune:List] %s: Rendering...\n", __func__);
-        bug("[Zune:List] %s: update = %d\n", __func__, data->update);
-    )
+        return 0;
 
     ret = DoSuperMethodA(cl, obj, (Msg) msg);
 
@@ -2021,7 +1979,7 @@ IPTR List__MUIM_Draw(struct IClass *cl, Object *obj, struct MUIP_Draw *msg)
     /* Calc the numbers of entries visible */
     CalcVertVisible(cl, obj);
 
-    if ((msg->flags & MADF_DRAWUPDATE) == 0 || data->update == UPDATEMODE_ALL)
+    if ((msg->flags & MADF_DRAWUPDATE) == 0 || data->update == 1)
     {
         DoMethod(obj, MUIM_DrawBackground, _mleft(data->area),
             _mtop(data->area), _mwidth(data->area), _mheight(data->area),
@@ -2031,7 +1989,7 @@ IPTR List__MUIM_Draw(struct IClass *cl, Object *obj, struct MUIP_Draw *msg)
     clip = MUI_AddClipping(muiRenderInfo(obj), _mleft(data->area),
         _mtop(data->area), _mwidth(data->area), _mheight(data->area));
 
-    if ((msg->flags & MADF_DRAWUPDATE) == 0 || data->update == UPDATEMODE_ALL)
+    if ((msg->flags & MADF_DRAWUPDATE) == 0 || data->update == 1)
     {
         y = _mtop(data->area);
         /* Draw Title
@@ -2055,7 +2013,7 @@ IPTR List__MUIM_Draw(struct IClass *cl, Object *obj, struct MUIP_Draw *msg)
     start = data->entries_first;
     end = data->entries_first + data->entries_visible;
 
-    if ((msg->flags & MADF_DRAWUPDATE) && data->update == (UPDATEMODE_ENTRY|UPDATEMODE_ALL))
+    if ((msg->flags & MADF_DRAWUPDATE) && data->update == 3)
     {
         int diffy = data->entries_first - data->update_pos;
         int top, bottom;
@@ -2098,12 +2056,10 @@ IPTR List__MUIM_Draw(struct IClass *cl, Object *obj, struct MUIP_Draw *msg)
         struct ListEntry *entry = data->entries[entry_pos];
 
         if (!(msg->flags & MADF_DRAWUPDATE) ||
-            ((msg->flags & MADF_DRAWUPDATE) && data->update == UPDATEMODE_ALL) ||
-            ((msg->flags & MADF_DRAWUPDATE) && data->update == (UPDATEMODE_ENTRY|UPDATEMODE_ALL)) ||
-            ((msg->flags & MADF_DRAWUPDATE) && data->update == UPDATEMODE_ENTRY
-                && data->update_pos == entry_pos) ||
-            ((msg->flags & MADF_DRAWUPDATE) && data->update == UPDATEMODE_NEEDED
-                && (entry->flags & ENTRY_RENDER)))
+            ((msg->flags & MADF_DRAWUPDATE) && data->update == 1) ||
+            ((msg->flags & MADF_DRAWUPDATE) && data->update == 3) ||
+            ((msg->flags & MADF_DRAWUPDATE) && data->update == 2
+                && data->update_pos == entry_pos))
         {
             /* Choose appropriate highlight image */
 
@@ -2126,10 +2082,8 @@ IPTR List__MUIM_Draw(struct IClass *cl, Object *obj, struct MUIP_Draw *msg)
                     data->entry_maxheight,
                     0, y - data->entries_top_pixel, 0);
             }
-            else if (((msg->flags & MADF_DRAWUPDATE) && data->update == UPDATEMODE_ENTRY
-                && data->update_pos == entry_pos) ||
-            ((msg->flags & MADF_DRAWUPDATE) && data->update == UPDATEMODE_NEEDED
-                && (entry->flags & ENTRY_RENDER)))
+            else if ((msg->flags & MADF_DRAWUPDATE) && data->update == 2
+                && data->update_pos == entry_pos)
             {
                 DoMethod(obj, MUIM_DrawBackground, _mleft(data->area), y,
                     _mwidth(data->area), data->entry_maxheight, 0,
@@ -2138,7 +2092,6 @@ IPTR List__MUIM_Draw(struct IClass *cl, Object *obj, struct MUIP_Draw *msg)
             }
 
             List_DrawEntry(cl, obj, entry_pos, y);
-            entry->flags &= ~ENTRY_RENDER;
         }
         y += data->entry_maxheight;
     }
@@ -2222,8 +2175,6 @@ IPTR List__MUIM_Draw(struct IClass *cl, Object *obj, struct MUIP_Draw *msg)
         x1 += data->ci[col].delta - halfdelta;
     }
 
-    data->flags &= ~LIST_CHANGED;
-
     return 0;
 }
 
@@ -2254,8 +2205,6 @@ IPTR List__MUIM_Clear(struct IClass *cl, Object *obj,
         DoMethod(obj, MUIM_List_Destruct, (IPTR) lentry->data,
             (IPTR) data->pool);
         FreeListEntry(data, lentry);
-
-        data->flags |= LIST_CHANGED;
     }
     /* Should never fail when shrinking */
     SetListSize(data, 0);
@@ -2268,7 +2217,7 @@ IPTR List__MUIM_Clear(struct IClass *cl, Object *obj,
             MUIV_List_Active_Off ? MUIA_List_Active : TAG_DONE,
             MUIV_List_Active_Off, TAG_DONE);
 
-        data->update = UPDATEMODE_ALL;
+        data->update = 1;
         MUI_Redraw(obj, MADF_DRAWUPDATE);
     }
 
@@ -2361,11 +2310,11 @@ IPTR List__MUIM_Exchange(struct IClass *cl, Object *obj,
         data->entries[pos1] = data->entries[pos2];
         data->entries[pos2] = save;
 
-        data->update = UPDATEMODE_ENTRY;
+        data->update = 2;
         data->update_pos = pos1;
         MUI_Redraw(obj, MADF_DRAWUPDATE);
 
-        data->update = UPDATEMODE_ENTRY;
+        data->update = 2;
         data->update_pos = pos2;
         MUI_Redraw(obj, MADF_DRAWUPDATE);
 
@@ -2385,63 +2334,45 @@ IPTR List__MUIM_Redraw(struct IClass *cl, Object *obj,
 {
     struct MUI_ListData *data = INST_DATA(cl, obj);
 
-    D(bug("[Zune:List] %s()\n", __func__);)
-
-    if (msg->pos == MUIV_List_Redraw_All)
+    if (!(data->flags & LIST_QUIET))
     {
-        CalcWidths(cl, obj);
-        data->update = UPDATEMODE_ALL;
-        if (!(data->flags & LIST_QUIET))
+        if (msg->pos == MUIV_List_Redraw_All)
         {
+            data->update = 1;
+            CalcWidths(cl, obj);
             MUI_Redraw(obj, MADF_DRAWUPDATE);
         }
         else
-            data->flags |= LIST_CHANGED;
-    }
-    else
-    {
-        LONG pos = -1;
-        if (msg->pos == MUIV_List_Redraw_Active)
-            pos = data->entries_active;
-        else if (msg->pos == MUIV_List_Redraw_Entry)
         {
-            LONG i;
-            for (i = 0; i < data->entries_num; i++)
-                if (data->entries[i]->data == msg->entry)
-                {
-                    pos = i;
-                    break;
-                }
-        }
-        else
-            pos = msg->pos;
-
-        if (pos != -1)
-        {
-            data->entries[pos]->flags |= ENTRY_RENDER;
-            if (!(data->flags & LIST_QUIET))
+            LONG pos = -1;
+            if (msg->pos == MUIV_List_Redraw_Active)
+                pos = data->entries_active;
+            else if (msg->pos == MUIV_List_Redraw_Entry)
             {
-                if (CalcDimsOfEntry(cl, obj, pos))
-                    data->update = UPDATEMODE_ALL;
-                else
-                {
-                    data->update = UPDATEMODE_ENTRY;
-                    data->update_pos = pos;
-                }
-
-                MUI_Redraw(obj, MADF_DRAWUPDATE);
+                LONG i;
+                for (i = 0; i < data->entries_num; i++)
+                    if (data->entries[i]->data == msg->entry)
+                    {
+                        pos = i;
+                        break;
+                    }
             }
             else
+                pos = msg->pos;
+
+            if (pos != -1)
             {
                 if (CalcDimsOfEntry(cl, obj, pos))
-                    data->update = UPDATEMODE_ALL;
-                else if (!(data->update & UPDATEMODE_ALL))
-                    data->update = UPDATEMODE_NEEDED;
-                data->flags |= LIST_CHANGED;
+                    data->update = 1;
+                else
+                {
+                    data->update = 2;
+                    data->update_pos = pos;
+                }
+                MUI_Redraw(obj, MADF_DRAWUPDATE);
             }
         }
     }
-
     return 0;
 }
 
@@ -2587,10 +2518,8 @@ IPTR List__MUIM_Remove(struct IClass *cl, Object *obj,
         active_tag, new_act,   /* Inform only if necessary (for notify) */
         TAG_DONE);
 
-    data->flags |= LIST_CHANGED;
-    data->update = UPDATEMODE_ALL;
-    if (!(data->flags & LIST_QUIET))
-        MUI_Redraw(obj, MADF_DRAWUPDATE);
+    data->update = 1;
+    MUI_Redraw(obj, MADF_DRAWUPDATE);
 
     return 0;
 }
@@ -2760,10 +2689,10 @@ IPTR List__MUIM_Select(struct IClass *cl, Object *obj,
     if (msg->seltype != MUIV_List_Select_Ask)
     {
         if (count > 1)
-            data->update = UPDATEMODE_ALL;
+            data->update = 1;
         else
         {
-            data->update = UPDATEMODE_ENTRY;
+            data->update = 2;
             data->update_pos = pos;
         }
         MUI_Redraw(obj, MADF_DRAWUPDATE);
@@ -2809,7 +2738,6 @@ IPTR List__MUIM_Insert(struct IClass *cl, Object *obj,
 {
     struct MUI_ListData *data = INST_DATA(cl, obj);
     LONG pos, count, sort, active;
-    BOOL adjusted = FALSE;
 
     count = msg->count;
     sort = 0;
@@ -2894,19 +2822,15 @@ IPTR List__MUIM_Insert(struct IClass *cl, Object *obj,
             return ~0;
         }
 
-        lentry->flags |= ENTRY_RENDER;
         data->entries[pos] = lentry;
         data->confirm_entries_num++;
-
-        data->flags |= LIST_CHANGED;
 
         if (_flags(obj) & MADF_SETUP)
         {
             /* We have to calculate the width and height of the newly
              * inserted entry. This has to be done after inserting the
              * element into the list */
-            if (CalcDimsOfEntry(cl, obj, pos))
-                adjusted = TRUE;
+            CalcDimsOfEntry(cl, obj, pos);
         }
 
         toinsert++;
@@ -2934,17 +2858,14 @@ IPTR List__MUIM_Insert(struct IClass *cl, Object *obj,
      */
     if (sort)
     {
-        /* TODO: which pos to return here !?        */
         DoMethod(obj, MUIM_List_Sort);
-
-        if ((adjusted) && (data->flags & LIST_QUIET))
-            data->update = UPDATEMODE_ALL;
+        /* TODO: which pos to return here !?        */
+        /* MUIM_List_Sort already called MUI_Redraw */
     }
     else
     {
-        data->update = UPDATEMODE_ALL;
-        if (!(data->flags & LIST_QUIET))
-            MUI_Redraw(obj, MADF_DRAWUPDATE);
+        data->update = 1;
+        MUI_Redraw(obj, MADF_DRAWUPDATE);
     }
     superset(cl, obj, MUIA_List_InsertPosition, data->insert_position);
 
@@ -3375,9 +3296,6 @@ IPTR List__MUIM_Sort(struct IClass *cl, Object *obj,
     int i, j, max;
     struct MUIP_List_Compare cmpmsg =
         { MUIM_List_Compare, NULL, NULL, 0, 0 };
-    BOOL changed = FALSE;
-
-    D(bug("[Zune:List] %s()\n", __func__);)
 
     if (data->entries_num > 1)
     {
@@ -3400,26 +3318,13 @@ IPTR List__MUIM_Sort(struct IClass *cl, Object *obj,
             {
                 APTR tmp = data->entries[i];
                 data->entries[i] = data->entries[max];
-                data->entries[i]->flags |= ENTRY_RENDER;
                 data->entries[max] = tmp;
-                data->entries[max]->flags |= ENTRY_RENDER;
-                if (data->entries_active == i)
-                    data->entries_active = max;
-                else if (data->entries_active == max)
-                    data->entries_active = i;
-                changed = TRUE;
             }
         }
     }
 
-    if (changed)
-    {
-        data->flags |= LIST_CHANGED;
-        if (!(data->update & UPDATEMODE_ALL))
-            data->update = UPDATEMODE_NEEDED;
-        if (!(data->flags & LIST_QUIET))
-            MUI_Redraw(obj, MADF_DRAWUPDATE);
-    }
+    data->update = 1;
+    MUI_Redraw(obj, MADF_DRAWUPDATE);
 
     return 0;
 }
@@ -3535,10 +3440,8 @@ IPTR List__MUIM_Move(struct IClass *cl, Object *obj,
 #endif
 
     /* Reflect list changes visually */
-    data->flags |= LIST_CHANGED;
-    data->update = UPDATEMODE_ALL;
-    if (!(data->flags & LIST_QUIET))
-        MUI_Redraw(obj, MADF_DRAWUPDATE);
+    data->update = 1;
+    MUI_Redraw(obj, MADF_DRAWUPDATE);
 
     return TRUE;
 }
@@ -3630,72 +3533,55 @@ IPTR List__MUIM_TestPos(struct IClass *cl, Object *obj,
     struct MUI_List_TestPos_Result *result = msg->res;
     LONG col = -1, row = -1;
     UWORD flags = 0, i;
-    LONG mx;
-    LONG ey;
+    LONG mx = msg->x - _left(data->area);
     LONG entries_visible;
 
     if (data->entries_visible <= data->entries_num)
         entries_visible = data->entries_visible;
     else
         entries_visible = data->entries_num;
+    LONG ey = msg->y - data->entries_top_pixel;
+        /* y coordinates transformed to the entries */
 
-    if ((msg->x == MUI_MAXMAX) && (msg->y == MUI_MAXMAX))
-    {
-        mx = data->mouse_x;
-        ey = data->mouse_y;
-    }
+    /* Now check if it was clicked on a title or on entries */
+    if (ey < 0)
+        flags |= MUI_LPR_ABOVE;
+    else if (ey >= entries_visible * data->entry_maxheight)
+        flags |= MUI_LPR_BELOW;
     else
     {
-        mx = msg->x;
-        ey = msg->y;
+        /* Identify row */
+        row = ey / data->entry_maxheight + data->entries_first;
+        result->yoffset =
+            ey % data->entry_maxheight - data->entry_maxheight / 2;
     }
 
-    if ((mx != MUI_MAXMAX) && (ey != MUI_MAXMAX))
+    if (mx < 0)
+        flags |= MUI_LPR_LEFT;
+    else if (mx >= _width(data->area))
+        flags |= MUI_LPR_RIGHT;
+    else
     {
-        mx -= _left(data->area);
-        /* y coordinates transformed to the entries */
-        ey -= data->entries_top_pixel;
-
-        /* Now check if it was clicked on a title or on entries */
-        if (ey < 0)
-            flags |= MUI_LPR_ABOVE;
-        else if (ey >= entries_visible * data->entry_maxheight)
-            flags |= MUI_LPR_BELOW;
-        else
+        /* Identify column */
+        if (data->entries_num > 0 && data->columns > 0)
         {
-            /* Identify row */
-            row = ey / data->entry_maxheight + data->entries_first;
-            result->yoffset =
-                ey % data->entry_maxheight - data->entry_maxheight / 2;
-        }
-
-        if (mx < 0)
-            flags |= MUI_LPR_LEFT;
-        else if (mx >= _width(data->area))
-            flags |= MUI_LPR_RIGHT;
-        else
-        {
-            /* Identify column */
-            if (data->entries_num > 0 && data->columns > 0)
+            LONG width_sum = 0;
+            col = data->columns - 1;
+            for (i = 0; i < data->columns; i++)
             {
-                LONG width_sum = 0;
-                col = data->columns - 1;
-                for (i = 0; i < data->columns; i++)
+                result->xoffset = mx - width_sum;
+                width_sum +=
+                    data->ci[i].entries_width +
+                    data->ci[i].delta +
+                    (data->ci[i].bar ? BAR_WIDTH : 0);
+                D(bug("[List/MUIM_TestPos] i %d "
+                    "width %d width_sum %d mx %d\n",
+                    i, data->ci[i].entries_width, width_sum, mx));
+                if (mx < width_sum)
                 {
-                    result->xoffset = mx - width_sum;
-                    width_sum +=
-                        data->ci[i].entries_width +
-                        data->ci[i].delta +
-                        (data->ci[i].bar ? BAR_WIDTH : 0);
-                    D(bug("[List/MUIM_TestPos] i %d "
-                        "width %d width_sum %d mx %d\n",
-                        i, data->ci[i].entries_width, width_sum, mx));
-                    if (mx < width_sum)
-                    {
-                        col = i;
-                        D(bug("[List/MUIM_TestPos] Column hit %d\n", col));
-                        break;
-                    }
+                    col = i;
+                    D(bug("[List/MUIM_TestPos] Column hit %d\n", col));
+                    break;
                 }
             }
         }
@@ -4161,13 +4047,9 @@ IPTR List__MUIM_HandleEvent(struct IClass *cl, Object *obj,
             }
             else
             {
+                /* Activate object */
                 if (msg->imsg->Code == SELECTUP && data->mouse_click)
                 {
-                    /* cache click position ... */
-                    data->mouse_x = msg->imsg->MouseX;
-                    data->mouse_y = msg->imsg->MouseY;
-
-                    /* ... and activate the object */
                     set(_win(obj), MUIA_Window_ActiveObject, (IPTR)obj);
                     data->mouse_click = 0;
                 }

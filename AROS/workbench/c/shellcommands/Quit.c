@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Quit.c 50751 2015-05-25 15:00:10Z neil $
 
     Desc: 
     Lang: English

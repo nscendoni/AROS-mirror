@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: releasedatatype.c 42656 2011-11-30 01:00:18Z neil $
 
     Desc:
     Lang: English

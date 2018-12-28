@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: update.c 49031 2014-05-28 18:40:13Z twilen $ */
 /* $Log: update.c $
  * Revision 12.12  1999/05/14  11:31:34  Michiel
  * Long filename support implemented; bugfixes

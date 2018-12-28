@@ -1,6 +1,6 @@
 /*
     Copyright © 2000, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: createdtdesc.h 30792 2009-03-07 22:40:04Z neil $
 
     Desc: DataTypesDescriptorCreator
     Lang: English.

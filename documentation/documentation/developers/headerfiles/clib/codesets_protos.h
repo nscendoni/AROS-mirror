@@ -19,7 +19,7 @@
 
  codesets.library project: http://sourceforge.net/projects/codesetslib/
 
- $Id$
+ $Id: codesets_protos.h 33636 2010-06-17 17:14:53Z mazze $
 
 ***************************************************************************/
 

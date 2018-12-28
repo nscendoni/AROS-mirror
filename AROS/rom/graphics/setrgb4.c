@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setrgb4.c 43660 2012-01-18 15:39:35Z twilen $
 
     Desc: Set one color register for this Viewport
     Lang: english

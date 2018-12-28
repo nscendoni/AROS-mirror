@@ -1,7 +1,7 @@
 #ifndef XADMASTER_FS_FAT_C
 #define XADMASTER_FS_FAT_C
 
-/*  $Id$
+/*  $Id: FS_FAT.c 43430 2012-01-01 20:12:06Z jmcmullan $
     FAT filesytem client
 
     XAD library system for archive handling

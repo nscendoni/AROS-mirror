@@ -2,7 +2,7 @@
 #define RPC_PMAP_CLNT_H
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pmap_clnt.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /* @(#)pmap_clnt.h	2.1 88/07/29 4.0 RPCSRC; from 1.11 88/02/08 SMI */

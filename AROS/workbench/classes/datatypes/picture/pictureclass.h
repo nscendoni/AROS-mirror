@@ -1,6 +1,6 @@
 /*
     Copyright ©	1995-2003, The AROS Development	Team. All rights reserved.
-    $Id$
+    $Id: pictureclass.h 31463 2009-06-23 18:23:23Z mazze $
 */
 
 #define	MIN(a,b) (((a) < (b)) ?	(a) : (b))

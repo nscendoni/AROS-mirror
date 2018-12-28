@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: BM_Class.c 36647 2011-01-17 14:01:23Z neil $
 
     Desc: Graphics-amiga-intui bitmap class implementation.
     Lang: english

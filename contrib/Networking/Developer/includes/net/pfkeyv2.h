@@ -2,7 +2,7 @@
 #define _NET_PFKEY_V2_H 1
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pfkeyv2.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*

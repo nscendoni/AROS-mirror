@@ -1,6 +1,6 @@
 /*
     Copyright © 2000, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpuinfo.h 53017 2016-10-22 11:50:43Z deadwood $
 
     Desc: Probe installed CPUs and display relevant information
     Lang: english

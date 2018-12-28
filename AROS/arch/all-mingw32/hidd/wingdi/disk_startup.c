@@ -1,6 +1,6 @@
 /*
-    Copyright  1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright  1995-2011, The AROS Development Team. All rights reserved.
+    $Id: disk_startup.c 44299 2012-02-29 21:12:47Z jmcmullan $
 
     Desc: Disk-resident part of GDI display driver
     Lang: english
@@ -19,7 +19,7 @@
 
 #include <stdlib.h>
 
-#include "wingdi_hidd.h"
+#include "gdi_class.h"
 
 /* Minimum required library version */
 #define GDI_VERSION 42

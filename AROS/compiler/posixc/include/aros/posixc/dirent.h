@@ -2,8 +2,8 @@
 #define _POSIXC_DIRENT_H_
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2012, The AROS Development Team. All rights reserved.
+    $Id: dirent.h 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: POSIX.1-2008 header file dirent.h
 */
@@ -34,18 +34,16 @@
 
 #endif /* !_POSIX_SOURCE */
 
+/* ABI_V0 compatibility */
 struct dirent
 {
     ino_t   d_ino;
-    char    d_name[NAME_MAX + 1];	/* name must be no longer than this */
-#ifndef _POSIX_SOURCE
     unsigned short int d_reclen;
     unsigned char d_type;
-#else
-    unsigned short int reserved1;
-    unsigned char reserved2;
-#endif /* !_POSIX_SOURCE */
+#define MAXNAMLEN NAME_MAX
+    char    d_name[MAXNAMLEN + 1];  /* name must be no longer than this */
 };
+
 
 /* structure describing an open directory. */
 struct __dirdesc;
@@ -53,7 +51,7 @@ typedef struct __dirdesc DIR;
 
 __BEGIN_DECLS
 
-int alphasort(const struct dirent **a, const struct dirent **b);
+/* NOTIMPL int alphasort(const struct dirent **a, const struct dirent **b); */
 int closedir(DIR *dir);
 int dirfd(DIR *dir);
 /* NOTIMPL DIR *fdopendir(int); */
@@ -61,9 +59,9 @@ DIR *opendir(const char *filename);
 struct dirent *readdir(DIR *dir);
 /* NOTIMPL int readdir_r(DIR *restrict, struct dirent *restrict, struct dirent **restrict); */
 void rewinddir(DIR *dir);
-int scandir (const char *dir, struct dirent ***namelist,
+/* NOTIMPL int scandir (const char *dir, struct dirent ***namelist,
               int (*select)(const struct dirent *),
-              int (*compar)(const struct dirent **, const struct dirent **));
+              int (*compar)(const struct dirent **, const struct dirent **)); */
 void seekdir(DIR *dir, off_t loc);
 long telldir(DIR *dir);
 

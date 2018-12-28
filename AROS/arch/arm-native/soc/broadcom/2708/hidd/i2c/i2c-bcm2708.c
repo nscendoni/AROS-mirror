@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: i2c-bcm2708.c 50277 2015-04-01 01:16:56Z NicJA $
 */
 
 #include <aros/symbolsets.h>

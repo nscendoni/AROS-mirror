@@ -1,6 +1,6 @@
 /*
     Copyright © 2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hid_stubs.c 36482 2011-01-10 04:06:07Z jmcmullan $
 
     Desc: Stub functions for PCI subsystem
     Lang: English

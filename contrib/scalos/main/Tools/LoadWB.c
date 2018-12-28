@@ -1,6 +1,6 @@
 // LoadWB.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 00:20:47 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51951 $
 
 #include <proto/exec.h>
 #include <proto/dos.h>

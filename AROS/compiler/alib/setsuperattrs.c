@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setsuperattrs.c 48792 2014-02-01 17:14:41Z mazze $
 
     Set attributes in a specific class
 */

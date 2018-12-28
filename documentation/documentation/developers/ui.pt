@@ -4,8 +4,8 @@ Guia de Estilos do Interface do Utilizador
 
 :Autor:			Adam Chodorowski
 :Direitos de Cópia:	Copyright © 2003, The AROS Development Team
-:Versão:		$Revision$
-:Data:			$Date$
+:Versão:		$Revision: 30800 $
+:Data:			$Date: 2009-03-08 18:28:50 +0100 (Sun, 08 Mar 2009) $
 
 .. ARRANJE-ME: Introdução aqui...
 
@@ -27,7 +27,7 @@ Preferencias
 Janelas de preferencias são similares a janelas de dialogo, nelas existe
 uma linha de botões e não existe ferramenta de fecho na barra de titulo. 
 
-.. Figure:: /documentation/developers/ui/images/windows-prefs-titlebar.png
+.. Figure:: ui/images/windows-prefs-titlebar.png
 
    Exemplo de uma barra de titulo de uma janela de preferencias. Note a ausencia da
    ferramenta de fecho.
@@ -72,7 +72,7 @@ ao longo do fundo da janela (na seguinte ordem, da esquerda para a direita):
    pequena possivel (quando redimensinando, só o espaço entre os grupos deverá crescer
    e não os botões).
         
-.. Figure:: /documentation/developers/ui/images/windows-prefs-buttons.png
+.. Figure:: ui/images/windows-prefs-buttons.png
 
    Exemplos da linha de botões numa janela de preferencias.
 

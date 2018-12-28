@@ -1,7 +1,7 @@
 #ifndef NETDB_H
 #define NETDB_H
 /*
- * $Id$
+ * $Id: netdb.h 30794 2009-03-08 02:19:07Z neil $
  *
  * Network Database Structures and Defintions
  *

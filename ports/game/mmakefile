@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile 52590 2016-04-11 18:20:17Z NicJA $
 
 #MM- ports : ports-game
 #MM- ports-game : ports-game-$(AROS_TARGET_CPU)

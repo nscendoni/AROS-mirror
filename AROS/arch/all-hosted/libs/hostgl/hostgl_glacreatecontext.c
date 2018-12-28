@@ -1,6 +1,6 @@
 /*
-    Copyright © 2011-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2011-2016, The AROS Development Team. All rights reserved.
+    $Id: hostgl_glacreatecontext.c 52756 2016-06-10 17:06:26Z neil $
 */
 
 #define AROS_TAGRETURNTYPE  GLAContext
@@ -14,7 +14,7 @@
 #include "hostgl_funcs.h"
 #include "hostgl_support.h"
 
-#include <x11gfx_bitmapclass.h>
+#include <bitmap_class.h>
 
 /*****************************************************************************
 

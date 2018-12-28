@@ -1,6 +1,6 @@
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: wbwindow.c 52028 2016-03-17 04:36:20Z jmcmullan $
 
     Desc: Workbook Window Class
     Lang: english

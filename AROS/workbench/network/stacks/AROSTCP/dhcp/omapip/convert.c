@@ -35,7 +35,7 @@
 
 #if 0
 static char copyright[] =
-"$Id$ Copyright (c) 2004 Internet Systems Consortium.  All rights reserved.\n";
+"$Id: convert.c 38234 2011-04-16 16:24:36Z mazze $ Copyright (c) 2004 Internet Systems Consortium.  All rights reserved.\n";
 #endif
 
 #include <omapip/omapip_p.h>

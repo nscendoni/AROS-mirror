@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stdcio_startup.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Additional startup code for stdcio.library that is executed during
     init of a program that uses the library.
@@ -8,8 +8,8 @@
     startup section in stdcio.conf
 */
 
+#include <aros/symbolsets.h>
 #include <proto/stdc.h>
-#include <proto/stdcio.h>
 #include <libraries/stdcio.h>
 
 #define DEBUG 0

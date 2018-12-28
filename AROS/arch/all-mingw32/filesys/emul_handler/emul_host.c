@@ -1,6 +1,6 @@
 /*
  Copyright © 1995-2011, The AROS Development Team. All rights reserved.
- $Id$
+ $Id: emul_host.c 49029 2014-05-25 12:38:26Z deadwood $
  
  Desc: Filesystem that accesses an underlying host OS filesystem.
        Low-level host-dependent subroutines for Windows.

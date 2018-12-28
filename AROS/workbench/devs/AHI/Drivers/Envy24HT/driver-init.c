@@ -1,6 +1,6 @@
 /*
     Copyright © 2005-2013, Davy Wentzler. All rights reserved.
-    $Id$
+    $Id: driver-init.c 48030 2013-09-08 21:14:08Z verhaegs $
 */
 
 #include <exec/memory.h>

@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id$
+ * $Id: filter.c 43842 2012-02-04 01:29:45Z neil $
  */
 
 # ifdef HAVE_CONFIG_H

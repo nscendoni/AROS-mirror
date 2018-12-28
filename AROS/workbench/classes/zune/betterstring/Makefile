@@ -16,7 +16,7 @@
 #
 # BetterString class Support Site:  http://www.sf.net/projects/bstring-mcc/
 #
-# $Id$
+# $Id: Makefile 34107 2010-08-12 08:27:14Z sonic $
 #
 #***************************************************************************/
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freesignal.c 50481 2015-04-28 10:49:03Z schulz $
 
     Desc: Free a signal.
     Lang: english
@@ -52,9 +52,8 @@
         /* No more atomic problem - i beleive THIS is atomic. - sonic */
         struct Task *me = GET_THIS_TASK;
 
-        /* Clear the bit */
-        if (me)
-            me->tc_SigAlloc &= ~(1 << signalNum);
+	/* Clear the bit */
+	me->tc_SigAlloc &= ~(1<<signalNum);
     }
     AROS_LIBFUNC_EXIT
 } /* FreeSignal() */

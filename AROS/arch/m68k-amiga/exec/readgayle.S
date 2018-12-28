@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readgayle.S 48960 2014-04-22 12:14:43Z twilen $
 
     Desc: ReadGayle() - get the Gayle ID
     Lang: english

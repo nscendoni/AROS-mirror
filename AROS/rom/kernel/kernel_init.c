@@ -1,6 +1,6 @@
 /*
-    Copyright © 2010-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2010-2011, The AROS Development Team. All rights reserved.
+    $Id: kernel_init.c 47346 2013-05-04 11:37:40Z mazze $
 
     Desc: Main kernel.resource initialization.
     Lang: english
@@ -100,8 +100,8 @@ AROS_UFH3S(struct KernelBase *, Kernel_Init,
     for (i=0; i < EXCEPTIONS_COUNT; i++)
 	NEWLIST(&KernelBase->kb_Exceptions[i]);
 
-    for (i=0; i < HW_IRQ_COUNT; i++)
-        NEWLIST(&KERNELIRQ_LIST(i));
+    for (i=0; i < IRQ_COUNT; i++)
+        NEWLIST(&KernelBase->kb_Interrupts[i]);
 
     /*
      * Everything is ok, add our resource.

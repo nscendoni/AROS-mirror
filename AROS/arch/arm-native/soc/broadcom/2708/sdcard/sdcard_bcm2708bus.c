@@ -1,6 +1,6 @@
 /*
     Copyright © 2013-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sdcard_bcm2708bus.c 50326 2015-04-11 08:44:13Z schulz $
 */
 
 #include "sdcard_intern.h"

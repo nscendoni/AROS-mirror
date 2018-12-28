@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 52341 2016-03-29 03:46:55Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- ports-text : ports-text-antiword
 
@@ -18,7 +18,6 @@ REPOSITORIES := http://www.winfield.demon.nl/linux
 ARCHBASE     := antiword-0.37
 TARGETDIR    := $(AROS_CONTRIB)/Utilities/Text/Antiword
 DB           := NDEBUG
-
 NOWARN_FLAGS := $(NOWARN_UNUSED_BUT_SET_VARIABLE)
 USER_CFLAGS  := $(NOWARN_FLAGS) -Wall -pedantic -D$(DB)
 

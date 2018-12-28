@@ -1,6 +1,6 @@
 /*
     Copyright © 2005-2013, Davy Wentzler. All rights reserved.
-    $Id$
+    $Id: misc.h 46905 2013-03-12 20:25:37Z neil $
 */
 
 #ifndef AHI_Drivers_Envy24HT_misc_h

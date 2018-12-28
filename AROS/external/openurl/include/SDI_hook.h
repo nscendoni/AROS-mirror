@@ -9,7 +9,7 @@
         Distribution:   PD
         Project page:   http://sf.net/p/adtools/code/HEAD/tree/trunk/sdi/
         Description:    defines to hide compiler specific hook stuff
-        Id:             $Id$
+        Id:             $Id: SDI_hook.h 49589 2014-09-08 18:47:02Z mazze $
         URL:            $URL: https://svn.code.sf.net/p/adtools/code/trunk/sdi/SDI_hook.h $
 
  1.0   21.06.02 : based on the work made for freeciv and YAM with

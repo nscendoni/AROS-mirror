@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: expansion.h 39836 2011-07-05 16:20:12Z jmcmullan $
 
     Desc: expansion.library external definitions
     Lang: english

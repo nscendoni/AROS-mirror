@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gt_postfilterimsg.c 52221 2016-03-24 09:04:52Z stegerg $
 
     Desc:
     Lang: english

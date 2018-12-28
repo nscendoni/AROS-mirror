@@ -1,7 +1,7 @@
 #ifndef SYSLOG_H
 #define SYSLOG_H
 /*
- * $Id$
+ * $Id: syslog.h 30794 2009-03-08 02:19:07Z neil $
  *
  * Copyright (c) 1994 AmiTCP/IP Group, <amitcp-group@hut.fi>
  *                    Helsinki University of Technology, Finland.

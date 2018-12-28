@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: dos_intern.h 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Internal types and stuff for dos
     Lang: English
@@ -317,17 +317,17 @@ BOOL getpacketinfo(struct DosLibrary *DOSBase, CONST_STRPTR, struct PacketHelper
 BOOL getdevpacketinfo(struct DosLibrary *DOSBase, CONST_STRPTR devname, CONST_STRPTR name, struct PacketHelperStruct *phs);
 void freepacketinfo(struct DosLibrary *DOSBase, struct PacketHelperStruct*);
 
-#ifndef __SRCFILENAME__
-#define __SRCFILENAME__ __FILE__
-#endif /* !__SRCFILENAME__ */
-
 #define ASSERT_VALID_FILELOCK(lock) do { \
         struct FileLock *fl = BADDR(lock); \
         if (fl && fl->fl_Access != SHARED_LOCK && fl->fl_Access != EXCLUSIVE_LOCK) { \
             bug("%s() bogus FileLock! '%s' %x %d %s/%s/%d\n", \
-                __FUNCTION__, FindTask(NULL)->tc_Node.ln_Name, fl, fl->fl_Access, __SRCFILENAME__,__FUNCTION__,__LINE__); \
+                __FUNCTION__, FindTask(NULL)->tc_Node.ln_Name, fl, fl->fl_Access, __FILE__,__FUNCTION__,__LINE__); \
         } \
     } while (0);
+
+/* ABI_V0 compatibility helper */
+#define ABIV0_IS_FL_A_FH(fl) \
+        ((fl->fl_Access != SHARED_LOCK) && (fl->fl_Access != EXCLUSIVE_LOCK))
 
 /* Shell utilities */
 BPTR findseg_cli(BOOL isBoot, struct DosLibrary *DOSBase);

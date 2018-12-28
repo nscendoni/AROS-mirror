@@ -2,7 +2,7 @@
     Copyright © 2002-2012, The AROS Development Team.
     All rights reserved.
     
-    $Id$
+    $Id: mui_removeclipregion.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <proto/layers.h>
@@ -23,7 +23,7 @@
         AROS_LHA(APTR, handle, A1),
 
 /*  LOCATION */
-        struct Library *, MUIMasterBase, 31, MUIMaster)
+        struct Library *, MUIMasterBase, 27, MUIMaster)
 
 /*  FUNCTION
 

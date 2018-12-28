@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rxfunctions.h 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Function prototypes for functions to call from the query function
     Lang: English

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: clearerr.c 48048 2013-09-08 21:19:29Z verhaegs $
 
     C99 function clearerr().
 */

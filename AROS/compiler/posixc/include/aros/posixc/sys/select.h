@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2010-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: select.h 48028 2013-09-08 21:13:29Z verhaegs $
 
     Desc: POSIX.1-2008 header file sys/select.h
 */

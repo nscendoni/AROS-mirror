@@ -1,6 +1,6 @@
 /*
     Copyright 2009-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hostgl_support.h 51001 2015-08-10 17:43:38Z neil $
 */
 
 #ifndef AROSMESA_FUNCS_H

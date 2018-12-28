@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pcipc_init.c 49512 2014-08-22 09:55:33Z DizzyOfCRN $
 */
 
 #include <aros/symbolsets.h>

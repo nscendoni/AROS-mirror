@@ -2,7 +2,7 @@
     Copyright © 2010, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: pm_exlst.c 33484 2010-06-07 13:08:45Z mazze $
 */
 
 //#define DEBUG 1

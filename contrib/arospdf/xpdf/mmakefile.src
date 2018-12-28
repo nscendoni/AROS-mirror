@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 52772 2016-07-06 16:43:18Z neil $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- contrib : contrib-arospdf
 

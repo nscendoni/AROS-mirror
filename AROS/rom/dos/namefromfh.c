@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: namefromfh.c 46059 2012-11-21 19:47:17Z mazze $
 
     Desc: Retrieve the full pathname from a filehandle.
     Lang: english

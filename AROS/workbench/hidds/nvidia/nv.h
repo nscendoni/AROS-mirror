@@ -1,8 +1,8 @@
 #ifndef _NV_H
 #define _NV_H
 /*
-    Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2004-2015, The AROS Development Team. All rights reserved.
+    $Id: nv.h 51032 2015-08-29 22:49:55Z NicJA $
 
     Desc: private header file
     Lang: English
@@ -20,7 +20,7 @@
 #include <oop/oop.h>
 
 #include <hidd/pci.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #include "nv_local.h"
 #include "riva_hw.h"
@@ -195,7 +195,6 @@ struct staticdata {
     OOP_Object		    *nvobject;
     OOP_Object		    *pcidriver;
 
-    OOP_AttrBase	    hiddAttrBase;
     OOP_AttrBase	    pciAttrBase;
     OOP_AttrBase	    bitMapAttrBase;
     OOP_AttrBase	    nvBitMapAttrBase;

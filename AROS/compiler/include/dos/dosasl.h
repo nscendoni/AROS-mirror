@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: dosasl.h 47658 2013-07-12 01:27:38Z neil $
 
     Desc: Pattern matching
     Lang: english

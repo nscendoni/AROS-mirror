@@ -1,6 +1,6 @@
 /* 
     Copyright © 2003-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: font.c 45683 2012-08-29 16:17:40Z neil $
 */
 
 #include <string.h>

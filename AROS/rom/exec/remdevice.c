@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: remdevice.c 50481 2015-04-28 10:49:03Z schulz $
 
     Desc: Remove a device from the public list of devices.
     Lang: english

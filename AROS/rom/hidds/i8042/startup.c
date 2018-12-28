@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: startup.c 49816 2014-12-01 02:26:51Z neil $
 */
 
 #include <aros/debug.h>

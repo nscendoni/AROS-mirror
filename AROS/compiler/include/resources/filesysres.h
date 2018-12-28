@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: filesysres.h 37441 2011-03-10 05:44:33Z jmcmullan $
 */
 
 #ifndef RESOURCES_FILESYSRES_H

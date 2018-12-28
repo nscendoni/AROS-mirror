@@ -1,7 +1,7 @@
 #ifndef XADMASTER_AMPK_C
 #define XADMASTER_AMPK_C
 
-/*  $Id$
+/*  $Id: AMPK.c 36659 2011-01-18 13:26:51Z neil $
     AmiPack file archiver
 
     XAD library system for archive handling

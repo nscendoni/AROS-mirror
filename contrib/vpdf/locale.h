@@ -8,7 +8,7 @@
  *   Copyright © 2012 Michal Zukowski, Michal Wozniak
  *   All rights reserved.
  *
- *   $Id$
+ *   $Id: locale.h 44996 2012-06-10 16:07:18Z verhaegs $
  */
 
 #define NEW_CATCOMP_ARRAY_IDS
@@ -16,7 +16,7 @@
 
 void   locale_init(void);
 void   locale_cleanup(void);
-CONST_STRPTR locale_getstr(ULONG);
+STRPTR locale_getstr(ULONG);
 
 #define LOCSTR(x) locale_getstr(x##_ID)
 

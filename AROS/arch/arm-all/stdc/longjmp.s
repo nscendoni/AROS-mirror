@@ -3,7 +3,7 @@
  *
  *  Created on: Aug 5, 2009
  *      Author: misc
- *  $Id$
+ *  $Id: longjmp.s 48032 2013-09-08 21:16:22Z verhaegs $
  */
 
 #include "aros/arm/asm.h"

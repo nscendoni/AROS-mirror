@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bosnia_herzegovina.c 47454 2013-05-22 21:49:40Z polluks $
 
     Desc: Country data for Bosna i Hercegovina (Bosnia and Herzegovina)
 */

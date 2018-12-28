@@ -275,7 +275,7 @@ struct Window *window;
     else request->flags&=~SRF_BORDERS;
 
     request->flags|=SRF_RECESSHI|SRF_EXTEND;
-    request->value=(long)&requester_stringex;
+    request->value=(int)&requester_stringex;
     fix_stringex(&requester_stringex);
 
     a=DoSimpleRequest(win,request);
@@ -324,7 +324,7 @@ int ftype,funconly;
         if (status_haveaborted) break;
         if (ftype==-2) {
             if (type->iconpath && type->recognition &&
-                (dochecktype(type,fullname,file,&info))) {
+                (dochecktype(type,fullname,(IPTR)file,&info))) {
                 Close(file);
                 return(type);
             }
@@ -350,7 +350,7 @@ int ftype,funconly;
 int dochecktype(type,name,fileparam,info)
 struct dopusfiletype *type;
 char *name;
-BPTR fileparam;
+int fileparam;
 struct FileInfoBlock *info;
 {
     unsigned char buf[514],buf2[1024],*recog;
@@ -374,7 +374,7 @@ struct FileInfoBlock *info;
             switch (operation) {
                 case FTYC_MATCH:
                 case FTYC_MATCHI:
-                    if (!(checktypechars(file,buf,(operation == FTYC_MATCHI) ? 1 : 0))) fail=1;
+                    if (!(checktypechars((IPTR)file,buf,(operation == FTYC_MATCHI) ? 1 : 0))) fail=1;
                     D(bug("checktypechars(): %ld\n",!fail));
                     break;
                 case FTYC_MATCHNAME:
@@ -438,7 +438,7 @@ struct FileInfoBlock *info;
                     break;
                 case FTYC_SEARCHFOR:
                     oldpos=Seek(file,0,OFFSET_CURRENT);
-                    if ((val=typesearch(file,buf,SEARCH_NOCASE|SEARCH_WILDCARD,NULL,0))==-1) {
+                    if ((val=typesearch((IPTR)file,buf,SEARCH_NOCASE|SEARCH_WILDCARD,NULL,0))==-1) {
                         fail=1;
                         Seek(file,oldpos,OFFSET_BEGINNING);
                     }
@@ -462,13 +462,13 @@ struct FileInfoBlock *info;
 }
 
 int checktypechars(fileparam,match,nocase)
-BPTR fileparam;
+int fileparam;
 unsigned char *match;
 int nocase;
 {
     unsigned char matchbuf[258],c1,c2;
     int len,clen,a,first=1,m,val,bpos;
-    BPTR file=fileparam;
+    BPTR file=(BPTR)fileparam;
 
     len=strlen(match);
 
@@ -527,7 +527,7 @@ D(bug("match: %s\tpattern: %s (match[0] = %ld)\n",match+first,matchbuf+m,match[0
 }
 
 int typesearch(fileparam,find,flags,buffer,bufsize)
-BPTR fileparam;
+int fileparam;
 char *find;
 int flags;
 char *buffer;
@@ -535,7 +535,7 @@ int bufsize;
 {
     unsigned char *findbuf,matchbuf[256];
     int matchsize,a,len,size,oldpos;
-    BPTR file=fileparam;
+    BPTR file=(BPTR)fileparam;
 
     len=strlen(find);
     if (find[0]=='$') {
@@ -574,7 +574,7 @@ int bufsize;
             oldpos=Seek(file,0,OFFSET_CURRENT);
             if ((size=Read(file,findbuf,32000))<1) break;
             if ((searchbuffer(findbuf,size,matchbuf,matchsize,flags))==1) {
-                oldpos+=((long)search_found_position-(long)findbuf);
+                oldpos+=((int)search_found_position-(int)findbuf);
                 FreeMem(findbuf,32004);
                 return(oldpos);
             }

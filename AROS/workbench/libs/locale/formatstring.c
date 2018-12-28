@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: formatstring.c 52792 2016-07-18 18:50:09Z deadwood $
 
     Desc:
     Lang: english
@@ -613,31 +613,19 @@ APTR InternalFormatString(const struct Locale * locale,
     AROS_LIBFUNC_INIT
     ULONG *indices;
     ULONG indexSize = 0;
-    APTR retval;
-    struct Locale *def_locale = NULL;
-#if defined(__arm__) || defined(__x86_64__) || defined(__powerpc__)
+#if defined(__arm__) || defined(__x86_64__)
     va_list nullarg = {};
 #else
     va_list nullarg = 0;
 #endif
-
-    if (locale == NULL)
-    {
-        locale = OpenLocale(NULL);
-        def_locale = (struct Locale *)locale;
-    }
 
     /* Generate the indexes for the provided datastream */
     GetDataStreamFromFormat(fmtTemplate, nullarg, NULL, NULL, NULL, &indexSize);
     indices = alloca(indexSize);
     GetDataStreamFromFormat(fmtTemplate, nullarg, NULL, NULL, indices, &indexSize);
 
-    retval = InternalFormatString(locale, fmtTemplate,
+    return InternalFormatString(locale, fmtTemplate,
                                 dataStream, indices, putCharFunc);
-
-    CloseLocale(def_locale);
-
-    return retval;
 
     AROS_LIBFUNC_EXIT
 }

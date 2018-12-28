@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: gettagdata.c 49964 2015-01-28 23:04:04Z NicJA $
 
     GetTagData()
 */
@@ -20,7 +20,7 @@
 /*  SYNOPSIS */
 	AROS_LHA(Tag                   , tagValue, D0),
 	AROS_LHA(IPTR                  , defaultVal, D1),
-	AROS_LHA(const struct TagItem *, tagList, A0),
+	AROS_LHA(struct TagItem *, tagList, A0),
 
 /*  LOCATION */
 	struct UtilityBase *, UtilityBase, 6, Utility)

@@ -1,6 +1,6 @@
 /*
     Copyright © 2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: notify.c 39325 2011-06-17 05:51:13Z jmcmullan $
 
     Test program for ram.handler notification.
 */
@@ -19,9 +19,6 @@
 
 int main(int argc, char* argv[])
 {
-    printf("Program waits till a file with the name 'Olle' is"
-        "created in RAM:\n");
-    
     struct NotifyRequest *nr = AllocVec(sizeof(struct NotifyRequest),
 					MEMF_CLEAR);
     BPTR lock;

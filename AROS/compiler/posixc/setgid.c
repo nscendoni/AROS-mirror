@@ -1,14 +1,12 @@
 /*
-    Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2004-2013, The AROS Development Team. All rights reserved.
+    $Id: setgid.c 48053 2013-09-08 21:20:12Z verhaegs $
 
     POSIX.1-2008 function setgid().
 */
 
 #include <aros/debug.h>
 #include <errno.h>
-
-#include "__posixc_intbase.h"
 
 /*****************************************************************************
 
@@ -21,13 +19,13 @@
 	gid_t gid)
 
 /*  FUNCTION
-	Set the group id, and effective group id of the calling process to gid.
-
+	
     INPUTS
 	
     RESULT
 	
     NOTES
+        Not implemented.
 
     EXAMPLE
 
@@ -39,10 +37,9 @@
 
 ******************************************************************************/
 {
-    struct PosixCIntBase *PosixCBase =
-        (struct PosixCIntBase *)__aros_getbase_PosixCBase();
-
-    PosixCBase->egid = PosixCBase->gid = gid;
+    /* TODO: Implement setgid() */
+    AROS_FUNCTION_NOT_IMPLEMENTED("posixc");
+    errno = ENOSYS;
 
     return 0;
 } /* setgid() */

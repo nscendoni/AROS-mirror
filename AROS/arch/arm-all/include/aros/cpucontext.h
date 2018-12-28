@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpucontext.h 50365 2015-04-13 21:01:05Z NicJA $
 
     Desc: CPU context definition for ARM processors
     Lang: english

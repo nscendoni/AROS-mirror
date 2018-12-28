@@ -1,7 +1,7 @@
 # Author: David Goodger
 # Contact: goodger@users.sourceforge.net
-# Revision: $Revision$
-# Date: $Date$
+# Revision: $Revision: 45148 $
+# Date: $Date: 2012-07-02 20:35:15 +0200 (Mon, 02 Jul 2012) $
 # Copyright: This module has been placed in the public domain.
 
 """
@@ -23,7 +23,7 @@ import time
 import re
 from types import ListType
 try:
-    from PIL import Image             # check for the Python Imaging Library
+    import Image                        # check for the Python Imaging Library
 except ImportError:
     Image = None
 import docutils

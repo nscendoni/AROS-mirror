@@ -1,7 +1,7 @@
 /*
     Copyright © 2002-2013, The AROS Development Team. All rights reserved.
 
-    $Id$
+    $Id: datatypescache.c 48325 2013-10-26 07:56:19Z neil $
 */
 
 #include <ctype.h>

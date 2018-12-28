@@ -1,7 +1,7 @@
 #ifndef XADMASTER_CAB_C
 #define XADMASTER_CAB_C
 
-/*  $Id$
+/*  $Id: CAB.c 51910 2016-03-13 13:23:42Z NicJA $
     Microsoft Cabinet archiver
 
     XAD library system for archive handling

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: whichlayer.c 49028 2014-05-25 12:38:18Z deadwood $
 
     Desc:
     Lang: english

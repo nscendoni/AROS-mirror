@@ -7,6 +7,12 @@
 
 #include "segments.h"
 
+/*
+ * We handle all 255 exception vectors. However vectors starting from 0x20
+ * are hardware IRQs which are handled separately. So - 32 raw exceptions.
+ */
+#define EXCEPTIONS_COUNT 32
+
 /* We use native context format, no conversion needed */
 #define regs_t struct ExceptionContext
 /* There are no private add-ons */
@@ -23,7 +29,7 @@
 #define goBack(mode)
 
 /* A command to issue a syscall */
-#define krnSysCall(num) asm volatile("int $0xfe"::"a"(num):"memory")
+#define krnSysCall(num) asm volatile("int $0x80"::"a"(num):"memory")
 
 #define IN_USER_MODE						\
 ({								\

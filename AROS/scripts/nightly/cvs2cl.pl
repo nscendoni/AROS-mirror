@@ -9,9 +9,9 @@ exec perl -w -x $0 ${1+"$@"} # -*- mode: perl; perl-indent-level: 2; -*-
 ###                                                        ###
 ##############################################################
 
-## $Revision$
-## $Date$
-## $Author$
+## $Revision: 30792 $
+## $Date: 2009-03-07 23:40:04 +0100 (Sat, 07 Mar 2009) $
+## $Author: neil $
 ##
 
 use strict;
@@ -145,7 +145,7 @@ use User::pwent    qw( getpwnam );
 use constant MAILNAME => "/etc/mailname";
 
 # In case we have to print it out:
-my $VERSION = '$Revision$';
+my $VERSION = '$Revision: 30792 $';
 $VERSION =~ s/\S+\s+(\S+)\s+\S+/$1/;
 
 ## Vars set by options:

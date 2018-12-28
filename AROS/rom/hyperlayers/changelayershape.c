@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: changelayershape.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc:
     Lang: english
@@ -26,7 +26,7 @@
 	AROS_LHA(struct Region *, newshape   , A1),
 	AROS_LHA(struct Hook   *, callback   , A2),
 /*  LOCATION */
-	struct LayersBase *, LayersBase, 37, Layers)
+	struct LayersBase *, LayersBase, 41, Layers)
 
 /*  FUNCTION
        Changes the shape of the layer on the fly.

@@ -10,7 +10,7 @@
  * ====================================================
  */
 
-__FBSDID("$FreeBSD: src/lib/msun/src/s_trunc.c,v 1.4 2008/02/22 02:27:34 das Exp $");
+__FBSDID("$FreeBSD: src/lib/msun/src/s_trunc.c,v 1.1 2004/06/20 09:25:43 das Exp $");
 
 /*
  * trunc(x)
@@ -21,7 +21,6 @@ __FBSDID("$FreeBSD: src/lib/msun/src/s_trunc.c,v 1.4 2008/02/22 02:27:34 das Exp
  *	Inexact flag raised if x not equal to trunc(x).
  */
 
-#include <float.h>
 #include "math.h"
 #include "math_private.h"
 
@@ -59,8 +58,3 @@ trunc(double x)
 	INSERT_WORDS(x,i0,i1);
 	return x;
 }
-
-#if LDBL_MANT_DIG == 53
-AROS_MAKE_ASM_SYM(typeof(truncl), truncl, AROS_CSYM_FROM_ASM_NAME(truncl), AROS_CSYM_FROM_ASM_NAME(trunc));
-AROS_EXPORT_ASM_SYM(AROS_CSYM_FROM_ASM_NAME(truncl));
-#endif

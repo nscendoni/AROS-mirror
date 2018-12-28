@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 52341 2016-03-29 03:46:55Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- ports-text-gocr : ports-text-gocr-icons
 

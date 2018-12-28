@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cachecleare.c 36647 2011-01-17 14:01:23Z neil $
 
     Desc: CacheClearE() - Clear the caches with extended control, ARM Linux-hosted implementation
     Lang: english

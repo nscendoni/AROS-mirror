@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getattrbase.c 39376 2011-06-18 20:07:39Z jmcmullan $
 
     Desc: OOP function OOP_GetAttrBase
     Lang: english

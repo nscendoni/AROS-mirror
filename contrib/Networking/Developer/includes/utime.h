@@ -2,7 +2,7 @@
 #define	_UTIME_H_
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: utime.h 32359 2010-01-16 22:25:24Z verhaegs $
 
     Desc: ANSI-C header file utime.h
     Lang: english

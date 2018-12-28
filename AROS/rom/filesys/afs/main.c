@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: main.c 46395 2013-01-27 04:59:56Z jmcmullan $
 */
 
 #ifndef DEBUG

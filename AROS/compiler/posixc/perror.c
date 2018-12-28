@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: perror.c 48052 2013-09-08 21:19:58Z verhaegs $
 
     C99 function perror().
 */

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: geticonrectangle.c 41726 2011-10-03 05:55:23Z jmcmullan $
 */
 
 #include "icon_intern.h"

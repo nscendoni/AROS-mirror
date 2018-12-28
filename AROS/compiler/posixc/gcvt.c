@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gcvt.c 48054 2013-09-08 21:20:18Z verhaegs $
 
     POSIX.1-2001 function gcvt().
     Function is deprecated and removed from POSIX.1-2008

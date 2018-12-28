@@ -2,7 +2,7 @@
     Copyright © 2002, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: aircos_main.c 43450 2012-01-02 08:08:01Z jmcmullan $
 */
 
 #include    <exec/types.h>

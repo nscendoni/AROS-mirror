@@ -3,7 +3,7 @@
     Copyright © 2002, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: bubbleengine.h 30792 2009-03-07 22:40:04Z neil $
 */
 
 #ifndef _ZUNE_BUBBLEENGINE_H__

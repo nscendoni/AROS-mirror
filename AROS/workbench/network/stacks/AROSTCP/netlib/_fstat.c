@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: _fstat.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      _fstat.c - fstat() for Network Support Library (SAS/C)
  *

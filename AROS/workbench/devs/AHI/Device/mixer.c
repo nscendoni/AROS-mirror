@@ -1,6 +1,5 @@
 /*
      AHI - Hardware independent audio subsystem
-     Copyright (C) 2017 The AROS Dev Team
      Copyright (C) 1996-2005 Martin Blom <martin@blom.org>
      
      This library is free software; you can redistribute it and/or
@@ -949,12 +948,12 @@ Mix( struct Hook*             unused_Hook,
             */
 
 /* 	    KPrintF( "cd->cd_Add=0x%08lx:%08lx\n", */
-/* 		     (IPTR) (cd->cd_Add >> 32), (IPTR) cd->cd_Add ); */
+/* 		     (ULONG) (cd->cd_Add >> 32), (ULONG) cd->cd_Add ); */
 /* 	    KPrintF( "cd->cd_Offset=0x%08lx:%08lx, " */
 /* 		     "cd->cd_LastOffset=0x%08lx:%08lx," */
 /* 		     "cd->cd_FirstOffset=%08lx\n", */
-/* 		     (IPTR) (cd->cd_Offset >> 32), (IPTR) cd->cd_Offset, */
-/* 		     (IPTR) (cd->cd_LastOffset >> 32), (IPTR) cd->cd_LastOffset, */
+/* 		     (ULONG) (cd->cd_Offset >> 32), (ULONG) cd->cd_Offset, */
+/* 		     (ULONG) (cd->cd_LastOffset >> 32), (ULONG) cd->cd_LastOffset, */
 /* 		     cd->cd_FirstOffsetI ); */
 		     
             /* What we do now is to calculate how much futher we have
@@ -965,8 +964,8 @@ Mix( struct Hook*             unused_Hook,
 /* 	    KPrintF( "cd->cd_Offset=0x%08lx:%08lx, " */
 /* 		     "cd->cd_LastOffset=0x%08lx:%08lx," */
 /* 		     "cd->cd_FirstOffset=%08lx\n", */
-/* 		     (IPTR) (cd->cd_Offset >> 32), (IPTR) cd->cd_Offset, */
-/* 		     (IPTR) (cd->cd_LastOffset >> 32), (IPTR) cd->cd_LastOffset, */
+/* 		     (ULONG) (cd->cd_Offset >> 32), (ULONG) cd->cd_Offset, */
+/* 		     (ULONG) (cd->cd_LastOffset >> 32), (ULONG) cd->cd_LastOffset, */
 /* 		     cd->cd_FirstOffsetI ); */
 
             /*
@@ -991,8 +990,8 @@ Mix( struct Hook*             unused_Hook,
 /* 	    KPrintF( "cd->cd_Offset=0x%08lx:%08lx, " */
 /* 		     "cd->cd_LastOffset=0x%08lx:%08lx," */
 /* 		     "cd->cd_FirstOffset=%08lx\n", */
-/* 		     (IPTR) (cd->cd_Offset >> 32), (IPTR) cd->cd_Offset, */
-/* 		     (IPTR) (cd->cd_LastOffset >> 32), (IPTR) cd->cd_LastOffset, */
+/* 		     (ULONG) (cd->cd_Offset >> 32), (ULONG) cd->cd_Offset, */
+/* 		     (ULONG) (cd->cd_LastOffset >> 32), (ULONG) cd->cd_LastOffset, */
 /* 		     cd->cd_FirstOffsetI ); */
             /*
             ** But what if the next sample is so short that we just

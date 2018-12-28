@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: attachpalextra.c 47612 2013-06-25 21:50:12Z sonic $
 
     Desc: Graphics function AttachPalExtra()
     Lang: english

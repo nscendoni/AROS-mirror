@@ -1,4 +1,4 @@
-#   $Id$
+#   $Id: mmakefile.src 53132 2016-12-29 10:32:06Z deadwood $
 #
 #   Generate the AROS support library, libarossupport.a
 #
@@ -7,20 +7,15 @@ include $(SRCDIR)/config/aros.cfg
 
 FILES	:= \
     calcchecksum \
-    clonerastport \
     createbstr \
-    createrastport \
     createseglist \
     debugmem \
-    deinitrastport \
-    freerastport \
     freestruct \
     hexdump \
     isdosentrya \
     kprintf \
     rkprintf \
     nastyfreemem \
-    purify \
     libfindtagitem \
     libgettagdata \
     libnexttagitem \
@@ -33,10 +28,6 @@ FILES	:= \
     readstruct \
     readword \
     removeslist \
-    rt \
-    rt_dos \
-    rt_exec \
-    rt_intuition \
     writebyte \
     writedouble \
     writefloat \

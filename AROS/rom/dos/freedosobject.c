@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freedosobject.c 49140 2014-07-23 01:03:37Z vidarh $
 
     Desc:
     Lang: english

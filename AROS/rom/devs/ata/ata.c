@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2014, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: ata.c 48823 2014-02-26 04:22:45Z neil $
 
     Desc:
     Lang: English
@@ -860,7 +860,6 @@ void BusTaskCode(struct ata_Bus *bus, struct ataBase *ATABase)
     DINIT(bug("[ATA**] Task started (bus: %u)\n", bus->ab_BusNum));
 
     bus->ab_Timer = ata_OpenTimer(ATABase);
-    bus->ab_BounceBufferPool = CreatePool(MEMF_CLEAR | MEMF_31BIT, 131072, 65536);
 
     /* Get the signal used for sleeping */
     bus->ab_Task = FindTask(0);

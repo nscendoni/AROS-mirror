@@ -1,8 +1,8 @@
-#   $Id$
+#   $Id: mmakefile.src 52376 2016-03-29 16:44:02Z NicJA $
 #
 #   Makefile to make Rexx.
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES := \
 	main \

@@ -1,6 +1,6 @@
 /*
     Copyright  2011-2012, The AROS Development Team.
-    $Id$
+    $Id: screendecorclass.c 48000 2013-09-07 02:54:44Z NicJA $
 */
 
 #define DEBUG 0

@@ -13,7 +13,7 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
- $Id$
+ $Id: Toolbar_mcc.h 30800 2009-03-08 17:28:50Z neil $
 
 ***************************************************************************/
 

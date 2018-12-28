@@ -1,7 +1,7 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
+    Copyright © 1995-2012, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: menutask.c 51549 2016-02-27 06:01:04Z jmcmullan $
 */
 
 #include <proto/exec.h>
@@ -110,14 +110,25 @@ void DefaultMenuHandler(struct MenuTaskParams *taskparams)
     struct IntuitionBase    *IntuitionBase = taskparams->intuitionBase;
     struct GfxBase          *GfxBase = GetPrivIBase(IntuitionBase)->GfxBase;
     struct MenuHandlerData  *mhd = NULL;
+    UBYTE                   *mem;
     struct MsgPort          *port = NULL;
     BOOL                     success = FALSE;
 
-    if ((mhd = (struct MenuHandlerData *)AllocMem(sizeof(struct MenuHandlerData), MEMF_PUBLIC | MEMF_CLEAR)))
+    if ((mem = AllocMem(sizeof(struct MsgPort) +
+                        sizeof(struct MenuHandlerData), MEMF_PUBLIC | MEMF_CLEAR)))
     {
-        port = CreateMsgPort();
+        port = (struct MsgPort *)mem;
+
+        port->mp_Node.ln_Type   = NT_MSGPORT;
+        port->mp_Flags          = PA_SIGNAL;
+        port->mp_SigBit         = AllocSignal(-1);
+        port->mp_SigTask        = FindTask(0);
+        NEWLIST(&port->mp_MsgList);
+
+        mhd = (struct MenuHandlerData *)(mem + sizeof(struct MsgPort));
 
         success = TRUE;
+
     } /* if ((mem = AllocMem(sizeof(struct MsgPort), MEMF_PUBLIC | MEMF_CLEAR))) */
 
     if (success)
@@ -201,10 +212,6 @@ void DefaultMenuHandler(struct MenuTaskParams *taskparams)
         } /* while((msg = (struct MenuMessage *)GetMsg(port))) */
 
     } /* for(;;) */
-
-    /* should never reach here but just incase.. */
-    if (port)
-        DeleteMsgPort(port);
 }
 
 /**************************************************************************************************/
@@ -722,9 +729,9 @@ static struct MenuItem *FindItem(WORD *var, struct MenuHandlerData *mhd)
     if (mhd->menuwin)
     {
         mouse_x = mhd->scrmousex - mhd->menuwin->LeftEdge
-            + mhd->activemenu->JazzX - mhd->menuinnerleft;
+            + mhd->activemenu->JazzX - mhd->innerleft - mhd->menuinnerleft;
         mouse_y = mhd->scrmousey - mhd->menuwin->TopEdge
-            + mhd->activemenu->JazzY - mhd->menuinnertop;
+            + mhd->activemenu->JazzY - mhd->innertop - mhd->menuinnertop;
 
         for(item = mhd->activemenu->FirstItem, i = 0; item; item = item->NextItem, i++)
         {

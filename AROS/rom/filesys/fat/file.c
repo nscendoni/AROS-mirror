@@ -7,7 +7,7 @@
  * This program is free software; you can redistribute it and/or modify it
  * under the same terms as AROS itself.
  *
- * $Id$
+ * $Id: file.c 50947 2015-07-12 23:29:57Z neil $
  */
 
 #include <exec/types.h>

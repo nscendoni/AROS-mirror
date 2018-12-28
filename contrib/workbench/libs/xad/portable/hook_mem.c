@@ -1,7 +1,7 @@
 #ifndef XADMASTER_HOOK_MEM_C
 #define XADMASTER_HOOK_MEM_C
 
-/*  $Id$
+/*  $Id: hook_mem.c 39571 2011-06-28 01:31:58Z NicJA $
     Memory IO hooks
 
     XAD library system for archive handling

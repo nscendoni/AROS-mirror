@@ -2,7 +2,7 @@
 #define  CLIB_SCALOSPREVIEWPLUGIN_PROTOS_H
 
 /*
-**	$Id$
+**	$Id: scalospreviewplugin_protos.h 51982 2016-03-15 21:56:01Z NicJA $
 **
 **	C prototypes. For use with 32 bit integers only.
 **

@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: changevpbitmap.c 38178 2011-04-12 11:59:48Z sonic $
 
     Desc: Graphics function ChangeVPBitMap()
     Lang: english
@@ -10,7 +10,7 @@
 #include <graphics/gfx.h>
 #include <graphics/gfxbase.h>
 #include <graphics/view.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #include "graphics_intern.h"
 #include "gfxfuncsupport.h"

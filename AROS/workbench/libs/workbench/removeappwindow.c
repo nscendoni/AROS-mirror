@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: removeappwindow.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Remove a window from Workbench's list of AppWindows.
     Lang: English

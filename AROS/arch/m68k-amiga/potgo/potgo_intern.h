@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: potgo_intern.h 36646 2011-01-17 13:48:43Z neil $
 
     Desc: Internal data structures for potgo.resource
     Lang: english

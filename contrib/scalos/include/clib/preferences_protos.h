@@ -2,7 +2,7 @@
 #define  CLIB_PREFERENCES_PROTOS_H
 
 /*
-**	$Id$
+**	$Id: preferences_protos.h 48481 2013-12-01 22:08:26Z mazze $
 **
 **	C prototypes. For use with 32 bit integers only.
 **

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: timer_intern.h 47625 2013-07-03 18:00:13Z twilen $
 
     Desc: Internal information about the timer.device and HIDD's
     Lang: english

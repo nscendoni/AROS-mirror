@@ -1,6 +1,6 @@
 /*
     Copyright © 2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ids.c 34427 2010-09-13 07:21:03Z neil $
 
     Desc: List of ATI cards supported by this driver
     Lang: English

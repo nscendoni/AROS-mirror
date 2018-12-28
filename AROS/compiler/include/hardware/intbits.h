@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: intbits.h 43288 2011-12-29 09:11:06Z sonic $
 
     Desc: Interrupt bits
     Lang: english

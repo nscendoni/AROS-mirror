@@ -3,7 +3,7 @@
 
 /*
     Copyright 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: softpipe_intern.h 33556 2010-06-12 12:57:12Z deadwood $
 */
 
 

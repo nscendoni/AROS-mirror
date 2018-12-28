@@ -2,7 +2,7 @@
 #define RPC_RPC_MSG_H
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rpc_msg.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /* @(#)rpc_msg.h	2.1 88/07/29 4.0 RPCSRC */

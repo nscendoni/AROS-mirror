@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: name.h 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Namespace structures
     Lang: english

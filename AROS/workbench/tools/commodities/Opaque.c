@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Opaque.c 49028 2014-05-25 12:38:18Z deadwood $
 */
 
 #include <aros/symbolsets.h>

@@ -1,5 +1,5 @@
 # Copyright © 2000-2009, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: Makefile 37970 2011-03-31 21:20:03Z verhaegs $
 #
 # Makefile to build collect-aros.
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: basicfuncs.c 41910 2011-10-18 13:18:09Z sonic $
 
     Desc: Basic help functions needed by gadtools.library.
     Lang: English.

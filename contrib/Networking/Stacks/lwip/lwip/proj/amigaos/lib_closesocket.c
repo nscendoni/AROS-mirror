@@ -2,7 +2,7 @@
     Copyright © 2002-2007, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: lib_closesocket.c 30794 2009-03-08 02:19:07Z neil $
 */
 
 /* We redefine the timeval here, because lwip defines an own timeval struct,

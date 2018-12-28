@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: keyboardgroup_class.h 44377 2012-03-07 20:24:14Z mazze $
 */
 
 #include <exec/types.h>

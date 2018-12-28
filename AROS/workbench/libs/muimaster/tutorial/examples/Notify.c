@@ -2,7 +2,7 @@
     Copyright © 2003-2011, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: Notify.c 43077 2011-12-17 17:47:02Z neil $
 */
 
 /* "muizunesupport.h" contains misc includes and

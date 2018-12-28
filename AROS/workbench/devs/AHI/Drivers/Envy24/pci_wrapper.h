@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pci_wrapper.h 52484 2016-03-31 15:25:06Z neil $
 */
 
 #ifndef PCI_WRAPPER_H

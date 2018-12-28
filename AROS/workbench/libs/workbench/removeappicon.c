@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: removeappicon.c 43500 2012-01-07 18:53:07Z deadwood $
 
     Desc: Remove an icon from Workbench's list of AppIcons.
     Lang: English

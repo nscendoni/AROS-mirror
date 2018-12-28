@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: scheduler.c 51150 2015-10-17 01:20:36Z neil $
 */
 
 #include <asm/mpc5200b.h>

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: doshunks.h 30800 2009-03-08 17:28:50Z neil $
 
     Desc: Definition of hunks, used in executable files.
     Lang: english

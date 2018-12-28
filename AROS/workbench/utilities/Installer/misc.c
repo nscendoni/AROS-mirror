@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: misc.c 48912 2014-04-06 17:12:22Z deadwood $
 */
 
 /* misc.c -- here are all miscellaneous functions for global use */

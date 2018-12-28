@@ -1,6 +1,6 @@
 /*
     Copyright 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: i965bridgedeviceclass.c 32899 2010-03-27 18:14:42Z deadwood $
 */
 
 #include <hidd/agp.h>

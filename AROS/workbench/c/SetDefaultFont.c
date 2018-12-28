@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: SetDefaultFont.c 42440 2011-11-14 07:55:21Z sonic $
 
     Desc:
     Lang: English
@@ -89,7 +89,10 @@ static void Cleanup(char *msg)
         Printf("SetDefaultFont: %s\n",msg);
     }
     
-    FreeArgs(myargs);
+    if (myargs)
+    {
+        FreeArgs(myargs);
+    }
 }
 
 int GfxBase_version = 0;

@@ -2,7 +2,7 @@
     Copyright © 2010, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: pm_filterimsg.c 34711 2010-10-14 05:18:56Z jmcmullan $
 */
 
 #include <utility/tagitem.h>

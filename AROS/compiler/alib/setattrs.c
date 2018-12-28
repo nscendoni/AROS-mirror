@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setattrs.c 48312 2013-10-24 02:05:49Z neil $
 
     Desc: Change the attributes of a BOOPSI object
     Lang: english

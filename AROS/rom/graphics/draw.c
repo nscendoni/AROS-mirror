@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: draw.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Graphics function Draw()
     Lang: english
@@ -57,8 +57,8 @@ static ULONG draw_render(APTR draw_rd, WORD srcx, WORD srcy,
 
 /*  SYNOPSIS */
 	AROS_LHA(struct RastPort *, rp, A1),
-	AROS_LHA(WORD             , x, D0),
-	AROS_LHA(WORD             , y, D1),
+	AROS_LHA(LONG             , x, D0),
+	AROS_LHA(LONG             , y, D1),
 
 /*  LOCATION */
 	struct GfxBase *, GfxBase, 41, Graphics)

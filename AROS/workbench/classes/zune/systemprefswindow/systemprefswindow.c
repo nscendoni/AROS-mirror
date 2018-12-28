@@ -3,7 +3,7 @@
     This file is part of the SystemPrefsWindow class, which is distributed under
     the terms of version 2.1 of the GNU Lesser General Public License.
     
-    $Id$
+    $Id: systemprefswindow.c 51238 2015-12-22 19:14:02Z neil $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

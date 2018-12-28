@@ -3,7 +3,7 @@
 
 /*
    Copyright © 2008-2013, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: page_region.h 47228 2013-04-14 00:11:16Z NicJA $
  */
 
 #include <exec/types.h>

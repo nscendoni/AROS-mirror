@@ -1,6 +1,6 @@
 /*
    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: icontroleditor.c 48691 2014-01-07 20:30:32Z mazze $
 
 Desc:
 Lang: English

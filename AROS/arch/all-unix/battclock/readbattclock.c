@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readbattclock.c 36131 2010-12-17 09:04:56Z sonic $
 
     Desc: ReadBattClock() function.
     Lang: english

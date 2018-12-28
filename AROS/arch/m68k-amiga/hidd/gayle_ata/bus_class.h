@@ -1,7 +1,4 @@
 
-#ifndef BUS_CLASS_H
-#define BUS_CLASS_H
-
 struct ata_ProbedBus
 {
     struct Node atapb_Node;
@@ -28,8 +25,7 @@ struct ataBase
 {
     struct Library  lib;
 
-    OOP_Class      *GayleBusClass;
-    OOP_Class      *FastATABusClass;
+    OOP_Class      *busClass;
 
     OOP_AttrBase    hiddAttrBase;
     OOP_AttrBase    ATABusAttrBase;
@@ -47,5 +43,3 @@ struct ataBase
 #define HWBase                (base->HWMethodBase)
 #define OOPBase               (base->cs_OOPBase)
 #define UtilityBase           (base->cs_UtilityBase)
-
-#endif /* !BUS_CLASS_H */

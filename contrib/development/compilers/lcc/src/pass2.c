@@ -5,7 +5,7 @@
 #include <io.h>
 #endif
 
-static char rcsid[] = "$Id$";
+static char rcsid[] = "$Id: pass2.c 30794 2009-03-08 02:19:07Z neil $";
 
 Interface *IR = NULL;
 int Aflag;		/* >= 0 if -A specified */

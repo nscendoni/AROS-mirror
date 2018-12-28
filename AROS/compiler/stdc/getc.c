@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getc.c 48051 2013-09-08 21:19:51Z verhaegs $
 
     C99 function getc().
 */

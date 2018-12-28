@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hdtoolbox_support.c 39270 2011-06-17 05:43:49Z jmcmullan $
 */
 
 #include <proto/alib.h>

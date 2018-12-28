@@ -1,4 +1,4 @@
-/*  $Id$
+/*  $Id: TestFilename.c 50043 2015-02-06 22:51:30Z NicJA $
     test program to test filename functions
 
     XAD library system for archive handling

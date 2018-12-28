@@ -1,7 +1,7 @@
 #ifndef XADMASTER_CLIENTS_C
 #define XADMASTER_CLIENTS_C
 
-/*  $Id$
+/*  $Id: clients.c 39547 2011-06-27 00:20:24Z NicJA $
     the xad packing library clients
 
     XAD library system for archive handling

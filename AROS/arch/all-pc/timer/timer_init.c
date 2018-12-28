@@ -1,25 +1,21 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: timer_init.c 42353 2011-11-09 16:29:14Z sonic $
 
     Desc: Timer startup and device commands
 */
 
-#define DEBUG 0
-#include <aros/debug.h>
-
 /****************************************************************************************/
 
-#include <aros/config.h>
 #include <exec/devices.h>
 #include <exec/interrupts.h>
 #include <devices/timer.h>
 #include <hardware/intbits.h>
 #include <proto/exec.h>
-#include <proto/execlock.h>
 #include <proto/kernel.h>
 #include <aros/symbolsets.h>
 #include <asm/io.h>
+#include <aros/debug.h>
 
 #include "ticks.h"
 
@@ -48,15 +44,6 @@ static void TimerInt(struct TimerBase *TimerBase, struct ExecBase *SysBase)
 
 static int hw_Init(struct TimerBase *LIBBASE)
 {
-#if defined(__AROSEXEC_SMP__)
-    struct ExecLockBase *ExecLockBase;
-    if ((ExecLockBase = OpenResource("execlock.resource")) != NULL)
-    {
-        LIBBASE->tb_ExecLockBase = ExecLockBase;
-        LIBBASE->tb_ListLock = AllocLock();
-    }
-#endif
-
     /* We must have kernel.resource */
     D(bug("[Timer] KernelBase = 0x%p\n", KernelBase));
     if (!KernelBase)

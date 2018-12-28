@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: _exit.c 48041 2013-09-08 21:18:19Z verhaegs $
 
     C99 function _Exit().
 */

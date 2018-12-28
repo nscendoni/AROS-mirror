@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: removeappmenuitem.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Remove a menuitem from Workbench's list of AppMenuItems.
     Lang: English

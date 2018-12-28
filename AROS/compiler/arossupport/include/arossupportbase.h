@@ -7,7 +7,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: arossupportbase.h 36214 2010-12-23 08:27:33Z sonic $
 */
 
 #include <stdarg.h>

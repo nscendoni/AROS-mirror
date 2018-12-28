@@ -1,4 +1,4 @@
-##rem $Id$
+##rem $Id: C++_CatalogF.cc 253 2014-02-18 11:15:58Z damato $
 
 //   Multipurpose CatalogF class implementation
 //   Written by Antonio J. Gomez Glez. on 20.6.94

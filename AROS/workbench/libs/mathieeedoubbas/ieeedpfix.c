@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2003, The AROS Development Team. All rights reserved.
+    $Id: ieeedpfix.c 47354 2013-05-04 17:12:25Z mazze $
 */
 
 #include "mathieeedoubbas_intern.h"
@@ -18,27 +18,19 @@
         struct MathIeeeDoubBasBase *, MathIeeeDoubBasBase, 5, MathIeeeDoubBas)
 
 /*  FUNCTION
-	Converts an IEEE double precision floating point number to an integer.
+	Convert IEEE double precision floating point number to integer
 
     INPUTS
-        y - IEEE double precision floating point number.
 
     RESULT
-        x - the closest signed 32-bit integer to y.
+	absolute value of y
 
 	Flags:
 	  zero	   : result is zero
 	  negative : result is negative
 	  overflow : ieeedp out of integer-range
 
-    NOTES
-
-    EXAMPLE
-
     BUGS
-
-    SEE ALSO
-        IEEEDPFlt(), IEEEDPFloor(), IEEEDPCeil()
 
     INTERNALS
 

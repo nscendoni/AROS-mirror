@@ -1,14 +1,11 @@
 /*
-    Copyright 2009-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright 2009, The AROS Development Team. All rights reserved.
+    $Id: drm_compat_types.h 48174 2013-09-28 19:09:29Z deadwood $
 */
 
 #ifndef _DRM_COMPAT_TYPES_
 #define _DRM_COMPAT_TYPES_
 
-#include <aros/config.h>
-
-#include <exec/lists.h>
 #include <exec/types.h>
 #include <exec/semaphores.h>
 #include <sys/types.h>
@@ -51,12 +48,10 @@ typedef struct
     LONG count;
 } atomic_t;
 
-#ifndef _AROS_TYPES_SPINLOCK_S_H_
 typedef struct
 {
-    ULONG dummy;
+    LONG dummy;
 } spinlock_t;
-#endif
 
 typedef struct
 {
@@ -186,7 +181,11 @@ struct i2c_msg
 };
 
 /* Wait queue handling */
-typedef struct MinList wait_queue_head_t;
+struct wait_queue_head
+{
+    ULONG dummy;
+};
+typedef struct wait_queue_head wait_queue_head_t;
 
 /* Firmware */
 struct firmware

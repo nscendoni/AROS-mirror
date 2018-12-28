@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getkey.c 47347 2013-05-04 12:10:32Z mazze $
 
     Desc: 
     Lang: english

@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: printuserfault.c 50462 2015-04-25 19:56:48Z schulz $
  * 
  *      printuserfault.c - Print a usergroup error message (DOS)
  *

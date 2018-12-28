@@ -1,12 +1,12 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2010, The AROS Development Team. All rights reserved.
+    $Id: nextdisplayinfo.c 33365 2010-05-27 13:23:56Z sonic $
 
     Desc: Graphics function NextDisplayInfo()
     Lang: english
 */
 #include <graphics/displayinfo.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <proto/oop.h>
 #include "graphics_intern.h"
 #include "dispinfo.h"

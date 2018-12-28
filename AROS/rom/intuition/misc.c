@@ -1,7 +1,7 @@
 /*
     Copyright © 2002-2013, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: misc.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <aros/debug.h>
@@ -120,6 +120,8 @@ struct Screen *FindFirstScreen(Object *monitor, struct IntuitionBase *IntuitionB
     return scr;
 }
 
+#ifdef __MORPHOS__
+
 struct RastPort *MyCreateRastPort(struct IntuitionBase *IntuitionBase)
 {
     struct IntIntuitionBase *_intuitionBase = GetPrivIBase(IntuitionBase);
@@ -160,8 +162,6 @@ void MyFreeRastPort(struct IntuitionBase *IntuitionBase, struct RastPort *rp)
 
     FreeMem(rp, sizeof(*rp));
 }
-
-#ifdef __MORPHOS__
 
 BOOL IsLayerHiddenBySibling(struct Layer *layer, BOOL xx)
 {

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: clipblit.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Copy content of a rastport to another rastport
     Lang: english
@@ -30,13 +30,13 @@
 
 /*  SYNOPSIS */
 	AROS_LHA(struct RastPort *, srcRP , A0),
-	AROS_LHA(WORD             , xSrc  , D0),
-	AROS_LHA(WORD             , ySrc  , D1),
+	AROS_LHA(LONG             , xSrc  , D0),
+	AROS_LHA(LONG             , ySrc  , D1),
 	AROS_LHA(struct RastPort *, destRP, A1),
-	AROS_LHA(WORD             , xDest , D2),
-	AROS_LHA(WORD             , yDest , D3),
-	AROS_LHA(WORD             , xSize , D4),
-	AROS_LHA(WORD             , ySize , D5),
+	AROS_LHA(LONG             , xDest , D2),
+	AROS_LHA(LONG             , yDest , D3),
+	AROS_LHA(LONG             , xSize , D4),
+	AROS_LHA(LONG             , ySize , D5),
 	AROS_LHA(UBYTE            , minterm, D6),
 
 /*  LOCATION */

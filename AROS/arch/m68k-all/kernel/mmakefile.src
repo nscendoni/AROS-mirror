@@ -1,18 +1,18 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
-FILES=dispatch schedule schedulecpu switch m68k_exception kernel_cpu kernel_intr \
+FILES=dispatch schedule switch m68k_exception kernel_cpu kernel_intr \
       platform_init setprotection mapglobal mmu bushandler #kernel_gdb
 
 AFILES=issuper fpusavecontext fpurestorecontext buserror
 
 USER_CFLAGS := $(PRIV_KERNEL_INCLUDES) $(PRIV_EXEC_INCLUDES) \
-	       -I$(GENINCDIR) -I$(AROS_DEVELOPER)/include \
+	       -I$(GENINCDIR) -I$(AROSDIR)/Development/include \
 	       -DPARANOIA_STACK
 
 USER_AFLAGS := $(PRIV_KERNEL_INCLUDES) $(PRIV_EXEC_INCLUDES) \
-	       -I$(GENINCDIR) -I$(AROS_DEVELOPER)/include \
+	       -I$(GENINCDIR) -I$(AROSDIR)/Development/include \
 	       -m68060
 
 %build_archspecific \

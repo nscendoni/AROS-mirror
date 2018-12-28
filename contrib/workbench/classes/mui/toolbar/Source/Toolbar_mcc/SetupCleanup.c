@@ -10,7 +10,7 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
- $Id$
+ $Id: SetupCleanup.c 51933 2016-03-13 22:25:52Z NicJA $
 
 ***************************************************************************/
 

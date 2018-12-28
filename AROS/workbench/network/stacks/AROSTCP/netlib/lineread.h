@@ -1,6 +1,6 @@
 #ifndef LINEREAD_H
 #define LINEREAD_H \
-       "$Id$"
+       "$Id: lineread.h 36648 2011-01-17 14:31:59Z neil $"
 /*
  *      Effective routines for reading line formatted data from network
  *

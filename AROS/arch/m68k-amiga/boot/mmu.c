@@ -1,11 +1,10 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: mmu.c 52833 2016-08-04 18:22:05Z twilen $
 */
 
-#define DEBUG 0
+#define DEBUG 1
 #include <aros/debug.h>
-
 #include <exec/types.h>
 #include <exec/resident.h>
 #include <proto/exec.h>
@@ -154,8 +153,7 @@ static void mmuprotectextrom(void *KernelBase)
     ForeachNode(bs->mlist, ml) {
         if (ml->ml_Node.ln_Type == NT_KICKMEM) {
             for(i = 0; i < ml->ml_NumEntries; i++) {
-                // me_Length bit 31 is KICKMEM_ALLOCATED bit
-                mmuprotectregion(KernelBase, "ROM", ml->ml_ME[i].me_Addr, ml->ml_ME[i].me_Length & ~0x80000000, MAP_Readable | MAP_Executable);
+                mmuprotectregion(KernelBase, "ROM", ml->ml_ME[i].me_Addr, ml->ml_ME[i].me_Length, MAP_Readable | MAP_Executable);
             }
         }
     }

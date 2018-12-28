@@ -131,11 +131,11 @@ static inline void dotitle(struct BitMapHeader *bmhd)
     getcolstring(cols);
     getviewmodes(modes);
     lsprintf(title,"%ld x %ld x %ld (page %ld x %ld) %s cols (%s)",
-        (long int)bmhd->bmh_Width,
-        (long int)bmhd->bmh_Height,
-        (long int)bmhd->bmh_Depth,
-        (long int)bmhd->bmh_PageWidth,
-        (long int)bmhd->bmh_PageHeight,
+        bmhd->bmh_Width,
+        bmhd->bmh_Height,
+        bmhd->bmh_Depth,
+        bmhd->bmh_PageWidth,
+        bmhd->bmh_PageHeight,
         cols,modes);
     dostatustext(title);
 }
@@ -157,7 +157,7 @@ char *name;
         imagewidth, imageheight,
         minwidth, minheight, maxwidth, maxheight,
         depth,
-        __unused coppersize,
+        coppersize,
         viewmode,
         maxframes;
     UWORD colourlist[4];
@@ -226,10 +226,10 @@ DTload:
           struct BitMapHeader *dto_bmhd;
 
           if (GetDTAttrs (dto,
-                      PDTA_ModeID,            &viewmode,
-                      PDTA_BitMapHeader,      &dto_bmhd,
-                      PDTA_ColorRegisters,    &colourptr,
-                      PDTA_NumColors,         &coloursize,
+                      PDTA_ModeID,            (Tag)&viewmode,
+                      PDTA_BitMapHeader,      (Tag)&dto_bmhd,
+                      PDTA_ColorRegisters,    (Tag)&colourptr,
+                      PDTA_NumColors,         (Tag)&coloursize,
                       TAG_DONE)==4)
            {
 D(bug("viewmode(0) = %08lx\n",viewmode));
@@ -384,7 +384,7 @@ D(bug("viewmode(0) = %08lx\n",viewmode));
         numcolours=coloursize/3;
 
         if (/*system_version2>=OSVER_39 &&*/ !specialformat)
-            colourtable_8=LAllocRemember(&iffkey,(coloursize+2)*sizeof(APTR),MEMF_CLEAR);
+            colourtable_8=LAllocRemember(&iffkey,(coloursize+2)*4,MEMF_CLEAR);
 
         colourtable_4=LAllocRemember(&iffkey,numcolours*sizeof(UWORD),MEMF_CLEAR);
     }
@@ -550,14 +550,14 @@ D(bug("extflag,viewmode(5) = %ld,%lx\n",extflag,viewmode));
                           SA_Width,      bitmapwidth,
                           SA_Height,     bitmapheight,
                           SA_Depth,      depth,
-                          dt_ok?SA_Type:SA_BitMap,     dt_ok?CUSTOMSCREEN:(IPTR)iffbm[0],
+                          dt_ok?SA_Type:SA_BitMap,     dt_ok?CUSTOMSCREEN:(Tag)iffbm[0],
                           SA_Behind,     TRUE,
                           SA_DisplayID,  viewmode,
                           SA_AutoScroll, TRUE,
                           SA_Overscan,   OSCAN_MAX,
                           SA_SharePens,  TRUE,
                           SA_ShowTitle,  FALSE,
-                          SA_Colors32,   colourtable_8,
+                          SA_Colors32,   (Tag)colourtable_8,
                  //            SA_ErrorCode,  (Tag)&err,
                           TAG_END)))
      {
@@ -579,13 +579,13 @@ D(bug("extflag,viewmode(5) = %ld,%lx\n",extflag,viewmode));
 
     if (dt_ok)
      {
-      SetDTAttrs(dto,NULL,NULL,PDTA_Screen,iffscreen,TAG_END);
+      SetDTAttrs(dto,NULL,NULL,PDTA_Screen,(Tag)iffscreen,TAG_END);
       DoDTMethod(dto, iffwindow, NULL, DTM_PROCLAYOUT, NULL, 1);
-      GetDTAttrs(dto, PDTA_DestBitMap, &iffbm[0],TAG_END);
+      GetDTAttrs(dto, PDTA_DestBitMap, (Tag)&iffbm[0],TAG_END);
 D(bug("PDTA_DestBitMap: %08lx\n",iffbm[0]));
       if (!(iffbm[0]))
        {
-        GetDTAttrs(dto, PDTA_BitMap, &iffbm[0],TAG_END);
+        GetDTAttrs(dto, PDTA_BitMap, (Tag)&iffbm[0],TAG_END);
 D(bug("PDTA_BitMap: %08lx\n",iffbm[0]));
        }
 //     if (!(iffbm[0])) GetDTAttrs(dto, PDTA_ClassBitMap, (Tag)&iffbm[0],TAG_END);
@@ -1383,7 +1383,7 @@ char *str;
         if (bmhd.bmh_Depth==8) strcpy(str,"256K");
         else strcpy(str,"4096");
     }
-    else lsprintf(str,"%ld",(long int)(1<<bmhd.bmh_Depth));
+    else lsprintf(str,"%ld",1<<bmhd.bmh_Depth);
 }
 
 void gfxprint(wind,rast,x,y,w,h,iff)
@@ -1530,8 +1530,8 @@ D(bug("Print screen ModeID: %lx\n",class));
 
         lsprintf(buf,"%12s : %ld x %ld",
             globstring[STR_IMAGE_SIZE],
-            (long int)bmhd.bmh_Width,
-            (long int)bmhd.bmh_Height);
+            bmhd.bmh_Width,
+            bmhd.bmh_Height);
         iffinfotxt(prp,buf,7,35+goff);
 
         if (anim.first_frame) {
@@ -1539,49 +1539,49 @@ D(bug("Print screen ModeID: %lx\n",class));
             else fnum=anim.framenum-1;
             lsprintf(buf,"%12s : %ld %s %ld @ %ld/sec",
                 globstring[STR_NUM_FRAMES],
-                (long int)fnum,
+                fnum,
                 globstring[STR_OF],
-                (long int)(anim.framecount+(1-got_dpan)),
-                (long int)anim.framespersec);
+                anim.framecount+(1-got_dpan),
+                anim.framespersec);
             iffinfotxt(prp,buf,7,43+goff);
 
             lsprintf(buf,"%12s : ANIM Op %ld",
                 globstring[STR_ANIM_TYPE],
-                (long int)anim.type);
+                anim.type);
             iffinfotxt(prp,buf,7,51+goff);
 
             lsprintf(title,"IFF ANIM : %s   %s %ld %s %ld   %ld x %ld x %s\n\n",
                 ptr,
                 globstring[STR_FRAME],
-                (long int)fnum,
+                fnum,
                 globstring[STR_OF],
-                (long int)(anim.framecount+1),
-                (long int)bmhd.bmh_Width,
-                (long int)bmhd.bmh_Height,
+                anim.framecount+1,
+                bmhd.bmh_Width,
+                bmhd.bmh_Height,
                 cols);
         }
         else {
             lsprintf(buf,"%12s : %ld x %ld",
                 globstring[STR_PAGE_SIZE],
-                (long int)bmhd.bmh_PageWidth,
-                (long int)bmhd.bmh_PageHeight);
+                bmhd.bmh_PageWidth,
+                bmhd.bmh_PageHeight);
             iffinfotxt(prp,buf,7,43+goff);
 
             lsprintf(buf,"%12s : %ld x %ld",
                 globstring[STR_SCREEN_SIZE],
-                (long int)iffscreen->Width,
-                (long int)iffscreen->Height);
+                iffscreen->Width,
+                iffscreen->Height);
             iffinfotxt(prp,buf,7,51+goff);
 
             lsprintf(title,"IFF ILBM : %s   %ld x %ld x %s\n\n",
                 ptr,
-                (long int)bmhd.bmh_Width,
-                (long int)bmhd.bmh_Height,
+                bmhd.bmh_Width,
+                bmhd.bmh_Height,
                 cols);
         }
         lsprintf(buf,"%12s : %ld",
             globstring[STR_DEPTH],
-            (long int)bmhd.bmh_Depth);
+            bmhd.bmh_Depth);
         iffinfotxt(prp,buf,7,67+goff);
 
         lsprintf(buf,"%12s : %s",
@@ -1608,14 +1608,14 @@ D(bug("Print screen ModeID: %lx\n",class));
 
         lsprintf(buf,"%12s : %ld",
             globstring[STR_FONT_SIZE],
-            (long int)show_global_font->tf_YSize);
+            show_global_font->tf_YSize);
         iffinfotxt(prp,buf,7,35+goff);
 
         lsprintf(buf,"%12s : %ld (%ld - %ld)",
             globstring[STR_NUM_CHARS],
-            (long int)((show_global_font->tf_HiChar-show_global_font->tf_LoChar)+1),
-            (long int)show_global_font->tf_LoChar,
-            (long int)show_global_font->tf_HiChar);
+            (show_global_font->tf_HiChar-show_global_font->tf_LoChar)+1,
+            show_global_font->tf_LoChar,
+            show_global_font->tf_HiChar);
         iffinfotxt(prp,buf,7,51+goff);
 
         lsprintf(buf,"%12s :",
@@ -1637,10 +1637,10 @@ D(bug("Print screen ModeID: %lx\n",class));
         iffinfotxt(prp,buf,7,75+goff);
 
         lsprintf(title,"Font : %s/%ld   %ld chars (%ld - %ld)\n\n",
-            fontname,(long int)show_global_font->tf_YSize,
-            (long int)((show_global_font->tf_HiChar-show_global_font->tf_LoChar)+1),
-            (long int)show_global_font->tf_LoChar,
-            (long int)show_global_font->tf_HiChar);
+            fontname,show_global_font->tf_YSize,
+            (show_global_font->tf_HiChar-show_global_font->tf_LoChar)+1,
+            show_global_font->tf_LoChar,
+            show_global_font->tf_HiChar);
     }
     else if (show_global_icon) {
         lsprintf(buf,"%12s : %s",

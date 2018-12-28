@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2007, The AROS Development Team. All rights reserved.
+    $Id: rkprintf.c 52974 2016-10-09 17:40:11Z deadwood $
 
     Desc: Formats a message and makes sure the user will see it.
     Lang: english
@@ -88,7 +88,7 @@
     // Check SysBase->DebugAROSBase->DebugConfig
 
     va_start(ap, fmt);
-    ret = vkprintf((const char *)fmt, ap);
+    ret = vkprintf(fmt, ap);
     va_end(ap);
 
     return ret;

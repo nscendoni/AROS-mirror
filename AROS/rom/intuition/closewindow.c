@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: closewindow.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <proto/exec.h>
@@ -456,6 +456,7 @@ VOID int_closewindow(struct CloseWindowActionMsg *msg,
 void intui_CloseWindow (struct Window * w,
                         struct IntuitionBase * IntuitionBase)
 {
+    struct GfxBase *GfxBase = GetPrivIBase(IntuitionBase)->GfxBase;
     struct LayersBase *LayersBase = GetPrivIBase(IntuitionBase)->LayersBase;
     KillWinSysGadgets(w, IntuitionBase);
 

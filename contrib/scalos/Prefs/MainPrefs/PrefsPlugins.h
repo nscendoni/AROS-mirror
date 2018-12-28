@@ -1,6 +1,6 @@
 // PrefsPlugins.h
-// $Date$
-// $Revision$
+// $Date: 2016-03-19 17:20:29 +0100 (Sat, 19 Mar 2016) $
+// $Revision: 52064 $
 
 
 #ifndef	PREFSPLUGINS_H

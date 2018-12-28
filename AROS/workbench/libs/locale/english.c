@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: english.c 52870 2016-08-20 21:32:41Z polluks $
 
     Desc: english.language description file.
     Lang: english

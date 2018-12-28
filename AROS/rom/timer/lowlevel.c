@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: lowlevel.c 45571 2012-08-16 06:17:16Z jmcmullan $
 
     Desc: Common IORequest processing routines
     Lang: english
@@ -13,7 +13,6 @@
 #include <exec/initializers.h>
 #include <hardware/intbits.h>
 #include <proto/exec.h>
-#include <proto/execlock.h>
 #include <proto/timer.h>
 
 #include "timer_intern.h"
@@ -156,13 +155,8 @@ BOOL common_BeginIO(struct timerequest *timereq, struct TimerBase *TimerBase)
 	    }
 	    else
 	    {
-#if defined(__AROSEXEC_SMP__)
-                struct ExecLockBase *ExecLockBase = TimerBase->tb_ExecLockBase;
-                if (ExecLockBase) ObtainLock(TimerBase->tb_ListLock, SPINLOCK_MODE_WRITE, 0);
-#endif
 		/* Ok, we add this to the list */
 		addToWaitList(&TimerBase->tb_Lists[TL_WAITVBL], timereq, SysBase);
-		timereq->tr_node.io_Flags &= ~IOF_QUICK;
 
 		/*
 		 * If our request was added to the head of the list, we may need to
@@ -172,11 +166,8 @@ BOOL common_BeginIO(struct timerequest *timereq, struct TimerBase *TimerBase)
 		if (TimerBase->tb_Lists[TL_WAITVBL].mlh_Head == (struct MinNode *)timereq)
 		    addedhead = TRUE;
 
-#if defined(__AROSEXEC_SMP__)
-                if (ExecLockBase) ReleaseLock(TimerBase->tb_ListLock, 0);
-#endif
 		replyit = FALSE;
-
+		timereq->tr_node.io_Flags &= ~IOF_QUICK;
 	    }
 	    
 	    Enable();
@@ -184,42 +175,30 @@ BOOL common_BeginIO(struct timerequest *timereq, struct TimerBase *TimerBase)
 
 	case UNIT_VBLANK:
 	case UNIT_MICROHZ:
-            {
-#if defined(__AROSEXEC_SMP__)
-                struct ExecLockBase *ExecLockBase = TimerBase->tb_ExecLockBase;
-#endif
+	    Disable();
 
-                Disable();
-
-                /* Query the hardware first */
-                EClockUpdate(TimerBase);
+	    /* Query the hardware first */
+	    EClockUpdate(TimerBase);
 
 
-                /*
-                 * Adjust the time request to be relative to the
-                 * elapsed time counter that we keep.
-                */
-                ADDTIME(&timereq->tr_time, &TimerBase->tb_Elapsed);
+	    /*
+	     * Adjust the time request to be relative to the
+	     * the elapsed time counter that we keep.
+	    */
+	    ADDTIME(&timereq->tr_time, &TimerBase->tb_Elapsed);		    
 
-#if defined(__AROSEXEC_SMP__)
-                if (ExecLockBase) ObtainLock(TimerBase->tb_ListLock, SPINLOCK_MODE_WRITE, 0);
-#endif
-                /* Slot it into the list. Use unit number as index. */
-                addToWaitList(&TimerBase->tb_Lists[unitNum], timereq, SysBase);
-                timereq->tr_node.io_Flags &= ~IOF_QUICK;
+	    /* Slot it into the list. Use unit number as index. */
+	    addToWaitList(&TimerBase->tb_Lists[unitNum], timereq, SysBase);
 
-                /* Indicate if HW need to be reprogrammed */
-                if (TimerBase->tb_Lists[unitNum].mlh_Head == (struct MinNode *)timereq)
-                    addedhead = TRUE;
+	    /* Indicate if HW need to be reprogrammed */
+	    if (TimerBase->tb_Lists[unitNum].mlh_Head == (struct MinNode *)timereq)
+		addedhead = TRUE;
 
-#if defined(__AROSEXEC_SMP__)
-                if (ExecLockBase) ReleaseLock(TimerBase->tb_ListLock, 0);
-#endif
-                Enable();
+	    Enable();
+	    timereq->tr_node.io_Flags &= ~IOF_QUICK;
+	    replyit = FALSE;
+	    break;
 
-                replyit = FALSE;
-                break;
-            }
 	case UNIT_ECLOCK:
 	case UNIT_WAITECLOCK:
 	    /* TODO: implement these (backport from m68k-Amiga) */
@@ -259,11 +238,8 @@ BOOL common_BeginIO(struct timerequest *timereq, struct TimerBase *TimerBase)
     return addedhead;
 }
 
-void TimerProcessMicroHZ(struct TimerBase *TimerBase, struct ExecBase *SysBase, BOOL locked)
+void handleMicroHZ(struct TimerBase *TimerBase, struct ExecBase *SysBase)
 {
-#if defined(__AROSEXEC_SMP__)
-    struct ExecLockBase *ExecLockBase = TimerBase->tb_ExecLockBase;
-#endif
     struct MinList *unit = &TimerBase->tb_Lists[TL_MICROHZ];
     struct timerequest *tr, *next;
 
@@ -271,9 +247,6 @@ void TimerProcessMicroHZ(struct TimerBase *TimerBase, struct ExecBase *SysBase, 
      * Go through the list and return requests that have completed.
      * A completed request is one whose time is less than that of the elapsed time.
     */
-#if defined(__AROSEXEC_SMP__)
-    if (ExecLockBase && !locked) ObtainLock(TimerBase->tb_ListLock, SPINLOCK_MODE_WRITE, 0);
-#endif
     ForeachNodeSafe(unit, tr, next)
     {
 	if (CMPTIME(&TimerBase->tb_Elapsed, &tr->tr_time) <= 0)
@@ -300,7 +273,7 @@ void TimerProcessMicroHZ(struct TimerBase *TimerBase, struct ExecBase *SysBase, 
 		 * VBLANK queue is checked more rarely than MICROHZ, this helps to decrease
 		 * CPU usage.
 		 */
-		TimerProcessVBlank(TimerBase, SysBase, TRUE);
+		handleVBlank(TimerBase, SysBase);
 
 		/*
 		 * Automatically requeue/reactivate request.
@@ -333,16 +306,10 @@ void TimerProcessMicroHZ(struct TimerBase *TimerBase, struct ExecBase *SysBase, 
 	    break;
 	}
     }
-#if defined(__AROSEXEC_SMP__)
-    if (ExecLockBase && !locked) ReleaseLock(TimerBase->tb_ListLock, 0);
-#endif
 }
 
-void TimerProcessVBlank(struct TimerBase *TimerBase, struct ExecBase *SysBase, BOOL locked)
+void handleVBlank(struct TimerBase *TimerBase, struct ExecBase *SysBase)
 {
-#if defined(__AROSEXEC_SMP__)
-    struct ExecLockBase *ExecLockBase = TimerBase->tb_ExecLockBase;
-#endif
     /*
      * VBlank handler is the same as above, with two differences:
      * 1. We don't check for VBlank emulation request.
@@ -357,9 +324,6 @@ void TimerProcessVBlank(struct TimerBase *TimerBase, struct ExecBase *SysBase, B
      * that have completed. A completed request is one whose time
      * is less than that of the elapsed time.
      */
-#if defined(__AROSEXEC_SMP__)
-    if (ExecLockBase && !locked) ObtainLock(TimerBase->tb_ListLock, SPINLOCK_MODE_WRITE, 0);
-#endif
     ForeachNodeSafe(&TimerBase->tb_Lists[TL_VBLANK], tr, next)
     {
 	if (CMPTIME(&TimerBase->tb_Elapsed, &tr->tr_time) <= 0)
@@ -395,9 +359,6 @@ void TimerProcessVBlank(struct TimerBase *TimerBase, struct ExecBase *SysBase, B
 	else
 	    break;
     }
-#if defined(__AROSEXEC_SMP__)
-    if (ExecLockBase && !locked) ReleaseLock(TimerBase->tb_ListLock, 0);
-#endif
 }
 
 /****************************************************************************************/

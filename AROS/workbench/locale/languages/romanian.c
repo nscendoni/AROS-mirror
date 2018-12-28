@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: romanian.c 50942 2015-07-09 21:51:11Z polluks $
 
     Desc: romanian.language description file.
     Dedicated to Eva C.

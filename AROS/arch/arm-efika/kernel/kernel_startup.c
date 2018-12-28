@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kernel_startup.c 47581 2013-06-19 20:40:34Z schulz $
 
     Desc:
     Lang: english

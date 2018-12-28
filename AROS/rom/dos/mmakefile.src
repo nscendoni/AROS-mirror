@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 53132 2016-12-29 10:32:06Z deadwood $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -6,11 +6,6 @@ SVNREV        := $(shell $(SRCDIR)/scripts/svnrev.sh $(SRCDIR))
 USER_INCLUDES := -I$(GENDIR)/$(CURDIR)
 USER_CFLAGS   := -D__DOS_NOLIBBASE__ -DISODATE="\"$(shell date '+%Y-%m-%d')\"" -DSVNREV=\"$(SVNREV)\"
 USER_LDFLAGS := -static
-ifeq ($(AROS_TARGET_CPU),m68k)
-# Make sure we optimize this code for size on m68k..
-OPTIMIZATION_CFLAGS := -Os
-USER_CFLAGS   += -D__DOS_NOLIBINLINE__ 
-endif
 
 IMAGE_TYPES := aos elf
 
@@ -31,7 +26,7 @@ FUNCTIONS := abortpkt addbuffers adddosentry addpart addsegment \
 	     close comparedates createdir createnewproc \
 	     createproc currentdir datestamp datetostr delay deletefile \
 	     deletevar deviceproc displayerror dopkt dosgetstring \
-	     duplock duplockfromfh endnotify errorreport \
+	     duplock duplockfromfh endnotify erroroutput errorreport \
 	     exall exallend examine examinefh execute exit exnext \
 	     fault fgetc fgets filepart findarg findcliproc finddosentry findsegment \
 	     findvar flush format fputc fputs fread freeargs freedeviceproc \
@@ -45,7 +40,7 @@ FUNCTIONS := abortpkt addbuffers adddosentry addpart addsegment \
 	     open openfromlock output parentdir parentoffh parsepattern \
 	     parsepatternnocase pathpart printfault putstr read readargs \
 	     readitem relabel readlink remassignlist remdosentry remsegment rename \
-	     replypkt runcommand samedevice samelock scanvars seek \
+	     replypkt runcommand samedevice samelock scanvars seek selecterroroutput \
 	     selectinput selectoutput sendpkt setargstr setcomment setconsoletask \
 	     setcurrentdirname setfiledate setfilesize setfilesystask \
 	     setioerr setmode setowner setprogramdir setprogramname \

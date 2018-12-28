@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: loadview.c 38178 2011-04-12 11:59:48Z sonic $
 
     Desc: Graphics function LoadView()
     Lang: english

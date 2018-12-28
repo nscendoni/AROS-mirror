@@ -1,7 +1,7 @@
 /*
  * Expanding strings
  */
-/* $Id$ */
+/* $Id: expand.h 36659 2011-01-18 13:26:51Z neil $ */
 
 #define        X_EXTRA         8       /* this many extra bytes in X string */
 

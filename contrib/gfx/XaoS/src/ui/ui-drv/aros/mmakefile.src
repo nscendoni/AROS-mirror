@@ -1,7 +1,7 @@
-#   $Id$
+#   $Id: mmakefile.src 52356 2016-03-29 14:45:13Z NicJA $
 #
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM linklibs-xaosuiaros : includes setup-gfx-xaos
 

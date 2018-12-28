@@ -1,6 +1,6 @@
 /*
     Copyright © 1998-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freemiscresource.c 34694 2010-10-13 20:28:49Z jmcmullan $
 
     Desc: AllocMiscResource() function.
     Lang: english

@@ -1,4 +1,4 @@
-/*  $Id$
+/*  $Id: emulation.c 36659 2011-01-18 13:26:51Z neil $
     Amiga API Emulation for Unix-like systems.
 
     XAD library system for archive handling

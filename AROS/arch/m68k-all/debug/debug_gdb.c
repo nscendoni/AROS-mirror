@@ -1,6 +1,6 @@
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: debug_gdb.c 47619 2013-07-02 18:27:20Z neil $
 
     Desc: Initialize the debug interface
     Lang: english
@@ -11,6 +11,7 @@
 #include <proto/exec.h>
 
 #ifdef AROS_MODULES_DEBUG
+typedef ULONG size_t;
 /* 'malloc' and 'free' are needed for GDB's strcmp(), which is
  * used by the 'loadseg' method of the .gdbinit of AROS
  */

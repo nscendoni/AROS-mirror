@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: enable.c 47740 2013-07-20 11:30:00Z mazze $
 
     Desc: Enable() - Allow interrupts to occur after Disable().
     Lang: english

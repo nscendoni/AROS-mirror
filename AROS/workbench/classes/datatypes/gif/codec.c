@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2005, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: codec.c 49667 2014-09-30 17:35:27Z neil $
 
     This file does not contain LZW code. It can read uncompressed files only,
     but it creates uncompressed files, that can be read by standard decoders,

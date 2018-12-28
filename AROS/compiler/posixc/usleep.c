@@ -1,6 +1,6 @@
 /*
     Copyright © 2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: usleep.c 48031 2013-09-08 21:16:04Z verhaegs $
 
     POSIX.1-2001 function usleep()
     Function is removed from POSIX.1-2008

@@ -2,7 +2,7 @@
 #define _NET_BPF_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bpf.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: bpf.h,v 1.12 1999/08/08 00:43:00 niklas Exp $	*/

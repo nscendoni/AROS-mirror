@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: video.c 49667 2014-09-30 17:35:27Z neil $
 */
 
 #include "sysmon_intern.h"
@@ -17,7 +17,7 @@
 
 #include <proto/graphics.h>
 #include <proto/oop.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 struct BitMap * bm = NULL;
 #undef HiddGfxNouveauAttrBase
 #undef HiddBitMapAttrBase

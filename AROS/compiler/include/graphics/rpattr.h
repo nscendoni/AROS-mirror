@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rpattr.h 41901 2011-10-17 12:52:04Z sonic $
 
     Desc: RastPort attribute tags
     Lang: english

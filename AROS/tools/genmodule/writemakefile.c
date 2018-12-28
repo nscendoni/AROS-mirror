@@ -1,6 +1,6 @@
 /*
-    Copyright © 2005-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2005-2014, The AROS Development Team. All rights reserved.
+    $Id: writemakefile.c 52975 2016-10-09 17:40:17Z deadwood $
 
     Code to write a Makefile with variables that provides the files
     and configuration for building the module
@@ -110,25 +110,14 @@ void writemakefile(struct config *cfg)
     }
     fprintf(out, "\n");
 
-
-    fprintf(out, "%s_LINKLIBCFLAGS  +=", cfg->modulename);
+    fprintf(out, "%s_CFLAGS  +=", cfg->modulename);
     for (s = cfg->rellibs; s ; s = s->next)
         fprintf(out, " -D__%s_RELLIBBASE__", upname(s->s));
     fprintf(out, "\n");
 
-    fprintf(out, "%s_CFLAGS  += $(%s_LINKLIBCFLAGS)", cfg->modulename, cfg->modulename);
-    if (cfg->options & OPTION_RELLINKLIB)
-        fprintf(out, " -D__%s_NOLIBBASE__", upname(cfg->modulename));
-    fprintf(out, "\n");
-
-    fprintf(out, "%s_LINKLIBDFLAGS  +=", cfg->modulename);
+    fprintf(out, "%s_DFLAGS  +=", cfg->modulename);
     for (s = cfg->rellibs; s ; s = s->next)
         fprintf(out, " -D__%s_RELLIBBASE__", upname(s->s));
-    fprintf(out, "\n");
-
-    fprintf(out, "%s_DFLAGS  += $(%s_LINKLIBDFLAGS)", cfg->modulename, cfg->modulename);
-    if (cfg->options & OPTION_RELLINKLIB)
-        fprintf(out, " -D__%s_NOLIBBASE__", upname(cfg->modulename));
     fprintf(out, "\n");
 
     fprintf(out, "%s_LDFLAGS +=", cfg->modulename);

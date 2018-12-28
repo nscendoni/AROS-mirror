@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: trackdisk_device.c 45571 2012-08-16 06:17:16Z jmcmullan $
 
     Desc: Amigastyle device for trackdisk
     Lang: English

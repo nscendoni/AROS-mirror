@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: waitnano.c 49026 2014-05-23 19:34:12Z twilen $
 */
 
 #include <exec/types.h>

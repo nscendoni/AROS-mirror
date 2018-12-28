@@ -27,7 +27,7 @@
 
 using namespace GenNS;
 
-#if defined(mc68000) && !defined(__AROS__)
+#if defined(mc68000)
    static unsigned long ___vFormatFunc[] = 
       { 0x16c04e75, 0x4e754e75 };
 #endif

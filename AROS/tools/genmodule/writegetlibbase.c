@@ -1,6 +1,6 @@
 /*
-    Copyright © 2012-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2012, The AROS Development Team. All rights reserved.
+    $Id: writegetlibbase.c 52878 2016-08-24 14:53:48Z NicJA $
 
     Function to write module_getlibbase.c. Part of genmodule.
 */
@@ -32,10 +32,13 @@ void writegetlibbase(struct config *cfg, int is_rel)
         fprintf(out,
                 "extern %s%s;\n"
                 "\n"
+                "%s__aros_getbase_%s(void);\n"
+                "\n"
                 "%s__aros_getbase_%s(void)\n"
                 "{\n"
                 "    return %s;\n"
                 "}\n",
+                cfg->libbasetypeptrextern, cfg->libbase,
                 cfg->libbasetypeptrextern, cfg->libbase,
                 cfg->libbasetypeptrextern, cfg->libbase,
                 cfg->libbase
@@ -48,11 +51,14 @@ void writegetlibbase(struct config *cfg, int is_rel)
                 "char *__aros_getoffsettable(void);\n"
                 "extern IPTR __aros_rellib_offset_%s;\n"
                 "\n"
+                "%s__aros_getbase_%s(void);\n"
+                "\n"
                 "%s__aros_getbase_%s(void)\n"
                 "{\n"
                 "    return *((%s*)(__aros_getoffsettable()+__aros_rellib_offset_%s));\n"
                 "}\n",
                 cfg->libbase,
+                cfg->libbasetypeptrextern, cfg->libbase,
                 cfg->libbasetypeptrextern, cfg->libbase,
                 cfg->libbasetypeptrextern, cfg->libbase
          );

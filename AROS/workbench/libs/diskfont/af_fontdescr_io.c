@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: af_fontdescr_io.c 37702 2011-03-21 14:14:07Z jmcmullan $
 
     Desc: Functions for readin .font files
     Lang: English.

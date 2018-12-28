@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2004-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: registertab.h 34413 2010-09-12 07:40:20Z mazze $
 */
 
 #include <exec/types.h>

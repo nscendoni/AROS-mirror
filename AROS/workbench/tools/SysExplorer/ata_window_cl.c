@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2013-2016, The AROS Development Team.
-    $Id$
+    $Id: ata_window_cl.c 51417 2016-01-25 18:10:16Z NicJA $
 */
 
 #include <aros/debug.h>

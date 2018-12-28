@@ -38,7 +38,7 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 #
-# $Id$
+# $Id: cvsweb 30794 2009-03-08 02:19:07Z neil $
 #
 ###
 
@@ -2248,7 +2248,7 @@ sub navigateHeader ($$$$$) {
     $swhere = "" if ($swhere eq $scriptwhere);
     $swhere = urlencode($filename) if ($swhere eq "");
     print "<HTML>\n<HEAD>\n";
-    print '<!-- hennerik CVSweb $Revision$ -->';
+    print '<!-- hennerik CVSweb $Revision: 30794 $ -->';
     print "\n<TITLE>$path$filename - $title - $rev</TITLE></HEAD>\n";
     print  "<BODY BGCOLOR=\"$backcolor\">\n";
     print "<table width=\"100%\" border=0 cellspacing=0 cellpadding=1 bgcolor=\"$navigationHeaderColor\">";
@@ -2597,7 +2597,7 @@ sub html_header($) {
     my ($title) = @_;
     http_header();
     print "<html>\n<title>$title</title>\n" .
-	'<!-- hennerik CVSweb $Revision$ -->' .
+	'<!-- hennerik CVSweb $Revision: 30794 $ -->' .
 	"\n</head>\n$body_tag\n" .
 	"$logo <h1 align=center>$title</h1>\n";
 }

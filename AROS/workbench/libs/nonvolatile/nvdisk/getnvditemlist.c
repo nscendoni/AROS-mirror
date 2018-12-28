@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getnvditemlist.c 39218 2011-06-14 18:47:11Z jmcmullan $
 
     Desc:
     Lang: English

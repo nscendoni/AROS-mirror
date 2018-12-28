@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: i2c.h 45204 2012-07-12 04:01:17Z jmcmullan $
 */
 
 #include <exec/types.h>

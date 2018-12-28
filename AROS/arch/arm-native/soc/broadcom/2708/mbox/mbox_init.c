@@ -1,6 +1,6 @@
 /*
     Copyright � 2013-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mbox_init.c 50339 2015-04-11 20:35:20Z schulz $
 */
 
 #define DEBUG 0

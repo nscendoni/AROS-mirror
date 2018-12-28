@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: main.c 52785 2016-07-14 22:27:40Z neil $
 
     Desc: File Identifier/starter
     Lang: English	

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: spsinh.c 47348 2013-05-04 13:11:19Z mazze $
 */
 
 #include "mathtrans_intern.h"

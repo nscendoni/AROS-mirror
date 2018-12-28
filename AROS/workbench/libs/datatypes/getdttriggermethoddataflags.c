@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getdttriggermethoddataflags.c 48592 2013-12-19 22:17:46Z hkiel $
 
     Desc:
     Lang: English

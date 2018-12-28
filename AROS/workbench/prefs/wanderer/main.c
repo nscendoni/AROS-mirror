@@ -3,7 +3,7 @@
     This file is part of the Wanderer Preferences program, which is distributed
     under the terms of version 2 of the GNU General Public License.
     
-    $Id$
+    $Id: main.c 43625 2012-01-14 20:13:20Z deadwood $
 */
 
 #define DEBUG 0

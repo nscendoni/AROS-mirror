@@ -1,7 +1,7 @@
 /*
     Copyright © 2005-2013, Davy Wentzler. All rights reserved.
     Copyright © 2010-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: interrupt.c 52229 2016-03-24 19:45:04Z neil $
 */
 
 #include <config.h>

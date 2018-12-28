@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Protect.c 40634 2011-08-09 20:21:48Z jmcmullan $
 
     Desc: Protect CLI command
     Lang: English

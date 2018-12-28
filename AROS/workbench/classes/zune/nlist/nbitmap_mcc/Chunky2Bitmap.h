@@ -16,7 +16,7 @@
 
  NList classes Support Site:  http://www.sf.net/projects/nlist-classes
 
- $Id$
+ $Id: Chunky2Bitmap.h 48674 2014-01-02 17:51:04Z neil $
 
 ***************************************************************************/
 

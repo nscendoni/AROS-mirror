@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fontsupport.c 41910 2011-10-18 13:18:09Z sonic $
 
     Desc: Misc font help funcs
     Lang: english

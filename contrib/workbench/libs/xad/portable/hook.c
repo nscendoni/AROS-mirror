@@ -1,7 +1,7 @@
 #ifndef XADMASTER_HOOK_C
 #define XADMASTER_HOOK_C
 
-/*  $Id$
+/*  $Id: hook.c 36659 2011-01-18 13:26:51Z neil $
     allows hook access from programs
 
     XAD library system for archive handling

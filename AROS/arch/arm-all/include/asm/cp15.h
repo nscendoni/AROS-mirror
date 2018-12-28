@@ -1,6 +1,6 @@
 /*
     Copyright © 2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cp15.h 48873 2014-03-20 17:38:53Z DizzyOfCRN $
 
     Desc: The purpose of the system control coprocessor, CP15, is to control and provide status information for the functions implemented in the processor.
     Lang: english

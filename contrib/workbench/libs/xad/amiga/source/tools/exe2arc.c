@@ -3,7 +3,7 @@
 #define REVISION     "5"
 #define DATE	     "24.04.2002"
 
-/*  $Id$
+/*  $Id: exe2arc.c 43430 2012-01-01 20:12:06Z jmcmullan $
     exe2arc - strips executable header from exe files
 
     XAD library system for archive handling

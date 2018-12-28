@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: enqueue.c 36262 2010-12-27 12:17:48Z sonic $
 
     Desc: Add a node into a sorted list
     Lang: english

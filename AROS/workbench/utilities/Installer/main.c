@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: main.c 48912 2014-04-06 17:12:22Z deadwood $
 
     Desc: Installer V43.3
     Lang: english
@@ -20,7 +20,7 @@
 
 
 #ifdef DEBUG
-char test_script[] = "SYS:Developer/Debug/Tests/Installer/test.script";
+char test_script[] = "SYS:Tests/Installer/test.script";
 #endif /* DEBUG */
 
 char *filename = NULL;

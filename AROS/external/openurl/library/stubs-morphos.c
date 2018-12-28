@@ -14,7 +14,7 @@
 
  openurl.library project: http://sourceforge.net/projects/openurllib/
 
- $Id$
+ $Id: stubs-morphos.c 49589 2014-09-08 18:47:02Z mazze $
 
 ***************************************************************************/
 

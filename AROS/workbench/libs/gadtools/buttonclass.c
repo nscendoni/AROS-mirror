@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2005, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: buttonclass.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Internal GadTools button class.
     Lang: English

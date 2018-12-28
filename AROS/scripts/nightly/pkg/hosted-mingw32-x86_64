@@ -1,8 +1,7 @@
 #!/bin/zsh
 # Creates mingw32-x86_64 "hosted" binary packages.
 
-BUILDCPU=x86_64
-BUILDTARGET=mingw32-$BUILDCPU
+BUILDTARGET=mingw32-x86_64
 
 source $SP/setup
 # The log-name MUST match the name of the package script

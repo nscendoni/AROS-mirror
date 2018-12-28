@@ -3,7 +3,7 @@
     Copyright © 2002-2016, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: area.c 51713 2016-03-09 22:53:00Z NicJA $
 */
 
 #include <stdlib.h>
@@ -1055,14 +1055,17 @@ static void Area_Draw_handle_background(Object *obj,
         background = data->mad_SelBack;
 
     if (zframe->customframe)
-        bgtop = data->mad_TitleHeightAbove;
+    {
+        bgtop = _top(obj) + data->mad_TitleHeightAbove;
+    }
     else
-        bgtop = data->mad_TitleHeightAbove + zframe->itop;
+    {
+        bgtop = _top(obj) + data->mad_TitleHeightAbove + zframe->itop;
+    }
 
     bgleft = _left(obj);
     bgw = _width(obj);
-    bgh = _height(obj) - bgtop;
-    bgtop += _top(obj);
+    bgh = _height(obj) - bgtop + _top(obj);
 
     r.MinX = bgleft;
     r.MinY = bgtop;

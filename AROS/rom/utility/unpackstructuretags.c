@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: unpackstructuretags.c 39057 2011-06-07 13:33:56Z sonic $
 
     Desc: UnpackStructureTags - unpack structure to values in TagList.
     Lang: english

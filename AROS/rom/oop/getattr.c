@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2007, The AROS Development Team. All rights reserved.
+    $Id: getattr.c 42014 2011-10-24 14:33:48Z jmcmullan $
 
     Desc: Get an attribute of an object.
     Lang: english
@@ -36,7 +36,9 @@
 		  
 	attrID  - Attribute ID for property to get.
 	
-	storage - Pointer to IPTR the fetched data should be put into.
+	storage - Pointer to IPTR the gitten data should be put
+		  into.
+
 
     RESULT
     	Undefined.
@@ -51,6 +53,10 @@
 	OOP_SetAttrs()
 
     INTERNALS
+
+    HISTORY
+	29-10-95    digulla automatically created from
+			    intuition_lib.fd and clib/intuition_protos.h
 
 *****************************************************************************/
 {

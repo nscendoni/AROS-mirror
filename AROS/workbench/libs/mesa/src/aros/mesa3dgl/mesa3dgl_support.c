@@ -1,6 +1,6 @@
 /*
     Copyright 2009-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mesa3dgl_support.c 50858 2015-06-23 22:30:34Z NicJA $
 */
 
 #include <aros/debug.h>

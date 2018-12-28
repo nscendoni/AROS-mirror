@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: access.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      access.c - check access to a file or a directory
  *

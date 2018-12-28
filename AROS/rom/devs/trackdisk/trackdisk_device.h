@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: trackdisk_device.h 45450 2012-08-10 05:00:16Z jmcmullan $
 
     Desc: Internal defs for trackdisk
     Lang: English

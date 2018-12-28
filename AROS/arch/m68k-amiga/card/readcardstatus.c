@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readcardstatus.c 49553 2014-08-28 15:36:11Z neil $
 
     Desc: ReadCardStatus() function.
     Lang: english

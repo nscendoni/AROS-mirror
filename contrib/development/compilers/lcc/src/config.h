@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: config.h 30794 2009-03-08 02:19:07Z neil $ */
 typedef struct {
 	unsigned char max_unaligned_load;
 	Symbol (*rmap)(int);

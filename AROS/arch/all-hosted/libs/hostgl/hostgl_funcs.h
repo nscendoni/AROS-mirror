@@ -1,6 +1,6 @@
 /*
     Copyright 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hostgl_funcs.h 51001 2015-08-10 17:43:38Z neil $
 */
 
 #ifndef HOSTGL_FUNCS_H

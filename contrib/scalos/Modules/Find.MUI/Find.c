@@ -1,6 +1,6 @@
 // Find.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 00:42:06 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51955 $
 
 #ifdef __AROS__
 #define MUIMASTER_YES_INLINE_STDARG

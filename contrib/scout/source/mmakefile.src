@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 52700 2016-04-26 17:28:11Z neil $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM contrib-scout-bin : includes linklibs contrib-zune-classes-nlist \
 #MM contrib-scout-tblib contrib-scout-catalogs contrib-scout-bin \

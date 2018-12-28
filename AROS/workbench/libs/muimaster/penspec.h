@@ -2,7 +2,7 @@
     Copyright  2003, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: penspec.h 45710 2012-08-31 19:01:54Z neil $
 */
 
 #ifndef MUI_PENSPEC_H

@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: readpartitiondata.c 49667 2014-09-30 17:35:27Z neil $
 */
 
 #include <aros/libcall.h>
@@ -29,13 +29,12 @@
     INPUTS
         Partition  - a handle to a partition to read from
         Buffer     - a pointer to a data buffer
-        DataSize   - Size of data to read in bytes. This size must be a
-                     multiple of block size in order to ensure correct
-                     operation
-        StartBlock - Number of the first block to start reading from
+        DataSize   - Size of data to read in bytes. This size must be a multiple of block size,
+                     in order to ensure correct operation
+        StartBlock - Number of the first block to start reading from.
 
     RESULT
-        Return code of DoIO() function which was used to read the data.
+        A return code of DoIO() function which was used to read the data
 
     NOTES
 
@@ -46,6 +45,8 @@
     SEE ALSO
 
     INTERNALS
+
+    HISTORY
 
 *****************************************************************************/
 {

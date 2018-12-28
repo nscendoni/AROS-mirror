@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bcpl_writef.S 41310 2011-09-13 16:08:24Z jmcmullan $
 
     Desc: BCPL stubs that call into Exec and Dos libraries.
     Lang: english

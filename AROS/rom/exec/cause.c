@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: cause.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Cause() - Cause a software interrupt.
     Lang: english
@@ -9,6 +9,7 @@
 #include <aros/asmcall.h>
 #include <exec/execbase.h>
 #include <hardware/intbits.h>
+#include <proto/kernel.h>
 
 #include "chipset.h"
 #include "exec_intern.h"
@@ -30,7 +31,7 @@
 /*  FUNCTION
 	Schedule a software interrupt to occur. If the processor is
 	currently running a user task, then the software interrupt will
-	pre-empt the current task and run itself. From a real interrupt, it
+	prempt the current task and run itself. From a real interrupt, it
 	will queue the software interrupt for a later time.
 
 	Software interrupts are useful from hardware interrupts if you
@@ -46,9 +47,15 @@
 
 	The software interrupt is called with the following prototype:
 
-    AROS_INTC1(YourIntCode, APTR, interruptData)
+	AROS_UFH3(void, YourIntCode,
+	    AROS_UFHA(APTR, interruptData, A1),
+	    AROS_UFHA(APTR, interruptCode, A5),
+	    AROS_UFHA(struct ExecBase *, SysBase, A6))
 
-	The interruptData is the value of the is_Data field.
+	The interruptData is the value of the is_Data field, interruptCode
+	is the value of the is_Code field - it is included for historical
+	and compatibility reasons. You can ignore the value of interruptCode,
+	but you must declare it.
 
     INPUTS
 	softint     -   The interrupt you wish to schedule. When setting up
@@ -166,7 +173,8 @@ AROS_INTH0(SoftIntDispatch)
                     KrnSti();
 
                     /* Call the software interrupt. */
-                    AROS_INTC1(intr->is_Code, intr->is_Data);
+                    /* ABI_V0 compatibility */
+                    AROS_SOFTINTC1(intr->is_Code, intr->is_Data);
 
                     /* Get out and start loop *all* over again *from scratch*! */
                     break;

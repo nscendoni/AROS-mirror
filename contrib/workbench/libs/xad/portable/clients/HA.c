@@ -1,7 +1,7 @@
 #ifndef XADMASTER_HA_C
 #define XADMASTER_HA_C
 
-/*  $Id$
+/*  $Id: HA.c 36659 2011-01-18 13:26:51Z neil $
     HA file archiver client for XAD
 
     XAD library system for archive handling

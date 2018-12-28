@@ -3,7 +3,6 @@ BEGIN {
     {
 	fin=ARGV[t];
 	name=fin;
-	sub(/.*\//,"",name); # strip path
 	sub(/\..*$/,"",name);
 	fout=name ".h"
 	getline colors < fin;

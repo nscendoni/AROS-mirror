@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freeentry.c 38327 2011-04-23 22:01:13Z verhaegs $
 
     Desc: Free memory allocated with AllocEntry().
     Lang: english

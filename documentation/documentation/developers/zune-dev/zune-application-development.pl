@@ -4,8 +4,8 @@ Zune - podrêcznik programowania
 
 :Authors:   David Le Corfec, Camelek.AmigaRulez@wp.pl [ AROS Polska Team ]
 :Copyright: Copyright © 2004, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 30800 $
+:Date:      $Date: 2009-03-08 18:28:50 +0100 (Sun, 08 Mar 2009) $
 :Status:    Unfinished;
 :ToDo:      All
 
@@ -207,7 +207,7 @@ wywo³ywan± w Twojej pêtli g³ównej::
 Witaj ¦wiecie
 -------------
 
-.. Figure:: /documentation/developers/zune-dev/images/hello.png
+.. Figure:: zune/images/hello.png
 
     Proste rzeczy najpierw! Wiem, ¿e to siê Wam spodoba.
 

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fontreqhooks.h 48110 2013-09-19 21:05:46Z mazze $
 
     Desc: Font requester specific defs.
     Lang: english

@@ -20,8 +20,6 @@
  * ensure the code picks up the local libpng implementation:
  */
 #include "../../png.h"
-#if defined(PNG_SIMPLIFIED_READ_SUPPORTED) && \
-    defined(PNG_SIMPLIFIED_WRITE_SUPPORTED)
 
 int main(int argc, const char **argv)
 {
@@ -92,4 +90,3 @@ int main(int argc, const char **argv)
 
    return result;
 }
-#endif /* READ && WRITE */

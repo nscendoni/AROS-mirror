@@ -20,7 +20,7 @@
     slouken@libsdl.org
 */
 
-/* $Id$ */
+/* $Id: showfont.c 52582 2016-04-11 17:23:06Z NicJA $ */
 
 /* A simple program to test the text rendering feature of the TTF library */
 

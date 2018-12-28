@@ -798,7 +798,7 @@ void convertA8_to_RGB888( 	   unsigned char *src, unsigned char *dst,
 									int xsize, int ysize )
 {
     int i, n;
-	__unused unsigned char	*p;
+	unsigned char	*p;
 	unsigned char	*d;
 
 	p = (unsigned char*)src;
@@ -1851,7 +1851,7 @@ char *strPathOnly(char *str)
 				stccpy(tempStr, str, file - str + 1);
 				lock = Lock(tempStr, ACCESS_READ);
 
-				if (lock != BNULL)
+				if (lock != NULL)
 				{
 					if (NameFromLock(lock, tempStr, file - str + 1 + 32))
 						newStr = strdup(tempStr);
@@ -2224,7 +2224,7 @@ void scaleCoordsWithAspect( int width, int height, int destWidth, int destHeight
 int strIsDir(char *path)
 {
 	BPTR lock = Lock(path, ACCESS_READ);
-	if (lock != BNULL)
+	if (lock != NULL)
 	{
 		struct FileInfoBlock fib;
 		if (Examine(lock, &fib))

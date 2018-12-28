@@ -24,7 +24,7 @@
 
  Mailtext OpenSource project :  http://sourceforge.net/projects/mailtext/
 
- $Id$
+ $Id: MailtextHeaders.h 36659 2011-01-18 13:26:51Z neil $
 
  Mailtext header file for includes
 

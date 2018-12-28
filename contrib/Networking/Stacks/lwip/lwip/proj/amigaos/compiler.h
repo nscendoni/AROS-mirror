@@ -2,7 +2,7 @@
     Copyright © 2002, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: compiler.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 #ifndef _COMPILER_H

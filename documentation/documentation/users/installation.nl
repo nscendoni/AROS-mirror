@@ -4,8 +4,8 @@ AROS Installatie Gids
 
 :Authors:   Stefan Rieken, Matt Parsons, Adam Chodorowski, Neil Cafferkey, Sergey Mineychev
 :Copyright: Copyright ² 1995-2006, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 30800 $
+:Date:      $Date: 2009-03-08 18:28:50 +0100 (Sun, 08 Mar 2009) $
 :Status:    Needs to be updated for some AROS ports. Can be translated.
 :Abstract:
     Deze instructies begeleiden u bij het installeren van de verschillende AROS soorten.

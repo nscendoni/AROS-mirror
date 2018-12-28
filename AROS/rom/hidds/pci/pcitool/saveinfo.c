@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2003-2013, The AROS Development Team.
-    $Id$
+    $Id: saveinfo.c 46381 2013-01-25 17:39:23Z sonic $
 */
 
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: isdosentrya.c 40671 2011-08-11 17:48:50Z jmcmullan $
 */
 
 #include <proto/arossupport.h>

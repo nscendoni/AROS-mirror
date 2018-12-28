@@ -3,7 +3,7 @@
  * kirk johnson
  * september 1995
  *
- * RCS $Id$
+ * RCS $Id: port.h 30794 2009-03-08 02:19:07Z neil $
  *
  * Copyright (C) 1989, 1990, 1993, 1994, 1995 Kirk Lauritz Johnson
  *

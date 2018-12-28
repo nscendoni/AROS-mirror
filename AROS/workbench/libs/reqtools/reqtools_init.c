@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: reqtools_init.c 37871 2011-03-28 20:17:26Z jmcmullan $
 
     ReqTools initialization code.
 */

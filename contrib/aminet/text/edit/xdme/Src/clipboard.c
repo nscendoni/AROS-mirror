@@ -1,7 +1,7 @@
 /******************************************************************************
 
     MODUL
-	$Id$
+	$Id: clipboard.c 36659 2011-01-18 13:26:51Z neil $
 
     DESCRIPTION
 	Provide standard clipboard.device interface functions like Open,

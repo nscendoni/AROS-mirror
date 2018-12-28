@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stpblk.c 48038 2013-09-08 21:17:58Z verhaegs $
 
     SAS/C function stpblk().
 */

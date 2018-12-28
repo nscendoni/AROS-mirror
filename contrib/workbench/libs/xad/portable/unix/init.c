@@ -1,4 +1,4 @@
-/*  $Id$
+/*  $Id: init.c 30794 2009-03-08 02:19:07Z neil $
     Unix startup and shutdown code.
 
     XAD library system for archive handling

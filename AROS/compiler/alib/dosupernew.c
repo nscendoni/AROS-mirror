@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: dosupernew.c 41534 2011-09-22 06:26:54Z sonic $
 */
 
 #define ALIB_NO_INLINE_STDARG

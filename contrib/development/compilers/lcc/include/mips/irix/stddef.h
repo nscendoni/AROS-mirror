@@ -1,7 +1,7 @@
 #ifndef __STDDEF
 #define __STDDEF
 
-/* $Id$ */
+/* $Id: stddef.h 30794 2009-03-08 02:19:07Z neil $ */
 
 #define NULL 0
 #define offsetof(ty,mem) ((size_t)((char*)&((ty*)0)->mem - (char*)0))

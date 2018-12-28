@@ -19,7 +19,7 @@
  * This file contains code to implement the "sqlite" command line utility for
  * accessing SQLite databases.
  * */
-/* $Id$ */
+/* $Id: shell.c 30794 2009-03-08 02:19:07Z neil $ */
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

@@ -1,6 +1,6 @@
 #include "c.h"
 
-static char rcsid[] = "$Id$";
+static char rcsid[] = "$Id: output.c 30794 2009-03-08 02:19:07Z neil $";
 
 static char *outs(const char *str, FILE *f, char *bp) {
 	if (f)

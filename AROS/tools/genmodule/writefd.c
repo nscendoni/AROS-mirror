@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: writefd.c 49552 2014-08-28 15:27:10Z neil $
 
     Write the functionlist to an FD file for identify.library.
 */

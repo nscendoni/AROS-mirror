@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cybergraphics_intern.h 51031 2015-08-29 22:48:43Z NicJA $
 */
 
 #ifndef CYBERGRAPHICS_INTERN_H

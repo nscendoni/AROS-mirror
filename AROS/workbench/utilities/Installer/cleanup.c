@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cleanup.c 48912 2014-04-06 17:12:22Z deadwood $
 */
 
 /* cleanup.c -- here are all functions used before exiting program */

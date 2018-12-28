@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freestruct.c 52974 2016-10-09 17:40:11Z deadwood $
 
     Desc: Free a structure returned by ReadStruct()
     Lang: english

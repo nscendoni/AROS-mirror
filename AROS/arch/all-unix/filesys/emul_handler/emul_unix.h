@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: emul_unix.h 51022 2015-08-22 00:25:39Z neil $
 */
 
 #ifdef HOST_LONG_ALIGNED

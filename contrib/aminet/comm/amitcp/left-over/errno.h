@@ -1,7 +1,7 @@
 #ifndef ERRNO_H
 #define ERRNO_H
 /*
- * $Id$
+ * $Id: errno.h 30794 2009-03-08 02:19:07Z neil $
  *
  * Copyright (c) 1993 AmiTCP/IP Group, <amitcp-group@hut.fi>
  *	              Helsinki University of Technology, Finland.

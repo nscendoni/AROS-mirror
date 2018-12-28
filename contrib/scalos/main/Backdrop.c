@@ -1,6 +1,6 @@
 // Backdrop.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-24 00:14:43 +0100 (Thu, 24 Mar 2016) $
+// $Revision: 52206 $
 // 04 Sep 2004 15:33:26
 
 

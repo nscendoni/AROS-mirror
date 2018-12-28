@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: autoinit.c 37465 2011-03-11 10:44:45Z sonic $
  *
  *      autoinit.c - SAS/C autoinitialization functions for bsdsocket.library
  *

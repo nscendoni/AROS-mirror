@@ -3,7 +3,7 @@
     This file is part of the Wanderer Preferences program, which is distributed
     under the terms of version 2 of the GNU General Public License.
 
-    $Id$
+    $Id: entryelements.c 42454 2011-11-14 20:06:32Z deadwood $
 */
 
 #include <proto/exec.h>

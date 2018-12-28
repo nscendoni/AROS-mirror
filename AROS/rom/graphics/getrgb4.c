@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getrgb4.c 46163 2012-12-26 15:44:52Z neil $
 
     Desc: Graphics function GetRGB4()
     Lang: english

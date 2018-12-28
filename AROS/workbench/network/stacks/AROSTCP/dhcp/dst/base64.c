@@ -47,7 +47,7 @@
  */
 
 #if !defined(LINT) && !defined(CODECENTER) && !defined(__AROS__)
-static const char rcsid[] = "$Id$";
+static const char rcsid[] = "$Id: base64.c 51759 2016-03-10 02:10:36Z NicJA $";
 #endif /* not lint */
 
 #include <sys/types.h>

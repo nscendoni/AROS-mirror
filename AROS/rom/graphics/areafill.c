@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: areafill.c 44123 2012-02-19 22:15:50Z verhaegs $
 
     Desc: Area support functions
     Lang: english

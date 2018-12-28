@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sun_usa.c 51235 2015-12-19 16:24:36Z polluks $
 
     Desc: American Sun 5C Keymap
     Lang: English

@@ -1,9 +1,9 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: gfxfuncsupport.h 47604 2013-06-24 21:28:04Z sonic $
 */
 
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <cybergraphx/cybergraphics.h>
 
 #include "cybergraphics_intern.h"

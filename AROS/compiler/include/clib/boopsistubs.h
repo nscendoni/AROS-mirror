@@ -2,7 +2,7 @@
 #define BOOPSISTUBS_H
 
 /*
-**	$Id$
+**	$Id: boopsistubs.h 30792 2009-03-07 22:40:04Z neil $
 **
 **	Copyright (C) 1997,1999,2000 Bernardo Innocenti <bernie@cosmos.it>
 **	All rights reserved.

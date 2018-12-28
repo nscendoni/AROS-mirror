@@ -4,8 +4,8 @@ Zune Application Development Manual -- Introduction
 
 :Authors:   David Le Corfec
 :Copyright: Copyright (C) 2004, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 45860 $
+:Date:      $Date: 2012-10-04 00:05:41 +0200 (Thu, 04 Oct 2012) $
 :Status:    Unfinished;
 :ToDo:      All
 
@@ -291,7 +291,7 @@ Some MUI conventions
 Hello world
 -----------
 
-.. Figure:: /documentation/developers/zune-dev/images/hello.png
+.. Figure:: zune/images/hello.png
 
     First things first!
 

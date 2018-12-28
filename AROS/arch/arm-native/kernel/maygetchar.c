@@ -1,6 +1,6 @@
 /*
     Copyright © 2013-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: maygetchar.c 50368 2015-04-13 23:32:03Z NicJA $
 */
 
 #include <aros/kernel.h>

@@ -59,6 +59,7 @@
 
 extern struct Library *LocaleBase;
 #define LOCALE_BASE_NAME LocaleBase
+#define D(x) x
 #warning TODO: make the semaphore per-document
 extern struct SignalSemaphore semaphore;
 
@@ -265,7 +266,7 @@ void *pdfPrintInit(void *_ctx, const char *path, int first, int last, struct pri
 				pctx->file = Open(path, MODE_NEWFILE);
 				SetVBuf(pctx->file, pctx->buffer, BUF_FULL, OUTPUTBUFFERSIZE);
 
-				if(pctx->file != BNULL)
+				if(pctx->file != NULL)
 				{
 					globalParams->setPSLevel((pctx->format == VPDF_PRINT_POSTSCRIPT_2)?psLevel2:psLevel3);
 					pctx->dev = new PSOutputDev(outputstreamfunc, pctx, "vpdf ps document output", pctx->doc,
@@ -281,7 +282,7 @@ void *pdfPrintInit(void *_ctx, const char *path, int first, int last, struct pri
 			}
 			catch(...)
 			{
-				if(pctx->file != BNULL)
+				if(pctx->file != NULL)
 					Close(pctx->file);
 
 				if(pctx->dev != NULL)
@@ -334,7 +335,7 @@ int pdfPrintPage(void *_pctx, int *_page, int center, int pages_per_sheet)
 		{
 			struct RastPort MyRastPort;
 			struct BitMap MyBitMap;
-			__unused char not_changed = FALSE;
+			char not_changed = FALSE;
 			cairo_surface_t *surface_back=NULL;
             cairo_t *cairo_back = NULL;
 	

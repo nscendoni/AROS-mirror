@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getmonitorlist.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Get a copy of monitors list
 */
@@ -24,7 +24,7 @@
         AROS_LHA(struct TagItem *, tags, A1),
 
 /*  LOCATION */
-        struct IntuitionBase *, IntuitionBase, 161, Intuition)
+        struct IntuitionBase *, IntuitionBase, 163, Intuition)
 
 /*  FUNCTION
 	Obtain an array of monitorclass objects installed in the

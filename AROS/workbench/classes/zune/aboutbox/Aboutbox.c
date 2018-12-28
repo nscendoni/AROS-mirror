@@ -1,7 +1,7 @@
 /*
     Copyright © 2011, Thore Böckelmann. All rights reserved.
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Aboutbox.c 50680 2015-05-15 17:04:26Z deadwood $
 */
 
 

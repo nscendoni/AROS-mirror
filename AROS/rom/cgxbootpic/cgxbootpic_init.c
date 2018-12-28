@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cgxbootpic_init.c 48424 2013-11-18 09:28:30Z neil $
 */
 
 #define DEBUG 1

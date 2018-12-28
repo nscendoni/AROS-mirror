@@ -1,6 +1,6 @@
 /*
     Copyright  2003-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ipeditor.c 49686 2014-10-03 22:12:28Z neil $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

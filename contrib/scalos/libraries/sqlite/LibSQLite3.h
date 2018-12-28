@@ -1,6 +1,6 @@
 // LibSQLite3.h
-// $Date$
-// $Revision$
+// $Date: 2013-12-26 20:38:47 +0100 (Thu, 26 Dec 2013) $
+// $Revision: 48636 $
 
 
 #ifndef LIBSQLITE3_H

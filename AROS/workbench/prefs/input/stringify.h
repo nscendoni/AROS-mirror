@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stringify.h 32540 2010-02-01 18:28:34Z mazze $
 */
 
 /*** Variables **************************************************************/

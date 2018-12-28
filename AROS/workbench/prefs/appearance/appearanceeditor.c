@@ -1,6 +1,6 @@
 /*
     Copyright © 2013-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: appearanceeditor.c 53110 2016-12-28 01:52:13Z neil $
 */
 
 #define DEBUG 0
@@ -536,6 +536,7 @@ IPTR AppearanceEditor__MUIM_PrefsEditor_Export
     else
     {
         DeleteVar(THEMES_ENVPATH, GVF_GLOBAL_ONLY | GVF_SAVE_VAR);
+        success = DoMethod(self, MUIM_PrefsEditor_ExportFH, NULL);
     }
 
     return success;

@@ -1,6 +1,6 @@
 /*
     Copyright © 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: file.c 40680 2011-08-11 17:49:45Z jmcmullan $
 */
 
 #include <proto/dos.h>

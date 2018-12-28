@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fontreqsupport.c 48110 2013-09-19 21:05:46Z mazze $
 
     Desc:
     Lang: english

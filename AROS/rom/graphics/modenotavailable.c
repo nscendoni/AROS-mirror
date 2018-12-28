@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: modenotavailable.c 45538 2012-08-13 01:42:55Z jmcmullan $
 
     Desc: Graphics function ModeNotAvailable()
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Prompt.c 31627 2009-07-26 12:26:01Z mazze $
 
     Desc: Prompt CLI command
     Lang: English

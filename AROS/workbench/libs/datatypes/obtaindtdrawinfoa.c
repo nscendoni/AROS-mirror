@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: obtaindtdrawinfoa.c 31824 2009-09-24 19:53:28Z mazze $
 
     Desc:
     Lang: English

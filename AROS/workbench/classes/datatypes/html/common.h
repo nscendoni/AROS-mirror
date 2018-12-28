@@ -1,7 +1,7 @@
 /*
     Copyright © 2004, Martin Gierich. All rights reserved.
     Licensed under the terms of the AROS Public License (APL)
-    $Id$
+    $Id: common.h 50099 2015-02-22 01:09:59Z polluks $
 
     Desc: Structs for both HTML parser and layout engine
 */

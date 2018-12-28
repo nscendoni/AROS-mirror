@@ -2,7 +2,7 @@ BEGIN {
     for (arg=1; arg<ARGC; arg++)
     {
 	copyright="        Copyright © 1995-2001, The AROS Development Team. All rights reserved.";
-	id="    $Id$";
+	id="    $Id: copyright.awk 30792 2009-03-07 22:40:04Z neil $";
 	logtxt="    $Log$
 	logtxt="    Revision 1.3  2001/10/30 20:28:20  chodorowski
 	logtxt="    Fixed copyright notice.

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: exit.c 40973 2011-08-30 02:40:14Z jmcmullan $
 
     Desc:
     Lang: English

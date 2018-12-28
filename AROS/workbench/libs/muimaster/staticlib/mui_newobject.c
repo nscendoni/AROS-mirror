@@ -2,7 +2,7 @@
     Copyright © 2002, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: mui_newobject.c 37272 2011-02-28 05:57:56Z jmcmullan $
 */
 
 #define AROS_TAGRETURNTYPE Object *

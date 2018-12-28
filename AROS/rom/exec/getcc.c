@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getcc.c 37153 2011-02-22 18:41:50Z jmcmullan $
 
     Desc: GetCC() - Read the CPU condition codes in an easy way.
     Lang: english

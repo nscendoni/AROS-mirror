@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mathieeesingtrans_intern.h 42827 2011-12-10 14:34:38Z jmcmullan $
 */
 
 #ifndef __MATHIEEESINGTRANS_INTERN_H__

@@ -1,6 +1,6 @@
 /*
     Copyright 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: agpclass.c 32890 2010-03-26 19:37:36Z deadwood $
 */
 
 #include <hidd/agp.h>

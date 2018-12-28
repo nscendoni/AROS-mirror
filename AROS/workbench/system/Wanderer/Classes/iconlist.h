@@ -3,7 +3,7 @@
 
 /*
     Copyright  2002-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: iconlist.h 48185 2013-09-30 20:40:28Z deadwood $
 */
 
 #include <string.h>

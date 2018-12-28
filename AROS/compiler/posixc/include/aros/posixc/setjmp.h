@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setjmp.h 50065 2015-02-11 02:31:29Z NicJA $
 
     POSIX-2008.1 header file setjmp.h
 */

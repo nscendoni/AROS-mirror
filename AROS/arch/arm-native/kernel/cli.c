@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cli.c 47740 2013-07-20 11:30:00Z mazze $
 */
 
 #include <aros/kernel.h>

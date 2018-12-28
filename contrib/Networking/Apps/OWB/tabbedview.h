@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: tabbedview.h 45979 2012-11-02 04:43:51Z jmcmullan $
 */
 
 #include <utility/tagitem.h>

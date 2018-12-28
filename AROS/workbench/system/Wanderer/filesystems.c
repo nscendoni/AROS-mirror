@@ -1,6 +1,6 @@
 /*
     Copyright © 2007-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: filesystems.c 48117 2013-09-23 16:50:43Z neil $
 */
 
 #include  "filesystems.h"

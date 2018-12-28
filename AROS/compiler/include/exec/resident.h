@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: resident.h 49798 2014-11-15 08:13:09Z deadwood $
 
     Resident modules.
 */

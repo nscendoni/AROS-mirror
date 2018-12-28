@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: trackdisk_device.c 49133 2014-07-22 16:19:09Z neil $
 
     Desc: Amiga-style device for trackdisk
     Lang: English
@@ -265,7 +265,7 @@ static int GM_UNIQUENAME(Init)(LIBBASETYPEPTR TDBase)
 	/* We only want 3.5" 1.44MB drives */
 	if (((drives >> (4*i))&0x0f) == 4)
 	{
-	    D(kprintf("[Floppy] Unit %d is a 1.44MB drive\n",i);)
+	    kprintf("[Floppy] Unit %d is a 1.44MB drive\n",i);
 	    TD_InitUnit(i,TDBase);
 	}
     }

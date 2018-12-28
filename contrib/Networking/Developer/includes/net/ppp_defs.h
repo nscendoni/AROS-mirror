@@ -2,7 +2,7 @@
 #define _PPP_DEFS_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ppp_defs.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ppp_defs.h,v 1.10 1999/12/08 06:50:18 itojun Exp $	*/

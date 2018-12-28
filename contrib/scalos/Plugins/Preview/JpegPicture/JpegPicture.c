@@ -1,6 +1,6 @@
 // JpegPicture.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 21:21:57 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51978 $
 
 #include <exec/types.h>
 #include <exec/libraries.h>

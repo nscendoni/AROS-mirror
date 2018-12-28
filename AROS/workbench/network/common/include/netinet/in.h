@@ -124,9 +124,6 @@
 /*
  * Macros for network/external number representation conversion.
  */
- 
-#define  INET_ADDRSTRLEN 16
- 
 #ifndef ntohl
 #define	ntohl(x)	BELong(x)
 #define	ntohs(x)	BEWord(x)

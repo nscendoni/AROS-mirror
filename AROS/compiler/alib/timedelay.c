@@ -1,6 +1,6 @@
 /*
-    Copyright ï¿½ 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2007, The AROS Development Team. All rights reserved.
+    $Id: timedelay.c 37174 2011-02-23 16:28:49Z twilen $
 
     Desc: TimeDelay() - wait a specified time.
     Lang: english
@@ -57,38 +57,39 @@
 ******************************************************************************/
 {
     struct timerequest tr;
-    struct MsgPort *mp;
+    struct MsgPort mp;
     UBYTE error = 0;
 
     /* Create a message port */
-    if ((mp = CreateMsgPort()) != NULL)
+    mp.mp_Node.ln_Type = NT_MSGPORT;
+    mp.mp_Node.ln_Pri = 0;
+    mp.mp_Node.ln_Name = NULL;
+    mp.mp_Flags = PA_SIGNAL;
+    mp.mp_SigTask = FindTask(NULL);
+    mp.mp_SigBit = SIGB_SINGLE;
+    NEWLIST(&mp.mp_MsgList);
+
+    tr.tr_node.io_Message.mn_Node.ln_Type = NT_MESSAGE;
+    tr.tr_node.io_Message.mn_Node.ln_Pri = 0;
+    tr.tr_node.io_Message.mn_Node.ln_Name = NULL;
+    tr.tr_node.io_Message.mn_ReplyPort = &mp;
+    tr.tr_node.io_Message.mn_Length = sizeof(struct timerequest);
+
+    SetSignal(0, SIGF_SINGLE);
+
+    if(OpenDevice("timer.device", Unit, (struct IORequest *)&tr, 0) == 0)
     {
-        FreeSignal(mp->mp_SigBit);
-        mp->mp_SigBit = SIGB_SINGLE;
+	tr.tr_node.io_Command = TR_ADDREQUEST;
+	tr.tr_node.io_Flags = 0;
+	tr.tr_time.tv_secs = Seconds;
+	tr.tr_time.tv_micro = MicroSeconds;
+		
+	DoIO((struct IORequest *)&tr);
 
-        tr.tr_node.io_Message.mn_Node.ln_Type = NT_MESSAGE;
-        tr.tr_node.io_Message.mn_Node.ln_Pri = 0;
-        tr.tr_node.io_Message.mn_Node.ln_Name = NULL;
-        tr.tr_node.io_Message.mn_ReplyPort = mp;
-        tr.tr_node.io_Message.mn_Length = sizeof(struct timerequest);
-
-        SetSignal(0, SIGF_SINGLE);
-
-        if(OpenDevice("timer.device", Unit, (struct IORequest *)&tr, 0) == 0)
-        {
-            tr.tr_node.io_Command = TR_ADDREQUEST;
-            tr.tr_node.io_Flags = 0;
-            tr.tr_time.tv_secs = Seconds;
-            tr.tr_time.tv_micro = MicroSeconds;
-                    
-            DoIO((struct IORequest *)&tr);
-
-            CloseDevice((struct IORequest *)&tr);
-            error = 1;
-        }
-        mp->mp_SigBit = -1;
-        DeleteMsgPort(mp);
+	CloseDevice((struct IORequest *)&tr);
+	error = 1;
     }
+
     return error;
 
 } /* TimeDelay() */

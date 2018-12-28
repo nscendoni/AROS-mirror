@@ -2,7 +2,7 @@
 #define _SDCARDBCM2708_INTERN_H
 /*
     Copyright © 2013-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sdcard_intern.h 50277 2015-04-01 01:16:56Z NicJA $
 */
 
 #include <exec/execbase.h>

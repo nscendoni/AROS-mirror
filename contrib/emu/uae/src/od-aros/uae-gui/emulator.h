@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: emulator.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 #include <exec/types.h>

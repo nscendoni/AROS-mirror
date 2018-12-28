@@ -24,7 +24,7 @@
 
  NList classes Support Site:  http://www.sf.net/projects/nlist-classes
 
- $Id$
+ $Id: NFloattext_mcc.h 30800 2009-03-08 17:28:50Z neil $
 
 ***************************************************************************/
 

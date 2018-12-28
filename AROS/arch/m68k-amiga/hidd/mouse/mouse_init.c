@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mouse_init.c 36646 2011-01-17 13:48:43Z neil $
 
     Desc: Amiga Mouse hidd
     Lang: english

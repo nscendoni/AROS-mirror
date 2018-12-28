@@ -1,6 +1,6 @@
 // argb.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-14 00:20:37 +0100 (Mon, 14 Mar 2016) $
+// $Revision: 51938 $
 
 
 #include <exec/types.h>

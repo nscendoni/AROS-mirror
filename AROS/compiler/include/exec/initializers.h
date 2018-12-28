@@ -5,7 +5,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: initializers.h 36807 2011-01-26 10:27:30Z sonic $
 
     Desc: Macros to build init structs (eg. for InitStruct())
     Lang: english

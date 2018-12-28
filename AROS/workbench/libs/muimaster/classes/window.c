@@ -1,9 +1,9 @@
 /*
     Copyright © 1999, David Le Corfec.
-    Copyright © 2002-2017, The AROS Development Team.
+    Copyright © 2002-2016, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: window.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 #include <exec/types.h>
 #include <exec/memory.h>
@@ -95,8 +95,6 @@ struct MUI_WindowData
     LONG wd_Y;
     LONG wd_ReqHeight;          /* given by programmer */
     LONG wd_ReqWidth;
-    LONG wd_ReqX;
-    LONG wd_ReqY;
     APTR wd_RootObject;         /* unique child */
     ULONG wd_Flags;             /* various status flags */
     struct MUI_ImageSpec_intern *wd_Background;
@@ -133,13 +131,13 @@ struct MUI_WindowData
 
     struct Screen *wd_UserScreen;
     STRPTR wd_UserPublicScreen;
+    LONG wd_XStore;             /* store MUIV_Window_LeftEdge_Centered Tags
+                                 * etc. because wd_X is overwritten by a
+                                 * value in CalcDimension. Popup windows work
+                                 * OK on AmiGG when main window is moved */
+    LONG wd_YStore;
 
     WORD wd_SleepCount;         /* MUIA_Window_Sleep nests */
-    LONG wd_SleepMaxHeight;     /* Remember Min/Max values for wakeup */
-    LONG wd_SleepMaxWidth;
-    LONG wd_SleepMinHeight;
-    LONG wd_SleepMinWidth;
-
     struct IClass *wd_Class;
 };
 
@@ -189,54 +187,6 @@ struct __dummyXFC3__
 };
 
 #define muiWindowData(obj)   (&(((struct __dummyXFC3__ *)(obj))->mwd))
-
-/****** List.mui/MUIA_Window_DragBar *****************************************
-*
-*   NAME
-*       MUIA_Window_DragBar -- (V4) [I..], BOOL
-*
-*   FUNCTION
-*       Allow the window to be dragged. Defaults to TRUE.
-*
-*   SEE ALSO
-*       MUIA_Window_DepthGadget, MUIA_Window_SizeGadget
-*
-******************************************************************************
-*
-*/
-
-/****** List.mui/MUIA_Window_ScreenTitle *************************************
-*
-*   NAME
-*       MUIA_Window_ScreenTitle -- (V5) [ISG], STRPTR
-*
-*   FUNCTION
-*       The title shown in the drag bar of the window's screen when the
-*       screen is active. If set to NULL, the screen's default title is shown.
-*       The set string is not copied.
-*
-*   SEE ALSO
-*       MUIA_Window_Title
-*
-******************************************************************************
-*
-*/
-
-/****** List.mui/MUIA_Window_Title *******************************************
-*
-*   NAME
-*       MUIA_Window_Title -- (V4) [ISG], STRPTR
-*
-*   FUNCTION
-*       The window title, as shown in the drag bar. If set to NULL, no title
-*       is shown. The set string is not copied.
-*
-*   SEE ALSO
-*       MUIA_Window_ScreenTitle
-*
-******************************************************************************
-*
-*/
 
 static void ActivateObject(struct MUI_WindowData *data);
 static void HandleInputEvent(Object *win, struct MUI_WindowData *data,
@@ -529,8 +479,8 @@ static BOOL SetupRenderInfo(Object *obj, struct MUI_WindowData *data,
 
     if (data->wd_CrtFlags & WFLG_BORDERLESS)
     {
-        /* In fact borderless windows could also have borders (e.g. if they
-         * have a window title) but since they look ugly anyway we ignore it
+        /* In fact borderless windows could also have borders (if they have
+         * a window title e.g. but since they look ugly anyway we ignore it
          * for now */
         mri->mri_BorderLeft = 0;
         mri->mri_BorderRight = 0;
@@ -540,7 +490,6 @@ static BOOL SetupRenderInfo(Object *obj, struct MUI_WindowData *data,
     else
     {
         mri->mri_BorderLeft = mri->mri_Screen->WBorLeft;
-        mri->mri_BorderRight = mri->mri_Screen->WBorRight;
         mri->mri_BorderTop =
             mri->mri_Screen->WBorTop + mri->mri_Screen->Font->ta_YSize + 1;
         temp_obj =
@@ -906,13 +855,12 @@ static void UndisplayWindow(Object *obj, struct MUI_WindowData *data)
 {
     struct Window *win = data->wd_RenderInfo.mri_Window;
     BOOL prefssnap =
-        data->wd_ID != 0 &&
         ((muiGlobalInfo(obj)->mgi_Prefs->window_position ==
             WINDOW_POSITION_REMEMBER_ON_EXIT)
         || (muiGlobalInfo(obj)->mgi_Prefs->window_position ==
             WINDOW_POSITION_SAVE_ON_EXIT));
 
-    if (prefssnap)
+    if (((data->wd_XStore >= 0) && (data->wd_YStore >= 0)) || prefssnap)
     {
         DoMethod(obj, MUIM_Window_Snapshot, 1);
     }
@@ -925,6 +873,18 @@ static void UndisplayWindow(Object *obj, struct MUI_WindowData *data)
 
     if (win != NULL)
     {
+        /* store position and size */
+        if (data->wd_XStore >= 0)
+            data->wd_X = win->LeftEdge;
+        else
+            data->wd_X = data->wd_XStore;
+        if (data->wd_YStore >= 0)
+            data->wd_Y = win->TopEdge;
+        else
+            data->wd_Y = data->wd_YStore;
+        data->wd_Width = win->GZZWidth;
+        data->wd_Height = win->GZZHeight;
+
         ClearMenuStrip(win);
         if (data->wd_Menu)
         {
@@ -1041,62 +1001,79 @@ static VOID RefreshWindow(Object *oWin, struct MUI_WindowData *data)
 
 
 /* Initialize data->wd_X and data->wd_Y for DisplayWindow */
+/* FIXME 20030817: needs some fixing, seems not fully implemented */
 static void CalcWindowPosition(Object *obj, struct MUI_WindowData *data)
 {
-    struct MUI_RenderInfo *mri = &data->wd_RenderInfo;
-    struct Screen *scr = mri->mri_Screen;
-    WORD width = mri->mri_BorderLeft + data->wd_Width + mri->mri_BorderRight,
-        height = mri->mri_BorderTop + data->wd_Height + mri->mri_BorderBottom;
-    ULONG refw = 0, refx = 0, refh = 0, refy = 0;
-
-    data->wd_X = data->wd_ReqX;
-    data->wd_Y = data->wd_ReqY;
-
-    /* Get dimensions of reference window */
-    if (data->wd_RefWindow != NULL)
+    data->wd_XStore = data->wd_X;
+    data->wd_YStore = data->wd_Y;
+    if (NULL == data->wd_RefWindow)
     {
-        get(data->wd_RefWindow, MUIA_Window_LeftEdge, &refx);
-        get(data->wd_RefWindow, MUIA_Window_Width, &refw);
-        get(data->wd_RefWindow, MUIA_Window_TopEdge, &refy);
-        get(data->wd_RefWindow, MUIA_Window_Height, &refh);
+        /* The following calculations are not very correct, the size and
+         * dragbar are ignored also the current overscan view */
+        if (data->wd_X == MUIV_Window_LeftEdge_Centered)
+        {
+            data->wd_X =
+                (data->wd_RenderInfo.mri_Screen->ViewPort.DWidth -
+                data->wd_Width) / 2 -
+                data->wd_RenderInfo.mri_Screen->LeftEdge;
+        }
+        else if (data->wd_X == MUIV_Window_LeftEdge_Moused)
+        {
+            data->wd_X = data->wd_RenderInfo.mri_Screen->MouseX;
+        }
+
+        if (data->wd_Y == MUIV_Window_TopEdge_Centered)
+        {
+            data->wd_Y =
+                (data->wd_RenderInfo.mri_Screen->ViewPort.DHeight -
+                data->wd_Height) / 2 -
+                data->wd_RenderInfo.mri_Screen->TopEdge;
+        }
+        else if (data->wd_Y == MUIV_Window_TopEdge_Moused)
+        {
+            data->wd_Y = data->wd_RenderInfo.mri_Screen->MouseY;
+        }
+        else if (data->wd_Y <= MUIV_Window_TopEdge_Delta(0))
+        {
+            data->wd_Y = data->wd_RenderInfo.mri_Screen->BarHeight + 1
+                + MUIV_Window_TopEdge_Delta(0) - data->wd_Y;
+        }
     }
-
-    /* Adjust X */
-    if (data->wd_X == MUIV_Window_LeftEdge_Centered)
+    else
     {
-        if (data->wd_RefWindow != NULL)
-            /* FIXME: only correct if border thickness is the same for both
-               windows */
-            data->wd_X = refx + (refw - width) / 2;
+        ULONG w = 0, x = 0;
+        ULONG h = 0, y = 0;
+
+        get(data->wd_RefWindow, MUIA_Window_Width, &w);
+        get(data->wd_RefWindow, MUIA_Window_LeftEdge, &x);
+
+        if (data->wd_X == MUIV_Window_LeftEdge_Centered)
+        {
+            data->wd_X = x + (w - data->wd_Width) / 2;
+        }
         else
-            data->wd_X = (scr->ViewPort.DWidth - width) / 2;
-    }
-    else if (data->wd_X == MUIV_Window_LeftEdge_Moused)
-        data->wd_X = scr->MouseX - width / 2;
-    else if (data->wd_RefWindow != NULL)
-        data->wd_X += refx;
+        {
+            data->wd_X += x;
+        }
 
-    /* Adjust Y */
-    if (data->wd_Y == MUIV_Window_TopEdge_Centered)
-    {
-        if (data->wd_RefWindow != NULL)
-            data->wd_Y = refy + (refh - data->wd_Height) / 2;
+        get(data->wd_RefWindow, MUIA_Window_Height, &h);
+        get(data->wd_RefWindow, MUIA_Window_TopEdge, &y);
+
+        if (data->wd_Y == MUIV_Window_TopEdge_Centered)
+        {
+/*          D(bug("y=%ld, h=%ld, wdh=%ld\n", y, h, data->wd_Height)); */
+            data->wd_Y = y + (h - data->wd_Height) / 2;
+        }
+        else if (data->wd_Y <= MUIV_Window_TopEdge_Delta(0))
+        {
+            /* ??? surely incorrect implementation */
+            data->wd_Y = y + 1 + MUIV_Window_TopEdge_Delta(0) - data->wd_Y;
+        }
         else
-            data->wd_Y = (scr->ViewPort.DHeight - height) / 2;
+        {
+            data->wd_Y += y;
+        }
     }
-    else if (data->wd_Y == MUIV_Window_TopEdge_Moused)
-        data->wd_Y = scr->MouseY - height / 2;
-    else if (data->wd_Y <= MUIV_Window_TopEdge_Delta(0)
-        && data->wd_Y > MUIV_Window_TopEdge_Delta(7))
-    {
-        data->wd_Y = MUIV_Window_TopEdge_Delta(0) - data->wd_Y;
-        if (data->wd_RefWindow != NULL)
-            data->wd_Y += refy + mri->mri_BorderTop;
-        else
-            data->wd_Y += scr->BarHeight + 1;
-    }
-    else if (data->wd_RefWindow != NULL)
-        data->wd_Y += refy;
 }
 
 /* Initialize alternative dimensions for DisplayWindow */
@@ -1705,7 +1682,7 @@ BOOL HandleWindowEvent(Object *oWin, struct MUI_WindowData *data,
             
             /* Use wd_Class below instead of OCLASS(oWin), because otherwise if oWin is an
                instance of a subclass of window class, then superset will go to window class's
-               OM_SET where MUIA_Window_Width|Height for some reason are always set to 0. This has
+               OM_SET where MUIA_window_Width|Height for some reason are always set to 0. This has
                the side effect that after the first window resize all future window moves(!) too
                are interpreted as "window size was changed" (if check above returns TRUE even if
                window size did not change) */
@@ -2408,27 +2385,6 @@ void _zune_window_message(struct IntuiMessage *imsg)
     oWin = (Object *) iWin->UserData;
     data = muiWindowData(oWin);
 
-    if (data->wd_SleepCount > 0)
-    {
-        BOOL refresh=FALSE;
-        /* Window is sleeping, so we just ignore (and reply) all messages.
-         * MUI 3.8/AmigaOS3 also receives all messages (IDCMP Flags 
-         * are not modified during sleeping). MUI refreshes the window 
-         * contents, so it seems to handle IDCMP_REFRESHWINDOW messages. 
-         * If any other messages are handled by MUI is unsure/not tested.
-         */
-        if (imsg->Class == IDCMP_REFRESHWINDOW) 
-        {
-            refresh=TRUE;
-        }
-        ReplyMsg((struct Message *)imsg);
-        if (refresh) 
-        {
-            RefreshWindow(oWin, data);
-        }
-        return;
-    }
-
     if (data->wd_DragObject)
     {
         if (!HandleDragging(oWin, data, imsg))
@@ -2782,6 +2738,11 @@ static void WindowSelectDimensions(struct MUI_WindowData *data)
                 scr->Height - data->wd_RenderInfo.mri_BorderTop -
                 data->wd_RenderInfo.mri_BorderBottom;
 
+            /* This is new to Zune: If TopEdge Delta is requested
+             * the screenheight doesn't cover the barlayer */
+            if (data->wd_Y <= MUIV_Window_TopEdge_Delta(0))
+                height -= scr->BarHeight + 1;
+
             data->wd_Height = height * (-(data->wd_ReqHeight + 200)) / 100;
         }
         else if (_between(MUIV_Window_Height_Visible(100),
@@ -2849,12 +2810,15 @@ IPTR Window__OM_NEW(struct IClass *cl, Object *obj, struct opSet *msg)
     data->wd_RootObject = NULL;
     data->wd_DefaultObject = NULL;
 
+/* alternate dimensions */
+/* no change in coordinates */
     data->wd_AltDim.Top = MUIV_Window_AltTopEdge_NoChange;
     data->wd_AltDim.Left = MUIV_Window_AltLeftEdge_NoChange;
+/* default to min size */
     data->wd_AltDim.Width = MUIV_Window_AltWidth_MinMax(0);
     data->wd_AltDim.Height = MUIV_Window_AltHeight_MinMax(0);
-    data->wd_ReqX = MUIV_Window_LeftEdge_Centered;
-    data->wd_ReqY = MUIV_Window_TopEdge_Centered;
+    data->wd_X = MUIV_Window_LeftEdge_Centered;
+    data->wd_Y = MUIV_Window_TopEdge_Centered;
     data->wd_DisabledKeys = 0L;
     data->wd_HelpTicker = BUBBLEHELP_TICKER_FIRST;
 
@@ -2983,11 +2947,11 @@ IPTR Window__OM_NEW(struct IClass *cl, Object *obj, struct opSet *msg)
             break;
 
         case MUIA_Window_LeftEdge:
-            data->wd_ReqX = tag->ti_Data;
+            data->wd_X = tag->ti_Data;
             break;
 
         case MUIA_Window_TopEdge:
-            data->wd_ReqY = tag->ti_Data;
+            data->wd_Y = tag->ti_Data;
             break;
 
         case MUIA_Window_UseBottomBorderScroller:
@@ -3052,6 +3016,12 @@ IPTR Window__OM_DISPOSE(struct IClass *cl, Object *obj, Msg msg)
 
     if (data->wd_ChildMenustrip)
         MUI_DisposeObject(data->wd_ChildMenustrip);
+
+    if (data->wd_Title)
+        FreeVec(data->wd_Title);
+
+    if (data->wd_ScreenTitle)
+        FreeVec(data->wd_ScreenTitle);
 
     DeletePool(data->wd_MemoryPool);
 
@@ -3169,14 +3139,18 @@ IPTR Window__OM_SET(struct IClass *cl, Object *obj, struct opSet *msg)
             break;
 
         case MUIA_Window_Title:
-            data->wd_Title = (STRPTR) tag->ti_Data;
+            if (data->wd_Title)
+                FreeVec(data->wd_Title);
+            data->wd_Title = StrDup((STRPTR) tag->ti_Data);
             if (data->wd_RenderInfo.mri_Window)
                 SetWindowTitles(data->wd_RenderInfo.mri_Window,
                     data->wd_Title, (CONST_STRPTR) ~ 0);
             break;
 
         case MUIA_Window_ScreenTitle:
-            data->wd_ScreenTitle = (STRPTR) tag->ti_Data;
+            if (data->wd_ScreenTitle)
+                FreeVec(data->wd_ScreenTitle);
+            data->wd_ScreenTitle = StrDup((STRPTR) tag->ti_Data);
             if (data->wd_RenderInfo.mri_Window)
                 SetWindowTitles(data->wd_RenderInfo.mri_Window,
                     (CONST_STRPTR) ~ 0, data->wd_ScreenTitle);
@@ -3212,11 +3186,11 @@ IPTR Window__OM_SET(struct IClass *cl, Object *obj, struct opSet *msg)
             break;
 
         case MUIA_Window_LeftEdge:
-            data->wd_ReqX = tag->ti_Data;
+            data->wd_X = tag->ti_Data;
             break;
 
         case MUIA_Window_TopEdge:
-            data->wd_ReqY = tag->ti_Data;
+            data->wd_Y = tag->ti_Data;
             break;
 
         case MUIA_Window_Width:
@@ -3249,20 +3223,7 @@ IPTR Window__OM_SET(struct IClass *cl, Object *obj, struct opSet *msg)
                         (data->wd_RenderInfo.mri_Window,
                         WA_BusyPointer, TRUE,
                         WA_PointerDelay, TRUE, TAG_DONE);
-
-                    /* event handling is disabled in _zune_window_message() */
-
-                    data->wd_SleepMaxHeight=data->wd_RenderInfo.mri_Window->MaxHeight;
-                    data->wd_SleepMinHeight=data->wd_RenderInfo.mri_Window->MinHeight;
-                    data->wd_SleepMaxWidth=data->wd_RenderInfo.mri_Window->MaxWidth;
-                    data->wd_SleepMinWidth=data->wd_RenderInfo.mri_Window->MaxWidth;
-                    /* According to MUI autodocs, sleeping windows can't be resized.
-                     * MUI 3.8/AmigaOS also changes min/max values with WindowLimits */
-                    WindowLimits(data->wd_RenderInfo.mri_Window, 
-                        data->wd_RenderInfo.mri_Window->Width,
-                        data->wd_RenderInfo.mri_Window->Height,
-                        data->wd_RenderInfo.mri_Window->Width,
-                        data->wd_RenderInfo.mri_Window->Height);
+                    // FIXME: how to disable event handling?
                 }
             }
             else
@@ -3272,21 +3233,6 @@ IPTR Window__OM_SET(struct IClass *cl, Object *obj, struct opSet *msg)
                     && (data->wd_SleepCount == 0))
                 {
                     SetWindowPointerA(data->wd_RenderInfo.mri_Window, NULL);
-
-                    /* Only restore settings, if they have been saved 
-                     * during (MUIA_Window_Sleep, TRUE) call */
-                    if (data->wd_SleepMaxHeight > 0)
-                    {
-                        WindowLimits(data->wd_RenderInfo.mri_Window, 
-                            data->wd_SleepMinWidth,
-                            data->wd_SleepMinHeight,
-                            data->wd_SleepMaxWidth,
-                            data->wd_SleepMaxHeight);
-                        data->wd_SleepMinHeight=0;
-                        data->wd_SleepMaxHeight=0;
-                        data->wd_SleepMinWidth=0;
-                        data->wd_SleepMaxWidth=0;
-                    }
                 }
             }
             break;
@@ -3350,10 +3296,7 @@ IPTR Window__OM_GET(struct IClass *cl, Object *obj, struct opGet *msg)
         return TRUE;
 
     case MUIA_Window_Height:
-        if (data->wd_RenderInfo.mri_Window != NULL)
-            STORE = (IPTR) data->wd_RenderInfo.mri_Window->GZZHeight;
-        else
-            STORE = 0;
+        STORE = (IPTR) data->wd_Height;
         return TRUE;
 
     case MUIA_Window_ID:
@@ -3395,10 +3338,7 @@ IPTR Window__OM_GET(struct IClass *cl, Object *obj, struct opGet *msg)
         return (TRUE);
 
     case MUIA_Window_Width:
-        if (data->wd_RenderInfo.mri_Window != NULL)
-            STORE = (IPTR) data->wd_RenderInfo.mri_Window->GZZWidth;
-        else
-            STORE = 0;
+        STORE = (IPTR) data->wd_Width;
         return TRUE;
 
     case MUIA_Window_Menustrip:
@@ -3936,7 +3876,14 @@ IPTR Window__MUIM_AddEventHandler(struct IClass *cl, Object *obj,
 
     //D(bug("muimaster.library/window.c: Add Eventhandler %p\n", msg->ehnode));
 
+    /* ABI_V0 compatibility */
+#ifdef __AROS__
+#if defined(__i386__)
+    msg->ehnode->ehn_Node.ln_Pri = msg->ehnode->ehn_Priority;
+#else
     msg->ehnode->ehn_Priority = msg->ehnode->ehn_Priority;
+#endif
+#endif
     EnqueueByPriAndAddress((struct List *)&data->wd_EHList,
         (struct Node *)msg->ehnode);
     ChangeEvents(data, GetDefaultEvents());
@@ -3999,8 +3946,8 @@ IPTR Window__MUIM_Cleanup(struct IClass *cl, Object *obj, Msg msg)
 
 
 /**************************************************************************
- This adds the the control char handler and also does the MUIA_CycleChain
- stuff. Orginal MUI does this another way.
+ This adds the the control char handler and also do the MUIA_CycleChain
+ stuff. Orginal MUI does this in an other way.
 **************************************************************************/
 IPTR Window__MUIM_AddControlCharHandler(struct IClass *cl, Object *obj,
     struct MUIP_Window_AddControlCharHandler *msg)
@@ -4010,7 +3957,14 @@ IPTR Window__MUIM_AddControlCharHandler(struct IClass *cl, Object *obj,
 
     if (msg->ccnode->ehn_Events)
     {
+        /* ABI_V0 compatibility */
+#ifdef __AROS__
+#if defined(__i386__)
+        msg->ccnode->ehn_Node.ln_Pri = msg->ccnode->ehn_Priority;
+#else
         msg->ccnode->ehn_Priority = msg->ccnode->ehn_Priority;
+#endif
+#endif
         Enqueue((struct List *)&data->wd_CCList,
             (struct Node *)msg->ccnode);
     }

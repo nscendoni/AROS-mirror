@@ -1,6 +1,6 @@
 /*
     Copyright  1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: econsole.c 47619 2013-07-02 18:27:20Z neil $
 
     Desc: Emergency console launcher for AROS
     Lang: english
@@ -109,7 +109,7 @@ SIPTR Raw_Write(CONST_APTR buff, SIPTR len, SIPTR *err)
     
 SIPTR Raw_ExamineFH(struct FileInfoBlock *fib, SIPTR *errcode)
 {
-    memset(fib, 0, sizeof(*fib));
+    memset(fib, 0, sizeof(fib));
     fib->fib_Protection = FIBF_WRITE | FIBF_READ;
 
     *errcode = 0;
@@ -142,7 +142,7 @@ SIPTR Boot_Write(CONST_APTR buff, SIPTR len, SIPTR *err)
 
 SIPTR Boot_ExamineFH(struct FileInfoBlock *fib, SIPTR *errcode)
 {
-    memset(fib, 0, sizeof(*fib));
+    memset(fib, 0, sizeof(fib));
     fib->fib_FileName[0] = strlen("AROS.boot");
     CopyMem("AROS.boot", &fib->fib_FileName[1], fib->fib_FileName[0] + 1);
     fib->fib_Protection = FIBF_READ;

@@ -1,6 +1,6 @@
 // cx_private_protos.h
-// $Date$
-// $Revision$
+// $Date: 2013-12-01 23:08:26 +0100 (Sun, 01 Dec 2013) $
+// $Revision: 48481 $
 
 #ifndef CLIB_COMMODITIES_PRIVATE_PROTOS_H
 #define CLIB_COMMODITIES_PRIVATE_PROTOS_H

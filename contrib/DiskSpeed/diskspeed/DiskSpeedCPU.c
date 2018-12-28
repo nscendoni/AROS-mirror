@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: DiskSpeedCPU.c 52778 2016-07-11 17:19:25Z neil $
 
     Desc: CPU Load Monitoring code.
     Lang: English.

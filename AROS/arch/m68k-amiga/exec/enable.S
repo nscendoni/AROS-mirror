@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: enable.S 39924 2011-07-08 15:37:34Z jmcmullan $
 
     Desc: Enable() - Allow interrupts to occur after Disable().
     Lang: english

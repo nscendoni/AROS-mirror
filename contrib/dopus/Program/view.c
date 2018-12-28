@@ -205,7 +205,7 @@ void __saveds view_file_process()
 
   Forbid();
   for (a=0;;a++) {
-    lsprintf(portname,"DOPUS_VIEW%ld",(long int)a);
+    lsprintf(portname,"DOPUS_VIEW%ld",a);
     if (!(FindPort(portname))) break;
   }
   Permit();
@@ -354,7 +354,7 @@ D(bug("linecount = %ld\n",vdata->view_line_count));
                                                                      WA_Width,        vdata->view_char_width*vdata->view_font->tf_XSize,
                                                                      WA_Height,       vdata->view_font->tf_YSize*6, //HUX was 3
                                                                      WA_Flags,        WFLG_SMART_REFRESH | WFLG_BORDERLESS | WFLG_BACKDROP,
-                                                                     WA_CustomScreen, vdata->view_screen,
+                                                                     WA_CustomScreen, (Tag)vdata->view_screen,
                                                                      WA_AutoAdjust,   TRUE,
                                                                      TAG_END)))
                {
@@ -372,7 +372,7 @@ D(bug("linecount = %ld\n",vdata->view_line_count));
                   for (a=0;a<MAXTABS;a++) view_console_unit->cu_TabStops[a]=a*config->tabsize;
                   view_console_unit->cu_TabStops[MAXTABS-1]=0xffff;
 
-                  lsprintf(buf,"\x9b\x30\x20\x70\x9b%ld\x75\x9b%ld\x74",(long int)(vdata->view_max_line_length+1),(long int)vdata->view_lines_per_screen); //turn off cursor, set line length, set page height
+                  lsprintf(buf,"\x9b\x30\x20\x70\x9b%ld\x75\x9b%ld\x74",vdata->view_max_line_length+1,vdata->view_lines_per_screen); //turn off cursor, set line length, set page height
                   view_print(vdata,buf,1,strlen(buf));
 
                   vdata->view_max_line_length=255;
@@ -454,8 +454,7 @@ struct ViewData *vdata;
 int view_loadfile(struct ViewData *vdata)
  {
   struct IntuiMessage *msg;
-  BPTR in;
-  int a, fsize;
+  int a, in, fsize;
 
 /*     if ((vdata->view_file_size&15)==0)
     vdata->view_buffer_size=vdata->view_file_size+16;
@@ -1760,7 +1759,7 @@ void view_status_text(struct ViewData *vdata, char *str)
     RectFill(vdata->view_rastport,g->LeftEdge,g->TopEdge+1,g->LeftEdge+g->Width-1,g->TopEdge+g->Height-2);
 */
     GT_SetGadgetAttrs(g,vdata->view_window,NULL,
-        GTTX_Text,buf,
+        GTTX_Text,(Tag)buf,
         TAG_END);
    }
 }
@@ -1893,9 +1892,9 @@ int line;
     buf3[8],buf3[9],buf3[10],buf3[11],buf3[12],buf3[13],buf3[14],buf3[15],
     buf2);*/
   lsprintf((char *)textbuf,
-    "%08lx: %08lx %08lx %08lx %08lx %s\n",(long unsigned int)(line*16),
-    (long unsigned int)AROS_LONG2BE(((long *)hex)[0]),(long unsigned int)AROS_LONG2BE(((long *)hex)[1]),
-    (long unsigned int)AROS_LONG2BE(((long *)hex)[2]),(long unsigned int)AROS_LONG2BE(((long *)hex)[3]),buf2);
+    "%08lx: %08lx %08lx %08lx %08lx %s\n",line*16,
+    AROS_LONG2BE(((long *)hex)[0]),AROS_LONG2BE(((long *)hex)[1]),
+    AROS_LONG2BE(((long *)hex)[2]),AROS_LONG2BE(((long *)hex)[3]),buf2);
 
   if (c>-1) {
     for (b=c;b<46;b++)
@@ -1959,7 +1958,7 @@ struct ViewData *vdata;
 {
   int a,b,c,d;
 //D(bug("view_fix_scroll_gadget()\n"));
-  GT_GetGadgetAttrs(viewGadgets[VIEW_SCROLLGADGET],vdata->view_window,NULL,GTSC_Top,&a,TAG_END);
+  GT_GetGadgetAttrs(viewGadgets[VIEW_SCROLLGADGET],vdata->view_window,NULL,GTSC_Top,(Tag)&a,TAG_END);
   if (vdata->view_line_count > 0x7FFF)
    {
     b = vdata->view_line_count>>15;

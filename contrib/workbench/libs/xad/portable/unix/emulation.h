@@ -1,4 +1,4 @@
-/*  $Id$
+/*  $Id: emulation.h 30794 2009-03-08 02:19:07Z neil $
     Old Amiga remains.
 
     XAD library system for archive handling

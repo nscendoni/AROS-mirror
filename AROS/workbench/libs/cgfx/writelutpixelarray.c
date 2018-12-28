@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: writelutpixelarray.c 50752 2015-05-25 15:20:32Z neil $
 
     Desc:
     Lang: english
@@ -8,7 +8,7 @@
 
 #include <aros/debug.h>
 #include <graphics/rastport.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #include "cybergraphics_intern.h"
 #include "gfxfuncsupport.h"

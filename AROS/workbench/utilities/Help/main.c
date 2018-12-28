@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: main.c 46858 2013-03-09 16:15:22Z mazze $
 */
 
 /******************************************************************************

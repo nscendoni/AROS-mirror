@@ -58,7 +58,7 @@ DEFNEW
 	Object *str_pages;
 	char initial_range[128];
 
-	if ((obj = (Object *) DoSuperNew(cl, obj,
+	if ((obj = DoSuperNew(cl, obj,
 		
 		Child, str_pages = StringObject, 
 			 MUIA_String_Accept, "0123456789-, ",
@@ -81,7 +81,7 @@ DEFNEW
 		data->sub_pos = -1;  // position within range
 	}
 	
-	return (IPTR)obj;
+	return (ULONG)obj;
 }
 
 

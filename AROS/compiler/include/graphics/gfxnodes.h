@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gfxnodes.h 33338 2010-05-24 08:54:28Z sonic $
 
     Desc: Extended node for graphics.library.
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright 2009-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mesa3dgl_gallium.c 50858 2015-06-23 22:30:34Z NicJA $
 */
 
 #include <proto/utility.h>
@@ -284,12 +284,12 @@ struct st_manager * MESA3DGLNewStManager(struct pipe_screen * pscreen)
     return stmanager;
 }
 
-VOID MESA3DGLFreeStManager(APTR pipe, struct st_manager * stmanager)
+VOID MESA3DGLFreeStManager(struct st_manager * stmanager)
 {
     if (stmanager)
     {
         if (stmanager->screen)
-            DestroyPipeScreen(pipe, stmanager->screen);
+            DestroyPipeScreen(stmanager->screen);
         FreeVec(stmanager);
     }
 }

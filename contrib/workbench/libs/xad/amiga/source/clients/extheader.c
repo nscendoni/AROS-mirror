@@ -1,4 +1,4 @@
-/*  $Id$
+/*  $Id: extheader.c 43430 2012-01-01 20:12:06Z jmcmullan $
     C header for xad externals
 
     XAD library system for archive handling

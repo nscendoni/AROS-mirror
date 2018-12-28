@@ -1,11 +1,11 @@
 # Copyright © 2003, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 52400 2016-03-30 09:04:21Z mazze $
 
 include $(SRCDIR)/config/aros.cfg
 
 CATALOGS:=
 # other catalogs need update to version 2
 
-%build_catalogs mmake=debug-tools-acpitool-catalogs \
+%build_catalogs mmake=workbench-tools-acpitool-catalogs \
     catalogs=$(CATALOGS) \
     name=ACPITool subdir=System/Tools/

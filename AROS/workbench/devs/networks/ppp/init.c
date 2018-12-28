@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: init.c 45422 2012-08-10 00:22:42Z neil $
  */
 
 #include <clib/alib_protos.h>

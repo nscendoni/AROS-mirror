@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: startup.c 51052 2015-08-31 14:19:13Z jmcmullan $
 */
 
 #define DEBUG 0
@@ -13,8 +13,8 @@
 #include <proto/graphics.h>
 #include <proto/oop.h>
 
-#include "uaegfx_intern.h"
-#include "uaegfx_bitmap.h"
+#include "uaegfx.h"
+#include "uaegfxbitmap.h"
 
 #include LC_LIBDEFS_FILE
 

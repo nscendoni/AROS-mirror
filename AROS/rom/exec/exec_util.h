@@ -2,14 +2,12 @@
 #define _EXEC_UTIL_H
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: exec_util.h 51674 2016-03-09 18:01:10Z NicJA $
 
     Desc: Utility functions for exec.
     Lang: english
 */
-
-#include <aros/config.h>
 
 #include <aros/asmcall.h>
 #include <exec/types.h>
@@ -24,13 +22,19 @@
 #ifdef __i386__
 #define PC eip
 #define FP ebp
+#if __GNUC__ > 4 || \
+              (__GNUC__ == 4 && (__GNUC_MINOR__ > 6 ))
+#define CALLER_FRAME NULL
 #endif
-
+#endif
 #ifdef __x86_64__
 #define PC rip
 #define FP rbp
+#if __GNUC__ > 4 || \
+              (__GNUC__ == 4 && (__GNUC_MINOR__ > 6 ))
+#define CALLER_FRAME NULL
 #endif
-
+#endif
 #ifdef __mc68000__
 #define PC pc
 #ifdef CONFIG_GCC_FP_A6
@@ -40,26 +44,20 @@
 #define CALLER_FRAME NULL
 #endif
 #endif
-
 #ifdef __powerpc__
 #define PC ip
 #define FP gpr[1]
 #endif
-
 #ifdef __arm__
 #define PC pc
 #define FP r[11]
+/* __builtin_frame_address(1) returns LR value. Perhaps not AAPCS-compatible. */
+//#define CALLER_FRAME ({void * _fp; asm volatile("ldr %0, [%%fp, #-4]":"=r"(_fp)); _fp;})
 #define CALLER_FRAME NULL
 #endif
 
 #ifndef PC
 #error unsupported CPU type
-#endif
-
-/* Newer gcc gives an error for calling __builtin_frame_address with non 0 arg */
-/* FIXME: Find a way to get caller's frame, until then it's disabled for now */
-#if __GNUC__ > 4 || (__GNUC__ == 4 && (__GNUC_MINOR__ > 6 ))
-#define CALLER_FRAME NULL
 #endif
 
 #ifndef CALLER_FRAME
@@ -91,7 +89,7 @@ struct TraceLocation
 BOOL PrepareContext(struct Task *task, APTR entryPoint, APTR fallBack,
                     const struct TagItem *tagList, struct ExecBase *SysBase);
 
-BOOL Exec_InitETask(struct Task *task, struct Task *parent, struct ExecBase *SysBase);
+BOOL Exec_InitETask(struct Task *task, struct ExecBase *SysBase);
 void Exec_CleanupETask(struct Task *task, struct ExecBase *SysBase);
 void Exec_ExpungeETask(struct ETask *et, struct ExecBase *SysBase);
 BOOL Exec_ExpandTS(struct Task *task, struct ExecBase *SysBase);
@@ -132,9 +130,6 @@ static inline void InitMsgPort(struct MsgPort *ret)
     ret->mp_Flags = PA_SIGNAL;
     /* Set port to type MsgPort */
     ret->mp_Node.ln_Type = NT_MSGPORT;
-#if defined(__AROSEXEC_SMP__)
-    EXEC_SPINLOCK_INIT(&ret->mp_SpinLock);
-#endif
     /* Clear the list of messages */
     NEWLIST(&ret->mp_MsgList);
 }
@@ -142,7 +137,7 @@ static inline void InitMsgPort(struct MsgPort *ret)
 /* Pseudo-functions, including SysBase for nicer calling */
 #define FindChild(i)	    Exec_FindChild(i,SysBase)
 #define FindETask(l,i)	    Exec_FindETask(l,i,SysBase)
-#define InitETask(t,p)	    Exec_InitETask(t,p,SysBase)
+#define InitETask(t)	    Exec_InitETask(t,SysBase)
 #define CleanupETask(t)     Exec_CleanupETask(t,SysBase)
 #define ExpungeETask(e)	    Exec_ExpungeETask(e,SysBase)
 

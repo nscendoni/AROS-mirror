@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: inifile_init.c 30794 2009-03-08 02:19:07Z neil $
 
     Desc: bsdsocket initialization code.
     Lang: English.

@@ -1,14 +1,10 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: exec_init.c 50668 2015-05-13 06:37:29Z NicJA $
 
     Desc: exec.library resident and initialization.
     Lang: english
 */
-
-#define DEBUG 0
-
-#include <aros/config.h>
 
 #include <exec/lists.h>
 #include <exec/execbase.h>
@@ -23,11 +19,13 @@
 #include <aros/system.h>
 #include <aros/arossupportbase.h>
 #include <aros/asmcall.h>
+#include <aros/config.h>
 
 #include <aros/debug.h>
 
 #include <proto/arossupport.h>
 #include <proto/exec.h>
+#include <proto/kernel.h>
 
 #include "exec_debug.h"
 #include "exec_intern.h"
@@ -43,7 +41,7 @@ static const UBYTE name[];
 static const UBYTE version[];
 
 /* This comes from genmodule */
-extern int LIBEND(void);
+extern const char LIBEND;
 
 AROS_UFP3S(struct ExecBase *, GM_UNIQUENAME(init),
     AROS_UFPA(struct MemHeader *, mh, D0),
@@ -125,11 +123,7 @@ AROS_UFH3S(struct ExecBase *, GM_UNIQUENAME(init),
     if (!origSysBase)
         return PrepareExecBase(mh, tagList);
 
-#if defined(__AROSEXEC_SMP__)
-    DINIT("AROS SMP 'exec.library' Initialization");
-#else
-    DINIT("AROS 'exec.library' Initialization");
-#endif
+    DINIT("exec.library init");
 
     /*
      * Call platform-specific pre-init code (if any). Return values are not checked.
@@ -143,8 +137,6 @@ AROS_UFH3S(struct ExecBase *, GM_UNIQUENAME(init),
      * SysBase then.
      */
     set_call_libfuncs(SETNAME(PREINITLIB), 1, 0, origSysBase);
-
-    DINIT("Preparing Bootstrap Task...");
 
     /*
      * kernel.resource is up and running and memory list is complete.
@@ -170,8 +162,6 @@ AROS_UFH3S(struct ExecBase *, GM_UNIQUENAME(init),
         goto execfatal;
     }
 
-    DINIT("Allocated Task structure and MemList");
-
     ctx = KrnCreateContext();
     if (!ctx)
     {
@@ -179,15 +169,9 @@ AROS_UFH3S(struct ExecBase *, GM_UNIQUENAME(init),
         goto execfatal;
     }
 
-    DINIT("Bootstrap CPU context @ 0x%p\n", ctx);
-
     NEWLIST(&t->tc_MemEntry);
 
-#if defined(__AROSEXEC_SMP__)
-    t->tc_Node.ln_Name = "Exec BSP Bootstrap Task";
-#else
-    t->tc_Node.ln_Name = "Exec Bootstrap Task";
-#endif
+    t->tc_Node.ln_Name = "Boot Task";
     t->tc_Node.ln_Type = NT_TASK;
     t->tc_Node.ln_Pri  = 0;
     t->tc_State        = TS_RUN;
@@ -211,24 +195,23 @@ AROS_UFH3S(struct ExecBase *, GM_UNIQUENAME(init),
     ml->ml_ME[0].me_Length = sizeof(struct Task);
     AddHead(&t->tc_MemEntry, &ml->ml_Node);
 
-    /* Set the bootstrapping task incase errors occur... */
-    DINIT("Preparing the Bootstrap task @ 0x%p", t);
-    SET_THIS_TASK(t);
-    DINIT("ThisTask is now 0x%p", GET_THIS_TASK);
-
-    /* Create the first ETask structure and attach CPU context */
-    if (!InitETask(t, NULL))
+    /* Create a ETask structure and attach CPU context */
+    if (!InitETask(t))
     {
         DINIT("FATAL: Failed to allocate any memory for first tasks extended data!");
         goto execfatal;
     }
     t->tc_UnionETask.tc_ETask->et_RegFrame = ctx;
 
-    DINIT("Bootstrap task ETask @ 0x%p\n", t->tc_UnionETask.tc_ETask);
+    DINIT("[exec] Boot Task 0x%p, ETask 0x%p, CPU context 0x%p\n", t, t->tc_UnionETask.tc_ETask, ctx);
 
-    SCHEDELAPSED_SET(SCHEDQUANTUM_GET);
-
-    DINIT("Inital Quantum = %d, Elapsed = %d\n", SCHEDQUANTUM_GET, SCHEDELAPSED_GET);
+    /*
+     * Set the current task and elapsed time for it.
+     * Set ThisTask only AFTER InitETask() has been called. InitETask() sets et_Parent
+     * to FindTask(NULL). We must get NULL there, otherwise we'll get task looped on itself.
+     */
+    SET_THIS_TASK(t);
+    SysBase->Elapsed  = SysBase->Quantum;
 
     /* Install the interrupt servers. Again, do it here because allocations are needed. */
     for (i=0; i < 16; i++)
@@ -276,8 +259,6 @@ AROS_UFH3S(struct ExecBase *, GM_UNIQUENAME(init),
         }
     }
 
-    DINIT("Enabling Exec Interrupts...\n");
-
     /* We now start up the interrupts */
     Permit();
     Enable();
@@ -316,14 +297,11 @@ int Exec_InitServices(struct ExecBase *SysBase)
 
     /* Our housekeeper must have the largest possible priority */
     t = NewCreateTask(TASKTAG_NAME       , "Exec housekeeper",
-                        TASKTAG_PRI        , 127,
-#if defined(__AROSEXEC_SMP__)
-                        TASKTAG_AFFINITY, TASKAFFINITY_ANY,
-#endif
-                        TASKTAG_PC         , ServiceTask,
-                        TASKTAG_TASKMSGPORT, &((struct IntExecBase *)SysBase)->ServicePort,
-                        TASKTAG_ARG1       , SysBase,
-                        TAG_DONE);
+                      TASKTAG_PRI        , 127,
+                      TASKTAG_PC         , ServiceTask,
+                      TASKTAG_TASKMSGPORT, &((struct IntExecBase *)SysBase)->ServicePort,
+                      TASKTAG_ARG1       , SysBase,
+                      TAG_DONE);
 
     if (!t)
     {

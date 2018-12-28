@@ -1,6 +1,6 @@
 /*
     Copyright © 2002, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: updatestdio.c 48048 2013-09-08 21:19:29Z verhaegs $
 
     C function to update stdfiles when changed by dos functions.
 */

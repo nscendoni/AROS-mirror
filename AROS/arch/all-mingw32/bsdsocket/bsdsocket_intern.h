@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bsdsocket_intern.h 34530 2010-09-28 10:50:58Z sonic $
 
     Desc: Internal definitions for bsdsocket.library
     Lang: English

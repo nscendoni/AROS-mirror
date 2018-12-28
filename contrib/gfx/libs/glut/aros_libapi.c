@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: aros_libapi.c 36659 2011-01-18 13:26:51Z neil $
 
 */
 

@@ -1,7 +1,7 @@
 /* vmstime.c */
 #ifndef LINT
 static char sccsid[]="$Source$\n\
-$Id$";
+$Id: vmstime.c 30794 2009-03-08 02:19:07Z neil $";
 #endif
 /*
 This file was graciously supplied by Randal Barnes to support preservation

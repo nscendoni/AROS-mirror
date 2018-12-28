@@ -2,7 +2,7 @@
 #define	__IP_FIL_H__
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ip_fil.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ip_fil.h,v 1.19 2000/05/10 20:40:53 deraadt Exp $	*/

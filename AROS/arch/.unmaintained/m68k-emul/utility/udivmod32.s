@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: udivmod32.s 30792 2009-03-07 22:40:04Z neil $
 
     Desc: unsigned 32 bit division/modulus functions for Amiga/m68k
     Lang: english

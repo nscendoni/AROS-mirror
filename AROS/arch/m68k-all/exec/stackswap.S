@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stackswap.S 45269 2012-07-20 04:52:32Z jmcmullan $
 */
 
 /*****************************************************************************

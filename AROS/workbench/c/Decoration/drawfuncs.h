@@ -1,6 +1,6 @@
 /*
     Copyright  2011, The AROS Development Team.
-    $Id$
+    $Id: drawfuncs.h 44597 2012-04-10 16:30:42Z neil $
 */
 
 #ifndef DRAWFUNCS_H

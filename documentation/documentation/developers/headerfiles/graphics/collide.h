@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: collide.h 30800 2009-03-08 17:28:50Z neil $
 
     Desc: collision detection and control
     Lang: english

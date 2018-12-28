@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: boot.c 47582 2013-06-19 20:40:42Z schulz $
 
     Desc: boot.c
     Lang: english

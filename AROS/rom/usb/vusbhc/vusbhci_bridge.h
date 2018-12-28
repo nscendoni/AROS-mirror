@@ -1,6 +1,6 @@
 /*
-    Copyright © 2015-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2015-2016, The AROS Development Team. All rights reserved.
+    $Id: vusbhci_bridge.h 52922 2016-08-31 08:09:52Z dizzyofcrn $
 
     Desc: Virtual USB host controller
     Lang: English
@@ -33,13 +33,7 @@ static const char *libusb_func_names[] = {
     "libusb_set_debug",
     "libusb_set_configuration",
     "libusb_kernel_driver_active",
-    "libusb_detach_kernel_driver",
-    "libusb_release_interface",
-    "libusb_get_active_config_descriptor",
-    "libusb_get_device",
-    "libusb_get_configuration",
-    "libusb_free_config_descriptor",
-    "libusb_get_string_descriptor_ascii"
+    "libusb_detach_kernel_driver"
 };
 
 #define LIBUSB_NUM_FUNCS (sizeof(libusb_func_names) / sizeof(libusb_func_names[0]))
@@ -87,12 +81,6 @@ struct libusb_func {
     int (*libusb_set_configuration)(libusb_device_handle *dev, int configuration);
     int (*libusb_kernel_driver_active)(libusb_device_handle *dev, int interface_number);
     int (*libusb_detach_kernel_driver)(libusb_device_handle *dev, int interface_number);
-    int (*libusb_release_interface)(libusb_device_handle *dev, int interface_number);
-    int (*libusb_get_active_config_descriptor)(libusb_device *dev, struct libusb_config_descriptor **config);
-    libusb_device* (*libusb_get_device)(libusb_device_handle *dev);
-    int (*libusb_get_configuration)(libusb_device_handle *dev, int *config);
-    void (*libusb_free_config_descriptor)(struct libusb_config_descriptor *config);
-    int (*libusb_get_string_descriptor_ascii)(libusb_device_handle *dev, uint8_t desc_index, unsigned char *data, int  	length); 	 	
 };
 
 //extern struct libusb_func libusb_func;

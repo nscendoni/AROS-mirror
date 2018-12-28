@@ -1,6 +1,6 @@
 #
 #   Copyright © 1995-96, The AROS Development Team. All rights reserved.
-#   $Id$
+#   $Id: mmakefile 52311 2016-03-28 13:47:02Z NicJA $
 #
 #   Desc: Amiga bootloader -- makefile
 #   Lang: english

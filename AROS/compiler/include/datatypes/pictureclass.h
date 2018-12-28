@@ -2,8 +2,8 @@
 #define DATATYPES_PICTURECLASS_H
 
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2016, The AROS Development Team. All rights reserved.
+    $Id: pictureclass.h 51347 2016-01-18 23:03:15Z NicJA $
 
     Desc: Includes for pictureclass
     Lang: English
@@ -24,6 +24,13 @@
 
 #define PICTUREDTCLASS          "picture.datatype"
 
+#ifndef __packed
+#ifdef __GNUC__
+#define __packed __attribute__((__packed__))
+#else
+#define __packed
+#endif
+#endif
 
 struct BitMapHeader
 {
@@ -74,7 +81,7 @@ struct ColorRegister
 
 /* Interface modes */
 #define PMODE_V42 (0)	/* Mode used for backward compatibility */
-#define PMODE_V43 (1)	/* Use the new features */
+#define PMODE_V43 (1)	/* Use the new features*/
 
 
 #define mskNone                 0

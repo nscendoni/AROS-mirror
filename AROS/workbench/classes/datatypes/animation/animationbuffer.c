@@ -1,6 +1,6 @@
 /*
     Copyright © 2015-2016, The AROS Development	Team. All rights reserved.
-    $Id$
+    $Id: animationbuffer.c 52508 2016-04-02 00:04:13Z NicJA $
 */
 
 #ifndef DEBUG

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: modereqhooks.c 48109 2013-09-19 19:52:44Z mazze $
 
     File requester specific code.
 */

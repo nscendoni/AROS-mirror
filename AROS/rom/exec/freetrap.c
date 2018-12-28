@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freetrap.c 50481 2015-04-28 10:49:03Z schulz $
 
     Desc: Free a trap.
     Lang: english
@@ -45,15 +45,13 @@
     {
         /* No more atomic problem - i beleive THIS is atomic. - sonic */
         struct Task *me = GET_THIS_TASK;
-        if (me)
-        {
-            if (me->tc_Flags & TF_ETASK) {
-            struct ETask *et = me->tc_UnionETask.tc_ETask;
-            
-            et->et_TrapAlloc &= ~(1<<trapNum);
-        } else
-            me->tc_TrapAlloc &= ~(1<<trapNum);
-        }
+
+        if (me->tc_Flags & TF_ETASK) {
+	    struct ETask *et = me->tc_UnionETask.tc_ETask;
+	    
+	    et->et_TrapAlloc &= ~(1<<trapNum);
+	} else
+	    me->tc_TrapAlloc &= ~(1<<trapNum);
     }
 
     AROS_LIBFUNC_EXIT

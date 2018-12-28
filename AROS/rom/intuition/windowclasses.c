@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: windowclasses.c 48592 2013-12-19 22:17:46Z hkiel $
     
     Classes for window decor stuff, like dragbar, close etc.
 */

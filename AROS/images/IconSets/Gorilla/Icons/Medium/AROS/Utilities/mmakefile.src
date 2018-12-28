@@ -1,11 +1,11 @@
-# Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-# $Id$
+# Copyright © 2004-2013, The AROS Development Team. All rights reserved.
+# $Id: mmakefile.src 46752 2013-03-02 10:16:08Z mazze $
 
-include $(SRCDIR)/config/aros.cfg
+include $(TOP)/config/make.cfg
 
-BASEICONS := Clock Help Installer More MultiView
+ICONS := Clock Help Installer More MultiView
 
-#MM- iconset-Gorilla-wbench-icons-aros-clean : iconset-Gorilla-wbench-icons-aros-utilities-clean
-#MM- iconset-Gorilla-wbench-icons-aros : iconset-Gorilla-wbench-icons-aros-utilities
-%build_icons mmake=iconset-Gorilla-wbench-icons-aros-utilities icons=$(BASEICONS) \
+#MM- iconset-Gorilla-icons-aros-clean : iconset-Gorilla-icons-aros-utilities-clean
+#MM- iconset-Gorilla-icons-aros : iconset-Gorilla-icons-aros-utilities
+%build_icons mmake=iconset-Gorilla-icons-aros-utilities icons=$(ICONS) \
              dir=$(AROS_UTILITIES)

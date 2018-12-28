@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2006 by Michal Schulz
-    $Id$
+    $Id: ohcihub.c 53132 2016-12-29 10:32:06Z deadwood $
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Library General Public License as
@@ -262,7 +262,8 @@ BOOL METHOD(OHCI, Hidd_USBHub, SetPortFeature)
     return TRUE;
 }
 
-AROS_INTH1(OHCI_HubInterrupt, ohci_data_t *,ohci)
+/* ABI_V0 compatibility */
+AROS_SOFTINTH1(OHCI_HubInterrupt, ohci_data_t *,ohci)
 {
     AROS_INTFUNC_INIT
 

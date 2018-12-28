@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2007, The AROS Development Team. All rights reserved.
+    $Id: abortaslrequest.c 48109 2013-09-19 19:52:44Z mazze $
 
     Desc:
     Lang: english
@@ -9,8 +9,6 @@
 
 #include <proto/exec.h>
 #include "asl_intern.h"
-
-#include <string.h>
 
 /*****************************************************************************
 
@@ -66,8 +64,9 @@
             sig = AllocSignal(-1);
             if (sig == -1) sig = SIGB_SINGLE;
 
-            memset( &mp, 0, sizeof( mp ) );
             mp.mp_Node.ln_Type = NT_MSGPORT;
+            mp.mp_Node.ln_Pri  = 0;
+            mp.mp_Node.ln_Name = NULL;
             mp.mp_Flags        = PA_SIGNAL;
             mp.mp_SigTask      = FindTask(NULL);
             mp.mp_SigBit       = sig;

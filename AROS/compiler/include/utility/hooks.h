@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hooks.h 45130 2012-06-26 13:23:52Z jmcmullan $
 */
 
 #ifndef EXEC_TYPES_H

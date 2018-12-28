@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Lock.c 42753 2011-12-07 09:04:57Z neil $
 
     Desc: Lock - Set the write protect status of a device.
     Lang: english

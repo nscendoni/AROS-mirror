@@ -1,6 +1,6 @@
 /*
   Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-  $Id$
+  $Id: regina_init.c 45625 2012-08-20 03:19:57Z jmcmullan $
 
   Desc: Regina code for initialization during opening and closing of the library
 */

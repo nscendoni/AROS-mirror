@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rmdir.c 49162 2014-07-25 18:34:19Z deadwood $
 
     POSIX.1-2008 function rmdir().
 */

@@ -3,7 +3,7 @@
 
 /*
  * Copyright © 1995-2013, The AROS Development Team. All rights reserved.
- * $Id$
+ * $Id: __termios.h 48053 2013-09-08 21:20:12Z verhaegs $
  *
  * internal header file for POSIX.1-2008 termios.h support
  */

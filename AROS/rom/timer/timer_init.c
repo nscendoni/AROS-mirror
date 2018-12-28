@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: timer_init.c 45571 2012-08-16 06:17:16Z jmcmullan $
 
     Desc: Timer startup and device commands, reference code
     
@@ -22,7 +22,6 @@
 #include <hardware/intbits.h>
 
 #include <proto/exec.h>
-#include <proto/execlock.h>
 #include <proto/timer.h>
 
 #include <aros/symbolsets.h>
@@ -63,15 +62,6 @@ static AROS_INTH1(VBlankInt, struct TimerBase *, TimerBase)
 static int GM_UNIQUENAME(Init)(LIBBASETYPEPTR LIBBASE)
 {
     struct Interrupt *is;
-
-#if defined(__AROSEXEC_SMP__)
-    struct ExecLockBase *ExecLockBase;
-    if ((ExecLockBase = OpenResource("execlock.resource")) != NULL)
-    {
-        LIBBASE->tb_ExecLockBase = ExecLockBase;
-        LIBBASE->tb_ListLock = AllocLock();
-    }
-#endif
 
     /* If no frequency is set, assume 50Hz */
     if (SysBase->VBlankFrequency == 0)

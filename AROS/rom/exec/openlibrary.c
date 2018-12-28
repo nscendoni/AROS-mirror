@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: openlibrary.c 40688 2011-08-12 10:45:43Z sonic $
 
     Desc: Open a library.
     Lang: english
@@ -13,10 +13,7 @@
 #include <aros/libcall.h>
 #include <proto/exec.h>
 
-#include "exec_intern.h"
 #include "exec_debug.h"
-#include "exec_locks.h"
-
 
 /*****************************************************************************
 
@@ -64,12 +61,10 @@
     DRAMLIB("OpenLibrary(\"%s\", %ld)", libName, version);
 
     /* Arbitrate for the library list */
-    EXEC_LOCK_LIST_READ_AND_FORBID(&SysBase->LibList);
-    
+    Forbid();
+
     /* Look for the library in our list */
     library = (struct Library *) FindName (&SysBase->LibList, libName);
-
-    EXEC_UNLOCK_LIST(&SysBase->LibList);
 
     /* Something found ? */
     if(library!=NULL)

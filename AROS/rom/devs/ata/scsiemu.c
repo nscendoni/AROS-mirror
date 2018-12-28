@@ -1,6 +1,6 @@
 /*
     Copyright © 2011-2012, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: scsiemu.c 48396 2013-11-08 07:07:27Z neil $
 
     Desc: Simple HD_SCSICMD emulator.
     Lang: English

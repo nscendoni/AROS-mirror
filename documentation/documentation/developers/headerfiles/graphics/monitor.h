@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: monitor.h 33636 2010-06-17 17:14:53Z mazze $
 
     Desc: Monitor definitions
     Lang: english

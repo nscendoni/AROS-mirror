@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: detach.c 30792 2009-03-07 22:40:04Z neil $
     
     Desc: support function for the detach.o startup file. 
           Probably this is not the right place where to keep it,

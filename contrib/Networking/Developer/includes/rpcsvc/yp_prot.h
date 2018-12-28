@@ -2,7 +2,7 @@
 #define _RPCSVC_YP_PROT_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: yp_prot.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: yp_prot.h,v 1.4 2000/03/15 03:56:48 todd Exp $	*/

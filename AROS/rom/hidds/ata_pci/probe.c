@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: probe.c 52028 2016-03-17 04:36:20Z jmcmullan $
 
     Desc: Hardware detection routine
     Lang: English
@@ -486,7 +486,7 @@ static int ata_pci_Scan(struct ataBase *base)
                     {
                         D(bug("[PCI-ATA] Disabling all ATA devices\n"));
 #ifdef SUPPORT_LEGACY
-                        scanlegacy = FALSE;
+                        scanlegacy =
 #endif
                         scanpci = FALSE;
 

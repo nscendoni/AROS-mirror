@@ -33,7 +33,7 @@
  * SUCH DAMAGE.
  *
  *	@(#)tcp_timer.c	8.1 (Berkeley) 6/10/93
- * $Id$
+ * $Id: tcp_timer.c 39339 2011-06-17 05:53:18Z jmcmullan $
  */
 
 #ifndef TUBA_INCLUDE

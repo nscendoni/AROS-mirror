@@ -1,7 +1,7 @@
 // http://upload.wikimedia.org/wikipedia/commons/f/f0/Romanian-keyboard-layout.png
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pc105_ro.c 51236 2015-12-19 16:58:58Z polluks $
 
     Desc: Romanian PC105 Keymap
     Lang: English

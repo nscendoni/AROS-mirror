@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ip_ether.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ip_ether.h,v 1.3 2000/01/21 03:40:31 angelos Exp $ */

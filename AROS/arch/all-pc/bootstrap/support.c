@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2006-2011 The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support.c 41961 2011-10-21 19:53:35Z sonic $
     
     Desc: Miscellaneous support functions.
     Lang: English

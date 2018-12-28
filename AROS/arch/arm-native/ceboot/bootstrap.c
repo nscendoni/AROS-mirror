@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bootstrap.c 43206 2011-12-23 12:35:15Z sonic $
 
     Desc: Native AROS softkicker for Windows CE
     Lang: english

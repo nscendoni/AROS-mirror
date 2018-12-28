@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: animationclassext.h 51948 2016-03-14 19:21:58Z neil $
 
     Desc: v41 extensions for animationclass
     Lang: English

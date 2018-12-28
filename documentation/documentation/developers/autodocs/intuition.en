@@ -1237,8 +1237,8 @@ Function
 
      Deletes a BOOPSI object. All memory associated with the object
      is freed. The object must have been created with NewObject().
-     Some objects contain other objects which might be freed as well
-     when this function is used on the "parent", while others might
+     Some object contain other object which might be freed as well
+     when this function is used on the "parent" while others might
      also contain children but won't free them. Read the documentation
      of the class carefully to find out how it behaves.
 
@@ -1262,7 +1262,7 @@ Notes
 ~~~~~
 ::
 
-     This functions sends OM_DISPOSE to the object.
+     This functions sends OM_DISPOSE to the oejct.
 
 
 
@@ -3589,9 +3589,9 @@ Function
 ::
 
      Use this function to create BOOPSI objects (BOOPSI stands for
-     "Basic Object Oriented Programming System for Intuition").
+     "Basic Object Oriented Programming System for Intuition).
 
-     You may specify a class either by its name (if it's a public class)
+     You may specify a class either by it's name (if it's a public class)
      or by a pointer to its definition (if it's a private class). If
      classPtr is NULL, classID is used.
 
@@ -3604,8 +3604,8 @@ Inputs
          happen to have a pointer to it)
      classID - Name of a public class
      tagList - Initial attributes. Read the documentation of the class
-         carefully to find out which attributes must or can be specified
-         here.
+         carefully to find out which attributes must be specified
+         here and which can.
 
 
 Result
@@ -3613,14 +3613,14 @@ Result
 ::
 
      A BOOPSI object which can be manipulated with general functions and
-     which must be disposed of with DisposeObject() later.
+     which must be disposed with DisposeObject() later.
 
 
 Notes
 ~~~~~
 ::
 
-     This function sends OM_NEW to the dispatcher of the class.
+     This functions send OM_NEW to the dispatcher of the class.
 
 
 

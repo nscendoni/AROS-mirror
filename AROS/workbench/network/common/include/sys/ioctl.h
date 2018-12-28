@@ -3,7 +3,7 @@
 
 /*
     Copyright (C) 2005-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ioctl.h 52774 2016-07-07 09:32:40Z o1i $
 */
 
 /*-

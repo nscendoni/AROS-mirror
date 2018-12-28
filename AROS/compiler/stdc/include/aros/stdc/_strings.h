@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: _strings.h 48640 2013-12-27 13:28:17Z neil $
 
     Desc: POSIX.1-2008 header file <strings.h>, with some extensions
           File is named _strings.h and included from strings.h.
@@ -31,7 +31,6 @@ void *memset (void * dest, int c, size_t n);
 char *strchr (const char * s, int c);
 char *strrchr (const char * s, int c);
 
-#ifndef _STDC_NOINLINE_DEPRECATED
 /* Deprecated, removed in POSIX.1-2008 */
 static __inline__ int bcmp(const void * s1, const void * s2, size_t n)
 {
@@ -57,7 +56,6 @@ static __inline__ char *rindex(const char * s, int c)
 {
     return strrchr(s, c);
 }
-#endif /* !_STDC_NOINLINE_DEPRECATED */
 
 /* BSD */
 char *strcasestr(const char * str, const char * search);

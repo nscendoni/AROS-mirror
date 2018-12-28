@@ -1,6 +1,6 @@
 /*
-    Copyright © 2007-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2007-2012, The AROS Development Team. All rights reserved.
+    $Id: vesa.c 45753 2012-09-08 14:55:47Z neil $
 
     Desc: Real-mode code to set VBE mode.
     Lang: english
@@ -216,20 +216,10 @@ short findMode(int x, int y, int d, int vfreq, BOOL prioritise_depth)
 
         for (i=0; modes[i] != 0xffff; ++i)
         {
-	    /* Check we can get info on the mode */
-            if (getModeInfo(modes[i])!= 0x4f)
-		continue;
-
-	    /* Check for our manatory attributes */
-            if ((modeinfo.mode_attributes & mode_attrs) != mode_attrs)
-		continue;
-
-	    /* We only support direct colour and paletted modes */
+            if (getModeInfo(modes[i])!= 0x4f) continue;
+            if ((modeinfo.mode_attributes & mode_attrs) != mode_attrs) continue;
             if ((modeinfo.memory_model != 6) && (modeinfo.memory_model != 4))
 		continue;
-
-	    /* Don't use a paletted mode that isn't VGA compatible: the VESA
-	     * driver uses VGA palette registers */
 	    if ((modeinfo.memory_model == 4) && (modeinfo.mode_attributes & 0x20))
 		continue;
 

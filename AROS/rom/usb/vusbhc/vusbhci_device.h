@@ -1,6 +1,6 @@
 /*
-    Copyright © 2015-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2015-2016, The AROS Development Team. All rights reserved.
+    $Id: vusbhci_device.h 52922 2016-08-31 08:09:52Z dizzyofcrn $
 
     Desc:
     Lang: English
@@ -11,8 +11,6 @@
 
 #include <aros/debug.h>
 #include <aros/macros.h>
-
-#include <exec/semaphores.h>
 
 #include <proto/exec.h>
 #include <proto/arossupport.h>
@@ -35,24 +33,6 @@ struct VUSBHCIUnit {
     ULONG                        state;
     BOOL                         allocated;
 
-    struct timerequest          *tr;
-    struct MsgPort              *mp;
-
-    struct IOUsbHWReq           *ioreq;
-
-    struct Task                 *handler_task;
-    ULONG                        handler_task_sig_run;
-
-    BOOL                         ctrlxfer_pending;
-    BOOL                         intrxfer_pending;
-    BOOL                         bulkxfer_pending;
-    BOOL                         isocxfer_pending;
-
-    struct SignalSemaphore       ctrlxfer_queue_lock;
-    struct SignalSemaphore       intrxfer_queue_lock;
-    struct SignalSemaphore       bulkxfer_queue_lock;
-    struct SignalSemaphore       isocxfer_queue_lock;
-
     struct List                  ctrlxfer_queue;
     struct List                  intrxfer_queue;
     struct List                  bulkxfer_queue;
@@ -60,7 +40,6 @@ struct VUSBHCIUnit {
 
     struct VUSBHCIRootHub {
 
-        struct SignalSemaphore   intrxfer_queue_lock;
         struct List              intrxfer_queue; /* Status Change endpoint */
 
         UWORD                    addr;
@@ -73,10 +52,7 @@ struct VUSBHCIUnit {
             struct UsbStdEPDesc  epdesc;
         }                        config;
 
-        union {
-            struct UsbHubDesc        hubdesc;
-            struct UsbSSHubDesc    sshubdesc;
-        };
+        struct UsbHubDesc        hubdesc;
 
         struct UsbHubStatus      hubstatus;
 
@@ -88,6 +64,9 @@ struct VUSBHCIUnit {
 
 struct VUSBHCIBase {
     struct Device                device;
+
+    struct Task                 *handler_task;
+    BOOL                         handler_task_run;
 
     //struct Library              *HostLibBase;
 

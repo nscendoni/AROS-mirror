@@ -1,12 +1,10 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: allocsignal.c 50729 2015-05-20 12:43:48Z NicJA $
 
     Desc: Allocate a signal
     Lang: english
 */
-
-#define DEBUG 0
 
 #include <exec/execbase.h>
 #include <exec/tasks.h>
@@ -16,7 +14,6 @@
 #include "exec_util.h"
 #if defined(__AROSEXEC_SMP__)
 #include "etask.h"
-#include "exec_locks.h"
 #endif
 
 /*****************************************************************************
@@ -69,14 +66,12 @@
     AROS_LIBFUNC_EXIT
 } /* AllocSignal() */
 
-LONG AllocTaskSignal(struct Task *thisTask, LONG signalNum, struct ExecBase *SysBase)
+LONG AllocTaskSignal(struct Task *ThisTask, LONG signalNum, struct ExecBase *SysBase)
 {
     ULONG mask;
     ULONG mask1;
 
-    D(bug("[Exec] %s()\n", __func__));
-
-    mask = thisTask->tc_SigAlloc;
+    mask = ThisTask->tc_SigAlloc;
 
     /* Will any signal do? */
     if(signalNum < 0)
@@ -108,36 +103,37 @@ LONG AllocTaskSignal(struct Task *thisTask, LONG signalNum, struct ExecBase *Sys
 	mask1 = 1L << signalNum;
 
 	/* If signal bit is already allocated, return. */
-	if(thisTask->tc_SigAlloc & mask1)
+	if(ThisTask->tc_SigAlloc & mask1)
 	    return -1;
     }
 
     /*
-     *	Exec shouldn't need to protect the changing of the task signal masks
+     *	I shouldn't need to disable around changing the signal masks
      *	because the only thing allowed to change the mask of allocated,
-     *	excepting and waiting signals is the task itself. 
-     *  Received signals do need protected because they can be modified
-     *  by interrupts, so atomicity cannot be relied upon.
+     *	excepting and waiting signals is the task itself. On the other
+     *	hand, I need to use Disable around the received signals because it
+     *	can be modified by interrupts, and I cannot rely upon the below
+     *	being atomic.
      */
 
-    thisTask->tc_SigAlloc  |=  mask1;
-    thisTask->tc_SigExcept &= ~mask1;
-    thisTask->tc_SigWait   &= ~mask1;
+    ThisTask->tc_SigAlloc  |=  mask1;
+    ThisTask->tc_SigExcept &= ~mask1;
+    ThisTask->tc_SigWait   &= ~mask1;
 
-    Disable();
 #if defined(__AROSEXEC_SMP__)
-    if (thisTask->tc_UnionETask.tc_ETask)
+    if (ThisTask->tc_UnionETask.tc_ETask)
     {
-        EXEC_LOCK_WRITE(&IntETask(thisTask->tc_UnionETask.tc_ETask)->iet_TaskLock);
+        EXEC_SPINLOCK_LOCK(&IntETask(ThisTask->tc_UnionETask.tc_ETask)->iet_TaskLock, SPINLOCK_MODE_WRITE);
     }
 #endif
+    Disable();
 
-    thisTask->tc_SigRecvd  &= ~mask1;
+    ThisTask->tc_SigRecvd  &= ~mask1;
 
 #if defined(__AROSEXEC_SMP__)
-    if (thisTask->tc_UnionETask.tc_ETask)
+    if (ThisTask->tc_UnionETask.tc_ETask)
     {
-        EXEC_UNLOCK(&IntETask(thisTask->tc_UnionETask.tc_ETask)->iet_TaskLock);
+        EXEC_SPINLOCK_UNLOCK(&IntETask(ThisTask->tc_UnionETask.tc_ETask)->iet_TaskLock);
     }
 #endif
     Enable();

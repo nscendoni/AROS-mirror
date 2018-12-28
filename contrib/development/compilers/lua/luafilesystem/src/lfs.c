@@ -16,7 +16,7 @@
 **   lfs.touch (filepath [, atime [, mtime]])
 **   lfs.unlock (fh)
 **
-** $Id$
+** $Id: lfs.c 44513 2012-04-04 12:34:21Z mazze $
 */
 
 #ifndef _WIN32

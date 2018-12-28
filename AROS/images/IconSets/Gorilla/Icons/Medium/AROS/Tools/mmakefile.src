@@ -1,19 +1,13 @@
-# Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-# $Id$
+# Copyright © 2004-2016, The AROS Development Team. All rights reserved.
+# $Id: mmakefile.src 52342 2016-03-29 10:15:57Z mazze $
 
-include $(SRCDIR)/config/aros.cfg
+include $(TOP)/config/make.cfg
 
-BASEICONS := Calculator HDToolBox InstallAROS Editor Commodities \
-         ShowConfig KeyShow InitPrinter PrintFiles GraphicDump
-ADDITIONALICONS := WiMP ScreenGrabber SysExplorer BoingIconBar
+ICONS := Calculator HDToolBox PCITool InstallAROS Editor Commodities Debug WiMP \
+         ScreenGrabber ShowConfig SysExplorer KeyShow InitPrinter PrintFiles GraphicDump \
+         BoingIconBar
 
-#MM- iconset-Gorilla-wbench-icons-aros-clean : iconset-Gorilla-wbench-icons-aros-tools-clean
-#MM- iconset-Gorilla-additional-icons-aros-clean : iconset-Gorilla-additional-icons-aros-tools-clean
-#MM- iconset-Gorilla-wbench-icons-aros : iconset-Gorilla-wbench-icons-aros-tools
-#MM- iconset-Gorilla-additional-icons-aros : iconset-Gorilla-additional-icons-aros-tools
-
-%build_icons mmake=iconset-Gorilla-wbench-icons-aros-tools icons=$(BASEICONS) \
-             dir=$(AROS_TOOLS)
-
-%build_icons mmake=iconset-Gorilla-additional-icons-aros-tools icons=$(ADDITIONALICONS) \
+#MM- iconset-Gorilla-icons-aros-clean : iconset-Gorilla-icons-aros-tools-clean
+#MM- iconset-Gorilla-icons-aros : iconset-Gorilla-icons-aros-tools
+%build_icons mmake=iconset-Gorilla-icons-aros-tools icons=$(ICONS) \
              dir=$(AROS_TOOLS)

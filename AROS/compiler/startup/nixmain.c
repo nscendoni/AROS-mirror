@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: nixmain.c 48048 2013-09-08 21:19:29Z verhaegs $
 
     Desc: special main function for code which has to use special *nix features
     Lang: english

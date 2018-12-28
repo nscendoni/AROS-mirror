@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2003-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: partition.h 45863 2012-10-04 19:03:14Z sonic $
 */
 
 #include <devices/trackdisk.h>

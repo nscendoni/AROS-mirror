@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: unarcgroup_class.h 44519 2012-04-04 18:45:44Z mazze $
 */
 
 #include <exec/types.h>

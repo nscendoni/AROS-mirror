@@ -1,7 +1,7 @@
 #ifndef XADMASTER_MXM_SIMPLEARC_C
 #define XADMASTER_MXM_SIMPLEARC_C
 
-/*  $Id$
+/*  $Id: MXM-SimpleArc.c 36659 2011-01-18 13:26:51Z neil $
     MXM-Simple Archive SFX file archiver client
 
     XAD library system for archive handling

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: copymem.c 48982 2014-05-03 18:18:36Z deadwood $
 
     Desc: Copy memory.
     Lang: english

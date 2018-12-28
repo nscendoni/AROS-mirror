@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: aboutmui.c 52188 2016-03-22 21:45:45Z mazze $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: processor_arch_intern.h 53107 2016-12-27 13:16:31Z deadwood $
 */
 
 #ifndef PROCESSOR_ARCH_INTERN_H

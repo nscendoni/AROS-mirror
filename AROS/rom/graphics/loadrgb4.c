@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: loadrgb4.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc:
     Lang: english
@@ -18,7 +18,7 @@
 /*  SYNOPSIS */
 	AROS_LHA(struct ViewPort *, vp, A0),
 	AROS_LHA(UWORD           *, colors, A1),
-	AROS_LHA(WORD             , count, D0),
+	AROS_LHA(LONG             , count, D0),
 
 /*  LOCATION */
 	struct GfxBase *, GfxBase, 32, Graphics)

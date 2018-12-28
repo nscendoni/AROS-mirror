@@ -1,6 +1,6 @@
 /*
-    Copyright © 2012-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2012, The AROS Development Team. All rights reserved.
+    $Id: locale.c 52443 2016-03-30 15:07:15Z mazze $
 */
 
 #include <exec/types.h>
@@ -9,7 +9,7 @@
 #define CATCOMP_ARRAY
 #include "strings.h"
 
-#define CATALOG_NAME     "System/Prefs/BoingIconBar.catalog"
+#define CATALOG_NAME     "System/Prefs/BIBPrefs.catalog"
 #define CATALOG_VERSION  2
 
 /*** Variables **************************************************************/

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: core.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Core of AROS.
     Lang: english

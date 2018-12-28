@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: handler.c 45948 2012-10-24 19:59:42Z neil $
  */
 
 /*
@@ -346,12 +346,10 @@ D(bug("%s: S2CmdConfigInterface()\n", unit->rhineu_name));
 
 static BOOL CmdBroadcast(LIBBASETYPEPTR LIBBASE, struct IOSana2Req *request)
 {
-    UWORD i;
-
     /* Fill in the broadcast address as destination */
 
-    for(i = 0; i < ETH_ADDRESSSIZE; i++)
-        request->ios2_DstAddr[i] = 0xff;
+    *((ULONG *)request->ios2_DstAddr) = 0xffffffff;
+    *((UWORD *)(request->ios2_DstAddr + 4)) = 0xffff;
 
     /* Queue the write as normal */
 

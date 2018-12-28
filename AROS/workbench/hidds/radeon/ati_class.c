@@ -1,6 +1,6 @@
 /*
-    Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright Â© 2004-2015, The AROS Development Team. All rights reserved.
+    $Id: ati_class.c 52023 2016-03-17 04:35:11Z jmcmullan $
 */
 
 #include <utility/tagitem.h>
@@ -21,13 +21,11 @@
 
 #define sd ((struct ati_staticdata*)SD(cl))
 
-#undef HiddAttrBase
 #undef HiddPCIDeviceAttrBase
 #undef HiddGfxAttrBase
 #undef HiddPixFmtAttrBase
 #undef HiddSyncAttrBase
 #undef HiddBitMapAttrBase
-#define HiddAttrBase    (sd->hiddAttrBase)
 #define HiddPCIDeviceAttrBase   (sd->pciAttrBase)
 #define HiddATIBitMapAttrBase   (sd->atiBitMapAttrBase)
 #define HiddBitMapAttrBase  (sd->bitMapAttrBase)
@@ -168,7 +166,7 @@ OOP_Object *METHOD(ATI, Hidd_Gfx, CreateObject)
                 - aHidd_BitMap_ModeID:  a modeid. create a nondisplayable
                     bitmap with the size  and pixelformat of a gfxmode.
                 - aHidd_BitMap_StdPixFmt: a standard pixelformat as described in
-                    hidd/gfx.h
+                    hidd/graphics.h
                 - aHidd_BitMap_Friend: if this is supplied and none of the two above
                     are supplied, then the pixel format of the created bitmap
                     will be the same as the one of the friend bitmap.
@@ -616,9 +614,6 @@ OOP_Object *METHOD(ATI, Root, New)
 
     struct TagItem mytags[] = {
         { aHidd_Gfx_ModeTags,   (IPTR)modetags  },
-        { aHidd_Name            , (IPTR)"ATI"     },
-        { aHidd_HardwareName    , (IPTR)"ATI/AMD Gfx Adaptor"   },
-        { aHidd_ProducerName    , (IPTR)"Advanced Micro Devices, Inc."  },
         { TAG_MORE, (IPTR)msg->attrList }
     };
 

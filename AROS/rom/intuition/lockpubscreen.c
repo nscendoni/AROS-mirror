@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: lockpubscreen.c 50462 2015-04-25 19:56:48Z schulz $
 */
 
 #include <string.h>

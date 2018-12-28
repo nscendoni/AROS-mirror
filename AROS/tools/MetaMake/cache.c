@@ -138,22 +138,29 @@ printtargetlist (struct List * l)
 
 
 static int progcount;
+static int token;
+static char tokens[]="|/-\\";
 
 static void
 progress_reset (FILE * fh)
 {
     progcount = 0;
-    fprintf(fh, "\n");
+    token = 0;
+    fprintf (fh, "\r|\r");
+    fflush (fh);
 }
 
 static void
 progress (FILE * fh)
 {
     progcount++;
-    if (progcount == 20)
+    if (progcount == 13)
     {
 	progcount = 0;
-	fprintf(fh, ".");
+	token++;
+	if (token == 4)
+	    token = 0;
+	fprintf (fh, "%c\r", tokens[token]);
 	fflush (fh);
     }
 }
@@ -598,7 +605,6 @@ activatecache (struct Project *prj)
     progress_reset (stdout);
     printf ("[MMAKE] Scanning dirs...\n");
     reread = updatemflist (cache, cache->topdir, &regeneratefiles);
-    progress_reset (stdout);
 
     debug(printf("MMAKE:cache.c->activatecache: Updated MF list.\n"));
 
@@ -671,7 +677,6 @@ activatecache (struct Project *prj)
 
     writecache (cache);
 
-    progress_reset (stdout);
     printf ("[MMAKE] Collecting targets...\n");
     buildtargetlist (cache, cache->topdir);
     if (debug)

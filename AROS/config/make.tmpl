@@ -22,17 +22,17 @@ endif
 #------------------------------------------------------------------------------
 # Compile the file %(from) to %(to) with %(cmd). Write any errors to %(err)
 # and use the options in %(opt). Use %(iquote) and %(iquote_end) for supplying -iquote or -I- flags
-%define compile_q cmd="$(TARGET_CC) $(TARGET_SYSROOT)" opt="$(CFLAGS) $(CPPFLAGS)" from=$< to=$@ iquote=$(CFLAGS_IQUOTE) iquote_end=$(CFLAGS_IQUOTE_END)
+%define compile_q cmd="$(TARGET_CC) $(TARGET_SYSROOT)" opt="$(TARGET_CFLAGS) $(CFLAGS)" from=$< to=$@ iquote=$(CFLAGS_IQUOTE) iquote_end=$(CFLAGS_IQUOTE_END)
 	@$(ECHO) "Compiling  $(if $(filter /%,%(from)),$(if $(filter $(SRCDIR)/%,$(abspath %(from))),$(patsubst $(SRCDIR)/%,%,$(abspath %(from))),$(patsubst $(TOP)/%,%,$(abspath %(from)))),$(patsubst $(SRCDIR)/%,%,$(abspath $(SRCDIR)/$(CURDIR)/%(from))))"
-	@$(IF) %(cmd) %(iquote) $(dir %(from)) %(iquote) $(SRCDIR)/$(CURDIR) %(iquote) . %(iquote_end) %(opt) -D__SRCFILENAME__="\"$(subst $(TOP)/,,$(subst $(SRCDIR)/,,$(abspath %(from))))"\" -c %(from) -o %(to) > $(GENDIR)/cerrors 2>&1 ; then \
+	@$(IF) %(cmd) %(iquote) $(dir %(from)) %(iquote) $(SRCDIR)/$(CURDIR) %(iquote) . %(iquote_end) %(opt) -c %(from) -o %(to) > $(GENDIR)/cerrors 2>&1 ; then \
 		$(IF) $(TEST) -s $(GENDIR)/cerrors ; then \
-			$(ECHO) "%(from): %(cmd) %(iquote) $(dir %(from)) %(iquote) $(SRCDIR)/$(CURDIR) %(iquote) . %(iquote_end) %(opt) -D__SRCFILENAME__=\"$(subst $(TOP)/,,$(subst $(SRCDIR)/,,$(abspath %(from))))\" -c %(from) -o %(to)" >> $(GENDIR)/errors ; \
+			$(ECHO) "%(from): %(cmd) %(iquote) $(dir %(from)) %(iquote) $(SRCDIR)/$(CURDIR) %(iquote) . %(iquote_end) %(opt) -c %(from) -o %(to)" >> $(GENDIR)/errors ; \
 			tee < $(GENDIR)/cerrors -a $(GENDIR)/errors ; \
 		else \
 			$(NOP) ; \
 		fi ; \
 	else \
-		$(ECHO) "Compile failed: %(cmd) %(iquote) $(dir %(from)) %(iquote) $(SRCDIR)/$(CURDIR) %(iquote) . %(iquote_end) %(opt) -D__SRCFILENAME__=\"$(subst $(TOP)/,,$(subst $(SRCDIR)/,,$(abspath %(from))))\" -c %(from) -o %(to)" 1>&2 ; \
+		$(ECHO) "Compile failed: %(cmd) %(iquote) $(dir %(from)) %(iquote) $(SRCDIR)/$(CURDIR) %(iquote) . %(iquote_end) %(opt) -c %(from) -o %(to)" 1>&2 ; \
 		tee < $(GENDIR)/cerrors -a $(GENDIR)/errors 1>&2 ; \
 		exit 1 ; \
 	fi
@@ -70,7 +70,7 @@ endif
 		$(IF) $(TEST) -s $(GENDIR)/cerrors ; then \
 				$(ECHO) "$(LINKTARGET): %(cmd) %(from) -o $(LINKTARGET) %(opt) %(libs)" >> $(GENDIR)/errors ; \
 				$(CAT) $(GENDIR)/cerrors >> $(GENDIR)/errors ; \
-		else \
+	   	else \
 			$(NOP) ; \
 		fi ; \
 		$(CP) $(LINKTMPFILE) $(LINKTARGET) ; \
@@ -78,11 +78,8 @@ endif
 		$(ECHO) "Link failed: %(cmd) %(from) -o $(LINKTARGET) %(opt) %(libs)" 1>&2 ; \
 		tee < $(GENDIR)/cerrors -a $(GENDIR)/errors 1>&2 ; \
 		exit 1 ; \
-	fi
-	@$(IF) [ "$(DEBUG)" = "yes" ]; then \
-		%(strip) $(LINKTARGET) --only-keep-debug -o $(LINKTARGET).dbg; \
-	fi
-	@%(strip) $(LINKTARGET)
+	fi; \
+	%(strip) $(LINKTARGET)
 %end
 #------------------------------------------------------------------------------
 
@@ -104,10 +101,8 @@ endif
 		cat %(objdir)/%(err); \
 		exit 1; \
 	fi
-	@$(IF) $(TEST) ! -s %(objdir)/%(err) ; then $(RM) %(objdir)/%(err) ; fi
-	@$(IF) [ "$(DEBUG)" = "yes" ]; then \
-		$(STRIP) $@ --only-keep-debug -o $@.dbg; \
-	fi
+
+	@if $(TEST) ! -s %(objdir)/%(err) ; then $(RM) %(objdir)/%(err) ; fi
 	@$(STRIP) $@
 %end
 #------------------------------------------------------------------------------
@@ -125,7 +120,7 @@ endif
 
 #------------------------------------------------------------------------------
 # Create the dependency file %(to) for %(from)
-%define mkdepend_q flags="$(CFLAGS) $(CPPFLAGS)" from=$< to=$@ cc="$(AROS_CC) $(TARGET_SYSROOT)"
+%define mkdepend_q flags=$(CFLAGS) from=$< to=$@ cc="$(AROS_CC) $(TARGET_SYSROOT)"
 	%mkdir_q dir="$(dir %(to))"
 	@$(ECHO) "Makedepend $(if $(filter /%,%(from)),$(if $(filter $(SRCDIR)/%,$(abspath %(from))),$(patsubst $(SRCDIR)/%,%,$(abspath %(from))),$(patsubst $(TOP)/%,%,$(abspath %(from)))),$(patsubst $(SRCDIR)/%,%,$(abspath $(SRCDIR)/$(CURDIR)/%(from))))..."
 	@AROS_CC="%(cc)" $(MKDEPEND) %(flags) -I$(TOP)/$(CURDIR) -I$(SRCDIR)/$(CURDIR) %(from) -o %(to)
@@ -145,7 +140,7 @@ endif
 # Create several directories without any output
 %define mkdirs_q dirs=/M
 	@$(FOR) dir in %(dirs) ; do \
-		$(IF) $(TEST) ! -d $$dir ; then $(MKDIR) $$dir ; else $(NOP) ; fi ; \
+	    $(IF) $(TEST) ! -d $$dir ; then $(MKDIR) $$dir ; else $(NOP) ; fi ; \
 	done
 %end
 #------------------------------------------------------------------------------
@@ -284,7 +279,7 @@ GLOB_MKDIRS += %(dirs)
 #   the same value as cflags will be used
 # - targetdir: the directory to put the .o file and the .d file. By default
 #   it is put in the same directory as the .c file
-%define rule_compile basename=/A cflags=$(CFLAGS) cppflags=$(CPPFLAGS) dflags= targetdir= compiler=target
+%define rule_compile basename=/A cflags=$(CFLAGS) dflags= targetdir= compiler=target
 
 BD_NIXFLAG ?= -nix
 
@@ -295,12 +290,12 @@ else
 endif
 
 # Adjust compiler flags to suit C
-TMP_CFLAGS := %(cflags) %(cppflags)
+TMP_CFLAGS := %(cflags)
 TMP_CFLAGS := $(subst -fpermissive,, $(TMP_CFLAGS))
 ifeq (%(dflags),)
-  TMP_DFLAGS := %(cflags) %(cppflags)
+  TMP_DFLAGS := %(cflags)
 else
-  TMP_DFLAGS := %(dflags) %(cppflags)
+  TMP_DFLAGS := %(dflags)
 endif
  
 ifeq ($(findstring %(compiler),host kernel target),)
@@ -311,8 +306,8 @@ BD_LINK ?= $(TARGET_CC) $(TARGET_SYSROOT) $(TARGET_LDFLAGS)
 BD_STRIP ?= $(TARGET_STRIP)
 $(TMP_TARGETBASE).o : TMP_CMD:=$(TARGET_CC) $(TARGET_SYSROOT)
 $(TMP_TARGETBASE).d : TMP_CMD:=$(TARGET_CC) $(TARGET_SYSROOT)
-$(TMP_TARGETBASE).o : TMP_CFLAGS:=$(TMP_CFLAGS) $(SAFETY_CFLAGS)
-$(TMP_TARGETBASE).d : TMP_DFLAGS:=$(TMP_DFLAGS)
+$(TMP_TARGETBASE).o : TMP_CFLAGS:=$(TARGET_CFLAGS) $(TMP_CFLAGS)
+$(TMP_TARGETBASE).d : TMP_DFLAGS:=$(TARGET_CFLAGS) $(TMP_DFLAGS)
 $(TMP_TARGETBASE).o : TMP_IQUOTE:=$(CFLAGS_IQUOTE)
 $(TMP_TARGETBASE).d : TMP_IQUOTE:=$(CFLAGS_IQUOTE)
 $(TMP_TARGETBASE).o : TMP_IQUOTE_END:=$(CFLAGS_IQUOTE_END)
@@ -368,7 +363,7 @@ $(TMP_TARGETBASE).d : %(basename).c
 #   the same value as cflags will be used
 # - targetdir: the directory to put the .o file and the .d file. By default
 #   it is put in the same directory as the .c file
-%define rule_compile_cxx basename=/A cxxflags=$(CXXFLAGS) cppflags=$(CPPFLAGS) dxxflags= targetdir= compiler=target
+%define rule_compile_cxx basename=/A cxxflags=$(CXXFLAGS) dxxflags= targetdir= compiler=target
 
 ifneq (%(basename),)
 BD_NIXFLAG ?= -nix
@@ -379,11 +374,11 @@ else
 endif
 
 # Adjust compiler flags to suit C++
-TMP_CXXFLAGS := %(cxxflags) %(cppflags)
+TMP_CXXFLAGS := %(cxxflags)
 ifeq (%(dxxflags),)
-  TMP_DXXFLAGS := %(cxxflags) %(cppflags)
+  TMP_DXXFLAGS := %(cxxflags)
 else
-  TMP_DXXFLAGS := %(dxxflags) %(cppflags)
+  TMP_DXXFLAGS := %(dxxflags)
 endif
 
 ifeq ($(findstring %(compiler),host kernel target),)
@@ -394,8 +389,8 @@ BD_LINK ?= $(AROS_CXX) $(TARGET_SYSROOT) $(TARGET_LDFLAGS)
 BD_STRIP ?= $(TARGET_STRIP)
 $(TMP_TARGETBASE).o : TMP_CMD:=$(AROS_CXX) $(TARGET_SYSROOT)
 $(TMP_TARGETBASE).d : TMP_CMD:=$(AROS_CXX) $(TARGET_SYSROOT)
-$(TMP_TARGETBASE).o : TMP_CXXFLAGS:=$(TMP_CXXFLAGS) $(SAFETY_CFLAGS)
-$(TMP_TARGETBASE).d : TMP_DXXFLAGS:=$(TMP_DXXFLAGS)
+$(TMP_TARGETBASE).o : TMP_CXXFLAGS:=$(TARGET_CXXFLAGS) $(TMP_CXXFLAGS)
+$(TMP_TARGETBASE).d : TMP_DXXFLAGS:=$(TARGET_CXXFLAGS) $(TMP_DXXFLAGS)
 $(TMP_TARGETBASE).o : TMP_IQUOTE:=$(CFLAGS_IQUOTE)
 $(TMP_TARGETBASE).d : TMP_IQUOTE:=$(CFLAGS_IQUOTE)
 $(TMP_TARGETBASE).o : TMP_IQUOTE_END:=$(CFLAGS_IQUOTE_END)
@@ -406,7 +401,7 @@ BD_LINK ?= $(HOST_CXX) $(HOST_LDFLAGS)
 BD_STRIP ?= $(HOST_STRIP)
 $(TMP_TARGETBASE).o : TMP_CMD:=$(HOST_CXX)
 $(TMP_TARGETBASE).d : TMP_CMD:=$(HOST_CXX)
-$(TMP_TARGETBASE).o : TMP_CXXFLAGS:=$(HOST_CXXFLAGS) $(TMP_CXXFLAGS) 
+$(TMP_TARGETBASE).o : TMP_CXXFLAGS:=$(HOST_CXXFLAGS) $(TMP_CXXFLAGS)
 $(TMP_TARGETBASE).d : TMP_DXXFLAGS:=$(HOST_CXXFLAGS) $(TMP_DXXFLAGS)
 $(TMP_TARGETBASE).o : TMP_IQUOTE:=$(HOST_IQUOTE)
 $(TMP_TARGETBASE).d : TMP_IQUOTE:=$(HOST_IQUOTE)
@@ -455,7 +450,7 @@ endif
 #   the same value as cflags will be used
 # - targetdir: the directory to put the .o file and the .d file. By default
 #   it is put in the same directory as the .m file
-%define rule_compile_objc basename=/A cflags=$(CFLAGS) cppflags=$(CPPFLAGS) dflags= targetdir= compiler=target
+%define rule_compile_objc basename=/A cflags=$(CFLAGS) dflags= targetdir= compiler=target
 
 ifneq (%(basename),)
 BD_NIXFLAG ?= -nix
@@ -466,13 +461,13 @@ else
 endif
 
 # Adjust compiler flags to suit ObjC
-TMP_OBJCFLAGS := %(cflags) %(cppflags)
-TMP_OBJCFLAGS := $(TMP_OBJCFLAGS) -isystem $(AROS_DEVELOPER)/include
+TMP_OBJCFLAGS := %(cflags)
+TMP_OBJCFLAGS := $(TMP_OBJCFLAGS) -isystem $(AROS_DEVELOPMENT)/include
 TMP_OBJCFLAGS := $(subst -Wno-pointer-sign,, $(subst -Werror-implicit-function-declaration,, $(TMP_OBJCFLAGS)))
 ifeq (%(dflags),)
-  TMP_OBJCDFLAGS := %(cflags) %(cppflags)
+  TMP_OBJCDFLAGS := %(cflags)
 else
-  TMP_OBJCDFLAGS := %(dflags) %(cppflags)
+  TMP_OBJCDFLAGS := %(dflags)
 endif
 
 # Define the use of cross compiler
@@ -490,8 +485,8 @@ BD_LINK ?= $(TMP_CC) $(TARGET_SYSROOT) $(TARGET_LDFLAGS)
 BD_STRIP ?= $(TARGET_STRIP)
 $(TMP_TARGETBASE).o : TMP_CMD:=$(TMP_CC) $(TARGET_SYSROOT)
 $(TMP_TARGETBASE).d : TMP_CMD:=$(TMP_CC) $(TARGET_SYSROOT)
-$(TMP_TARGETBASE).o : TMP_OBJCFLAGS:=$(TMP_OBJCFLAGS) $(SAFETY_CFLAGS)
-$(TMP_TARGETBASE).d : TMP_OBJCDFLAGS:=$(TMP_OBJCDFLAGS)
+$(TMP_TARGETBASE).o : TMP_OBJCFLAGS:=$(TARGET_CFLAGS) $(TMP_OBJCFLAGS)
+$(TMP_TARGETBASE).d : TMP_OBJCDFLAGS:=$(TARGET_CFLAGS) $(TMP_OBJCDFLAGS)
 $(TMP_TARGETBASE).o : TMP_IQUOTE:=$(CFLAGS_IQUOTE)
 $(TMP_TARGETBASE).d : TMP_IQUOTE:=$(CFLAGS_IQUOTE)
 $(TMP_TARGETBASE).o : TMP_IQUOTE_END:=$(CFLAGS_IQUOTE_END)
@@ -553,7 +548,7 @@ endif
 #   empty, path names will be stripped from the file names so that all files
 #   are in that dir and not in subdirectories.
 # - compiler (default target): compiler to use, target, kernel or host
-%define rule_compile_multi basenames=/A cflags=$(CFLAGS) cppflags=$(cppflags) dflags= srcdir= targetdir= \
+%define rule_compile_multi basenames=/A cflags=$(CFLAGS) dflags= srcdir= targetdir= \
     compiler=target
 
 ifeq (%(srcdir),)
@@ -585,11 +580,11 @@ endif
 
 endif
 
-TMP_CFLAGS := %(cflags) %(cppflags)
+TMP_CFLAGS := %(cflags)
 ifeq (%(dflags),)
-  TMP_DFLAGS := %(cflags) %(cppflags)
+  TMP_DFLAGS := %(cflags)
 else
-  TMP_DFLAGS := %(dflags) %(cppflags)
+  TMP_DFLAGS := %(dflags)
 endif
 
 ifeq ($(findstring %(compiler),host kernel target),)
@@ -600,8 +595,8 @@ BD_LINK ?= $(TARGET_CC) $(TARGET_SYSROOT) $(TARGET_LDFLAGS)
 BD_STRIP ?= $(TARGET_STRIP)
 BD_ASSEMBLER ?= $(TARGET_CC) $(TARGET_SYSROOT)
 $(TMP_TARGETS) $(TMP_DTARGETS) : CMD:=$(TARGET_CC) $(TARGET_SYSROOT)
-$(TMP_TARGETS) $(TMP_DTARGETS) : TMP_CFLAGS:=$(TMP_CFLAGS) $(SAFETY_CFLAGS)
-$(TMP_TARGETS) $(TMP_DTARGETS) : TMP_DFLAGS:=$(TMP_DFLAGS)
+$(TMP_TARGETS) $(TMP_DTARGETS) : TMP_CFLAGS:=$(TARGET_CFLAGS) $(TMP_CFLAGS) -D__ENABLE_HIDDEN_LIBAPI__
+$(TMP_TARGETS) $(TMP_DTARGETS) : TMP_DFLAGS:=$(TARGET_CFLAGS) $(TMP_DFLAGS)
 $(TMP_TARGETS) $(TMP_DTARGETS) : TMP_IQUOTE:=$(CFLAGS_IQUOTE)
 $(TMP_TARGETS) $(TMP_DTARGETS) : TMP_IQUOTE_END:=$(CFLAGS_IQUOTE_END)
 endif
@@ -652,7 +647,7 @@ $(TMP_DTARGETS) : $(TMP_TGTWILDCARD).d : $(TMP_SRCWILDCARD).c
 #   empty, path names will be stripped from the file names so that all files
 #   are in that dir and not in subdirectories.
 # - compiler (default target): compiler to use, target, kernel or host
-%define rule_compile_cxx_multi basenames=/A cxxflags=$(CXXFLAGS) cppflags=$(CPPFLAGS) dxxflags= \
+%define rule_compile_cxx_multi basenames=/A cxxflags=$(CXXFLAGS) dxxflags= \
     targetdir= compiler=target
 
 TMP_CXXABSBASENAMES := $(foreach TMP_CXXBASE,%(basenames),$(if $(filter /%,$(TMP_CXXBASE)),$(TMP_CXXBASE),$(abspath $(SRCDIR)/$(CURDIR)/$(TMP_CXXBASE))))
@@ -678,11 +673,11 @@ else
 endif
 
 # Adjust compiler flags to suit C++
-TMP_CXXFLAGS := %(cxxflags) %(cppflags)
+TMP_CXXFLAGS := %(cxxflags)
 ifeq (%(dxxflags),)
-  TMP_DXXFLAGS := %(cxxflags) %(cppflags)
+  TMP_DXXFLAGS := %(cxxflags)
 else
-  TMP_DXXFLAGS := %(dxxflags) %(cppflags)
+  TMP_DXXFLAGS := %(dxxflags)
 endif
 
 ifeq ($(findstring %(compiler),host kernel target),)
@@ -703,8 +698,8 @@ ifeq (%(compiler),target)
   BD_STRIP ?= $(TARGET_STRIP)
   BD_ASSEMBLER ?= $(TARGET_CC) $(TARGET_SYSROOT)
   TMP_CXXCMD:=$(AROS_CXX) $(TARGET_SYSROOT)
-  TMP_CXXFLAGS := $(TMP_CXXFLAGS) $(SAFETY_CFLAGS)
-  TMP_DXXFLAGS := $(TMP_DXXFLAGS)
+  TMP_CXXFLAGS := $(TARGET_CXXFLAGS) $(TMP_CXXFLAGS)
+  TMP_DXXFLAGS := $(TARGET_CXXFLAGS) $(TMP_DXXFLAGS)
   TMP_CXXIQUOTE:=$(CFLAGS_IQUOTE)
   TMP_CXXIQUOTE_END:=$(CFLAGS_IQUOTE_END)
 endif
@@ -714,7 +709,7 @@ ifeq (%(compiler),kernel)
   BD_STRIP ?= $(ECHO) >/dev/null
   BD_ASSEMBLER ?= $(KERNEL_CC) $(KERNEL_SYSROOT)
   TMP_CXXCMD:=$(KERNEL_CXX) $(KERNEL_SYSROOT)
-  TMP_CXXFLAGS := $(KERNEL_CXXFLAGS) $(TMP_CXXFLAGS) 
+  TMP_CXXFLAGS := $(KERNEL_CXXFLAGS) $(TMP_CXXFLAGS)
   TMP_DXXFLAGS := $(KERNEL_CXXFLAGS) $(TMP_DXXFLAGS)
   TMP_CXXIQUOTE:=$(KERNEL_IQUOTE)
   TMP_CXXIQUOTE_END:=$(KERNEL_IQUOTE_END)
@@ -754,7 +749,7 @@ endif
 #   empty, path names will be stripped from the file names so that all files
 #   are in that dir and not in subdirectories.
 # - compiler (default target): compiler to use, target, kernel or host
-%define rule_compile_objc_multi basenames=/A cflags=$(CFLAGS) cppflags=$(CPPFLAGS) dflags= \
+%define rule_compile_objc_multi basenames=/A cflags=$(CFLAGS) dflags= \
     targetdir= compiler=target
 
 ifneq (%(basenames),)
@@ -789,13 +784,13 @@ else
 endif
 
 # Adjust compiler flags to suit ObjC
-TMP_OBJCFLAGS := %(cflags) %(cppflags)
-TMP_OBJCFLAGS := $(TMP_OBJCFLAGS) -isystem $(AROS_DEVELOPER)/include
+TMP_OBJCFLAGS := %(cflags)
+TMP_OBJCFLAGS := $(TMP_OBJCFLAGS) -isystem $(AROS_DEVELOPMENT)/include
 TMP_OBJCFLAGS := $(subst -Wno-pointer-sign,, $(subst -Werror-implicit-function-declaration,, $(TMP_OBJCFLAGS)))
 ifeq (%(dflags),)
-  TMP_OBJCDFLAGS := %(cflags) %(cppflags)
+  TMP_OBJCDFLAGS := %(cflags)
 else
-  TMP_OBJCDFLAGS := %(dflags) %(cppflags)
+  TMP_OBJCDFLAGS := %(dflags)
 endif
 
 ifeq ($(findstring %(compiler),host kernel target),)
@@ -806,8 +801,8 @@ ifeq (%(compiler),target)
   BD_STRIP ?= $(TARGET_STRIP)
   BD_ASSEMBLER ?= $(TARGET_CC) $(TARGET_SYSROOT)
   $(TMP_TARGETS) $(TMP_DTARGETS) : CMD:=$(TMP_CC) $(TARGET_SYSROOT)
-  $(TMP_TARGETS) $(TMP_DTARGETS) : TMP_OBJCFLAGS:=$(TMP_OBJCFLAGS)  $(SAFETY_CFLAGS)
-  $(TMP_TARGETS) $(TMP_DTARGETS) : TMP_OBJCDFLAGS:=$(TMP_OBJCDFLAGS)
+  $(TMP_TARGETS) $(TMP_DTARGETS) : TMP_OBJCFLAGS:=$(TARGET_CFLAGS) $(TMP_OBJCFLAGS)
+  $(TMP_TARGETS) $(TMP_DTARGETS) : TMP_OBJCDFLAGS:=$(TARGET_CFLAGS) $(TMP_OBJCDFLAGS)
   $(TMP_TARGETS) $(TMP_DTARGETS) : TMP_IQUOTE:=$(CFLAGS_IQUOTE)
   $(TMP_TARGETS) $(TMP_DTARGETS) : TMP_IQUOTE_END:=$(CFLAGS_IQUOTE_END)
 endif
@@ -827,8 +822,8 @@ ifeq (%(compiler),kernel)
   BD_STRIP ?= $(ECHO) >/dev/null
   BD_ASSEMBLER ?= $(KERNEL_CC) $(KERNEL_SYSROOT)
   $(TMP_TARGETS) $(TMP_DTARGETS) : CMD:=$(KERNEL_OBJC) $(KERNEL_SYSROOT)
-  $(TMP_TARGETS) $(TMP_DTARGETS) : TMP_OBJCFLAGS:=$(KERNEL_CFLAGS) $(TMP_OBJCFLAGS) 
-  $(TMP_TARGETS) $(TMP_DTARGETS) : TMP_OBJCDFLAGS:=$(KERNEL_CFLAGS) $(TMP_OBJCDFLAGS) 
+  $(TMP_TARGETS) $(TMP_DTARGETS) : TMP_OBJCFLAGS:=$(KERNEL_CFLAGS) $(TMP_OBJCFLAGS)
+  $(TMP_TARGETS) $(TMP_DTARGETS) : TMP_OBJCDFLAGS:=$(KERNEL_CFLAGS) $(TMP_OBJCDFLAGS)
   $(TMP_TARGETS) $(TMP_DTARGETS) : TMP_IQUOTE:=$(KERNEL_IQUOTE)
   $(TMP_TARGETS) $(TMP_DTARGETS) : TMP_IQUOTE_END:=$(KERNEL_IQUOTE_END)
 endif
@@ -1089,7 +1084,7 @@ else
                     -L/usr/lib $(addprefix -l,%(usehostlibs))
 endif 
 %(module) : %(objs) %(endobj) $(TMP_DEPLIBS) $(USER_DEPLIBS)
-	%link_module_q cmd="%(cmd)" err=$(ERR) endtag=$(ENDTAG) objs=$(OBJS) libs=$(LIBS) objdir=$(OBJDIR) ldflags=$(LDFLAGS)
+	%link_module_q cmd="%(cmd)" err=$(ERR) endtag=$(ENDTAG) objs=$(OBJS) libs=$(LIBS) objdir=$(OBJDIR) ldflags="$(LDFLAGS) -newclib"
 
 %end
 #------------------------------------------------------------------------------
@@ -1221,6 +1216,7 @@ TMP_GENTARGETS := $(addsuffix .c,$(TMP_GENTARGETS))
 TMP_STUBTARGETS := $(addsuffix .c,$(TMP_STUBTARGETS)) \
                $(addsuffix .S, $(%(modname)_LINKLIBAFILES) $(%(modname)_RELLINKLIBAFILES))
 
+
 TMP_DEPS := $(GENMODULE)
 TMP_OPTS :=
 
@@ -1243,9 +1239,6 @@ ifneq (%(targetdir),)
     TMP_OPTS += -d %(targetdir)
     TMP_TARGETDIR := $(shell echo %(targetdir) | sed 's/^\(.\):\//\/\1\//')
     TMP_GENTARGETS := $(addprefix $(TMP_TARGETDIR)/,$(TMP_GENTARGETS))
-    TMP_GENFILEFLAG=$(TMP_TARGETDIR)/.%(modname).%(modtype)-genfiles
-else
-    TMP_GENFILEFLAG=$(GENDIR)/$(CURDIR)/.%(modname).%(modtype)-genfiles
 endif
 ifneq (%(stubdir),)
     TMP_OPTS += -l %(stubdir)
@@ -1263,12 +1256,10 @@ ifneq ($(TMP_TARGETDIRS),)
 $(TMP_TARGETS) : | $(TMP_TARGETDIRS)
 endif
 
-$(TMP_TARGETS) : $(TMP_DEPS) $(TMP_GENFILEFLAG)
-
-$(TMP_GENFILEFLAG) : OPTS := $(TMP_OPTS)
-$(TMP_GENFILEFLAG) : MODNAME := %(modname)
-$(TMP_GENFILEFLAG) : MODTYPE := %(modtype)
-$(TMP_GENFILEFLAG) : $(TMP_DEPS)
+$(TMP_TARGETS) : OPTS := $(TMP_OPTS)
+$(TMP_TARGETS) : MODNAME := %(modname)
+$(TMP_TARGETS) : MODTYPE := %(modtype)
+$(TMP_TARGETS) : $(TMP_DEPS)
 	@$(ECHO) "Generating support files for module $(MODNAME$(BDID))"
 ifneq (%(conffile),lib.conf)
 	@$(IF) $(TEST) -f lib.conf; then \
@@ -1279,7 +1270,6 @@ endif
 	  $(ECHO) "WARNING !!! $(CURDIR)/libdefs.h may probably be removed"; \
 	fi
 	@$(GENMODULE) $(OPTS) writefiles $(MODNAME) $(MODTYPE)
-	@$(TOUCH) $@
 %end
 #------------------------------------------------------------------------------
 
@@ -1291,7 +1281,6 @@ endif
     targetdir= conffile=
 
 ifneq ($(%(modname)_INCLUDES),)
-
 TMP_TARGETS := $(%(modname)_INCLUDES)
 
 TMP_DEPS := $(GENMODULE)
@@ -1315,20 +1304,14 @@ endif
 ifneq (%(targetdir),)
     TMP_OPTS += -d %(targetdir)
     TMP_TARGETS := $(addprefix %(targetdir)/,$(TMP_TARGETS))
-    TMP_GENINCFLAG=%(targetdir)/.%(modname).%(modtype)-includes
-else
-    TMP_GENINCFLAG=$(GENDIR)/$(CURDIR)/.%(modname).%(modtype)-includes
 endif
 
-$(TMP_TARGETS) : $(TMP_DEPS) $(TMP_GENINCFLAG)
-
-$(TMP_GENINCFLAG) : OPTS := $(TMP_OPTS)
-$(TMP_GENINCFLAG) : MODNAME := %(modname)
-$(TMP_GENINCFLAG) : MODTYPE := %(modtype)
-$(TMP_GENINCFLAG) : $(TMP_DEPS)
+$(TMP_TARGETS) : OPTS := $(TMP_OPTS)
+$(TMP_TARGETS) : MODNAME := %(modname)
+$(TMP_TARGETS) : MODTYPE := %(modtype)
+$(TMP_TARGETS) : $(TMP_DEPS)
 	@$(ECHO) "Generating $(MODNAME).$(MODTYPE) includes"
 	@$(GENMODULE) $(OPTS) writeincludes $(MODNAME) $(MODTYPE)
-	@$(TOUCH) $@
 endif
 %end
 #------------------------------------------------------------------------------
@@ -1391,7 +1374,7 @@ BDID := $(BDTARGETID)
 %define build_prog mmake=/A progname=/A files=$(BD_PROGNAME) cxxfiles= \
     objcfiles= \
     asmfiles= objdir=$(GENDIR)/$(CURDIR) targetdir=$(AROSDIR)/$(CURDIR) \
-    cflags=$(CFLAGS) cppflags=$(CPPFLAGS) dflags=$(BD_CFLAGS) cxxflags=$(CXXFLAGS) dxxflags=$(BD_CXXFLAGS) ldflags=$(LDFLAGS) \
+    cflags=$(CFLAGS) dflags=$(BD_CFLAGS) cxxflags=$(CXXFLAGS) dxxflags=$(BD_CXXFLAGS) ldflags=$(LDFLAGS) \
     aflags=$(AFLAGS) uselibs= usehostlibs= usestartup=yes detach=no nix=no \
     includedir= libdir= \
     compiler=target linker= lto=$(TARGET_LTO)
@@ -1423,11 +1406,10 @@ BD_DEPS := $(addsuffix .d,$(addprefix $(BD_OBJDIR)/,$(notdir $(TMP_FILES))))
 
 BD_CFLAGS    := %(cflags)
 BD_CXXFLAGS := %(cxxflags)
-BD_CPPFLAGS :=  %(cppflags)
 ifeq (%(lto),yes)
 ifeq (%(compiler),target)
-BD_CFLAGS    := $(LTO_BINARY_CFLAGS) $(BD_CFLAGS)
-BD_CXXFLAGS := $(LTO_BINARY_CFLAGS) $(BD_CXXFLAGS)
+BD_CFLAGS    := $(CFLAGS_LTO) $(BD_CFLAGS)
+BD_CXXFLAGS := $(CFLAGS_LTO) $(BD_CXXFLAGS)
 endif
 endif
 ifneq (%(includedir),)
@@ -1444,6 +1426,11 @@ BD_LDFLAGS   := %(ldflags)
 ifneq (%(libdir),)
 BD_LDFLAGS   += -L%(libdir)
 endif
+ifneq (%(linker), kernel)
+ifeq (%(compiler),target)
+BD_LDFLAGS   += -newclib
+endif
+endif
 
 #MM
 %(mmake)-quick : %(mmake)
@@ -1453,11 +1440,11 @@ endif
 
 ifneq ($(filter $(TARGET),%(mmake) %(mmake)-quick %(mmake)-gz-quick),)
 %rule_compile_cxx_multi basenames=$(BD_CXXFILES) targetdir=$(BD_OBJDIR) \
-    cxxflags=$(BD_CXXFLAGS) cppflags=$(BD_CPPFLAGS) dxxflags=$(BD_DXXFLAGS) compiler="%(compiler)"
+    cxxflags=$(BD_CXXFLAGS) dxxflags=$(BD_DXXFLAGS) compiler="%(compiler)"
 %rule_compile_objc_multi basenames=$(BD_OBJCFILES) targetdir=$(BD_OBJDIR) \
-    cflags=$(BD_CFLAGS) cppflags=$(BD_CPPFLAGS) dflags=$(BD_DFLAGS) compiler="%(compiler)"
+    cflags=$(BD_CFLAGS) dflags=$(BD_DFLAGS) compiler="%(compiler)"
 %rule_compile_multi basenames=$(BD_NARCHFILES) targetdir=$(BD_OBJDIR) \
-    cflags=$(BD_CFLAGS) cppflags=$(BD_CPPFLAGS) dflags=$(BD_DFLAGS) compiler="%(compiler)"
+    cflags=$(BD_CFLAGS) dflags=$(BD_DFLAGS) compiler="%(compiler)"
 %rule_assemble_multi cmd=$(BD_ASSEMBLER) basenames=$(BD_ASMFILES) targetdir=$(BD_OBJDIR) \
     aflags=$(BD_AFLAGS)
 
@@ -1490,7 +1477,7 @@ GLOB_MKDIRS += $(BD_OBJDIR) $(BD_TARGETDIR)
 # name as the C file
 %define build_progs mmake=/A files=/A nix=no \
     objdir=$(GENDIR)/$(CURDIR) targetdir=$(AROSDIR)/$(CURDIR) \
-    cflags=$(CFLAGS) cppflags=$(CPPFLAGS) dflags=$(BD_CFLAGS) ldflags=$(LDFLAGS) \
+    cflags=$(CFLAGS) dflags=$(BD_CFLAGS) ldflags=$(LDFLAGS) \
     includedir= libdir= \
     compiler=target \
     uselibs= usehostlibs= usestartup=yes detach=no lto=$(TARGET_LTO)
@@ -1508,17 +1495,19 @@ BD_EXES      := $(addprefix $(BD_TARGETDIR)/,$(BD_FILES))
 BD_CFLAGS    := %(cflags)
 ifeq (%(lto),yes)
 ifeq (%(compiler),target)
-BD_CFLAGS    := $(LTO_BINARY_CFLAGS) $(BD_CFLAGS)
+BD_CFLAGS    := $(CFLAGS_LTO) $(BD_CFLAGS)
 endif
 endif
 ifneq (%(includedir),)
     BD_CFLAGS += -I%(includedir)
 endif
-BD_CPPFLAGS := %(cppflags)
 BD_DFLAGS    := %(dflags)
 BD_LDFLAGS   := %(ldflags)
 ifneq (%(libdir),)
     BD_LDFLAGS += -L%(libdir)
+endif
+ifeq (%(compiler),target)
+    BD_LDFLAGS += -newclib
 endif
 
 #MM
@@ -1529,7 +1518,7 @@ endif
 
 ifneq ($(filter $(TARGET),%(mmake) %(mmake)-quick),)
 %rule_compile_multi basenames=$(BD_FILES) targetdir=$(BD_OBJDIR) \
-    cflags=$(BD_CFLAGS) cppflags=$(BD_CPPFLAGS) dflags=$(BD_DFLAGS) compiler="%(compiler)"
+    cflags=$(BD_CFLAGS) dflags=$(BD_DFLAGS) compiler="%(compiler)"
 
 %rule_link_progs progs=$(BD_FILES) nix="%(nix)" \
     targetdir=$(BD_TARGETDIR) objdir=$(BD_OBJDIR) \
@@ -1563,9 +1552,9 @@ GLOB_MKDIRS += $(BD_TARGETDIR) $(BD_OBJDIR)
 # be used for compiling external code. For AROS code use %build_module
 %define build_module_simple mmake=/A modname=/A modtype=/A \
     files="$(basename $(call WILDCARD, *.c))" \
-    cflags=$(CFLAGS) cppflags=$(CPPFLAGS) dflags=$(BD_DEFDFLAGS) \
+    cflags=$(CFLAGS) dflags=$(BD_DEFDFLAGS) \
     objdir=$(OBJDIR) moduledir= \
-    uselibs= usehostlibs= compiler=target lto=$(TARGET_LTO)
+    uselibs= usehostlibs= compiler=target
 
 # Define metamake targets and their dependencies
 #MM %(mmake) : core-linklibs includes-generate-deps
@@ -1588,11 +1577,6 @@ endif
 # Default values for variables and arguments
 BD_DEFLINKLIBNAME := %(modname)
 BD_DEFDFLAGS := %(cflags)
-ifeq (%(lto),yes)
-ifeq (%(compiler),target)
-BD_DEFDFLAGS    := $(LTO_BINARY_CFLAGS) $(CFLAGS_NO_STRICT_ALIASING) $(BD_DEFDFLAGS)
-endif
-endif
 BD_DEFDXXFLAGS := %(dxxflags)
 OBJDIR ?= $(GENDIR)/$(CURDIR)
 BD_MODDIR := %(moduledir)
@@ -1647,7 +1631,7 @@ BD_NARCHFILES := $(filter-out $(BD_ARCHFILES),%(files))
 
 %rule_compile_multi \
     basenames=$(BD_NARCHFILES) targetdir="%(objdir)" \
-    cflags="$(BD_DEFDFLAGS)" cppflags="%(cppflags)" dflags="%(dflags)" \
+    cflags="%(cflags)" dflags="%(dflags)" \
     compiler="%(compiler)"
 
 # Handlers use dash instead of dot in their names
@@ -1727,10 +1711,10 @@ GLOB_MKDIRS += %(objdir) $(BD_MODDIR) $(KOBJSDIR)
 %define build_module_core mmake=/A modname=/A modtype=/A modsuffix= version= conffile= \
   files="$(basename $(call WILDCARD, *.c))" \
   cxxfiles="$(basename $(call WILDCARD $(foreach CXX_EXT, $(AROS_CXXEXTS), *.$(CXX_EXT))))" \
-  linklibfiles= linklibobjs= cflags=$(CFLAGS) cppflags=$(CPPFLAGS) dflags=$(BD_DEFDFLAGS) cxxflags=$(CXXFLAGS) dxxflags=$(BD_DEFDXXFLAGS) \
+  linklibfiles= linklibobjs= cflags=$(CFLAGS) dflags=$(BD_DEFDFLAGS) cxxflags=$(CXXFLAGS) dxxflags=$(BD_DEFDXXFLAGS) \
   objdir=$(OBJDIR) moduledir=$(BD_DEFMODDIR) prefix=$(AROSDIR) \
   linklibname=$(BD_DEFLINKLIBNAME) uselibs= usehostlibs= \
-  compiler=target lto=$(TARGET_LTO) nostartup=yes archspecific=no \
+  compiler=target nostartup=yes archspecific=no \
   includedir= libdir= \
   build_abi= build_library=
 
@@ -1807,13 +1791,6 @@ endif
 BD_DEFLINKLIBNAME := %(modname)
 BD_DEFDFLAGS := %(cflags)
 BD_DEFDXXFLAGS := %(cxxflags)
-BD_DEFCPPFLAGS := %(cppflags)
-ifeq (%(lto),yes)
-ifeq (%(compiler),target)
-BD_DEFDFLAGS    := $(LTO_BINARY_CFLAGS) $(CFLAGS_NO_STRICT_ALIASING) $(NOWARN_LTO_TYPE_MISMATCH) $(BD_DEFDFLAGS)
-BD_DEFDXXFLAGS := $(LTO_BINARY_CFLAGS) $(CFLAGS_NO_STRICT_ALIASING) $(NOWARN_LTO_TYPE_MISMATCH) $(BD_DEFDXXFLAGS)
-endif
-endif
 ifneq (%(includedir),)
     BD_DEFDFLAGS += -I%(includedir)
     BD_DEFDXXFLAGS += -I%(includedir)
@@ -1836,10 +1813,7 @@ GLOB_MKDIRS += %(objdir)
 # Do not parse these statements if metatarget is not appropriate
 ifneq ($(filter $(TARGET),$(BD_ALLTARGETS)),)
 
-# suppress makes warning that the Makefile doesnt yet exist
-# on early passes (it will generate the file as needed though)
-# when we include it.
--include %(objdir)/Makefile.%(modname)%(modtype)
+include %(objdir)/Makefile.%(modname)%(modtype)
 
 BD_DEFMODDIR := $(%(modname)_MODDIR)
 ifeq (%(archspecific),yes)
@@ -1852,7 +1826,7 @@ endif
 ifneq (%(includedir),)
 BD_INCDIR    := %(includedir)
 else
-BD_INCDIR    := %(prefix)/$(AROS_DIR_DEVELOPER)/$(AROS_DIR_INCLUDE)
+BD_INCDIR    := %(prefix)/$(AROS_DIR_INCLUDE)
 endif
 BD_LIBDEFSINC := %(objdir)/include/%(modname)_libdefs.h
 BD_DEFLIBDEFSINC := %(objdir)/include/%(modname)_deflibdefs.h
@@ -1889,8 +1863,8 @@ endif
 endif
 
 %rule_genmodule_genlibdefs modname="%(modname)" modtype="%(modtype)" \
-    modsuffix="%(modsuffix)" targetdir="%(objdir)/include" \
-    conffile="%(conffile)" version="%(version)"
+		 	   modsuffix="%(modsuffix)" targetdir="%(objdir)/include" \
+		 	   conffile="%(conffile)" version="%(version)"
 
 $(BD_DEFLIBDEFSINC) : FILENAME := $(BD_LIBDEFSINC)
 $(BD_DEFLIBDEFSINC) :
@@ -1903,22 +1877,22 @@ GLOB_MKDIRS += %(objdir)/include
 ## Extra genmodule src files generation
 ## 
 %rule_genmodule_files modname="%(modname)" modtype="%(modtype)" \
-    modsuffix="%(modsuffix)" targetdir="%(objdir)" stubdir="%(objdir)/linklib" \
-    conffile="%(conffile)"
+		      modsuffix="%(modsuffix)" targetdir="%(objdir)" stubdir="%(objdir)/linklib" \
+		      conffile="%(conffile)"
 
 GLOB_MKDIRS += %(objdir)/linklib
 
 ifeq (%(build_abi),M)
 ## Create FD file
 ifeq (%(includedir),)
-BD_FDDIR := %(prefix)/$(AROS_DIR_DEVELOPER)/fd
+BD_FDDIR := %(prefix)/$(AROS_DIR_DEVELOPMENT)/fd
 else
 BD_FDDIR := %(includedir)/../fd
 endif
 %(mmake)-fd : $(BD_FDDIR)/%(modname)_lib.fd
 
 %rule_genmodule_fd modname="%(modname)" modtype="%(modtype)" \
-    modsuffix="%(modsuffix)" targetdir=$(BD_FDDIR) conffile="%(conffile)"
+                   modsuffix="%(modsuffix)" targetdir=$(BD_FDDIR) conffile="%(conffile)"
 
 $(BD_FDDIR)/%(modname)_lib.fd : | $(BD_FDDIR)
 
@@ -1934,9 +1908,6 @@ BD_LIBFILES := %(linklibfiles)
 
 BD_FDIRS      := $(sort $(dir $(BD_FILES)))
 
-BD_FILEMATCH = $(and $(findstring $(1),$(2)),$(findstring $(2),$(1)))
-BD_MATCHARCH = $(foreach matchfile,$(2),$(foreach archfile,$(1),$(if $(call BD_FILEMATCH,$(archfile),$(notdir $(matchfile))),$(matchfile),)))
-BD_FILTERARCH = $(filter-out $(call BD_MATCHARCH,$(1),$(2)),$(2))
 BD_STARTFILES := $(addprefix %(objdir)/,$(%(modname)_STARTFILES))
 BD_ENDFILES   := $(addprefix %(objdir)/,$(%(modname)_ENDFILES))
 
@@ -1944,31 +1915,22 @@ BD_ARCHOBJS   := $(wildcard %(objdir)/arch/*.o)
 BD_LIBARCHOBJS   := $(wildcard %(objdir)/linklib/arch/*.o)
 BD_ARCHFILES  := $(basename $(notdir $(BD_ARCHOBJS)))
 BD_LIBARCHFILES  := $(basename $(notdir $(BD_LIBARCHOBJS)))
-BD_NARCHFILES := $(call BD_FILTERARCH,$(BD_ARCHFILES),$(BD_FILES))
-BD_NLIBARCHFILES := $(call BD_FILTERARCH,$(BD_LIBARCHFILES),$(BD_LIBFILES))
-BD_ARCHNLIBFILES := $(call BD_FILTERARCH,$(BD_LIBFILES),$(BD_LIBARCHFILES))
+BD_NARCHFILES := $(filter-out $(BD_ARCHFILES),$(BD_FILES))
+BD_NLIBARCHFILES := $(filter-out $(BD_LIBARCHFILES),$(BD_LIBFILES))
+BD_ARCHNLIBFILES := $(filter-out $(BD_LIBFILES),$(BD_LIBARCHFILES))
 
-BD_COMMONCFLAGS=-I%(objdir)/include -include $(BD_DEFLIBDEFSINC)
-BD_CFLAGS        := %(cflags) $(BD_COMMONCFLAGS) $(%(modname)_CFLAGS)
-BD_LINKLIBCFLAGS := %(cflags) $(BD_COMMONCFLAGS) $(%(modname)_LINKLIBCFLAGS)
-BD_CXXFLAGS      := %(cxxflags) $(BD_COMMONCFLAGS) $(%(modname)_CXXFLAGS)
-ifeq (%(lto),yes)
-ifeq (%(compiler),target)
-BD_LTOFLAGS=$(LTO_BINARY_CFLAGS) $(CFLAGS_NO_STRICT_ALIASING) $(NOWARN_LTO_TYPE_MISMATCH)
-BD_CFLAGS        := $(BD_LTOFLAGS) $(BD_CFLAGS)
-BD_LINKLIBCFLAGS := $(BD_LTOFLAGS) $(BD_LINKLIBCFLAGS)
-BD_CXXFLAGS      := $(BD_LTOFLAGS) $(BD_CXXFLAGS)
-endif
-endif
+BD_CFLAGS     := %(cflags) -I%(objdir)/include -include $(BD_DEFLIBDEFSINC) $(%(modname)_CFLAGS)
+BD_CXXFLAGS := %(cxxflags) -I%(objdir)/include -include $(BD_DEFLIBDEFSINC) $(%(modname)_CXXFLAGS)
+# ifeq (%(compiler),target)
+# BD_CFLAGS    := $(CFLAGS_LTO) $(BD_CFLAGS)
+# BD_CXXFLAGS := $(CFLAGS_LTO) $(BD_CXXFLAGS)
+# endif
 ifneq (%(includedir),)
-BD_CFLAGS        += -I%(includedir)
-BD_LINKLIBCFLAGS += -I%(includedir)
-BD_CXXFLAGS      += -I%(includedir)
+BD_CFLAGS     += -I%(includedir)
+BD_CXXFLAGS += -I%(includedir)
 endif
-BD_CPPFLAGS      := %(cppflags)
-BD_DFLAGS        := %(dflags) $(BD_COMMONCFLAGS) $(%(modname)_DFLAGS)
-BD_LINKLIBDFLAGS := %(dflags) $(BD_COMMONCFLAGS) $(%(modname)_LINKLIBDFLAGS)
-BD_DXXFLAGS      := %(dxxflags) $(BD_COMMONCFLAGS) $(%(modname)_DXXFLAGS)
+BD_DFLAGS     := %(dflags) -I%(objdir)/include -include $(BD_DEFLIBDEFSINC) $(%(modname)_DFLAGS)
+BD_DXXFLAGS := %(dxxflags) -I%(objdir)/include -include $(BD_DEFLIBDEFSINC) $(%(modname)_DXXFLAGS)
 
 ifeq (%(modtype),library)
     BD_LIBSUFFIX := 
@@ -1977,7 +1939,7 @@ else
 endif
 
 ifeq (%(libdir),)
-BD_LIBDIR := %(prefix)/$(AROS_DIR_DEVELOPER)/$(AROS_DIR_LIB)
+BD_LIBDIR := %(prefix)/$(AROS_DIR_LIB)
 else
 BD_LIBDIR := %(libdir)
 endif
@@ -2023,23 +1985,23 @@ BD_LINKLIBCCGENFILES := $(BD_LINKLIBCFILES) $(BD_RELLINKLIBCFILES)
 
 %rule_compile_cxx_multi \
     basenames=$(BD_CXXFILES) targetdir="%(objdir)" \
-    cxxflags=$(BD_CXXFLAGS) cppflags=$(BD_CPPFLAGS) dxxflags=$(BD_DXXFLAGS) \
+    cxxflags=$(BD_CXXFLAGS) dxxflags=$(BD_DXXFLAGS) \
     compiler="%(compiler)"
 %rule_compile_multi \
     basenames=$(BD_CCFILES) targetdir="%(objdir)" \
-    cflags=$(BD_CFLAGS) cppflags=$(BD_CPPFLAGS) dflags=$(BD_DFLAGS) \
+    cflags=$(BD_CFLAGS) dflags=$(BD_DFLAGS) \
     compiler="%(compiler)"
 %rule_compile_multi \
     basenames=$(BD_TARGETCCFILES) targetdir="%(objdir)" \
-    cflags=$(BD_CFLAGS) cppflags="$(BD_CPPFLAGS) -D__AROS__" dflags=$(BD_DFLAGS) \
+    cflags="$(BD_CFLAGS) -D__AROS__" dflags=$(BD_DFLAGS) \
     compiler="%(compiler)"
 %rule_compile_multi \
     basenames=$(BD_NLIBARCHFILES) targetdir="%(objdir)/linklib" \
-    cflags=$(BD_LINKLIBCFLAGS) cppflags="$(BD_CPPFLAGS) -D__AROS__" dflags=$(BD_LINKLIBDFLAGS) \
+    cflags="$(BD_CFLAGS) -D__AROS__" dflags=$(BD_DFLAGS) \
     compiler="%(compiler)"
 %rule_compile_multi \
     basenames=$(BD_LINKLIBCCGENFILES) srcdir="%(objdir)/linklib" targetdir="%(objdir)/linklib" \
-    cflags=$(BD_LINKLIBCFLAGS) cppflags="$(BD_CPPFLAGS) -D__AROS__" dflags=$(BD_LINKLIBDFLAGS) \
+    cflags="$(BD_CFLAGS) -D__AROS__" dflags=$(BD_DFLAGS) \
     compiler="%(compiler)"
 
 ifneq ($(BD_LINKLIBAFILES),)
@@ -2194,10 +2156,10 @@ endif # $(TARGET) in $(BD_ALLTARGETS)
 %define build_module mmake=/A modname=/A modtype=/A modsuffix= version= conffile= \
   files="$(basename $(call WILDCARD, *.c))" \
   cxxfiles="$(basename $(call WILDCARD $(foreach CXX_EXT, $(AROS_CXXEXTS), *.$(CXX_EXT))))" \
-  linklibfiles= linklibobjs= cflags=$(CFLAGS) cppflags=$(CPPFLAGS) dflags=$(BD_DEFDFLAGS) cxxflags=$(CXXFLAGS) dxxflags=$(BD_DEFDXXFLAGS) \
+  linklibfiles= linklibobjs= cflags=$(CFLAGS) dflags=$(BD_DEFDFLAGS) cxxflags=$(CXXFLAGS) dxxflags=$(BD_DEFDXXFLAGS) \
   objdir=$(OBJDIR) moduledir=$(BD_DEFMODDIR) prefix=$(AROSDIR) \
   linklibname=$(BD_DEFLINKLIBNAME) uselibs= usehostlibs= \
-  compiler=target lto=$(TARGET_LTO) nostartup=yes archspecific=no \
+  compiler=target nostartup=yes archspecific=no \
   includedir= libdir=
 
 %build_module_core mmake="%(mmake)" modname="%(modname)" modtype="%(modtype)" \
@@ -2205,9 +2167,9 @@ endif # $(TARGET) in $(BD_ALLTARGETS)
    files="%(files)" cxxfiles="%(cxxfiles)" \
    linklibname="%(linklibname)" \
    linklibfiles="%(linklibfiles)" linklibobjs="%(linklibobjs)" \
-   cflags="%(cflags)" cppflags="%(cppflags)" dflags="%(dflags)" cxxflags="%(cxxflags)" dxxflags="%(dxxflags)" \
+   cflags="%(cflags)" dflags="%(dflags)" cxxflags="%(cxxflags)" dxxflags="%(dxxflags)" \
    objdir="%(objdir)" moduledir="%(moduledir)" prefix="%(prefix)" \
-   uselibs="%(uselibs)" usehostlibs="%(usehostlibs)" compiler="%(compiler)" lto=%(lto) \
+   uselibs="%(uselibs)" usehostlibs="%(usehostlibs)" compiler="%(compiler)" \
    nostartup="%(nostartup)" archspecific="%(archspecific)" \
    includedir="%(includedir)" libdir="%(libdir)" \
    build_abi=M build_library=M
@@ -2223,7 +2185,7 @@ endif # $(TARGET) in $(BD_ALLTARGETS)
 # This is used when for plugins or classes with the same API, but no actual
 # implementation here.
 %define build_module_abi mmake=/A modname=/A modtype=/A modsuffix= version= conffile= \
-  linklibfiles= linklibobjs= cflags=$(CFLAGS) cppflags=$(CPPFLAGS) dflags=$(BD_DEFDFLAGS) cxxflags=$(CXXFLAGS) dxxflags=$(BD_DEFDXXFLAGS) \
+  linklibfiles= linklibobjs= cflags=$(CFLAGS) dflags=$(BD_DEFDFLAGS) cxxflags=$(CXXFLAGS) dxxflags=$(BD_DEFDXXFLAGS) \
   objdir=$(OBJDIR) moduledir=$(BD_DEFMODDIR) prefix=$(AROSDIR) \
   linklibname=$(BD_DEFLINKLIBNAME) uselibs= usehostlibs= \
   compiler=target nostartup=yes archspecific=no \
@@ -2233,9 +2195,9 @@ endif # $(TARGET) in $(BD_ALLTARGETS)
   modsuffix="%(modsuffix)" version="%(version)" conffile="%(conffile)" \
   linklibname="%(linklibname)" \
   linklibfiles="%(linklibfiles)" linklibobjs="%(linklibobjs)" \
-  cflags="%(cflags)" cppflags="%(cppflags)" dflags="%(dflags)" cxxflags="%(cxxflags)" dxxflags="%(dxxflags)" \
+  cflags="%(cflags)" dflags="%(dflags)" cxxflags="%(cxxflags)" dxxflags="%(dxxflags)" \
   objdir="%(objdir)" moduledir="%(moduledir)" prefix="%(prefix)" \
-  uselibs="%(uselibs)" usehostlibs="%(usehostlibs)" compiler="%(compiler)" lto=%(lto) \
+  uselibs="%(uselibs)" usehostlibs="%(usehostlibs)" compiler="%(compiler)" \
   nostartup="%(nostartup)" archspecific="%(archspecific)" \
   includedir="%(includedir)" libdir="%(libdir)" \
   build_abi=M build_library=
@@ -2249,18 +2211,18 @@ endif # $(TARGET) in $(BD_ALLTARGETS)
 %define build_module_library mmake=/A modname=/A modtype=/A modsuffix= version= conffile= \
   files="$(basename $(call WILDCARD, *.c))" \
   cxxfiles="$(basename $(call WILDCARD $(foreach CXX_EXT, $(AROS_CXXEXTS), *.$(CXX_EXT))))" \
-  cflags=$(CFLAGS) cppflags=$(CPPFLAGS) dflags=$(BD_DEFDFLAGS) cxxflags="$(CXXFLAGS)" dxxflags="$(BD_DEFDXXFLAGS)" \
+  cflags=$(CFLAGS) dflags=$(BD_DEFDFLAGS) cxxflags="$(CXXFLAGS)" dxxflags="$(BD_DEFDXXFLAGS)" \
   objdir=$(OBJDIR) moduledir=$(BD_DEFMODDIR) prefix=$(AROSDIR) \
   uselibs= usehostlibs= \
-  compiler=target lto=$(TARGET_LTO) nostartup=yes archspecific=no \
+  compiler=target nostartup=yes archspecific=no \
   includedir= libdir=
 
 %build_module_core mmake="%(mmake)" modname="%(modname)" modtype="%(modtype)" \
    modsuffix="%(modsuffix)" version="%(version)" conffile="%(conffile)" \
    files="%(files)" cxxfiles="%(cxxfiles)" \
-   cflags="%(cflags)" cppflags="%(cppflags)" dflags="%(dflags)" cxxflags="%(cxxflags)" dxxflags="%(dxxflags)" \
+   cflags="%(cflags)" dflags="%(dflags)" cxxflags="%(cxxflags)" dxxflags="%(dxxflags)" \
    objdir="%(objdir)" moduledir="%(moduledir)" prefix="%(prefix)" \
-   uselibs="%(uselibs)" usehostlibs="%(usehostlibs)" compiler="%(compiler)" lto=%(lto) \
+   uselibs="%(uselibs)" usehostlibs="%(usehostlibs)" compiler="%(compiler)" \
    nostartup="%(nostartup)" archspecific="%(archspecific)" \
   includedir="%(includedir)" libdir="%(libdir)" \
    build_abi= build_library=M
@@ -2287,11 +2249,12 @@ endif # $(TARGET) in $(BD_ALLTARGETS)
 # - cflags are the flags to compile the source (default $(CFLAGS))
 # - dflags are the flags used during makedepend (default equal to cflags)
 # - aflags are the flags used during assembling (default $(AFLAGS))
+# - libdir is the directory where the linklib will be placed (default $(AROS_LIB))
 %define build_linklib mmake=/A libname=/A files= cxxfiles= \
   asmfiles= objs= objdir=$(GENDIR)/$(CURDIR) libdir=$(AROS_LIB) \
   includedir= \
-  cflags=$(CFLAGS) cppflags=$(CPPFLAGS) dflags=$(BD_CFLAGS) cxxflags=$(CXXFLAGS) dxxflags=$(BD_CXXFLAGS) \
-  aflags=$(AFLAGS) compiler=target lto=$(TARGET_LTO)
+  cflags=$(CFLAGS) dflags=$(BD_CFLAGS) cxxflags=$(CXXFLAGS) dxxflags=$(BD_CXXFLAGS) \
+  aflags=$(AFLAGS) compiler=target
 
 # assign and generate the local variables used in this macro
 BD_LIBNAME    := %(libname)
@@ -2312,17 +2275,10 @@ BD_DEPS       := $(patsubst %.o,%.d,$(BD_OBJS))
 
 BD_CFLAGS    := %(cflags)
 BD_CXXFLAGS := %(cxxflags)
-ifeq (%(lto),yes)
-ifeq (%(compiler),target)
-BD_CFLAGS    := $(LTO_CFLAGS) $(BD_CFLAGS)
-BD_CXXFLAGS := $(LTO_CFLAGS) $(BD_CXXFLAGS)
-endif
-endif
 ifneq (%(includedir),)
 BD_CFLAGS    += -I%(includedir)
 BD_CXXFLAGS += -I%(includedir)
 endif
-BD_CPPFLAGS := %(cppflags)
 BD_AFLAGS    := %(aflags)
 BD_DFLAGS    := %(dflags)
 BD_DXXFLAGS := %(dxxflags)
@@ -2338,9 +2294,9 @@ BD_DXXFLAGS := %(dxxflags)
 ifneq ($(filter $(TARGET),%(mmake) %(mmake)-quick),)
 
 %rule_compile_cxx_multi basenames=$(BD_CXXFILES) targetdir="%(objdir)" \
-    compiler="%(compiler)" cxxflags=$(BD_CXXFLAGS) cppflags=$(BD_CPPFLAGS) dxxflags=$(BD_DXXFLAGS)
+    compiler="%(compiler)" cxxflags=$(BD_CXXFLAGS) dxxflags=$(BD_DXXFLAGS)
 %rule_compile_multi basenames=$(BD_FILES) targetdir="%(objdir)" \
-    compiler="%(compiler)" cflags=$(BD_CFLAGS) cppflags=$(BD_CPPFLAGS) dflags=$(BD_DFLAGS)
+    compiler="%(compiler)" cflags=$(BD_CFLAGS) dflags=$(BD_DFLAGS)
 %rule_assemble basename=% targetdir="%(objdir)" \
     aflags=$(BD_AFLAGS)
 
@@ -2429,9 +2385,9 @@ endif
 #-----------------------------------------------------------------------------
 # Build icons.
 # - mmake is the mmaketarget
-# - icons is a list of icon base names (i.e. without the .info suffix)
+# - icons is a list of icon base names (ie. without the .info suffix)
 # - dir is the destination directory
-# - srcdir is where *.png and *.info.src are sought
+# - srcdir is where *.png and *.info.src are searched
 #-----------------------------------------------------------------------------
 
 %define build_icons mmake=/A icons=/A dir=/A srcdir=$(SRCDIR)/$(CURDIR) image=
@@ -2485,14 +2441,14 @@ GLOB_MKDIRS += %(dir)
 # - compiler: (host, kernel or target) specifies which compiler to use. By default
 #   the target compiler is used
 %define build_archspecific files= cxxfiles= asmfiles= linklibfiles= linklibobjs= mainmmake=/A maindir=/A arch=/A \
-cflags=$(CFLAGS) cppflags=$(CPPFLAGS) dflags= aflags=$(AFLAGS) compiler=target modulename=
+cflags=$(CFLAGS) dflags= aflags=$(AFLAGS) compiler=target modulename=
 
 ifeq (%(files) %(linklibfiles) %(linklibobjs) %(asmfiles),)
-    $(error no files or asmfiles given)
+  $(error no files or asmfiles given)
 endif
 
 ifneq (%(cxxfiles),)
-    $(error cxx support is TODO)
+  $(error cxx support is TODO)
 endif
 
 %buildid targets="%(mainmmake)-%(arch)"
@@ -2553,16 +2509,10 @@ GLOB_MKDIRS += $(BD_OBJDIR$(BDID)) $(BD_LIBOBJDIR$(BDID))
 %(mainmmake)-%(arch)-quick :: $(BD_OBJS$(BDID))
 
 ifeq ($(findstring %(compiler),host kernel target),)
-    $(error unknown compiler %(compiler))
-endif
-ifneq (%(modulename),)
-$(BD_FILEOBJS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_CFLAGS:=%(cflags) -I$(GENDIR)/%(maindir) $(BD_DEFLIBDEFSINC$(BDID)) %(cppflags)
-else
-$(BD_FILEOBJS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_CFLAGS:=%(cflags) %(cppflags)
+  $(error unknown compiler %(compiler))
 endif
 ifeq (%(compiler),target)
-$(BD_FILEOBJS$(BDID)) $(BD_DEPS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_CMD:=$(TARGET_CC) $(TARGET_SYSROOT)
-$(BD_FILEOBJS$(BDID)) $(BD_DEPS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_CFLAGS:=$(TMP_CFLAGS) $(SAFETY_CFLAGS)
+$(BD_FILEOBJS$(BDID)) $(BD_DEPS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_CMD:=$(TARGET_CC) $(TARGET_SYSROOT) $(TARGET_CFLAGS) -D__ENABLE_HIDDEN_LIBAPI__
 $(BD_FILEOBJS$(BDID)) $(BD_DEPS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_IQUOTE:=$(CFLAGS_IQUOTE)
 $(BD_FILEOBJS$(BDID)) $(BD_DEPS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_IQUOTE_END:=$(CFLAGS_IQUOTE_END)
 endif
@@ -2572,12 +2522,15 @@ $(BD_FILEOBJS$(BDID)) $(BD_DEPS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_IQUOTE:=$
 $(BD_FILEOBJS$(BDID)) $(BD_DEPS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_IQUOTE_END:=$(HOST_IQUOTE_END)
 endif
 ifeq (%(compiler),kernel)
-$(BD_FILEOBJS$(BDID)) $(BD_DEPS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_CMD:=$(KERNEL_CC) $(KERNEL_SYSROOT)
-$(BD_FILEOBJS$(BDID)) $(BD_DEPS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_CFLAGS:=$(KERNEL_CFLAGS) $(TMP_CFLAGS)
+$(BD_FILEOBJS$(BDID)) $(BD_DEPS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_CMD:=$(KERNEL_CC) $(KERNEL_SYSROOT) $(KERNEL_CFLAGS)
 $(BD_FILEOBJS$(BDID)) $(BD_DEPS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_IQUOTE:=$(KERNEL_IQUOTE)
 $(BD_FILEOBJS$(BDID)) $(BD_DEPS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_IQUOTE_END:=$(KERNEL_IQUOTE_END)
 endif
-
+ifneq (%(modulename),)
+$(BD_FILEOBJS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_CFLAGS:=%(cflags) -I$(GENDIR)/%(maindir) $(BD_DEFLIBDEFSINC$(BDID))
+else
+$(BD_FILEOBJS$(BDID)) $(BD_LINKLIBOBJS$(BDID)) : TMP_CFLAGS:=%(cflags)
+endif
 ifeq ($(TARGET),$(BD_TARGET))
 $(BD_LIBOBJDIR$(BDID))/%.o : $(SRCDIR)/$(CURDIR)/%.c
 	%compile_q cmd=$(TMP_CMD) opt=$(TMP_CFLAGS) iquote=$(TMP_IQUOTE) iquote_end=$(TMP_IQUOTE_END)
@@ -2586,9 +2539,9 @@ $(BD_OBJDIR$(BDID))/%.o : $(SRCDIR)/$(CURDIR)/%.c
 endif
 
 ifeq (%(dflags),)
-$(BD_DEPS$(BDID)) : TMP_DFLAGS:=%(cflags) $(BD_DEFLIBDEFSINC$(BDID)) %(cppflags)
+$(BD_DEPS$(BDID)) : TMP_DFLAGS:=%(cflags) $(BD_DEFLIBDEFSINC$(BDID))
 else
-$(BD_DEPS$(BDID)) : TMP_DFLAGS:=%(dflags) %(cppflags)
+$(BD_DEPS$(BDID)) : TMP_DFLAGS:=%(dflags)
 endif
 ifeq ($(TARGET),$(BD_TARGET))
 $(BD_LIBOBJDIR$(BDID))/%.d : $(SRCDIR)/$(CURDIR)/%.c
@@ -2617,7 +2570,7 @@ endif
 %define ctoasm_q
 %.s : %.c
 	@$(ECHO) "Generating $(CURDIR)/$(notdir $@)..."
-	@$(TARGET_CC) $(TARGET_SYSROOT) -S $(CFLAGS) $(CPPFLAGS) $< -c -o $@
+	@$(TARGET_CC) $(TARGET_SYSROOT) -S $(CFLAGS) $(TARGET_CFLAGS) $< -c -o $@
 %end
 #------------------------------------------------------------------------------
 
@@ -2694,6 +2647,7 @@ endif
 $(BD_INCL_FILES) : $(GENINCDIR)/%(path)/% : $(BD_INC_PATH)%
 	@$(CP) $< $@
 
+
 ifeq (%(compiler),target)
 
 ifneq (%(dir),)
@@ -2721,7 +2675,7 @@ GLOB_MKDIRS += $(dir $(BD_INCL_FILES))
 
 
 #------------------------------------------------------------------------------
-%define make_hidd_stubs hidd=/A cflags=$(CFLAGS) cppflags=$(CPPFLAGS) dflags=$(CFLAGS) parenttarget=linklibs
+%define make_hidd_stubs hidd=/A cflags=$(CFLAGS) dflags=$(CFLAGS) parenttarget=linklibs
 STUBS_SRC := $(addprefix $(SRCDIR)/$(CURDIR)/,$(addsuffix .c,$(STUBS)))
 STUBS_MEM := $(addsuffix .o,$(STUBS))
 STUBS_OBJ := $(addprefix $(OBJDIR)/,$(STUBS_MEM))
@@ -2737,10 +2691,10 @@ $(HIDD_LIB)($(STUBS_MEM)) : $(STUBS_OBJ)
 	%mklib_q from=$^
 
 $(STUBS_OBJ) : $(STUBS_SRC) 
-	%compile_q cmd="$(TARGET_CC) $(TARGET_SYSROOT)" opt="%(cflags) %(cppflags)" iquote=$(CFLAGS_IQUOTE) iquote_end=$(CFLAGS_IQUOTE_END)
+	%compile_q cmd="$(TARGET_CC) $(TARGET_SYSROOT) $(TARGET_CFLAGS)" opt="%(cflags)" iquote=$(CFLAGS_IQUOTE) iquote_end=$(CFLAGS_IQUOTE_END)
 
 $(STUBS_DEP) : $(STUBS_SRC)
-	%mkdepend_q flags="%(dflags) %(cppflags)"
+	%mkdepend_q flags="%(dflags)"
 
 setup ::
 	%mkdirs_q $(OBJDIR) $(AROS_LIB)
@@ -2786,11 +2740,6 @@ DEPS := $(DEPS) $(STUBS_DEP)
 #     - aros_prefix     = set a path which is valid within the AROS filesystem.
 #                         Defaults to the value of the prefix option.
 #     - extraoptions    = additional options for the configure script.
-#     - usecppflags      = enable the use of cpp flags. some external configure
-#                         scripts will not set their own cppflags if it is already
-#                         set, so this allows them to be disabled (unless you can provide
-#                         all the options they would need)
-#     - extracppflags      = additional preprocessor flags.
 #     - extracflags     = additional flags to use with the C compiler.
 #     - extracxxflags   = additional flags to use with the C++ compiler.
 #     - nix_dir_layout  = if yes the binary will be stored in a bin subdirectory.
@@ -2837,12 +2786,10 @@ DEPS := $(DEPS) $(STUBS_DEP)
 # endif
 #
 
-%define build_with_configure mmake=/A package= srcdir=$(SRCDIR)/$(CURDIR) \
-    prefix= gendir= basedir=$(CURDIR) extraoptions= \
-    usecppflags=yes extracppflags= extracflags="$(OPTIMIZATION_CFLAGS)" extracxxflags="$(OPTIMIZATION_CFLAGS)" \
-    aros_prefix= nix_dir_layout= nix=no compiler=target crossbuild=no \
+%define build_with_configure mmake=/A package= srcdir=$(SRCDIR)/$(CURDIR) gendir= prefix= \
+    aros_prefix= extraoptions= extracflags= extracxxflags= nix_dir_layout= nix=no compiler=target \
     install_target=install preconfigure= postconfigure= postinstall= \
-    config_env_extra= install_env= use_build_env=no buildflags=yes gnuflags=yes
+    config_env_extra= install_env= use_build_env=no gnuflags=yes
 
 ifneq (%(prefix),)
     %(mmake)-prefix := %(prefix)
@@ -2877,7 +2824,7 @@ endif
 %(mmake)-volfunc = $(%(mmake)-volpfx)$(notdir $1)$(%(mmake)-volsfx)
 
 %(mmake)-install_opts := prefix=$(%(mmake)-prefix) \
-        exec_prefix=$(%(mmake)-prefix) %(install_env)
+	exec_prefix=$(%(mmake)-prefix) %(install_env)
 
 # Check if chosen compiler is valid
 ifeq ($(findstring %(compiler),host target kernel),)
@@ -2887,31 +2834,25 @@ endif
 # Set legacy 'host' variable based on chosen compiler
 ifeq (%(compiler),host)
     host := yes
-    ifeq (%(basedir),)
-        %(mmake)-pkgbasedir := $(HOSTGENDIR)
+    ifeq (%(package),)
+        %(mmake)-pkgdir := $(HOSTGENDIR)/$(CURDIR)
     else
-        %(mmake)-pkgbasedir := $(HOSTGENDIR)/%(basedir)
+        %(mmake)-pkgdir := $(HOSTGENDIR)/$(CURDIR)/%(package)
     endif
 else
     host := no
-    ifeq (%(basedir),)
-        %(mmake)-pkgbasedir := $(GENDIR)
+    ifeq (%(package),)
+        %(mmake)-pkgdir := $(GENDIR)/$(CURDIR)
     else
-        %(mmake)-pkgbasedir := $(GENDIR)/%(basedir)
+        %(mmake)-pkgdir := $(GENDIR)/$(CURDIR)/%(package)
     endif
 endif
 ifneq (%(gendir),)
-    ifeq (%(basedir),)
-        %(mmake)-pkgbasedir := %(gendir)
+    ifeq (%(package),)
+        %(mmake)-pkgdir := %(gendir)/$(CURDIR)
     else
-        %(mmake)-pkgbasedir := %(gendir)/%(basedir)
+        %(mmake)-pkgdir := %(gendir)/$(CURDIR)/%(package)
     endif
-endif
-
-ifeq (%(package),)
-    %(mmake)-pkgdir := $(%(mmake)-pkgbasedir)
-else
-    %(mmake)-pkgdir := $(%(mmake)-pkgbasedir)/%(package)
 endif
 
 %(mmake)-configflag := $(%(mmake)-pkgdir)/.configured
@@ -2931,9 +2872,9 @@ else
     %(mmake)-PROGDIR := $(%(mmake)-aros_prefix)
     
     %(mmake)-install_opts := bindir=$(%(mmake)-prefix) \
-        sbindir=$(%(mmake)-prefix) \
-        libdir=$(AROS_LIB) includedir=$(AROS_INCLUDES) \
-        oldincludedir=$(AROS_INCLUDES) %(install_env)
+	sbindir=$(%(mmake)-prefix) \
+	libdir=$(AROS_LIB) includedir=$(AROS_INCLUDES) \
+	oldincludedir=$(AROS_INCLUDES) %(install_env)
 endif
 
 ifneq ($(DEBUG),yes)
@@ -2947,7 +2888,7 @@ ifeq (%(compiler),host)
     # since that won't get picked up during configure.
     # We also cannot pass in the compiler including std flags so we need to use
     # the "plain" host compiler.
-    %(mmake)-cfg-env := %(config_env_extra) \
+    CONFIG_ENV := %(config_env_extra) \
         CPP="$(HOST_CPP)" \
         CXXCPP="$(HOST_CPP)" \
         CC="$(HOST_DEF_CC) $(HOST_CFLAGS) -I$(CROSSTOOLSDIR)/include" \
@@ -2965,81 +2906,54 @@ ifeq (%(compiler),host)
         TARGET_OBJCOPY="$(TARGET_OBJCOPY)"
 endif
 ifeq (%(compiler),target)
-    %(mmake)-cfg-env := %(config_env_extra) \
-        PKG_CONFIG_LIBDIR="$(AROS_DEVELOPER)/lib/pkgconfig" \
-        PKG_CONFIG_SYSROOT_DIR="$(AROSDIR)"
-    %(mmake)-cfg-env += CPP="$(strip $(TARGET_CPP) $(TARGET_SYSROOT))" \
-        CXXCPP="$(strip $(TARGET_CPP) $(TARGET_SYSROOT))" \
-        CC="$(strip $(TARGET_CC) $(TARGET_SYSROOT))" \
-        CXX="$(strip $(TARGET_CXX) $(TARGET_SYSROOT))" \
-        LD="$(strip $(TARGET_LD))"
-ifeq (%(crossbuild),yes)
-    %(mmake)-cfg-env += CFLAGS="$(strip $(ISA_FLAGS) $(USER_INCLUDES) $(BASE_CFLAGS) $(USER_CFLAGS) %(extracflags) $(%(mmake)-s_flag))" \
-        CXXFLAGS="$(strip $(ISA_FLAGS) $(USER_INCLUDES) $(BASE_CXXFLAGS) $(USER_CXXFLAGS) %(extracxxflags) $(%(mmake)-s_flag))"
-ifeq (%(usecppflags),yes)
-    %(mmake)-cfg-env += CPPFLAGS="$(strip $(USER_CPPFLAGS) %(extracppflags))"
-endif
-else
-    %(mmake)-cfg-env += CFLAGS="$(strip $(ISA_FLAGS) $(USER_INCLUDES) $(BASE_CFLAGS) $(USER_CFLAGS) %(extracflags) $(%(mmake)-nix) $(%(mmake)-s_flag))" \
-        CXXFLAGS="$(strip $(ISA_FLAGS) $(USER_INCLUDES) $(BASE_CXXFLAGS) $(USER_CXXFLAGS) %(extracxxflags) $(%(mmake)-nix) $(%(mmake)-s_flag))"
-ifeq (%(usecppflags),yes)
-    %(mmake)-cfg-env += CPPFLAGS="$(strip $(USER_CPPFLAGS) %(extracppflags))"
-endif
-endif
-    %(mmake)-cfg-env += LDFLAGS="$(strip -L$(AROS_DEVELOPER)/lib $(USER_LDFLAGS) $(%(mmake)-nix) $(%(mmake)-s_flag))" \
-        CC_FOR_BUILD="$(strip $(HOST_DEF_CC))" \
-        CFLAGS_FOR_BUILD="$(strip $(HOST_CFLAGS) $(%(mmake)-s_flag))" \
-        CXX_FOR_BUILD="$(strip $(HOST_CXX))" \
-        CXXFLAGS_FOR_BUILD="$(strip $(HOST_CXXFLAGS) $(%(mmake)-s_flag))" \
-        LD_FOR_BUILD="$(strip $(HOST_LD))" \
-        LDFLAGS_FOR_BUILD="$(strip $(HOST_LDFLAGS) $(%(mmake)-s_flag))" \
-        CC_FOR_HOST="$(strip $(TARGET_CC) $(TARGET_SYSROOT))" \
-        CFLAGS_FOR_HOST="$(strip $(ISA_FLAGS) $(USER_INCLUDES) $(BASE_CFLAGS) $(USER_CFLAGS) -L$(AROS_DEVELOPER)/lib %(extracflags) $(%(mmake)-nix) $(%(mmake)-s_flag))" \
-        CXX_FOR_HOST="$(strip $(TARGET_CXX) $(TARGET_SYSROOT))" \
-        CXXFLAGS_FOR_HOST="$(strip $(ISA_FLAGS) $(USER_INCLUDES) $(BASE_CXXFLAGS) $(USER_CXXFLAGS) -L$(AROS_DEVELOPER)/lib %(extracxxflags) $(%(mmake)-nix) $(%(mmake)-s_flag))" \
-        LD_FOR_HOST="$(strip $(TARGET_LD))" \
-        LDFLAGS_FOR_HOST="$(strip -L$(AROS_DEVELOPER)/lib $(USER_LDFLAGS) $(%(mmake)-nix) $(%(mmake)-s_flag))" \
-        CC_FOR_TARGET="$(strip $(TARGET_CC) $(TARGET_SYSROOT))" \
-        CFLAGS_FOR_TARGET="$(strip $(ISA_FLAGS) $(USER_INCLUDES) $(BASE_CFLAGS) $(USER_CFLAGS) -L$(AROS_DEVELOPER)/lib %(extracflags) $(%(mmake)-nix) $(%(mmake)-s_flag))" \
-        CXX_FOR_TARGET="$(strip $(TARGET_CXX) $(TARGET_SYSROOT))" \
-        CXXFLAGS_FOR_TARGET="$(strip $(ISA_FLAGS) $(USER_INCLUDES) $(BASE_CXXFLAGS) $(USER_CXXFLAGS) -L$(AROS_DEVELOPER)/lib %(extracxxflags) $(%(mmake)-nix) $(%(mmake)-s_flag))" \
-        LD_FOR_TARGET="$(strip $(TARGET_LD))" \
-        LDFLAGS_FOR_TARGET="$(strip -L$(AROS_DEVELOPER)/lib $(USER_LDFLAGS) $(%(mmake)-nix) $(%(mmake)-s_flag))" \
-        AR="$(strip $(AR_PLAIN))" \
-        AS="$(strip $(TARGET_AS))" \
-        OBJCOPY="$(strip $(OBJCOPY))" \
-        RANLIB="$(strip $(RANLIB))" \
-        STRIP="$(strip $(STRIP_PLAIN))" \
-        TARGET_CC="$(strip $(KERNEL_CC) $(KERNEL_SYSROOT))" \
-        TARGET_CFLAGS="$(strip $(KERNEL_CFLAGS) $(%(mmake)-s_flag))" \
-        TARGET_CXX="$(strip $(KERNEL_CXX) $(KERNEL_SYSROOT))" \
-        TARGET_CXXFLAGS="$(strip $(KERNEL_CXXFLAGS) $(%(mmake)-s_flag))" \
-        TARGET_AS="$(strip $(TARGET_AS))" \
-        TARGET_RANLIB="$(strip $(RANLIB))" \
-        TARGET_STRIP="$(strip $(STRIP_PLAIN))" \
-        TARGET_NM="$(strip $(NM_PLAIN))"
-ifeq (%(buildflags),yes)
-    %(mmake)-config_opts += --target=$(AROS_TARGET_CPU)-aros
-    %(mmake)-config_opts += --build=$(AROS_HOST_CPU)-$(AROS_HOST_ARCH)
-    %(mmake)-config_opts += --host=$(AROS_TARGET_CPU)-aros
-endif
+    CONFIG_ENV := %(config_env_extra) \
+        PKG_CONFIG_LIBDIR="$(AROS_DEVELOPMENT)/lib/pkgconfig" \
+        PKG_CONFIG_SYSROOT_DIR="$(AROSDIR)" \
+        CPP="$(TARGET_CPP) $(TARGET_SYSROOT)" \
+        CXXCPP="$(TARGET_CPP) $(TARGET_SYSROOT)" \
+        CC="$(TARGET_CC) $(TARGET_SYSROOT)" \
+        CFLAGS=" $(TARGET_CFLAGS) $(DEBUG_CFLAGS) $(OPTIMIZATION_CFLAGS) %(extracflags) $(ISA_FLAGS) -newclib $(%(mmake)-nix) $(%(mmake)-s_flag)" \
+        CXX="$(TARGET_CXX) $(TARGET_SYSROOT)" \
+        CXXFLAGS=" $(TARGET_CXXFLAGS) $(DEBUG_CFLAGS) $(OPTIMIZATION_CFLAGS) %(extracxxflags) $(ISA_FLAGS) -newclib $(%(mmake)-nix) $(%(mmake)-s_flag)" \
+        LDFLAGS="-L$(AROS_DEVELOPMENT)/lib $(USER_LDFLAGS) -newclib $(%(mmake)-nix) $(%(mmake)-s_flag)" \
+        AS="$(TARGET_AS)" \
+        CC_FOR_BUILD="$(HOST_DEF_CC)" \
+        CFLAGS_FOR_BUILD="$(HOST_CFLAGS)" \
+        CXX_FOR_BUILD="$(HOST_CXX)" \
+        CXXFLAGS_FOR_BUILD="$(HOST_CXXFLAGS)" \
+        RANLIB="$(RANLIB)" \
+        AR="$(AR_PLAIN)" \
+        STRIP="$(STRIP_PLAIN)" \
+        TARGET_CC="$(KERNEL_CC) $(KERNEL_SYSROOT)" \
+        TARGET_CFLAGS="$(KERNEL_CFLAGS) $(%(mmake)-s_flag)" \
+        TARGET_CXX="$(KERNEL_CXX) $(KERNEL_SYSROOT)" \
+        TARGET_CXXFLAGS="$(KERNEL_CXXFLAGS) $(%(mmake)-s_flag)" \
+        TARGET_AS="$(TARGET_AS)" \
+        OBJCOPY="$(OBJCOPY)" \
+        TARGET_RANLIB="$(RANLIB)" \
+        TARGET_STRIP="$(STRIP_PLAIN)" \
+        TARGET_NM="$(NM_PLAIN)" \
+        CC_FOR_TARGET="$(TARGET_CC) $(TARGET_SYSROOT)" \
+        CFLAGS_FOR_TARGET="$(TARGET_CFLAGS) -L$(AROS_DEVELOPMENT)/lib %(extracflags) $(ISA_FLAGS) -newclib $(%(mmake)-nix) $(%(mmake)-s_flag)" \
+        CXX_FOR_TARGET="$(TARGET_CXX) $(TARGET_SYSROOT)" \
+        CXXFLAGS_FOR_TARGET="$(TARGET_CFLAGS) -L$(AROS_DEVELOPMENT)/lib %(extracxxflags) $(ISA_FLAGS) -newclib $(%(mmake)-nix) $(%(mmake)-s_flag)"
 ifeq (%(gnuflags),yes)
-    %(mmake)-config_opts += --without-pic --disable-shared
-    %(mmake)-config_opts += --disable-nls --without-x
+    %(mmake)-config_opts += --build=$(AROS_HOST_CPU)-$(AROS_HOST_ARCH)\
+        --host=$(AROS_TARGET_CPU)-aros\
+        --target=$(AROS_TARGET_CPU)-aros\
+        --disable-nls\
+        --without-x --without-pic --disable-shared
 endif
 endif
 ifeq (%(compiler),kernel)
-    %(mmake)-cfg-env := %(config_env_extra) \
+    CONFIG_ENV := %(config_env_extra) \
         CPP="$(KERNEL_CPP)" \
         CXXCPP="$(KERNEL_CPP)" \
         CC="$(KERNEL_CC) $(KERNEL_SYSROOT)" \
-        CFLAGS="$(strip $(KERNEL_CFLAGS) %(extracflags) $(%(mmake)-s_flag))" \
+        CFLAGS="$(KERNEL_CFLAGS) %(extracflags) $(%(mmake)-s_flag)" \
         CXX="$(KERNEL_CXX) $(KERNEL_SYSROOT)" \
-        CXXFLAGS="$(strip $(KERNEL_CXXFLAGS) %(extracxxflags) $(%(mmake)-s_flag))"
-ifeq (%(usecppflags),yes)
-    %(mmake)-cfg-env += CPPFLAGS="$(strip $(KERNEL_CPPFLAGS) %(extracppflags))"
-endif
-    %(mmake)-cfg-env += AS="$(KERNEL_AS)" \
+        CXXFLAGS="$(KERNEL_CXXFLAGS) %(extracxxflags) $(%(mmake)-s_flag)" \
+        AS="$(KERNEL_AS)" \
         CC_FOR_BUILD="$(HOST_DEF_CC)" \
         CFLAGS_FOR_BUILD="$(HOST_CFLAGS)" \
         CXX_FOR_BUILD="$(HOST_CXX)" \
@@ -3048,37 +2962,17 @@ endif
         TARGET_RANLIB="$(RANLIB)" \
         TARGET_STRIP="$(STRIP_PLAIN)" \
         TARGET_NM="$(NM_PLAIN)"
-ifeq (%(buildflags),yes)
-    %(mmake)-config_opts += --target=$(AROS_TARGET_CPU)-aros
-    %(mmake)-config_opts += --build=$(AROS_HOST_CPU)-$(AROS_HOST_ARCH)
-    %(mmake)-config_opts += --host=$(AROS_TARGET_CPU)-aros
-endif
 ifeq (%(gnuflags),yes)
-    %(mmake)-config_opts += --without-pic --disable-shared
-    %(mmake)-config_opts += --disable-nls --without-x
+    %(mmake)-config_opts += --build=$(AROS_HOST_CPU)-$(AROS_HOST_ARCH)\
+        --host=$(AROS_TARGET_CPU)-aros\
+        --target=$(AROS_TARGET_CPU)-aros --disable-nls\
+        --without-x --without-pic --disable-shared
 endif
 endif
 
 ifeq (%(use_build_env),yes)
-    BUILD_ENV := $(%(mmake)-cfg-env)
+    BUILD_ENV := $(CONFIG_ENV)
 endif
-
-ifneq ("$(wildcard %(srcdir)/Makefile)","")
-# in an ideal world, we would depend on the files in the source directory,
-# so we could copy them when they change. unfortunately filenames with
-# spaces causes problems with this
-$(%(mmake)-pkgdir)/.local-copy:
-	%mkdirs_q $(%(mmake)-pkgdir)
-	@$(ECHO) "Copying Local-Build Sources to  \`$(patsubst $(TOP)/%,%,$(abspath $(%(mmake)-pkgdir)))'"
-	@$(CP) -Rf "%(srcdir)/." $(%(mmake)-pkgdir)/ && $(TOUCH) $@
-
-$(%(mmake)-pkgdir)/.files-touched : $(%(mmake)-pkgdir)/.local-copy
-
-    %(mmake)-cfg-srcdir=$(%(mmake)-pkgdir)
-else
-    %(mmake)-cfg-srcdir=%(srcdir)
-endif
-%(mmake)-make-env := -C $(%(mmake)-pkgdir)
 
 .PHONY : %(mmake) %(mmake)-clean %(mmake)-build_and_install-quick
 
@@ -3096,14 +2990,13 @@ endif
 # where N > 1.
 ifneq (%(install_target),)
     %(mmake)-install_command = \
-        $(ECHO) "Installing from build in         $(subst $(TOP)/,,$(%(mmake)-pkgdir))" && \
         $(MAKE) PROGDIR="$(%(mmake)-PROGDIR)/" $(%(mmake)-install_opts) \
-        $(%(mmake)-make-env) %(install_target) -j1
+        -C $(%(mmake)-pkgdir) %(install_target) -j1
 
     %(mmake)-uninstall_command = \
     $(RM) $(%(mmake)-installflag) && \
     $(MAKE) PROGDIR="$(%(mmake)-PROGDIR)/" \
-    $(%(mmake)-install_opts) $(%(mmake)-make-env) uninstall
+    $(%(mmake)-install_opts) -C $(%(mmake)-pkgdir) uninstall
 else
     %(mmake)-install_command   := true
     %(mmake)-uninstall_command := true
@@ -3114,21 +3007,18 @@ endif
 #MM
 %(mmake)-build_and_install-quick :  $(%(mmake)-installflag)
 
-#
-# N.B.: the make test for the targets being up to date generates a benign Error 1.
-#
 $(%(mmake)-installflag) : $(%(mmake)-configflag)
-	@$(IF) ! $(MAKE) PROGDIR="$(call %(mmake)-volfunc, PROGDIR)" -q $(%(mmake)-make-env); then \
-	    $(RM) $(%(mmake)-installflag) && \
-	    $(ECHO) "Performing build in         $(subst $(TOP)/,,$(%(mmake)-pkgdir))" && \
-	    $(BUILD_ENV) $(MAKE) PROGDIR="$(call %(mmake)-volfunc, PROGDIR)" $(%(mmake)-make-env) && \
+	if ! $(MAKE) PROGDIR="$(call %(mmake)-volfunc, PROGDIR)" -q -C $(%(mmake)-pkgdir); then \
+            $(RM)  $(%(mmake)-installflag) && \
+	    $(BUILD_ENV) $(MAKE) PROGDIR="$(call %(mmake)-volfunc, PROGDIR)"\
+	     -C $(%(mmake)-pkgdir) && \
 	    $(%(mmake)-install_command) && \
 	    $(TOUCH) $@ -r $^; \
-	fi
+        fi
 
 $(%(mmake)-pkgdir)/.files-touched:
 	%mkdirs_q $(%(mmake)-pkgdir)
-	@find %(srcdir) -exec $(TOUCH) -c -r $(%(mmake)-cfg-srcdir)/configure '{}' \; && \
+	find %(srcdir) -exec $(TOUCH) -c -r %(srcdir)/configure '{}' \; && \
 	$(TOUCH) $@
 
 #MM
@@ -3138,14 +3028,14 @@ $(%(mmake)-pkgdir)/.files-touched:
 #MM
 %(mmake)-configure : $(%(mmake)-configflag)
 
-$(%(mmake)-configflag) : TMP_SRCDIR := $(shell echo $(%(mmake)-cfg-srcdir) | sed 's/^\(.\):\//\/\1\//')
+$(%(mmake)-configflag) : TMP_SRCDIR := $(shell echo %(srcdir) | sed 's/^\(.\):\//\/\1\//')
 $(%(mmake)-configflag) : $(%(mmake)-pkgdir)/.files-touched $(TOP)/$(CURDIR)/mmakefile
-	@$(RM) $@
+	$(RM) $@
 	%mkdirs_q $(%(mmake)-pkgdir)
-	@$(ECHO) "Configuring build in         $(subst $(TOP)/,,$(%(mmake)-pkgdir))"
-	@cd $(%(mmake)-pkgdir) && \
+	cd $(%(mmake)-pkgdir) && \
 	find . -name config.cache -exec $(RM) '{}' \; && \
-	$(%(mmake)-cfg-env) $(TMP_SRCDIR)/configure $(%(mmake)-config_opts) %(extraoptions) && \
+	$(CONFIG_ENV) $(TMP_SRCDIR)/configure $(%(mmake)-config_opts) \
+	    %(extraoptions) && \
 	$(TOUCH) $@
 
 #MM
@@ -3169,19 +3059,12 @@ $(%(mmake)-configflag) : $(%(mmake)-pkgdir)/.files-touched $(TOP)/$(CURDIR)/mmak
 #     - aros_prefix     = set a path which is valid within the AROS filesystem.
 #                         Defaults to the value of the prefix option.
 #     - extraoptions    = additional options for the cmake script.
-#     - usecppflags     = enable the use of cpp flags. some external cmake
-#                         scripts will not set their own cppflags if it is already
-#                         set, so this allows them to be disabled (unless you can provide
-#                         all the options they would need)
-#     - cppflags        = preprocessor flags.
-#     - cflags          = flags to use with the C compiler.
-#     - cxxflags        = flags to use with the C++ compiler.
 #     - installoptions    = additional options for the install step.
 #
 
 %define build_with_cmake mmake=/A package= srcdir=$(SRCDIR)/$(CURDIR) gendir= prefix= \
     aros_prefix= extraoptions= installoptions= maketarget= compiler=target \
-    usecppflags=yes cppflags=$(CPPFLAGS) cflags=$(CFLAGS) cxxflags=$(CXXFLAGS) ldflags=$(LDFLAGS)
+    cflags=$(CFLAGS) cxxflags=$(CXXFLAGS) ldflags=$(LDFLAGS)
 
 ifneq (%(prefix),)
     %(mmake)-prefix := %(prefix)
@@ -3199,12 +3082,7 @@ ifeq (%(compiler),host)
     BD_LDFLAGS   := -L$(CROSSTOOLSDIR)/lib $(USER_LDFLAGS)
     BD_CFLAGS := $(HOST_CFLAGS) -I$(CROSSTOOLSDIR)/include
     BD_CXXFLAGS := $(HOST_CXXFLAGS) -I$(CROSSTOOLSDIR)/include
-    BD_CPPFLAGS := $(HOST_CPPFLAGS)
-    %(mmake)-cmake_opts  := -DCMAKE_INSTALL_PREFIX=$(%(mmake)-prefix) -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="$(HOST_DEF_CC)" -DCMAKE_C_FLAGS="$(strip $(BD_CFLAGS))"
-    ifeq (%(usecppflags),yes)
-        %(mmake)-cmake_opts += -DCMAKE_CPP_FLAGS="$(BD_CPPFLAGS)"
-    endif
-    %(mmake)-cmake_opts += -DCMAKE_CXX_COMPILER="$(HOST_CXX)" -DCMAKE_CXX_FLAGS="$(strip $(BD_CXXFLAGS))"
+    %(mmake)-cmake_opts  := -DCMAKE_INSTALL_PREFIX=$(%(mmake)-prefix) -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="$(HOST_DEF_CC)" -DCMAKE_C_FLAGS="$(BD_CFLAGS)" -DCMAKE_CXX_COMPILER="$(HOST_CXX)" -DCMAKE_CXX_FLAGS="$(BD_CXXFLAGS)"
     ifeq (%(package),)
         %(mmake)-pkgdir := $(HOSTGENDIR)/$(CURDIR)
     else
@@ -3212,14 +3090,9 @@ ifeq (%(compiler),host)
     endif
 else
     BD_LDFLAGS   := %(ldflags)
-    BD_CFLAGS := %(cflags) 
+    BD_CFLAGS := %(cflags)
     BD_CXXFLAGS := %(cxxflags)
-    BD_CPPFLAGS := %(cppflags)
-    %(mmake)-cmake_opts  := -DCMAKE_TOOLCHAIN_FILE=$(GENDIR)/config/conf.cmake -DCMAKE_INSTALL_PREFIX=$(%(mmake)-prefix) -DCMAKE_C_FLAGS="$(strip $(BD_CFLAGS))"
-    ifeq (%(usecppflags),yes)
-        %(mmake)-cmake_opts += -DCMAKE_CPP_FLAGS="$(BD_CPPFLAGS)"
-    endif
-    %(mmake)-cmake_opts  += -DCMAKE_CXX_FLAGS="$(strip $(BD_CXXFLAGS))" -DCMAKE_EXE_LINKER_FLAGS="$(strip $(BD_LDFLAGS))"
+    %(mmake)-cmake_opts  := -DCMAKE_TOOLCHAIN_FILE=$(GENDIR)/config/conf.cmake -DCMAKE_INSTALL_PREFIX=$(%(mmake)-prefix) -DCMAKE_C_FLAGS="$(BD_CFLAGS)" -DCMAKE_CXX_FLAGS="$(BD_CXXFLAGS)" -DCMAKE_EXE_LINKER_FLAGS="$(BD_LDFLAGS)"
     ifeq (%(package),)
         %(mmake)-pkgdir := $(GENDIR)/$(CURDIR)
     else
@@ -3247,13 +3120,13 @@ endif
 %(mmake)-build_and_install-quick :  $(%(mmake)-installflag)
 
 $(%(mmake)-installflag) : $(%(mmake)-cmakeflag)
-	$(IF) ! $(MAKE) -q -C $(%(mmake)-pkgdir); then \
-	    $(RM)  $(%(mmake)-installflag) && \
+	if ! $(MAKE) -q -C $(%(mmake)-pkgdir); then \
+            $(RM)  $(%(mmake)-installflag) && \
 	    $(MAKE) -C $(%(mmake)-pkgdir) %(maketarget) && \
 	    cd $(%(mmake)-pkgdir) && \
 	    cmake %(installoptions) -P cmake_install.cmake && \
 	    $(TOUCH) $@ -r $^; \
-	fi
+        fi
 
 $(%(mmake)-pkgdir)/.files-touched:
 	%mkdirs_q $(%(mmake)-pkgdir)
@@ -3295,7 +3168,7 @@ $(%(mmake)-cmakeflag) : $(%(mmake)-pkgdir)/.files-touched $(TOP)/$(CURDIR)/mmake
 #                         in sequence, until the archive is found and fetching it 
 #                         succeeded. If not specified, the current directory is assumed.
 #     - archive         = the archive name. Mandatory.
-#     - suffixes        = a list of suffixes to append to the package name plus the
+#     - suffixes        = a list of suffixes to append to the the package name plus the
 #                         version. Each one of them is tried until a matching archive is
 #                         found. They are appended to patches and these are tried the
 #                         same way as packages are.
@@ -3331,7 +3204,7 @@ endif
 #MM
 %(mmake) :
 	$(FETCH) -ao "%(archive_origins)" -a %(archive) -s "%(suffixes)" -l $(%(mmake)-location) \
-	-d %(destination) -po "%(patches_origins)" -p "%(patches_specs)"
+        -d %(destination) -po "%(patches_origins)" -p "%(patches_specs)"
 %end
 #------------------------------------------------------------------------------
 
@@ -3425,8 +3298,6 @@ endif
 #    - prefix           = same meaning as the one for the %build_with_configure macro.
 #    - aros_prefix      = same meaning as the one for the %build_with_configure macro.
 #    - extraoptions     = same meaning as the one for the %build_with_configure macro.
-#    - usecppflags      = same meaning as the one for the %build_with_configure macro.
-#    - extracppflags    = same meaning as the one for the %build_with_configure macro.
 #    - extracflags      = same meaning as the one for the %build_with_configure macro.
 #    - extracxxflags    = same meaning as the one for the %build_with_configure macro.
 #    - preconfigure     = same meaning as the one for the %build_with_configure macro.
@@ -3438,11 +3309,10 @@ endif
 #    - nix_dir_layout   = same meaning as the one for the %build_with_configure macro.
 #    - create_pkg       = create a distributable package of the compiled sources, defaults to no
 
-%define fetch_and_build mmake=/A package=/A subpackage= compiler=target crossbuild=no install_target=install \
-    version=/A suffixes="tar.bz2 tar.gz" srcdir= builddir= gendir= basedir=$(CURDIR) package_repo= patch=no patch_repo= \
-    prefix= aros_prefix= preconfigure= postconfigure= postinstall= \
-    extraoptions=  usecppflags=yes extracppflags= extracflags="$(OPTIMIZATION_CFLAGS)" extracxxflags="$(OPTIMIZATION_CFLAGS)" \
-    config_env_extra= install_env= use_build_env=no nix=no nix_dir_layout= create_pkg=no buildflags=yes gnuflags=yes
+%define fetch_and_build mmake=/A package=/A subpackage= compiler=target install_target=install \
+    version=/A suffixes="tar.bz2 tar.gz" srcdir= builddir= gendir= package_repo= patch=no patch_repo= \
+    prefix= aros_prefix= extraoptions= extracflags= extracxxflags= preconfigure= postconfigure= postinstall= \
+    config_env_extra= install_env= use_build_env=no nix=no nix_dir_layout= create_pkg=no gnuflags=yes
 
 #MM- %(mmake)-quick : %(mmake)-%(subpackage)-quick
 #MM- %(mmake)-%(subpackage)-quick : %(mmake)-%(subpackage)-fetch
@@ -3509,12 +3379,12 @@ ifneq (%(create_pkg),no)
     %(mmake)-%(subpackage)-package := $(%(mmake)-%(subpackage)-package-basename).tar.bz2
 endif
 
-%build_with_configure mmake="%(mmake)-%(subpackage)" package="%(package)" compiler="%(compiler)"  crossbuild="%(crossbuild)" install_target="%(install_target)" \
-     srcdir=$(%(mmake)-portdir)/$(%(mmake)-%(subpackage)-builddir) gendir="%(gendir)" basedir="%(basedir)" \
+%build_with_configure mmake="%(mmake)-%(subpackage)" package="%(package)" compiler="%(compiler)" install_target="%(install_target)" \
+     srcdir=$(%(mmake)-portdir)/$(%(mmake)-%(subpackage)-builddir) gendir="%(gendir)" \
      config_env_extra="%(config_env_extra)" install_env="%(install_env)" use_build_env="%(use_build_env)" \
      nix="%(nix)" nix_dir_layout="%(nix_dir_layout)" prefix=$(%(mmake)-prefix) \
      aros_prefix="%(aros_prefix)" preconfigure="%(preconfigure)" postconfigure="%(postconfigure)" postinstall="%(postinstall) \
-     %(mmake)-%(subpackage)-make-package"  extraoptions="%(extraoptions)" usecppflags="%(usecppflags)" extracppflags="%(extracppflags)" extracflags="%(extracflags)" extracxxflags="%(extracxxflags)" buildflags=%(buildflags) gnuflags=%(gnuflags)
+     %(mmake)-%(subpackage)-make-package"  extraoptions="%(extraoptions)" extracflags="%(extracflags)" extracxxflags="%(extracxxflags)" gnuflags=%(gnuflags)
 
 .PHONY : %(mmake)-%(subpackage)-make-package %(mmake)-%(subpackage)-create-patch
 #MM %(mmake)-%(subpackage)-make-package : %(mmake)-%(subpackage)-quick
@@ -3528,15 +3398,15 @@ endif
 #the package got installed would not exist anymore. 
 #We work this around by using an if statement to manually check the mtimes.
 $(%(mmake)-%(subpackage)-package-basename).tar.bz2 :
-	@$(IF) $(TEST) $(%(mmake)-installflag) -nt $@ || ! $(TEST) -f $@; then \
-	    $(RM) $@ ; \
-	    $(ECHO) "Building   \`$(%(mmake)-%(subpackage)-package-basename).tar.bz2'" ; \
-	    $(MKDIR) -p "$(DISTDIR)/Packages" ; \
-	    $(MKDIR) -p "$(%(mmake)-prefix)" ; \
-	    cd $(%(mmake)-%(subpackage)-package-dir) ; \
-	    tar -cvf $(%(mmake)-%(subpackage)-package-basename).tar * ; \
-	    bzip2 -9 -f $(%(mmake)-%(subpackage)-package-basename).tar ; \
-	fi
+	@$(IF) test $(%(mmake)-installflag) -nt $@ || ! test -f $@; then \
+        $(RM) $@ ; \
+        $(ECHO) "Building   \`$(%(mmake)-%(subpackage)-package-basename).tar.bz2'" ; \
+        mkdir -p "$(DISTDIR)/Packages" ; \
+        mkdir -p "$(%(mmake)-prefix)" ; \
+        cd $(%(mmake)-%(subpackage)-package-dir) ; \
+        tar -cvf $(%(mmake)-%(subpackage)-package-basename).tar * ; \
+        bzip2 -9 -f $(%(mmake)-%(subpackage)-package-basename).tar ; \
+    fi
 %end
 #------------------------------------------------------------------------------
 
@@ -3567,19 +3437,18 @@ $(%(mmake)-%(subpackage)-package-basename).tar.bz2 :
 #    - prefix           = defaults to $(GNUDIR).
 #    - aros_prefix      = defaults to /GNU.
 
-%define fetch_and_build_gnu mmake=/A package=/A subpackage= version=/A crossbuild=no suffixes="tar.bz2 tar.gz" \
+%define fetch_and_build_gnu mmake=/A package=/A subpackage= version=/A suffixes="tar.bz2 tar.gz" \
     srcdir= package_repo= patch=no patch_repo= prefix=$(GNUDIR) \
-    aros_prefix=/GNU config_env_extra= preconfigure= postconfigure= postinstall=  nix=yes \
-    extraoptions=  extracflags="$(OPTIMIZATION_CFLAGS)" extracppflags= extracxxflags="$(OPTIMIZATION_CFLAGS)"
+    aros_prefix=/GNU extraoptions= extracflags= extracxxflags= config_env_extra= preconfigure= postconfigure= postinstall= 
 
 GNU_REPOSITORY := gnu://
 
 %fetch_and_build mmake="%(mmake)" package="%(package)" subpackage="%(subpackage)" version="%(version)" \
-    crossbuild="%(crossbuild)" suffixes="%(suffixes)" srcdir="%(srcdir)" \
+    suffixes="%(suffixes)" srcdir="%(srcdir)" \
     package_repo="%(package_repo) $(GNU_REPOSITORY)%(package)" \
     patch="%(patch)" patch_repo="%(patch_repo)" \
-    prefix="%(prefix)" aros_prefix="%(aros_prefix)" extraoptions="%(extraoptions)" extracflags="%(extracflags)" extracppflags="%(extracppflags)" extracxxflags="%(extracxxflags)" \
-    config_env_extra="%(config_env_extra)" preconfigure="%(preconfigure)" postconfigure="%(postconfigure)" postinstall="%(postinstall)" nix=%(nix)
+    prefix="%(prefix)" aros_prefix="%(aros_prefix)" extraoptions="%(extraoptions)" extracflags="%(extracflags)" extracxxflags="%(extracxxflags)" \
+    config_env_extra="%(config_env_extra)" preconfigure="%(preconfigure)" postconfigure="%(postconfigure)" postinstall="%(postinstall)" nix=yes
 
 %end
 #------------------------------------------------------------------------------
@@ -3587,8 +3456,8 @@ GNU_REPOSITORY := gnu://
 
 #------------------------------------------------------------------------------
 # Same job as the one of %fetch_and_build_gnu, except that this one assumes
-# that the package is a "Developer" package, and as such it needs to be placed
-# under the $(AROS_DEVELOPER) directory, as a default. 
+# that the package is a "Development" package, and as such it needs to be placed
+# under the $(AROS_DEVELOPMENT) directory, as a default. 
 #
 # All the arguments have the same meaning as the ones of the %fetch_and_build_gnu 
 # macro, but notice that %fetch_and_build_gnu_development *doesn't* have a
@@ -3596,24 +3465,22 @@ GNU_REPOSITORY := gnu://
 #
 #     #MM- development-%(package)
 
-%define fetch_and_build_gnu_development package=/A subpackage= version=/A  crossbuild=no suffixes="tar.bz2 tar.gz" \
-    srcdir= package_repo= patch=no patch_repo= prefix=$(AROS_DEVELOPER) \
-    aros_prefix=/Developer config_env_extra= preconfigure= postconfigure= postinstall=  nix=yes \
-    extraoptions=  extracflags="$(OPTIMIZATION_CFLAGS)" extracppflags= extracxxflags="$(OPTIMIZATION_CFLAGS)"
+%define fetch_and_build_gnu_development package=/A subpackage= version=/A suffixes="tar.bz2 tar.gz" \
+    srcdir= package_repo= patch=no patch_repo= prefix=$(AROS_DEVELOPMENT) \
+    aros_prefix=/Development config_env_extra= preconfigure= postconfigure= postinstall=  extraoptions= extracflags= extracxxflags=
 
 #MM- development : development-%(package)
 
 
 %fetch_and_build_gnu mmake="development-%(package)" package="%(package)" subpackage="%(subpackage)" \
-   version="%(version)" crossbuild="%(crossbuild)" suffixes="%(suffixes)" srcdir="%(srcdir)" \
-   package_repo="%(package_repo)" \
-   patch="%(patch)" patch_repo="%(patch_repo)" \
-   prefix="%(prefix)"  aros_prefix="%(aros_prefix)" extraoptions="%(extraoptions)" extracflags="%(extracflags)" extracppflags="%(extracppflags)" extracxxflags="%(extracxxflags)" \
-   config_env_extra="%(config_env_extra)" preconfigure="%(preconfigure)" postconfigure="%(postconfigure)" postinstall="postinstall-%(package)-delete-la-files %(postinstall)" nix=%(nix)
+   version="%(version)" suffixes="%(suffixes)" srcdir="%(srcdir)"  \
+   package_repo="%(package_repo)" patch="%(patch)" patch_repo="%(patch_repo)" prefix="%(prefix)" \
+   aros_prefix="%(aros_prefix)" config_env_extra="%(config_env_extra)" preconfigure="%(preconfigure)" postconfigure="%(postconfigure)" postinstall="postinstall-%(package)-delete-la-files %(postinstall)" \
+   extraoptions="%(extraoptions)" extracflags="%(extracflags)" extracxxflags="%(extracxxflags)"
 
 #MM
 postinstall-%(package)-delete-la-files:
-	$(RM) %(prefix)/lib/*.la
+	$(RM) $(AROS_DEVELOPMENT)/lib/*.la
 
 %end
 #------------------------------------------------------------------------------
@@ -3737,14 +3604,11 @@ endif
 
 %(file): KOBJS := $(KOBJS)
 %(file): LDFLAGS := $(TMP_LDFLAGS) $(NOSTARTUP_LDFLAGS) \
-                    -static -nosysbase -Wl,-Ur
+                    -static -nosysbase -newclib -Wl,-Ur
 %(file): LDLIBS := $(addprefix -l, %(uselibs))
 %(file): $(KOBJS) $(DEPLIBS) | $(TMP_DIRS)
 	@$(ECHO) "Kickstart  $(subst $(TARGETDIR)/,,$@)..."
 	@$(TARGET_CC) $(TARGET_SYSROOT) -o $@ $(KOBJS) $(LDFLAGS) $(LDLIBS)
-ifeq ($(DEBUG),yes)
-	@$(STRIP) $@ --only-keep-debug -o $@.dbg
-endif
 	@$(STRIP) $@
 
 %compress_file mmake="%(mmake)" file="%(file)"

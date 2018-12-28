@@ -16,7 +16,7 @@
 
  TheBar class Support Site:  http://www.sf.net/projects/thebar
 
- $Id$
+ $Id: icon.c 47868 2013-08-24 12:59:23Z mazze $
 
 ***************************************************************************/
 

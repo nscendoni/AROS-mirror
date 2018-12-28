@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: WaitForPort.c 47091 2013-03-27 13:06:48Z mazze $
     
     Desc: Waits up to 10 seconds for a user specified Port to become available
     Lang: English

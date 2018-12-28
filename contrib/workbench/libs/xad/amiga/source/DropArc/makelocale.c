@@ -5,7 +5,7 @@
 #define DISTRIBUTION "(LGPL) "
 #define AUTHOR       "by Dirk Stöcker <soft@dstoecker.de>"
 
-/*  $Id$
+/*  $Id: makelocale.c 30794 2009-03-08 02:19:07Z neil $
     handles locale stuff of code
 
     XAD library system for archive handling

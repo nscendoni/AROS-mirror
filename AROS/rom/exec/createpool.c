@@ -1,6 +1,6 @@
 /*
     Copyright (C) 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: createpool.c 51383 2016-01-21 00:29:44Z NicJA $
 
     Desc: Create a memory pool.
     Lang: english

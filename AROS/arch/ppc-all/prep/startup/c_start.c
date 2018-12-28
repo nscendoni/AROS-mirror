@@ -1,6 +1,6 @@
 /*
     c_start.c - description
-    $Id$
+    $Id: c_start.c 41215 2011-09-09 05:59:11Z sonic $
 */
 
 /*

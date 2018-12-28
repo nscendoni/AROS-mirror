@@ -1,6 +1,6 @@
 /*
     Copyright � 2004-2014, Davy Wentzler. All rights reserved.
-    $Id$
+    $Id: misc.h 48701 2014-01-12 00:54:38Z neil $
 */
 
 #ifndef AHI_Drivers_misc_h

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: newminlist.c 45693 2012-08-30 16:13:34Z neil $
 
     Desc: Initialize a list
     Lang: english

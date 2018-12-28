@@ -2,7 +2,7 @@
 #define _SDCARD_BUS_H
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sdcard_bus.h 50393 2015-04-14 19:51:41Z schulz $
 */
 
 #include <exec/types.h>

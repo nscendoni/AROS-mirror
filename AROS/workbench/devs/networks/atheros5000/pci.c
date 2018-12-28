@@ -1,6 +1,6 @@
 /*
 
-Copyright (C) 2004-2013 Neil Cafferkey
+Copyright (C) 2004-2011 Neil Cafferkey
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -77,7 +77,7 @@ const UWORD product_codes[] =
 };
 
 
-static const struct TagItem unit_tags[] =
+static struct TagItem unit_tags[] =
 {
    {IOTAG_AllocDMAMem, (UPINT)AllocDMAMemHook},
    {IOTAG_FreeDMAMem, (UPINT)FreeDMAMemHook},
@@ -531,6 +531,8 @@ static APTR AllocDMAMemHook(struct BusContext *context, UPINT size,
    APTR mem = NULL, original_mem;
 
    base = context->device;
+#ifndef __amigaos4__
+alignment = 4096;
    size += 2 * sizeof(APTR) + alignment;
 #if !(defined(__MORPHOS__) || defined(__amigaos4__))
    if(base->prometheus_base != NULL)
@@ -545,6 +547,10 @@ static APTR AllocDMAMemHook(struct BusContext *context, UPINT size,
       *((APTR *)mem - 1) = original_mem;
       *((UPINT *)mem - 2) = size;
    }
+#else
+if(size < 4000) size = 4000;
+   mem = AllocVec(size, MEMF_PUBLIC);
+#endif
 
    return mem;
 }
@@ -570,6 +576,7 @@ static VOID FreeDMAMemHook(struct BusContext *context, APTR mem)
    struct DevBase *base;
 
    base = context->device;
+#ifndef __amigaos4__
    if(mem != NULL)
    {
 #if !(defined(__MORPHOS__) || defined(__amigaos4__))
@@ -580,6 +587,9 @@ static VOID FreeDMAMemHook(struct BusContext *context, APTR mem)
 #endif
          FreeMem(*((APTR *)mem - 1), *((UPINT *)mem - 2));
    }
+#else
+   FreeVec(mem);
+#endif
 
    return;
 }

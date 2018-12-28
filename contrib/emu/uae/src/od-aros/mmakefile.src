@@ -1,7 +1,7 @@
 # Copyright © 2003, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 52352 2016-03-29 14:32:31Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 UAESRCDIR := $(SRCDIR)/$(CURDIR)
 EXEDIR := $(GENDIR)/$(CURDIR)/..

@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: imageadjust.c 50444 2015-04-21 20:42:54Z neil $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

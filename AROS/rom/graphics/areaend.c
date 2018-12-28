@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: areaend.c 47674 2013-07-14 07:57:29Z neil $
 
     Desc: Graphics function AreaEnd()
     Lang: english

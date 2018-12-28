@@ -1,6 +1,6 @@
 /*
         Copyright © 1995-2002, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: deleterexxmsg.c 45533 2012-08-13 01:42:18Z jmcmullan $
 
     Desc:
     Lang: english

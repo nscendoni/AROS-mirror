@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: page_region.c 48578 2013-12-16 01:50:52Z neil $
 */
 
 #include <aros/debug.h>

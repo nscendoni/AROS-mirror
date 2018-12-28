@@ -1,6 +1,6 @@
 // debug.h
-// $Date$
-// $Revision$
+// $Date: 2016-03-24 00:57:11 +0100 (Thu, 24 Mar 2016) $
+// $Revision: 52211 $
 
 
 #ifndef DEBUG_H

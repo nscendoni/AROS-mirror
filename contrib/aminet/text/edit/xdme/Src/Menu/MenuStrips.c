@@ -73,7 +73,7 @@
 	18 Dec 1992 b_null created
 	20-Jan 1993 b_null added checkitems
 	27 Jan 1993 b_null added multiple menustrips (renamed menubase -> menustrips)
-	$Date$ last update
+	$Date: 2011-01-18 14:26:51 +0100 (Tue, 18 Jan 2011) $ last update
 
 ******************************************************************************/
 

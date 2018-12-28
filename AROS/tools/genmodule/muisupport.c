@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: muisupport.c 51340 2016-01-18 22:44:08Z NicJA $
 
     Support functions for MUI classes. Part of genmodule.
 */

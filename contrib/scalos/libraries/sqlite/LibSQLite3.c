@@ -1,6 +1,6 @@
 // LibSQLite3.c
-// $Date$
-// $Revision$
+// $Date: 2016-10-29 09:01:33 +0200 (Sat, 29 Oct 2016) $
+// $Revision: 53043 $
 
 
 #include <exec/types.h>

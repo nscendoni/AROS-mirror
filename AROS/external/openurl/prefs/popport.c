@@ -14,7 +14,7 @@
 
  openurl.library project: http://sourceforge.net/projects/openurllib/
 
- $Id$
+ $Id: popport.c 51651 2016-03-09 05:38:22Z NicJA $
 
 ***************************************************************************/
 

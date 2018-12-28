@@ -1,6 +1,6 @@
 /*
     Copyright © 2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: patches.h 47193 2013-04-09 07:00:05Z mazze $
 */
 
 #ifndef PATCHES_H

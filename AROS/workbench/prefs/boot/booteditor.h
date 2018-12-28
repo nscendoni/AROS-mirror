@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2009-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: booteditor.h 50168 2015-03-08 19:42:29Z neil $
  */
 
 #include <exec/types.h>

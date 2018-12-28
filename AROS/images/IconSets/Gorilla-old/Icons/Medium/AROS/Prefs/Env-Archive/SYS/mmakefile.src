@@ -1,7 +1,7 @@
 # Copyright © 2004-2007, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 30839 2009-03-11 14:30:37Z NicJA $
 
-include $(SRCDIR)/config/aros.cfg
+include $(TOP)/config/make.cfg
 
 ICONS := \
     def_Disk def_RAM def_Harddisk def_CDROM def_Drawer \

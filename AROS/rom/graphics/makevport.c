@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: makevport.c 49127 2014-07-21 00:00:29Z neil $
 
     Desc: Graphics function MakeVPort()
     Lang: english

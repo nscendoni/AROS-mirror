@@ -1,7 +1,7 @@
 #ifndef XADMASTER_DEBUG_C
 #define XADMASTER_DEBUG_C
 
-/*  $Id$
+/*  $Id: debug.c 36659 2011-01-18 13:26:51Z neil $
     the debug stuff
 
     XAD library system for archive handling

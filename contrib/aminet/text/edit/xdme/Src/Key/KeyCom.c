@@ -181,7 +181,7 @@
 	14-Dec-92  b_null created
 	16-Dec-92  b_null some names updated & introduced currenthash
 	05-08-94   null added STATIC Command Interface
-	$Date$ last update
+	$Date: 2011-01-18 14:26:51 +0100 (Tue, 18 Jan 2011) $ last update
 
 ******************************************************************************/
 

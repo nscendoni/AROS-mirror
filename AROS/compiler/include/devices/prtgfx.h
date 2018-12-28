@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prtgfx.h 43720 2012-01-26 07:00:56Z jmcmullan $
 
     Desc: graphics printer driver structures
     Lang: english

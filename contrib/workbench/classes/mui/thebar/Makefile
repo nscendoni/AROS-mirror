@@ -16,7 +16,7 @@
 #
 # TheBar class Support Site:  http://www.sf.net/projects/thebar
 #
-# $Id$
+# $Id: Makefile 43803 2012-01-30 20:14:47Z mazze $
 #
 #***************************************************************************/
 

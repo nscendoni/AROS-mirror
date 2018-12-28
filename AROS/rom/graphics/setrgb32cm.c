@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setrgb32cm.c 49133 2014-07-22 16:19:09Z neil $
 
     Desc: Graphics function SetRGB32CM()
     Lang: english

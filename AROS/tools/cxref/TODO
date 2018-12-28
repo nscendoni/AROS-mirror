@@ -7,7 +7,7 @@ Better RCS / CVS Formatting
 > Format the RCS / CVS $Log$
 > Format the RCS / CVS Revision 1.2  2004/01/04 19:43:15  galaxy
 > Format the RCS / CVS *** empty log message ***
-> Format the RCS / CVS and $Revision$ keywords similar to the way that the
+> Format the RCS / CVS and $Revision: 30792 $ keywords similar to the way that the
 > $Header$ one is currently formatted.
 
 

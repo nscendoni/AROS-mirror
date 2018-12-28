@@ -1,8 +1,8 @@
 # makefile for PNG icon datatype
 # using GNU make and SAS/C
-# $Date$
-# $Revision$
-# $Id$
+# $Date: 2013-12-01 23:08:26 +0100 (Sun, 01 Dec 2013) $
+# $Revision: 48481 $
+# $Id: makefile 48481 2013-12-01 22:08:26Z mazze $
 #####################################################################
 
 ASRCS =

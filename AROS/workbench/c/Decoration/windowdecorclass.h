@@ -1,6 +1,6 @@
 /*
     Copyright  2011, The AROS Development Team.
-    $Id$
+    $Id: windowdecorclass.h 42816 2011-12-10 10:01:18Z deadwood $
 */
 
 #ifndef WINDOWDECORCLASS_H

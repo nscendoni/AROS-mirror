@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bitmap.h 49647 2014-09-18 23:22:47Z mazze $
 */
 
 #ifndef _MUI_CLASSES_BITMAP_H

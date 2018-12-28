@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2011, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: ahci_init.c 48559 2013-12-10 04:04:04Z jmcmullan $
 
     Desc:
     Lang: English

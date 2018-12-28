@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hwroot.c 47359 2013-05-04 21:15:08Z mazze $
 */
 
 #include <hidd/hidd.h>

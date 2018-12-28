@@ -1,17 +1,17 @@
+=============================
+Download ABIv1 Nightly Builds
+=============================
+
 .. Note::
 
-   - These builds are experimental and not for general consumption. Users should instead
-     download one of the available AROS distributions.
-   - **Binaries/Developer Tools are incompatible with previous ABI versions.**
-   - The use of any information or materials on this page is entirely at your own risk.
-     The AROS Dev Team accepts no liability whatsoever for any loss or damage incurred
-     from using the files listed on this page. 
+   These builds are experimental and not for general consumption.
+   **They are also completely incompatible with other AROS software.**
+   Users should instead download an AROS distribution.
 
 
-Nightly Build Downloads (ABI-v1)
-================================
+Nightly Builds (ABIv1)
+======================
 
 .. raw:: html
 
    <?php virtual( "/cgi-bin/files?type=nightly2&lang=en" ); ?>
-

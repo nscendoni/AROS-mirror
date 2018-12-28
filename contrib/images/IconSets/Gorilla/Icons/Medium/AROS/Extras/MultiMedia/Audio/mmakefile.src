@@ -1,11 +1,11 @@
 # Copyright © 2004, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 49218 2014-08-02 12:15:21Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(TOP)/config/make.cfg
 
 #MM- iconset-Gorilla-contrib-icons-extras-mmedia : iconset-Gorilla-contrib-icons-extras-mmedia-audio
 
-ICONS := PlayCDDA Radium Shellplayer
+ICONS := Radium Shellplayer
 
 #MM- iconset-Gorilla-contrib-icons-extras-mmedia-clean : iconset-Gorilla-contrib-icons-extras-mmedia-audio-clean
 %build_icons mmake=iconset-Gorilla-contrib-icons-extras-mmedia-audio icons=$(ICONS) dir=$(AROS_CONTRIB)/MultiMedia/Audio

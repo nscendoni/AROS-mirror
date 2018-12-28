@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: replymsg.c 49757 2014-11-04 23:12:46Z neil $
 
     Desc: Reply a message
     Lang: english

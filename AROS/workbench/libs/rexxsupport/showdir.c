@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: showdir.c 34755 2010-10-15 14:58:44Z jmcmullan $
 
     Desc: Rexx stub for AllocMem system function
     Lang: English

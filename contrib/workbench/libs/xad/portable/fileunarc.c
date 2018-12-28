@@ -1,7 +1,7 @@
 #ifndef XADMASTER_FILEUNARC_C
 #define XADMASTER_FILEUNARC_C
 
-/*  $Id$
+/*  $Id: fileunarc.c 36659 2011-01-18 13:26:51Z neil $
     unarchiving of file archives
 
     XAD library system for archive handling

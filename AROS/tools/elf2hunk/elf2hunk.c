@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright Â© 1995-2001, The AROS Development Team. All rights reserved.
+    $Id: elf2hunk.c 51582 2016-03-01 04:57:00Z jmcmullan $
 */
 
 #define PROTOTYPES
@@ -568,8 +568,7 @@ static int relocate
                 break;
 
             case R_68K_PC16:
-                bug("[ELF2HUNK] Unsupported relocation type R_68K_PC16,\n");
-                bug("[ELF2HUNK]    for symbol '%s'\n", symname);
+                bug("[ELF2HUNK] Unsupported relocation type R_68K_PC16\n");
                 set_error(EINVAL);
                 return 0;
                 break;
@@ -579,8 +578,7 @@ static int relocate
                 break;
 
             default:
-                bug("[ELF2HUNK] Unrecognized relocation type %d %d,\n", (int)i, (int)ELF_R_TYPE(rel->info));
-                bug("[ELF2HUNK]    for symbol '%s'\n", symname);
+                bug("[ELF2HUNK] Unrecognized relocation type %d %d\n", (int)i, (int)ELF_R_TYPE(rel->info));
                 set_error(EINVAL);
 		return 0;
         }
@@ -900,7 +898,7 @@ int elf2hunk(int file, int hunk_fd, const char *libname, int flags)
 
     /* Write all hunks */
     for (i = hunks = 0; i < int_shnum; i++) {
-    	D(int s;)
+    	int s;
 
     	if (hh[i]==NULL || hh[i]->hunk < 0)
     	    continue;
@@ -910,14 +908,13 @@ int elf2hunk(int file, int hunk_fd, const char *libname, int flags)
 
     	switch (hh[i]->type) {
     	case HUNK_BSS:
-    	    D(
-                bug("HUNK_BSS: %d longs\n", (int)((hh[i]->size + 4) / 4));
-                for (s = 0; s < int_shnum; s++) {
-                    if (hh[s] && hh[s]->type == HUNK_SYMBOL)
-                        sym_dump(hunk_fd, sh, hh, i, s);
-                }
-            )
-
+    	    D(bug("HUNK_BSS: %d longs\n", (int)((hh[i]->size + 4) / 4)));
+if (0) {
+    	    for (s = 0; s < int_shnum; s++) {
+    	    	if (hh[s] && hh[s]->type == HUNK_SYMBOL)
+    	    	    sym_dump(hunk_fd, sh, hh, i, s);
+    	    }
+}
     	    wlong(hunk_fd, HUNK_END);
     	    hunks++;
     	    break;
@@ -927,12 +924,12 @@ int elf2hunk(int file, int hunk_fd, const char *libname, int flags)
     	    err = write(hunk_fd, hh[i]->data, ((hh[i]->size + 4)/4)*4);
     	    if (err < 0)
     	    	return EXIT_FAILURE;
-            D(
-                for (s = 0; s < int_shnum; s++) {
-                    if (hh[s] && hh[s]->type == HUNK_SYMBOL)
-                        sym_dump(hunk_fd, sh, hh, i, s);
-                }
-            )
+if (0) {
+    	    for (s = 0; s < int_shnum; s++) {
+    	    	if (hh[s] && hh[s]->type == HUNK_SYMBOL)
+    	    	    sym_dump(hunk_fd, sh, hh, i, s);
+    	    }
+}
     	    reloc_dump(hunk_fd, hh, i);
     	    wlong(hunk_fd, HUNK_END);
     	    D(bug("\tHUNK_END\n"));
@@ -968,14 +965,6 @@ error:
 
 static int copy(const char *src, const char *dst, int flags);
 
-static BOOL valid_dir(const char *dir)
-{
-    /* Don't convert anything in a Developer directory */
-    if (strcasecmp(dir, "Developer") == 0)
-            return FALSE;
-    return TRUE;
-}
-
 static int copy_dir(const char *src, const char *dst, int flags)
 {
     DIR *sdir;
@@ -1008,8 +997,8 @@ static int copy_dir(const char *src, const char *dst, int flags)
             (strcmp(de->d_name, "..") == 0))
             continue;
 
-        /* Don't convert anything if its an invalid directory */
-        if (!valid_dir(de->d_name))
+        /* Don't convert anything in a Development directory */
+        if (strcasecmp(de->d_name, "Development") == 0)
             eflags |= F_NOCONVERT;
 
         strncpy(sp, de->d_name, sleft);

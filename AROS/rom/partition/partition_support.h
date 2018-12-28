@@ -2,8 +2,8 @@
 #define PARTITION_SUPPORT_H
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: partition_support.h 42896 2011-12-13 06:13:30Z sonic $
 
 */
 
@@ -39,16 +39,16 @@ struct PTFunctionTable
     void        (*closePartitionTable)     (struct Library *, struct PartitionHandle *);
     LONG        (*writePartitionTable)     (struct Library *, struct PartitionHandle *);
     LONG        (*createPartitionTable)    (struct Library *, struct PartitionHandle *);
-    struct PartitionHandle *(*addPartition)(struct Library *, struct PartitionHandle *, const struct TagItem *);
+    struct PartitionHandle *(*addPartition)(struct Library *, struct PartitionHandle *, struct TagItem *);
     void        (*deletePartition)         (struct Library *, struct PartitionHandle *);
-    LONG        (*getPartitionTableAttr)   (struct Library *, struct PartitionHandle *, const struct TagItem *);
-    LONG        (*setPartitionTableAttrs)  (struct Library *, struct PartitionHandle *, const struct TagItem *);
-    LONG        (*getPartitionAttr)        (struct Library *, struct PartitionHandle *, const struct TagItem *);
+    LONG        (*getPartitionTableAttr)   (struct Library *, struct PartitionHandle *, struct TagItem *);
+    LONG        (*setPartitionTableAttrs)  (struct Library *, struct PartitionHandle *, struct TagItem *);
+    LONG        (*getPartitionAttr)        (struct Library *, struct PartitionHandle *, struct TagItem *);
     LONG        (*setPartitionAttrs)       (struct Library *, struct PartitionHandle *, const struct TagItem *);
     const struct PartitionAttribute *partitionTableAttrs;
     const struct PartitionAttribute *partitionAttrs;
     ULONG    	(*destroyPartitionTable) (struct Library *, struct PartitionHandle *);
-    struct Node *(*findFileSystem)	 (struct Library *, struct PartitionHandle *, const struct TagItem *);
+    struct Node *(*findFileSystem)	 (struct Library *, struct PartitionHandle *, struct TagItem *);
 };
 
 struct BootFileSystem

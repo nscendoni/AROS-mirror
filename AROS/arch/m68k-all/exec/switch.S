@@ -1,6 +1,6 @@
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: switch.S 47619 2013-07-02 18:27:20Z neil $
 
     Desc: Switch()
     Lang: english

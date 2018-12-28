@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: interface_pio.c 51603 2016-03-04 00:27:51Z wawa $
 
     Desc: A600/A1200/A4000 ATA HIDD PIO interface functions
     Lang: English
@@ -16,8 +16,8 @@ static void ata_out(struct pio_data *data, UBYTE val, UWORD offset)
 {
     volatile UBYTE *addr;
     addr = data->port;
-    DIO(bug("%p REG %d <- %02X\n", addr, offset, val));
     addr[offset * 4] = val;
+    DIO(bug("%p REG %d <- %02X\n", addr, offset, val));
 }
 static UBYTE ata_in(struct pio_data *data, UWORD offset)
 {

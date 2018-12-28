@@ -1,6 +1,6 @@
 /*
     Copyright  1995-2014, The AROS Development Team.
-    $Id$
+    $Id: decoration.c 49841 2014-12-08 04:10:07Z NicJA $
 */
 
 /******************************************************************************
@@ -52,7 +52,7 @@
 #include "newimage.h"
 #include "config.h"
 
-const TEXT version_string[] = "$VER: Decoration 1.9 (11.01.2017)";
+const TEXT version_string[] = "$VER: Decoration 1.8 (8.12.2014)";
 
 STRPTR __detached_name = "Decorator";
 

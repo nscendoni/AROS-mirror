@@ -1,6 +1,6 @@
 /*
     Copyright © 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: misc.c 45057 2012-06-18 13:09:20Z olivieradam $
 */
 
 #include <exec/types.h>

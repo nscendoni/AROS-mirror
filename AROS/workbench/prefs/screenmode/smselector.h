@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: smselector.h 30792 2009-03-07 22:40:04Z neil $
 */
 
 #ifndef _SMSELECTOR_H

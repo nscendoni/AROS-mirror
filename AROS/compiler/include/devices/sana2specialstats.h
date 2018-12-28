@@ -3,7 +3,7 @@
 
 /*
     Copyright (C) 2005 Neil Cafferkey
-    $Id$
+    $Id: sana2specialstats.h 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Special statistics definitions for SANA-II devices
     Lang: english

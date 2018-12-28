@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freemenus.c 35654 2010-11-20 21:00:40Z jmcmullan $
 
     Desc: Free memory allocated by CreateMenusA()
     Lang: english

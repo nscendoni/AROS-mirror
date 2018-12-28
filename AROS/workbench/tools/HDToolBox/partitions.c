@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: partitions.c 45983 2012-11-02 20:43:31Z neil $
 */
 
 #include <proto/exec.h>

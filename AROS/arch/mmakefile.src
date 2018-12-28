@@ -1,6 +1,5 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
 #MM- distfiles : distfiles-$(AROS_TARGET_ARCH)-$(AROS_TARGET_CPU)
-#MM- distfiles-quick : distfiles-quick-$(AROS_TARGET_ARCH)-$(AROS_TARGET_CPU)

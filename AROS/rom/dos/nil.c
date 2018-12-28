@@ -1,6 +1,6 @@
 /*
     Copyright © 2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: nil.c 49007 2014-05-18 03:39:51Z neil $
 
     Desc: Special handling for NIL: locks and file handles
     Lang: English

@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mui_beginrefresh.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <proto/graphics.h>
@@ -21,7 +21,7 @@
         AROS_LHA(ULONG, flags, D0),
 
 /*  LOCATION */
-        struct Library *, MUIMasterBase, 32, MUIMaster)
+        struct Library *, MUIMasterBase, 28, MUIMaster)
 
 /*  FUNCTION
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Copyright © 2015, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: snapshotports.sh 50634 2015-05-09 13:01:44Z mazze $
 
 # This script simplifies the task of creating snapshots of the ports.
 
@@ -29,26 +29,7 @@ copy()
         echo "Copying '$from' to '$to'"
         mkdir -p "$to"
         cp -r "$from" "$to"
-        if [ -f "$from.info" ] ; then
-            cp "$from.info" "$to"
-        fi
-    else
-        echo "'$from' doesn't exist"
-    fi
-}
-
-copyenv()
-{
-    local target="$1"   # e.g. "pc-i386"
-    local reldir="Prefs/Env-Archive/SYS/Packages"
-    local variable="$2" # e.g. "Lua"
-    local from="$root/build/$target/bin/$target/AROS/$reldir/$variable"
-    local to="$root/bin/AROS-$date-$target-ports/$reldir"
-
-    if [ -f "$from" ] ; then
-        echo "Copying '$from' to '$to'"
-        mkdir -p "$to"
-        cp "$from" "$to"
+        cp -r "$from.info" "$to"
     else
         echo "'$from' doesn't exist"
     fi
@@ -65,58 +46,54 @@ build()
     rm "$builddir" -rf
     mkdir "$builddir" -p
     cd "$builddir"
-    "$srcdir/configure" --target="$target" --with-portssources="$portsdir" --with-binutils-version=2.25 --with-gcc-version=6.3.0
-    make -s -j4
-    make -s -j4 ports
+    "$srcdir/configure" --target="$target" --with-portssources="$portsdir"
+    make -s -j3
+    make -s -j3 ports
+
+    # TODO: copy package variables
 
     echo "Copying the binaries"
     mkdir "$bindir" -p
 
-    copy "$target" "Extras/Developer"               "BWBasic"
-    copy "$target" "Extras/Developer"               "CBMBasic"
-    copy "$target" "Extras/Developer"               "CFlow"
-    copy "$target" "Extras/Developer"               "Ctags"
+    copy "$target" "Extras/MultiMedia/Audio"        "Abcm2ps"
+    copy "$target" "Extras/Development"             "BWBasic"
+    copy "$target" "Extras/Development"             "CBMBasic"
+    copy "$target" "Extras/Development"             "CFlow"
+    copy "$target" "Extras/Development"             "Ctags"
     copy "$target" "Extras/Emu"                     "DOSBox"
     copy "$target" "Extras/Emu"                     "Scummvm"
-    copy "$target" "Extras/Emu"                     "Vbam"
     copy "$target" "Extras/Emu"                     "Vice"
-    copy "$target" "Extras/Games/Platform"          "Abuse"
-    copy "$target" "Extras/Games/Action"            "Biniax2"
-    copy "$target" "Extras/Games/Platform"          "Blobwars"
-    copy "$target" "Extras/Games/Action"            "Bugsquish"
-    copy "$target" "Extras/Games/Action"            "CircusLinux"
-    copy "$target" "Extras/Games/Action"            "Defendguin"
-    copy "$target" "Extras/Games/Puzzle"            "GemDropX"
-    copy "$target" "Extras/Games/Action"            "GnuJump"
-    copy "$target" "Extras/Games/Action"            "GnuRobbo"
-    copy "$target" "Extras/Games/Platform"          "Hurrican"
-    copy "$target" "Extras/Games/Puzzle"            "InterLogic"
-    copy "$target" "Extras/Games/Action"            "KoboDeluxe"
-    copy "$target" "Extras/Games/Action"            "Koules"
-    copy "$target" "Extras/Games/Puzzle"            "LMarbles"
-    copy "$target" "Extras/Games/Puzzle"            "LTris"
-    copy "$target" "Extras/Games/Action"            "MadBomber"
-    copy "$target" "Extras/Games/Adventure"         "Magnetic"
-    copy "$target" "Extras/Games/Puzzle"            "MultiPuzzle"
-    copy "$target" "Extras/Games/Action"            "PenguinCommand"
-    copy "$target" "Extras/Games/Puzzle"            "Pushover"
-    copy "$target" "Extras/Games/Action"            "Rocksndiamonds"
-    copy "$target" "Extras/Games/Action"            "SdlScavenger"
-    copy "$target" "Extras/Games/Action"            "Vectoroids"
-    copy "$target" "Extras/Games/Action"            "WormWars"
-    copy "$target" "Extras/Games/Action"            "Xpired"
-    copy "$target" "Extras/MultiMedia/Audio"        "Abcm2ps"
-    copy "$target" "Extras/MultiMedia/Audio"        "MilkyTracker"
-    copy "$target" "Extras/MultiMedia/Audio"        "Timidity"
+    copy "$target" "Extras/Utilities/Filetool"      "Zaphod"
+    copy "$target" "Extras/Games"                   "Abuse"
+    copy "$target" "Extras/Games"                   "Adv770"
+    copy "$target" "Extras/Games"                   "Biniax2"
+    copy "$target" "Extras/Games"                   "Blobwars"
+    copy "$target" "Extras/Games"                   "Bugsquish"
+    copy "$target" "Extras/Games"                   "CircusLinux"
+    copy "$target" "Extras/Games"                   "Defendguin"
+    copy "$target" "Extras/Games"                   "GemDropX"
+    copy "$target" "Extras/Games"                   "GnuRobbo"
+    copy "$target" "Extras/Games"                   "Hurrican"
+    copy "$target" "Extras/Games"                   "InterLogic"
+    copy "$target" "Extras/Games"                   "KoboDeluxe"
+    copy "$target" "Extras/Games"                   "Koules"
+    copy "$target" "Extras/Games"                   "LMarbles"
+    copy "$target" "Extras/Games"                   "LTris"
+    copy "$target" "Extras/Games"                   "MadBomber"
+    copy "$target" "Extras/Games"                   "Magnetic"
+    copy "$target" "Extras/Games"                   "MultiPuzzle"
+    copy "$target" "Extras/Games"                   "PenguinCommand"
+    copy "$target" "Extras/Games"                   "Pushover"
+    copy "$target" "Extras/Games"                   "SdlScavenger"
+    copy "$target" "Extras/Games"                   "Vectoroids"
+    copy "$target" "Extras/Games"                   "WormWars"
+    copy "$target" "Extras/Games"                   "Xpired"
     copy "$target" "Extras/MultiMedia/Gfx"          "GrafX2"
-    copy "$target" "Extras/MultiMedia/Gfx"          "Lodepaint"
+    copy "$target" "Extras/MultiMedia/Gfx"          "Lunapaint"
     copy "$target" "Extras/MultiMedia/Gfx"          "Potrace"
-    copy "$target" "Extras/MultiMedia/Gfx"          "ZunePaint"
     copy "$target" "Extras/MultiMedia/Gfx"          "ZuneView"
-    copy "$target" "Extras/MultiMedia/Video"        "ScreenRecorder"
     copy "$target" "Extras/Office"                  "MUIbase"
     copy "$target" "Extras/Utilities/Archive"       "ZuneARC"
-    copy "$target" "Extras/Utilities/Filetool"      "Zaphod"
     copy "$target" "Extras/Utilities/Print"         "A2ps"
     copy "$target" "Extras/Utilities/Scientific"    "Mathomatic"
     copy "$target" "Extras/Utilities/Scientific"    "MathX"
@@ -125,11 +102,7 @@ build()
     copy "$target" "Extras/Utilities/Text"          "Gocr"
     copy "$target" "Extras/Utilities/Text"          "PolyglotMan"
     copy "$target" "Extras/Utilities/Text"          "Vim"
-
-    # copy package variables
-    copyenv "$target" "Freepats"
-    copyenv "$target" "MUIbase"
-    copyenv "$target" "Vim"
+    copy "$target" "Extras/MultiMedia/Video"        "ScreenRecorder"
 
     echo "Creating the archive $arcdir/$arcname.tar.bz2"
     mkdir -p "$arcdir"
@@ -156,7 +129,7 @@ if [ $# -eq 1 ] && [ "$1" == "-b" ] ; then
     svn up "$srcdir" "$srcdir/contrib" "$srcdir/ports"
 
     build pc-i386
-    build pc-x86_64
+    #build pc-x86_64
     build amiga-m68k
     #build raspi-armhf
     exit 0

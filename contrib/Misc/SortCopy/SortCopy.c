@@ -1,6 +1,6 @@
 /*
     Copyright © 2000, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: SortCopy.c 47726 2013-07-18 17:53:08Z jmcmullan $
 
     Desc: SortCopy from Thomas Richter
     Lang: English

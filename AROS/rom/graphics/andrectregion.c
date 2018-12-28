@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: andrectregion.c 34366 2010-09-07 09:54:21Z stegerg $
 
     Desc: Graphics function AndRectRegion()
     Lang: english

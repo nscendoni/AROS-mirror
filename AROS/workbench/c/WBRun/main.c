@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: main.c 47693 2013-07-16 00:31:52Z neil $
 
     Desc: WBRun CLI command
     Lang: English

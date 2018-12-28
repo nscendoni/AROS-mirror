@@ -1,6 +1,6 @@
 /*
     Copyright 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sisbridgedeviceclass.c 39382 2011-06-18 20:08:18Z jmcmullan $
 */
 
 #include <hidd/agp.h>

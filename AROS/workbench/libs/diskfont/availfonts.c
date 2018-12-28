@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: availfonts.c 51507 2016-02-21 22:52:09Z mazze $
 
     Desc: Main fileof diskfont function AvailFonts()
     Lang: english

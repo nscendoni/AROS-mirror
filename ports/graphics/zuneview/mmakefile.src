@@ -1,58 +1,32 @@
-# $Id$
+# $Id: mmakefile.src 53101 2016-12-23 22:42:49Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
-#MM- ports-graphics : ports-graphics-$(AROS_TARGET_CPU)
-
-#MM- ports-graphics-i386 : ports-graphics-zuneview
-#MM- ports-graphics-m68k : ports-graphics-zuneview
-#MM- ports-graphics-arm : ports-graphics-zuneview
-#DISABLED #MM- ports-graphics-x86_64 : ports-graphics-zuneview
+#MM- ports-graphics : ports-graphics-zuneview
 
 #MM  ports-graphics-zuneview : \
 #MM    includes linklibs ports-graphics-zuneview-fetch \
-#MM    ports-graphics-zuneview-cpy ports-graphics-zuneview-catalogs
+#MM    ports-graphics-zuneview-cpy
 
 #MM  ports-graphics-zuneview-quick : ports-graphics-zuneview-fetch
 
 REPOSITORIES := sf://zunetools
-ARCHBASE     := ZuneView_v0.37
+ARCHBASE     := ZuneView_v0.31
 TARGETDIR    := $(AROS_CONTRIB)/MultiMedia/Gfx/ZuneView
-
-NOWARN_FLAGS := $(NOWARN_INT_CONVERSION) $(NOWARN_MISLEADING_INDENTATION) $(NOWARN_FORMAT)
+NOWARN_FLAGS := $(NOWARN_INT_TO_POINTER_CAST) $(NOWARN_POINTER_TO_INT_CAST) $(NOWARN_PARENTHESES) $(NOWARN_UNUSED_BUT_SET_VARIABLE) $(NOWARN_UNUSED_CONST_VARIABLE)
 USER_CFLAGS  := $(NOWARN_FLAGS) -DZUNEVIEW -DAROS_ABI_V1
 USER_INCLUDES:= -I$(PORTSDIR)/zuneview/$(ARCHBASE)/ZuneView/src
- 
+
 FILES := \
     SupportFunctions \
     ListTreeHooks \
     Picture_Filter \
-    Picture_Quantize \
     Picture_Artistic \
     Picture_Geometry \
     Picture_IO \
     Picture_Color \
-    Quant_Neu \
-    Quant_Yer \
-    Quant_Octree \
     FilterFunctions \
     mcc_Pictdisp \
-    Win_BCG \
-    Win_Color \
-    Win_Conv \
-    Win_Resize \
-    Win_Barrel \
-    Win_Save \
-    Win_Stat \
-    Win_Art \
-    Win_Polar \
-    Win_Rotation \
-    Win_Vigneting \
-    Win_Quantize \
-    Win_ZVSetting \
-    Win_Rename \
-    Win_Icon \
-    Win_Batch \
     mcc_Thumbdisp \
     mcc_Thumbnail \
     mcc_Thumbgroup \
@@ -60,27 +34,23 @@ FILES := \
     mcc_Matrix \
     mcc_Histdisp \
     exif \
-    locale \
-    Picture_Masks \
-    Picture_Paint \
-    ZuneView
-
+    ZuneView \
+    locale
 FILES := $(addprefix $(PORTSDIR)/zuneview/$(ARCHBASE)/ZuneView/src/,$(FILES))
 
 %build_prog mmake=ports-graphics-zuneview progname=ZuneView \
     files=$(FILES) targetdir=$(TARGETDIR) \
-    uselibs="jpeg png mui"
+    uselibs="mui"
+
 
 %fetch mmake=ports-graphics-zuneview-fetch archive=$(ARCHBASE) destination=$(PORTSDIR)/zuneview/$(ARCHBASE) \
     location=$(PORTSSOURCEDIR) archive_origins=$(REPOSITORIES) suffixes="zip" \
-    patches_specs=zuneview_v0.37-aros.diff:$(ARCHBASE):-p1
+    patches_specs=ZuneView_v0.31-aros.diff::-p1
 
 CPFILES := ZuneView.info
 
 %copy_files_q mmake=ports-graphics-zuneview-cpy files=$(CPFILES) src=$(PORTSDIR)/zuneview/$(ARCHBASE)/ZuneView \
     dst=$(TARGETDIR)
 
-%copy_dir_recursive mmake=ports-graphics-zuneview-catalogs src=$(PORTSDIR)/zuneview/$(ARCHBASE)/ZuneView/catalogs \
-    dst=$(TARGETDIR)/Catalogs
 
 %common

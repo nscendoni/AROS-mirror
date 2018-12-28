@@ -1,6 +1,6 @@
 /*
     Copyright © 2009-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: initexitsets.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: autoinit library - handle init and exit symolsets
 */
@@ -80,4 +80,4 @@ static void __startup_initexit(struct ExecBase *SysBase)
     D(bug("Leaving __startup_initexit\n"));
 }
 
-ADD2SET(__startup_initexit, PROGRAM_ENTRIES, -20);
+ADD2SET(__startup_initexit, PROGRAM_ENTRIES, -60);

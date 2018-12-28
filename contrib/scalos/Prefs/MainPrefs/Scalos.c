@@ -1,6 +1,6 @@
 // Scalos.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-16 02:07:14 +0100 (Wed, 16 Mar 2016) $
+// $Revision: 51985 $
 
 //   program: Scalos Main Preferences
 //  coded by: Budda [mike@scalos.com]

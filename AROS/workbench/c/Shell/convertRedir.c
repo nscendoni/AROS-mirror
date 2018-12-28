@@ -1,6 +1,6 @@
 /*
     Copyright (C) 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: convertRedir.c 52973 2016-10-06 03:28:07Z neil $
  */
 
 #include <proto/dos.h>

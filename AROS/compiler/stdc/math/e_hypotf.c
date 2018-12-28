@@ -14,7 +14,7 @@
  */
 
 #ifndef lint
-static char rcsid[] = "$FreeBSD: src/lib/msun/src/e_hypotf.c,v 1.14 2011/10/15 07:00:28 das Exp $";
+static char rcsid[] = "$FreeBSD: src/lib/msun/src/e_hypotf.c,v 1.9 2002/05/28 18:15:03 alfred Exp $";
 #endif
 
 #include "math.h"
@@ -23,7 +23,7 @@ static char rcsid[] = "$FreeBSD: src/lib/msun/src/e_hypotf.c,v 1.14 2011/10/15 0
 float
 __ieee754_hypotf(float x, float y)
 {
-	float a,b,t1,t2,y1,y2,w;
+	float a=x,b=y,t1,t2,y1,y2,w;
 	int32_t j,k,ha,hb;
 
 	GET_FLOAT_WORD(ha,x);
@@ -31,14 +31,13 @@ __ieee754_hypotf(float x, float y)
 	GET_FLOAT_WORD(hb,y);
 	hb &= 0x7fffffff;
 	if(hb > ha) {a=y;b=x;j=ha; ha=hb;hb=j;} else {a=x;b=y;}
-	a = fabsf(a);
-	b = fabsf(b);
+	SET_FLOAT_WORD(a,ha);	/* a <- |a| */
+	SET_FLOAT_WORD(b,hb);	/* b <- |b| */
 	if((ha-hb)>0xf000000) {return a+b;} /* x/y > 2**30 */
 	k=0;
 	if(ha > 0x58800000) {	/* a>2**50 */
 	   if(ha >= 0x7f800000) {	/* Inf or NaN */
-	       /* Use original arg order iff result is NaN; quieten sNaNs. */
-	       w = fabsf(x+0.0F)-fabsf(y+0.0F);
+	       w = a+b;			/* for sNaN */
 	       if(ha == 0x7f800000) w = a;
 	       if(hb == 0x7f800000) w = b;
 	       return w;
@@ -73,7 +72,7 @@ __ieee754_hypotf(float x, float y)
 	    a  = a+a;
 	    SET_FLOAT_WORD(y1,hb&0xfffff000);
 	    y2 = b - y1;
-	    SET_FLOAT_WORD(t1,(ha+0x00800000)&0xfffff000);
+	    SET_FLOAT_WORD(t1,ha+0x00800000);
 	    t2 = a - t1;
 	    w  = __ieee754_sqrtf(t1*y1-(w*(-w)-(t1*y2+t2*b)));
 	}

@@ -1,8 +1,8 @@
-#   $Id$
+#   $Id: mmakefile.src 52348 2016-03-29 14:28:20Z NicJA $
 #
 #   Makefile to make MUIBuilder
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES := \
     argnotify \
@@ -53,7 +53,7 @@ FILES := \
 
 #MM contrib-development-gui-muibuilder-src : includes linklib contrib-development-gui-muibuilder-locale
 
-EXEDIR := $(AROSDIR)/Extras/$(AROS_DIR_DEVELOPER)/MUIBuilder
+EXEDIR := $(AROSDIR)/Extras/Development/MUIBuilder
 
 NOWARN_FLAGS := $(NOWARN_FORMAT_SECURITY) $(NOWARN_PARENTHESES) $(NOWARN_UNINITIALIZED)
 USER_CFLAGS := $(NOWARN_FLAGS) -I$(AROS_INCLUDES)/SDI -DMUI_OBSOLETE

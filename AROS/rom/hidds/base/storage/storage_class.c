@@ -1,11 +1,10 @@
 /*
-    Copyright (C) 2015-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright (C) 2015-2016, The AROS Development Team. All rights reserved.
+    $Id: storage_class.c 51948 2016-03-14 19:21:58Z neil $
 */
 
-#define DEBUG 0
+#define DEBUG 1
 #include <aros/debug.h>
-
 #include <oop/oop.h>
 #include <utility/tagitem.h>
 

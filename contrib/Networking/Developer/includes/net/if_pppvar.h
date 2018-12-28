@@ -2,7 +2,7 @@
 #define _NET_IF_PPPVAR_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: if_pppvar.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: if_pppvar.h,v 1.7 1998/05/08 05:02:08 millert Exp $	*/

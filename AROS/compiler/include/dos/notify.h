@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: notify.h 38534 2011-05-04 12:24:42Z sonic $
 
     Notification handling.
 */

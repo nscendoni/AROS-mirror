@@ -2,8 +2,8 @@
 #define AROS_X86_64_GENMODULE_H
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2012, The AROS Development Team. All rights reserved.
+    $Id: genmodule.h 47619 2013-07-02 18:27:20Z neil $
 
     Desc: genmodule specific definitions for x86_64
     Lang: english
@@ -29,8 +29,7 @@
         asm volatile( \
             ".weak " #fname "\n" \
             #fname " :\n" \
-            "\tmovabsq $" #libbasename ", %%r11\n" \
-            "\tmovq (%%r11),%%r11\n" \
+            "\tmovq " #libbasename "(%%rip), %%r11\n" \
             "\tjmp  *%c0(%%r11)\n" \
             : : "i" ((-lvo)*LIB_VECTSIZE) \
         ); \
@@ -55,8 +54,7 @@
             "\tpushq %%rcx\n"     \
             "\tpushq %%r8\n"      \
             "\tpushq %%r9\n"      \
-            "\tmovabsq $__aros_getoffsettable,%%r11\n" \
-            "\tcall *%%r11\n" \
+            "\tcall __aros_getoffsettable\n" \
             "\taddq __aros_rellib_offset_" #libbasename "(%%rip), %%rax\n" \
             "\tmovq (%%rax),%%r11\n" \
             "\tpopq %%r9\n"      \
@@ -107,8 +105,7 @@
             "\tpushq %%r8\n"      \
             "\tpushq %%r9\n"      \
             "\tmovq  %%r11,%%rdi\n" \
-            "\tmovabsq $__aros_setoffsettable,%%r11\n" \
-            "\tcall *%%r11\n" \
+            "\tcall __aros_setoffsettable\n" \
             "\tpopq %%r9\n"      \
             "\tpopq %%r8\n"      \
             "\tpopq %%rcx\n"     \
@@ -116,8 +113,7 @@
             "\tpopq %%rsi\n"     \
             "\tpopq %%rdi\n"     \
             "\tpopq %%rax\n"     \
-            "\tmovabsq $" #fname ",%%r11\n" \
-            "\tjmp  *%%r11\n" \
+            "\tjmp  " #fname "\n" \
             : : : \
         ); \
     }

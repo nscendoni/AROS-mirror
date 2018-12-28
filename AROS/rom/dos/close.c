@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: close.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc:
     Lang: English
@@ -62,6 +62,15 @@
     /* 0 handles are OK */
     if(file == BNULL)
         return ret;
+
+    /* ABI_V0 compatibility */
+    /* Up to 2010-12-03 UnLock was an alias/define to Close */
+    if (((LONG)fh->fh_Type /* fl->fl_Access */ == SHARED_LOCK) ||
+            ((LONG)fh->fh_Type /* fl->fl_Access */ == EXCLUSIVE_LOCK))
+    {
+        return UnLock(file);
+    }
+
 
     /* Func3 == -1: file was already closed. */
     if (fh->fh_Func3 == -1)

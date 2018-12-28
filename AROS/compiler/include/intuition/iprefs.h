@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: iprefs.h 40020 2011-07-12 07:54:11Z sonic $
 
     Desc: PRIVATE/TOP SECRET!!! Communication between IPrefs program and Intuition
     Lang: english

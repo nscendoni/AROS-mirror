@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __stdio.h 48044 2013-09-08 21:18:52Z verhaegs $
 
     Desc: internal header file for stdio
     Lang: English

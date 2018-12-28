@@ -1,12 +1,4 @@
-/* Fake a PNG - just write it out directly.
- *
- * COPYRIGHT: Written by John Cunningham Bowler, 2014.
- * To the extent possible under law, the author has waived all copyright and
- * related or neighboring rights to this work.  This work is published from:
- * United States.
- *
- */
-
+/* Fake a PNG - just write it out directly. */
 #include <stdio.h>
 #include <zlib.h> /* for crc32 */
 
@@ -60,6 +52,6 @@ main(void)
    fwrite(signature, sizeof signature, 1, stdout);
    put_chunk(IHDR, sizeof IHDR);
 
-   for (;;)
+   for(;;)
       put_chunk(unknown, sizeof unknown);
 }

@@ -1,6 +1,5 @@
 /*
      AHI - Hardware independent audio subsystem
-     Copyright (C) 2017 The AROS Dev Team
      Copyright (C) 1996-2005 Martin Blom <martin@blom.org>
      
      This library is free software; you can redistribute it and/or
@@ -601,7 +600,7 @@ static BOOL scanElfSymbols(struct ElfObject *eo,struct PPCObjectInfo *info,
 /* doesn't exist. */
 /* ATTENTION: PPCLibBase may be locked at that stage! */
 {
-  IPTR addr = info->Address;
+  ULONG addr = info->Address;
   char *name = info->Name;
 //KPrintF( "scanElfSymbols( 0x%08lx, 0x%08lx, %ld\n", eo, info, relmode );
   if (relmode) {
@@ -614,7 +613,7 @@ static BOOL scanElfSymbols(struct ElfObject *eo,struct PPCObjectInfo *info,
       if( (es = eo->sections[i]) != NULL ) {
         for (j=0,r=es->relocs; j<es->nrel; j++,r++) {
           if (getsyminfo(eo,info,&eo->symtab[ELF32_R_SYM(r->r_info)])) {
-            info->Address = (IPTR)es->address + r->r_offset;
+            info->Address = (ULONG)es->address + r->r_offset;
             info->Type = PPCELFINFOTYPE_RELOC;
             info->SubType = (ULONG)ELF32_R_TYPE(r->r_info);
             if (info->Address == addr) {
@@ -682,7 +681,7 @@ static BOOL getsyminfo(struct ElfObject *eo,struct PPCObjectInfo *info,
         break;
       default:
         if( (es = eo->sections[stab->st_shndx]) != NULL )
-          info->Address = (IPTR)es->address + stab->st_value;
+          info->Address = (ULONG)es->address + stab->st_value;
         else
           info->Address = stab->st_value;
         break;

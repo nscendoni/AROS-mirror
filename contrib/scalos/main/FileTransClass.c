@@ -1,6 +1,6 @@
 // FileTransClass.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-24 01:53:45 +0100 (Thu, 24 Mar 2016) $
+// $Revision: 52215 $
 
 
 #include <exec/types.h>

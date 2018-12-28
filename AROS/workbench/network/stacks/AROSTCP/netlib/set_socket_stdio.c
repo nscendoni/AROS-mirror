@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: set_socket_stdio.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      set_socket_stdio.c - redirect stdio to/from a socket
  *

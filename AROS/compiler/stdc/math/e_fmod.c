@@ -12,7 +12,7 @@
  */
 
 #ifndef lint
-static char rcsid[] = "$FreeBSD: src/lib/msun/src/e_fmod.c,v 1.10 2008/02/22 02:30:34 das Exp $";
+static char rcsid[] = "$FreeBSD: src/lib/msun/src/e_fmod.c,v 1.9 2005/02/04 18:26:05 das Exp $";
 #endif
 
 /*
@@ -21,7 +21,6 @@ static char rcsid[] = "$FreeBSD: src/lib/msun/src/e_fmod.c,v 1.10 2008/02/22 02:
  * Method: shift and subtract
  */
 
-#include <float.h>
 #include "math.h"
 #include "math_private.h"
 
@@ -45,7 +44,7 @@ __ieee754_fmod(double x, double y)
 	    return (x*y)/(x*y);
 	if(hx<=hy) {
 	    if((hx<hy)||(lx<ly)) return x;	/* |x|<|y| return x */
-	    if(lx==ly) 
+	    if(lx==ly)
 		return Zero[(uint32_t)sx>>31];	/* |x|=|y| return x*0*/
 	}
 
@@ -68,7 +67,7 @@ __ieee754_fmod(double x, double y)
 	} else iy = (hy>>20)-1023;
 
     /* set up {hx,lx}, {hy,ly} and align y to x */
-	if(ix >= -1022) 
+	if(ix >= -1022)
 	    hx = 0x00100000|(0x000fffff&hx);
 	else {		/* subnormal x, shift x to normal */
 	    n = -1022-ix;
@@ -80,7 +79,7 @@ __ieee754_fmod(double x, double y)
 		lx = 0;
 	    }
 	}
-	if(iy >= -1022) 
+	if(iy >= -1022)
 	    hy = 0x00100000|(0x000fffff&hy);
 	else {		/* subnormal y, shift y to normal */
 	    n = -1022-iy;
@@ -132,8 +131,3 @@ __ieee754_fmod(double x, double y)
 	}
 	return x;		/* exact output */
 }
-
-#if	LDBL_MANT_DIG == DBL_MANT_DIG
-AROS_MAKE_ASM_SYM(typeof(fmodl), fmodl, AROS_CSYM_FROM_ASM_NAME(fmodl), AROS_CSYM_FROM_ASM_NAME(fmod));
-AROS_EXPORT_ASM_SYM(AROS_CSYM_FROM_ASM_NAME(fmodl));
-#endif

@@ -1,7 +1,7 @@
 /*
     Copyright © 2003-2015, The AROS Development Team. All rights reserved.
 
-    $Id$
+    $Id: penspec.c 50444 2015-04-21 20:42:54Z neil $
 */
 #include <stdlib.h>
 #include <stdio.h>

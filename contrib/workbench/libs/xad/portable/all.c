@@ -1,7 +1,7 @@
 #ifndef XADMASTER_ALL_C
 #define XADMASTER_ALL_C
 
-/*  $Id$
+/*  $Id: all.c 36659 2011-01-18 13:26:51Z neil $
     all-in-one file for short code
 
     XAD library system for archive handling

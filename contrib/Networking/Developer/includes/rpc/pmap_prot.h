@@ -2,7 +2,7 @@
 #define RPC_PMAP_PROT_H
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pmap_prot.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /* @(#)pmap_prot.h	2.1 88/07/29 4.0 RPCSRC; from 1.14 88/02/08 SMI */

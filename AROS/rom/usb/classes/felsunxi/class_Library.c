@@ -1,6 +1,6 @@
 /*
     Copyright © 2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: class_Library.c 51791 2016-03-10 19:21:37Z NicJA $
 
     Desc:
     Lang: English

@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: rcmd.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      rcmd.c - rcmd() for AmiTCP/IP and usergroup.library
  *

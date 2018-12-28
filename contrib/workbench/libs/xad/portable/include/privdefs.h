@@ -1,7 +1,7 @@
 #ifndef XADMASTER_PRIVDEFS_H
 #define XADMASTER_PRIVDEFS_H
 
-/*  $Id$
+/*  $Id: privdefs.h 39547 2011-06-27 00:20:24Z NicJA $
     private definitions and structures
 
     XAD library system for archive handling

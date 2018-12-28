@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: writeexpansionword.c 36646 2011-01-17 13:48:43Z neil $
 
     Desc:
     Lang: english

@@ -2,7 +2,7 @@
 #define _AROS_SYSTYPES_H
 /*
     Copyright © 1995-2002, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: systypes.h 33636 2010-06-17 17:14:53Z mazze $
 
     AROS Header to define many important types without declaring them.
 */

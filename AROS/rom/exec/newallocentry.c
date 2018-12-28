@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: newallocentry.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Allocate memory.
     Lang: english
@@ -157,4 +157,50 @@
     
     AROS_LIBFUNC_EXIT
 } /* AllocEntry */
+
+/* ABI_V0 compatibility */
+
+/*****************************************************************************
+
+    NAME */
+
+    AROS_LH3(BOOL, NewAllocEntryABIV0,
+
+/*  SYNOPSIS */
+    AROS_LHA(struct MemList *, entry, A0),
+    AROS_LHA(struct MemList **, return_entry, A1),
+    AROS_LHA(ULONG *, return_flags, D0),
+
+/*  LOCATION */
+    struct ExecBase *, SysBase, 151, Exec)
+
+/*  FUNCTION
+
+    INPUTS
+
+    RESULT
+
+    NOTES
+        This function is AROS-specific.
+
+    EXAMPLE
+
+    BUGS
+
+    SEE ALSO
+    AllocEntry(), FreeEntry()
+
+    INTERNALS
+
+******************************************************************************/
+{
+    AROS_LIBFUNC_INIT
+
+    if ((*return_entry = NewAllocEntry(entry, return_flags)) != NULL)
+        return TRUE;
+    else
+        return FALSE;
+
+    AROS_LIBFUNC_EXIT
+} /* NewAllocEntryABIV0 */
 

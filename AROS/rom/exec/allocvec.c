@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: allocvec.c 49043 2014-06-03 16:40:14Z deadwood $
 
     Desc: Allocate some memory.
     Lang: english

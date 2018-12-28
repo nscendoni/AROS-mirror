@@ -1,6 +1,6 @@
 // GadgetBarClass.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-16 03:36:57 +0100 (Wed, 16 Mar 2016) $
+// $Revision: 51990 $
 
 
 #include <exec/types.h>

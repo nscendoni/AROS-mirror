@@ -93,7 +93,7 @@ trysave:
     unbusy();
 }
 
-int doload(type,def)
+doload(type,def)
 int type,def;
 {
     char *path,buf[80],*menulist[6],menuarray[6],**ftypelist,*typearray;
@@ -242,7 +242,7 @@ tryload:
                     b++;
                     ftype=ftype->next;
                 }
-                if (!(ftypelist=LAllocRemember(&fkey,(b+1)*sizeof(APTR),MEMF_CLEAR)) ||
+                if (!(ftypelist=LAllocRemember(&fkey,(b+1)*4,MEMF_CLEAR)) ||
                     !(typearray=LAllocRemember(&fkey,b+1,MEMF_CLEAR))) break;
                 ftype=newcstuff->firsttype;
                 for (a=0;a<b;a++) {
@@ -282,7 +282,7 @@ tryload:
                     b++;
                     fhotkey=fhotkey->next;
                 }
-                if (!(ftypelist=LAllocRemember(&fkey,(b+1)*sizeof(APTR),MEMF_CLEAR)) ||
+                if (!(ftypelist=LAllocRemember(&fkey,(b+1)*4,MEMF_CLEAR)) ||
                     !(typearray=LAllocRemember(&fkey,b+1,MEMF_CLEAR))) break;
                 fhotkey=newcstuff->firsthotkey;
                 for (a=0;a<b;a++) {
@@ -380,7 +380,7 @@ struct Config *config1,*config2;
     LFreeRemember(&key);
 }
 
-int dolistwindow(title,w,h,items,flags,selarray,item)
+dolistwindow(title,w,h,items,flags,selarray,item)
 char *title;
 int w,h;
 char **items;
@@ -510,7 +510,7 @@ char **funclist,*functype,*flagsel;
     unbusy();
 }
 
-int pasteclip(func,funclist,functype,displist,flagsel)
+pasteclip(func,funclist,functype,displist,flagsel)
 struct dopusfunction *func;
 char **funclist,*functype,**displist,*flagsel;
 {
@@ -520,7 +520,7 @@ char **funclist,*functype,**displist,*flagsel;
     int a,b,ret=0;
 
     if (!clipcount) return(0);
-    if (!(cliplist=LAllocRemember(&key,(clipcount+1)*sizeof(APTR),MEMF_CLEAR))) return(0);
+    if (!(cliplist=LAllocRemember(&key,(clipcount+1)*4,MEMF_CLEAR))) return(0);
     busy();
     clip=firstclip;
     for (a=0;a<clipcount;a++) {
@@ -536,9 +536,9 @@ char **funclist,*functype,**displist,*flagsel;
         for (b=0;b<a;b++) if (!(clip=clip->next)) break;
         if (clip) {
             erasefunction(func,funclist,displist,flagsel);
-            lsprintf(edit_stackbuf,"%ld",(long int)clip->func.stack);
-            lsprintf(edit_prioritybuf,"%ld",(long int)clip->func.pri);
-            lsprintf(edit_delaybuf,"%ld",(long int)clip->func.delay);
+            lsprintf(edit_stackbuf,"%ld",clip->func.stack);
+            lsprintf(edit_prioritybuf,"%ld",clip->func.pri);
+            lsprintf(edit_delaybuf,"%ld",clip->func.delay);
             strcpy(edit_namebuf,clip->name);
             func->key=0; func->qual=0;
             func->fpen=clip->func.fpen; func->bpen=clip->func.bpen;

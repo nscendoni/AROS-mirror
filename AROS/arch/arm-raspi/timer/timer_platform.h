@@ -1,6 +1,6 @@
 /*
     Copyright © 2013-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: timer_platform.h 50433 2015-04-19 19:41:34Z schulz $
 */
 
 #define USE_VBLANK_INT

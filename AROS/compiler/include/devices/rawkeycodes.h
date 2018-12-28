@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rawkeycodes.h 44292 2012-02-28 21:58:01Z mazze $
 
     Desc: Standard Amiga (in case of AROS: virtual) rawkey codes
     Lang: english

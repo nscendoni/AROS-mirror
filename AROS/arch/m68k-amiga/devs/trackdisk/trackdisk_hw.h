@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: trackdisk_hw.h 39879 2011-07-07 11:21:25Z twilen $
 
     Desc: Hardware defs for trackdisk
     Lang: English

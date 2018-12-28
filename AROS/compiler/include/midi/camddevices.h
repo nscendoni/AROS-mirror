@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: camddevices.h 43175 2011-12-22 19:04:13Z neil $
 */
 
 #ifndef EXEC_TYPES_H

@@ -1,6 +1,6 @@
 /*
  *  Copyright © 2004-2015 The AROS Developmemt Team. All rights reserved.
- *  $Id$
+ *  $Id: limits.h 52192 2016-03-23 01:49:27Z NicJA $
  *
  *  C99 header file limits.h
  */

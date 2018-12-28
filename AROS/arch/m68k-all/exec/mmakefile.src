@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -13,8 +13,7 @@ AFILES=newstackswap stackswap \
        cacheclearu_ cachecleare_ cachepostdma_ cachepredma_ \
        setsr cachecontrol_ \
        obtainquickvector \
-       copymem_ copymem_020 copymem_040 copymem_060 \
-       copymemquick copymemquick_040 copymemquick_060
+       copymem_ copymemquick
 
 USER_CFLAGS := $(PRIV_EXEC_INCLUDES)
 USER_AFLAGS := -I$(GENINCDIR) -m68060

@@ -1,6 +1,6 @@
 /*
    Copyright © 2001-2011, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: partition_init.c 45616 2012-08-20 03:19:02Z jmcmullan $
 
    Desc: Partition initialization code
    Lang: English

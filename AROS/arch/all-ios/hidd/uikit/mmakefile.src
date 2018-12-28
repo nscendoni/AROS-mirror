@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -7,7 +7,7 @@ include $(SRCDIR)/config/aros.cfg
 #MM kernel-hidd-uikit-kobj: kernel-hidd-uikit-native
 #MM kernel-hidd-uikit-kobj-quick: kernel-hidd-uikit-native
 
-FILES := uikit_hiddclass uikit_bitmapclass eventtask startup
+FILES := gfxclass bitmapclass eventtask startup
 
 %build_module mmake=kernel-hidd-uikit \
   modname=uikit modtype=hidd \

@@ -1,12 +1,11 @@
-# $Id$
+# $Id: mmakefile 53102 2016-12-25 17:21:09Z deadwood $
 
 include $(SRCDIR)/config/aros.cfg
-include $(TOP)/$(CURDIR)/geninc.cfg
 
 INCSUBDIRS :=	aros				\
 		aros/preprocessor		\
+		aros/preprocessor/facilities	\
 		aros/preprocessor/variadic	\
-		aros/preprocessor/array		\
 		aros/types			\
 		asm				\
 		bluetooth			\
@@ -14,7 +13,6 @@ INCSUBDIRS :=	aros				\
 		c++/exec			\
 		clib				\
 		datatypes			\
-		defines			        \
 		devices				\
 		diskfont			\
 		dos				\
@@ -26,7 +24,6 @@ INCSUBDIRS :=	aros				\
 		hardware/efi			\
 		hardware/pic			\
 		hidd				\
-		inline			        \
 		intuition			\
 		irda				\
 		libcore				\
@@ -43,11 +40,10 @@ INCSUBDIRS :=	aros				\
 		workbench
 
 # clib & proto are handled above.
-#INCEMPTYDIRS := defines				\
-#		inline
+INCEMPTYDIRS := defines				\
+		inline
 
-INCLUDES_BASE    := $(foreach d,$(addprefix $(SRCDIR)/$(CURDIR)/,$(INCSUBDIRS)),$(wildcard $(d)/*.h) $(wildcard $(d)/*.hpp)) $(wildcard *.h)
-INCLUDES      := $(subst $(SRCDIR)/$(CURDIR)/,,$(INCLUDES_BASE))
+INCLUDES      := $(foreach d,$(INCSUBDIRS),$(wildcard $(d)/*.h) $(wildcard $(d)/*.hpp)) $(wildcard *.h)
 ARCHINCDIR    := $(SRCDIR)/arch/$(CPU)-$(ARCH)/include/
 ARCH_INCLUDES := $(subst $(ARCHINCDIR),,$(foreach d,$(addprefix $(ARCHINCDIR),$(INCSUBDIRS)),$(wildcard $(d)/*.h) $(wildcard $(d)/*.hpp)))
 INCLUDES      := $(filter-out $(ARCH_INCLUDES),$(INCLUDES))
@@ -68,42 +64,21 @@ INCL_DIRS     := $(foreach dir,$(INCSUBDIRS) $(INCEMPTYDIRS),$(AROS_INCLUDES)/$(
 #MM- includes-copy-$(ARCH)-$(CPU) :
 
 #MM
-compiler-includes : setup $(DEST_INCLUDES) $(GEN_INCLUDES) includes-execbase_h
+compiler-includes : setup $(DEST_INCLUDES) $(GEN_INCLUDES)
 
-# execbase is copied seperately, since on SMP builds we need to
-# remove some fields
-
-$(GENINCDIR)/exec/execbase.h : $(SRCDIR)/$(CURDIR)/exec/execbase.inc
-	@$(ECHO) "Copying    C   includes to $(GENINCDIR)..."
-	@$(CP) $< $@
-ifneq ($(strip $(EXECSMP)),"")
-	$(SED) -i -e 's/.*ThisTask;.*/    IPTR         SMPPrivate1;/' -e 's/.*Quantum;.*/    WORD         SMPPrivate2;/' -e 's/.*Elapsed;.*/    WORD         SMPPrivate3;/' -e 's/.*IDNestCnt;.*/    UBYTE        SMPPrivate4;/' -e 's/.*TDNestCnt;.*/    UBYTE        SMPPrivate5;/' $@
-endif
-
-$(AROS_INCLUDES)/exec/execbase.h : $(GENINCDIR)/exec/execbase.h
+$(AROS_INCLUDES)/%.h : %.h
 	@$(ECHO) "Copying    C   includes to $(AROS_INCLUDES)..."
 	@$(CP) $< $@
 
-#MM
-includes-execbase_h : $(AROS_INCLUDES)/exec/execbase.h
-
-.PHONY : includes-execbase_h
-
-# normal include copy routines
-
-$(AROS_INCLUDES)/%.h : $(SRCDIR)/$(CURDIR)/%.h
-	@$(ECHO) "Copying    C   includes to $(AROS_INCLUDES)..."
-	@$(CP) $< $@
-
-$(GENINCDIR)/%.h : $(SRCDIR)/$(CURDIR)/%.h
+$(GENINCDIR)/%.h : %.h
 	@$(ECHO) "Copying    C   includes to $(GENINCDIR)..."
 	@$(CP) $< $@
 
-$(AROS_INCLUDES)/%.hpp : $(SRCDIR)/$(CURDIR)/%.hpp
+$(AROS_INCLUDES)/%.hpp : %.hpp
 	@$(ECHO) "Copying    C++ includes to $(AROS_INCLUDES)..."
 	@$(CP) $< $@
 
-$(GENINCDIR)/%.hpp : $(SRCDIR)/$(CURDIR)/%.hpp
+$(GENINCDIR)/%.hpp : %.hpp
 	@$(ECHO) "Copying    C++ includes to $(GENINCDIR)..."
 	@$(CP) $< $@
 
@@ -118,7 +93,7 @@ includes-asm_h-$(CPU) : $(GENINCDIR)/aros/$(CPU)/asm.h
 
 .PHONY : includes-asm_h-$(CPU)
 
-$(OBJDIR)/asm.s : $(SRCDIR)/$(CURDIR)/asm.c | $(OBJDIR)
+$(OBJDIR)/asm.s : asm.c | $(OBJDIR)
 	@$(ECHO) "Compiling  $<..."
 	@$(TARGET_CC) $(TARGET_SYSROOT) $(CFLAGS) $(PRIV_EXEC_INCLUDES) $(PRIV_KERNEL_INCLUDES) -S $< -o $@
 
@@ -135,4 +110,3 @@ $(GENINCDIR)/aros/$(CPU) :
 #MM
 clean :
 	-$(RM) $(AROS_INCLUDES) $(GENINCDIR)
-

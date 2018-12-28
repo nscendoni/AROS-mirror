@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2003, The AROS Development Team. All rights reserved.
+    $Id: ieeedpsub.c 47354 2013-05-04 17:12:25Z mazze $
 */
 
 #include "mathieeedoubbas_intern.h"
@@ -19,23 +19,21 @@
         struct MathIeeeDoubBasBase *, MathIeeeDoubBasBase, 12, MathIeeeDoubBas)
 
 /*  FUNCTION
-        Subtracts two IEEE double precision floating point numbers.
+        Subtracts two IEEE double precision numbers
 
     INPUTS
-        y - minuend.
-        z - subtrahend.
 
     RESULT
-        x - difference.
+       +1 : y > z
+        0 : y = z
+       -1 : y < z
 
-    NOTES
-
-    EXAMPLE
+        Flags:
+          zero     : y = z
+          negative : y < z
+          overflow : 0
 
     BUGS
-
-    SEE ALSO
-        IEEEDPNeg()
 
     INTERNALS
 

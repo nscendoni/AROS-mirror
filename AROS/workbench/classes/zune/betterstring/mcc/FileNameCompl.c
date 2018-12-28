@@ -16,7 +16,7 @@
 
  BetterString class Support Site:  http://www.sf.net/projects/bstring-mcc/
 
- $Id$
+ $Id: FileNameCompl.c 49429 2014-08-16 10:47:20Z mazze $
 
 ***************************************************************************/
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: drive.c 30794 2009-03-08 02:19:07Z neil $
 */
 
 #include <proto/exec.h>

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu-thumb2.h 51368 2016-01-19 10:33:31Z dizzyofcrn $
 
     NOTE: This file must compile *without* any other header !
 

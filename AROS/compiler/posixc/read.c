@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: read.c 52859 2016-08-14 18:56:33Z deadwood $
 
     POSIX.1-2008 function read().
 */

@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 53087 2016-12-21 16:26:45Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- ports-audio : ports-audio-abcm2ps
 
@@ -13,19 +13,16 @@ include $(SRCDIR)/config/aros-contrib.cfg
 #MM  ports-audio-abcm2ps-formats : ports-audio-abcm2ps-fetch
 #MM  ports-audio-abcm2ps-docs : ports-audio-abcm2ps-fetch
 
-REPOSITORIES := \
-    https://github.com/leesavide/abcm2ps/archive \
-    http://ftp.dei.uc.pt/pub/linux/gentoo/distfiles/
 
-ARCHBASE     := abcm2ps-8.13.13
+REPOSITORIES := http://moinejf.free.fr
+ARCHBASE     := abcm2ps-8.13.1
 TARGETDIR    := $(AROS_CONTRIB)/MultiMedia/Audio/Abcm2ps
-
 NOWARN_FLAGS := $(NOWARN_UNINITIALIZED)
 USER_CFLAGS  := $(NOWARN_FLAGS) \
     -DA4_FORMAT=1 \
     -DDEFAULT_FDIR="\"PROGDIR:Formats\"" \
-    -DVERSION="\"8.13.13\"" \
-    -DVDATE="\"July 31, 2017\""
+    -DVERSION="\"8.13.1\"" \
+    -DVDATE="\"December 10, 2016\""
 
 FILES := \
     abcm2ps \
@@ -41,7 +38,7 @@ FILES := \
     subs \
     svg \
     syms
-FILES := $(addprefix $(PORTSDIR)/abcm2ps/abcm2ps-$(ARCHBASE)/,$(FILES))
+FILES := $(addprefix $(PORTSDIR)/abcm2ps/$(ARCHBASE)/,$(FILES))
 
 %build_prog mmake=ports-audio-abcm2ps progname=Abcm2ps \
     files=$(FILES) targetdir=$(TARGETDIR) \
@@ -50,21 +47,21 @@ FILES := $(addprefix $(PORTSDIR)/abcm2ps/abcm2ps-$(ARCHBASE)/,$(FILES))
 
 %fetch mmake=ports-audio-abcm2ps-fetch archive=$(ARCHBASE) destination=$(PORTSDIR)/abcm2ps \
     location=$(PORTSSOURCEDIR) archive_origins=$(REPOSITORIES) suffixes="tar.gz" \
-    patches_specs=$(ARCHBASE)-aros.diff:abcm2ps-$(ARCHBASE):-p1
+    patches_specs=$(ARCHBASE)-aros.diff:$(ARCHBASE):-p1
 
 
 FORMATFILES := flute.fmt landscape.fmt musicfont.fmt
-%copy_files_q mmake=ports-audio-abcm2ps-formats files=$(FORMATFILES) src=$(PORTSDIR)/abcm2ps/abcm2ps-$(ARCHBASE) \
+%copy_files_q mmake=ports-audio-abcm2ps-formats files=$(FORMATFILES) src=$(PORTSDIR)/abcm2ps/$(ARCHBASE) \
     dst=$(TARGETDIR)/Formats
 
 
 DOCFILES := $(notdir \
-    $(call WILDCARD, $(PORTSDIR)/abcm2ps/abcm2ps-$(ARCHBASE)/*.abc) \
-    $(call WILDCARD, $(PORTSDIR)/abcm2ps/abcm2ps-$(ARCHBASE)/*.eps) \
-    $(call WILDCARD, $(PORTSDIR)/abcm2ps/abcm2ps-$(ARCHBASE)/*.txt) \
+    $(call WILDCARD, $(PORTSDIR)/abcm2ps/$(ARCHBASE)/*.abc) \
+    $(call WILDCARD, $(PORTSDIR)/abcm2ps/$(ARCHBASE)/*.eps) \
+    $(call WILDCARD, $(PORTSDIR)/abcm2ps/$(ARCHBASE)/*.txt) \
     ) Changes README
 
-%copy_files_q mmake=ports-audio-abcm2ps-docs files=$(DOCFILES) src=$(PORTSDIR)/abcm2ps/abcm2ps-$(ARCHBASE) \
+%copy_files_q mmake=ports-audio-abcm2ps-docs files=$(DOCFILES) src=$(PORTSDIR)/abcm2ps/$(ARCHBASE) \
     dst=$(TARGETDIR)/Docs
 
 

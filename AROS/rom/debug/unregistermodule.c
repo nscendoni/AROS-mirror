@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: unregistermodule.c 53078 2016-12-16 02:39:20Z neil $
 
     Desc:
 */

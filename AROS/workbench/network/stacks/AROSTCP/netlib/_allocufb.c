@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: _allocufb.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      _allocufb.c - get a free ufb (SAS/C)
  *

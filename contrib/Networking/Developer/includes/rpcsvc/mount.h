@@ -2,7 +2,7 @@
 #define _MOUNT_H_RPCGEN
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mount.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*

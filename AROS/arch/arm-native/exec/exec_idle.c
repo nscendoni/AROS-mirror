@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: exec_idle.c 50817 2015-06-12 15:56:27Z schulz $
 */
 
 #define DEBUG 0
@@ -31,7 +31,7 @@ void IdleTask(struct ExecBase *SysBase)
     do
     {
         /* forever */
-        D(bug("[IDLE:%02d] CPU has idled for %d seconds..\n", cpunum, GetIntETask(thisTask)->iet_CpuTime.tv_sec));
+        D(bug("[IDLE:%02d] CPU has idled for %d seconds..\n", cpunum, GetIntETask(thisTask)->iet_CpuTime.tv_secs));
         asm volatile("mov r0, #0\n\t mcr p15, 0, r0, c7, c0, 4":::"r0");
     } while(1);
 }

@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2006, The AROS Development Team. All rights reserved.
+    $Id: ParallelClass.c 39278 2011-06-17 05:44:55Z jmcmullan $
 
     Desc: Parallel hidd class implementation.
     Lang: english
@@ -21,8 +21,8 @@
 
 #undef  SDEBUG
 #undef  DEBUG
-#define SDEBUG 0
-#define DEBUG 0
+#define SDEBUG 1
+#define DEBUG 1
 #include <aros/debug.h>
 
 

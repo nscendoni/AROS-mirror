@@ -1,6 +1,6 @@
 /*
     Copyright © 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: allocpubscreendesc.c 47724 2013-07-18 17:52:58Z jmcmullan $
 */
 
 #include <libraries/muiscreen.h>

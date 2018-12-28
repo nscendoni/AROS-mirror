@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: handler.c 53132 2016-12-29 10:32:06Z deadwood $
 
     The Workbench Handler process and associated functions.
 */
@@ -322,9 +322,20 @@ static VOID __HandleLaunch_WB
         {NP_HomeDir,    (IPTR)home                      },
         {NP_StackSize,  stacksize                       },
         {NP_Priority,   priority                        },
+        /* ABI_V0 compatibility */
+        /* The lines below as compatibility fix for amiga-m68k AROS.
+         * These changes however cause ABI_V0 programs compiled
+         * before 2009-03-13 to crash as there is now no way
+         * that process started from WB can get pr_COS/pr_CIS set.
+         */
+#if 0
         {NP_Input,      (IPTR)BNULL                     },
         {NP_Output,     (IPTR)BNULL                     },
+#endif
+        /* ABI_V0 compatibility */
+#if 0
         {NP_CurrentDir, (IPTR)BNULL                     },
+#endif
         {TAG_DONE,      0                               }
     };
 

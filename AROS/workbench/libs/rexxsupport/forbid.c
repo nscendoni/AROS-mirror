@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2006, The AROS Development Team. All rights reserved.
+    $Id: forbid.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Disable task switching
     Lang: English
@@ -28,12 +28,9 @@
 static BOOL inforbid = FALSE;
 static int forbid_nest = 0;
 
-/* maximum size of a string that represents a signed decimal integer */
-#define REXXVAR_MAXSTR 11
-
 LONG rxsupp_forbid(struct Library *RexxSupportBase, struct RexxMsg *msg, UBYTE **argstring)
 {
-    char val[REXXVAR_MAXSTR + 1];
+    char val[5];
     
     if (!inforbid)
     {
@@ -46,7 +43,7 @@ LONG rxsupp_forbid(struct Library *RexxSupportBase, struct RexxMsg *msg, UBYTE *
 	    permit_nest = -1;
     
 	permit_nest++;
-	sprintf(val, "%d", permit_nest);
+	snprintf(val, 5, "%d", permit_nest);
 
 	if (permit_nest == 0)
 	{
@@ -64,7 +61,7 @@ LONG rxsupp_forbid(struct Library *RexxSupportBase, struct RexxMsg *msg, UBYTE *
     else /* inforbid == TRUE */
     {
 	forbid_nest++;
-	sprintf(val, "%d", forbid_nest);
+	snprintf(val, 5, "%d", forbid_nest);
     }
 
     *argstring = CreateArgstring(val, strlen(val));
@@ -73,7 +70,7 @@ LONG rxsupp_forbid(struct Library *RexxSupportBase, struct RexxMsg *msg, UBYTE *
 
 LONG rxsupp_permit(struct Library *RexxSupportBase, struct RexxMsg *msg, UBYTE **argstring)
 {
-    char val[REXXVAR_MAXSTR + 1];
+    char val[5];
 
     if (!inforbid)
     {
@@ -86,7 +83,7 @@ LONG rxsupp_permit(struct Library *RexxSupportBase, struct RexxMsg *msg, UBYTE *
 	    permit_nest = -1;
     
 	permit_nest--;
-	sprintf(val, "%d", permit_nest);
+	snprintf(val, 5, "%d", permit_nest);
 
 	if (SetRexxVar(msg, NEST_VAR, (char *)&permit_nest, sizeof(int)) != RC_OK)
 	{
@@ -97,7 +94,7 @@ LONG rxsupp_permit(struct Library *RexxSupportBase, struct RexxMsg *msg, UBYTE *
     else /* inforbid == TRUE */
     {
 	forbid_nest--;
-	sprintf(val, "%d", forbid_nest);
+	snprintf(val, 5, "%d", forbid_nest);
 	
 	if (forbid_nest < 0)
 	{

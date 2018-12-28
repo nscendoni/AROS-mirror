@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vars.h 43690 2012-01-22 09:15:40Z mazze $
 */
 
 #ifndef VAR

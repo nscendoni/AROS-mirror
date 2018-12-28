@@ -19,7 +19,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *   
- * $Id$
+ * $Id: idhardwarenum.c 45160 2012-07-04 15:38:14Z twilen $
  */
 
 #include <exec/execbase.h>

@@ -3,7 +3,7 @@
     This file is part of the AboutWindow class, which is distributed under
     the terms of version 2.1 of the GNU Lesser General Public License.
     
-    $Id$
+    $Id: aboutwindow.c 43432 2012-01-01 20:15:00Z jmcmullan $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

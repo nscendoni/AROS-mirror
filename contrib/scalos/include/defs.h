@@ -1,8 +1,8 @@
 /*
  * defs.h
  *
- * $Date$
- * $Revision$
+ * $Date: 2016-01-07 00:00:52 +0100 (Thu, 07 Jan 2016) $
+ * $Revision: 51255 $
  *
  * Some global compiler- and platform-dependent definitions
  *

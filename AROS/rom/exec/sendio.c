@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sendio.c 36262 2010-12-27 12:17:48Z sonic $
 
     Desc: Start an asynchronous I/O request.
     Lang: english

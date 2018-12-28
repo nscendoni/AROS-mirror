@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: arossupport.c 43690 2012-01-22 09:15:40Z mazze $
 
     Desc:
     Lang: English

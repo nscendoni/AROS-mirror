@@ -3,7 +3,7 @@
     This file is part of the About program, which is distributed under
     the terms of version 2 of the GNU General Public License.
     
-    $Id$
+    $Id: main.c 41520 2011-09-21 13:56:22Z sonic $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

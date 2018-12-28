@@ -1,5 +1,5 @@
 # Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 54765 2017-06-08 19:56:34Z neil $
 
 include $(SRCDIR)/config/aros.cfg
 

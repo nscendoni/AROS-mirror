@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: input.h 34272 2010-08-26 05:35:34Z sonic $
 
     Desc: Input device commands
     Lang: english

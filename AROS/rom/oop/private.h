@@ -2,7 +2,7 @@
 #define PRIVATE_H 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: private.h 39376 2011-06-18 20:07:39Z jmcmullan $
 
     Desc: Private methods and attrs
     Lang: english

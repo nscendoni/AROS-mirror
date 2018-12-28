@@ -1,5 +1,5 @@
 
-/* $Id$ */
+/* $Id: boot.c 49095 2014-07-01 18:46:34Z twilen $ */
 /* $Log: boot.c $
  * Revision 13.5  1999/05/14  11:31:34  Michiel
  * Long filename support implemented; bugfixes

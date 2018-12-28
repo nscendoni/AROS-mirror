@@ -1,6 +1,6 @@
 /*
-    Copyright © 2004-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright  2004-2013, The AROS Development Team. All rights reserved.
+    $Id: wanderer.c 52477 2016-03-31 11:17:31Z NicJA $
 */
 
 #define ZCC_QUIET
@@ -2928,9 +2928,15 @@ void wanderer_menufunc_wanderer_shutdown(void)
 {
     LONG action;
 
+#if defined(__AROS_ARCH_pc__) && defined(__i386__)
     action = MUI_RequestA(_WandererIntern_AppObj, NULL, 0,
-        _(MSG_SHUTDOWN_TITLE), _(MSG_SHUTDOWN_BUTTONS),
+        _(MSG_SHUTDOWN_TITLE), strchr(_(MSG_SHUTDOWN_BUTTONS), '|') + 1,
         _(MSG_SHUTDOWN_BODY), NULL);
+    if (action != 0)
+        action++;
+#else
+    action = MUI_RequestA(_WandererIntern_AppObj, NULL, 0, _(MSG_SHUTDOWN_TITLE), _(MSG_SHUTDOWN_BUTTONS), _(MSG_SHUTDOWN_BODY), NULL);
+#endif
     switch (action) {
     case 0:
         return;
@@ -3459,12 +3465,9 @@ IPTR Wanderer__OM_DISPOSE(Class *CLASS, Object *self, Msg message)
 
         DisposeObject(data->wd_Prefs);
         data->wd_Prefs = NULL;
-        return DoSuperMethodA(CLASS, self, (Msg) message);
     }
-    
-    // FIXME: Temporary solution to avoid a crash if there's no SDL (I know this shouldn't happen)
-    //        (I hope this won't bring any unwanted bugs)
-    return (IPTR) NULL;//DoSuperMethodA(CLASS, self, (Msg) message);
+
+    return DoSuperMethodA(CLASS, self, (Msg) message);
 }
 ///
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: croatia.c 47221 2013-04-13 16:20:11Z NicJA $
 
     Desc: Country data for Hrvatska (Croatia)
 */

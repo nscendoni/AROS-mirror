@@ -1,7 +1,7 @@
 #ifndef __gl_h_
 #define __gl_h_
 
-/* $Revision: 10601 $ on $Date:: 2010-03-04 22:15:27 -0800 #$ */
+/* $Revision: 41764 $ on $Date:: 2011-10-05 22:18:03 +0200 #$ */
 
 #include <GLES/glplatform.h>
 

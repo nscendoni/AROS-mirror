@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pic.h 36670 2011-01-19 12:04:42Z agreppin $
 
     Desc: AROS PIC/APIC Definitions.
     Lang: english

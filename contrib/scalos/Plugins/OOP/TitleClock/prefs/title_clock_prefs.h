@@ -1,6 +1,6 @@
 // title_clock_prefs.h
-// $Date$
-// $Revision$
+// $Date: 2013-12-01 23:08:26 +0100 (Sun, 01 Dec 2013) $
+// $Revision: 48481 $
 
 #ifndef TITLE_CLOCK_PREFS_H
 #define TITLE_CLOCK_PREFS_H

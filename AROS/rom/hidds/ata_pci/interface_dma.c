@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2013, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: interface_dma.c 48385 2013-11-07 03:28:01Z neil $
 
     Desc: Generic PCI-DMA ATA controller driver
     Lang: English
@@ -51,7 +51,7 @@ static LONG dma_Setup(APTR addr, ULONG len, BOOL read, struct PRDEntry* array)
             /*
              * politely say what sucks
              */
-            if (phy_mem > 0xffffffffull || (phy_mem + tmp) > 0xffffffffull)
+            if (phy_mem > 0xffffffffull)
             {
                 D(bug("[PCI-ATA] dma_Setup: ERROR: ATA DMA POINTERS BEYOND MAXIMUM ALLOWED ADDRESS!\n"));
                 return 0;

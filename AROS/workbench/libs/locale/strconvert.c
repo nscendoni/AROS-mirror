@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: strconvert.c 43286 2011-12-29 02:11:58Z neil $
 
     Desc: StrConvert - Stub for the Locale StrConvert function.
     Lang: english
@@ -40,8 +40,7 @@
         function on the two strings.
 
     INPUTS
-        locale      -   the Locale to use for the transformation or
-                        NULL for the system default locale.
+        locale      -   the Locale to use for the transformation.
         string      -   the string to be transformed
         buffer      -   the destination for the transformed string.
                         This buffer may need to be larger than the
@@ -71,13 +70,6 @@
     AROS_LIBFUNC_INIT
 
     LONG result;
-    struct Locale *def_locale = NULL;
-
-    if (locale == NULL)
-    {
-        locale = OpenLocale(NULL);
-        def_locale = (struct Locale *)locale;
-    }
 
     DEBUG_STRCONVERT(dprintf
         ("StrConvert: locale 0x%lx <%s> buffer 0x%lx size %ld type 0x%lx\n",
@@ -100,8 +92,6 @@
 #endif
 
     DEBUG_STRCONVERT(dprintf("StrConvert: retval %lu\n", result));
-
-    CloseLocale(def_locale);
 
     return result;
 

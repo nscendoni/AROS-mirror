@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: superstate.c 40459 2011-08-01 08:25:35Z sonic $
 
     Desc: SuperState() - Switch the processor into a higher plane.
     Lang: english
@@ -8,6 +8,7 @@
 
 #include <aros/config.h>
 #include <aros/debug.h>
+#include <proto/kernel.h>
 
 #include "exec_intern.h"
 

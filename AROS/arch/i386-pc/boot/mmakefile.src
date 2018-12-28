@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 53132 2016-12-29 10:32:06Z deadwood $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -8,13 +8,13 @@ include $(SRCDIR)/config/aros.cfg
 # Rules to create kickstart packages for pc-i386
 #
 
-#MM- kernel-link-pc-i386 :	\
+#MM- kernel-link-pc-i386 : \
 #MM     kernel-pc-i386-kernel-gz \
-#MM	kernel-bsp-pc-i386-gz	\
-#MM     kernel-legacy-pc-i386-gz \
-#MM	kernel-package-base-gz	\
-#MM	kernel-package-usb-gz	\
-#MM	kernel-package-fs-gz
+#MM     kernel-bsp-pc-i386 \
+#MM     kernel-legacy-pc-i386 \
+#MM     kernel-objs \
+#MM     kernel-usb \
+#MM     kernel-package-fs-deps
 
 #
 # The kernel
@@ -34,14 +34,12 @@ include $(SRCDIR)/config/aros.cfg
 
 #MM- kernel-bsp-pc-i386 :		\
 #MM	linklibs			\
-#MM	kernel-hidd-base    		\
 #MM	kernel-battclock    		\
 #MM	kernel-processor    		\
 #MM	kernel-timer    		\
 #MM	kernel-expansion    		\
 #MM	kernel-efi     			\
 #MM	kernel-pc-acpica   		\
-#MM	kernel-hidd-acpibutton		\
 #MM	kernel-pc-hpet     		\
 #MM	kernel-ata      		\
 #MM     kernel-hidd-pciata              \
@@ -51,8 +49,8 @@ include $(SRCDIR)/config/aros.cfg
 #MM     kernel-hidd-i8042               \
 #MM     kernel-hidd-pci     		\
 #MM     kernel-hidd-pci-pcipc    	\
-#MM     kernel-hidd-vesagfx      	\
-#MM     kernel-hidd-vgagfx    
+#MM     kernel-hidd-vesa      		\
+#MM     kernel-hidd-vga    
 
 KRSRCS      := efi hpet
 KRSRCS_ARCH := battclock processor
@@ -60,9 +58,9 @@ KLIBS       := acpica
 KLIBS_ARCH  := expansion
 KDEVS       := ahci ata
 KDEVS_ARCH  := timer
-KHIDDS      := ata_pci i8042 vesagfx vgagfx pci pcipc serial parallel storage system acpibutton
+KHIDDS      := ata_pci i8042 vesagfx vgah pci pcipc serial parallel
 
-%make_package mmake=kernel-bsp-pc-i386 file=$(AROSARCHDIR)/aros-bsp.pkg \
+%make_package mmake=kernel-bsp-pc-i386-yes file=$(AROSARCHDIR)/aros-bsp.pkg \
     devs=$(KDEVS) arch_devs=$(KDEVS_ARCH) hidds=$(KHIDDS) libs=$(KLIBS) \
     arch_libs=$(KLIBS_ARCH) res=$(KRSRCS) arch_res=$(KRSRCS_ARCH)
 
@@ -80,7 +78,7 @@ KHIDDS      := ata_pci i8042 vesagfx vgagfx pci pcipc serial parallel storage sy
 LEGACY_DEVS  := trackdisk
 LEGACY_HIDDS := serialmouse
 
-%make_package mmake=kernel-legacy-pc-i386 file=$(AROSARCHDIR)/aros-legacy.pkg \
+%make_package mmake=kernel-legacy-pc-i386-yes file=$(AROSARCHDIR)/aros-legacy.pkg \
 	devs=$(LEGACY_DEVS) hidds=$(LEGACY_HIDDS) res=$(LEGACY_RSRCS)
 
 %common

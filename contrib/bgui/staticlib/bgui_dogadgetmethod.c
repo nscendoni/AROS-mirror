@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2000, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bgui_dogadgetmethod.c 30794 2009-03-08 02:19:07Z neil $
 
     Desc:
     Lang: english

@@ -1,6 +1,6 @@
 /*
-    Copyright  1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright  1995-2011, The AROS Development Team. All rights reserved.
+    $Id: screennotifytask.c 40021 2011-07-12 08:18:24Z sonic $
 */
 
 #include <proto/exec.h>
@@ -31,9 +31,16 @@ void DefaultScreennotifyHandler(struct ScreennotifyTaskParams *taskparams)
     struct MsgPort          *port = NULL;
     BOOL            	     success = FALSE;
 
-    if ((port  = CreateMsgPort()))
+    if ((port = AllocMem(sizeof(struct MsgPort), MEMF_PUBLIC | MEMF_CLEAR)))
     {
+        port->mp_Node.ln_Type   = NT_MSGPORT;
+        port->mp_Flags      	= PA_SIGNAL;
+        port->mp_SigBit     	= AllocSignal(-1);
+        port->mp_SigTask    	= FindTask(0);
+        NEWLIST(&port->mp_MsgList);
+
         success = TRUE;
+
     } /* if ((mem = AllocMem(sizeof(struct MsgPort), MEMF_PUBLIC | MEMF_CLEAR))) */
 
     if (success)
@@ -63,10 +70,6 @@ void DefaultScreennotifyHandler(struct ScreennotifyTaskParams *taskparams)
         } /* while((msg = (struct ScreenNotifyMessage *)GetMsg(port))) */
 
     } /* for(;;) */
-
-    /* should never reach here but just incase.. */
-    if (port)
-        DeleteMsgPort(port);
 }
 
 /**************************************************************************************************/

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: monitorclass.h 36648 2011-01-17 14:31:59Z neil $
 
     Desc: Headerfile for BOOPSI monitorclass.
     Lang: english

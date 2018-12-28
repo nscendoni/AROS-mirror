@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support.h 47636 2013-07-09 17:43:50Z neil $
 */
 
 #ifndef _MUIMASTER_SUPPORT_H

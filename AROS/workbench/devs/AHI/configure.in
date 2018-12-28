@@ -1,9 +1,9 @@
-dnl $Id$
+dnl $Id: configure.in 51211 2015-11-11 13:45:00Z deadwood $
 
 
 dnl Process this file with autoconf to produce a configure script.
 
-AC_REVISION( $Revision$ )
+AC_REVISION( $Revision: 51211 $ )
 dnl
 AC_INIT(TODO)
 
@@ -83,7 +83,7 @@ case $host in
   linkerflags=""
   asflags="--defsym CPU=${CPU} --defsym LITTLE_ENDIAN=1"
   resident=""                                      dnl *** Not supported (yet?)
-  stripflag=""
+  stripflag="--strip-unneeded"
  ;;
  x86_64-*-aros)
  : ${CPU="x86_64"}
@@ -92,7 +92,7 @@ case $host in
   linkerflags=""
   asflags="--defsym CPU=${CPU} --defsym LITTLE_ENDIAN=1 --defsym x86_64=1"
   resident=""
-  stripflag=""
+  stripflag="--strip-unneeded"
  ;;
  *)
   AC_MSG_WARN(Unknown architecture!)

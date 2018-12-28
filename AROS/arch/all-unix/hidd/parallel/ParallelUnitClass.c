@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ParallelUnitClass.c 48687 2014-01-07 20:16:11Z jmcmullan $
 
     Desc: Parallel Unit hidd class implementation.
     Lang: english

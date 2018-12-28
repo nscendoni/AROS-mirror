@@ -1,8 +1,9 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 #
 
 include $(SRCDIR)/config/aros.cfg
 
+USER_CFLAGS := -I$(SRCDIR)/rom/processor
 
 FILES := \
     getcpuinfo \
@@ -10,8 +11,7 @@ FILES := \
 
 #MM- kernel-processor-m68k : includes
 
-USER_CFLAGS := -D__UTILITY_NOLIBBASE__
-USER_INCLUDES := -I$(SRCDIR)/rom/processor
+USER_CFLAGS += -D__UTILITY_NOLIBBASE__
 
 %build_archspecific mainmmake=kernel-processor maindir=rom/processor \
     arch=m68k files=$(FILES)

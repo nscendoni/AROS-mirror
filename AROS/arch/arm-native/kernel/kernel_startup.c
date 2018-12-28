@@ -1,6 +1,6 @@
 /*
     Copyright © 2013-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kernel_startup.c 50671 2015-05-13 19:37:46Z NicJA $
 */
 
 #define DEBUG 1

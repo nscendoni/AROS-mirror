@@ -7,7 +7,7 @@
  * This program is free software; you can redistribute it and/or modify it
  * under the same terms as AROS itself.
  *
- * $Id$
+ * $Id: main.c 53132 2016-12-29 10:32:06Z deadwood $
  */
 
 #include <aros/asmcall.h>
@@ -203,7 +203,8 @@ LONG handler(struct ExecBase *SysBase)
     return RETURN_OK;
 }
 
-static AROS_INTH1(DiskChangeIntHandler, struct IntData *, MyIntData)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(DiskChangeIntHandler, struct IntData *, MyIntData)
 {
     AROS_INTFUNC_INIT
 

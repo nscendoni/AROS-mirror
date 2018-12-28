@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: emul_host_unix.c 51022 2015-08-22 00:25:39Z neil $
 */
 
 #include "unix_hints.h"

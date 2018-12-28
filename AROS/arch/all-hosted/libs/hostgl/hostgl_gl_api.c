@@ -1,6 +1,6 @@
 /*
     Copyright 2011-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hostgl_gl_api.c 51001 2015-08-10 17:43:38Z neil $
 */
 
 #include "hostgl_ctx_manager.h"

@@ -1,7 +1,7 @@
 # Copyright © 2012, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 52374 2016-03-29 16:41:04Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 CATDIR := $(AROS_CONTRIB)/Utilities/Archive/Unarc/Catalogs
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: platform_init.c 49667 2014-09-30 17:35:27Z neil $
 */
 
 #define __KERNEL_NOLIBBASE__
@@ -26,9 +26,8 @@ static int Platform_Init(struct KernelBase *LIBBASE)
     	return FALSE;
 
     LIBBASE->kb_PlatformData = pd;
-    if (SysBase->AttnFlags & AFF_68080)
-	pd->mmu_type = 0;
-    else if (SysBase->AttnFlags & AFF_68060)
+
+    if (SysBase->AttnFlags & AFF_68060)
     	pd->mmu_type = MMU060;
     else if (SysBase->AttnFlags & AFF_68040)
     	pd->mmu_type = MMU040;

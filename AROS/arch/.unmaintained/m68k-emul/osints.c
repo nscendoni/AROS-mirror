@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: osints.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: OS specific functions for signal blocking
     Lang: english

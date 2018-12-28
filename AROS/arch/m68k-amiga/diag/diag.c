@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: diag.c 52365 2016-03-29 14:59:53Z jmcmullan $
 */
 
 #define DEBUG 1
@@ -72,11 +72,10 @@ static BOOL calldiagrom(struct ExpansionBase *ExpansionBase, struct ConfigDev *c
 	// call autoconfig ROM da_DiagPoint
 	D(bug("Call boot rom @%p board %p diag %p configdev %p\n",
 		code, configDev->cd_BoardAddr, diag, configDev));
-	ret = AROS_UFC6(ULONG, code,
+	ret = AROS_UFC5(ULONG, code,
 		AROS_UFCA(APTR, configDev->cd_BoardAddr, A0),
 		AROS_UFCA(struct DiagArea*, diag, A2),
 		AROS_UFCA(struct ConfigDev*, configDev, A3),
-		AROS_UFCA(ULONG, 0, A4), // Dummy variable. Preserve A4 because Blizzard 1260 ROM modifies it.
 		AROS_UFCA(struct ExpansionBase*, ExpansionBase, A5),
 		AROS_UFCA(struct ExecBase*, SysBase, A6));
 	D(bug(ret ? "->success\n" : "->failed\n"));
@@ -172,7 +171,7 @@ static void callroms(struct ExpansionBase *ExpansionBase)
 }
 
 
-void InitKickMemDiag(struct ExecBase *SysBase);
+void InitKickMemDiag(void);
 
 static AROS_UFH3 (APTR, Init,
 		  AROS_UFHA(struct Library *, lh, D0),
@@ -195,7 +194,7 @@ static AROS_UFH3 (APTR, Init,
    /* ArosBootStrap mode? Check for kick modules again if some of our kick modules
     * are located in diag initialized ram (Blizzard A1200 accelerator boards)
     */
-   InitKickMemDiag(SysBase);
+   InitKickMemDiag();
 
    AROS_USERFUNC_EXIT
 

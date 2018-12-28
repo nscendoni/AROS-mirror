@@ -2,8 +2,8 @@
 // Popup Menu Images
 // ©1996-1997 Henrik Isaksson
 //
-// $Date$
-// $Revision$
+// $Date: 2013-12-01 23:08:26 +0100 (Sun, 01 Dec 2013) $
+// $Revision: 48481 $
 //
 
 #include <exec/types.h>

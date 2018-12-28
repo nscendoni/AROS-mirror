@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pcilinux_init.c 36162 2010-12-18 18:56:18Z sonic $
 */
 
 #include <aros/libcall.h>

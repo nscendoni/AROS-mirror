@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 52304 2016-03-28 11:18:43Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -6,7 +6,7 @@ include $(SRCDIR)/config/aros.cfg
 #MM tools-setrev : includes linklibs
 
 FILES  := setrev
-EXEDIR := $(AROS_CONTRIB)/$(AROS_DIR_DEVELOPER)/Build
+EXEDIR := $(AROS_CONTRIB)/Development/Build
 USER_CFLAGS :=
 
 %build_prog mmake=tools-setrev progname=setrev \

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: internalloadseg_elf.c 48652 2013-12-29 16:19:56Z deadwood $
 
     Desc: Code to dynamically load ELF executables
     Lang: english

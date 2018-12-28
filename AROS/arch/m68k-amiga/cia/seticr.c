@@ -1,6 +1,6 @@
 /*
     Copyright © 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: seticr.c 39899 2011-07-08 04:15:31Z jmcmullan $
 
     Desc: SetICR() function.
     Lang: english

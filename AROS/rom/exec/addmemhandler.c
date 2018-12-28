@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: addmemhandler.c 48982 2014-05-03 18:18:36Z deadwood $
 
     Desc: Add a low memory handler.
     Lang: english

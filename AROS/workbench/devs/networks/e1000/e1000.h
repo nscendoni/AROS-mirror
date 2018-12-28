@@ -1,7 +1,7 @@
 #ifndef _E1000_H_
 #define _E1000_H_
 /*
- * $Id$
+ * $Id: e1000.h 45475 2012-08-10 05:03:02Z jmcmullan $
  */
 /*
     This program is free software; you can redistribute it and/or modify

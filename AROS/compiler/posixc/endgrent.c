@@ -1,6 +1,6 @@
 /*
     Copyright © 2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: endgrent.c 48053 2013-09-08 21:20:12Z verhaegs $
 */
 
 #include <aros/debug.h>

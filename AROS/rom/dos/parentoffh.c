@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: parentoffh.c 48397 2013-11-09 03:46:51Z neil $
 
     Desc: Lock the directory a file is located in
     Lang: english

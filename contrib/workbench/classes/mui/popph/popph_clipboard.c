@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: popph_clipboard.c 37250 2011-02-28 05:54:56Z jmcmullan $
 **
 ** © 1999 Marcin Orlowski <carlos@amiga.com.pl>
 */

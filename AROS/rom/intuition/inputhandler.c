@@ -1,15 +1,12 @@
 /*
-    Copyright Â© 1995-2017, The AROS Development Team. All rights reserved.
-    Copyright Â© 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
+    $Id: inputhandler.c 49749 2014-11-03 02:16:23Z neil $
 */
 
 /****************************************************************************************/
 
-#include <aros/config.h>
-
 #include <proto/exec.h>
-#include <proto/execlock.h>
 #include <proto/intuition.h>
 #include <proto/alib.h>
 #include <proto/layers.h>
@@ -70,7 +67,7 @@ struct Interrupt *InitIIH(struct IntuitionBase *IntuitionBase)
 {
     struct Interrupt *iihandler;
 
-    D(bug("[Intuition] %s(IntuitionBase=%p)\n", __func__, IntuitionBase));
+    D(bug("InitIIH(IntuitionBase=%p)\n", IntuitionBase));
 
     iihandler = AllocMem(sizeof (struct Interrupt), MEMF_PUBLIC | MEMF_CLEAR);
     if (iihandler)
@@ -82,7 +79,7 @@ struct Interrupt *InitIIH(struct IntuitionBase *IntuitionBase)
         {
             struct MsgPort *port;
 
-            port = CreateMsgPort();
+            port = AllocMem(sizeof (struct MsgPort), MEMF_PUBLIC | MEMF_CLEAR);
             if (port)
             {
                 if ((iihdata->InputEventMemPool = CreatePool(MEMF_PUBLIC | MEMF_CLEAR,
@@ -121,10 +118,9 @@ struct Interrupt *InitIIH(struct IntuitionBase *IntuitionBase)
                            We are anyway woken up about 10 times a second by
                            timer events
                            */
-                        FreeSignal(port->mp_SigBit);
-                        port->mp_SigBit  = -1;
                         port->mp_Flags   = PA_IGNORE;
 
+                        NEWLIST( &(port->mp_MsgList) );
                         iihdata->IntuiReplyPort = port;
 
                         NEWLIST((struct List*) &iihdata->IntuiActionQueue);
@@ -163,7 +159,7 @@ struct Interrupt *InitIIH(struct IntuitionBase *IntuitionBase)
                     DeletePool(iihdata->InputEventMemPool);
 
                 } /* if (iihdata->InputEventMemPool = ... */
-                DeleteMsgPort(port);
+                FreeMem(port, sizeof(struct MsgPort));
 
             } /* if (port) */
             FreeMem(iihdata, sizeof (struct IIHData));
@@ -182,8 +178,6 @@ struct Interrupt *InitIIH(struct IntuitionBase *IntuitionBase)
 VOID CleanupIIH(struct Interrupt *iihandler, struct IntuitionBase *IntuitionBase)
 {
     struct IIHData *iihdata = (struct IIHData *)iihandler->is_Data;
-
-    D(bug("[Intuition] %s()\n", __func__));
 
     DisposeObject((Object *)iihdata->MasterDragGadget);
     DisposeObject((Object *)iihdata->MasterSizeGadget);
@@ -210,8 +204,6 @@ static void HandleIntuiReplyPort(struct IIHData *iihdata, struct IntuitionBase *
 {
     struct Library *TimerBase = GetPrivIBase(IntuitionBase)->TimerBase;
     struct IntuiMessage *im;
-
-    D(bug("[Intuition] %s()\n", __func__));
 
     while ((im = (struct IntuiMessage *)GetMsg(iihdata->IntuiReplyPort)))
     {
@@ -429,8 +421,6 @@ struct Window *GetToolBoxWindow(struct InputEvent *ie, struct Screen *scr, struc
     struct Layer    *l;
     struct Window   *new_w = NULL;
 
-    D(bug("[Intuition] %s()\n", __func__));
-
     if (scr)
     {
         D(bug("GetToolBoxWindow: Click at (%d,%d)\n",scr->MouseX,scr->MouseY));
@@ -493,8 +483,6 @@ static struct Gadget *Process_RawMouse(struct InputEvent *ie, struct IIHData *ii
 {
     struct Library *InputBase = GetPrivIBase(IntuitionBase)->InputBase;
     struct Requester *req = w ? w->FirstRequest : NULL;
-
-    D(bug("[Intuition] %s()\n", __func__));
 
     switch (ie->ie_Code) {
     case SELECTDOWN:
@@ -1765,38 +1753,32 @@ static struct Gadget *Process_RawMouse(struct InputEvent *ie, struct IIHData *ii
         if (w->UserPort)
         {
             struct IntuiMessage *im;
-#if defined(__AROSEXEC_SMP__)
-            struct ExecLockBase *ExecLockBase = GetPrivIBase(IntuitionBase)->ExecLockBase;
-            if (ExecLockBase) ObtainLock(&w->UserPort->mp_SpinLock, SPINLOCK_MODE_READ, 0);
-#endif
+
             for (im = (struct IntuiMessage *)w->UserPort->mp_MsgList.lh_TailPred;
             im->ExecMessage.mn_Node.ln_Pred;
             im = (struct IntuiMessage *)im->ExecMessage.mn_Node.ln_Pred)
             {
-                if ((im->Class == IDCMP_MOUSEMOVE) &&
-                    (im->IDCMPWindow == w))
+            if ((im->Class == IDCMP_MOUSEMOVE) &&
+                (im->IDCMPWindow == w))
+            {
+                im->Qualifier = iihdata->ActQualifier;
+
+                if (w->IDCMPFlags & IDCMP_DELTAMOVE)
                 {
-                    im->Qualifier = iihdata->ActQualifier;
-
-                    if (w->IDCMPFlags & IDCMP_DELTAMOVE)
-                    {
-                    im->MouseX = iihdata->DeltaMouseX;
-                    im->MouseY = iihdata->DeltaMouseY;
-                    }
-                    else
-                    {
-                    im->MouseX = w->MouseX;
-                    im->MouseY = w->MouseY;
-                    }
-                    CurrentTime(&im->Seconds, &im->Micros);
-
-                    old_msg_found = TRUE;
-                    break;
+                im->MouseX = iihdata->DeltaMouseX;
+                im->MouseY = iihdata->DeltaMouseY;
                 }
+                else
+                {
+                im->MouseX = w->MouseX;
+                im->MouseY = w->MouseY;
+                }
+                CurrentTime(&im->Seconds, &im->Micros);
+
+                old_msg_found = TRUE;
+                break;
             }
-#if defined(__AROSEXEC_SMP__)
-            if (ExecLockBase) ReleaseLock(&w->UserPort->mp_SpinLock, 0);
-#endif
+            }
         } /* if (w->UserPort) */
         Permit();
 

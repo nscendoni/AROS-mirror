@@ -2,7 +2,7 @@
     Copyright © 2009, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: main.c 49216 2014-08-02 10:11:21Z mazze $
 */
 
 /*  

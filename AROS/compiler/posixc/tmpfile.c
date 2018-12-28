@@ -1,6 +1,6 @@
 /*
     This file has been released into the Public Domain.
-    $Id$
+    $Id: tmpfile.c 48051 2013-09-08 21:19:51Z verhaegs $
 
     POSIX.1-2008 function tmpfile().
 */

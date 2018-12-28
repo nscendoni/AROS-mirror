@@ -1,6 +1,6 @@
 /*
     Copyright 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: nouveau_pciids.h 48961 2014-04-22 23:32:32Z neil $
 */
 
 #if !defined(NOVUEAU_PCIIDS_H)

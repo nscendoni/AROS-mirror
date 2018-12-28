@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mui_freeclass.c 51642 2016-03-09 04:19:25Z NicJA $
 */
 
 #include <string.h>

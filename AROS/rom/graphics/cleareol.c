@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cleareol.c 46616 2013-02-16 00:00:27Z jmcmullan $
 
     Desc: Graphics function ClearEOL()
     Lang: English

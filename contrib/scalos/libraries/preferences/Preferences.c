@@ -1,6 +1,6 @@
 // Preferences.c
-// $Date$
-// $Revision$
+// $Date: 2016-01-03 18:43:57 +0100 (Sun, 03 Jan 2016) $
+// $Revision: 51249 $
 
 
 #include <exec/types.h>

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: iso646.h 48028 2013-09-08 21:13:29Z verhaegs $
 
     Alternate spellings. This is designed to be used by people who use
     languages that may not support the standard C symbols.

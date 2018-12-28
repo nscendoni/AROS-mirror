@@ -1,6 +1,6 @@
 /*
     Copyright 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: drm_aros.h 45491 2012-08-10 05:04:49Z jmcmullan $
 */
 
 #if !defined(DRM_AROS_H)

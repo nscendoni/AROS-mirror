@@ -1,6 +1,6 @@
 /*
-    Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright Â© 2004, The AROS Development Team. All rights reserved.
+    $Id: ati_bitmap.c 45314 2012-07-24 10:58:28Z jmcmullan $
 */
 
 #include "ati.h"
@@ -11,7 +11,7 @@
 #include "radeon_macros.h"
 
 #include <oop/oop.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <hidd/hidd.h>
 
 #include <proto/oop.h>

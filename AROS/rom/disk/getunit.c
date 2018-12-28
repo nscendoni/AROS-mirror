@@ -1,6 +1,6 @@
 /*
     Copyright © 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getunit.c 36645 2011-01-17 13:41:08Z neil $
 
     Desc: GetUnit() function.
     Lang: english

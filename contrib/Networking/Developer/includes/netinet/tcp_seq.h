@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: tcp_seq.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: tcp_seq.h,v 1.2 1997/02/24 14:06:46 niklas Exp $	*/

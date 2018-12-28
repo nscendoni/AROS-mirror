@@ -63,7 +63,7 @@ typedef char grub_bool;
 #define MAX_FORMAT_LEN 256
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-//MODULE_ID("$Id$")
+//MODULE_ID("$Id: tparm.c 30792 2009-03-07 22:40:04Z neil $")
 
 /*
  *	char *

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: charset.c 50940 2015-07-09 01:16:32Z neil $
 */
 
 #include <dos/dosextens.h>

@@ -1,11 +1,9 @@
 /*
     Copyright © 2003-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getgid.c 48053 2013-09-08 21:20:12Z verhaegs $
 
     POSIX.1-2008 function getgid().
 */
-
-#include "__posixc_intbase.h"
 
 /*****************************************************************************
 
@@ -18,13 +16,13 @@
 	void)
 
 /*  FUNCTION
-	Returns the real group ID of the calling process
-
+	
     INPUTS
 	
     RESULT
 	
     NOTES
+        Always return 0 for the moment.
 
     EXAMPLE
 
@@ -37,8 +35,5 @@
 
 ******************************************************************************/
 {
-    struct PosixCIntBase *PosixCBase =
-        (struct PosixCIntBase *)__aros_getbase_PosixCBase();
-
-    return (gid_t)PosixCBase->gid;
+    return 0;
 } /* getgid() */

@@ -1,6 +1,6 @@
 /*
     Copyright © 2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: alsa.c 51948 2016-03-14 19:21:58Z neil $
 */
 
 #include "alsa_hostlib.h"

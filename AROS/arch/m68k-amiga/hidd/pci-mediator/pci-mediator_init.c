@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pci-mediator_init.c 47619 2013-07-02 18:27:20Z neil $
 */
 
 #include <aros/debug.h>

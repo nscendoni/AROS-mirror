@@ -1,6 +1,6 @@
 /*
-    Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2004-2015, The AROS Development Team. All rights reserved.
+    $Id: nvidiaclass.c 52023 2016-03-17 04:35:11Z jmcmullan $
 
     Desc: NVidia gfx class
     Lang: English
@@ -10,7 +10,7 @@
 #include <exec/memory.h>
 
 #include <hidd/hidd.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #include <proto/exec.h>
 #include <proto/oop.h>
@@ -25,13 +25,11 @@
 #define _sd (&((LIBBASETYPEPTR)cl->UserData)->sd)
 
 #undef HiddPCIDeviceAttrBase
-#undef HiddAttrBase
 #undef HiddGfxAttrBase
 #undef HiddPixFmtAttrBase
 #undef HiddSyncAttrBase
 #undef HiddBitMapAttrBase
 #define HiddPCIDeviceAttrBase	(_sd->pciAttrBase)
-#define HiddAttrBase		(_sd->hiddAttrBase)
 #define HiddNVidiaBitMapAttrBase (_sd->nvBitMapAttrBase)
 #define HiddBitMapAttrBase	(_sd->bitMapAttrBase)
 #define HiddPixFmtAttrBase	(_sd->pixFmtAttrBase)
@@ -248,9 +246,6 @@ OOP_Object *NV__Root__New(OOP_Class *cl, OOP_Object *o, struct pRoot_New *msg)
 
     struct TagItem mytags[] = {
 	{ aHidd_Gfx_ModeTags,	(IPTR)modetags	},
-        { aHidd_Name            , (IPTR)"Nvidia"     },
-        { aHidd_HardwareName    , (IPTR)"Nvidia Gfx Adaptor"   },
-        { aHidd_ProducerName    , (IPTR)"Nvidia Corporation"  },
 	{ TAG_MORE, (IPTR)msg->attrList }
     };
 

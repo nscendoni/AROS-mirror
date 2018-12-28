@@ -1,7 +1,7 @@
 # Copyright © 2004, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 52357 2016-03-29 14:48:26Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- contrib-gnu : contrib-gnu-gawk
 #MM- contrib-gnu-gawk : development-gawk

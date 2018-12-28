@@ -1,4 +1,4 @@
-# $Id$
+# $Id: Makefile 30792 2009-03-07 22:40:04Z neil $
 
 INSTALLPATH = ../../build
 ABOXINCLUDEPATH = /gg/morphos/aboxinclude/

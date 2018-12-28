@@ -2,7 +2,7 @@
     Copyright © 2002, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: socket_intern.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 #ifndef MUIMASTER_INTERN_H

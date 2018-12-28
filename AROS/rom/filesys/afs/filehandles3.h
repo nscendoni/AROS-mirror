@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: filehandles3.h 36808 2011-01-26 11:53:43Z sonic $
 */
 
 #include "os.h"

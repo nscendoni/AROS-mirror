@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getdtattrsa.c 51476 2016-02-12 17:38:40Z mazze $
 
     Desc:
     Lang: english

@@ -1,7 +1,7 @@
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2009, The AROS Development Team. All rights reserved.
+    $Id: startup.c 52750 2016-06-03 16:21:15Z schulz $
 
     Desc: Common startup code
     Lang: english
@@ -66,12 +66,12 @@ __startup AROS_PROCH(__startup_entry, argstr, argsize, SysBase)
         No one program will be able to do anything useful without the dos.library,
         so we open it here instead of using the automatic opening system
     */
-    DOSBase = (struct DosLibrary *)OpenLibrary((CONST_STRPTR)DOSNAME, 0);
+    DOSBase = (struct DosLibrary *)OpenLibrary(DOSNAME, 0);
     if (!DOSBase) return RETURN_FAIL;
     if (((struct Library *)DOSBase)->lib_Version < __aros_libreq_DOSBase)
         return RETURN_FAIL;
 
-    __argstr  = (char *)argstr;
+    __argstr  = argstr;
     __argsize = argsize;
     __startup_error = RETURN_FAIL;
 

@@ -1,7 +1,7 @@
 #ifndef XADMASTER_CONVERTE_C
 #define XADMASTER_CONVERTE_C
 
-/*  $Id$
+/*  $Id: ConvertE.c 30794 2009-03-08 02:19:07Z neil $
     endian conversion macros
 
     XAD library system for archive handling

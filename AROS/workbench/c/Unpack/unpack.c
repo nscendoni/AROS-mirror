@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: unpack.c 50095 2015-02-19 13:24:18Z polluks $
 */
 
 /******************************************************************************

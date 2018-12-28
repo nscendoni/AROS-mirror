@@ -1,8 +1,6 @@
-#ifndef __KERNEL_DEBUG_H_
-#define __KERNEL_DEBUG_H_
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kernel_debug.h 49922 2015-01-21 01:34:41Z NicJA $
 
     Desc:
 */
@@ -12,6 +10,9 @@
  * kernel.resource's own debugging facilities. Include it if you
  * need bug() in your code.
  */
+
+#ifndef __KERNEL_DEBUG_H_
+#define __KERNEL_DEBUG_H_
 
 #include <aros/asmcall.h>
 #include <aros/libcall.h>

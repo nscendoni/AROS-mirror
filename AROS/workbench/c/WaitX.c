@@ -1,6 +1,6 @@
 /*
     Copyright © 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: WaitX.c 45720 2012-09-02 16:46:15Z jmcmullan $
 
     Desc: Execute a command after a given time
     Lang: English

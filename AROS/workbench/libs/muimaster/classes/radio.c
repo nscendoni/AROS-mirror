@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: radio.c 52184 2016-03-22 16:48:14Z NicJA $
 */
 
 #include <clib/alib_protos.h>

@@ -1,6 +1,6 @@
 // IconObject.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-13 23:42:05 +0100 (Sun, 13 Mar 2016) $
+// $Revision: 51935 $
 
 
 #include <exec/types.h>

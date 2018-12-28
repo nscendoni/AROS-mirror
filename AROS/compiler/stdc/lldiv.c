@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: lldiv.c 48037 2013-09-08 21:17:44Z verhaegs $
 
     Desc: C99 function lldiv
 */

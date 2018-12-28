@@ -5,7 +5,7 @@
 #include <io.h>
 #endif
 
-static char rcsid[] = "$Id$";
+static char rcsid[] = "$Id: asdl.c 30794 2009-03-08 02:19:07Z neil $";
 
 static list_ty interfaces;
 static rcc_program_ty pickle;

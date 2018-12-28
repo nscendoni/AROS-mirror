@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright ï¿½ 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: planarbm.c 48273 2013-10-09 15:43:52Z neil $
 
     Desc: Graphics planar bitmap class implementation.
     Lang: english
@@ -17,7 +17,7 @@
 #include <graphics/gfx.h>
 #include <oop/oop.h>
 
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #include <string.h>
 

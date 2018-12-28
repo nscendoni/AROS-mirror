@@ -1,6 +1,6 @@
 /*
    Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: menu.c 48337 2013-10-26 19:29:25Z deadwood $
 
    Desc: Main bootmenu code
    Lang: english

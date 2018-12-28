@@ -6,7 +6,7 @@
     This file is part of the PrefsEditor class, which is distributed under
     the terms of version 2.1 of the GNU Lesser General Public License.
     
-    $Id$
+    $Id: prefseditor_private.h 46244 2013-01-12 02:10:53Z neil $
 */
 
 #include <exec/types.h>
@@ -32,8 +32,8 @@ struct PrefsEditor_DATA
 
 /*** Private methods ********************************************************/
 #define MUIM_PrefsEditor_ExportToDirectory   (TAG_USER | 0x10000000)
-struct  MUIP_PrefsEditor_ExportToDirectory   {STACKED ULONG MethodID; STACKED CONST_STRPTR directory;};
+struct  MUIP_PrefsEditor_ExportToDirectory   {ULONG MethodID; CONST_STRPTR directory;};
 #define MUIM_PrefsEditor_ImportFromDirectory (TAG_USER | 0x10000001)
-struct  MUIP_PrefsEditor_ImportFromDirectory {STACKED ULONG MethodID; STACKED CONST_STRPTR directory;};
+struct  MUIP_PrefsEditor_ImportFromDirectory {ULONG MethodID; CONST_STRPTR directory;};
 
 #endif /* _PREFSEDITOR_PRIVATE_H_ */

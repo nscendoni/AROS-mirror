@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright Â© 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: ticks.c 43584 2012-01-10 22:00:14Z jmcmullan $
 
     Desc: Hardware management routines for IBM PC-AT timer
     Lang: english
@@ -8,7 +8,6 @@
 
 #include <asm/io.h>
 #include <proto/exec.h>
-#include <proto/execlock.h>
 
 #include "ticks.h"
 #include "timer_macros.h"
@@ -21,7 +20,7 @@
  */
 
 /*
- * The math magic behind this is:
+ * The math magic behing this is:
  *
  * 1. Theoretical value of microseconds is: tick * 1000000 / tb_eclock_rate.
  * 2. tb_eclock_rate is constant and equal to 1193180Hz (frequency of PIT's master quartz).
@@ -115,18 +114,12 @@ void EClockSet(struct TimerBase *TimerBase)
 
 void Timer0Setup(struct TimerBase *TimerBase)
 {
-#if defined(__AROSEXEC_SMP__)
-    struct ExecLockBase *ExecLockBase = TimerBase->tb_ExecLockBase;
-#endif
     struct timeval time;
     ULONG delay = 23864;
     ULONG old_tick;
-    struct timerequest *tr;
+    struct timerequest *tr = (struct timerequest *)GetHead(&TimerBase->tb_Lists[TL_MICROHZ]);
 
-#if defined(__AROSEXEC_SMP__)
-    if (ExecLockBase) ObtainLock(TimerBase->tb_ListLock, SPINLOCK_MODE_READ, 0);
-#endif
-    if ((tr = (struct timerequest *)GetHead(&TimerBase->tb_Lists[TL_MICROHZ])) != NULL)
+    if (tr)
     {
         time.tv_micro = tr->tr_time.tv_micro;
         time.tv_secs  = tr->tr_time.tv_secs;
@@ -146,9 +139,7 @@ void Timer0Setup(struct TimerBase *TimerBase)
             }
         }
     }
-#if defined(__AROSEXEC_SMP__)
-    if (ExecLockBase) ReleaseLock(TimerBase->tb_ListLock, 0);
-#endif
+
     if (delay < 2) delay = 2;
 
     /*

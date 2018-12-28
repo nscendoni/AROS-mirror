@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: helpfuncs.c 51376 2016-01-20 00:31:40Z NicJA $
 */
 
 #define USE_BOOPSI_STUBS

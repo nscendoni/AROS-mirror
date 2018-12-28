@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gettimeofday.c 48053 2013-09-08 21:20:12Z verhaegs $
 
     Query the current time and/or timezone.
 */
@@ -136,10 +136,12 @@ static struct MsgPort __timeport;
 
 static void __init_timerbase(void)
 {
-    memset( &__timeport, 0, sizeof( __timeport ) );
     __timeport.mp_Node.ln_Type   = NT_MSGPORT;
+    __timeport.mp_Node.ln_Pri    = 0;
+    __timeport.mp_Node.ln_Name   = NULL;
     __timeport.mp_Flags          = PA_IGNORE;
     __timeport.mp_SigTask        = FindTask(NULL);
+    __timeport.mp_SigBit         = 0;
     NEWLIST(&__timeport.mp_MsgList);
 
     __timereq.tr_node.io_Message.mn_Node.ln_Type    = NT_MESSAGE;

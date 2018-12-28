@@ -3,17 +3,13 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu.h 51959 2016-03-15 01:23:43Z jmcmullan $
 
     NOTE: This file must compile *without* any other header !
 
     Desc: machine.h include file for Linux/x86_64 (work in progres...)
     Lang: english
 */
-
-typedef  unsigned char cpuid_t;
-typedef  unsigned char apicid_t;
-typedef  void *cpumask_t;
 
 /* Information about size and alignment,
  * the defines have to be numeric constants */

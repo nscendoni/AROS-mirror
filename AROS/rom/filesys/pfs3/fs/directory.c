@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: directory.c 49086 2014-06-24 07:54:30Z twilen $ */
 /* $Log: directory.c $
  * Revision 15.21  1999/09/11  17:05:14  Michiel
  * bugfix version 18.4

@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: disk.c 49086 2014-06-24 07:54:30Z twilen $ */
 /* $Log: disk.c $
  * Revision 15.12  1999/03/25  22:05:00  Michiel
  * fixed deldir related (beta) bug

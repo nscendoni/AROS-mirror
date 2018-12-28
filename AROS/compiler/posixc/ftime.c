@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ftime.c 48031 2013-09-08 21:16:04Z verhaegs $
 
     POSIX.1-2001 function ftime().
     Function is deprecated and removed from POSIX.1-2008

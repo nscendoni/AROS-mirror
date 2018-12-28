@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu_arm.h 45263 2012-07-20 04:29:42Z jmcmullan $
 
     Desc: Macros to handle unix signals, ARM version
     Lang: english

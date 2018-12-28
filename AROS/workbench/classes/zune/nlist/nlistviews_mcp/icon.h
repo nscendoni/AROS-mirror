@@ -19,7 +19,7 @@
 
  NList classes Support Site:  http://www.sf.net/projects/nlist-classes
 
- $Id$
+ $Id: icon.h 51615 2016-03-06 20:11:17Z mazze $
 
 ***************************************************************************/
 

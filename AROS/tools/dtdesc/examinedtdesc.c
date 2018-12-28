@@ -1,6 +1,6 @@
 /*
     Copyright © 2000, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: examinedtdesc.c 48427 2013-11-18 19:35:53Z jmcmullan $
 
     Desc: DataTypesDescriptorExaminator
     Lang: English.

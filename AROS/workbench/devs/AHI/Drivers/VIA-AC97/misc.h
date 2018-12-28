@@ -1,7 +1,7 @@
 /*
     Copyright © 2005-2013, Davy Wentzler. All rights reserved.
     Copyright © 2010-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: misc.h 46698 2013-02-25 01:57:03Z neil $
 */
 
 #ifndef AHI_Drivers_misc_h

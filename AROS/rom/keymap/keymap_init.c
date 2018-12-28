@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: keymap_init.c 44448 2012-03-25 12:02:13Z mazze $
 
     Desc: Library header for keymap
     Lang: english

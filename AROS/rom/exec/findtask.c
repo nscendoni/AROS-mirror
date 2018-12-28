@@ -1,19 +1,15 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: findtask.c 50742 2015-05-20 22:33:20Z NicJA $
 
     Desc: Search a task by name.
     Lang: english
 */
-
-#define DEBUG 0
-
 #include <exec/execbase.h>
 #include <aros/libcall.h>
 #include <proto/exec.h>
 
 #include "exec_intern.h"
-#include "exec_locks.h"
 
 /*****************************************************************************
 
@@ -55,18 +51,18 @@
     AROS_LIBFUNC_INIT
 
 #if defined(__AROSEXEC_SMP__)
-    spinlock_t *listlock;
+    spinlock_t *listLock;
 #endif
-    struct Task *ret, *thisTask = GET_THIS_TASK;
+    struct Task *ret;
 
     /* Quick return for a quick argument */
     if (name == NULL)
-	return thisTask;
+	return GET_THIS_TASK;
 
     /* Always protect task lists */
 #if defined(__AROSEXEC_SMP__)
-    EXEC_LOCK_READ_AND_DISABLE(&PrivExecBase(SysBase)->TaskReadySpinLock);
-    listlock = &PrivExecBase(SysBase)->TaskReadySpinLock;
+    listLock = EXEC_SPINLOCK_LOCK(&PrivExecBase(SysBase)->TaskReadySpinLock, SPINLOCK_MODE_READ);
+    Forbid();
 #else
     Disable();
 #endif
@@ -76,9 +72,10 @@
     if (ret == NULL)
     {
 #if defined(__AROSEXEC_SMP__)
-        EXEC_UNLOCK_AND_ENABLE(listlock);
-        EXEC_LOCK_READ_AND_DISABLE(&PrivExecBase(SysBase)->TaskWaitSpinLock);
-        listlock = &PrivExecBase(SysBase)->TaskWaitSpinLock;
+        EXEC_SPINLOCK_UNLOCK(listLock);
+        Permit();
+        listLock = EXEC_SPINLOCK_LOCK(&PrivExecBase(SysBase)->TaskWaitSpinLock, SPINLOCK_MODE_READ);
+        Forbid();
 #endif
 	/* Then into the waiting list. */
 	ret = (struct Task *)FindName(&SysBase->TaskWait, name);
@@ -88,29 +85,29 @@
 		Finally test the running task(s). This is mainly of importance on smp systems.
 	    */
 #if defined(__AROSEXEC_SMP__)
-            EXEC_UNLOCK_AND_ENABLE(listlock);
-            EXEC_LOCK_READ_AND_DISABLE(&PrivExecBase(SysBase)->TaskRunningSpinLock);
-            listlock = &PrivExecBase(SysBase)->TaskRunningSpinLock;
+            listLock = EXEC_SPINLOCK_LOCK(&PrivExecBase(SysBase)->TaskRunningSpinLock, SPINLOCK_MODE_READ);
+            Forbid();
             ret = (struct Task *)FindName(&PrivExecBase(SysBase)->TaskRunning, name);
             if (ret == NULL)
             {
-                EXEC_UNLOCK_AND_ENABLE(listlock);
-                EXEC_LOCK_READ_AND_DISABLE(&PrivExecBase(SysBase)->TaskSpinningLock);
-                listlock = &PrivExecBase(SysBase)->TaskSpinningLock;
+                EXEC_SPINLOCK_UNLOCK(listLock);
+                Permit();
+                listLock = EXEC_SPINLOCK_LOCK(&PrivExecBase(SysBase)->TaskSpinningLock, SPINLOCK_MODE_READ);
+                Forbid();
                 ret = (struct Task *)FindName(&PrivExecBase(SysBase)->TaskSpinning, name);
             }
 #else
 
 	    char *s1;
 	    const char *s2 = name;
-            s1 = thisTask->tc_Node.ln_Name;
+            s1 = GET_THIS_TASK->tc_Node.ln_Name;
 	    /* Check as long as the names are identical. */
 	    while (*s1++ == *s2)
 		/* Terminator found? */
 		if (!*s2++)
 		{
 		    /* Got it. */
-		    ret = thisTask;
+		    ret = GET_THIS_TASK;
 		    break;
 		}
 #endif
@@ -118,7 +115,8 @@
     }
 
 #if defined(__AROSEXEC_SMP__)
-    EXEC_UNLOCK_AND_ENABLE(listlock);
+    EXEC_SPINLOCK_UNLOCK(listLock);
+    Permit();
 #else
     Enable();
 #endif

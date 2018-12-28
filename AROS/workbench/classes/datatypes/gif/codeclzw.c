@@ -1,5 +1,5 @@
 /*
-    $Id$
+    $Id: codeclzw.c 40098 2011-07-14 12:10:39Z jmcmullan $
 
     This code contains a LZW decoder. LZW algorithm was patented and maybe still is in some countries.
     Only use this code, if you are sure, that you do not infringe a valid patent !

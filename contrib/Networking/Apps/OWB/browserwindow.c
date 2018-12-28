@@ -1,6 +1,6 @@
 /*
     Copyright © 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: browserwindow.c 45979 2012-11-02 04:43:51Z jmcmullan $
 */
 
 #include <exec/types.h>

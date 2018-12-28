@@ -1,9 +1,9 @@
 /* 
     Copyright  1999, David Le Corfec.
-    Copyright  2002-2018, The AROS Development Team.
+    Copyright  2002, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: frame.c 45683 2012-08-29 16:17:40Z neil $
 */
 
 #include <exec/types.h>
@@ -1026,10 +1026,9 @@ const struct ZuneFrameGfx *zune_zframe_get_with_state(Object *obj,
 BOOL zune_frame_intern_to_spec(const struct MUI_FrameSpec_intern *intern,
     STRPTR spec)
 {
-     if (!intern || !spec)
+    if (!intern || !spec)
         return FALSE;
 
-    char tmpSpec[3];
     char sp;
 
     if (intern->type < 10)
@@ -1040,17 +1039,12 @@ BOOL zune_frame_intern_to_spec(const struct MUI_FrameSpec_intern *intern,
     /* Must cast to LONG because on AmigaOS SNPrintf() is used which is like
      * RawDoFmt() 16 bit */
     snprintf(&spec[0], 2, "%c", sp);
-    snprintf(tmpSpec, 3, "%lx", (long)intern->state);
-    spec[1] = tmpSpec[0];
-    snprintf(tmpSpec, 3, "%lx", (long)intern->innerLeft);
-    spec[2] = tmpSpec[0];
-    snprintf(tmpSpec, 3, "%lx", (long)intern->innerRight);
-    spec[3] = tmpSpec[0];
-    snprintf(tmpSpec, 3, "%lx", (long)intern->innerTop);
-    spec[4] = tmpSpec[0];
-    snprintf(tmpSpec, 3, "%lx", (long)intern->innerBottom);
-    spec[5] = tmpSpec[0];
-    spec[6] = '\0';
+    snprintf(&spec[1], 2, "%lx", (long)intern->state);
+    snprintf(&spec[2], 2, "%lx", (long)intern->innerLeft);
+    snprintf(&spec[3], 2, "%lx", (long)intern->innerRight);
+    snprintf(&spec[4], 2, "%lx", (long)intern->innerTop);
+    snprintf(&spec[5], 2, "%lx", (long)intern->innerBottom);
+    /* 0 byte is ensured through snprintf */
     return TRUE;
 }
 

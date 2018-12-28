@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: popobject.c 49106 2014-07-10 19:28:41Z neil $
 */
 
 #include <graphics/gfx.h>

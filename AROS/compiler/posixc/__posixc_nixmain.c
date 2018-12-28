@@ -1,6 +1,6 @@
 /* 
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __posixc_nixmain.c 49655 2014-09-21 23:01:25Z neil $
 
     Desc: special main function for code which has to use special *nix features.
           This function gets called from a function with a similar name statically

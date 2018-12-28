@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2011, The AROS Development Team.
-    $Id$
+    $Id: main.c 41520 2011-09-21 13:56:22Z sonic $
 */
 
 #include <exec/types.h>

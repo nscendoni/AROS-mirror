@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: parallel_support.c 50913 2015-07-03 19:34:32Z jmcmullan $
 */
 
 

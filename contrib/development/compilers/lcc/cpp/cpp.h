@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: cpp.h 30794 2009-03-08 02:19:07Z neil $ */
 #define	INS	32768		/* input buffer */
 #define	OBS	4096		/* outbut buffer */
 #define	NARG	32		/* Max number arguments to a macro */

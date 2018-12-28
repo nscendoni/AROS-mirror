@@ -2,7 +2,7 @@
 #define	_NET_IF_VLAN_VAR_H_	1
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: if_vlan_var.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: drawiconstate.c 44784 2012-05-10 14:38:04Z jmcmullan $
 */
 
 #include <aros/debug.h>

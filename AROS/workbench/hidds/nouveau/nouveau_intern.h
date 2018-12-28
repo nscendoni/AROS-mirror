@@ -1,12 +1,11 @@
 #ifndef _NOUVEAU_INTERN_H
 #define _NOUVEAU_INTERN_H
 /*
-    Copyright © 2010-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2010-2015, The AROS Development Team. All rights reserved.
+    $Id: nouveau_intern.h 51039 2015-08-29 23:58:02Z NicJA $
 */
 
-#include <exec/semaphores.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <hidd/i2c.h>
 #include <hidd/gallium.h>
 
@@ -26,8 +25,6 @@
 #ifndef __OOP_NOATTRBASES__
 extern OOP_AttrBase HiddGfxNouveauAttrBase;
 #endif
-
-extern struct SignalSemaphore globalLock;
 
 enum
 {
@@ -171,8 +168,7 @@ struct staticdata
     OOP_Class       *i2cclass;
     OOP_Class       *galliumclass;
     OOP_Class       *compositorclass;
-
-    OOP_AttrBase    hiddAttrBase;    
+    
     OOP_AttrBase    pixFmtAttrBase;
     OOP_AttrBase    gfxAttrBase;
     OOP_AttrBase    gfxNouveauAttrBase;
@@ -217,9 +213,6 @@ LIBBASETYPE
 #define BASE(lib)                   ((LIBBASETYPEPTR)(lib))
 
 #define SD(cl)                      (&BASE(cl->UserData)->sd)
-
-#define LOCK_ENGINE                 { ObtainSemaphore(&globalLock); }
-#define UNLOCK_ENGINE               { ReleaseSemaphore(&globalLock); }
 
 #define LOCK_BITMAP                 { ObtainSemaphore(&bmdata->semaphore); }
 #define UNLOCK_BITMAP               { ReleaseSemaphore(&bmdata->semaphore); }

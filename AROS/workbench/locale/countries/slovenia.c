@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: slovenia.c 50823 2015-06-15 07:39:14Z polluks $
 
     Desc: Country data for Slovenija (Slovenia)
 */

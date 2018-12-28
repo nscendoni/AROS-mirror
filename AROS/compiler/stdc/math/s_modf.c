@@ -24,7 +24,6 @@ static char rcsid[] = "$FreeBSD: src/lib/msun/src/s_modf.c,v 1.8 2007/01/06 21:2
  *	No exception.
  */
 
-#include <float.h>
 #include "math.h"
 #include "math_private.h"
 
@@ -78,8 +77,3 @@ modf(double x, double *iptr)
 	    }
 	}
 }
-
-#if	LDBL_MANT_DIG == DBL_MANT_DIG
-AROS_MAKE_ASM_SYM(typeof(modfl), modfl, AROS_CSYM_FROM_ASM_NAME(modfl), AROS_CSYM_FROM_ASM_NAME(modf));
-AROS_EXPORT_ASM_SYM(AROS_CSYM_FROM_ASM_NAME(modfl));
-#endif

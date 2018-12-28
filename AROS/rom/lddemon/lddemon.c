@@ -1,11 +1,9 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: lddemon.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Loader for shared libraries and devices.
 */
-
-#include <aros/config.h>
 
 #include <aros/asmcall.h>
 #include <aros/debug.h>
@@ -22,10 +20,7 @@
 #include <dos/dosextens.h>
 #include <dos/dostags.h>
 #include <proto/exec.h>
-#include <proto/execlock.h>
 #include <proto/dos.h>
-#include <resources/execlock.h>
-#include <aros/types/spinlock_s.h>
 
 #include <stddef.h>
 #include <string.h>
@@ -96,7 +91,7 @@ static BPTR LDLoad(struct Process *caller, STRPTR name, STRPTR basedir,
 
     /*
 	If the caller was a process, we have more scope for loading
-	libraries. We can load them from the caller's current directory,
+	libraries. We can load them from the callers current directory,
 	or from the PROGDIR: assign. These could both be the same
 	though.
     */
@@ -280,9 +275,9 @@ static struct LDObjectNode *LDNewObjectNode(STRPTR name, struct ExecBase *SysBas
             InitSemaphore(&ret->ldon_SigSem);
 	    ret->ldon_AccessCount = 0;
 
-#if CHECK_DEPENDENCY
+	    #if CHECK_DEPENDENCY
 	    ret->ldon_FirstLocker = FindTask(0);
-#endif
+            #endif
 
 	    return ret;
         }
@@ -301,9 +296,6 @@ static struct LDObjectNode *LDRequestObject(STRPTR libname, ULONG version, STRPT
 	but the resident only contains foo.gadget
     */
     struct LDDemonBase *ldBase = SysBase->ex_RamLibPrivate;
-#if defined(__AROSEXEC_SMP__)
-    void *ExecLockBase = ldBase->dl_ExecLockRes;
-#endif    
     struct Library *DOSBase = ldBase->dl_DOSBase;
     STRPTR stripped_libname = FilePart(libname);
     struct Library *tmplib;
@@ -374,19 +366,12 @@ static struct LDObjectNode *LDRequestObject(STRPTR libname, ULONG version, STRPT
     ObtainSemaphore(&object->ldon_SigSem);
 
     /* Try to find the resident in the list */
-#if defined(__AROSEXEC_SMP__)
-    ObtainSystemLock(list, SPINLOCK_MODE_READ, LOCKF_FORBID);
-#endif
     tmplib = (struct Library *)FindName(list, stripped_libname);
-#if defined(__AROSEXEC_SMP__)
-    ReleaseSystemLock(list, LOCKF_FORBID);
-#endif
 
     if (!tmplib)
     {
 	/* Try to load from disk if not found */
 	struct LDDMsg ldd;
-	bzero(&ldd, sizeof(ldd));
 
 	ldd.ldd_ReplyPort.mp_SigBit       = SIGB_SINGLE;
 	ldd.ldd_ReplyPort.mp_SigTask      = FindTask(NULL);
@@ -489,7 +474,14 @@ AROS_LH2(struct Library *, OpenLibrary,
 
     struct LDDemonBase *ldBase = SysBase->ex_RamLibPrivate;
     struct Library *library;
-    struct LDObjectNode *object;
+    struct LDObjectNode *object = NULL;
+
+    /* ABI_V0 compatibility */
+    /* It was possible to open libraries by names not matching casing with library name. This is a workaround
+     * for programs that did this (example FPC runtime)
+     */
+    if (strcmp(libname, "Thread.library") == 0)
+        libname = "thread.library";
 
     object = LDRequestObject(libname, version, "libs", &SysBase->LibList, SysBase);
 
@@ -519,7 +511,6 @@ AROS_LH4(LONG, OpenDevice,
     struct LDDemonBase *ldBase = SysBase->ex_RamLibPrivate;
 
     object = LDRequestObject(devname, 0, "devs", &SysBase->DeviceList, SysBase);
-    
     if (object)
     {
     	/* Call exec.library/OpenDevice(), it will do the job */
@@ -628,9 +619,6 @@ AROS_UFH3(LONG, LDFlush,
     AROS_USERFUNC_INIT
 
     struct LDDemonBase *ldBase = SysBase->ex_RamLibPrivate;
-#if defined(__AROSEXEC_SMP__)
-    void *ExecLockBase = ldBase->dl_ExecLockRes;
-#endif
     struct Library *library;
 
     D(bug("[LDDemon] Flush called\n"));
@@ -638,9 +626,6 @@ AROS_UFH3(LONG, LDFlush,
 
     /* Forbid() is already done, but I don't want to rely on it. */
     Forbid();
-#if defined(__AROSEXEC_SMP__)
-    ObtainSystemLock(&SysBase->LibList, SPINLOCK_MODE_WRITE, 0);
-#endif
 
     /* Follow the linked list of shared libraries. */
     library = (struct Library *)SysBase->LibList.lh_Head;
@@ -656,9 +641,6 @@ AROS_UFH3(LONG, LDFlush,
 	    if( ldBase->dl_LDReturn != MEM_DID_NOTHING )
 	    {
 		/* Yes! Return it. */
-#if defined(__AROSEXEC_SMP__)
-                ReleaseSystemLock(&SysBase->LibList, 0);
-#endif
 		Permit();
 		return MEM_TRY_AGAIN;
 	    }
@@ -670,11 +652,7 @@ AROS_UFH3(LONG, LDFlush,
 	    library = (struct Library *)library->lib_Node.ln_Succ;
 	}
     }
-#if defined(__AROSEXEC_SMP__)
-    ReleaseSystemLock(&SysBase->LibList, 0);
 
-    ObtainSystemLock(&SysBase->DeviceList, SPINLOCK_MODE_WRITE, 0);
-#endif
     /* Do the same with the device list. */
     library = (struct Library *)SysBase->DeviceList.lh_Head;
     while(library->lib_Node.ln_Succ != NULL)
@@ -688,9 +666,6 @@ AROS_UFH3(LONG, LDFlush,
 	    if( ldBase->dl_LDReturn != MEM_DID_NOTHING )
 	    {
 		/* Yes! Return it. */
-#if defined(__AROSEXEC_SMP__)
-            ReleaseSystemLock(&SysBase->DeviceList, 0);
-#endif
 		Permit();
 		return MEM_TRY_AGAIN;
 	    }
@@ -702,11 +677,7 @@ AROS_UFH3(LONG, LDFlush,
 	    library = (struct Library *)library->lib_Node.ln_Succ;
 	}
     }
-#if defined(__AROSEXEC_SMP__)
-    ReleaseSystemLock(&SysBase->DeviceList, 0);
-#endif
     Permit();
-
     return MEM_DID_NOTHING;
 
     AROS_USERFUNC_EXIT
@@ -798,10 +769,6 @@ static ULONG LDDemon_Init(struct LDDemonBase *ldBase)
     SysBase->ex_RamLibPrivate = ldBase;
 
     AddMemHandler(&ldBase->dl_LDHandler);
-
-#if defined(__AROSEXEC_SMP__)
-    ldBase->dl_ExecLockRes = OpenResource("execlock.resource");
-#endif
 
     /*
      *	Grab the semaphore ourself. The reason for this is that it will

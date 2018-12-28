@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: colorhandling.h 30792 2009-03-07 22:40:04Z neil $
 */
 
 #define CLIP(x) ((x)>0xff ? 0xff : ((x)<0x00 ? 0x00 : (x)))

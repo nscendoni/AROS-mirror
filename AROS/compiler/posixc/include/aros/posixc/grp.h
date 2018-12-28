@@ -3,18 +3,19 @@
 
 /*
     Copyright © 2003-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: grp.h 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <aros/types/size_t.h>
 #include <aros/types/gid_t.h>
 
+/* ABI_V0 compatibility */
 struct group
 {
     char   *gr_name;      /* Group name */
+    char   *gr_passwd;    /* Group password */
     gid_t   gr_gid;       /* Group ID */
     char  **gr_mem;       /* Group members */
-    char   *gr_passwd;    /* Group password */
 };
 
 __BEGIN_DECLS

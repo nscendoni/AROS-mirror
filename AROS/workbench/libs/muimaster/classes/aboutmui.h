@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: aboutmui.h 30792 2009-03-07 22:40:04Z neil $
 */
 
 #ifndef _MUI_CLASSES_ABOUTMUI_H

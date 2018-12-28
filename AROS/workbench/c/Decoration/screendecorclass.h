@@ -1,6 +1,6 @@
 /*
     Copyright  2011-2012, The AROS Development Team.
-    $Id$
+    $Id: screendecorclass.h 44561 2012-04-07 21:43:27Z NicJA $
 */
 
 #ifndef SCREENDECORCLASS_H

@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: videocore.h 47619 2013-07-02 18:27:20Z neil $
 */
 
 #ifndef VCMBOX_H

@@ -1,6 +1,6 @@
 /*
-    Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2004-2010, The AROS Development Team. All rights reserved.
+    $Id: nvidiabitmap.c 45304 2012-07-23 19:44:42Z jmcmullan $
 
     Desc: NVidia bitmap class
     Lang: English
@@ -10,7 +10,7 @@
 #include <exec/memory.h>
 
 #include <hidd/hidd.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #include <proto/exec.h>
 #include <proto/oop.h>

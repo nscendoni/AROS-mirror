@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: install-i386-pc.c 51712 2016-03-09 22:37:02Z NicJA $
 */
 /******************************************************************************
 

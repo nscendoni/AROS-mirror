@@ -1,8 +1,7 @@
 #!/bin/zsh
 # Creates darwin-ppc "hosted" binary packages.
 
-BUILDCPU=ppc
-BUILDTARGET=darwin-$BUILDCPU
+BUILDTARGET=darwin-ppc
 BUILDEXTRAOPTS=(--with-kernel-gcc-version=4.2.1)
 
 source $SP/pkg/hosted

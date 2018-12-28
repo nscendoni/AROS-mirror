@@ -205,7 +205,7 @@ LibOpen(REG(a6) struct ClassBase *ClassBase)
           // base
 
         SoundClass->cl_Dispatcher.h_Entry   = (HOOKFUNC)ClassDispatch;
-        SoundClass->cl_UserData             = (IPTR)ClassBase;
+        SoundClass->cl_UserData             = (ULONG)ClassBase;
 
           // Make the class publicly available
 

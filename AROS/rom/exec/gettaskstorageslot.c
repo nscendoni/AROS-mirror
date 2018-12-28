@@ -1,6 +1,6 @@
 /*
     Copyright © 2012-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gettaskstorageslot.c 51383 2016-01-21 00:29:44Z NicJA $
 */
 
 #include <aros/debug.h>
@@ -55,7 +55,7 @@
 
 IPTR TaskGetStorageSlot(struct Task * t, LONG id)
 {
-    struct ETask *et = t ? GetETask(t) : NULL;
+    struct ETask *et = GetETask(t);
     IPTR *ts;
 
     D(bug("TaskGetStorageSlot: %p: Get TaskGetStorageSlot %d\n", et, id);)

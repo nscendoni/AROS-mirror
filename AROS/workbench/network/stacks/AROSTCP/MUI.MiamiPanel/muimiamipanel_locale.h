@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2003-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: muimiamipanel_locale.h 30792 2009-03-07 22:40:04Z neil $
 */
 
 #include <exec/types.h>

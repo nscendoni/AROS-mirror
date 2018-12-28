@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: parallel_stubs.c 36482 2011-01-10 04:06:07Z jmcmullan $
 
     Desc: Stubs for Parallel and ParallelUnit class
     Lang: english

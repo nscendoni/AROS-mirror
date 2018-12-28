@@ -1,6 +1,6 @@
 /*
     Copyright © 2000, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: x86_RiSE.c 48533 2013-12-06 21:24:19Z jmcmullan $
 
     Desc: Probe installed Rise Technology mP6 CPUs and display relevant information
     Lang: english

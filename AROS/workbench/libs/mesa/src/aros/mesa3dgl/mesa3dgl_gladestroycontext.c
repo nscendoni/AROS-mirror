@@ -1,6 +1,6 @@
 /*
     Copyright 2009-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mesa3dgl_gladestroycontext.c 50858 2015-06-23 22:30:34Z NicJA $
 */
 
 #define DEBUG 0
@@ -61,7 +61,7 @@
 
             _ctx->st->destroy(_ctx->st);
             MESA3DGLFreeFrameBuffer(_ctx->framebuffer);
-            MESA3DGLFreeStManager(_ctx->driver, _ctx->stmanager);
+            MESA3DGLFreeStManager(_ctx->stmanager);
             glstapi->destroy(glstapi);
             MESA3DGLFreeContext(_ctx);
         }

@@ -19,7 +19,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *   
- * $Id$
+ * $Id: idestimateformatsize.c 38931 2011-05-30 19:41:52Z mazze $
  */
 
 #include "identify_intern.h"

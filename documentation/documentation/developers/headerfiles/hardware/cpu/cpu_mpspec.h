@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu_mpspec.h 30800 2009-03-08 17:28:50Z neil $
 
     Desc: Structure definitions for SMP machines following the Intel Multiprocessing Specification 1.1 and 1.4.
     Lang: english

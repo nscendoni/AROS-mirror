@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kernel_cpu.h 50731 2015-05-20 20:29:13Z NicJA $
 */
 
 #ifndef CPU_ARM_H_

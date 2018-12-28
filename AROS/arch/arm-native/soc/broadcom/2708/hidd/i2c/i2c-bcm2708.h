@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: i2c-bcm2708.h 50277 2015-04-01 01:16:56Z NicJA $
 */
 
 #ifndef I2C_BCM2708_H

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prefs.c 48674 2014-01-02 17:51:04Z neil $
 
     Desc:
     Lang: English

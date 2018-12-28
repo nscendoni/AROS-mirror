@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2013, The AROS Development Team.
-    $Id$
+    $Id: generic_window_cl.c 48674 2014-01-02 17:51:04Z neil $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

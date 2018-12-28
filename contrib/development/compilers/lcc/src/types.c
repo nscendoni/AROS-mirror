@@ -1,7 +1,7 @@
 #include "c.h"
 #include <float.h>
 
-static char rcsid[] = "$Id$";
+static char rcsid[] = "$Id: types.c 30794 2009-03-08 02:19:07Z neil $";
 
 static Field isfield(const char *, Field);
 static Type type(int, Type, int, int, void *);

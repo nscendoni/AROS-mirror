@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mui_removeclipping.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <proto/muimaster.h>
@@ -18,7 +18,7 @@
         AROS_LHA(APTR, handle, A1),
 
 /*  LOCATION */
-        struct Library *, MUIMasterBase, 29, MUIMaster)
+        struct Library *, MUIMasterBase, 25, MUIMaster)
 
 /*  FUNCTION
 

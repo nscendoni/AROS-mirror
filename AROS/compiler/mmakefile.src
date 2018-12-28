@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 52307 2016-03-28 12:37:35Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -20,5 +20,5 @@ include $(SRCDIR)/config/aros.cfg
 
 
 #MM compiler-setup :
-%rule_makedirs dirs="$(AROS_INCLUDES) $(AROS_LIB) $(AROS_DEVELOPER)/bin $(AROS_DEVELOPER)/etc" \
+%rule_makedirs dirs="$(AROS_INCLUDES) $(AROS_LIB) $(AROS_DEVELOPMENT)/bin $(AROS_DEVELOPMENT)/etc" \
     setuptarget=compiler-setup

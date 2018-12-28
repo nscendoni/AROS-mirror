@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gfx.h 34242 2010-08-23 11:26:01Z sonic $
 
     Desc: Graphic structures
     Lang: english

@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -7,10 +7,6 @@ USER_CFLAGS := $(PRIV_KERNEL_INCLUDES) -I$(GENDIR)/$(MAINDIR)/include \
 	       -isystem $(GENINCDIR) $(KERNEL_INCLUDES) \
 	       -DAROS_ARCHITECTURE="\"$(AROS_TARGET_PLATFORM)\"" \
 	       -DHOST_OS_$(ARCH) -DHOST_OS_$(AROS_TARGET_VARIANT)
-
-ifneq ("","$(strip $(WARN_ERROR))")
-CONFIG_CFLAGS := $(subst $(WARN_ERROR),,$(CONFIG_CFLAGS))
-endif
 
 FUNCS := cause cli issuper kernel_debug maygetchar sti setprotection \
 	 obtaininput releaseinput getpagesize allockernelbase

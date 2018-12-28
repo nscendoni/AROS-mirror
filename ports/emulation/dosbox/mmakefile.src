@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 52341 2016-03-29 03:46:55Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- ports-emulation : ports-emulation-dosbox
 
@@ -10,10 +10,7 @@ PACKAGE      := dosbox
 VERSION      := 0.74
 TARGETDIR    := $(AROS_CONTRIB)/Emu/DOSBox
 REPOSITORIES := sf://dosbox
-
-USER_CXXFLAGS  := $(CFLAGS_EXCEPTIONS) $(CFLAGS_PERMISSIVE) -static-libstdc++
-USER_INCLUDES := -I$(AROS_CONTRIB_INCLUDES)
-USER_LDFLAGS := -L$(AROS_CONTRIB_LIB)
+USER_CXXFLAGS  := -fexceptions -fpermissive -static-libstdc++
 
 %fetch_and_build mmake=ports-emulation-dosbox prefix=$(TARGETDIR) \
 	package=$(PACKAGE) version=$(VERSION) suffixes="tar.gz" \

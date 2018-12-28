@@ -1,8 +1,8 @@
-#   $Id$
+#   $Id: mmakefile.src 52370 2016-03-29 16:20:00Z NicJA $
 #
 #   Makefile to make nbench bytemark 2.1
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES :=emfloat misc nbench0 nbench1 sysspec
 

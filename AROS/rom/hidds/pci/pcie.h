@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pcie.h 49492 2014-08-20 15:29:15Z DizzyOfCRN $
 */
 
 /*

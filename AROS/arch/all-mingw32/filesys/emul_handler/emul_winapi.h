@@ -1,6 +1,6 @@
 /*
     Copyright © 2008-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: emul_winapi.h 42587 2011-11-24 07:13:45Z sonic $
  
     Desc: WinAPI definitions to be used with AROS-side code.
           Taken from various Mingw32 headers.

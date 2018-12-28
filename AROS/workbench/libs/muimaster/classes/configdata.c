@@ -1,7 +1,7 @@
 /*
     Copyright © 2002-2014, The AROS Development Team. All rights reserved.
 
-    $Id$
+    $Id: configdata.c 51645 2016-03-09 04:36:47Z NicJA $
 */
 #include <stdlib.h>
 #include <string.h>

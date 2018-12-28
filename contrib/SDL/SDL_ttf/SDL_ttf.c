@@ -20,7 +20,7 @@
     slouken@libsdl.org
 */
 
-/* $Id$ */
+/* $Id: SDL_ttf.c 30794 2009-03-08 02:19:07Z neil $ */
 
 #include <math.h>
 #include <stdio.h>

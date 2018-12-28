@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: printf.c 48051 2013-09-08 21:19:51Z verhaegs $
 
     C99 function printf().
 */
@@ -34,13 +34,13 @@
 	Zero or more of the following flags:
 
 	# - specifying that the value should be converted to an
-	    ``alternate form''. For a,A,c, d, i, n, p, s, and u conversions, this
+	    ``alternate form''. For c, d, i, n, p, s, and u conversions, this
 	    option has no effect. For o conversions, the precision of the
 	    number is increased to force the first character of the output
 	    string to a zero (except if a zero value is printed with an
 	    explicit precision of zero). For x and X conversions, a non-zero
 	    result has the string `0x' (or `0X' for X conversions) prepended to
-	    it. For e, E, f, F,g, and G conversions, the result will always
+	    it. For e, E, f, g, and G conversions, the result will always
 	    contain a decimal point, even if no digits follow it (normally, a
 	    decimal point appears in the results of those conversions only if a
 	    digit follows). For g and G conversions, trailing zeros are not
@@ -48,8 +48,8 @@
 
 	0 - specifying zero padding. For all conversions except n, the
 	    converted value is padded on the left with zeros rather than
-	    blanks. For f,F conversion, or if a precision is given with a numeric
-	    conversion (d, i, o,u, i, x, and X), the 0 flag is ignored.
+	    blanks. If a precision is given with a numeric conversion (d, i, o,
+	    u, i, x, and X), the 0 flag is ignored.
 
 	- - (a negative field width flag) indicates the converted
 	    value is to be left adjusted on the field boundary. Except for n
@@ -127,10 +127,6 @@
 		 digits that must appear; if the converted value requires fewer
 		 digits, it is padded on the left with zeros.
 
-	aA - (TODO) The double argument is rounded and converted to the C99
-	      floating-point number in hexadecimal notation - preserving all
-	      bits of precision, and presenting them in a robust way.
-
 	eE - The double argument is rounded and converted in the style
 	     [<->]d.dddedd where there is one digit before the decimal-point
 	     character and the number of digits after it is equal to the
@@ -140,7 +136,7 @@
 	     exponent. The exponent always contains at least two digits; if the
 	     value is zero, the exponent is 00.
 
-	fF - The double argument is rounded and converted to decimal
+	f - The double argument is rounded and converted to decimal
 	    notation in the style [-]ddd.ddd, where the number of digits after
 	    the decimal-point character is equal to the precision
 	    specification. If the precision is missing, it is taken as 6; if

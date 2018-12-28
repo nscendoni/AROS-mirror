@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: iconlistview.h 30802 2009-03-08 19:25:45Z neil $
 */
 
 #ifndef _MUI_CLASSES_ICONLISTVIEW_H

@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: strgadgets.c 48920 2014-04-08 16:45:53Z jmcmullan $
 */
 
 #include <proto/exec.h>

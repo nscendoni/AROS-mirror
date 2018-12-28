@@ -1,6 +1,6 @@
 /*
         Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getrexxvar.c 42837 2011-12-11 07:57:14Z jmcmullan $
 
     Desc:
     Lang: english

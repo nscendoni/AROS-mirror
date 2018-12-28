@@ -271,8 +271,8 @@ D(bug("DOS notification message\n"));
                             c=0;
                             for (a=0;a<4;a++) {
                                 if ((old_change_state&(1<<a))!=(disk_change_state&(1<<a))) {
-                                    lsprintf(buf,"DF%ld:",(long int)a);
-                                    lsprintf(buf2,"PC%ld:",(long int)a);
+                                    lsprintf(buf,"DF%ld:",a);
+                                    lsprintf(buf2,"PC%ld:",a);
                                     for (b=0;b<2;b++) {
                                         if ((Stricmp(dopus_curwin[b]->realdevice,buf)==0) ||
                                             (Stricmp(dopus_curwin[b]->realdevice,buf2)==0)) {
@@ -635,8 +635,7 @@ D(bug("doidcmp: a = %ld\n",a);KDump(&dopus_curgadbank->gadgets[a],sizeof(struct 
                                  }
                                 else
                                   win = isinwindow(x,y); // lister area
-                                
-                                if (win == -1) break;
+                                  if (win == -1) break;
                             case CURSOR_UP:
                                 if (win == -1) win = data_active_window;
                                 if (dopus_curwin[win]->total<scrdata_dispwin_lines) break;
@@ -685,8 +684,7 @@ D(bug("doidcmp: a = %ld\n",a);KDump(&dopus_curgadbank->gadgets[a],sizeof(struct 
                                  }
                                 else
                                   win = isinwindow(x,y); // lister area
-                                
-                                if (win == -1) break;
+                                  if (win == -1) break;
                             case CURSOR_DOWN:
                                 if (win == -1) win = data_active_window;
                                 if (dopus_curwin[win]->total<scrdata_dispwin_lines) break;

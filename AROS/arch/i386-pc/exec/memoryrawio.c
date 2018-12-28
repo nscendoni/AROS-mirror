@@ -1,12 +1,13 @@
 /*
-    Copyright © 2009-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2009-2011, The AROS Development Team. All rights reserved.
+    $Id: memoryrawio.c 41903 2011-10-17 18:29:01Z sonic $
 
     Desc: functions for memory-stored RawIOInit/RawPutChar
     Lang: English
 */
 
 #include <proto/exec.h>
+#include <proto/kernel.h>
 
 #include <string.h>
 

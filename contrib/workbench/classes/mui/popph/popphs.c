@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: popphs.c 43433 2012-01-01 20:16:02Z jmcmullan $
 **
 ** © 1999-2000 Marcin Orlowski <carlos@amiga.com.pl>
 */

@@ -1,7 +1,7 @@
 #ifndef XADMASTER_BZIP2_C
 #define XADMASTER_BZIP2_C
 
-/*  $Id$
+/*  $Id: bzip2.c 30794 2009-03-08 02:19:07Z neil $
     bzip2 file archiver
 
     XAD library system for archive handling

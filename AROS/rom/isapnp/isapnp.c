@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: isapnp.c 42954 2011-12-15 11:54:03Z sonic $ */
 
 /*
      ISA-PnP -- A Plug And Play ISA software layer for AmigaOS.

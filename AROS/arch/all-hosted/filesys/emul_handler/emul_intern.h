@@ -2,7 +2,7 @@
 #define __EMUL_INTERN_H
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: emul_intern.h 49029 2014-05-25 12:38:26Z deadwood $
 
     Desc: Internal header-file for emulation-handler.
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: lang_openclose.inc 49681 2014-10-01 19:05:00Z deadwood $
 
     Desc: common code for language description files
 */

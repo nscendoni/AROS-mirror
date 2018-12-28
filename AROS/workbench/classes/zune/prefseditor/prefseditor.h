@@ -6,7 +6,7 @@
     This file is part of the PrefsEditor class, which is distributed under
     the terms of version 2.1 of the GNU Lesser General Public License.
     
-    $Id$
+    $Id: prefseditor.h 46244 2013-01-12 02:10:53Z neil $
 */
 
 #include <dos/dos.h>

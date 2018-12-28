@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: childfree.c 42357 2011-11-09 21:10:02Z verhaegs $
 
     Free child task information on a dead child.
 */

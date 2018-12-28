@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu_i386.h 52731 2016-05-16 15:45:53Z schulz $
 */
 
 #include <sys/types.h>

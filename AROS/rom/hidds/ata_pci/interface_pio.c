@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: interface_pio.c 47817 2013-08-16 18:27:11Z weissms $
 
     Desc: PCI IDE PIO interface functions
     Lang: English

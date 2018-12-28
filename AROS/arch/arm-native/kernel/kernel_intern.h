@@ -1,6 +1,6 @@
 /*
     Copyright © 2013-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kernel_intern.h 50566 2015-05-01 18:21:44Z schulz $
 */
 
 #ifndef KERNEL_INTERN_H_

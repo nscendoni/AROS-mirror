@@ -1,7 +1,7 @@
 // http://ascii-table.com/keyboard.php/463
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pc105_by.c 50780 2015-06-06 17:17:05Z polluks $
     
     Desc: Belarusian PC105 Keymap
     Lang: English

@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: multiboot.h 41214 2011-09-09 05:58:43Z sonic $
  
     Desc: Multiboot information structures
     Lang: english

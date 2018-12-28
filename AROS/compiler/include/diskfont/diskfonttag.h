@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: diskfonttag.h 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Tags for outline font engines and .otag files
     Lang: english

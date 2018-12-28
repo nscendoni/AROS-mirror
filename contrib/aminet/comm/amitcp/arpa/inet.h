@@ -1,7 +1,7 @@
 #ifndef ARPA_INET_H
 #define ARPA_INET_H
 /*
- * $Id$
+ * $Id: inet.h 30794 2009-03-08 02:19:07Z neil $
  *
  * Copyright © 1993 AmiTCP/IP Group, <amitcp-group@hut.fi>
  *                  Helsinki University of Technology, Finland.

@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readtapinterface.c 30794 2009-03-08 02:19:07Z neil $
 */
 
 #include <fcntl.h>

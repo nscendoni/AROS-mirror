@@ -56,7 +56,7 @@
 
 /*
  *	@(#)resolv.h	8.1 (Berkeley) 6/2/93
- *	$Id$
+ *	$Id: resolv.h 36648 2011-01-17 14:31:59Z neil $
  */
 
 #ifndef _RESOLV_H_

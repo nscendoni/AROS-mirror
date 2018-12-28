@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Lamp_mcc.h 39982 2011-07-10 18:42:39Z mazze $
 */
 
 #include <libraries/mui.h>

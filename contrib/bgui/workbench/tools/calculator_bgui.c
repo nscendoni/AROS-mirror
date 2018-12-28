@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: calculator_bgui.c 37138 2011-02-21 01:42:29Z jmcmullan $
 */
 
 #include <exec/types.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stringify.c 41520 2011-09-21 13:56:22Z sonic $
 */
 
 #include <libraries/mui.h>

@@ -3,7 +3,7 @@
     This file is part of the PrefsWindow class, which is distributed under
     the terms of version 2.1 of the GNU Lesser General Public License.
     
-    $Id$
+    $Id: prefswindow.c 49578 2014-09-06 14:25:43Z mazze $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

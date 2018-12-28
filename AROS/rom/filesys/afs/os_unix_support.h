@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: os_unix_support.h 43308 2011-12-29 15:25:24Z olivieradam $
 */
 
 #include <stdio.h>

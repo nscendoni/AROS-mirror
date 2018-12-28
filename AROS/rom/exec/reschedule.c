@@ -1,17 +1,16 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: reschedule.c 51383 2016-01-21 00:29:44Z NicJA $
 
     Desc: Enforce task rescheduling
     Lang: english
 */
 
-#define DEBUG 0
-
 #include <exec/execbase.h>
 #include <aros/libcall.h>
 #include <aros/atomic.h>
 #include <hardware/intbits.h>
+#include <proto/kernel.h>
 
 #include "chipset.h"
 #include "exec_intern.h"

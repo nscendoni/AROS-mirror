@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kernel_syscall.h 50816 2015-06-11 20:47:49Z schulz $
 
     Desc:
 */

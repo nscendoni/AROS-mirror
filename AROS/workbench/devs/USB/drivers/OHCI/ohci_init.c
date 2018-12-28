@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2006 by Michal Schulz
-    $Id$
+    $Id: ohci_init.c 45473 2012-08-10 05:02:48Z jmcmullan $
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Library General Public License as

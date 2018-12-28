@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: alerthook.c 45100 2012-06-18 20:00:13Z jmcmullan $
 
     Desc: Alert.Hook for AROS
     Lang: english

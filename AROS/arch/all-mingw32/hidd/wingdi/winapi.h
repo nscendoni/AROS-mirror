@@ -1,6 +1,6 @@
 /*
     Copyright © 2009-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: winapi.h 43151 2011-12-21 12:07:41Z sonic $
 
     Desc: WinAPI definitions to be used with AROS-side code.
           Taken from various Mingw32 headers..

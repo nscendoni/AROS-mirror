@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: elf_io.c 47619 2013-07-02 18:27:20Z neil $
 
     Desc: I/O routines for bootstrap ELF loader
     Lang: english

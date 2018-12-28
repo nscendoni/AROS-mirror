@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: global.h 43689 2012-01-22 07:51:54Z mazze $
 */
 
 /****************************************************************************************/

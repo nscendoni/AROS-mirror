@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: writestruct.c 41724 2011-10-03 05:55:02Z jmcmullan $
 
     Desc: Write a big endian structure to a streamhook
     Lang: english

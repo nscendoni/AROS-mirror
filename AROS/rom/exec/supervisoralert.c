@@ -1,6 +1,6 @@
 /*
-    Copyright © 2012-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2012-2015, The AROS Development Team. All rights reserved.
+    $Id: supervisoralert.c 50721 2015-05-20 01:07:11Z NicJA $
 
     Desc: Display an alert passed from supervisor mode.
     Lang: english
@@ -12,6 +12,7 @@
 #include <intuition/intuition.h>
 #include <proto/exec.h>
 #include <proto/intuition.h>
+#include <proto/kernel.h>
 
 #include "etask.h"
 #include "exec_intern.h"

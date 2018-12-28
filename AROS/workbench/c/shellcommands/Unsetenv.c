@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Unsetenv.c 34500 2010-09-24 21:59:23Z otigreat $
 
     Desc: UnSetEnv CLI command
     Lang: English

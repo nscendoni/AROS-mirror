@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rtfontrequest.c 39255 2011-06-17 05:41:37Z jmcmullan $
 
     Desc:
     Lang: english

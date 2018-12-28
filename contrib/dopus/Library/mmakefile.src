@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 52371 2016-03-29 16:31:33Z NicJA $
 
 include $(SRCDIR)/$(CURDIR)/../make.cfg
 
@@ -24,7 +24,7 @@ FILES	:= \
 
 #MM- dopus-library : setup includes linklibs dopus-includes
 
-USER_CFLAGS := -D__DOPUS_NOLIBBASE__ -I$(DOPUSDIR)/$(AROS_DIR_DEVELOPER)/include
+USER_CFLAGS := -D__DOPUS_NOLIBBASE__ -I$(DOPUSDIR)/Development/include
 
 # TODO: Remove and clean the compiler warnings!
 USER_CFLAGS += -Wno-error

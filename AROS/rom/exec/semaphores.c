@@ -1,16 +1,15 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: semaphores.c 50721 2015-05-20 01:07:11Z NicJA $
 
     Desc: Semaphore internal handling
     Lang: english
 */
 
-#define DEBUG 0
-
 #include <aros/atomic.h>
 #include <aros/debug.h>
 #include <proto/exec.h>
+#include <proto/kernel.h>
 
 #include "exec_util.h"
 #include "semaphores.h"
@@ -31,8 +30,6 @@ BOOL CheckSemaphore(struct SignalSemaphore *sigSem, struct TraceLocation *caller
         return FALSE;
     }
 
-    /* Some m68k programs initialize semaphores manually, without setting up ln_Type */
-#if !defined(__mc68000__) || DEBUG
     if ((sigSem->ss_Link.ln_Type != NT_SIGNALSEM) || (sigSem->ss_WaitQueue.mlh_Tail != NULL))
     {
         struct Task *ThisTask = GET_THIS_TASK;
@@ -43,7 +40,6 @@ BOOL CheckSemaphore(struct SignalSemaphore *sigSem, struct TraceLocation *caller
 
         return FALSE;
     }
-#endif
 
     return TRUE;
 }
@@ -95,7 +91,7 @@ void InternalObtainSemaphore(struct SignalSemaphore *sigSem, struct Task *owner,
      * by this task (ss_Owner == ThisTask).
      * Exclusive or shared mode of this function is determined by 'owner' parameter.
      * Actually it's pointer to a task which is allowed to share the lock with us.
-     * If it's equal to 'ThisTask', we are locking the semaphore in exclusive mode. If it's NULL,
+     * If it's equal to 'ThisTask', we are locking the semaphore in exclusive more. If it's NULL,
      * we are locking in shared mode. This helps to optimize code against speed, and remove
      * extra comparisons.
      */

@@ -1,5 +1,5 @@
 /* Modified version for AROS - The AROS Research OS
-** $Id$
+** $Id: Misc.c 39322 2011-06-17 05:50:48Z jmcmullan $
 */
 
 #include <stdio.h>

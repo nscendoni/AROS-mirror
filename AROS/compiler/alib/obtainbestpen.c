@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: obtainbestpen.c 52020 2016-03-17 04:34:55Z jmcmullan $
 
     Desc: Obtain the best pen available for a given color
     Lang: english

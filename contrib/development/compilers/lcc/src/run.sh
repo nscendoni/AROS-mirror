@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id$
+# $Id: run.sh 30794 2009-03-08 02:19:07Z neil $
 # run .../target/os/tst/foo.s [ remotehost ]
 
 # set -x

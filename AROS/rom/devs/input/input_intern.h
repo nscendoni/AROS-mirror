@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: input_intern.h 49714 2014-10-27 03:38:30Z neil $
 
     Desc: Internal definitions for the input.device
     Lang: english

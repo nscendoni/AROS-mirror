@@ -2,7 +2,7 @@
     Copyright  2002-2016, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: zune.c 53084 2016-12-20 17:57:04Z neil $
 */
 
 #include <string.h>

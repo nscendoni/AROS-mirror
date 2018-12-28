@@ -1,6 +1,6 @@
 /*
-    Copyright © 2003-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2003-2013, The AROS Development Team. All rights reserved.
+    $Id: smselector.c 52028 2016-03-17 04:36:20Z jmcmullan $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG
@@ -29,7 +29,6 @@
 
 struct ScreenModeSelector_DATA
 {
-    Object *mode_list;
     STRPTR *modes_array;
     ULONG  *ids_array;
 };
@@ -148,7 +147,6 @@ Object *ScreenModeSelector__OM_NEW(Class *CLASS, Object *self, struct opSet *mes
 
     list = (Object *)ListObject,
         InputListFrame,
-        MUIA_List_AutoVisible, (IPTR)TRUE,
         MUIA_List_DisplayHook, (IPTR)&DisplayHook,
         MUIA_List_Format, (IPTR)"BAR,",
         MUIA_List_SourceArray, (IPTR)modes_array,
@@ -169,8 +167,7 @@ Object *ScreenModeSelector__OM_NEW(Class *CLASS, Object *self, struct opSet *mes
     DoMethod(self, MUIM_Notify, MUIA_List_Active, MUIV_EveryTime,
              (IPTR)self, 3, MUIM_CallHook, (IPTR)&SelectHook, MUIV_TriggerValue);
  
-    data = INST_DATA(CLASS, self);
-    data->mode_list = list;
+    data = INST_DATA(CLASS, self);    
     data->modes_array = modes_array;
     data->ids_array   = ids_array;
 
@@ -235,10 +232,10 @@ IPTR ScreenModeSelector__OM_SET(Class *CLASS, Object *self, struct opSet *messag
                     tag->ti_Data = INVALID_ID;
                 else
                 {
-                    if (XGET(data->mode_list, MUIA_List_Active) != i)
+                    if (XGET(self, MUIA_List_Active) != i)
                     {
                         D(bug("[smselector] Set active item %lu\n", i));
-                        NNFSET(data->mode_list, MUIA_List_Active, i);
+                        NNFSET(self, MUIA_List_Active, i);
                     }
                 }
                 break;
@@ -257,7 +254,7 @@ IPTR ScreenModeSelector__OM_GET(Class *CLASS, Object *self, struct opGet *messag
     {
         case MUIA_ScreenModeSelector_Active:
             *message->opg_Storage =
-                data->ids_array[XGET(data->mode_list, MUIA_List_Active)];
+                data->ids_array[XGET(self, MUIA_List_Active)];
             break;
         default:
             return DoSuperMethodA(CLASS, self, (Msg)message);

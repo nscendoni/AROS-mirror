@@ -1,7 +1,7 @@
 // Kbdir_EnglishIreland_pkf.txt
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pc105_irl.c 51236 2015-12-19 16:58:58Z polluks $
 
     Desc: English Irish PC105 Keymap
     Lang: English

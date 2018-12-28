@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 53114 2016-12-28 09:06:03Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- ports-game : ports-game-madbomber
 
@@ -16,19 +16,16 @@ include $(SRCDIR)/config/aros-contrib.cfg
 REPOSITORIES := ftp://ftp.tuxpaint.org/unix/x/madbomber/src
 ARCHBASE     := madbomber-0.2.5
 TARGETDIR    := $(AROS_CONTRIB)/Games/Action/MadBomber
-SDL_PREFIX   := $(AROS_DEVELOPER)
-
+SDL_PREFIX   := $(AROS_DEVELOPMENT)
 NOWARN_FLAGS := $(NOWARN_SEQUENCE_POINT) $(NOWARN_UNUSED_VARIABLE)
 USER_CFLAGS  := $(NOWARN_FLAGS) $(shell $(SDL_PREFIX)/bin/sdl-config --prefix=$(SDL_PREFIX) --cflags) \
                 -DDATA_PREFIX=\"PROGDIR:data/\"
-USER_INCLUDES:= -I$(AROS_CONTRIB_INCLUDES)
-USER_LDFLAGS := -L$(AROS_CONTRIB_LIB)
 
 FILES := $(PORTSDIR)/madbomber/$(ARCHBASE)/madbomber
 
 %build_prog mmake=ports-game-madbomber progname=MadBomber \
     files=$(FILES) targetdir=$(TARGETDIR) \
-    uselibs="SDL_image png jpeg SDL_mixer mikmod vorbisfile vorbis ogg SDL z"
+    uselibs="SDL_image png jpeg SDL_mixer vorbisfile vorbis ogg SDL z"
 
 %fetch mmake=ports-game-madbomber-fetch archive=$(ARCHBASE) destination=$(PORTSDIR)/madbomber \
     location=$(PORTSSOURCEDIR) archive_origins=$(REPOSITORIES) suffixes="tar.gz" \

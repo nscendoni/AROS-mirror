@@ -426,10 +426,10 @@ int *count;
 
     Forbid();
     for (a=0;;a++) {
-        lsprintf(buffer,"%s%ld",config_replyport_basename,(long int)a);
+        lsprintf(buffer,"%s%ld",config_replyport_basename,a);
         if (!(FindPort(buffer)))
          {
-          lsprintf(buffer,"%s.%ld",base,(long int)(a+1));
+          lsprintf(buffer,"%s.%ld",base,a+1);
           if (!(FindPort(buffer)))
            {
             port=LCreatePort(buffer,0);
@@ -452,9 +452,9 @@ int win,unit;
     wsave=main_proc->pr_WindowPtr;
     main_proc->pr_WindowPtr=(APTR)-1;
 
-    lsprintf(buf,"DF%ld:",(long int)unit);
+    lsprintf(buf,"DF%ld:",unit);
     if (!(lock=Lock(buf,ACCESS_READ))) {
-        lsprintf(buf,"PC%ld:",(long int)unit);
+        lsprintf(buf,"PC%ld:",unit);
         if (!(lock=Lock(buf,ACCESS_READ))) return(0);
     }
     UnLock(lock);

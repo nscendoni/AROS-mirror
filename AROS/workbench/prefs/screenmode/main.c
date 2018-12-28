@@ -1,6 +1,6 @@
 /*
-    Copyright © 2003-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2003-2014, The AROS Development Team. All rights reserved.
+    $Id: main.c 51751 2016-03-10 01:35:35Z NicJA $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG
@@ -20,8 +20,8 @@
 #include "prefs.h"
 #include "smeditor.h"
 
-#define VERSION "ScreenMode Preferences 1.8 (27.5.2017)"
-#define COPYRIGHT "Copyright © 1995-2017, The AROS Development Team"
+#define VERSION "ScreenMode Preferences 1.6 (27.6.2014)"
+#define COPYRIGHT "Copyright © 1995-2014, The AROS Development Team"
 
 static const char vers[] = VERSION;
 static const char version[] __attribute__((used)) = "$VER: " VERSION "\n";

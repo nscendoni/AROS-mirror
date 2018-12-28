@@ -1,6 +1,6 @@
 /*
-    Copyright © 2012-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2012-2013, The AROS Development Team. All rights reserved.
+    $Id: __stdc_intbase.h 48303 2013-10-17 05:02:50Z mazze $
 
     This file defines the private part of StdCBase.
     This should only be used internally in stdc.library code so
@@ -53,9 +53,6 @@ struct StdCIntBase
 
     /* strtok.c */
     char *last;
-
-    /* private for softfloat implementations */
-    APTR __fpu_private;
 };
 
 /* Make a distinction between exit() and abort() */

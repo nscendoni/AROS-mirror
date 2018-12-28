@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: SerialUnitClass.c 36647 2011-01-17 14:01:23Z neil $
 
     Desc: Serial Unit hidd class implementation.
     Lang: english

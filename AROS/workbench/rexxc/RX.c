@@ -1,6 +1,6 @@
 /*
     Copyright © 2007-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: RX.c 47802 2013-08-09 19:13:36Z verhaegs $
 
     Run REXX scripts
 */

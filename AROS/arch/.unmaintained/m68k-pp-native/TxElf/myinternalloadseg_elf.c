@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: myinternalloadseg_elf.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Code to dynamically load ELF executables and relocate it.
           Take from dos/internalloadseg_elf.c

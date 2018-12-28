@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: serialdebug.h 47619 2013-07-02 18:27:20Z neil $
  *
  *  Created on: Nov 8, 2009
  *      Author: misc

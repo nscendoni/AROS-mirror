@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gfxmacros.h 38461 2011-05-01 08:35:55Z mazze $
 
     Desc: AmigaOS include file graphics/gfxmacros.h
     Lang: english

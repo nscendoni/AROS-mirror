@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: execstubs.s 51286 2016-01-16 18:15:48Z dizzyofcrn $
 
     Desc: Stubs to call C functions while preserving all registers, ARM version
     Lang: english

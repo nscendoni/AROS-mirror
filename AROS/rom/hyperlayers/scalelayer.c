@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: scalelayer.c 40139 2011-07-14 20:33:45Z jmcmullan $
 
     Desc:
     Lang: english

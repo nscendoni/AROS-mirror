@@ -1,6 +1,6 @@
 /*
     Copyright (C) 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: deletepool.c 48982 2014-05-03 18:18:36Z deadwood $
 
     Desc: Delete a memory pool including all its memory.
     Lang: english

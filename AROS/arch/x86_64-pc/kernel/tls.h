@@ -1,27 +1,11 @@
 #ifndef ASM_TLS_H
 #define ASM_TLS_H
 
-#include <aros/config.h>
-
-#if defined(__AROSEXEC_SMP__)
-#include <kernel_scheduler.h>
-#endif
-
-#include "apic.h"
-
 typedef struct tls
 {
-    struct ExecBase             *SysBase;
-    void                        *KernelBase;    /* Base of kernel.resource              */
-#if defined(__AROSEXEC_SMP__)
-    struct X86SchedulerPrivate  *ScheduleData;
-#endif
-    apicid_t                    CPUNumber;
+    struct ExecBase     *SysBase;
+    void *              *KernelBase;    /* Base of kernel.resource */
 } tls_t;
-
-#define TLSSF_Quantum   (1 << 0)
-#define TLSSF_Switch    (1 << 1)
-#define TLSSF_Dispatch  (1 << 2)
 
 #define TLS_OFFSET(name) ((char *)&(((tls_t *)0)->name)-(char *)0)
 

@@ -19,7 +19,7 @@
 
  NList classes Support Site:  http://www.sf.net/projects/nlist-classes
 
- $Id$
+ $Id: NList_mcc0.c 53132 2016-12-29 10:32:06Z deadwood $
 
 ***************************************************************************/
 
@@ -460,6 +460,12 @@ static IPTR mNL_Export(struct IClass *cl,Object *obj,struct MUIP_Export *msg)
 static IPTR mNL_List_Construct( struct IClass *cl, Object *obj, struct MUIP_NList_Construct *msg )
 {
     APTR entry = msg->entry;
+
+    /* Existing WookieChat binary wrongly passes entry object and crashes
+     * later in construct hook. This quirk needs to be in place until
+     * new version of WookieChat can be produced.
+     */
+    if( entry == (APTR)0x20202020 ) return (IPTR)NULL;
 
     if( entry )
     {

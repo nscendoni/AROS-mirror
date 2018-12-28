@@ -5,8 +5,8 @@ AROS Installation Guide
 :Authors:   Stefan Rieken, Matt Parsons, Adam Chodorowski, Neil Cafferkey,
             Sergey Mineychev
 :Copyright: Copyright (C) 1995-2011, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 49830 $
+:Date:      $Date: 2014-12-06 22:36:06 +0100 (Sat, 06 Dec 2014) $
 :Status:    Needs to be updated for some AROS ports. In works, being
             updating to the current status.
 :Abstract:
@@ -720,7 +720,7 @@ you've already installed the bootloader in previous steps, nothing should be
 missing.
 
 Well, if you used a fresh nightly build then
-`GRUB <https://en.wikipedia.org/wiki/GRUB>`__ should already be installed and
+`GRUB <http://en.wikipedia.org/wiki/GRUB>`__ should already be installed and
 working, and you can skip the step in the next paragraphs. If not, please
 read on.
 

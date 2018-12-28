@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: parallel_init.c 50912 2015-07-03 19:34:27Z jmcmullan $
 
     Desc: Parallel hidd initialization code.
     Lang: English.

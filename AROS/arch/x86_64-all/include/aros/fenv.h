@@ -23,7 +23,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/msun/i387/fenv.h,v 1.6 2007/01/06 21:46:23 das Exp $
+ * $FreeBSD: src/lib/msun/amd64/fenv.h,v 1.6 2007/01/06 21:46:23 das Exp $
  */
 
 #ifndef	_FENV_H_
@@ -32,10 +32,6 @@
 #include <aros/system.h>
 #include <aros/types/int_t.h>
 
-/*                   
- * To preserve binary compatibility with FreeBSD 5.3, we pack the
- * mxcsr into some reserved fields, rather than changing sizeof(fenv_t).
- */
 typedef struct {
 	struct {
 		uint32_t	__control;
@@ -46,6 +42,10 @@ typedef struct {
 	uint32_t		__mxcsr;
 } fenv_t;
 
+#define __INITIAL_FPUCW__       0x037F
+#define __INITIAL_MXCSR__       0x1F80
+#define __INITIAL_MXCSR_MASK__  0xFFBF
+ 
 typedef	uint16_t	fexcept_t;
 
 /* Exception flags */
@@ -115,8 +115,8 @@ feclearexcept(int __excepts)
 static __inline int
 fegetexceptflag(fexcept_t *__flagp, int __excepts)
 {
-	uint32_t __mxcsr;
-	uint16_t __status;
+	short __status;
+	int __mxcsr;
 
 	__stmxcsr(&__mxcsr);
 	__fnstsw(&__status);
@@ -125,8 +125,6 @@ fegetexceptflag(fexcept_t *__flagp, int __excepts)
 }
 #endif /* !STDC_NOINLINE */
 
-int fegetenv(fenv_t *__envp);
-int feholdexcept(fenv_t *__envp);
 int fesetexceptflag(const fexcept_t *__flagp, int __excepts);
 int feraiseexcept(int __excepts);
 
@@ -134,8 +132,8 @@ int feraiseexcept(int __excepts);
 static __inline int
 fetestexcept(int __excepts)
 {
-	uint32_t __mxcsr;
-	uint16_t __status;
+	short __status;
+	int __mxcsr;
 
 	__stmxcsr(&__mxcsr);
 	__fnstsw(&__status);
@@ -145,7 +143,7 @@ fetestexcept(int __excepts)
 static __inline int
 fegetround(void)
 {
-	uint16_t __control;
+	int __control;
 
 	/*
 	 * We assume that the x87 and the SSE unit agree on the
@@ -160,8 +158,7 @@ fegetround(void)
 static __inline int
 fesetround(int __round)
 {
-	uint32_t __mxcsr;
-	uint16_t __control;
+	int __mxcsr, __control;
 
 	if (__round & ~_ROUND_MASK)
 		return (-1);
@@ -179,6 +176,9 @@ fesetround(int __round)
 	return (0);
 }
 #endif /* !STDC_NOINLINE */
+
+int fegetenv(fenv_t *__envp);
+int feholdexcept(fenv_t *__envp);
 
 #ifndef STDC_NOINLINE
 static __inline int
@@ -210,7 +210,7 @@ int fedisableexcept(int __mask);
 static __inline int
 fegetexcept(void)
 {
-	uint16_t __control;
+	int __control;
 
 	/*
 	 * We assume that the masks for the x87 and the SSE unit are

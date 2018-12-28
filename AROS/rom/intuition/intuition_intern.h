@@ -2,9 +2,9 @@
 #define INTUITION_INTERN_H
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
     Copyright © 2001-2013, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: intuition_intern.h 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #ifndef AROS_LIBCALL_H
@@ -634,9 +634,6 @@ struct IntIntuitionBase
     struct SignalSemaphore	 MonitorListSem;
 
     struct Interrupt             ShutdownHandler;
-#if defined(__AROSEXEC_SMP__)
-    void *                       ExecLockBase;
-#endif
 };
 
 struct SharedPointer
@@ -1132,7 +1129,8 @@ void *FindBestMonitorNode(void *family, const char *name, ULONG modeid, struct I
 void *FindBest3dMonitor(void *family, struct IntuitionBase *IntuitionBase);
 ULONG FindBestModeID(const char *name, ULONG depth, ULONG width, ULONG height, struct IntuitionBase *IntuitionBase);
 
-AROS_INTP(ShutdownScreenHandler);
+/* ABI_V0 compatibility */
+AROS_SOFTINTP(ShutdownScreenHandler);
 
 #ifdef __MORPHOS__
 BOOL IsLayerHiddenBySibling(struct Layer *layer, BOOL xx);
@@ -1155,10 +1153,10 @@ IPTR Custom_DoMethodA(struct IntuitionBase *, struct Gadget *, Msg);
 
 #ifdef __MORPHOS__
 #define DeinitRastPort(rp)  	    ((void)0)
-#endif
 #define CreateRastPort()            MyCreateRastPort(IntuitionBase)
 #define CloneRastPort(rp)           MyCloneRastPort(IntuitionBase, rp)
 #define FreeRastPort(rp)            MyFreeRastPort(IntuitionBase, rp)
+#endif
 
 /* Replacement for dos.library/DisplayError() */
 AROS_UFP3(LONG, Intuition_DisplayError,

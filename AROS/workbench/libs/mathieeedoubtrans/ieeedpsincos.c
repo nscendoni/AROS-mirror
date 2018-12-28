@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ieeedpsincos.c 47353 2013-05-04 16:44:36Z mazze $
 */
 
 #include "mathieeedoubtrans_intern.h"

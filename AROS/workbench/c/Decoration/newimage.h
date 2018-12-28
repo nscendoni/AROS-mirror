@@ -1,6 +1,6 @@
 /*
     Copyright  2011, The AROS Development Team.
-    $Id$
+    $Id: newimage.h 42789 2011-12-08 20:28:14Z deadwood $
 */
 
 #ifndef NEWIMAGE_H

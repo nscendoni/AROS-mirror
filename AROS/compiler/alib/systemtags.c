@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: systemtags.c 33390 2010-05-30 12:14:54Z mazze $
 
     Desc: Varargs version of dos.library/SystemTagList()
     Lang: english

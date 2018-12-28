@@ -1,5 +1,5 @@
 /******************************************************************************
-* $Id$
+* $Id: lmuilib.c 51891 2016-03-13 01:05:47Z NicJA $
 *
 * Copyright (C) 2006 Matthias Rustler.  All rights reserved.
 *

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Version.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Version CLI command
     Lang: english
@@ -62,9 +62,6 @@
 #include <aros/inquire.h>
 #include <proto/aros.h>
 
-#define ENABLE_RT 1
-#include <aros/rt.h>
-
 #include <string.h>
 #include <ctype.h>
 
@@ -80,12 +77,6 @@
 #include <dos/dos.h>
 #include <dos/dosextens.h>
 #include <dos/elf.h>
-
-#if defined(__AROSPLATFORM_SMP__)
-#include <aros/types/spinlock_s.h>
-#include <proto/execlock.h>
-#include <resources/execlock.h>
-#endif
 
 /*===[md5.h]==============================================================*/
 
@@ -114,7 +105,7 @@ void MD5Final(unsigned char digest[16], MD5_CTX *mdContext);
  * (c) 2001-2003 by David Gerber <zapek@meanmachine.ch>
  * All Rights Reserved
  *
- * $Id$
+ * $Id: Version.c 53132 2016-12-29 10:32:06Z deadwood $
  */
 
 //#include "ambient.h"
@@ -1366,16 +1357,9 @@ int makeexeclistver(struct List *list, CONST_STRPTR name)
 {
     struct Library *MyLibrary;
     int error = -1;
-#if defined(__AROSPLATFORM_SMP__)
-	void *ExecLockBase = OpenResource("execlock.resource");
 
-    if (ExecLockBase)
-        ObtainSystemLock(list, SPINLOCK_MODE_READ, LOCKF_FORBID);
-    else
-        Forbid();
-#else
     Forbid();
-#endif
+
     MyLibrary = (struct Library *) findname(list, name);
     if (MyLibrary)
     {
@@ -1409,14 +1393,7 @@ int makeexeclistver(struct List *list, CONST_STRPTR name)
         }
     }
 
-#if defined(__AROSPLATFORM_SMP__)
-    if (ExecLockBase)
-        ReleaseSystemLock(list, LOCKF_FORBID);
-    else
-        Permit();
-#else
     Permit();
-#endif
 
     return error;
 }
@@ -2298,8 +2275,6 @@ int main (void)
         PrintFault(IoErr(), (STRPTR) ERROR_HEADER);
         error = RETURN_FAIL;
     }
-
-        RT_Exit();
 
         return error;
 }

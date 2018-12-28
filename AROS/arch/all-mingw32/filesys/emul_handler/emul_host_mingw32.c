@@ -1,6 +1,6 @@
 /*
  Copyright © 1995-2010, The AROS Development Team. All rights reserved.
- $Id$
+ $Id: emul_host_mingw32.c 47619 2013-07-02 18:27:20Z neil $
  
  Desc: Filesystem that accesses an underlying host OS filesystem.
        Low-level host-dependent subroutines for Windows.

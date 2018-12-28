@@ -1,7 +1,7 @@
 // Format_disk_rev.h
-// $Date$
-// $Revision$
-// $Id$
+// $Date: 2013-12-01 23:08:26 +0100 (Sun, 01 Dec 2013) $
+// $Revision: 48481 $
+// $Id: Format_disk_rev.h 48481 2013-12-01 22:08:26Z mazze $
 
 #ifndef	FORMAT_DISK_REV_H
 #define FORMAT_DISK_REV_H

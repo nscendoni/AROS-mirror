@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: addamigaguidehosta.c 47342 2013-05-04 10:34:30Z mazze $
 
     Desc: AmigaGuide function AddAmigaGuideHostA()
     Lang: english

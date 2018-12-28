@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mui_request.c 45710 2012-08-31 19:01:54Z neil $
 */
 
 #include <string.h>

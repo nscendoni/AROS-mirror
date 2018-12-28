@@ -1,6 +1,6 @@
 /*
-    Copyright © 2015-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2015, The AROS Development Team. All rights reserved.
+    $Id: QueryTaskTagList.c 50909 2015-07-03 15:39:55Z NicJA $
 */
 
 #define DEBUG 0
@@ -13,7 +13,7 @@
 
 #include "etask.h"
 
-#include "task_intern.h"
+#include "taskres_intern.h"
 
 /*****************************************************************************
 
@@ -67,11 +67,6 @@
     struct Library *UtilityBase = TaskResBase->trb_UtilityBase;
     struct IntETask *task_et = GetIntETask(task);
 
-    D(
-        bug("[TaskRes] %s: task @ 0x%p\n", __func__, task);
-        bug("[TaskRes] %s: taglist @ 0x%p\n", __func__, tagList);
-    )
-
     /* This is the default implementation */
         
     while ((Tag = NextTagItem(&tagList)) != NULL)
@@ -87,14 +82,9 @@
             break;
         case(TaskTag_CPUAffinity):
 #if defined(__AROSEXEC_SMP__)
-            {
-                int i, count = KrnGetCPUCount();
-                for (i = 0; i < count; i ++)
-                {
-                    if (KrnCPUInMask(i, task_et->iet_CpuAffinity))
-                        KrnGetCPUMask(i, (void *)Tag->ti_Data);
-                }
-            }
+            *((IPTR *)Tag->ti_Data) = task_et->iet_CpuAffinity;
+#else
+            *((IPTR *)Tag->ti_Data) = (1 << 0);
 #endif
             break;
         case(TaskTag_CPUTime):
@@ -102,17 +92,9 @@
                 struct timeval *storeval = (struct timeval *)Tag->ti_Data;
                 if (task_et)
                 {
-                    storeval->tv_micro = (task_et->iet_CpuTime.tv_nsec + 500) / 1000;
-                    storeval->tv_secs  = task_et->iet_CpuTime.tv_sec;
+                    storeval->tv_micro = task_et->iet_CpuTime.tv_micro;
+                    storeval->tv_secs  = task_et->iet_CpuTime.tv_secs;
                 }
-            }
-            break;
-        case(TaskTag_CPUUsage):
-            {
-                if (task_et)
-                    *(ULONG *)(Tag->ti_Data) = task_et->iet_CpuUsage;
-                else
-                    *(ULONG *)(Tag->ti_Data) = 0;
             }
             break;
         case(TaskTag_StartTime):
@@ -120,8 +102,8 @@
                 struct timeval *storeval = (struct timeval *)Tag->ti_Data;
                 if (task_et)
                 {
-                    storeval->tv_micro = (task_et->iet_StartTime.tv_nsec + 500) / 1000;
-                    storeval->tv_secs  = task_et->iet_StartTime.tv_sec;
+                    storeval->tv_micro = task_et->iet_StartTime.tv_micro;
+                    storeval->tv_secs  = task_et->iet_StartTime.tv_secs;
                 }
             }
             break;

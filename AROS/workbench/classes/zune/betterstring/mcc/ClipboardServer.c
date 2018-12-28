@@ -1,7 +1,6 @@
 /***************************************************************************
 
  BetterString.mcc - A better String gadget MUI Custom Class
- Copyright (C) 2017 The AROS Dev Team.
  Copyright (C) 1997-2000 Allan Odgaard
  Copyright (C) 2005-2013 by BetterString.mcc Open Source Team
 
@@ -17,7 +16,7 @@
 
  BetterString class Support Site:  http://www.sf.net/projects/bstring-mcc/
 
- $Id$
+ $Id: ClipboardServer.c 49429 2014-08-16 10:47:20Z mazze $
 
 ***************************************************************************/
 
@@ -455,11 +454,10 @@ BOOL StartClipboardServer(void)
     if(serverProcess !=  NULL)
     {
       // we use one global reply port with a static signal bit
-      memset( &replyPort, 0, sizeof( replyPort ) );
       replyPort.mp_Node.ln_Type = NT_MSGPORT;
+      NewList(&replyPort.mp_MsgList);
       replyPort.mp_SigBit = SIGB_SINGLE;
       replyPort.mp_SigTask = FindTask(NULL);
-      NewList(&replyPort.mp_MsgList);
 
       msg.mn_ReplyPort = &replyPort;
       msg.mn_Node.ln_Name = (STRPTR)NULL;

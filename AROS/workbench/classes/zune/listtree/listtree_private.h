@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: listtree_private.h 51308 2016-01-17 15:41:47Z deadwood $
 */
 
 #include <libraries/mui.h>

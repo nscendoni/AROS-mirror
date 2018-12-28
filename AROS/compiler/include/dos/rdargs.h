@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rdargs.h 45422 2012-08-10 00:22:42Z neil $
 
     Desc: Definitions for the dos function ReadArgs().
     Lang: english

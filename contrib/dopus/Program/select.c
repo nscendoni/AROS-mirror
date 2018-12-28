@@ -183,8 +183,7 @@ startdragging:
                             }
                             else if (y<scrdata_dispwin_ypos) {
                                 if (juststart!=-1) {
-                                    if (fa<0) fa=0;
-                                    if (la>=scrdata_dispwin_lines) la=scrdata_dispwin_lines;
+                                    if (fa<0) fa=0; if (la>=scrdata_dispwin_lines) la=scrdata_dispwin_lines;
                                     if (state) {
                                         for (d=fa;d<la;d++) defselect(win,d,b);
                                         defselect(win,0,b);
@@ -198,8 +197,7 @@ startdragging:
                             }
                             else if (y>=scrdata_dispwin_height+scrdata_dispwin_ypos) {
                                 if (juststart!=1) {
-                                    if (fa<0) fa=0;
-                                    if (la>=scrdata_dispwin_lines) la=scrdata_dispwin_lines;
+                                    if (fa<0) fa=0; if (la>=scrdata_dispwin_lines) la=scrdata_dispwin_lines;
                                     if (state) {
                                         for (d=fa;d<la;d++) defselect(win,d,b);
                                         defselect(win,scrdata_dispwin_lines-1,b);
@@ -284,8 +282,8 @@ int win;
 {
     ULONG class;
     UWORD code;
-    int x,y,d,__unused a,__unused ret=0;
-    __unused struct Directory *temp;
+    int x,y,d,a,ret=0;
+    struct Directory *temp;
 
     if (data_active_window!=win) {
         makeactive(win,0);
@@ -803,7 +801,7 @@ int *prot;
 
 void wildselect(wild,boobs,and,mode)
 char *wild;
-int boobs,and,mode;
+int boobs,and;
 {
     char buf[256];
     struct Directory *temp;

@@ -22,7 +22,7 @@
  */
 
 #if !defined(lint) && !defined(__AROS__)
-static const char rcsid[] = "$Id$";
+static const char rcsid[] = "$Id: ns_date.c 51761 2016-03-10 02:16:12Z NicJA $";
 #endif
 
 /* Import. */

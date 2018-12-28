@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getvar.c 46059 2012-11-21 19:47:17Z mazze $
 
     Desc: GetVar - Return the value of a local or global variable.
     Lang: English

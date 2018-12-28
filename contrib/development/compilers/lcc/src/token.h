@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: token.h 30794 2009-03-08 02:19:07Z neil $ */
 /*
 xx(symbol,	value,	prec,	op,	optree,	kind,	string)
 */

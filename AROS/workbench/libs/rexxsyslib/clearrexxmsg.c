@@ -1,6 +1,6 @@
 /*
         Copyright © 1995-2002, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: clearrexxmsg.c 30901 2009-03-14 12:42:52Z mazze $
 
     Desc:
     Lang: english

@@ -1,16 +1,12 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: palettedemo.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Demo/test for AROS boopsi objects
     Lang: english
 */
 
 #include <aros/config.h>
-
-#if !(AROS_FLAVOUR & AROS_FLAVOUR_NATIVE)
-#   define ENABLE_RT 1
-#endif
 
 #include <proto/exec.h>
 #include <proto/intuition.h>
@@ -21,8 +17,6 @@
 #include <gadgets/aroscheckbox.h>
 #include <intuition/classes.h>
 #include <utility/tagitem.h>
-
-#include <aros/rt.h>
 
 #define SDEBUG 1
 #define DEBUG 1
@@ -47,8 +41,6 @@ int main(int argc, char **argv)
     struct Task*inputDevice;
     
     EnterFunc(bug("main()\n"));
-    
-    RT_Init();
     
     /* Initialize the input.device's tc_UserData to 0 */
     inputDevice = FindTask("input.device");
@@ -168,8 +160,6 @@ int main(int argc, char **argv)
     	CloseLibrary((struct Library *)IntuitionBase);
     } /* if (intuition opened) */
 
-    RT_Exit();
-    
     ReturnInt ("main", int, 0);
 
 }

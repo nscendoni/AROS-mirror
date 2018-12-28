@@ -89,7 +89,7 @@ static void draw_stuff(void)
 
     // We ask nicely for a new pen...
     pen = ObtainBestPen(cm, 0 , 0 , 0xFFFF0000 , TAG_END);
-    if ( (pen == -1) ) clean_exit("Can't allocate pen\n");
+    if ( !pen) clean_exit("Can't allocate pen\n");
     
     // ... and use it to draw a line.
     SetAPen(rp, pen);
@@ -103,11 +103,13 @@ static void handle_events(void)
     struct IntuiMessage *imsg;
     struct MsgPort *port = window->UserPort;
 
+    ULONG signals;
+    
     BOOL terminated = FALSE;
     
     while (! terminated)
     {
-        Wait(1L << port->mp_SigBit);
+        signals = Wait(1L << port->mp_SigBit);
 
         while ((imsg = (struct IntuiMessage *)GetMsg(port)) != NULL)
         {

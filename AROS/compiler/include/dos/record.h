@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: record.h 44756 2012-05-06 13:00:50Z NicJA $
 
     Desc: Record structures and definitions.
     Lang: english

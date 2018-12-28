@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setrgb4cm.c 45898 2012-10-13 09:04:03Z neil $
 
     Desc: Graphics function SetRGB4CM()
     Lang: english

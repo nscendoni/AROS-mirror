@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright © 2002-2012, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: buildit.py 51116 2015-09-27 13:25:57Z mazze $
 
 import os, sys, shutil, glob
 
@@ -573,10 +573,9 @@ def buildWWW():
         TRGROOT
     )
 
-    copy( os.path.join( 'targets/www', 'htaccess'), os.path.join( TRGROOT, '.htaccess' ) )
-
     dbpath = os.path.join( TRGROOT, 'db' )
     makedir( dbpath )
+    copy( 'db/quotes', dbpath )
 
     makedir( os.path.join( dbpath, 'download-descriptions' ) )
     for lang in languages:

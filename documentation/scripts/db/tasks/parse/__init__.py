@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright © 2002, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: __init__.py 31402 2009-06-12 10:22:00Z deadwood $
 
 from db.tasks.model import *
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: serialprefs.c 32542 2010-02-02 08:57:46Z sonic $
 
     Desc:
     Lang: English

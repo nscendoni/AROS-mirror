@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: strdup.c 51504 2016-02-20 04:21:02Z neil $
 
     AllocVec-based string duplication.
 */

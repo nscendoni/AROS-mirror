@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vfscanf.c 48044 2013-09-08 21:18:52Z verhaegs $
 
     Scan a stream and write the result in the parameters.
 */

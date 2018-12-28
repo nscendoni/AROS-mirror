@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: view.h 46058 2012-11-21 01:25:27Z neil $
 
     Desc: View structures
     Lang: english

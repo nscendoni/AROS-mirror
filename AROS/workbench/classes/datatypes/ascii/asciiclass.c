@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: asciiclass.c 43918 2012-02-08 02:07:10Z jmcmullan $
 */
 
 /**********************************************************************/

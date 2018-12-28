@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: security_intern.h 52507 2016-04-01 23:58:50Z NicJA $
 
     Desc:
     Lang: english

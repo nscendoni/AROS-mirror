@@ -3,7 +3,7 @@
 
 /*
     Copyright  2002-2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: icon.h 47663 2013-07-13 03:06:45Z neil $
 */
 
 #include <string.h>

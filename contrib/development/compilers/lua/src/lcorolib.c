@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lcorolib.c 47953 2013-09-02 05:00:46Z mazze $
 ** Coroutine Library
 ** See Copyright Notice in lua.h
 */

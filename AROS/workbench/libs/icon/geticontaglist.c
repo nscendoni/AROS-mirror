@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: geticontaglist.c 49964 2015-01-28 23:04:04Z NicJA $
 */
 
 #include <aros/debug.h>
@@ -20,7 +20,7 @@
 
 /*  SYNOPSIS */
 	AROS_LHA(CONST_STRPTR, name, A0),
-	AROS_LHA(const struct TagItem *, tags, A1),
+	AROS_LHA(struct TagItem *, tags, A1),
 /*  LOCATION */
 	struct IconBase *, IconBase, 30, Icon)
 

@@ -1,4 +1,4 @@
-;;; $Id$
+;;; $Id: in_cksum.asm 30794 2009-03-08 02:19:07Z neil $
 ;;;
 ;;; in_cksum.s --- calculate internet checksum
 ;;;

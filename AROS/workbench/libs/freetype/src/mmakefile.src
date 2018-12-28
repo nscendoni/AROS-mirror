@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 52568 2016-04-10 15:26:19Z mazze $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -82,5 +82,5 @@ $(AROS_LIB)/pkgconfig/freetype2.pc : $(SRCDIR)/$(CURDIR)/../builds/unix/freetype
 	       -e 's|%ft_version%|2.5.0|' \
 	       -e 's|%includedir%|$${prefix}/include|' \
 	       -e 's|%libdir%|$(AROS_LIB)|' \
-	       -e 's|%prefix%|/Developer|' \
+	       -e 's|%prefix%|/Development|' \
 	       $< >$@

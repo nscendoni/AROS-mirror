@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rootclass.c 46573 2013-02-11 19:54:27Z sonic $
 
     Desc: OOP rootclass
     Lang: english

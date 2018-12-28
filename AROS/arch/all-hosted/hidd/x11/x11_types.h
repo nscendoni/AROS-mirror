@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: x11_types.h 53089 2016-12-22 14:49:32Z neil $
 */
 
 #define timeval sys_timeval

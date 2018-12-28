@@ -3,7 +3,7 @@
 
 /*
     Copyright 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: agp_private.h 41760 2011-10-05 20:14:21Z deadwood $
 */
 
 #include <exec/lists.h>

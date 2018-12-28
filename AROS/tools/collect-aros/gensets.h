@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gensets.h 40169 2011-07-16 03:03:35Z jmcmullan $
 */
 
 #ifndef _GENSETS_H_

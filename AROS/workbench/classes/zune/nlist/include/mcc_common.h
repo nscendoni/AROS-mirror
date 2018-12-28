@@ -18,7 +18,7 @@
 
  NList classes Support Site:  http://www.sf.net/projects/nlist-classes
 
- $Id$
+ $Id: mcc_common.h 49441 2014-08-16 12:12:16Z mazze $
 
 ***************************************************************************/
 

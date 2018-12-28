@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hostdisk_device.c 42761 2011-12-08 07:24:09Z sonic $
 */
 
 /****************************************************************************************/

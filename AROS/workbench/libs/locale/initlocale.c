@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: initlocale.c 49678 2014-10-01 18:37:28Z deadwood $
 
     Desc: InitLocale() load locale preferences from a file.
     Lang: english
@@ -318,7 +318,6 @@ void InitLocale(STRPTR filename, struct IntLocale *locale,
     locale->il_Locale.loc_CountryCode = cp->cp_CountryCode;
     locale->il_Locale.loc_TelephoneCode = cp->cp_TelephoneCode;
     locale->il_Locale.loc_GMTOffset = lp->lp_GMTOffset;
-    locale->il_Locale.loc_MeasuringSystem = cp->cp_MeasuringSystem;
     locale->il_Locale.loc_CalendarType = cp->cp_CalendarType;
 
 #if (AROS_BIG_ENDIAN == 0)

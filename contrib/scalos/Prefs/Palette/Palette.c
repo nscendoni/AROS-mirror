@@ -1,6 +1,6 @@
 // Palette.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-16 02:13:17 +0100 (Wed, 16 Mar 2016) $
+// $Revision: 51987 $
 
 
 #include <stdlib.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu.h 48550 2013-12-08 19:36:55Z verhaegs $
 
     Desc: AROS Generic CPU Definitions.
     Lang: english

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: screens.h 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Screen handling structures
     Lang: english
@@ -41,8 +41,8 @@ struct Screen
     WORD Width;
     WORD Height;
 
-    WORD MouseY;
-    WORD MouseX;
+    WORD MouseX; /* ABI_V0 compatibility */
+    WORD MouseY; /* ABI_V0 compatibility */
 
     UWORD   Flags;
     UBYTE * Title;

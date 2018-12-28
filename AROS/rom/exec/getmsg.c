@@ -1,20 +1,15 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2001, The AROS Development Team. All rights reserved.
+    $Id: getmsg.c 36262 2010-12-27 12:17:48Z sonic $
 
     Desc: Get a message from a message port.
     Lang: english
 */
-
-#define DEBUG 0
 #include <aros/debug.h>
-
 #include <exec/execbase.h>
 #include <exec/ports.h>
 #include <aros/libcall.h>
 #include <proto/exec.h>
-
-#include "exec_intern.h"
 
 /*****************************************************************************
 
@@ -56,26 +51,18 @@
 
     struct Message *msg;
 
-    D(bug("[Exec] GetMsg(0x%p)\n", port);)
-
     ASSERT_VALID_PTR(port);
 
-    /*
-     * Protect the message list, and get the first node.
-     */
+    /* Protect the message list. */
     Disable();
-#if defined(__AROSEXEC_SMP__)
-    EXEC_SPINLOCK_LOCK(&port->mp_SpinLock, NULL, SPINLOCK_MODE_WRITE);
-#endif
+
+    /* Get first node. */
     msg=(struct Message *)RemHead(&port->mp_MsgList);
-#if defined(__AROSEXEC_SMP__)
-    EXEC_SPINLOCK_UNLOCK(&port->mp_SpinLock);
-#endif
-    Enable();
 
     /* All done. */
-    ASSERT_VALID_PTR_OR_NULL(msg);
+    Enable();
 
+    ASSERT_VALID_PTR_OR_NULL(msg);
     return msg;
     AROS_LIBFUNC_EXIT
 } /* GetMsg() */

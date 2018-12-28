@@ -76,7 +76,7 @@
 
 #if defined(LIBC_SCCS) && !defined(lint) && !defined(__AROS__)
 static const char sccsid[] = "@(#)res_init.c	8.1 (Berkeley) 6/7/93";
-static const char rcsid[] = "$Id$";
+static const char rcsid[] = "$Id: res_init.c 51761 2016-03-10 02:16:12Z NicJA $";
 #endif /* LIBC_SCCS and not lint */
 
 #include <sys/types.h>

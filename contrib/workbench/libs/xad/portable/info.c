@@ -1,7 +1,7 @@
 #ifndef XADMASTER_INFO_C
 #define XADMASTER_INFO_C
 
-/*  $Id$
+/*  $Id: info.c 36659 2011-01-18 13:26:51Z neil $
     information handling functions
 
     XAD library system for archive handling

@@ -4,8 +4,8 @@ Contact Informatie
 
 :Authors:   Adam Chodorowski, Matthias Rustler 
 :Copyright: Copyright © 1995-2009, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 31367 $
+:Date:      $Date: 2009-06-05 00:25:19 +0200 (Fri, 05 Jun 2009) $
 :Status:    Done.
 
 .. Contents::

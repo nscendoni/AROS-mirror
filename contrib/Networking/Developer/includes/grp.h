@@ -2,7 +2,7 @@
 #define	_GRP_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: grp.h 32359 2010-01-16 22:25:24Z verhaegs $
 */
 
 #include <sys/_types.h>

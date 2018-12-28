@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __fdesc.h 52860 2016-08-14 18:56:36Z deadwood $
 
     Desc: file descriptors handling internals - header file
     Lang: english

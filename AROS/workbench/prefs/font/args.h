@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: args.h 32279 2010-01-04 23:15:12Z mazze $
 */
 
 #include <exec/types.h>

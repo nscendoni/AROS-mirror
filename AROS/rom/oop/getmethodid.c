@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getmethodid.c 49655 2014-09-21 23:01:25Z neil $
 
     Desc: OOP function OOP_GetMethodID
     Lang: english

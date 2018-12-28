@@ -1,6 +1,6 @@
 /*
     Copyright © 2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pcixhci_discover.c 49626 2014-09-14 11:49:42Z DizzyOfCRN $
 
     Desc: PCI XHCI USB host controller
     Lang: English

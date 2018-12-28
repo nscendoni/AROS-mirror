@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cycle.c 53076 2016-12-11 17:51:06Z deadwood $
 */
 
 #include <graphics/gfx.h>

@@ -1,12 +1,12 @@
-# $Id$
+# $Id: mmakefile.src 52341 2016-03-29 03:46:55Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- ports-devel : ports-devel-cflow
 
 PACKAGE      := cflow
-VERSION      := 1.5
-TARGETDIR    := $(AROS_CONTRIB)/$(AROS_DIR_DEVELOPER)/CFlow
+VERSION      := 1.4
+TARGETDIR    := $(AROS_CONTRIB)/Development/CFlow
 REPOSITORIES := gnu://cflow
 
 %fetch_and_build mmake=ports-devel-cflow prefix=$(TARGETDIR) \

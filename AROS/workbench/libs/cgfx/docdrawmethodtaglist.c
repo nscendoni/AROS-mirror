@@ -1,12 +1,12 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: docdrawmethodtaglist.c 51031 2015-08-29 22:48:43Z NicJA $
 
     Desc:
     Lang: english
 */
 
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <aros/debug.h>
 
 #include "cybergraphics_intern.h"

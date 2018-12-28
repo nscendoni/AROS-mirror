@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __stat.h 48031 2013-09-08 21:16:04Z verhaegs $
 
     Desc: stat() internals - header file
     Lang: english

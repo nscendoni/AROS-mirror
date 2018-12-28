@@ -2,7 +2,7 @@
     Copyright © 2003, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: support_aros.h 37268 2011-02-28 05:57:26Z jmcmullan $
 */
 
 #ifndef _MUIMASTER_SUPPORT_AROS_H_

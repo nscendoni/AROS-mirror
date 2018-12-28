@@ -1,6 +1,6 @@
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: GraphicDump.c 44403 2012-03-13 22:37:41Z mazze $
 
     Desc: Dump screen to printer
     Lang: English

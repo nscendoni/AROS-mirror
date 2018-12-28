@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Installer.h 48906 2014-04-04 20:07:36Z deadwood $
 */
 
 #ifndef _INSTALLER_H

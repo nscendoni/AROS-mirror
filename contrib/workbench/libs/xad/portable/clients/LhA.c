@@ -1,7 +1,7 @@
 #ifndef XADMASTER_LHA_C
 #define XADMASTER_LHA_C
 
-/*  $Id$
+/*  $Id: LhA.c 49018 2014-05-18 18:19:10Z deadwood $
     LhA file archiver client
 
     XAD library system for archive handling

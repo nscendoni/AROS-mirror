@@ -1,7 +1,7 @@
 #ifndef XADMASTER_CLIENTFUNC_C
 #define XADMASTER_CLIENTFUNC_C
 
-/*  $Id$
+/*  $Id: clientfunc.c 39571 2011-06-28 01:31:58Z NicJA $
     the client support functions
 
     XAD library system for archive handling

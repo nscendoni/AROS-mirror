@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: libcall.h 36647 2011-01-17 14:01:23Z neil $
 */
 
 #pragma pack(2)
@@ -10,7 +10,7 @@
 /******************************************************************************
 
     MODUL
-	$Id$
+	$Id: libcall.h 36647 2011-01-17 14:01:23Z neil $
 
     DESCRIPTION
 	Some macros to build functions with registerized parameters on the

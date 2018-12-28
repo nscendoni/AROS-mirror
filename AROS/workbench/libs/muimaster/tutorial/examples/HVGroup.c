@@ -2,7 +2,7 @@
     Copyright © 2003-2011, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: HVGroup.c 38685 2011-05-15 16:36:15Z weissms $
 */
 
 /* "muizunesupport.h" contains misc includes and

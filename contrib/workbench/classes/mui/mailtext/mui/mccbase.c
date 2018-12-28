@@ -22,7 +22,7 @@
 
  Mailtext OpenSource project :  http://sourceforge.net/projects/mailtext/
 
- $Id$
+ $Id: mccbase.c 37243 2011-02-28 05:53:53Z jmcmullan $
 
  Common functions and structures needed for an MUI (mcc) library.
 

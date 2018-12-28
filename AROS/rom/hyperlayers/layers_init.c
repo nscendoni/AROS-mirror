@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: layers_init.c 45664 2012-08-26 14:21:38Z jmcmullan $
 
     Desc: Layers Resident and initialization.
     Lang: english

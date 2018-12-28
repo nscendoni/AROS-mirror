@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2031, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getcpuinfo.c 47740 2013-07-20 11:30:00Z mazze $
 
     Desc: GetCPUInfo() - Provides information about installed CPUs
     Lang: english
@@ -85,7 +85,7 @@ AROS_LH1(void, GetCPUInfo,
             *((UQUAD *)passedTag->ti_Data) = 0;
             break;
         case(GCIT_ProcessorLoad):
-            *((ULONG *)passedTag->ti_Data) = 0;
+            *((UBYTE *)passedTag->ti_Data) = 0;
             break;
         case(GCIT_FrontsideSpeed):
             *((UQUAD *)passedTag->ti_Data) = 0;

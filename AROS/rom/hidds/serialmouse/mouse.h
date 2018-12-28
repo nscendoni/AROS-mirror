@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mouse.h 46990 2013-03-18 15:52:56Z neil $
 
     Desc: Include for the mouse native HIDD.
     Lang: English.

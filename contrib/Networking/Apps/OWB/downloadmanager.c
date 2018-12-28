@@ -1,6 +1,6 @@
 /*
     Copyright © 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: downloadmanager.c 46050 2012-11-17 06:03:49Z jmcmullan $
 */
 
 /* Process this class after all the base

@@ -1,7 +1,7 @@
 #ifndef XADMASTER_FUNCTIONS_H
 #define XADMASTER_FUNCTIONS_H
 
-/*  $Id$
+/*  $Id: functions.h 48675 2014-01-02 18:34:06Z neil $
     declarations and prototypes
 
     XAD library system for archive handling

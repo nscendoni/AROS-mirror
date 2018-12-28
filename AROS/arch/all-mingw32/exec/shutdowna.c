@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: shutdowna.c 34578 2010-10-04 07:19:30Z sonic $
 
     Desc: ShutdownA() - Shut down the operating system, Windows-hosted implementation.
     Lang: english

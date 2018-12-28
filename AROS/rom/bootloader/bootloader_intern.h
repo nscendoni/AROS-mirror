@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bootloader_intern.h 33925 2010-07-27 12:22:13Z sonic $
 
     Internal data structures for bootloader.resource
 */

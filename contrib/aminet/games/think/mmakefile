@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile 30794 2009-03-08 02:19:07Z neil $
 
 #MM- aminet-games-think : aminet-games-think-yahzee \
 #MM	aminet-games-think-newmastermind \
@@ -6,3 +6,4 @@
 #MM	aminet-games-think-soliton \
 #MM	aminet-games-think-amichess \
 #MM	aminet-games-think-muimine
+

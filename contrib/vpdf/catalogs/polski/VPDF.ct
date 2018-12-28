@@ -227,9 +227,3 @@ MSG_SEARCH_LABEL
 Szukaj:
 MSG_SLIDER_PAGE
 Strona %ld
-MSG_MENU_SAVE
-Zapisz plik...
-MSG_MENU_EXPORT
-Zapisz jako bitmapy...
-MSG_EXPORT_WINTITLE
-Zapisywanie dokumentu do bitmap

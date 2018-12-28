@@ -1,7 +1,7 @@
 #ifndef XADMASTER_MDC_C
 #define XADMASTER_MDC_C
 
-/*  $Id$
+/*  $Id: MDC.c 36659 2011-01-18 13:26:51Z neil $
     MDC disk archiver client
 
     XAD library system for archive handling

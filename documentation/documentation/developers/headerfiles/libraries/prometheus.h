@@ -3,7 +3,7 @@
 
 /*
     Copyright (C) 2005 Neil Cafferkey
-    $Id$
+    $Id: prometheus.h 30800 2009-03-08 17:28:50Z neil $
 
     Desc: Definitions for prometheus.library
     Lang: english

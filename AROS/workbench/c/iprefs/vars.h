@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vars.h 37298 2011-03-02 13:07:49Z sonic $
 
     Desc:
     Lang: English

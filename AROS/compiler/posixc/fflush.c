@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fflush.c 48292 2013-10-15 20:31:29Z mazze $
 
     C99 function fflush().
 */

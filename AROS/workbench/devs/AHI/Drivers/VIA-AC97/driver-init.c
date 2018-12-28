@@ -1,7 +1,7 @@
 /*
     Copyright © 2005-2013, Davy Wentzler. All rights reserved.
     Copyright © 2010-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: driver-init.c 48674 2014-01-02 17:51:04Z neil $
 */
 
 #ifdef __AROS__

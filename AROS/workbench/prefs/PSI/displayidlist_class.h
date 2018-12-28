@@ -5,7 +5,7 @@
     Copyright © 2009-2010, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: displayidlist_class.h 33557 2010-06-12 20:08:25Z mazze $
 */
 
 #include "psi.h"

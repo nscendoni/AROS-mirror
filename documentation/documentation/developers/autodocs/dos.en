@@ -973,7 +973,7 @@ Synopsis
 ::
 
  struct Process * CreateNewProc(
-          const struct TagItem * tags );
+          struct TagItem * tags );
  
  struct Process * CreateNewProcTags(
           TAG tag, ... );
@@ -1348,7 +1348,6 @@ Inputs
 
              GVF_LOCAL_ONLY  - delete a local variable.
              GVF_GLOBAL_ONLY - delete a global environment variable.
-             GVF_SAVE_VAR    - delete a global variable permanently.
 
 
 Result
@@ -4323,7 +4322,7 @@ Synopsis
 
  BPTR NewLoadSeg(
           CONST_STRPTR file,
-          const struct TagItem * tags );
+          struct TagItem * tags );
  
  BPTR NewLoadSegTags(
           CONST_STRPTR file,
@@ -4855,7 +4854,7 @@ Synopsis
 
  struct RDArgs * ReadArgs(
           CONST_STRPTR template,
-          SIPTR * array,
+          IPTR * array,
           struct RDArgs * rdargs );
 
 Function
@@ -6519,7 +6518,7 @@ Synopsis
 
  LONG SystemTagList(
           CONST_STRPTR command,
-          const struct TagItem * tags );
+          struct TagItem * tags );
  
  LONG SystemTags(
           CONST_STRPTR command,

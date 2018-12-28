@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: convtolower.c 43286 2011-12-29 02:11:58Z neil $
 
     Desc: ConvToLower() - Stub for the Language tolower() function.
     Lang: english
@@ -31,8 +31,7 @@
         Otherwise, the original character will be returned.
 
     INPUTS
-        locale      - The Locale to use for this conversion or NULL for
-                      the system default locale.
+        locale      - The Locale to use for this conversion.
         character   - The character to convert to lower case.
 
     RESULT
@@ -55,13 +54,6 @@
     AROS_LIBFUNC_INIT
 
     ULONG retval;
-    struct Locale *def_locale = NULL;
-
-    if (locale == NULL)
-    {
-        locale = OpenLocale(NULL);
-        def_locale = (struct Locale *)locale;
-    }
 
     DEBUG_CONVTOLOWER(dprintf("ConvToLower: locale 0x%lx char 0x%lx\n",
             locale, character));
@@ -80,9 +72,7 @@
 
     DEBUG_CONVTOLOWER(dprintf("ConvToLower: retval 0x%lx\n", retval));
 
-    CloseLocale(def_locale);
-
-    return retval;
+    return (retval);
 
     AROS_LIBFUNC_EXIT
 }

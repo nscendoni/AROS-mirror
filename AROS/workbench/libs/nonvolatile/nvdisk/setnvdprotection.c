@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setnvdprotection.c 40676 2011-08-11 17:49:21Z jmcmullan $
 
     Desc:
     Lang: English

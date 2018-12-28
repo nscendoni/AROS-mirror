@@ -2,8 +2,8 @@
 #define EXEC_LISTS_H
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: lists.h 49144 2014-07-23 18:50:11Z NicJA $
         
     Structures and macros for exec lists.
 */
@@ -72,7 +72,7 @@ struct MinList
 	       Macros
 **************************************/
 #define IsListEmpty(l) \
-	(((struct Node *)((struct List *)(l))->lh_TailPred) == (struct Node *)(l))
+	( (((struct List *)l)->lh_TailPred) == (struct Node *)(l) )
 
 #define IsMinListEmpty(l) \
 	( (((struct MinList *)l)->mlh_TailPred) == (struct MinNode *)(l) )

@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: dosio_sprintf.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      dosio_sprintf.c - formatted print to a buffer using RawDoFmt()
  *

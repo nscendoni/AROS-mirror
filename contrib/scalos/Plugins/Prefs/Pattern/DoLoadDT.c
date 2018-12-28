@@ -1,7 +1,7 @@
 // DoLoadDT.c  
 // datatype loading, scaling, remapping and dithering routine.
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 16:15:27 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51974 $
 
 #include <exec/memory.h>
 #include <exec/types.h>

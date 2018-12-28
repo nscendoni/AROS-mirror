@@ -1,6 +1,6 @@
 /*
     Copyright © 1999, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Rotate.c 51876 2016-03-12 04:12:51Z NicJA $
 
     Desc: Rotate Game
     Lang: german

@@ -1,6 +1,6 @@
 /*
     Copyright (C) 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: tcsetattr.c 52860 2016-08-14 18:56:36Z deadwood $
 */
 
 #include <proto/dos.h>

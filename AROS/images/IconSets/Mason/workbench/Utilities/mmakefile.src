@@ -1,13 +1,13 @@
-# $Id$
+# $Id: mmakefile.src 34053 2010-08-07 05:57:59Z mazze $
 #
 # Makefile for Mason's workbench icons
 
-include $(SRCDIR)/config/aros.cfg
+include $(TOP)/config/make.cfg
 
 ICONS     := Multiview Clock More Installer
 ICONDIR   := $(AROSDIR)/Utilities
 
-#MM- iconset-Mason-wbench-icons-aros : iconset-Mason-wbench-icons-aros-utility
+#MM- iconset-Mason-icons : masonworkbenchutilityicons
 
-%build_icons mmake=iconset-Mason-wbench-icons-aros-utility icons=$(ICONS) \
+%build_icons mmake=masonworkbenchutilityicons icons=$(ICONS) \
              dir=$(ICONDIR)

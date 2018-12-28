@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rtezrequesta.c 34110 2010-08-12 11:29:19Z sonic $
 
     Desc:
     Lang: English

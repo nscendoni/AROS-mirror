@@ -34,7 +34,7 @@ typedef struct {
 
 static int load_file(ext2_boot_dev_t * this, char *filename, void *buffer)
 {
-	int filelen;
+	unsigned filelen;
 
 	if (!ext2fs_mount(this->part_length)) {
 		printf("** Bad ext2 partition or disk - %d:%d **\n",

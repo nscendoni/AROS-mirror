@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: releasesemaphorelist.c 36262 2010-12-27 12:17:48Z sonic $
 
     Desc: Release all semaphores in the list.
     Lang: english

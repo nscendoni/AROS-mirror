@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: NoCapsLock.c 31657 2009-08-03 13:08:00Z mazze $
 
     NoCapsLock commodity -- Renders the CAPS LOCK key ineffective
 */

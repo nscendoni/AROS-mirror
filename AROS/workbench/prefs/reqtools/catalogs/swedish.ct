@@ -1,6 +1,16 @@
-## version $VER: ReqTools.catalog 3.1 (30.6.2017)
-## language svenska
+;**************************
+;
+;   ReqTools Preferences
+;
+;   Svenska
+;
+;**************************
+;
+## version $VER: reqtoolsprefs.catalog 39.0 (31.03.2016)
 ## codeset 0
+## language svenska
+;
+; *** Misc ***
 ;
 MSG_WINDOW_TITLE
 ReqToolsinställningar
@@ -14,9 +24,70 @@ Filväljare
 MSG_SIZE
 Storlek (% av synlig höjd):
 ;
-MSG_OK
-Ok
+MSG_SET
+Ställ in...
 ;
+MSG_TEST
+Testa...
+;
+MSG_SAVE
+Spara
+;
+MSG_USE
+Använd
+;
+MSG_CANCEL
+Avbryt
+;
+MSG_ABORT
+Avbryt
+;
+; Note: there are two spaces around the Ok string to make it 4 chars wide.
+MSG_OK
+ Ok \
+
+;
+; ** 2.7 **
+;
+MSG_INFORMATION
+Information
+;
+; *** Menus ***
+;
+MSG_PROJECT_MENU
+Arkiv
+;
+MSG_PROJECT_OPEN
+O\0Öppna...
+;
+MSG_PROJECT_SAVEAS
+A\0Spara som...
+;
+MSG_PROJECT_ABOUT
+?\0Om...
+;
+MSG_PROJECT_QUIT
+Q\0Avsluta
+;
+MSG_EDIT_MENU
+Redigera
+;
+MSG_EDIT_RESET
+F\0Förinställda värden
+;
+MSG_EDIT_LASTSAVED
+E\0Senast sparade
+;
+MSG_EDIT_RESTORE
+Â\0Återställ
+;
+MSG_OPTIONS_MENU
+Tillval
+;
+MSG_OPTIONS_CREATEICONS
+I\0Skapa symboler
+;
+; *** Switches ***
 ;
 MSG_POPSCREEN
 Flytta fram skärm
@@ -36,48 +107,57 @@ LED
 MSG_DEFAULTFONT
 Systemteckensnitt
 ;
+; ** 2.3 **
+;
 MSG_FKEYS
 Använd f-tangenter
 ;
+; ** 2.5 **
+;
 ; Hrm. Inte så bra kanske.. ;)
 MSG_DOWHEEL
-Färghjul:
+Färghjul
+;
+; ** 2.7 **
 ;
 MSG_WHEEL_NONE
-Ingen
+Inget färghjul
 ;
 MSG_WHEEL_SIMPLE
-Enkelt
+Enkelt färghjul
 ;
 MSG_WHEEL_FANCY
-Fint
+Fint färghjul
+;
+; ** 2.8 **
 ;
 MSG_MMB_PARENT
 MMK ger moderlåda
 ;
-MSG_DEFAULTS
-Förinställt
+; *** Requester Type ***
 ;
 MSG_REQUESTER
-\33bDialog:
+Förinställt för
 ;
 MSG_FILEREQ
-Fil
+Filväljare
 ;
 MSG_FONTREQ
-Teckensnitts
+Teckensnittsväljare
 ;
 MSG_PALETTEREQ
-Färginst
+Färginställningar
 ;
 MSG_SCRMODEREQ
-Skärmlägesinst
+Skärmlägesinställningar
 ;
 MSG_VOLUMEREQ
-Volym
+Volymväljare
 ;
 MSG_OTHERREQ
-Andra
+Andra dialogrutor
+;
+; *** Position ***
 ;
 MSG_POSITION
 Läge:
@@ -98,13 +178,75 @@ MSG_TOPLEFTSCR
 Övre vänster hörn på skärm
 ;
 MSG_OFFSET
-\33bOffset
+Offset:
+;
+; *** Entries ***
 ;
 MSG_NR_OF_ENTRIES
-\33bAntal synliga poster
+Antal synliga poster:
 ;
 MSG_MIN
-Minimum:
+Minimum
 ;
 MSG_MAX
-Maximum:
+Maximum
+;
+; *** Errors ***
+;
+MSG_YOU_NEED_REQTOOLS38
+Du behöver reqtools.library version 38 eller högre!
+;
+MSG_WRONG_REQTOOLS_VERSION
+Denna version av reqtools.library stödjer inte inställningar.
+;
+MSG_ALL_PREFS_NOT_SUPPORTED
+VARNING: Denna version av inställningseditorn\n\
+stödjer inte alla inställningar som det\n\
+reqtools.library du har installerat!
+;
+MSG_NO_WB_LIB
+Kunde inte öppna workbench.library!
+;
+MSG_NO_UTILITY_LIB
+Kunde inte öppna utility.library!
+;
+MSG_NO_ICON_LIB
+Kunde inte öppna icon.library!
+;
+MSG_COULDNT_LOCK_PUBSCREEN
+Kunde inte låsa allmän skärm!
+;
+MSG_ERROR_GETSCREENDRAWINFO
+Kunde inte få tag på ritinformation!
+;
+MSG_ERROR_GETVISUALINFO
+Kunde inte få tag på visuell information!
+;
+MSG_COULDNT_OPEN_WINDOW
+Kunde inte öppna fönster!
+;
+MSG_ERROR_ACCESSING_FILE
+Fel i fil\n%s,\n%s
+;
+MSG_READ_ERROR
+Läsfel!
+;
+MSG_ERROR_SAVING_PREFS
+Fel vid lagring av inställningar!
+;
+; ** 2.7 **
+;
+MSG_ERROR_ARGS
+Argumentfel
+;Argument error
+;
+MSG_ERROR_LIBRARY
+Kunde inte öppna %s\n\
+version %ld eller högre!
+;Couldn't open %s\n\
+;version %ld or higher!
+;
+MSG_ERROR_MENUS
+Kunde inte skapa menyer!
+;Couldn't create menus!
+;

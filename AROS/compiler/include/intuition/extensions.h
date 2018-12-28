@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2003 - 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: extensions.h 33761 2010-07-06 06:33:20Z sonic $
 */
 
 /*** Sysiclass **************************************************************/

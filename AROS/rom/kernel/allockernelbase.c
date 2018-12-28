@@ -1,6 +1,6 @@
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: allockernelbase.c 44658 2012-04-21 22:12:41Z jmcmullan $
 
     Desc: Allocate kernel.resource base.
     Lang: english

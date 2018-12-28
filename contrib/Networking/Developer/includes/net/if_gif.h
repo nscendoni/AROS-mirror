@@ -2,7 +2,7 @@
 #define _NET_IF_GIF_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: if_gif.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: if_gif.h,v 1.3 2000/01/12 06:40:45 angelos Exp $	*/

@@ -2,8 +2,8 @@
 #define HIDD_PCI_H
 
 /*
-    Copyright © 2003-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2003-2013, The AROS Development Team. All rights reserved.
+    $Id: pci_hidd.h 46532 2013-02-07 19:51:02Z sonic $
 */
 
 #ifndef EXEC_TYPES_H
@@ -73,16 +73,6 @@ enum
 
 #define IS_PCIDRV_ATTR(attr, idx) \
     (((idx) = (attr) - HiddPCIDriverAttrBase) < num_Hidd_PCIDriver_Attrs)
-
-struct PCI_IRQRoutingEntry
-{
-    struct MinNode  re_Node;
-    UBYTE           re_PCISegNum;
-    UBYTE           re_PCIBusNum;
-    UBYTE           re_PCIDevNum;
-    UBYTE           re_IRQPin;
-    UWORD           re_IRQ;
-};
 
 #endif
 

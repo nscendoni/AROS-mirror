@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: pkts.c 36648 2011-01-17 14:31:59Z neil $
  *
  * Simplified doublebuffered AmigaDOS IO.
  * 

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: table2c.c 45849 2012-09-26 13:55:25Z deadwood $
 */
 
 #include <stdio.h>

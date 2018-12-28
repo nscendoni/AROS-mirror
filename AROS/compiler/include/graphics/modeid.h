@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: modeid.h 33363 2010-05-26 11:38:50Z sonic $
 
     Desc: Display mode definitions
     Lang: english

@@ -22,7 +22,7 @@
     slouken@libsdl.org
 */
 
-/* $Id$ */
+/* $Id: glfont.c 30794 2009-03-08 02:19:07Z neil $ */
 
 /* A simple program to test the text rendering feature of the TTF library */
 

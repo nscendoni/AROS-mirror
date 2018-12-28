@@ -1,6 +1,6 @@
 /*
     Copyright  2011, The AROS Development Team.
-    $Id$
+    $Id: menudecorclass.h 38138 2011-04-09 16:36:17Z neil $
 */
 
 #ifndef MENUDECORCLASS_H

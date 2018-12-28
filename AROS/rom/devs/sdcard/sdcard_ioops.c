@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sdcard_ioops.c 47078 2013-03-26 00:16:22Z NicJA $
 */
 
 #define DEBUG 0

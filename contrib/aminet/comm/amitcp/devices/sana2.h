@@ -2,8 +2,8 @@
 #define SANA2_SANA2DEVICE_H 1
 /*
 **      $Filename: devices/sana2.h $
-**      $Revision$
-**      $Date$
+**      $Revision: 30794 $
+**      $Date: 2009-03-08 03:19:07 +0100 (Sun, 08 Mar 2009) $
 **
 **      Structure definitions for SANA-II devices.
 **

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: scrollregion.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Graphics function ScrollRegion()
     Lang: english
@@ -25,7 +25,7 @@
 	AROS_LHA(WORD,               dy,     D1),
 
 /*  LOCATION */
-	struct GfxBase *, GfxBase, 185, Graphics)
+	struct GfxBase *, GfxBase, 191, Graphics)
 
 /*  FUNCTION
 	Scroll the rectangles in the region by the amount of pixels specified, within the

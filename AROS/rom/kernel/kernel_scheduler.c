@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: kernel_scheduler.c 50713 2015-05-19 14:50:00Z NicJA $
 
     Desc:
 */
@@ -25,14 +25,11 @@
  */
 BOOL core_Schedule(void)
 {
-    struct Task *task = GET_THIS_TASK;
+    struct Task *task = SysBase->ThisTask;
 
     D(bug("[KRN] core_Schedule()\n"));
 
     FLAG_SCHEDSWITCH_CLEAR;
-
-    if (task->tc_State == TS_REMOVED)
-        return FALSE;
 
     /* If task has pending exception, reschedule it so that the dispatcher may handle the exception */
     if (!(task->tc_Flags & TF_EXCEPT))
@@ -43,7 +40,7 @@ BOOL core_Schedule(void)
         if (IsListEmpty(&SysBase->TaskReady))
             return FALSE;
 
-        /* Does the TaskReady list contain tasks with priority equal to or lower than current task?
+        /* Does the TaskReady list contains tasks with priority equal or lower than current task?
          * If so, then check further... */
         pri = ((struct Task*)GetHead(&SysBase->TaskReady))->tc_Node.ln_Pri;
         if (pri <= task->tc_Node.ln_Pri)
@@ -54,7 +51,13 @@ BOOL core_Schedule(void)
         }
     }
 
-    D(bug("[KRN] Rescheduling required\n"));
+    /* 
+     * If we got here, then the rescheduling is necessary. 
+     * Put the task into the TaskReady list.
+     */
+    D(bug("[KRN] Setting task 0x%p (%s) to READY\n", task, task->tc_Node.ln_Name));
+    task->tc_State = TS_READY;
+    Enqueue(&SysBase->TaskReady, &task->tc_Node);
 
     /* Select new task to run */
     return TRUE;
@@ -63,16 +66,9 @@ BOOL core_Schedule(void)
 /* Actually switch away from the task */
 void core_Switch(void)
 {
-    struct Task *task = GET_THIS_TASK;
-    ULONG showAlert = 0;
+    struct Task *task = SysBase->ThisTask;
 
     D(bug("[KRN] core_Switch(): Old task = %p (%s)\n", task, task->tc_Node.ln_Name));
-
-    if (task->tc_State != TS_RUN)
-        Remove(&task->tc_Node);
-
-    if ((task->tc_State != TS_WAIT) && (task->tc_State != TS_REMOVED))
-        task->tc_State = TS_READY;
 
 #ifndef __mc68000
     if (task->tc_SPReg <= task->tc_SPLower || task->tc_SPReg > task->tc_SPUpper)
@@ -84,28 +80,19 @@ void core_Switch(void)
          * lock on some global/library semaphore it will most likelly mean immenent freeze. In most cases
          * however, user will be shown an alert.
          */
+        Remove(&task->tc_Node);
         task->tc_SigWait    = 0;
         task->tc_State      = TS_WAIT;
+        Enqueue(&SysBase->TaskWait, &task->tc_Node);
 
-        showAlert = AN_StackProbe;
+        Alert(AN_StackProbe);
     }
 #endif
 
     task->tc_IDNestCnt = IDNESTCOUNT_GET;
 
-    if (task->tc_State == TS_READY)
-    {
-        if (task->tc_Flags & TF_SWITCH)
-            AROS_UFC1NR(void, task->tc_Switch, AROS_UFCA(struct ExecBase *, SysBase, A6));
-        Enqueue(&SysBase->TaskReady, &task->tc_Node);
-    }
-    else if (task->tc_State != TS_REMOVED)
-    {
-        D(bug("[KRN] Setting '%s' @ 0x%p to wait\n", task->tc_Node.ln_Name, task));
-        Enqueue(&SysBase->TaskWait, &task->tc_Node);
-    }
-    if (showAlert)
-        Alert(showAlert);
+    if (task->tc_Flags & TF_SWITCH)
+        AROS_UFC1NR(void, task->tc_Switch, AROS_UFCA(struct ExecBase *, SysBase, A6));
 }
 
 /*
@@ -134,41 +121,32 @@ struct Task *core_Dispatch(void)
         return NULL;
     }
 
-    if (task->tc_State == TS_READY)
-    {
-        IDNESTCOUNT_SET(task->tc_IDNestCnt);
-        SET_THIS_TASK(task);
-        SCHEDELAPSED_SET(SCHEDQUANTUM_GET);
-        FLAG_SCHEDQUANTUM_CLEAR;
-        /*
-         * Check the stack of the task we are about to launch.
-         * Unfortunately original m68k programs can change stack manually without updating SPLower or SPUpper.
-         * For example WB3.1 C:SetPatch adds exec/OpenDevice() patch that swaps stacks manually.
-         * Result is that _all_ programs that call OpenDevice() crash if stack is checked.
-         */
+    SysBase->DispCount++;
+    IDNESTCOUNT_SET(task->tc_IDNestCnt);
+    SysBase->ThisTask  = task;
+    SysBase->Elapsed   = SysBase->Quantum;
+    FLAG_SCHEDQUANTUM_CLEAR;
+    task->tc_State     = TS_RUN;
+
+    D(bug("[KRN] New task = %p (%s)\n", task, task->tc_Node.ln_Name));
+
+    /*
+     * Check the stack of the task we are about to launch.
+     * Unfortunately original m68k programs can change stack manually without updating SPLower or SPUpper.
+     * For example WB3.1 C:SetPatch adds exec/OpenDevice() patch that swaps stacks manually.
+     * Result is that _all_ programs that call OpenDevice() crash if stack is checked.
+     */
 #ifndef __mc68000
-        if (task->tc_SPReg <= task->tc_SPLower || task->tc_SPReg > task->tc_SPUpper)
-            task->tc_State     = TS_WAIT;
-        else
-#endif
-            task->tc_State     = TS_RUN;
-    }
-
-    if (task->tc_State != TS_RUN)
+    if (task->tc_SPReg <= task->tc_SPLower || task->tc_SPReg > task->tc_SPUpper)
     {
-        D(bug("[KRN] Skipping '%s' @ 0x%p (state %08x)\n", task->tc_Node.ln_Name, task, task->tc_State));
-
+        /* Don't let the task run, switch it away (raising Alert) and dispatch another task */
         core_Switch();
-        task = core_Dispatch();
+        return core_Dispatch();
     }
-    else
-    {
-        D(bug("[KRN] New task = %p (%s)\n", task, task->tc_Node.ln_Name));
+#endif
 
-        SysBase->DispCount++;
-        if (task->tc_Flags & TF_LAUNCH)
-            AROS_UFC1NR(void, task->tc_Launch, AROS_UFCA(struct ExecBase *, SysBase, A6));
-    }
+    if (task->tc_Flags & TF_LAUNCH)
+        AROS_UFC1NR(void, task->tc_Launch, AROS_UFCA(struct ExecBase *, SysBase, A6));
 
     /* Leave interrupt and jump to the new task */
     return task;

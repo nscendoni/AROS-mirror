@@ -1,6 +1,6 @@
 /*
     Copyright � 2007-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fenv.h 48028 2013-09-08 21:13:29Z verhaegs $
 
     C99 floating-point environment
 */

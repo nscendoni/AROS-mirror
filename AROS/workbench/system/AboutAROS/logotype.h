@@ -6,7 +6,7 @@
     This file is part of the About program, which is distributed under
     the terms of version 2 of the GNU General Public License.
     
-    $Id$
+    $Id: logotype.h 30792 2009-03-07 22:40:04Z neil $
 */
 
 #define LOGOTYPE_IMAGE "IMAGES:AROS.png"

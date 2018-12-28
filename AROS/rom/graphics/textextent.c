@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: textextent.c 46023 2012-11-08 16:05:13Z neil $
 
     Desc: Calculate the size a text needs in a specific rastport.
     Lang: english

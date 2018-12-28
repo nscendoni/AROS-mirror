@@ -5,8 +5,8 @@
 :Авторы:    Staf Verhaegen, Sebastian Rittau, Stefan Rieken, Matt Parsons,
             Adam Chodorowski, Fabio Alemagna, Matthias Rustler
 :Copyright: Copyright (C) 1995-2006, The AROS Development Team
-:Версия:    $Revision$
-:Дата:      $Date$
+:Версия:    $Revision: 45870 $
+:Дата:      $Date: 2012-10-07 19:53:43 +0200 (Sun, 07 Oct 2012) $
 :Статус:    Не завершено; в процессе объединения (впереди долгий путь).
 :Сделать:   Объединить разные части. Обновить и проверить. Завершить...
 :Описание:

@@ -1,6 +1,6 @@
 /*
     Copyright 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: drm_compat_funcs.c 41758 2011-10-05 20:14:12Z deadwood $
 */
 
 #include "drm_compat_funcs.h"
@@ -110,7 +110,7 @@ void udelay(unsigned long usecs)
     timerio.tr_node.io_Message.mn_ReplyPort     = &timermp;    
     timerio.tr_node.io_Command                  = TR_ADDREQUEST;
     timerio.tr_time.tv_secs                     = usecs / 1000000;
-    timerio.tr_time.tv_micro                    = usecs % 1000000;
+    timerio.tr_time.tv_micro                    = usecs - (timerio.tr_time.tv_secs * 1000000);
 
     SetSignal(0, SIGF_SINGLE);
 

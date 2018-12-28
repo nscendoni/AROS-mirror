@@ -2,7 +2,7 @@
     Copyright © 2002, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: test.c 50864 2015-06-24 19:43:50Z deadwood $
 */
 
 #include <stdio.h>

@@ -1,8 +1,10 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
 FILES := battclock_init readbattclock writebattclock
+
+USER_CFLAGS += -DDEBUG=1
 
 %build_archspecific \
   mainmmake=kernel-battclock maindir=rom/battclock arch=pc \

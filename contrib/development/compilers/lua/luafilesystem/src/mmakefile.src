@@ -1,6 +1,6 @@
-#   $Id$
+#   $Id: mmakefile.src 52348 2016-03-29 14:28:20Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 # files to build the linker lib 'lualfs'
 LFSLIBFILES := lfs

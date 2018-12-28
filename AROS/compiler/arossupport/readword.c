@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readword.c 42235 2011-11-03 14:26:18Z jmcmullan $
 
     Desc: Read a big endian word (16bit) from a streamhook
     Lang: english

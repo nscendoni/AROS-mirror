@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: intuitionbase.h 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Structure of intuition.library
     Lang: english
@@ -35,8 +35,8 @@ struct IntuitionBase
 
     ULONG Flags;
 
-    WORD  MouseY;
-    WORD  MouseX;
+    WORD  MouseX; /* ABI_V0 compatibility */
+    WORD  MouseY; /* ABI_V0 compatibility */
 
     ULONG Seconds;
     ULONG Micros;

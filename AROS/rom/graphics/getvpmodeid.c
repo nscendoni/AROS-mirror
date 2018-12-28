@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2010, The AROS Development Team. All rights reserved.
+    $Id: getvpmodeid.c 33532 2010-06-10 09:10:24Z sonic $
 
     Desc: Graphics function GetVPModeID()
     Lang: english
@@ -8,7 +8,7 @@
 #include <aros/debug.h>
 #include <graphics/view.h>
 #include <graphics/modeid.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <proto/graphics.h>
 
 #include "graphics_intern.h"

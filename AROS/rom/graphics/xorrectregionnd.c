@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: xorrectregionnd.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc:
     Lang: english
@@ -23,7 +23,7 @@
 	AROS_LHA(struct Rectangle *, Rect, A1),
 
 /*  LOCATION */
-	struct GfxBase *, GfxBase, 190, Graphics)
+	struct GfxBase *, GfxBase, 152, Graphics)
 
 /*  FUNCTION
 	Exclusive-OR the given rectangle to the given

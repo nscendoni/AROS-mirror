@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: newobject.c 50838 2015-06-19 00:14:32Z NicJA $
 
     Desc: Create a new OOP object
     Lang: english
@@ -72,7 +72,7 @@
 
 // bug("OOP_NewObject(class=%s, classptr=%p, tags=%p)\n", classID, classPtr, tagList);    
     EnterFunc(bug("OOP_NewObject(classPtr=%p, classID=%s, tagList=%p)\n",
-		  classPtr, (classID ? (const char *)classID : "(null)"), tagList));
+    		classPtr, ((classID != (CONST_STRPTR)NULL) ? classID : "(null)"), tagList));
 
     if (!classPtr)
     {

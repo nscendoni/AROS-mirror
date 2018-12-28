@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getgrgid.c 48053 2013-09-08 21:20:12Z verhaegs $
 */
 
 #include <aros/debug.h>

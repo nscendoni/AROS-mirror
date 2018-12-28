@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: driverclass.c 47619 2013-07-02 18:27:20Z neil $
 
     Desc: PCI direct driver for Elbox Mediator series
     Lang: English

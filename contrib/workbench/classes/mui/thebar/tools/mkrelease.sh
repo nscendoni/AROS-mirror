@@ -18,7 +18,7 @@
 #
 # TheBar class Support Site:  http://www.sf.net/projects/thebar
 #
-# $Id$
+# $Id: mkrelease.sh 49424 2014-08-16 07:30:44Z mazze $
 #
 ############################################################################
 

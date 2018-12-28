@@ -5,7 +5,7 @@
  *
  * Licensed under the AROS PUBLIC LICENSE (APL) Version 1.1
  * 
- * $Id$
+ * $Id: rom_init.S 48477 2013-11-30 14:02:25Z jmcmullan $
  */
 
 #include <aros/m68k/asm.h>
@@ -107,7 +107,7 @@ arosbootstrap_init:
 	bmi.s	.test32bit
 .is32bit:
 	/* set AttnFlags AFB_ADDR32 */
-	or.w	#0x2000,%a4@(2)
+	or.w	#0x4000,%a4@(2)
 .test32bit:
 
 	/* Memory region array is put into the

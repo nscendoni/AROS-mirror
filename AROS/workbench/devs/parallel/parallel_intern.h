@@ -2,7 +2,7 @@
 #define PARALLEL_INTERN_H
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: parallel_intern.h 37826 2011-03-27 19:15:57Z verhaegs $
 
     Desc: Private definitions for Parallel device.
     Lang:

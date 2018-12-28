@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: class3.h 48675 2014-01-02 18:34:06Z neil $
 */
 
 #include <exec/types.h>

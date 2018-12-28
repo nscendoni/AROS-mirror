@@ -2,7 +2,7 @@
 #define _NETINET_ICMP6_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: icmp6.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: icmp6.h,v 1.5 2000/03/09 21:21:12 itojun Exp $	*/

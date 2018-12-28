@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: defmap.h 36659 2011-01-18 13:26:51Z neil $
  *
  * $Log$
  * Revision 1.1  2001/10/06 20:18:47  digulla

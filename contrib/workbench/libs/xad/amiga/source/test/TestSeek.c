@@ -1,7 +1,7 @@
 #ifndef XADMASTER_TEST_C
 #define XADMASTER_TEST_C
 
-/*  $Id$
+/*  $Id: TestSeek.c 30794 2009-03-08 02:19:07Z neil $
     test client for xadHookAccessSeek
 
     XAD library system for archive handling

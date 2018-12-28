@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: genmodule.c 52975 2016-10-09 17:40:17Z deadwood $
 
     Main for genmodule. A tool to generate files for building modules.
 */

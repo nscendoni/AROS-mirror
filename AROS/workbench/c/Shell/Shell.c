@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Shell.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 /* TODO:
@@ -23,12 +23,6 @@
 #include <aros/debug.h>
 
 #include "Shell.h"
-
-/* Prevent inclusion of the ErrorOutput() linklib
- * routine from -lamiga, so that we don't need a global
- * SysBase
- */
-#define ErrorOutput()  (((struct Process *)FindTask(NULL))->pr_CES)
 
 #define IS_SYSTEM ((ss->flags & (FNF_VALIDFLAGS | FNF_SYSTEM)) == (FNF_VALIDFLAGS | FNF_SYSTEM))
 #define IS_SCRIPT (cli->cli_CurrentInput != cli->cli_StandardInput)
@@ -613,7 +607,6 @@ __startup AROS_CLI(ShellStart)
     APTR DOSBase;
     struct Process *me = (struct Process *)FindTask(NULL);
     struct CommandLineInterface *cli;
-    IPTR prntArgs[2];
 
     DOSBase = OpenLibrary("dos.library",36);
     if (!DOSBase)
@@ -660,12 +653,11 @@ __startup AROS_CLI(ShellStart)
 
     initDefaultInterpreterState(ss);
 
-    prntArgs[0] = me->pr_TaskNum;
     if (AROS_CLI_Type == CLI_RUN) {
-        VFPrintf(cli->cli_StandardError, "[CLI %ld]\n", (RAWARG)prntArgs);
+        FPrintf(cli->cli_StandardError, "[CLI %ld]\n", me->pr_TaskNum);
     }
     if (AROS_CLI_Type == CLI_NEWCLI) {
-        VFPrintf(cli->cli_StandardOutput, "New Shell process %ld\n", (RAWARG)prntArgs);
+        FPrintf(cli->cli_StandardOutput, "New Shell process %ld\n", me->pr_TaskNum);
     }
 
     error = interact(ss);

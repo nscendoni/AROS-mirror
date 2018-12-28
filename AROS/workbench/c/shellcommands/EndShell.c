@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: EndShell.c 37810 2011-03-27 14:17:02Z jmcmullan $
 
     Desc: EndShell CLI command
     Lang: English

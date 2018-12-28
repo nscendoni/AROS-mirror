@@ -1,6 +1,6 @@
 /*
     Copyright © 2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: tapedeck_intern.h 51948 2016-03-14 19:21:58Z neil $
 */
 
 /***********************************************************************************/

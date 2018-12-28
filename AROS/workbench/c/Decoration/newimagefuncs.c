@@ -1,6 +1,6 @@
 /*
-    Copyright © 2011-2018, The AROS Development Team.
-    $Id$
+    Copyright © 2011, The AROS Development Team.
+    $Id: newimagefuncs.c 44597 2012-04-10 16:30:42Z neil $
 */
 
 #include <datatypes/pictureclass.h>
@@ -339,6 +339,7 @@ struct NewImage * CreateNewImageContainerMatchingScreen(struct NewImage *in, BOO
         {
             /* If this is LUT screen, try to load LUT version of image */
             out->ok = FALSE;
+            strcpy(out->filename, in->filename);
             strcat(out->filename, "_LUT");
         
             out->o = LoadPicture(out->filename, scr);

@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lua.c 47953 2013-09-02 05:00:46Z mazze $
 ** Lua stand-alone interpreter
 ** See Copyright Notice in lua.h
 */

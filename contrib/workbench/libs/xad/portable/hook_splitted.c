@@ -1,7 +1,7 @@
 #ifndef XADMASTER_HOOK_SPLITTED_C
 #define XADMASTER_HOOK_SPLITTED_C
 
-/*  $Id$
+/*  $Id: hook_splitted.c 43430 2012-01-01 20:12:06Z jmcmullan $
     splitted input file IO hook
 
     XAD library system for archive handling

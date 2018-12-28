@@ -1,7 +1,7 @@
 /*
     Copyright © 2011, Thore Böckelmann. All rights reserved.
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Rawimage.c 44110 2012-02-19 22:14:30Z verhaegs $
 */
 
 #include <proto/intuition.h>

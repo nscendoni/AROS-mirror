@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gfxfuncsupport.c 47604 2013-06-24 21:28:04Z sonic $
 */
 
 #include <aros/debug.h>

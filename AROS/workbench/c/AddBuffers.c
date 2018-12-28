@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: AddBuffers.c 48900 2014-04-02 16:30:52Z neil $
 
     Desc: AddBuffers CLI command
     Lang: English

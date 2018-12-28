@@ -1,7 +1,7 @@
 /*
    Copyright © 2002-2009, Chris Hodges. All rights reserved.
    Copyright © 2009-2012, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: pci.c 48513 2013-12-04 20:50:40Z jmcmullan $
 */
 
 #include <aros/bootloader.h>

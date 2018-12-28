@@ -1,7 +1,7 @@
 # Copyright © 2004-2011, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 48675 2014-01-02 18:34:06Z neil $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(TOP)/config/make.cfg
 
 ICONS := def_MUIbase
 

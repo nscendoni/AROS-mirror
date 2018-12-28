@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: configchain.c 35399 2010-11-12 14:16:36Z sonic $
 
     Desc:
     Lang: english

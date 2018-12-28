@@ -1,6 +1,6 @@
 // TTlayout.c
-// $Date$
-// $Revision$
+// $Date: 2016-10-29 09:01:26 +0200 (Sat, 29 Oct 2016) $
+// $Revision: 53040 $
 
 
 #include <exec/types.h>

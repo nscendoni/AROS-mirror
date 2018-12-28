@@ -1,7 +1,7 @@
 /******************************************************************************
 
     MODUL
-	$Id$
+	$Id: spc.c 36659 2011-01-18 13:26:51Z neil $
 
     DESCRIPTION
 	That module represents ab interface to all

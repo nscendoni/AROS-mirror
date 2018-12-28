@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: internalflush.c 47846 2013-08-22 21:14:15Z verhaegs $
 */
 
 #include <exec/types.h>

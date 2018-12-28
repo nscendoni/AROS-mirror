@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2004-2010, The AROS Development Team.
-    $Id$
+    $Id: pciids.c 51013 2015-08-18 12:07:46Z polluks $
 */
 
 #include <exec/memory.h>

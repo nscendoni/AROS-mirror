@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: atomic.h 42530 2011-11-18 07:49:49Z sonic $
 */
 
 #ifndef AROS_ATOMIC_H

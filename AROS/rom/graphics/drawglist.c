@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: drawglist.c 52873 2016-08-21 22:14:15Z NicJA $
 
     Desc: Draw the list of gels
     Lang: english

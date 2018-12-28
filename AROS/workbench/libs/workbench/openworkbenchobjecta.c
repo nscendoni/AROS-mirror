@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: openworkbenchobjecta.c 48942 2014-04-18 13:17:49Z neil $
 
     Open a drawer or launch a program.
 */

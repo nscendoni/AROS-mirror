@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: debugdriver.c 43077 2011-12-17 17:47:02Z neil $
 
     Desc: 
     Lang: English
@@ -32,8 +32,6 @@ debugdriver.o: debugdriver.c makefile
 #include <libcore/compiler.h>
 
 #define NUMPORTS 4
-
-#define D(x)
 
 struct ExecBase *SysBase;
 
@@ -125,7 +123,7 @@ SAVEDS ASM void ActivateXmit(REG(a2) APTR userdata,ULONG REG(d0) portnum){
     data=(TransmitFunc)(userdata);
 
     if(data==0x100) return;
-    D(kprintf("Debugdriver has received: %lx at port %ld\n",data,portnum);)
+    kprintf("Debugdriver has received: %lx at port %ld\n",data,portnum);
   }
 }
 

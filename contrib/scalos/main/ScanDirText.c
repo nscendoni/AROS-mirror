@@ -1,7 +1,7 @@
 // ScanDir.c
-// $Date$
-// $Revision$
-// $Id$
+// $Date: 2016-03-14 20:26:50 +0100 (Mon, 14 Mar 2016) $
+// $Revision: 51949 $
+// $Id: ScanDirText.c 51949 2016-03-14 19:26:50Z NicJA $
 
 #include <exec/types.h>
 #include <intuition/classes.h>

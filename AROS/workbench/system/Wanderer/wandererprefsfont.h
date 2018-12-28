@@ -1,6 +1,6 @@
 /*
    Copyright © 2002-2011, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: wandererprefsfont.h 48674 2014-01-02 17:51:04Z neil $
 */
 
 #include <prefs/prefhdr.h>

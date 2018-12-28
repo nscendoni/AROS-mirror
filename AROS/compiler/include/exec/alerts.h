@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: alerts.h 45100 2012-06-18 20:00:13Z jmcmullan $
 
     Desc: alert numbers
     Lang: english

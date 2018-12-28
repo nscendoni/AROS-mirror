@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: ParallelUnitClass.c 45448 2012-08-10 05:00:02Z jmcmullan $
 
     Desc: Parallel Unit hidd class implementation.
     Lang: english
@@ -30,8 +30,8 @@
 
 #undef  SDEBUG
 #undef  DEBUG
-#define SDEBUG 0
-#define DEBUG 0
+#define SDEBUG 1
+#define DEBUG 1
 #include <aros/debug.h>
 
 void parallelunit_receive_data();

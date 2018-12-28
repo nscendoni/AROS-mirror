@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rpc_des.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: rpc_des.h,v 1.3 1998/02/10 06:25:33 deraadt Exp $	*/

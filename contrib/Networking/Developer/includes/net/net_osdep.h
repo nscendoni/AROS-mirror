@@ -2,7 +2,7 @@
 #define __NET_NET_OSDEP_H_DEFINED_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: net_osdep.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: net_osdep.h,v 1.1 1999/12/08 06:50:18 itojun Exp $	*/

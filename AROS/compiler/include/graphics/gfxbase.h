@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gfxbase.h 41297 2011-09-13 13:11:23Z sonic $
 
     Desc: graphics.library
     Lang: english

@@ -20,6 +20,13 @@
 
 #define SCSI_BUFSIZE 2048
 
+#ifndef __packed
+#ifdef __GNUC__
+#define __packed __attribute__((__packed__))
+#else
+#define __packed
+#endif
+#endif
 
 typedef struct CDROM {
   struct CDVDBase *global;

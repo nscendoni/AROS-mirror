@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: locdosgetlocalizedstring.c 43286 2011-12-29 02:11:58Z neil $
 
     Desc: LocStrToDateGetCharFunc - locale.library's private replacement
               of dos.library/DosGetLocalizedString function. IPrefs will install

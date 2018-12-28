@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prtbase.h 44071 2012-02-17 03:28:51Z jmcmullan $
 
     Desc: printer driver structures and tags
     Lang: english

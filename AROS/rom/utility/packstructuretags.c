@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: packstructuretags.c 39057 2011-06-07 13:33:56Z sonic $
 
     Desc: Pack a TagList into a structure.
     Lang: english

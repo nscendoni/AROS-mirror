@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: enable.c 51383 2016-01-21 00:29:44Z NicJA $
 
     Desc: Enable() - Allow interrupts to occur after Disable().
     Lang: english
@@ -11,6 +11,7 @@
 #include <exec/execbase.h>
 #include <aros/libcall.h>
 #include <aros/atomic.h>
+#include <proto/kernel.h>
 
 #include "exec_intern.h"
 
@@ -29,7 +30,7 @@
         struct ExecBase *, SysBase, 21, Exec)
 
 /*  FUNCTION
-        This function will allow interrupts to occur (*) after they have
+        This function will allow interrupts to occur after they have
         been disabled by Disable().
 
         Note that calls to Disable() nest, and for every call to
@@ -37,12 +38,15 @@
 
         ***** WARNING *****
 
-
-        Using this function is considered very harmful, and it should only
-        ever be used to protect data that could also be accessed in interrupts.
+        Using this function is considered very harmful, and it is
+        not recommended to use this function for ** ANY ** reason.
 
         It is quite possible to either crash the system, or to prevent
         normal activities (disk/port i/o) from occuring.
+
+        Note: As taskswitching is driven by the interrupts subsystem,
+              this function has the side effect of disabling
+              multitasking.
 
     INPUTS
         None.
@@ -56,16 +60,8 @@
         To prevent deadlocks calling Wait() in disabled state breaks
         the disable - thus interrupts may happen again.
 
-        As the schedulers pre-emption is interrupt driven,
-        this function has the side effect of disabling
-        multitasking.
-
-        (*) On EXECSMP builds, Enable() only applies to the processor
-            it is called from. Data which needs to be protected from
-            parallel access will also require a spinlock.            
-
     EXAMPLE
-        In most userspace code, you will not want to use this function.
+        No you DEFINITATELY don't want to use this function.
 
     BUGS
         The only architecture that you can rely on the registers being
@@ -94,11 +90,11 @@
         {
             D(bug("[Exec] Enable: Enabling interrupts\n");)
 
+            KrnSti();
+
             /* The following stuff is not safe to call from within supervisor mode */
             if (!KrnIsSuper())
             {
-                KrnSti();
-                
                 /*
                  * There's no dff09c like thing in x86 native which would allow
                  * us to set delayed (mark it as pending but it gets triggered
@@ -110,7 +106,7 @@
                     /*
                      * First we react on SFF_SoftInt by issuing KrnCause() call. This triggers
                      * the complete interrupt processing code in kernel, which implies also
-                     * rescheduling if it becomes necessary.
+                     * rescheduling if became necessary.
                      */
                     D(bug("[Exec] Enable: causing softints\n");)
                     KrnCause();

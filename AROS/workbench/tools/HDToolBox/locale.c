@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: locale.c 30904 2009-03-14 14:22:09Z mazze $
 */
 
 #define CATCOMP_ARRAY

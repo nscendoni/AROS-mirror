@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: partitiontables.h 38399 2011-04-27 07:44:49Z sonic $
 */
 
 #ifndef PARTITIONTABLES_H

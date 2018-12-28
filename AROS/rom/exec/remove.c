@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: remove.c 50728 2015-05-20 01:44:59Z NicJA $
 
     Desc: Remove a node from a list
     Lang: english

@@ -36,6 +36,12 @@
 #undef kprintf
 #define kprintf(fmt, args...) device_printf(NULL, fmt ,##args)
 
+#ifdef __GNUC__
+#define __packed __attribute__((__packed__))
+#else
+#error Define __packed appropriately for your compiler!
+#endif
+
 typedef uint8_t u_int8_t;
 typedef uint16_t u_int16_t;
 typedef uint32_t u_int32_t;
@@ -397,6 +403,8 @@ static inline int lockmgr(struct lock *lock, int flags)
 #define atomic_set_int(ptr, val) AROS_ATOMIC_OR(*(ptr), (val))
 
 /* Callouts */
+
+static const int hz = (1000000 / 2); /* UNIT_MICROHZ frequency */
 
 typedef void timeout_t (void *);
 

@@ -1,13 +1,13 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: blttemplatealpha.c 47438 2013-05-20 02:30:36Z neil $
 
     Desc:
     Lang: english
 */
 
 #include <aros/debug.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <proto/cybergraphics.h>
 
 #include "cybergraphics_intern.h"

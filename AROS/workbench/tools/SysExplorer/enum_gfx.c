@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2015-2017, The AROS Development Team.
-    $Id$
+    Copyright (C) 2015, The AROS Development Team.
+    $Id: enum_gfx.c 51948 2016-03-14 19:21:58Z neil $
 */
 
 #define DEBUG 1
@@ -19,7 +19,7 @@
 #include <utility/tagitem.h>
 #include <utility/hooks.h>
 
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #include "locale.h"
 #include "classes.h"
@@ -44,7 +44,6 @@ static void addGgfxDisplay(OOP_Object *obj, struct MUI_NListtree_TreeNode *paren
 
     OOP_GetAttr(obj, aHidd_Name, (IPTR *)&name);
 
-    sysExplGlobalCount++;
     DoMethod(hidd_tree, MUIM_NListtree_Insert, name, &msg,
              parent, MUIV_NListtree_Insert_PrevNode_Tail, 0);
 }

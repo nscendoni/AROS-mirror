@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: strerror.c 37463 2011-03-11 09:11:18Z sonic $
  *
  *      strerror.c - network errno support for AmiTCP/IP
  *

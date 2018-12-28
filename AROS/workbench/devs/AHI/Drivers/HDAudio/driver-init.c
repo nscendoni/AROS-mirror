@@ -63,7 +63,7 @@ BOOL DriverInit(struct DriverBase* ahisubbase)
     int card_no;
     int i;
 
-    D(bug("[HDAudio] %s()\n", __func__));
+    D(bug("[HDAudio] %s()\n", __PRETTY_FUNCTION__));
     AHIsubBase = ahisubbase;
 
     DOSBase = (struct DosLibrary *) OpenLibrary(DOSNAME, 37);
@@ -199,18 +199,18 @@ static void parse_config_file(void)
 {
     BPTR config_file;
     BPTR handle;
-
-    handle = Lock("ENVARC:hdaudio.config", SHARED_LOCK);
+    
+    handle = Lock("ENV:hdaudio.config", SHARED_LOCK);
   
     if (handle == 0)
     {
-        bug("No handle found. IoErr()=%d\n", IoErr());
+        bug("No handle found\n");
         return;
     }
     
     UnLock(handle);
-
-    config_file = Open("ENVARC:hdaudio.config", MODE_OLDFILE);
+    
+    config_file = Open("ENV:hdaudio.config", MODE_OLDFILE);
 
     if (config_file)
     {   

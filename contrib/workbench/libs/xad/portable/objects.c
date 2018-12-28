@@ -1,7 +1,7 @@
 #ifndef XADMASTER_OBJECTS_C
 #define XADMASTER_OBJECTS_C
 
-/*  $Id$
+/*  $Id: objects.c 39547 2011-06-27 00:20:24Z NicJA $
     object allocation functions
 
     XAD library system for archive handling

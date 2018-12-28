@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: updateworkbench.c 37434 2011-03-09 22:08:29Z jmcmullan $
 
     Open the file information window for a specified file.
 */

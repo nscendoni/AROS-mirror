@@ -1,7 +1,7 @@
 #ifndef XADMASTER_DISKFILE_C
 #define XADMASTER_DISKFILE_C
 
-/*  $Id$
+/*  $Id: diskfile.c 43430 2012-01-01 20:12:06Z jmcmullan $
     file extraction from disk images
 
     XAD library system for archive handling

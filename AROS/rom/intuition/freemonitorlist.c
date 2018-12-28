@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freemonitorlist.c 53132 2016-12-29 10:32:06Z deadwood $
  
     Free a copy of monitors list
 */
@@ -21,7 +21,7 @@
         AROS_LHA(Object **, list, A1),
 
 /*  LOCATION */
-        struct IntuitionBase *, IntuitionBase, 162, Intuition)
+        struct IntuitionBase *, IntuitionBase, 164, Intuition)
 
 /*  FUNCTION
 	Frees an array of monitor class objects obtained using

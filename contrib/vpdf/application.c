@@ -80,7 +80,7 @@ struct Data
 	Object *aboutbox;
 };
 
-/* Menu description */
+/* MEnu description */
 
 enum
 {
@@ -95,7 +95,7 @@ enum
 	MEN_OPEN_RECENT0 = 100 /* keep it last*/
 };
 
-static Object *menu[MEN_OPEN_RECENT0 + 1];
+Object menu[MEN_OPEN_RECENT0+1];
 
 /* rexx handling */
 
@@ -177,73 +177,65 @@ DEFNEW
 	Object *settings, *settingswin, *printerwin;
 	Object *btnSave, *btnUse, *btnCancel;
 
-	obj = (Object *) DoSuperNew(cl, obj,
-				MUIA_Application_Menustrip, (IPTR) (menu[0] = MenustripObject,
-					MUIA_Family_Child, (IPTR) (MenuObject,
-						MUIA_Menu_Title, (IPTR) LOCSTR(MSG_MENU_PROJECT), 
-						MUIA_Family_Child, (IPTR) (menu[MEN_WINDOW_NEW] =
-							CreateMenuitem(LOCSTR(MSG_MENU_NEWWIN), "N")),
-						MUIA_Family_Child, (IPTR) (menu[MEN_TAB_NEW] =
-							CreateMenuitem(LOCSTR(MSG_MENU_NEWTAB), "T")),
+	obj = DoSuperNew(cl, obj,
+				MUIA_Application_Menustrip, menu[0] =  MenustripObject,
+					MUIA_Family_Child, MenuObject,
+						MUIA_Menu_Title, LOCSTR(MSG_MENU_PROJECT), 
+						MUIA_Family_Child, menu[MEN_WINDOW_NEW] = CreateMenuitem(LOCSTR(MSG_MENU_NEWWIN), "N"),
+						MUIA_Family_Child, menu[MEN_TAB_NEW] = CreateMenuitem(LOCSTR(MSG_MENU_NEWTAB), "T"),
 						/*
-						MUIA_Family_Child, (IPTR) (menu[MEN_OPEN_URL] =
-							CreateMenuitem(LOCSTR(MSG_MENU_URL), "T")),
+						MUIA_Family_Child, menu[MEN_OPEN_URL] = CreateMenuitem(LOCSTR(MSG_MENU_URL), "T"),
 						*/
-						MUIA_Family_Child, (IPTR) (menu[MEN_OPEN_FILE] =
-							CreateMenuitem(LOCSTR(MSG_MENU_FILE), 0)),
-						MUIA_Family_Child, (IPTR) (menu[MEN_OPEN_RECENT] =
-							CreateMenuitem(LOCSTR(MSG_MENU_RECENT), 0)),
-						MUIA_Family_Child, (IPTR) (menu[MEN_PRINT] =
-							CreateMenuitem(LOCSTR(MSG_MENU_PRINT), "P")),
-						MUIA_Family_Child, (IPTR) CreateMenuitem(NM_BARLABEL, NULL),
-						MUIA_Family_Child, (IPTR) (menu[MEN_ABOUT] =
-							CreateMenuitem(LOCSTR(MSG_MENU_ABOUT), "?")),
-						MUIA_Family_Child, (IPTR) CreateMenuitem(NM_BARLABEL, NULL),
-						MUIA_Family_Child, (IPTR) (menu[MEN_QUIT] =
-							CreateMenuitem(LOCSTR(MSG_MENU_QUIT), "Q")),
-					End),
-			   		MUIA_Family_Child, (IPTR) (MenuObject,
-						MUIA_Menu_Title, (IPTR) LOCSTR(MSG_MENU_EDIT), 
-						MUIA_Family_Child, (IPTR) (menu[MEN_EDIT_COPY] =
-							CreateMenuitem(LOCSTR(MSG_MENU_COPY), "C")),
-					End),
-					MUIA_Family_Child, (IPTR) (MenuObject,
-						MUIA_Menu_Title, (IPTR) LOCSTR(MSG_MENU_WINDOWS), 
-						MUIA_Family_Child, (IPTR) (menu[MEN_WINDOWS_LOG] =
-							CreateMenuitem(LOCSTR(MSG_MENU_LOG), 0)),
-					End),
-					MUIA_Family_Child, (IPTR) (MenuObject,
-						MUIA_Menu_Title, (IPTR) LOCSTR(MSG_MENU_SETTINGS), 
-						MUIA_Family_Child, (IPTR) (menu[MEN_SETTINGS_SETTINGS] = 
-							CreateMenuitem(LOCSTR(MSG_MENU_SETTINGS_SETTINGS), 0)),
-						MUIA_Family_Child, (IPTR) (menu[MEN_SETTINGS_SAVESETTINGS] = 
-							CreateMenuitem(LOCSTR(MSG_MENU_SETTINGS_SAVE), 0)),
-						MUIA_Family_Child, (IPTR) (menu[MEN_SETTINGS_MUI] = 
-							CreateMenuitem(LOCSTR(MSG_MENU_SETTINGS_MUI), 0)),
-					End),
-				End),
+						MUIA_Family_Child, menu[MEN_OPEN_FILE] = CreateMenuitem(LOCSTR(MSG_MENU_FILE), 0),
+						MUIA_Family_Child, menu[MEN_OPEN_RECENT] = CreateMenuitem(LOCSTR(MSG_MENU_RECENT), 0),
+						MUIA_Family_Child, menu[MEN_PRINT] = CreateMenuitem(LOCSTR(MSG_MENU_PRINT), "P"),
+						MUIA_Family_Child, CreateMenuitem(NM_BARLABEL, NULL),
+						MUIA_Family_Child, menu[MEN_ABOUT] = CreateMenuitem(LOCSTR(MSG_MENU_ABOUT), "?"),
+						MUIA_Family_Child, CreateMenuitem(NM_BARLABEL, NULL),
+						MUIA_Family_Child, menu[MEN_QUIT] = CreateMenuitem(LOCSTR(MSG_MENU_QUIT), "Q"),
+					End,
+			   		MUIA_Family_Child, MenuObject,
+						MUIA_Menu_Title, LOCSTR(MSG_MENU_EDIT), 
+						MUIA_Family_Child, menu[MEN_EDIT_COPY] = CreateMenuitem(LOCSTR(MSG_MENU_COPY), "C"),
+					End,
+					MUIA_Family_Child, MenuObject,
+						MUIA_Menu_Title, LOCSTR(MSG_MENU_WINDOWS), 
+						MUIA_Family_Child, menu[MEN_WINDOWS_LOG] = CreateMenuitem(LOCSTR(MSG_MENU_LOG), 0),
+					End,
+					MUIA_Family_Child, MenuObject,
+						MUIA_Menu_Title, LOCSTR(MSG_MENU_SETTINGS), 
+						MUIA_Family_Child, menu[MEN_SETTINGS_SETTINGS] = 
+							CreateMenuitem(LOCSTR(MSG_MENU_SETTINGS_SETTINGS), 0),
+						MUIA_Family_Child, menu[MEN_SETTINGS_SAVESETTINGS] = 
+							CreateMenuitem(LOCSTR(MSG_MENU_SETTINGS_SAVE), 0),
+						MUIA_Family_Child, menu[MEN_SETTINGS_MUI] = 
+							CreateMenuitem(LOCSTR(MSG_MENU_SETTINGS_MUI), 0),
+					End,
+       
+                End,
+                    
 
 #if !defined(__AROS__)
 						MUIA_Application_Commands, &rexxcommands,
 #endif
-						MUIA_Application_Window, (IPTR) (settingswin = WindowObject,
-							MUIA_Window_Title, (IPTR) "VPDF � Settings",
+						MUIA_Application_Window, settingswin = WindowObject,
+							MUIA_Window_Title,"VPDF � Setttings",
 							MUIA_Window_Width, MUIV_Window_Width_Screen(30),
 							MUIA_Window_Height, MUIV_Window_Height_Screen(40),
 							MUIA_Window_ID, MAKE_ID('V', 'P', 'S', 'T'),
-							MUIA_Window_RootObject,	 (IPTR) (VGroup,
-								Child, (IPTR) (settings = VPDFSettingsObject,
+							MUIA_Window_RootObject,	VGroup,
+								Child, settings = VPDFSettingsObject,
 									MUIA_Frame, MUIV_Frame_Group,
-									End),
-								Child, (IPTR) (HGroup,
-									Child, (IPTR) (btnSave = SimpleButton(LOCSTR(MSG_SAVE))),
-									Child, (IPTR) (btnUse = SimpleButton(LOCSTR(MSG_USE))),
+									End,
+								Child, HGroup,
+									Child, btnSave = SimpleButton(LOCSTR(MSG_SAVE)),
+									Child, btnUse = SimpleButton(LOCSTR(MSG_USE)),
 									//Child, SimpleButton("_Test"),
-									Child, (IPTR) HSpace(0),
-									Child, (IPTR) (btnCancel = SimpleButton(LOCSTR(MSG_CANCEL))),
-									End),
-								End),						
-							End),
+									Child, HSpace(0),
+									Child, btnCancel = SimpleButton(LOCSTR(MSG_CANCEL)),
+									End,
+								End,						
+							End,
 							MUIA_Application_Window, printerwin = VPDFPrinterObject, End,	
 						
 						TAG_MORE, INITTAGS);
@@ -263,17 +255,17 @@ DEFNEW
 		reqInit("");
 
 		/* menu notifications */
-		DoMethod((Object *)menu[MEN_ABOUT], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime, obj, 1, MUIM_VPDF_About);
-		DoMethod((Object *)menu[MEN_QUIT], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime, obj, 2, MUIM_Application_ReturnID, MUIV_Application_ReturnID_Quit);
-		DoMethod((Object *)menu[MEN_TAB_NEW], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime, obj, 2, MUIM_VPDF_CreateTab, 0);
-		DoMethod((Object *)menu[MEN_WINDOW_NEW], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime, obj, 1, MUIM_VPDF_CreateWindow);
-		DoMethod((Object *)menu[MEN_OPEN_FILE], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime, obj, 4, MUIM_VPDF_OpenFile, 0, NULL, MUIV_VPDFWindow_OpenFile_CurrentTabIfEmpty);
-		DoMethod((Object *)menu[MEN_SETTINGS_SETTINGS], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime,settingswin, 3, MUIM_Set, MUIA_Window_Open, TRUE);
-		DoMethod((Object *)menu[MEN_SETTINGS_SAVESETTINGS], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime,settingswin, 1, MUIM_VPDFSettings_Save);
-		DoMethod((Object *)menu[MEN_SETTINGS_MUI], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime, obj, 2, MUIM_Application_OpenConfigWindow, 0);
-		DoMethod((Object *)menu[MEN_PRINT], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime,obj, 1, MUIM_VPDF_PrintDocument);
-		DoMethod((Object *)menu[MEN_WINDOWS_LOG], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime,obj, 3, MUIM_VPDF_LogMessage, 0, NULL);
-		DoMethod((Object *)menu[MEN_EDIT_COPY], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime,obj, 1, MUIM_VPDF_SelectionCopy);
+		DoMethod(menu[MEN_ABOUT], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime,obj, 1, MUIM_VPDF_About);
+		DoMethod(menu[MEN_QUIT], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime,obj, 2, MUIM_Application_ReturnID, MUIV_Application_ReturnID_Quit);
+		DoMethod(menu[MEN_TAB_NEW], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime,obj, 2, MUIM_VPDF_CreateTab, 0);
+		DoMethod(menu[MEN_WINDOW_NEW], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime,obj, 1, MUIM_VPDF_CreateWindow);
+		DoMethod(menu[MEN_OPEN_FILE], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime,obj, 4, MUIM_VPDF_OpenFile, 0, NULL, MUIV_VPDFWindow_OpenFile_CurrentTabIfEmpty);
+		DoMethod(menu[MEN_SETTINGS_SETTINGS], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime,settingswin, 3, MUIM_Set, MUIA_Window_Open, TRUE);
+		DoMethod(menu[MEN_SETTINGS_SAVESETTINGS], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime,settingswin, 1, MUIM_VPDFSettings_Save);
+		DoMethod(menu[MEN_SETTINGS_MUI], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime, obj, 2, MUIM_Application_OpenConfigWindow, 0);
+		DoMethod(menu[MEN_PRINT], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime,obj, 1, MUIM_VPDF_PrintDocument);
+		DoMethod(menu[MEN_WINDOWS_LOG], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime,obj, 3, MUIM_VPDF_LogMessage, 0, NULL);
+		DoMethod(menu[MEN_EDIT_COPY], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime,obj, 1, MUIM_VPDF_SelectionCopy);
 		
 
 		DoMethod(settingswin, MUIM_Notify, MUIA_Window_CloseRequest, TRUE, settingswin, 3, MUIM_Set, MUIA_Window_Open, FALSE);
@@ -292,7 +284,7 @@ DEFNEW
 
 	}
 
-	return (IPTR)obj;
+	return (ULONG)obj;
 }
 
 DEFDISP
@@ -408,13 +400,13 @@ DEFMMETHOD(VPDF_CreateTab)
 DEFMMETHOD(VPDF_CreateWindow)
 {
 	GETDATA;
-	Object *refwindow =  (Object*)DoMethod(obj, MUIM_VPDF_FindActiveWindow);
+	Object *refwindow = DoMethod(obj, MUIM_VPDF_FindActiveWindow);
 	Object *window = VPDFWindowObject,
 							MUIA_VPDFWindow_ID, ++data->windowid,
 							MUIA_Window_ID, MAKE_ID('V','P', 'W','O'), /* this is going to be nullified for all non-active windows */
 							MUIA_Window_LeftEdge, 20,
 							MUIA_Window_TopEdge, 20,
-							MUIA_Window_RefWindow, (IPTR) refwindow, 
+							MUIA_Window_RefWindow, refwindow, 
 							MUIA_Window_OverrideStoredPosition, refwindow != NULL ? TRUE : FALSE,
 							End;
 
@@ -529,11 +521,11 @@ DEFMMETHOD(VPDF_RequestFile)
 		/* setup proper title */
 
 		if (msg->mode & MUIV_VPDF_RequestFile_DirectoryOnly)
-			title = (STRPTR) LOCSTR( MSG_REQ_DRAWER );
+			title = LOCSTR( MSG_REQ_DRAWER );
 		else if (msg->mode & MUIV_VPDF_RequestFile_Load)
-			title = (STRPTR) LOCSTR( MSG_REQ_OPEN );
+			title =  LOCSTR( MSG_REQ_OPEN );
 		else if (msg->mode & MUIV_VPDF_RequestFile_Save)
-			title = (STRPTR) LOCSTR( MSG_REQ_SAVE );
+			title =  LOCSTR( MSG_REQ_SAVE );
 
 		if (MUI_AslRequestTags(req,
 						title != NULL ? ASLFR_TitleText : TAG_IGNORE, title,
@@ -543,7 +535,7 @@ DEFMMETHOD(VPDF_RequestFile)
 						buf[ 0 ] ? ASLFR_InitialDrawer : TAG_IGNORE, buf,
 						ASLFR_InitialFile, msg->initialfile ? msg->initialfile : msg->initialpath ? (char*)FilePart(msg->initialpath) : (char*)"",
 						ASLFR_DrawersOnly, msg->mode & MUIV_VPDF_RequestFile_DirectoryOnly,
-						ASLFR_Window, window != 0 ? xget(window, MUIA_Window_Window) : 0,
+						ASLFR_Window, window != NULL ? xget(window, MUIA_Window_Window) : NULL,
 						TAG_DONE))
 		{
 			if (*req->fr_File)
@@ -572,33 +564,32 @@ DEFMMETHOD(VPDF_RequestFile)
 static void setuprecent(Object *obj, struct Data *data)
 {
 #if defined(__AROS__)
-#define MUIM_Menustrip_Popup                        (MUIB_MUI|0x00420e76) /* MUI: V20 */
-#define MUIM_Menustrip_ExitChange                   (MUIB_MUI|0x0042ce4d) /* MUI: V20 */
-#define MUIM_Menustrip_InitChange                   (MUIB_MUI|0x0042dcd9) /* MUI: V20 */
+    kprintf("[setuprecent] not implemented\n");
     // FIXME: AROS
-#endif
+#else
 	int i;
 	Object *o;
-	DoMethod((Object *)menu[MEN_OPEN_RECENT] , MUIM_Menustrip_InitChange);
+	DoMethod(menu[MEN_OPEN_RECENT] , MUIM_Menustrip_InitChange);
 
 	/* cleanup recents */
-	while((o = (Object *)DoMethod((Object *)menu[MEN_OPEN_RECENT], MUIM_Family_GetChild, MUIV_Family_GetChild_First)))
+	while((o = (Object*)DoMethod(menu[MEN_OPEN_RECENT], MUIM_Family_GetChild, MUIV_Family_GetChild_First)))
 	{
-		DoMethod((Object *)menu[MEN_OPEN_RECENT], MUIM_Family_Remove, o);
+		DoMethod(menu[MEN_OPEN_RECENT], MUIM_Family_Remove, o);
 		MUI_DisposeObject(o);
 	};
 	
 	for(i=0; i<MAXRECENT && data->recent[i] != NULL && *data->recent[i] != '\0'; i++)
 	{
 		menu[MEN_OPEN_RECENT0-i] = MenuitemObject,
-					MUIA_Menuitem_Title, (IPTR)data->recent[i],
+					MUIA_Menuitem_Title, data->recent[i],
 					MUIA_Menuitem_CopyStrings, TRUE,
 					End;
-		DoMethod((Object *)menu[MEN_OPEN_RECENT0-i], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime, obj, 3, MUIM_VPDF_OpenRecentFile, 0, i);	
-		DoMethod((Object *)menu[MEN_OPEN_RECENT], MUIM_Family_AddTail, menu[MEN_OPEN_RECENT0-i]);
+		DoMethod(menu[MEN_OPEN_RECENT0-i], MUIM_Notify, MUIA_Menuitem_Trigger, MUIV_EveryTime, obj, 3, MUIM_VPDF_OpenRecentFile, 0, i);	
+		DoMethod(menu[MEN_OPEN_RECENT], MUIM_Family_AddTail, menu[MEN_OPEN_RECENT0-i]);
 	}
 
-	DoMethod((Object *)menu[MEN_OPEN_RECENT], MUIM_Menustrip_ExitChange);
+	DoMethod(menu[MEN_OPEN_RECENT], MUIM_Menustrip_ExitChange);
+#endif
 }
 
 /* this method finds window which was last activated, not currently active one! */
@@ -615,7 +606,7 @@ DEFMMETHOD(VPDF_FindActiveWindow)
 	{
 		//if (xget(winobj, MUIA_Window_Activate))
 		if (xget(winobj, MUIA_Window_ID) != 0 && get(winobj, MUIA_VPDFWindow_ID, &v))
-			return (IPTR) winobj;
+			return winobj;
 	}
 
 	return 0;
@@ -642,9 +633,9 @@ DEFMMETHOD(VPDF_FindWindowByID)
 				continue;
 
 			if (msg->windowid == MUIV_VPDF_FindWindowByID_First)
-				return (IPTR) winobj;
+				return winobj;
 			else if (msg->windowid == xget(winobj, MUIA_VPDFWindow_ID))
-				return (IPTR) winobj;
+				return winobj;
 		}
 	}
 
@@ -659,9 +650,9 @@ DEFMMETHOD(VPDF_CloseWindow)
 	{
 		set(window, MUIA_Window_Open, FALSE);
 		DoMethod(obj, OM_REMMEMBER, window);
-		DoMethod(obj, MUIM_Application_PushMethod, window, 1, OM_DISPOSE);
+		MUI_DisposeObject(window);
 
-		if (DoMethod(obj, MUIM_VPDF_FindWindowByID, MUIV_VPDF_FindWindowByID_First) == 0)
+		if (DoMethod(obj, MUIM_VPDF_FindWindowByID, MUIV_VPDF_FindWindowByID_First) == NULL)
 			DoMethod(obj, MUIM_Application_ReturnID, MUIV_Application_ReturnID_Quit);
 
 		return TRUE;
@@ -692,7 +683,7 @@ DEFMMETHOD(Import)
 		char *recent = (char*)DoMethod(msg->dataspace, MUIM_Dataspace_Find, ID_VPDF_RECENT0 + i);
 		if (recent != NULL)
 		{
-			BPTR lock;
+			BPTR *lock;
 			struct Process *theProc = (struct Process *)FindTask(NULL);
 			struct Window *oldWindowPtr = theProc->pr_WindowPtr;
 			theProc->pr_WindowPtr = (APTR)(-1L);
@@ -783,11 +774,11 @@ DEFMMETHOD(VPDF_LogMessage)
 	if (data->logger == NULL)
 	{
 		data->loggerwin = WindowObject,
-						MUIA_Window_Title, (IPTR) "VPDF � Log",
+						MUIA_Window_Title,"VPDF � Log",
 						MUIA_Window_Width, MUIV_Window_Width_Screen(30),
 						MUIA_Window_Height, MUIV_Window_Height_Screen(10),
 						MUIA_Window_RootObject,
-						(IPTR) (data->logger = LoggerObject, End),
+						data->logger = LoggerObject, End,
 						End;
 
 		if (data->loggerwin != NULL)
@@ -872,7 +863,7 @@ DEFMMETHOD(VPDF_About)
 	if (data->aboutbox == NULL)
 	{
 		data->aboutbox = AboutboxObject,
-			MUIA_Aboutbox_Credits, (IPTR) __credits,
+			MUIA_Aboutbox_Credits, __credits,
 		End;
 
 		DoMethod(obj, OM_ADDMEMBER, data->aboutbox);

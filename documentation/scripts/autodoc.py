@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright © 2008-2010, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: autodoc.py 53036 2016-10-26 20:57:13Z mazze $
 
 
 """Autodoc to ReST converter.

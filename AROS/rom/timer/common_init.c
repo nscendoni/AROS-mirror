@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: common_init.c 48424 2013-11-18 09:28:30Z neil $
 
     Desc: Timer startup, common part
 */

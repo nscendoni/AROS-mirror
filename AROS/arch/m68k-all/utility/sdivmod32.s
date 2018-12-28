@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sdivmod32.s 41787 2011-10-08 16:48:27Z jmcmullan $
 
     Desc: signed 32 bit division/modulus functions for Amiga/m68k
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: allocconfigdev.c 46335 2013-01-18 20:43:50Z sonic $
 
     Desc: AllocConfigDev() - Create a new ConfigDev in a compatible way.
     Lang: english

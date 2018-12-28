@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: deletemidi.c 51742 2016-03-10 00:49:26Z NicJA $
 
     Desc: 
     Lang: English

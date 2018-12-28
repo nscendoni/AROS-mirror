@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mktime.c 48031 2013-09-08 21:16:04Z verhaegs $
 
     Convert a broken-down time into calendar time.
 */

@@ -1,11 +1,12 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright � 1995-2012, The AROS Development Team. All rights reserved.
+    $Id: memory.c 50640 2015-05-10 06:13:26Z deadwood $
 */
 
 #include <aros/debug.h>
 #include <exec/rawfmt.h>
 #include <exec/memheaderext.h>
+#include <proto/kernel.h>
 
 #include "exec_intern.h"
 #include "exec_util.h"

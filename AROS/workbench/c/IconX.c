@@ -1,6 +1,6 @@
 /*
     Copyright © 2006-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: IconX.c 49219 2014-08-02 12:32:53Z mazze $
 
     Desc: IconX WB script starter
     Lang: English

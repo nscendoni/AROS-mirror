@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: timerinit.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      timerinit.c - SAS C auto initialization functions for timer device
  *

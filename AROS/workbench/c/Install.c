@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Install.c 51709 2016-03-09 22:30:43Z NicJA $
 
     Desc: Install CLI command
     Lang: English

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: animationclass.h 51354 2016-01-19 01:02:26Z NicJA $
 
     Desc: Includes for animationclass
     Lang: English
@@ -31,6 +31,13 @@
 
 #define	ANIMATIONDTCLASS	"animation.datatype"
 
+#ifndef __packed
+#ifdef __GNUC__
+#define __packed __attribute__((__packed__))
+#else
+#define __packed
+#endif
+#endif
 
 /* Tags */
 #define	ADTA_Dummy		(DTA_Dummy + 600)

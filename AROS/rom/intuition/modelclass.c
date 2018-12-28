@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: modelclass.c 51701 2016-03-09 21:49:26Z NicJA $
 */
 
 #include <exec/types.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 2015-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: alsa-playslave.c 52635 2016-04-14 02:15:29Z neil $
 */
 
 #include <aros/debug.h>

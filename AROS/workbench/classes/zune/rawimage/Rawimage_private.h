@@ -4,7 +4,7 @@
 /*
     Copyright © 2011, Thore Böckelmann. All rights reserved.
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Rawimage_private.h 44106 2012-02-19 13:52:55Z mazze $
 */
 
 #include <libraries/mui.h>

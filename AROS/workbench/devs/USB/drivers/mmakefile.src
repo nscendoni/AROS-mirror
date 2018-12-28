@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 36648 2011-01-17 14:31:59Z neil $
 
 #MM- hidd-usb-drivers: hidd-usb-drivers-ohci hidd-usb-drivers-uhci hidd-usb-drivers-ehci
 

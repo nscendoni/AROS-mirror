@@ -1,8 +1,9 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2003, The AROS Development Team. All rights reserved.
+    $Id: ieeedpdiv.c 47354 2013-05-04 17:12:25Z mazze $
 */
 
+#include <aros/debug.h>
 #include "mathieeedoubbas_intern.h"
 
 /*****************************************************************************
@@ -19,22 +20,22 @@
         struct MathIeeeDoubBasBase *, MathIeeeDoubBasBase, 14, MathIeeeDoubBas)
 
 /*  FUNCTION
-	Divides two IEEE double precision numbers.
+	Divides two IEEE double precision numbers
 
     INPUTS
-        y - dividend.
-        z - divisor.
 
     RESULT
-        x - quotient.
+       +1 : y > z
+	0 : y = z
+       -1 : y < z
 
-    NOTES
-
-    EXAMPLE
+	Flags:
+	  zero	   : y = z
+	  negative : y < z
+	  overflow : 0
 
     BUGS
-
-    SEE ALSO
+        This function is unimplemented.
 
     INTERNALS
 
@@ -42,7 +43,21 @@
 {
     AROS_LIBFUNC_INIT
 
-    return y / z;
+    union {
+        QUAD i;
+        double d;
+    } Res;
+    
+#if 0
+    QUAD * Qy = (QUAD *)&y;
+    QUAD * Qz = (QUAD *)&z;
+#endif
+    
+    Res.i = 0x0badc0de0badc0deULL;
+
+    aros_print_not_implemented("Software IEEEDPDiv");
+
+    return Res.d;
 
     AROS_LIBFUNC_EXIT
 }

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: arosmesaglut_intern.h 36659 2011-01-18 13:26:51Z neil $
 */
 
 #include <exec/memory.h>

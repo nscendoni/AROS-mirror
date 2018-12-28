@@ -1,4 +1,4 @@
-#   $Id$
+#   $Id: mmakefile.src 53132 2016-12-29 10:32:06Z deadwood $
 #
 #   Makefile for AROS Demos
 
@@ -44,7 +44,6 @@ FILES	:= \
     realtdemo \
     roundshape \
     roundwindow \
-    rtdemo \
     rtezrequest \
     rtfont \
     rtlong \

@@ -2,7 +2,7 @@
 #define _NETINET_AH_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ip_ah.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ip_ah.h,v 1.25 2000/03/17 10:25:22 angelos Exp $	*/

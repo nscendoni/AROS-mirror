@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: unlockbitmaptaglist.c 49838 2014-12-08 01:02:54Z NicJA $
 
     Desc:
     Lang: english
@@ -13,7 +13,7 @@
 #include <proto/utility.h>
 
 #include <cybergraphx/cybergraphics.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #include "cybergraphics_intern.h"
 

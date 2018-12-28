@@ -4,8 +4,8 @@
 
 :Авторы:    Aaron Digulla, Adam Chodorowski, Sergey Mineychev 
 :Copyright: Copyright (C) 1995-2002, The AROS Development Team
-:Версия:    $Revision$
-:Дата:      $Date$
+:Версия:    $Revision: 48788 $
+:Дата:      $Date: 2014-01-30 22:36:28 +0100 (Thu, 30 Jan 2014) $
 :Статус:    Завершено.
 :Описание: 
     Subversion (кратко, SVN) - это инструмент контроля версий 
@@ -307,5 +307,5 @@ SVN не станет автоматически заглядывать в новосозданные директории и добавлять
 + `Subversion Home`_
 
 .. _`Version Control with Subversion`: http://svnbook.red-bean.com/
-.. _`Subversion Home`:               http://subversion.apache.org/
+.. _`Subversion Home`:               http://subversion.tigris.org/
 

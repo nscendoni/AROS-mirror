@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: taggedopenlibrary.c 40681 2011-08-11 17:49:50Z jmcmullan $
 
     Desc: Shortcut OpenLibrary call for system modules (private!)
     Lang: english

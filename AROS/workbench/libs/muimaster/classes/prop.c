@@ -1,6 +1,6 @@
 /*
     Copyright  2002-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prop.c 46026 2012-11-09 05:43:12Z neil $
 */
 
 #include <exec/memory.h>

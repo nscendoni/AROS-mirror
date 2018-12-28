@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: os_aros_support.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #ifndef DEBUG
@@ -266,7 +266,8 @@ LONG getGeometry
 	return DoIO((struct IORequest *)&ioh->ioreq->iotd_Req);
 }
 
-AROS_INTP(changeIntCode);
+/* ABI_V0 compatibility */
+AROS_SOFTINTP(changeIntCode);
 
 LONG addChangeInt(struct AFSBase *afsbase, struct IOHandle *ioh) {
 
@@ -557,7 +558,8 @@ BOOL retry = TRUE;
 
 #undef SysBase
 
-AROS_INTH1(changeIntCode, struct IOHandle *, ioh)
+/* ABI_V0 compatibility */
+AROS_SOFTINTH1(changeIntCode, struct IOHandle *, ioh)
 {
 	AROS_INTFUNC_INIT
 

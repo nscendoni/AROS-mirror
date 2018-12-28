@@ -1,6 +1,6 @@
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pccard_intern.h 48674 2014-01-02 17:51:04Z neil $
 */
 
 #ifndef PCCARD_LIBRARY_H

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: default_font.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 /****************************************************************************************/
@@ -216,9 +216,15 @@ const struct TextFont topaz8_tf =
 		{	/* mn_Node */
 			NULL,
 			NULL,
+#if defined(__i386__)
+			"topaz.font", /* ABI_V0 compatibility */
+			NT_FONT,
+			0
+#else
 			NT_FONT,
 			0,
 			"topaz.font"
+#endif
 		},
 		NULL,
 		0

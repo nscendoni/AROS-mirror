@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2004-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kbd_init.c 47064 2013-03-24 01:13:52Z neil $
 */
 
 #include <aros/debug.h>

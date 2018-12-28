@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: __stdc_assert.c 48050 2013-09-08 21:19:42Z verhaegs $
 
     C99 assert() stdc.library support
 */
@@ -76,5 +76,4 @@
     abort();
 }
 
-AROS_MAKE_ASM_SYM(typeof(__assert), __assert, AROS_CSYM_FROM_ASM_NAME(__assert), AROS_CSYM_FROM_ASM_NAME(__stdc_assert));
-AROS_EXPORT_ASM_SYM(AROS_CSYM_FROM_ASM_NAME(__assert));
+

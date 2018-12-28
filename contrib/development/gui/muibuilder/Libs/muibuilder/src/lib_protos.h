@@ -19,7 +19,7 @@
 
   MUIBuilder Support Site: http://sourceforge.net/projects/muibuilder/
 
-  $Id$
+  $Id: lib_protos.h 49595 2014-09-09 19:41:34Z mazze $
 
 ***************************************************************************/
 

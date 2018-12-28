@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support.h 47732 2013-07-19 18:45:16Z deadwood $
 
     Desc: Filesystem that uses console device for input/output.
     Lang: english

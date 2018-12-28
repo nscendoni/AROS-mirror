@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: misc.c 50969 2015-07-22 10:33:03Z polluks $
  */
 
 #define DEBUG 1

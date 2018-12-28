@@ -1,7 +1,7 @@
 #ifndef XADMASTER_LHF_C
 #define XADMASTER_LHF_C
 
-/*  $Id$
+/*  $Id: LhF.c 43430 2012-01-01 20:12:06Z jmcmullan $
     LhF file archiver client
 
     XAD library system for archive handling

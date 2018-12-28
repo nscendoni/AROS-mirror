@@ -1,6 +1,6 @@
 /*
-    Copyright © 2003-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright ï¿½ 2003-2007, The AROS Development Team. All rights reserved.
+    $Id: bitmap.c 48487 2013-12-02 18:03:07Z jmcmullan $
 */
 
 #define DEBUG 0
@@ -10,12 +10,6 @@
 #include <aros/debug.h>
 #include <exec/memory.h>
 #include <exec/memheaderext.h>
-
-#if defined(__AROSPLATFORM_SMP__)
-#include <aros/types/spinlock_s.h>
-#include <proto/execlock.h>
-#include <resources/execlock.h>
-#endif
 
 LONG bfffo(ULONG val, UBYTE bitoffset)
 {
@@ -401,9 +395,6 @@ IPTR mh_Avail(struct MemHeaderExt *mhe, ULONG flags)
 
 void BitmapInit(struct ati_staticdata *sd)
 {
-#if defined(__AROSPLATFORM_SMP__)
-    void *ExecLockBase = OpenResource("execlock.resource");
-#endif
     /*
      * If Radeon chip has some video memory, create a bitmap representing all allocations.
      * Divide whole memory into 1KB chunks
@@ -425,23 +416,9 @@ void BitmapInit(struct ati_staticdata *sd)
     	sd->managedMem.mhe_ReAlloc = mh_ReAlloc;
     	sd->managedMem.mhe_Avail = mh_Avail;
 
-#if defined(__AROSPLATFORM_SMP__)
-        if (ExecLockBase)
-            ObtainSystemLock(&SysBase->MemList, SPINLOCK_MODE_WRITE, LOCKF_DISABLE);
-        else
-            Disable();
-#else
-        Disable();
-#endif
+    	Disable();
     	AddTail(&SysBase->MemList, (struct Node *)&sd->managedMem);
-#if defined(__AROSPLATFORM_SMP__)
-        if (ExecLockBase)
-            ReleaseSystemLock(&SysBase->MemList, LOCKF_DISABLE);
-        else
-            Enable();
-#else
-        Enable();
-#endif
+    	Enable();
     }
 
     /* Number of ULONG's in bitmap */

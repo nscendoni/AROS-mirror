@@ -1,6 +1,6 @@
 /*
     Copyright © 2006-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setup.c 47769 2013-07-28 10:16:02Z deadwood $
 */
 
 //#define DEBUG 1

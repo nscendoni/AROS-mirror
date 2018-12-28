@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: maprawkey.c 44454 2012-03-26 16:56:19Z mazze $
 
     Desc: keymap.library function MapRawKey()
     Lang: english

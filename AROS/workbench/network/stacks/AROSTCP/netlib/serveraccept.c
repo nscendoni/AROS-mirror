@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: serveraccept.c 37529 2011-03-14 06:53:29Z sonic $
  *
  *      serveraccept - accept a server connection on named port
  *

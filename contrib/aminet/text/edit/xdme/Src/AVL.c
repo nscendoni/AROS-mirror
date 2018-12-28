@@ -52,7 +52,7 @@
 	07-11-93 b_noll fixed bug in rem_rek (there were no reports)
 	12-05-94 b_noll joined xdme-verion and lib-version
 	04-09-94 b_noll BUGFIX in AVL_balance
-	$Date$ last update
+	$Date: 2011-01-18 14:26:51 +0100 (Tue, 18 Jan 2011) $ last update
 
 ******************************************************************************/
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: completion.c 49583 2014-09-07 21:01:08Z otigreat $
 
     Desc: 
     Lang: english

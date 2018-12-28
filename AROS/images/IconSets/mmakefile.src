@@ -1,7 +1,6 @@
-# Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-# $Id$
+# Copyright © 2004, The AROS Development Team. All rights reserved.
+# $Id: mmakefile.src 31519 2009-07-02 11:57:03Z neil $
 
-include $(SRCDIR)/config/aros.cfg
+include $(TOP)/config/make.cfg
 
-#MM- workbench : iconset-$(AROS_TARGET_ICONSET)-wbench-icons
-#MM- workbench-complete : iconset-$(AROS_TARGET_ICONSET)-wbench-icons iconset-$(AROS_TARGET_ICONSET)-additional-icons
+#MM- workbench-complete : iconset-$(AROS_TARGET_ICONSET)-icons

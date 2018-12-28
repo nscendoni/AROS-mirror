@@ -1,7 +1,7 @@
 // IconProperties.c
-// $Date$
-// $Revision$
-// $Id$
+// $Date: 2016-03-15 01:15:23 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51958 $
+// $Id: IconProperties.c 51958 2016-03-15 00:15:23Z NicJA $
 
 // NOTE: Replaced "VSpace(0)" by "RectangleObject" before
 // "IconobjectMCCObject" and after "CheckMarkNoDrag ImageObject" and,

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: coldreboot.c 46165 2012-12-27 09:06:13Z neil $
 
     Desc: ColdReboot() - Reboot the computer.
     Lang: english

@@ -2,7 +2,7 @@
     Copyright © 2002, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: menu.h 50846 2015-06-20 06:31:47Z deadwood $
 */
 
 #ifndef _MUI_MENU_H

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: afshandler.h 39860 2011-07-06 17:04:36Z jmcmullan $
 */
 
 #include <exec/devices.h>

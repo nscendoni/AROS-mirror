@@ -1,64 +1,19 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
-FUNCS	 := \
-             allocirq \
-             addirqhandler \
-             displayalert \
-             getcpucount \
-             getcpunumber \
-             alloccpumask \
-             clearcpumask \
-             freecpumask \
-             getcpumask \
-             cpuinmask \
-             spininit \
-             spinislocked \
-             spintrylock \
-             spinlock \
-             spinunlock \
-             schedulecpu \
-             getsystemattr
-
-ASMFILES := \
-             cli \
-             sti \
-             issuper
-
-FILES    := \
-             apic \
-             apic_ia32 \
-             apic_msi \
-             apic_intr \
-             apic_heartbeat \
-             apic_error \
-             acpi \
-             acpi_pm \
-             acpi_apic \
-             acpi_ioapic \
-             acpi_set \
-             smp \
-             syscall \
-             cpu_traps \
-             pic_i8259a \
-             ictl \
-             smp_exec \
-             kernel_mmap \
-             kernel_scheduler \
-             kernel_timer \
-             _displayalert \
-             _bug \
-             platform_post \
-             kernel_ipi
+FUNCS	 := displayalert
+FILES    := apic apic_acpi apic_ia32 xtpic cpu_traps kernel_mmap kernel_timer _displayalert
+ASMFILES := cli sti issuper
 
 MAINDIR	      := rom/kernel
 USER_INCLUDES  := $(PRIV_KERNEL_INCLUDES) $(PRIV_EXEC_INCLUDES) \
-		  -isystem $(SRCDIR)/arch/all-native/bootconsole/include -DAROS_ARCHITECTURE="\"$(AROS_TARGET_PLATFORM)\""
+		  -isystem $(SRCDIR)/arch/all-native/bootconsole/include
 
 #MM- kernel-kernel-pc : kernel-pc-acpica-linklib  linklibs-bootconsole kernel-kernel-native
 #MM- kernel-kernel-pc-kobj : kernel-pc-acpica-linklib linklibs-bootconsole kernel-kernel-native
-#MM- kernel-kernel-pc-quick : kernel-kernel-native-quick
+#MM- kernel-kernel-pc-quick : kernel-pc-acpica-linklib kernel-kernel-native-quick
+#MM- kernel-kernel-pc-kobj-quick : kernel-pc-acpica-linklib kernel-kernel-native-quick
 
 %build_archspecific \
   mainmmake=kernel-kernel maindir=$(MAINDIR) \

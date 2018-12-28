@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2009, The AROS Development Team. All rights reserved.
+    $Id: workbench_init.c 42692 2011-12-01 02:30:00Z jmcmullan $
 
     Initialization of workbench.library.
 */
@@ -32,8 +32,8 @@ static int WBInit(LIBBASETYPEPTR LIBBASE)
     InitSemaphore(&(WorkbenchBase->wb_BaseSemaphore));
     
     /* Initialize handler message port -------------------------------------*/
-    memset( &WorkbenchBase->wb_HandlerPort, 0, sizeof( WorkbenchBase->wb_HandlerPort ) );
     WorkbenchBase->wb_HandlerPort.mp_SigBit  = SIGBREAKB_CTRL_F;
+    WorkbenchBase->wb_HandlerPort.mp_SigTask = NULL;      
     WorkbenchBase->wb_HandlerPort.mp_Flags   = PA_IGNORE;
     NEWLIST(&(WorkbenchBase->wb_HandlerPort.mp_MsgList));
 

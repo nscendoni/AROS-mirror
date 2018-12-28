@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: barlabelclass.c 42413 2011-11-11 21:33:27Z verhaegs $
  
     AROS menubarlabelclass implementation (does not exist in AmigaOS)
 */

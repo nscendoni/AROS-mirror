@@ -22,7 +22,7 @@ Mailtext - An MUI Custom Class for eMessage display
 
  Mailtext OpenSource project :  http://sourceforge.net/projects/mailtext/
 
- $Id$
+ $Id: Mailtext_mcc.h 30800 2009-03-08 17:28:50Z neil $
 
  Mailtext_mcc.h
 

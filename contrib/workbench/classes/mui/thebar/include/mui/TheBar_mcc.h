@@ -19,7 +19,7 @@
 **
 ** TheBar class Support Site: http://www.sf.net/projects/thebar
 **
-** $Id$
+** $Id: TheBar_mcc.h 49424 2014-08-16 07:30:44Z mazze $
 ** $URL: svn://svn.code.sf.net/p/thebar/code/releases/26.15/include/mui/TheBar_mcc.h $
 **
 **/

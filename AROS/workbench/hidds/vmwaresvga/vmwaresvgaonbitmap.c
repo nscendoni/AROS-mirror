@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2006, The AROS Development Team. All rights reserved.
+    $Id: vmwaresvgaonbitmap.c 39389 2011-06-18 20:09:09Z jmcmullan $
 
     Desc: Bitmap class for VMWareSVGA hidd.
     Lang: English.
@@ -19,7 +19,7 @@
 #include <aros/symbolsets.h>
 #include <graphics/rastport.h>
 #include <graphics/gfx.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <oop/oop.h>
 
 #include "vmwaresvgabitmap.h"

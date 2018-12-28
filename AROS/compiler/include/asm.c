@@ -1,9 +1,7 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: asm.c 52754 2016-06-03 18:20:06Z schulz $
 */
-
-#include <aros/config.h>
 
 #include <exec/alerts.h>
 #include <exec/types.h>
@@ -45,29 +43,15 @@ int main(void) {
     asm volatile("\n.asciz \"/* ExecBase */\"" ::);
     DEFINE(AttnResched   , offsetof (struct ExecBase, AttnResched));
     DEFINE(AttnFlags     , offsetof (struct ExecBase, AttnFlags));
-#if !defined(__AROSEXEC_SMP__)
     DEFINE(IDNestCnt     , offsetof (struct ExecBase, IDNestCnt));
     DEFINE(TDNestCnt     , offsetof (struct ExecBase, TDNestCnt));
-#else
-    DEFINE(SMPPrivate4   , offsetof (struct ExecBase, SMPPrivate4));
-    DEFINE(SMPPrivate5   , offsetof (struct ExecBase, SMPPrivate5));
-#endif
     DEFINE(TaskReady     , offsetof (struct ExecBase, TaskReady));
-#if !defined(__AROSEXEC_SMP__)
     DEFINE(ThisTask      , offsetof (struct ExecBase, ThisTask));
-#else
-    DEFINE(SMPPrivate1   , offsetof (struct ExecBase, SMPPrivate1));
-#endif
     DEFINE(SysFlags      , offsetof (struct ExecBase, SysFlags));
     DEFINE(IdleCount     , offsetof (struct ExecBase, IdleCount));
     DEFINE(DispCount     , offsetof (struct ExecBase, DispCount));
-#if !defined(__AROSEXEC_SMP__)
     DEFINE(Quantum       , offsetof (struct ExecBase, Quantum));
     DEFINE(Elapsed       , offsetof (struct ExecBase, Elapsed));
-#else
-    DEFINE(SMPPrivate2   , offsetof (struct ExecBase, SMPPrivate2));
-    DEFINE(SMPPrivate3   , offsetof (struct ExecBase, SMPPrivate3));
-#endif
     DEFINE(SysStkUpper   , offsetof (struct ExecBase, SysStkUpper));
 
     asm volatile("\n.asciz \"/* struct Task */\"" ::);

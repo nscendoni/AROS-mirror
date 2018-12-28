@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2016, The AROS Development Team. All rights reserved.
+    $Id: x11_init.c 55285 2018-06-10 21:19:49Z neil $
 
     Desc: X11 hidd initialization code.
     Lang: English.
@@ -16,7 +16,7 @@
 #include "x11_types.h"
 #include LC_LIBDEFS_FILE
 #include "x11_hostlib.h"
-#include "x11gfx_fullscreen.h"
+#include "fullscreen.h"
 
 /****************************************************************************************/
 

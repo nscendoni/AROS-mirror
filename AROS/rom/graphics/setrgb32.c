@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setrgb32.c 38174 2011-04-12 07:28:28Z sonic $
 
     Desc: Set one color register for this Viewport
     Lang: english

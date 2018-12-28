@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2001-2011, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: partition_intern.h 45616 2012-08-20 03:19:02Z jmcmullan $
 
    Desc: Internal definitions for partition.library
    Lang: english

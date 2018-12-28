@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: startup.c 51032 2015-08-29 22:49:55Z NicJA $
 */
 
 /*

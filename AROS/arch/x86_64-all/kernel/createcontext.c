@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: createcontext.c 42343 2011-11-09 06:36:01Z sonic $
 
     Desc: Create an empty usable CPU context, x86_64 version.
     Lang: english

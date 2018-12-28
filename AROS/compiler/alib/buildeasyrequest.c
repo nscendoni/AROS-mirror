@@ -1,6 +1,6 @@
 /*
     Copyright � 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: buildeasyrequest.c 52900 2016-08-29 06:49:37Z deadwood $
 
     Desc: Varargs version of BuildEasyRequestArgs() (intuition.library)
     Lang: english

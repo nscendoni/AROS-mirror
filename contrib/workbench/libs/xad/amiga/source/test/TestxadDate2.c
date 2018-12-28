@@ -1,4 +1,4 @@
-/*  $Id$
+/*  $Id: TestxadDate2.c 51565 2016-02-29 15:26:35Z NicJA $
     test program to test date functions
 
     XAD library system for archive handling

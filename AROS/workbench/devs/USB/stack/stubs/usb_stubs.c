@@ -1,6 +1,6 @@
 /*
     Copyright © 2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: usb_stubs.c 39204 2011-06-14 13:47:44Z jmcmullan $
 
     Desc: Stub functions for USB subsystem
     Lang: English

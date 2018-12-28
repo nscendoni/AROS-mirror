@@ -3,7 +3,7 @@
 
 /*
    Copyright © 2004-2010, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: page_language.h 48578 2013-12-16 01:50:52Z neil $
  */
 
 #include <exec/types.h>

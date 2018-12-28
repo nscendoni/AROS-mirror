@@ -1,6 +1,6 @@
 /*
     Copyright © 2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: libgen.h 48028 2013-09-08 21:13:29Z verhaegs $
 
     POSIX.1-2008 header file libgen.h
 */

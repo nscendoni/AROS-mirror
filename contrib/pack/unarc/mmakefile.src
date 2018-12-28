@@ -1,7 +1,7 @@
-# $Id$
+# $Id: mmakefile.src 52374 2016-03-29 16:41:04Z NicJA $
 # Makefile to make Unarc tool.
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES  := main locale unarcgroup_class
 EXEDIR := $(AROS_CONTRIB)/Utilities/Archive/Unarc

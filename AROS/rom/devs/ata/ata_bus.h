@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ata_bus.h 46875 2013-03-10 12:39:25Z sonic $
 
     Desc: private inline stubs for calling DMA and PIO vectors
     Lang: English

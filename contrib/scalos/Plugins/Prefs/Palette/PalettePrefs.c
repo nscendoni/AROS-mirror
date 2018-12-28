@@ -1,6 +1,6 @@
 // PalettePrefs.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 15:49:48 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51973 $
 
 #ifdef __AROS__
 #define MUIMASTER_YES_INLINE_STDARG

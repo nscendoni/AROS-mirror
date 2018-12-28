@@ -1,6 +1,6 @@
 /*
-    Copyright 2011-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright 2011-2015, The AROS Development Team. All rights reserved.
+    $Id: hostgl_gladestroycontext.c 51016 2015-08-19 12:54:12Z NicJA $
 */
 
 #include <aros/debug.h>
@@ -12,7 +12,7 @@
 #include "hostgl_funcs.h"
 #include "hostgl_support.h"
 
-#include <x11gfx_bitmapclass.h>
+#include <bitmap_class.h>
 
 /*****************************************************************************
 

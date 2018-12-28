@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: muimaster_intern.h 50898 2015-06-30 23:42:39Z neil $
 */
 
 #ifndef MUIMASTER_INTERN_H

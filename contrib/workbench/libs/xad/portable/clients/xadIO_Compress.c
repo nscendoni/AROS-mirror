@@ -1,7 +1,7 @@
 #ifndef XADMASTER_XADIO_COMPRESS_C
 #define XADMASTER_XADIO_COMPRESS_C
 
-/*  $Id$
+/*  $Id: xadIO_Compress.c 36659 2011-01-18 13:26:51Z neil $
     UNIX Compress
 
     XAD library system for archive handling

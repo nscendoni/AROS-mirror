@@ -1,6 +1,6 @@
 /*
     Copyright 2010-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mesa3dgl_init.c 50856 2015-06-23 22:01:54Z NicJA $
 */
 
 #include <aros/symbolsets.h>

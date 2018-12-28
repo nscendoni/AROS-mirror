@@ -1,6 +1,6 @@
 /*
     Copyright 2009-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: emul_arosc.c 48057 2013-09-08 21:21:07Z verhaegs $
 */
 
 #include <proto/dos.h>

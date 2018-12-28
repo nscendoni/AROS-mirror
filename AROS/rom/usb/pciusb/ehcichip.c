@@ -1,9 +1,7 @@
 /*
     Copyright © 2010-2013, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: ehcichip.c 53132 2016-12-29 10:32:06Z deadwood $
 */
-
-#define DB_LEVEL 100
 
 #include <proto/exec.h>
 #include <proto/oop.h>
@@ -18,7 +16,8 @@
 #undef HiddAttrBase
 #define HiddAttrBase (hd->hd_HiddAB)
 
-static AROS_INTH1(EhciResetHandler, struct PCIController *, hc)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(EhciResetHandler, struct PCIController *, hc)
 {
     AROS_INTFUNC_INIT
 
@@ -57,7 +56,7 @@ static void ehciFinishRequest(struct PCIUnit *unit, struct IOUsbHWReq *ioreq)
         dir = ioreq->iouh_Dir;
 
     usbReleaseBuffer(eqh->eqh_Buffer, ioreq->iouh_Data, ioreq->iouh_Actual, dir);
-    usbReleaseBuffer(eqh->eqh_SetupBuf, &ioreq->iouh_SetupData, 8, UHDIR_OUT);
+    usbReleaseBuffer(eqh->eqh_SetupBuf, &ioreq->iouh_SetupData, 8, UHDIR_IN);
     eqh->eqh_Buffer   = NULL;
     eqh->eqh_SetupBuf = NULL;
 }
@@ -1090,7 +1089,8 @@ void ehciUpdateFrameCounter(struct PCIController *hc) {
     Enable();
 }
 
-static AROS_INTH1(ehciCompleteInt, struct PCIController *, hc)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(ehciCompleteInt, struct PCIController *, hc)
 {
     AROS_INTFUNC_INIT
 

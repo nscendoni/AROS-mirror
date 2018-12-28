@@ -3,7 +3,7 @@
 
 /*
 **
-** $Id$
+** $Id: classdata.h 51948 2016-03-14 19:21:58Z neil $
 **  anim.datatype 1.11
 **
 **  anim class data

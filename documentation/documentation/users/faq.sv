@@ -4,8 +4,8 @@ Frågor och svar (FAQ)
 
 :Authors:   Aaron Digulla, Adam Chodorowski, Sergey Mineychev, AROS-Exec.org
 :Copyright: Copyright © 1995-2007, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 46215 $
+:Date:      $Date: 2013-01-05 18:36:13 +0100 (Sat, 05 Jan 2013) $
 :Status:    Done.
 
 .. Contents::
@@ -312,7 +312,7 @@ De språk som finns tillgängliga i native är Python_, Regina_, Lua_, Hollywood: o
 + False kan klassifieras som ett exotiskt språk och kommer mest troligt att
   inte användas för seriös utveckling, men det är ganska kul. :-)
 
-.. _Python: https://www.python.org/
+.. _Python: http://www.python.org/
 .. _Regina: http://regina-rexx.sourceforge.net/
 .. _Lua: http://www.lua.org/
 .. _Hollywood: http://www.airsoftsoftwair.com/
@@ -695,7 +695,7 @@ Hårdvarufrågor
 Var kan jag hitta en AROS Hardware Compability List?                   
 ----------------------------------------------------
 
-Du kan finna en på `AROS Wiki <https://en.wikibooks.org/wiki/Aros/Platforms/x86_support>`__ .
+Du kan finna en på `AROS Wiki <http://en.wikibooks.org/wiki/Aros/Platforms/x86_support>`__ .
 Det kan även finnas andra listor av AROS-användare.
 
 Varför kan inte AROS boota från hårddisken om hårddisken är satt som SLAVE?

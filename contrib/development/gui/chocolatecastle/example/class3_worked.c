@@ -1,6 +1,6 @@
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: class3_worked.c 45586 2012-08-17 11:01:13Z mazze $
 */
 
 #include <proto/graphics.h>

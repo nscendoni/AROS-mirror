@@ -1,7 +1,7 @@
 #ifndef XADMASTER_DISKUNARC_C
 #define XADMASTER_DISKUNARC_C
 
-/*  $Id$
+/*  $Id: diskunarc.c 36659 2011-01-18 13:26:51Z neil $
     disk unarchiving stuff
 
     XAD library system for archive handling

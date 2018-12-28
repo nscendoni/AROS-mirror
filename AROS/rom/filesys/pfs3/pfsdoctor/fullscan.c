@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: fullscan.c 49096 2014-07-01 18:48:17Z twilen $ */
 /* $Log: fullscan.c $
  * Revision 2.5  1999/09/10  22:14:49  Michiel
  * Bugfixes etc (1.4)

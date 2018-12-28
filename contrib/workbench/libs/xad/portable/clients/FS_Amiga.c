@@ -1,7 +1,7 @@
 #ifndef XADMASTER_FS_AMIGA_C
 #define XADMASTER_FS_AMIGA_C
 
-/*  $Id$
+/*  $Id: FS_Amiga.c 43430 2012-01-01 20:12:06Z jmcmullan $
     amiga filesytem client
 
     XAD library system for archive handling

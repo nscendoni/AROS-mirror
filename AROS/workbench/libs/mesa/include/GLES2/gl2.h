@@ -1,7 +1,7 @@
 #ifndef __gl2_h_
 #define __gl2_h_
 
-/* $Revision: 10602 $ on $Date:: 2010-03-04 22:35:34 -0800 #$ */
+/* $Revision: 41764 $ on $Date:: 2011-10-05 22:18:03 +0200 #$ */
 
 #include <GLES2/gl2platform.h>
 

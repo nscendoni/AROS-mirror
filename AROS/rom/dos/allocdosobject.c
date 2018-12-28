@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013 The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: allocdosobject.c 48297 2013-10-16 16:38:31Z neil $
 
     Desc:
     Lang: English

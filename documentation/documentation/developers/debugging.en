@@ -3,13 +3,12 @@ AROS Debugging Manual
 =====================
 
 :Authors:   David Le Corfec, Matthias Rustler, Krzysztof Smiechowic
-:Copyright: Copyright (C) 2004-2017, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Copyright: Copyright (C) 2004-2016, The AROS Development Team
+:Version:   $Revision: 51568 $
+:Date:      $Date: 2016-02-29 16:52:47 +0100 (Mon, 29 Feb 2016) $
 :Status:    Work in progress.
 
-The AROS Debugging reference Manual.
-
+This manual explains the various options for AROS debugging.
 
 
 .. Contents::
@@ -19,29 +18,18 @@ The AROS Debugging reference Manual.
 Introduction
 ------------
 
-This manual aims to aid in debugging AROS code, and explains various options
-for debugging AROS or generated binaries.
+For most developers, the easiest way to develop and debug is to use the
+hosted AROS port under Linux (which is the most popular setting) or BSD.
+This way you can use GDB under Linux to debug AROS. You'll need to pass
+the ``--enable-debug`` to the configure script before compiling AROS.
+Beware: Debugging information may increase the disk size occupied by
+the AROS tree tenfold.
 
+Low-level hardware developers will rather use the serial debug output on
+the native port.
 
-
-
------------
-Configuring
------------
-
-To enable debug builds of AROS it is necessary to pass the ``--enable-debug``
-option to the configure script, before compiling AROS.  Please note though 
-that by doing so, extra debugging information will be generated, and will increase
-the disk size occupied by the AROS build tree considerably.
-Debug information/symbols will be stored in additional \*.dbg files.
-
-N.B.: Due to a lack of native debugging tools, using the hosted AROS port under
-Linux or BSD is the prefered way to develop code.  This allows host tools,
-such as GDB under Linux, to be used to debug AROS. 
-
-Low-level hardware developers will more likely test in native environements, using
-the serial ports to output debug, though some devices may also be tested under
-hosted builds (needs citation).
+Application developers need to ensure that their programs release all
+the resources they take. AROS provides some tools for this.
 
 
 
@@ -55,7 +43,7 @@ Printing debug statements
     #define DEBUG 1
     #include <aros/debug.h>
     ...
-    D(bug("value1=%ld, path=%s", value, path);)
+    D(bug("value1=%ld, path=%s", value, path));
 
 ``D()`` will expand to nothing if ``DEBUG`` is 0 or undefined.
 Use ``bug()`` alone to force debug output whatever is the value of ``DEBUG``.
@@ -90,20 +78,10 @@ from the boot subdirectory.
 Live debugging
 ==============
 
-To debug AROS code using GDB, you will first need to change to the
-directory the AROS binaries reside in, and invoke GDB like below::
+Start GDB like below::
 
-    > cd ./bin/linux-i386/AROS/
-    > gdb boot/linux/AROSBootstrap
-
-If you are debugging the host bootstrap code or kernel, invoke GDB
-using the following command instead::
-
-    > gdb boot/linux/AROSBootstrap --symbols boot/linux/AROSBootstrap.dbg
-
-GDB Will then launch and load the AROS bootstrap binary, displaying some information
-in the process::
-
+    > cd /AROS/bin/linux-i386/AROS/
+    > gdb boot/aros-unix
     GNU gdb 6.0-debian
     Copyright 2003 Free Software Foundation, Inc.
     GDB is free software, covered by the GNU General Public License, and you are
@@ -113,34 +91,33 @@ in the process::
     This GDB was configured as "i386-linux"...
     (gdb)
 
-At this point, you can run AROS with::
+Then you run AROS with::
 
     (gdb) r
-    Starting program: /AROS/bin/linux-i386/AROS/boot/linux/AROSBootstrap
+    Starting program: /AROS/bin/linux-i386/AROS/aros
     (... lots of debug output follows ...)
 
- - Arguments can be passed to AROS by placing them after the ``r`` command.
- - Use Ctrl-C in the shell to interrupt AROS and get back to the GDB prompt.
- - See GDB (basic commands) for additional commands.
+You can pass arguments to AROS by placing them after the ``r`` command.
+Use Ctrl-C in the shell to interrupt AROS and get back to the GDB prompt.
+Use ``help`` for help, or ``q`` to quit :)
 
 
 
 Post-mortem debugging
 =====================
 
-Before post-morten debugging is possible you have to enable core dump
-generation, using e.g. ulimit for the Bash shell.  It is then possible to run
-AROS and generate a usable core dump::
+First, you have to enable core dump generation, using e.g. ulimit for the Bash
+shell. Then run AROS and generate a core dump::
 
     > cd /AROS/bin/linux-i386/AROS/
     > ulimit -c unlimited # see your shell manual to enable core dumps
-    > ./boot/linux/AROSBootsrap
+    > ./boot/aros-unix
     Quit (core dumped)
 
-Once the dump has been generated, it can be analyzed in GDB by specifying
-the aros executable name, followed by the core file::
+Now you can start GDB, by specifying the aros executable name and the core
+file::
 
-    > gdb boot/linux/AROSBootsrap core
+    > gdb aros core
     GNU gdb 6.0-debian
     Copyright 2003 Free Software Foundation, Inc.
     GDB is free software, covered by the GNU General Public License, and you are
@@ -148,7 +125,7 @@ the aros executable name, followed by the core file::
     Type "show copying" to see the conditions.
     There is absolutely no warranty for GDB.  Type "show warranty" for details.
     This GDB was configured as "i386-linux"...
-    Core was generated by `boot/linux/AROSBootsrap'.
+    Core was generated by `aros'.
     Program terminated with signal 3, Quit.
     Reading symbols from /usr/X11R6/lib/libX11.so.6...done.
     Loaded symbols for /usr/X11R6/lib/libX11.so.6
@@ -304,14 +281,14 @@ Use ``findaddr`` on any address you want to resolve (probably the innermost)::
     Address found in System:Tests/Zune/list1, which is loaded at 0x402bd454.
     If this is an executable, its .text section starts at 0x402bd460
 
-Next you'll use the ``add-symbol-file`` command to load the given file's debug
-symbols at the given text address::
+Next you'll use the ``add-symbol-file`` command to load the given file
+at the given text address::
 
-    (gdb) add-symbol-file Tests/Zune/list1.dbg 0x402bd460
-    add symbol table from file "Tests/Zune/list1.dbg" at
+    (gdb) add-symbol-file Tests/Zune/list1 0x402bd460
+    add symbol table from file "Tests/Zune/list1" at
     .text_addr = 0x402bd460
     (y or n) y
-    Reading symbols from Tests/Zune/list1.dbg...done.
+    Reading symbols from Tests/Zune/list1...done.
 
 Hopefully it has resolved the addresses::
 
@@ -362,10 +339,6 @@ surprisingly, this is the data found in ``SysBase->ThisTask``::
 
 Tips and tricks
 ===============
-
-Application developers need to ensure that their programs release all
-the resources they take. AROS provides some tools for this (needs citation).
-
 
 Program-induced breakpoint on i386
 ----------------------------------

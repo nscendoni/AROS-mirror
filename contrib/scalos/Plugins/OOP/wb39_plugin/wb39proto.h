@@ -1,6 +1,6 @@
 // wb39proto.h
-// $Date$
-// $Revision$
+// $Date: 2013-12-20 17:22:03 +0100 (Fri, 20 Dec 2013) $
+// $Revision: 48600 $
 
 
 #ifndef	WB39PROTO_H_INCLUDED

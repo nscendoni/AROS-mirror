@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: syscall.c 50892 2015-06-29 21:39:48Z schulz $
 */
 
 #include <inttypes.h>

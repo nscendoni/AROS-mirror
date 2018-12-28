@@ -3,7 +3,7 @@
 #define REVISION     "3"
 #define DATE	     "06.01.2002"
 
-/*  $Id$
+/*  $Id: xad2lha.c 43430 2012-01-01 20:12:06Z jmcmullan $
     xad2lha - recompresses file archives in lha format
 
     XAD library system for archive handling

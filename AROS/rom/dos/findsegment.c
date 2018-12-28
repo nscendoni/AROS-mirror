@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: findsegment.c 51293 2016-01-16 19:57:48Z neil $
 
     Desc: Find a resident segment.
     Lang: english

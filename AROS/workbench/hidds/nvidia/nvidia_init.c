@@ -1,6 +1,6 @@
 /*
-    Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2004-2015, The AROS Development Team. All rights reserved.
+    $Id: nvidia_init.c 51032 2015-08-29 22:49:55Z NicJA $
 
     Desc: nvidia.hidd initialization
     Lang: English
@@ -69,7 +69,7 @@
 
 #include <hidd/pci.h>
 #include <hidd/hidd.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #include <aros/symbolsets.h>
 
@@ -83,13 +83,11 @@
 #include "nv.h"
 
 #undef HiddPCIDeviceAttrBase
-#undef HiddAttrBase
 #undef HiddGfxAttrBase
 #undef HiddPixFmtAttrBase
 #undef HiddSyncAttrBase
 #undef HiddBitMapAttrBase
 #define HiddPCIDeviceAttrBase	(sd->pciAttrBase)
-#define HiddAttrBase		(sd->hiddAttrBase)
 #define HiddBitMapAttrBase	(sd->bitMapAttrBase)
 #define HiddNVidiaBitMapAttrBase (sd->nvBitMapAttrBase)
 #define HiddPixFmtAttrBase	(sd->pixFmtAttrBase)
@@ -766,7 +764,6 @@ static int NV_Init(LIBBASETYPEPTR LIBBASE)
 	    struct OOP_ABDescr attrbases[] = 
 	    {
 		{ IID_Hidd_PCIDevice,   &HiddPCIDeviceAttrBase },
-		{ IID_Hidd,	    	    &HiddAttrBase },
 		{ IID_Hidd_BitMap,	    &HiddBitMapAttrBase },
 		{ IID_Hidd_PixFmt,	    &HiddPixFmtAttrBase },
 		{ IID_Hidd_Sync,	    &HiddSyncAttrBase },

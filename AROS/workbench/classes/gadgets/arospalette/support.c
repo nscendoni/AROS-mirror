@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support.c 40099 2011-07-14 12:10:49Z jmcmullan $
 
     Desc: Support functions for the palette class
     Lang: English

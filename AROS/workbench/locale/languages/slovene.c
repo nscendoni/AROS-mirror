@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: slovene.c 51225 2015-12-03 13:36:31Z polluks $
 
     Desc: slovene.language description file.
 */

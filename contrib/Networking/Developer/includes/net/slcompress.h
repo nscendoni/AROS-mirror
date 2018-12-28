@@ -2,7 +2,7 @@
 #define _NET_SLCOMPRESS_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: slcompress.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: slcompress.h,v 1.4 1998/05/08 05:02:02 millert Exp $	*/

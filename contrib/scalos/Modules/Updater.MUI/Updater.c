@@ -1,6 +1,6 @@
 // Updater.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-17 15:20:02 +0100 (Thu, 17 Mar 2016) $
+// $Revision: 52033 $
 
 #ifdef __AROS__
 #define MUIMASTER_YES_INLINE_STDARG

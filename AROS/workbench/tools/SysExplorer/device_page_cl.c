@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2013, The AROS Development Team.
-    $Id$
+    $Id: device_page_cl.c 47103 2013-03-31 03:25:58Z NicJA $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

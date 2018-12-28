@@ -1,7 +1,7 @@
 /*
     Copyright  1995-2012, The AROS Development Team. All rights reserved.
     Copyright  2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: windecorclass.c 43560 2012-01-09 21:51:40Z deadwood $
 */
 
 

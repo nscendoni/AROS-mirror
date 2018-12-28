@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lsiamigalib.c 44514 2012-04-04 13:28:32Z mazze $
 ** Siamiga library
 ** See Copyright Notice in lua.h
 */

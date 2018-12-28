@@ -1,6 +1,6 @@
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: pciehci_uhw.h 44938 2012-06-04 13:55:09Z neil $
 */
 
 static const UWORD NSDSupported[] = {

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: calcchecksum.c 52974 2016-10-09 17:40:11Z deadwood $
 
     Desc: Calculate a checksum for a given area of memory
     Lang: english

@@ -1,7 +1,7 @@
 #ifndef XADMASTER_DISKDOUBLER_C
 #define XADMASTER_DISKDOUBLER_C
 
-/*  $Id$
+/*  $Id: DiskDoubler.c 36659 2011-01-18 13:26:51Z neil $
     DiskDoubler file archiver client
 
     XAD library system for archive handling

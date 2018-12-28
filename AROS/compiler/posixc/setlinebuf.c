@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setlinebuf.c 48054 2013-09-08 21:20:18Z verhaegs $
 
     BSD legacy function setlinebuf().
     Function is deprecated and not part of POSIX standard.

@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: winapi.h 47619 2013-07-02 18:27:20Z neil $
 
     Desc: Windows CE API functions missing in mingw32ce headers
     Lang: english

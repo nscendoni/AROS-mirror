@@ -221,7 +221,7 @@
 	25 Jan 1993 b_null added do_delmenu, do_itemcheck, do_subcheck
 	22 Jun 1994 null added support of check_symbol, short_cut
 	05-08-94    null added STATIC Command Interface
-	$Date$ last update
+	$Date: 2011-01-18 14:26:51 +0100 (Tue, 18 Jan 2011) $ last update
 
 ******************************************************************************/
 

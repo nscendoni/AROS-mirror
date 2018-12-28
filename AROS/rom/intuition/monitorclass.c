@@ -1,11 +1,11 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: monitorclass.c 48592 2013-12-19 22:17:46Z hkiel $
 */
 
 #include <aros/debug.h>
 #include <cybergraphx/cybergraphics.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <hidd/hidd.h>
 #include <graphics/driver.h>
 #include <graphics/sprite.h>

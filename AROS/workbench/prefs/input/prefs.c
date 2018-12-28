@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prefs.c 51548 2016-02-26 16:16:49Z polluks $
 
     Desc: Change your input preferences
     Lang: English

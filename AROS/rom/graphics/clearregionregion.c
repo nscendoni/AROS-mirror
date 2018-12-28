@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: clearregionregion.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: (AROS only) Graphics function ClearRegionRegion()
     Lang: english
@@ -23,7 +23,7 @@
 	AROS_LHA(struct Region *, R2, A1),
 
 /*  LOCATION */
-	struct GfxBase *, GfxBase, 182, Graphics)
+	struct GfxBase *, GfxBase, 187, Graphics)
 
 /*  FUNCTION
 	Clear the given Region region1 from the given Region region2

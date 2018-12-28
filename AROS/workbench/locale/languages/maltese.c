@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: maltese.c 49681 2014-10-01 19:05:00Z deadwood $
 
     Desc: maltese.language description file.
     Char: ISO 8859-3

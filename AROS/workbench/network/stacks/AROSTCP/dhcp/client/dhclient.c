@@ -31,7 +31,7 @@
  */
 
 const char dhcp_ocopyright[] =
-"$Id$ Copyright (c) 2004-2005 Internet Systems Consortium.  All rights reserved.\n";
+"$Id: dhclient.c 44329 2012-03-04 04:46:26Z jmcmullan $ Copyright (c) 2004-2005 Internet Systems Consortium.  All rights reserved.\n";
 
 #include "dhcpd.h"
 #include "version.h"
@@ -184,7 +184,7 @@ int main (argc, argv, envp)
 	SetErrnoPtr(&errno, sizeof(errno));
 
 	static TEXT dh_conf[256];
-	static TEXT dh_db[288];
+	static TEXT dh_db[256];
 	LONG len;
 
 	dh_conf[0] = dh_db[0] = '\0';

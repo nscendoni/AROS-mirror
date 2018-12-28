@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: flush.c 47805 2013-08-11 15:17:48Z verhaegs $
 */
 
 #include <aros/debug.h>

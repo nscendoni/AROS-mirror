@@ -65,7 +65,7 @@ extern char * _ProgramName;  // from libnix startup code
 
 struct classinitialization_function
 {
-	IPTR (*initfunc)(void);
+	ULONG (*initfunc)(void);
 	void (*endfunc)(void);
 	int done;
 };
@@ -126,7 +126,7 @@ static void MessageAddFile(struct MsgPort *port, struct MsgPort *replyport, stru
 
 	strcpy(arexxstr, "OPEN FILE=");
 
-	if(lock == BNULL)
+	if(lock == NULL)
 	{
 		lock = Lock("", ACCESS_READ);
 		NameFromLock(lock, filepath, sizeof(filepath));
@@ -135,7 +135,7 @@ static void MessageAddFile(struct MsgPort *port, struct MsgPort *replyport, stru
 	else
 		NameFromLock(lock, filepath, sizeof(filepath));
 
-	if(lock != BNULL)
+	if(lock != NULL)
 	{
 		char *ftemp = filepath;
 
@@ -149,12 +149,12 @@ static void MessageAddFile(struct MsgPort *port, struct MsgPort *replyport, stru
 		}
 
 		strlcat(arexxstr, filepath, sizeof(arexxstr));
-		rexxmsg->rm_Args[0] = (IPTR)CreateArgstring(arexxstr, strlen(arexxstr));
+		rexxmsg->rm_Args[0] = (char *)CreateArgstring(arexxstr, strlen(arexxstr));
 		rexxmsg->rm_Action = RXCOMM;
 		PutMsg(port, (struct Message*)rexxmsg);
 		WaitPort(replyport);
 		GetMsg(replyport);
-		DeleteArgstring((UBYTE *)rexxmsg->rm_Args[0]);
+		DeleteArgstring(rexxmsg->rm_Args[0]);
 	}
 }
 
@@ -189,7 +189,7 @@ int main(int argc, char *argv[])
 				snprintf(message, sizeof(message), "Failed to initialize class (%d)", i);
 				MUI_Request(NULL, NULL, 0, "Error...", "OK", message, TAG_END);
 				cleanupclasses();
-				return 0;
+				return NULL;
 			}
 			classinitialization_functions[ i ].done = TRUE;
 			i++;
@@ -199,9 +199,8 @@ int main(int argc, char *argv[])
 	/* handle params */
 	{
 		struct RDArgs *myargs = NULL;
-		IPTR args[ARG_NUMARGS] = {0};
-		Object *app;
-		__unused Object *window;
+		LONG args[ARG_NUMARGS] = {0};
+		Object *app, *window;
 		ULONG sigs = 0;
 		char buf[80];
 		struct MsgPort *port = NULL;
@@ -209,7 +208,7 @@ int main(int argc, char *argv[])
 	
 		app = NULL;
 
-		if(argc && !(myargs = ReadArgs(ARG_TEMPLATE, (IPTR *) &args, NULL)))
+		if(argc && !(myargs = ReadArgs(ARG_TEMPLATE, args, NULL)))
 			Fault(IoErr(), 0, buf, sizeof(buf));
 		else
 		{
@@ -263,7 +262,7 @@ int main(int argc, char *argv[])
 							}
 
 							strcpy(arexxstr, "APPTOFRONT");
-							rexxmsg->rm_Args[0] = (IPTR)CreateArgstring(arexxstr, strlen(arexxstr));
+							rexxmsg->rm_Args[0] = (char *)CreateArgstring(arexxstr, strlen(arexxstr));
 							rexxmsg->rm_Action = RXCOMM;
 
 							Forbid();
@@ -276,7 +275,7 @@ int main(int argc, char *argv[])
 								GetMsg(replyport);
 							}
 							Permit();
-							DeleteArgstring((UBYTE *)rexxmsg->rm_Args[0]);
+							DeleteArgstring(rexxmsg->rm_Args[0]);
 							DeleteRexxMsg(rexxmsg);
 						}
 						if(replyport)
@@ -289,16 +288,16 @@ int main(int argc, char *argv[])
 				if(!port)
 				{
 					/* build new application object */
-					disk_object = GetDiskObject(_ProgramName);
+					disk_object =GetDiskObject(_ProgramName);
 					
 	            	app	= VPDFObject,
-						MUIA_Application_Title,			(IPTR)PROGNAME,
-						MUIA_Application_Version,		(IPTR)"$VER: " PROGNAME " " VERSION "." REVISION " ("VERSIONDATE ")""© 2009-2012 by Michal Wozniak",
-						MUIA_Application_Copyright,	(IPTR)"© 2009-2012 by Michal Wozniak",
-						MUIA_Application_Author,		(IPTR)"Michal Wozniak",
-						MUIA_Application_Description, (IPTR)LOCSTR( MSG_APPLICATION_DESCRIPTION ),
-						MUIA_Application_Base,			(IPTR)"VPDF",
-					    MUIA_Application_DiskObject,      (IPTR)disk_object,
+						MUIA_Application_Title,			PROGNAME,
+						MUIA_Application_Version,		"$VER: " PROGNAME " " VERSION "." REVISION " ("VERSIONDATE ")""© 2009-2012 by Michal Wozniak",
+						MUIA_Application_Copyright,		"© 2009-2012 by Michal Wozniak",
+						MUIA_Application_Author,		"Michal Wozniak",
+						MUIA_Application_Description, LOCSTR( MSG_APPLICATION_DESCRIPTION ),
+						MUIA_Application_Base,			"VPDF",
+					    MUIA_Application_DiskObject,    disk_object,
 					End;
 
 					if(app != NULL)

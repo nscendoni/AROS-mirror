@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: closeworkbenchobjecta.c 40674 2011-08-11 17:49:10Z jmcmullan $
 
     Desc: Close a named named drawer displayed by Workbench. 
     Lang: english

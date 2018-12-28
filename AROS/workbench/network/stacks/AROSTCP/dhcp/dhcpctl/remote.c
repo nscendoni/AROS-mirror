@@ -34,7 +34,7 @@
 
 #ifndef lint
 static char copyright[] =
-"$Id$ Copyright (c) 2004 Internet Systems Consortium.  All rights reserved.\n";
+"$Id: remote.c 36648 2011-01-17 14:31:59Z neil $ Copyright (c) 2004 Internet Systems Consortium.  All rights reserved.\n";
 #endif /* not lint */
 
 #include <omapip/omapip_p.h>

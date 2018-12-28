@@ -2,7 +2,7 @@
 #define CLIB_USERGROUP_PROTOS_H
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: usergroup_protos.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 #ifndef LIBRARIES_USERGROUP_H

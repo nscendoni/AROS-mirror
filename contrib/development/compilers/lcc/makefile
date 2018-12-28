@@ -1,4 +1,4 @@
-# $Id$
+# $Id: makefile 30794 2009-03-08 02:19:07Z neil $
 TEMPDIR=/tmp
 A=.a
 O=.o
@@ -17,7 +17,7 @@ include $(CUSTOM)
 B=$(BUILDDIR)./build
 T=$(TSTDIR)./build
 
-# $Id$
+# $Id: makefile 30794 2009-03-08 02:19:07Z neil $
 
 what:
 	-@echo make all rcc lburg cpp lcc bprint liblcc triple clean clobber

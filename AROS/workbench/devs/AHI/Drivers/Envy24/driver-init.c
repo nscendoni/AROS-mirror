@@ -1,7 +1,7 @@
 /*
     Copyright © 2004-2014, Davy Wentzler. All rights reserved.
     Copyright © 2010-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: driver-init.c 48701 2014-01-12 00:54:38Z neil $
 */
 
 #include <exec/memory.h>

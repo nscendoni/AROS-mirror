@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2016, The AROS Development Team. All rights reserved.
+    $Id: writeincinline.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Function to write inline/modulename.h. Part of genmodule.
 */
@@ -43,31 +43,6 @@ void writeincinline(struct config *cfg)
             "\n",
             cfg->includenameupper, cfg->includenameupper, banner, cfg->modulename
     );
-    if ((cfg->options & OPTION_RELLINKLIB) || (cfg->options & OPTION_DUPBASE))
-    {
-        fprintf(out,
-                "#if !defined(__%s_LIBBASE)\n"
-                "#  if !defined(__NOLIBBASE__) && !defined(__%s_NOLIBBASE__)\n"
-                "#    define __%s_LIBBASE __aros_getbase_%s()\n"
-                "#  else\n"
-                "#    define __%s_LIBBASE %s\n"
-                "#  endif\n"
-                "#endif\n"
-                "\n",
-                cfg->includenameupper, cfg->includenameupper,
-                cfg->includenameupper, cfg->libbase,
-                cfg->includenameupper, cfg->libbase
-        );
-    }
-    else
-        fprintf(out,
-                "#if !defined(__%s_LIBBASE)\n"
-                "#    define __%s_LIBBASE %s\n"
-                "#endif\n"
-                "\n",
-                cfg->includenameupper, 
-                cfg->includenameupper, cfg->libbase
-        );        
     freeBanner(banner);
 
     for (funclistit = cfg->funclist; funclistit!=NULL; funclistit = funclistit->next)
@@ -161,6 +136,14 @@ void writeincinline(struct config *cfg)
                 }
             }
 
+            if (funclistit->hidden)
+            {
+                fprintf(out,
+                        "\n"
+                        "#if defined(__ENABLE_HIDDEN_LIBAPI__)"
+                        "\n");
+            }
+
             writeinlineregister(out, funclistit, cfg, isvararg);
             if (!funclistit->novararg && isvararg)
             {
@@ -169,6 +152,15 @@ void writeincinline(struct config *cfg)
             }
 
             writealiases(out, funclistit, cfg);
+
+            if (funclistit->hidden)
+            {
+                fprintf(out,
+                        "\n"
+                        "#endif /* defined(__ENABLE_HIDDEN_LIBAPI__) */"
+                        "\n");
+            }
+
 
             fprintf(out,
                     "\n"
@@ -206,12 +198,13 @@ writeinlineregister(FILE *out, struct functionhead *funclistit, struct config *c
             funclistit->type, cfg->basename, funclistit->name
     );
     for (arglistit = funclistit->arguments, count = 1;
-         arglistit != NULL;
+         arglistit!=NULL;
          arglistit = arglistit->next, count++
     )
     {
         type = getargtype(arglistit);
-        fprintf(out, "%s __arg%d, ",
+        fprintf(out, "%s%s __arg%d, ",
+            ((isvararg) && (!arglistit->next)) ? "const " : "",
             type, count);
         if (strchr(arglistit->reg, '/') != NULL) {
             nquad++;
@@ -245,7 +238,8 @@ writeinlineregister(FILE *out, struct functionhead *funclistit, struct config *c
             type = getargtype(arglistit);
             assert(type != NULL);
             fprintf(out,
-                    "        AROS_LCA(%s,(__arg%d),%s),\n",
+                    "        AROS_LCA(%s%s,(__arg%d),%s),\n",
+                    ((isvararg) && (!arglistit->next)) ? "const " : "",
                     type, count, arglistit->reg
             );
             free(type);
@@ -283,13 +277,15 @@ writeinlineregister(FILE *out, struct functionhead *funclistit, struct config *c
             if (quad2 != NULL) {
                 *quad2 = 0;
                 fprintf(out,
-                        "         AROS_LCAQUAD(%s, (__arg%d), %s, %s), \n",
+                        "         AROS_LCAQUAD(%s%s, (__arg%d), %s, %s), \\\n",
+                        ((isvararg) && (!arglistit->next)) ? "const " : "",
                         type, count, arglistit->reg, quad2+1
                 );
                 *quad2 = '/';
             } else {
                 fprintf(out,
-                        "         AROS_LCA(%s, (__arg%d), %s), \n",
+                        "         AROS_LCA(%s%s, (__arg%d), %s), \\\n",
+                        ((isvararg) && (!arglistit->next)) ? "const " : "",
                         type, count, arglistit->reg
                 );
             }
@@ -319,7 +315,7 @@ writeinlineregister(FILE *out, struct functionhead *funclistit, struct config *c
          arglistit = arglistit->next, count++
     )
         fprintf(out, "(arg%d), ", count);
-    fprintf(out, "__%s_LIBBASE)\n", cfg->includenameupper);
+    fprintf(out, "__aros_getbase_%s())\n", cfg->libbase);
 }
 
 void
@@ -378,7 +374,7 @@ writeinlinevararg(FILE *out, struct functionhead *funclistit, struct config *cfg
             {
                 type = getargtype(arglistit);
                 assert(type != NULL);
-                fprintf(out, "(%s)(%s_args)", type, funclistit->name);
+                fprintf(out, "(const %s)(%s_args)", type, funclistit->name);
                 free(type);
             }
             else
@@ -448,12 +444,9 @@ writeinlinevararg(FILE *out, struct functionhead *funclistit, struct config *cfg
         }
         fprintf(out,
                 "...) \\\n"
-                "    __inline_%s_%s(",
-                cfg->basename, varargname
+                "    __inline_%s_%s(%s, ",
+                cfg->basename, varargname, cfg->libbase
         );
-        fprintf(out, "(%s)__%s_LIBBASE, ",
-                cfg->libbasetypeptrextern,
-                cfg->includenameupper);
         for (arglistit = funclistit->arguments, count = 1;
              arglistit != NULL && arglistit->next != NULL && arglistit->next->next != NULL;
              arglistit = arglistit->next, count++
@@ -529,12 +522,11 @@ writeinlinevararg(FILE *out, struct functionhead *funclistit, struct config *cfg
         }
         fprintf(out,
                 "...) \\\n"
-                "    __inline_%s_%s(",
-                cfg->basename, varargname
-        );
-        fprintf(out, "(%s)__%s_LIBBASE, ",
+                "    __inline_%s_%s((%s)(%s), ",
+                cfg->basename, varargname,
                 cfg->libbasetypeptrextern,
-                cfg->includenameupper);
+                cfg->libbase
+        );
         for (arglistit = funclistit->arguments, count = 1;
              arglistit != NULL && arglistit->next != NULL && arglistit->next->next != NULL;
              arglistit = arglistit->next, count++

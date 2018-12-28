@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: main.h 48906 2014-04-04 20:07:36Z deadwood $
 */
 
 #ifndef _MAIN_H

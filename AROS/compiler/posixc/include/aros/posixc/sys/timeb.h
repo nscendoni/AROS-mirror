@@ -2,7 +2,7 @@
 #define _POSIXC_SYS_TIMEB_H_
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: timeb.h 48028 2013-09-08 21:13:29Z verhaegs $
 
     Desc: POSIX.1-2001 header file <sys/timeb.h>
           This is deprecated and not present anymore in POSIX.1-2008

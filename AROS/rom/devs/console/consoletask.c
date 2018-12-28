@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: consoletask.c 49195 2014-07-31 14:16:31Z neil $
 
     Desc: Code executed by the console.device task.
     Lang: english

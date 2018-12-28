@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: closemonitor.c 46575 2013-02-12 18:56:20Z twilen $
 
     Desc: Graphics function CloseMonitor()
     Lang: english

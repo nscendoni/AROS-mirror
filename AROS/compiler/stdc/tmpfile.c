@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2013, The AROS Development Team. All rights reserved. 
-    $Id$
+    $Id: tmpfile.c 48044 2013-09-08 21:18:52Z verhaegs $
 
     C99 function tmpfile().
     This function is based on the public domain libnix code

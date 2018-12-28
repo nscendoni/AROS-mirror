@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$	$Log
+    $Id: inittmpras.c 32445 2010-01-25 16:28:51Z mazze $	$Log
 
     Desc: Graphics function InitRastPort()
     Lang: english

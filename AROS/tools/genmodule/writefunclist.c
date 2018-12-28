@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: writefunclist.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Write the functionlist to a file that can be included in the .conf file.
 */
@@ -94,6 +94,9 @@ void writefunclist(struct config *cfg)
 
                 if (funclistit->priv)
                     fprintf(out, ".private\n");
+
+                if (funclistit->hidden)
+                    fprintf(out, ".hidden\n");
 
                 lvo = funclistit->lvo;
             }

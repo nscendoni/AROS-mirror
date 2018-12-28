@@ -15,15 +15,12 @@
 #include <proto/exec.h>
 #include <proto/dos.h>
 
-#define ARGS_QUIET      0
-#define ARGS_REMOVE     1
-#define ARGS_SIZEOF     2
-
-#define CLASSPATH       "SYS:Classes/USB"
-#define CLASSNAMEMAX    128
+#define ARGS_QUIET    0
+#define ARGS_REMOVE   1
+#define ARGS_SIZEOF   2
 
 static const char *template = "QUIET/S,REMOVE/S";
-const char *version = "$VER: AddUSBClasses 1.8 (24.05.2017) © The AROS Development Team";
+const char *version = "$VER: AddUSBClasses 1.7 (03.06.09) by Chris Hodges <chrisly@platon42.de>";
 static IPTR ArgsArray[ARGS_SIZEOF];
 static struct RDArgs *ArgsHook = NULL;
 
@@ -44,18 +41,19 @@ void fail(char *str)
 
 int main(int argc, char *argv[])
 {
-    UBYTE               buf[1024];
-    struct Library      *ps;
+    struct Library *ps;
     struct ExAllControl *exall;
-    struct ExAllData    *exdata;
-    STRPTR              errmsg = NULL;
-    struct List         *puclist;
-    struct Node         *puc;
-    UBYTE               sbuf[CLASSNAMEMAX];
-    BPTR                lock;
-    ULONG               ents;
-    ULONG               namelen;
-    BOOL                exready, isvalid;
+    BPTR lock;
+    STRPTR errmsg = NULL;
+    struct ExAllData *exdata;
+    ULONG ents;
+    struct List *puclist;
+    UBYTE buf[1024];
+    STRPTR sbuf;
+    BOOL exready;
+    struct Node *puc;
+    ULONG namelen;
+    STRPTR classpath;
 
     if(!(ArgsHook = ReadArgs(template, ArgsArray, NULL)))
     {
@@ -82,7 +80,8 @@ int main(int argc, char *argv[])
         } else {
             if((exall = AllocDosObject(DOS_EXALLCONTROL, NULL)))
             {
-                lock = Lock(CLASSPATH, ACCESS_READ);
+                classpath = "SYS:Classes/USB";
+                lock = Lock(classpath, ACCESS_READ);
                 if(lock)
                 {
                     exall->eac_LastKey = 0;
@@ -95,67 +94,66 @@ int main(int argc, char *argv[])
                         ents = exall->eac_Entries;
                         while(ents--)
                         {
-                            isvalid = TRUE;
-                            psdSafeRawDoFmt(sbuf, CLASSNAMEMAX, CLASSPATH "/%s", exdata->ed_Name);
-                            namelen = strlen(sbuf);
-                            if (((namelen > 4) && (!strcmp(&sbuf[namelen-4], ".dbg"))) || ((namelen > 5) && (!strcmp(&sbuf[namelen-5], ".info"))))
-                                isvalid = FALSE;
-                            if (isvalid)
+                            sbuf = psdCopyStrFmt("%s/%s", classpath, exdata->ed_Name);
+                            if(!sbuf)
                             {
-                                if(namelen > 4)
+                                break;
+                            }
+                            namelen = strlen(sbuf);
+                            if(namelen > 4)
+                            {
+                                if(!strcmp(&sbuf[namelen-4], ".elf"))
                                 {
-                                    if(!strcmp(&sbuf[namelen-4], ".elf"))
-                                    {
-                                        sbuf[namelen-4] = 0;
-                                    }
-                                }
-                                psdGetAttrs(PGA_STACK, NULL, PA_ClassList, &puclist, TAG_END);
-                                Forbid();
-                                puc = puclist->lh_Head;
-                                while(puc->ln_Succ)
-                                {
-                                    if(!strncmp(puc->ln_Name, exdata->ed_Name, strlen(puc->ln_Name)))
-                                    {
-                                        break;
-                                    }
-                                    puc = puc->ln_Succ;
-                                }
-                                if(puc->ln_Succ)
-                                {
-                                    Permit();
-                                    if(!ArgsArray[ARGS_QUIET])
-                                    {
-                                        Printf("Skipping class %s...\n", exdata->ed_Name);
-                                    }
-                                    exdata = exdata->ed_Next;
-                                    continue;
-                                }
-                                Permit();
-
-                                if(!ArgsArray[ARGS_QUIET])
-                                {
-                                    Printf("Adding class %s...", exdata->ed_Name);
-                                }
-                                if(psdAddClass(sbuf, 0))
-                                {
-                                    if(!ArgsArray[ARGS_QUIET])
-                                    {
-                                        PutStr("okay!\n");
-                                    }
-                                } else {
-                                    if(!ArgsArray[ARGS_QUIET])
-                                    {
-                                        PutStr("failed!\n");
-                                    }
+                                    sbuf[namelen-4] = 0;
                                 }
                             }
+                            psdGetAttrs(PGA_STACK, NULL, PA_ClassList, &puclist, TAG_END);
+                            Forbid();
+                            puc = puclist->lh_Head;
+                            while(puc->ln_Succ)
+                            {
+                                if(!strncmp(puc->ln_Name, exdata->ed_Name, strlen(puc->ln_Name)))
+                                {
+                                    break;
+                                }
+                                puc = puc->ln_Succ;
+                            }
+                            if(puc->ln_Succ)
+                            {
+                                Permit();
+                                if(!ArgsArray[ARGS_QUIET])
+                                {
+                                    Printf("Skipping class %s...\n", exdata->ed_Name);
+                                }
+                                exdata = exdata->ed_Next;
+                                continue;
+                            }
+                            Permit();
+
+                            if(!ArgsArray[ARGS_QUIET])
+                            {
+                                Printf("Adding class %s...", exdata->ed_Name);
+                            }
+                            if(psdAddClass(sbuf, 0))
+                            {
+                                if(!ArgsArray[ARGS_QUIET])
+                                {
+                                    PutStr("okay!\n");
+                                }
+                            } else {
+                                if(!ArgsArray[ARGS_QUIET])
+                                {
+                                    PutStr("failed!\n");
+                                }
+                            }
+                            psdFreeVec(sbuf);
                             exdata = exdata->ed_Next;
                         }
                     } while(exready);
                     UnLock(lock);
                     psdClassScan();
                 } else {
-                    errmsg = "Failed to lock " CLASSPATH ".\n";
+                    errmsg = "Could not lock on SYS:Classes/USB.\n";
                 }
                 FreeDosObject(DOS_EXALLCONTROL, exall);
             }

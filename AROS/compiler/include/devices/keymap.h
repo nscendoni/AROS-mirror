@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: keymap.h 37917 2011-03-30 13:15:22Z jmcmullan $
 
     Desc: Keymap definitions
     Lang: english

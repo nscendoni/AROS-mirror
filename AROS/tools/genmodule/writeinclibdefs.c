@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: writeinclibdefs.c 48665 2013-12-31 08:20:42Z mazze $
 
     Function to write libdefs.h. Part of genmodule.
 */

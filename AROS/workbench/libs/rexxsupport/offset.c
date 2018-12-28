@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: offset.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Add offset to a pointer
     Lang: English

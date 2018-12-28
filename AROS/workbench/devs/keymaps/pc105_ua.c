@@ -1,7 +1,7 @@
 // Kbdur_Ucranian_pkf.txt
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pc105_ua.c 50780 2015-06-06 17:17:05Z polluks $
     
     Desc: Ukranian PC105 Keymap
     Lang: English

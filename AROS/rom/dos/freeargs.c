@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freeargs.c 49145 2014-07-23 21:32:31Z neil $
 
     Desc: Free arguments structure from ReadArgs()
     Lang: english

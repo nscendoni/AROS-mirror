@@ -2,7 +2,7 @@
 #define RPC_XDR_H
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: xdr.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /* @(#)xdr.h	2.2 88/07/29 4.0 RPCSRC */

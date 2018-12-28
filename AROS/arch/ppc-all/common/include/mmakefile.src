@@ -1,7 +1,7 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
-%copy_includes includes=multiboot.h dir=aros
+copy_includes includes=multiboot.h dir=aros
 
 %common

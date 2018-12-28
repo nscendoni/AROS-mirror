@@ -2,7 +2,7 @@
 #define _NETINET_IPIP_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ip_ipip.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ip_ipip.h,v 1.1 2000/01/21 03:15:05 angelos Exp $ */

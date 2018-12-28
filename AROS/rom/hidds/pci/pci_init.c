@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pci_init.c 51422 2016-01-25 18:29:05Z NicJA $
 */
 
 #include <aros/symbolsets.h>

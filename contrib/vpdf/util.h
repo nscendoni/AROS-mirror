@@ -43,7 +43,7 @@ static inline int sxget(void *object, LONG attr)
 static inline LONG isDirPath(char *path)
 {
 	BPTR lock = Lock(path, ACCESS_READ);
-	if (lock != BNULL)
+	if (lock != NULL)
 	{
 		struct FileInfoBlock fib;
 		if (Examine(lock, &fib))

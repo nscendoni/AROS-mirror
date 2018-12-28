@@ -1,5 +1,5 @@
 #include <hidd/compositor.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <oop/oop.h>
 
 /* Inline stubs for calling the driver */

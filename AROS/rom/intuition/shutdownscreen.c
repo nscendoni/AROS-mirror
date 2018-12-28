@@ -1,7 +1,7 @@
 /*
-   Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-   $Id$
-*/
+   Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+   $Id: shutdownscreen.c 53132 2016-12-29 10:32:06Z deadwood $
+ */
 
 #include <exec/libraries.h>
 #include <graphics/gfxbase.h>
@@ -26,7 +26,8 @@ static const UWORD empty_pointer[1] = { 0 };
 
 /* This reset handler is called if software power-off or reboot has not
  * occurred */
-AROS_INTH1(ShutdownScreenHandler, struct Interrupt *, handler)
+/* ABI_V0 compatibility */
+AROS_SOFTINTH1(ShutdownScreenHandler, struct Interrupt *, handler)
 {
     AROS_INTFUNC_INIT
 
@@ -83,17 +84,6 @@ static struct Screen *OpenFinalScreen(BYTE MinDepth, BOOL squarePixels,
        matching mode ID and then open a screen with that mode */
     mode = BestModeID(BIDTAG_DesiredWidth, 640, BIDTAG_DesiredHeight, height,
         BIDTAG_Depth, MinDepth, TAG_DONE);
-
-    /* Reset to default decorator. The one installed by C:Decoration may try
-     * to load images from disk while opening the screen, which isn't a good
-     * idea when the system is partly shut down */
-    GetPrivIBase(IntuitionBase)->Decorator = NULL;
-    GetPrivIBase(IntuitionBase)->ScrDecorClass = FindClass(SCRDECORCLASS);
-    GetPrivIBase(IntuitionBase)->ScrDecorTags = NULL;
-    GetPrivIBase(IntuitionBase)->MenuDecorClass = FindClass(MENUDECORCLASS);
-    GetPrivIBase(IntuitionBase)->MenuDecorTags = NULL;
-    GetPrivIBase(IntuitionBase)->WinDecorClass = FindClass(WINDECORCLASS);
-    GetPrivIBase(IntuitionBase)->WinDecorTags = NULL;
 
     if (mode != INVALID_ID)
     {

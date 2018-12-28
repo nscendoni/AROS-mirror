@@ -2,7 +2,7 @@
 #define PRAGMAS_CYBERGRAPHICS_PRAGMAS_H
 
 /*
-**	$Id$
+**	$Id: cybergraphics_pragmas.h 48481 2013-12-01 22:08:26Z mazze $
 **
 **	Direct ROM interface (pragma) definitions.
 **

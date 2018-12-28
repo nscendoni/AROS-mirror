@@ -1,6 +1,6 @@
 /*
     Copyright © 1997-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: font2c.c 40530 2011-08-03 17:42:42Z weissms $
 
     Desc: Convert Amiga font to C code.
     Lang: english

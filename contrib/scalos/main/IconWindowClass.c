@@ -1,6 +1,6 @@
 // IconWindowClass.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-24 02:34:33 +0100 (Thu, 24 Mar 2016) $
+// $Revision: 52219 $
 
 
 #include <exec/types.h>

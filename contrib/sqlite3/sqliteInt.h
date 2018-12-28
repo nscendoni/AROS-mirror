@@ -18,7 +18,7 @@
  * @brief Internal interface definitions for SQLite.
  *
  * */
-/* $Id$ */
+/* $Id: sqliteInt.h 36659 2011-01-18 13:26:51Z neil $ */
 #ifndef _SQLITEINT_H_
 #define _SQLITEINT_H_
 

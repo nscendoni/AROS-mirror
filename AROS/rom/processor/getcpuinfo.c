@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getcpuinfo.c 43432 2012-01-01 20:15:00Z jmcmullan $
 
     Desc: GetCPUInfo() - Provides information about installed CPUs
     Lang: english
@@ -37,7 +37,7 @@
     INPUTS
 
         Function takes an array of tags. Data is returned for each tag. See
-        specific tag description. There is a control tag CGIT_SelectedProcessor.
+        specific tag description. There is a control tag CGIT_SelecetProcessor.
 
     TAGS
 
@@ -69,7 +69,7 @@
         
         GCIT_FrontsideSpeed - (UQUAD *) Provides the current FSB speed in Hz
 
-        GCIT_ProcessorLoad - (ULONG *) Provides the current CPU load (0-0xffffffff)
+        GCIT_ProcessorLoad - (UBYTE *) Provides the current CPU load in % (0-100)
 
         Cache sizes - (ULONG *) Following tags are used to retrieve size of 
                       specified caches.
@@ -195,7 +195,7 @@
             *((UQUAD *)passedTag->ti_Data) = 0;
             break;
         case(GCIT_ProcessorLoad):
-            *((ULONG *)passedTag->ti_Data) = 0;
+            *((UBYTE *)passedTag->ti_Data) = 0;
             break;
         case(GCIT_FrontsideSpeed):
             *((UQUAD *)passedTag->ti_Data) = 0;

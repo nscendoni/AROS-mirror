@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rename.c 48049 2013-09-08 21:19:37Z verhaegs $
 
     C99 function rename() with optional Amiga<>Posix file name conversion.
 */

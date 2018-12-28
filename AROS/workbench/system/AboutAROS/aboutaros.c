@@ -3,7 +3,7 @@
     This file is part of the About program, which is distributed under
     the terms of version 2 of the GNU General Public License.
     
-    $Id$
+    $Id: aboutaros.c 48941 2014-04-17 17:24:05Z deadwood $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

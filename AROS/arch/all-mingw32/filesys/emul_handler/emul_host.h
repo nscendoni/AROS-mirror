@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: emul_host.h 42589 2011-11-24 07:57:44Z sonic $
 
     Desc: Internal header-file for emulation-handler.
     Lang: english

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prefhdr.h 30792 2009-03-07 22:40:04Z neil $
 
     File format for preferences header.
 */
@@ -30,7 +30,7 @@ struct PrefHeader
     UBYTE   ph_Version;     /* The version of the PrefHeader data */
     UBYTE   ph_Type;        /* The type of the PrefHeader data */
     ULONG   ph_Flags;       /* Flags, set to 0 for now */
-} __packed;
+} __attribute__((__packed__));
 
 #define PHV_AMIGAOS     0               /* Format from AmigaOS v36+ */
 #define PHV_CURRENT     PHV_AMIGAOS     /* The current version */

@@ -2,7 +2,7 @@
     Copyright © 2002, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: localdata.c 30794 2009-03-08 02:19:07Z neil $
 */
 
 #include <string.h>

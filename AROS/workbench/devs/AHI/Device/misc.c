@@ -135,8 +135,8 @@ SprintfA( char *dst, const char *fmt, IPTR* args )
                    (void(*)(void)) &struffChar,
                    dst );
 #else
-  return (char *)RawDoFmt( (UBYTE*) fmt,
-                   (RAWARG)args, 
+  return RawDoFmt( (UBYTE*) fmt,
+                   args, 
                    0,
                    dst );
 #endif

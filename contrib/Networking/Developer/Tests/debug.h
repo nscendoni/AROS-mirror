@@ -2,7 +2,7 @@
     Copyright © 2002-2004, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: debug.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 #ifndef __DEBUG_H

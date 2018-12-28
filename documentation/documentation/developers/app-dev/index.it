@@ -5,8 +5,8 @@ Manuale di sviluppo applicazioni AROS
 :Authors:   Staf Verhaegen, Sebastian Rittau, Stefan Rieken, Matt Parsons,
             Adam Chodorowski, Fabio Alemagna, Matthias Rustler
 :Copyright: Copyright (C) 1995-2008, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 30800 $
+:Date:      $Date: 2009-03-08 18:28:50 +0100 (Sun, 08 Mar 2009) $
 :Status:    Unfinished; integration started (looong way left to go).
 :ToDo:      Integrate the various parts. Update and revise. Complete...
 

@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright © 2002-2007, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: components.py 45145 2012-07-01 16:25:10Z mazze $
 
 from html import *
 

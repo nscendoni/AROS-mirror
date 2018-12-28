@@ -6,7 +6,7 @@
     Copyright © 2002-2003, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: text.h 49519 2014-08-23 16:45:48Z mazze $
 */
 
 /*** Name *******************************************************************/

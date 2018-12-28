@@ -10,7 +10,7 @@
         Project page:   http://sf.net/p/adtools/code/HEAD/tree/trunk/sdi/
         Description:    defines to hide OS specific variable arguments
                         function definitions
-        Id:             $Id$
+        Id:             $Id: SDI_stdarg.h 49441 2014-08-16 12:12:16Z mazze $
         URL:            $URL: https://svn.code.sf.net/p/adtools/code/trunk/sdi/SDI_stdarg.h $
 
  1.0   05.07.04 : initial version

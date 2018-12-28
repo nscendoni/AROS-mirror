@@ -3,8 +3,8 @@
 /*
 **  $VER: GadgetBar.h 41.5 (06 Jan 2006 20:00:13)
 **
-** $Date$
-** $Revision$
+** $Date: 2016-03-15 22:56:01 +0100 (Tue, 15 Mar 2016) $
+** $Revision: 51982 $
 **
 **	Scalos.library include
 **

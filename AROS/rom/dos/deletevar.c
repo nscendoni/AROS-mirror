@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: deletevar.c 53092 2016-12-22 23:35:29Z neil $
 
     Desc: DeleteVar() - Deletes a local or environmental variable.
     Lang: english

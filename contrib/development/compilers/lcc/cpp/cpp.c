@@ -17,7 +17,7 @@ int	ifdepth;
 int	ifsatisfied[NIF];
 int	skipping;
 
-char rcsid[] = "$Revision$ $Date$";
+char rcsid[] = "$Revision: 30794 $ $Date: 2009-03-08 03:19:07 +0100 (Sun, 08 Mar 2009) $";
 
 int
 main(int argc, char **argv)

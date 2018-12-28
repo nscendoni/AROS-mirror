@@ -1,6 +1,6 @@
 /*
     Copyright © 2000-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: recvfrom.c 34530 2010-09-28 10:50:58Z sonic $
 
     Desc:
     Lang: English

@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2006 by Michal Schulz
-    $Id$
+    $Id: hidclass.c 53132 2016-12-29 10:32:06Z deadwood $
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Library General Public License as
@@ -62,7 +62,8 @@ static usb_interface_descriptor_t *find_idesc(usb_config_descriptor_t *cd, int i
     return (NULL);
 }
 
-static AROS_INTH1(HidInterrupt, HidData *, hid)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(HidInterrupt, HidData *, hid)
 {
     AROS_INTFUNC_INIT
 

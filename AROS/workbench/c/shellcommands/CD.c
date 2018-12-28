@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: CD.c 46704 2013-02-27 02:40:37Z jmcmullan $
 
     Desc: CD CLI command
     Lang: English

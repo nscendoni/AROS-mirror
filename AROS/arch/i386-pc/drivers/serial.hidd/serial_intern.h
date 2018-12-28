@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: serial_intern.h 45449 2012-08-10 05:00:09Z jmcmullan $
 */
 
 #ifndef SERIAL_HIDD_INTERN_H

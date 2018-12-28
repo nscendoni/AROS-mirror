@@ -3,7 +3,7 @@
     Copyright © 2009-2011, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: screenlist_class.c 39272 2011-06-17 05:44:11Z jmcmullan $
 */
 
 #include <proto/muiscreen.h>

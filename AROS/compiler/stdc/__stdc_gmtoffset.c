@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __stdc_gmtoffset.c 48040 2013-09-08 21:18:12Z verhaegs $
 
     Internal arossstdc function to get current GMT offset
 */

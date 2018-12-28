@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: jmpdefs.h 36224 2010-12-24 14:09:45Z sonic $
 */
 
 #ifndef JMPDEFS_H

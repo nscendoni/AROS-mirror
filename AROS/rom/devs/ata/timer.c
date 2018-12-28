@@ -1,6 +1,6 @@
 /*
     Copyright © 2009-2013, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: timer.c 47409 2013-05-13 13:11:23Z NicJA $
 
     Desc:
     Lang: English

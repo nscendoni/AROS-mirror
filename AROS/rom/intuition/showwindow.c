@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: showwindow.c 51658 2016-03-09 13:40:15Z NicJA $
 */
 
 #include <proto/layers.h>

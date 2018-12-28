@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2002-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: popimage.h 45802 2012-09-15 17:08:34Z neil $
 */
 
 /*** Name *******************************************************************/

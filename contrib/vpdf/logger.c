@@ -52,7 +52,7 @@ DEFNEW
 {
 	Object *list;
 
-	obj = (Object *) DoSuperNew(cl, obj,
+	obj = DoSuperNew(cl, obj,
 						Child, list = ListObject,
 							MUIA_Frame, MUIV_Frame_ReadList,
 							MUIA_List_ConstructHook, MUIV_List_ConstructHook_String,
@@ -67,7 +67,7 @@ DEFNEW
 		data->list = list;
 	}
 
-	return (IPTR)obj;
+	return (ULONG)obj;
 }
 
 DEFMMETHOD(Logger_LogMessage)

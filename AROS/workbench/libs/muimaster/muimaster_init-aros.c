@@ -2,7 +2,7 @@
     Copyright © 2002-2015, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: muimaster_init-aros.c 51641 2016-03-09 04:12:25Z NicJA $
 */
 
 #include <proto/exec.h>

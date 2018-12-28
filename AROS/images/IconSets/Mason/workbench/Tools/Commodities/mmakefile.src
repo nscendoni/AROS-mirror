@@ -1,13 +1,13 @@
-# $Id$
+# $Id: mmakefile.src 34053 2010-08-07 05:57:59Z mazze $
 #
 # Makefile for Mason's workbench icons
 
-include $(SRCDIR)/config/aros.cfg
+include $(TOP)/config/make.cfg
 
 ICONS     := AutoPoint Blanker ClickToFront Exchange Opaque
 ICONDIR   := $(AROSDIR)/Tools/Commodities
 
-#MM- iconset-Mason-wbench-icons-aros : iconset-Mason-wbench-icons-aros-commodities
+#MM- iconset-Mason-icons : masonworkbenchcxicons
 
-%build_icons mmake=iconset-Mason-wbench-icons-aros-commodities icons=$(ICONS) \
+%build_icons mmake=masonworkbenchcxicons icons=$(ICONS) \
              dir=$(ICONDIR)

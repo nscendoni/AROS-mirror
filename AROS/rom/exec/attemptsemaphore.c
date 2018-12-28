@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: attemptsemaphore.c 52807 2016-07-28 01:51:35Z neil $
 
     Desc: Try to lock a sempahore.
     Lang: english

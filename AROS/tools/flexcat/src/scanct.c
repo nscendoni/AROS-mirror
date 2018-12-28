@@ -1,8 +1,8 @@
 /*
- * $Id$
+ * $Id: scanct.c 49325 2014-08-14 00:52:39Z mazze $
  *
  * Copyright (C) 1993-1999 by Jochen Wiedmann and Marcin Orlowski
- * Copyright (C) 2002-2017 FlexCat Open Source Team
+ * Copyright (C) 2002-2010 by the FlexCat Open Source Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,14 +37,18 @@
 #include "utils.h"
 #include "createcat.h"
 
-char *CatVersionString = NULL;   /* Version string of catalog translation (## version) */
-char *CatLanguage = NULL;        /* Language of catalog translation */
-char *CatRcsId = NULL;           /* RCS ID of catalog translation (## rcsid) */
-char *CatName = NULL;            /* Name of catalog translation */
-unsigned long int CodeSet = 0;   /* Codeset of catalog translation */
-int  CT_Scanned = FALSE;         /* If TRUE and we are going to write a new #?.ct file, then the
-                                    user is surely updating his own #?.ct file, so we should write
-                                    ***NEW*** wherever necessary. */
+char           *CatVersionString = NULL;   /* Version string of catalog
+                                              translation (## version) */
+char           *CatLanguage = NULL;        /* Language of catalog translation */
+char           *CatRcsId = NULL;           /* RCS ID of catalog translation
+                                              (## rcsid) */
+char           *CatName = NULL;            /* Name of catalog translation */
+uint32          CodeSet = 0;               /* Codeset of catalog translation */
+int             CT_Scanned = FALSE;        /* If TRUE and we are going to
+                                              write a new #?.ct file, then the
+                                              user is surely updating his own
+                                              #?.ct file, so we should write
+                                              ***NEW*** wherever necessary. */
 
 #define IS_NUMBER_OR_LETTER(c) (((c) >= '0' && (c) <= '9') || \
                                 ((c) >= 'a' && (c) <= 'z') || \
@@ -75,10 +79,7 @@ int ScanCTFile(char *ctfile)
     if(!NoBufferedIO)
         setvbuf(fp, NULL, _IOFBF, buffer_size);
 
-    // initialize "line" ahead of the loop
-    // the loop will bail out early for empty files
-    line = NULL;
-    newline = NULL;
+
     while(!feof(fp) && (line = newline = ReadLine(fp, TRUE)) != NULL)
     {
         switch(*line)
@@ -150,6 +151,9 @@ int ScanCTFile(char *ctfile)
                     errno = 0;
 
                     CodeSet = strtoul(line, &line, 0);
+
+/*                  printf("ulong_max es %lu\n",ULONG_MAX);
+                    printf("CodeSet obtenido de strtoul es %lu\n",CodeSet);*/
 
                     if(errno == ERANGE && CodeSet == ULONG_MAX)
                     {

@@ -3,7 +3,7 @@
     Copyright © 2002 - 2014, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: area.h 48931 2014-04-17 13:45:49Z neil $
 */
 
 #ifndef _MUI_CLASSES_AREA_H

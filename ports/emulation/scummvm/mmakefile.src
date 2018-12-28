@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 52696 2016-04-23 09:45:37Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #DISABLED #MM- ports-emulation : ports-emulation-scummvm
 
@@ -15,7 +15,8 @@ REPOSITORIES := https://www.scummvm.org/frs/scummvm/1.8.0
 
 %fetch_and_build mmake=ports-emulation-scummvm prefix=$(TARGETDIR) \
     package=$(PACKAGE) version=$(VERSION) suffixes="tar.bz2" \
-    patch=yes package_repo=$(REPOSITORIES) nix=no nix_dir_layout=no gnuflags=no\
+    patch=yes package_repo=$(REPOSITORIES) nix=no nix_dir_layout=no gnuflags=no \
+    extracflags="" \
     extraoptions="--host=i386-aros --enable-verbose-build"
 
 

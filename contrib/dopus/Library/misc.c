@@ -43,8 +43,7 @@ int __saveds DoRawkeyToStr(register UWORD code __asm("d0"),
     struct ConsoleDevice *ConsoleDevice;
     char ocbuf[20],cbuf[20],*foo;
 
-    if (buf) buf[0]=0;
-    ocbuf[0]=cbuf[0]=0;
+    if (buf) buf[0]=0; ocbuf[0]=cbuf[0]=0;
     if (code!=(UWORD)~0 && code!=0xff) {
         if (code&IECODE_UP_PREFIX) code-=0x80;
         if (code>=0x50 && code<=0x59) LSprintf(cbuf,"F%ld",code-0x4f);
@@ -77,7 +76,7 @@ int __saveds DoRawkeyToStr(register UWORD code __asm("d0"),
             ConsoleDevice=(struct ConsoleDevice *)req->io_Device;
             inev.ie_NextEvent=NULL;
             inev.ie_Class=IECLASS_RAWKEY;
-            inev.ie_SubClass=0;
+            inev.ie_SubClass=NULL;
             inev.ie_Code=code;
             inev.ie_Qualifier=qual&(IEQUALIFIER_LSHIFT|IEQUALIFIER_RSHIFT);
             inev.ie_EventAddress=NULL;
@@ -173,7 +172,7 @@ void __saveds DoDecode_RLE(register char *source __asm("a0"),
     }
 }
 
-static struct TagItem
+const static struct TagItem
     busytags[2]={
         {WA_BusyPointer,1},
         {TAG_DONE,0}};

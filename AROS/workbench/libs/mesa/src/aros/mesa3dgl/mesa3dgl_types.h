@@ -1,6 +1,6 @@
 /*
     Copyright 2009-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mesa3dgl_types.h 50856 2015-06-23 22:01:54Z NicJA $
 */
 
 #ifndef MESA3DGL_TYPES_H
@@ -27,7 +27,6 @@ struct mesa3dgl_framebuffer
 /* mesa/gallium GL context */
 struct mesa3dgl_context
 {
-    APTR                                driver;
     struct st_context_iface     *st;
     struct st_visual            stvis;
     struct st_manager           *stmanager;

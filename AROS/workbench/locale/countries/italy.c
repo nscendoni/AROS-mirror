@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: italy.c 50781 2015-06-06 21:56:09Z polluks $
 
     Desc: Country data for Italia (Italy)
           based on the Amiga Developer CD 2.1 file -: 

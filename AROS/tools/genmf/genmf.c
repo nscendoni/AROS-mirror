@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: genmf.c 49324 2014-08-13 23:51:28Z mazze $
 */
 
 #define PROTOTYPES

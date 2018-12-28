@@ -1,6 +1,6 @@
 /*
-    Copyright © 2011-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2011-2015, The AROS Development Team. All rights reserved.
+    $Id: kernel_intr.c 50710 2015-05-19 12:27:56Z NicJA $
 
     Desc: High-level scheduler calling code
     Lang: English
@@ -14,6 +14,8 @@
 #include <kernel_intr.h>
 #include <kernel_scheduler.h>
 #include <kernel_syscall.h>
+
+#include "exec_platform.h"
 
 /*
  * Leave the interrupt. This function receives the interrupt register frame

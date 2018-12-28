@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -39,7 +39,7 @@ include $(SRCDIR)/config/aros.cfg
 #MM     kernel-console \
 #MM     kernel-fs-con \
 #MM     kernel-fs-ram \
-#MM     kernel-hidd-gfx \
+#MM     kernel-hidd-graphics \
 #MM     kernel-hidd-kbd \
 #MM     kernel-hidd-mouse \
 #MM     kernel-hidd \

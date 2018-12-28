@@ -9,8 +9,8 @@ Compilando o AROS
             		+ Aaron Digulla
             		+ Adam Chodorowski
 :Direitos de Cópia:	Copyright (C) 2001-2008, A equipa de desenvolvimento AROS
-:Versão:		$Revision$
-:Data:			$Date$
+:Versão:		$Revision: 30800 $
+:Data:			$Date: 2009-03-08 18:28:50 +0100 (Sun, 08 Mar 2009) $
 :Estado:		Feito.
 :Abstracto:  
     Este documento irá explicar como compilar o AROS. Desenvolvimento do AROS é

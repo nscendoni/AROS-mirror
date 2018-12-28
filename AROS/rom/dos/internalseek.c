@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: internalseek.c 46059 2012-11-21 19:47:17Z mazze $
 */
 
 #include <aros/debug.h>

@@ -2,7 +2,7 @@
 #define PROTO_MCCCLASS_H
 
 /*
-**	$Id$
+**	$Id: mccclass.h 31418 2009-06-15 12:43:32Z mazze $
 **	Includes Release 50.1
 **
 **	Prototype/inline/pragma header file combo

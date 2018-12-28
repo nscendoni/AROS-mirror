@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cliinit.h 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Document the CLI startup packet
     Lang: English
@@ -167,7 +167,7 @@
            } \
        } \
        type = dp->dp_Type; \
-       me->pr_HomeDir = BNULL; \
+       /* me->pr_HomeDir = BNULL; ABI_V0 compatibility. Needed for SystemTags("PROGDIR:abc"). Example: RX/RexxMast */ \
        segArray = BADDR(me->pr_SegList); \
        segArray[4] = segArray[3]; \
        segArray[3] = BNULL; \

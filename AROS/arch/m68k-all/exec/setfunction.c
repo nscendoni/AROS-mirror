@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setfunction.c 47740 2013-07-20 11:30:00Z mazze $
 
     Desc: Patch a library or device function
     Lang: english

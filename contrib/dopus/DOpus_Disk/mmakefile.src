@@ -1,10 +1,10 @@
-# $Id$
+# $Id: mmakefile.src 52371 2016-03-29 16:31:33Z NicJA $
 
 include $(SRCDIR)/$(CURDIR)/../make.cfg
 
 #MM- DOpus_Disk : dopus-library
 
-USER_CFLAGS := -I$(DOPUSDIR)/$(AROS_DIR_DEVELOPER)/include \
+USER_CFLAGS := -I$(DOPUSDIR)/Development/include \
     -I$(SRCDIR)/$(CURDIR)/../include \
     -D__REXXSYSLIB_STDLIBBASE__ \
     -D__UTILITY_STDLIBBASE__ \

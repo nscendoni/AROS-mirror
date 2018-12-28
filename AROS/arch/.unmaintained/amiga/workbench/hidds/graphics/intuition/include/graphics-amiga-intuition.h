@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: graphics-amiga-intuition.h 36647 2011-01-17 14:01:23Z neil $
 
     Desc: Definitions for the Graphics amiga intui HIDD system.
     Lang: english

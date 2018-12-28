@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: if_bridge.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: if_bridge.h,v 1.12 2000/01/25 22:06:27 jason Exp $	*/

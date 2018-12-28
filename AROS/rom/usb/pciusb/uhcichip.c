@@ -1,9 +1,8 @@
 /*
     Copyright © 2010-2011, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: uhcichip.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
-#define DB_LEVEL 20
 
 #include <proto/exec.h>
 #include <proto/oop.h>
@@ -18,7 +17,8 @@
 #undef HiddAttrBase
 #define HiddAttrBase (hd->hd_HiddAB)
 
-static AROS_INTH1(UhciResetHandler, struct PCIController *, hc)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(UhciResetHandler, struct PCIController *, hc)
 {
     AROS_INTFUNC_INIT
 
@@ -165,7 +165,7 @@ void uhciHandleFinishedTDs(struct PCIController *hc) {
                 KPRINTF(1, ("UQH terminated %08lx\n", linkelem));
                 inspect = 2;
             } else {
-                utd = (struct UhciTD *) ((linkelem & UHCI_PTRMASK) - hc->hc_PCIVirtualAdjust - UHCI_STRUCTURE_OFFSET); // struct UhciTD starts 16/32 bytes before physical TD depending on architecture
+                utd = (struct UhciTD *) ((linkelem & UHCI_PTRMASK) - hc->hc_PCIVirtualAdjust - 16); // struct UhciTD starts 16 bytes before physical TD
                 ctrlstatus = READMEM32_LE(&utd->utd_CtrlStatus);
                 nextutd = (struct UhciTD *)utd->utd_Succ;
                 if(!(ctrlstatus & UTCF_ACTIVE) && nextutd)
@@ -340,17 +340,9 @@ void uhciHandleFinishedTDs(struct PCIController *hc) {
                 unit->hu_DevBusyReq[devadrep] = NULL;
                 Remove(&ioreq->iouh_Req.io_Message.mn_Node);
                 if (uqh->uqh_DataBuffer)
-                {
-                    UWORD dir;
-                    if (ioreq->iouh_Req.io_Command == UHCMD_CONTROLXFER)
-                        dir = (ioreq->iouh_SetupData.bmRequestType & URTF_IN) ? UHDIR_IN : UHDIR_OUT;
-                    else
-                        dir = ioreq->iouh_Dir;
-
-                    usbReleaseBuffer(uqh->uqh_DataBuffer, data, actual, dir);
-                }
+                    usbReleaseBuffer(uqh->uqh_DataBuffer, data, actual, ioreq->iouh_Dir);
                 if (uqh->uqh_SetupBuffer)
-                    usbReleaseBuffer(uqh->uqh_SetupBuffer, &ioreq->iouh_SetupData, sizeof(ioreq->iouh_SetupData), UHDIR_OUT);
+                    usbReleaseBuffer(uqh->uqh_SetupBuffer, &ioreq->iouh_SetupData, sizeof(ioreq->iouh_SetupData), (ioreq->iouh_SetupData.bmRequestType & URTF_IN) ? UHDIR_IN : UHDIR_OUT);
                 uhciFreeQContext(hc, uqh);
                 if(ioreq->iouh_Req.io_Command == UHCMD_INTXFER)
                 {
@@ -488,7 +480,7 @@ void uhciScheduleCtrlTDs(struct PCIController *hc) {
             cont = FALSE;
             uqh->uqh_FirstTD = setuputd;
             uqh->uqh_Element = setuputd->utd_Self; // start of queue
-            uqh->uqh_SetupBuffer = usbGetBuffer(&ioreq->iouh_SetupData, sizeof(ioreq->iouh_SetupData), UHDIR_OUT);
+            uqh->uqh_SetupBuffer = usbGetBuffer(&ioreq->iouh_SetupData, sizeof(ioreq->iouh_SetupData), (ioreq->iouh_SetupData.bmRequestType & URTF_IN) ? UHDIR_IN : UHDIR_OUT);
             WRITEMEM32_LE(&setuputd->utd_CtrlStatus, ctrlstatus);
             WRITEMEM32_LE(&setuputd->utd_Token, (PID_SETUP<<UTTS_PID)|token|(7<<UTTS_TRANSLENGTH)|UTTF_DATA0);
             WRITEMEM32_LE(&setuputd->utd_BufferPtr, (ULONG) (IPTR) pciGetPhysical(hc, uqh->uqh_SetupBuffer));
@@ -511,7 +503,7 @@ void uhciScheduleCtrlTDs(struct PCIController *hc) {
             } else {
                 ioreq->iouh_Actual=0;
             }
-            uqh->uqh_DataBuffer = usbGetBuffer(&(((UBYTE *)ioreq->iouh_Data)[ioreq->iouh_Actual]), ioreq->iouh_Length - actual, (ioreq->iouh_SetupData.bmRequestType & URTF_IN) ? UHDIR_IN : UHDIR_OUT);
+            uqh->uqh_DataBuffer = usbGetBuffer(&(((UBYTE *) ioreq->iouh_Data)[ioreq->iouh_Actual]), ioreq->iouh_Length - actual, ioreq->iouh_Dir);
             phyaddr = (ULONG)(IPTR)pciGetPhysical(hc, uqh->uqh_DataBuffer);
             do
             {
@@ -935,7 +927,8 @@ void uhciUpdateFrameCounter(struct PCIController *hc) {
     Enable();
 }
 
-static AROS_INTH1(uhciCompleteInt, struct PCIController *,hc)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(uhciCompleteInt, struct PCIController *,hc)
 {
     AROS_INTFUNC_INIT
 
@@ -978,12 +971,12 @@ static AROS_INTH1(uhciIntCode, struct PCIController *, hc)
     struct PCIDevice *base = hc->hc_Device;
     UWORD intr;
 
-    KPRINTF(10, ("pciUhciInt()\n"));
+    //KPRINTF(10, ("pciUhciInt()\n"));
     intr = READIO16_LE(hc->hc_RegBase, UHCI_USBSTATUS);
     if(intr & (UHSF_USBINT|UHSF_USBERRORINT|UHSF_RESUMEDTX|UHSF_HCSYSERROR|UHSF_HCPROCERROR|UHSF_HCHALTED))
     {
         WRITEIO16_LE(hc->hc_RegBase, UHCI_USBSTATUS, intr);
-        KPRINTF(1, ("INT=%04lx\n", intr));
+        //KPRINTF(1, ("INT=%04lx\n", intr));
         if(intr & (UHSF_HCSYSERROR|UHSF_HCPROCERROR|UHSF_HCHALTED))
         {
             KPRINTF(200, ("Host ERROR!\n"));
@@ -1222,7 +1215,7 @@ BOOL uhciInit(struct PCIController *hc, struct PCIUnit *hu) {
          */
         WRITEIO32_LE(hc->hc_RegBase, UHCI_FRAMELISTADDR, (ULONG)(IPTR)pciGetPhysical(hc, hc->hc_UhciFrameList));
 
-        WRITEIO16_LE(hc->hc_RegBase, UHCI_USBSTATUS, UHSF_USBINT | UHSF_USBERRORINT | UHSF_RESUMEDTX | UHSF_HCSYSERROR | UHSF_HCPROCERROR | UHSF_HCHALTED);
+        WRITEIO16_LE(hc->hc_RegBase, UHCI_USBSTATUS, UHIF_TIMEOUTCRC|UHIF_INTONCOMPLETE|UHIF_SHORTPACKET);
 
         // install reset handler
         hc->hc_ResetInt.is_Code = (VOID_FUNC)UhciResetHandler;

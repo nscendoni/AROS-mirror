@@ -1,6 +1,6 @@
 /*
     Copyright © 2008-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __vfork.c 50462 2015-04-25 19:56:48Z schulz $
 */
 
 #include <proto/exec.h>

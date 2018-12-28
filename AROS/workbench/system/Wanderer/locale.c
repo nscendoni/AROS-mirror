@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: locale.c 52275 2016-03-27 14:18:38Z mazze $
 */
 #include "portable_macros.h"
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stdkeytable.h 31808 2009-09-19 17:00:28Z neil $
 */
 
 #define NUM_STDKEYS 89

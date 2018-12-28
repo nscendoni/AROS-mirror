@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: _dup2.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      _dup2.c - duplicate a file descriptor (SAS/C)
  *

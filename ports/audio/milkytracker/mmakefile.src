@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 52698 2016-04-23 14:08:18Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- ports-audio : ports-audio-milkytracker
 
@@ -10,10 +10,7 @@ PACKAGE      := milkytracker
 VERSION      := 0.90.86
 TARGETDIR    := $(AROS_CONTRIB)/MultiMedia/Audio/MilkyTracker
 REPOSITORIES := http://milkytracker.org/files
-
-USER_CXXFLAGS:= -std=c++03 -UHAVE_CONFIG_H $(CFLAGS_PERMISSIVE)
-USER_INCLUDES:= -I$(AROS_CONTRIB_DEVELOPER)/include
-USER_LDFLAGS := -static-libstdc++
+USER_CXXFLAGS:= -fpermissive
 
 %fetch_and_build mmake=ports-audio-milkytracker prefix=$(TARGETDIR) \
 	package=$(PACKAGE) version=$(VERSION) suffixes="tar.bz2" \

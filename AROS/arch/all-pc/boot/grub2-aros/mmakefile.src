@@ -1,5 +1,5 @@
 # Copyright © 2004-2016, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 53016 2016-10-22 07:37:07Z deadwood $
 # just for building the grub2 utils
 # in prevision to use grub-mkimage in InstallAROS
 

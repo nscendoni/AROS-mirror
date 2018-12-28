@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setvar.c 49157 2014-07-24 18:56:44Z deadwood $
 
     Desc:
     Lang: English

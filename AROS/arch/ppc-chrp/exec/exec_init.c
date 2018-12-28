@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: exec_init.c 49667 2014-09-30 17:35:27Z neil $
 */
 
 #define DEBUG 1
@@ -376,7 +376,7 @@ void exec_main(struct TagItem *msg, void *entry)
             }
 
             /* Initialise the ETask data. */
-            InitETask(t, NULL, t->tc_UnionETask.tc_ETask);
+            InitETask(t, t->tc_UnionETask.tc_ETask);
             t->tc_UnionETask.tc_ETask->et_RegFrame = KrnCreateContext();
 
             if (!t->tc_UnionETask.tc_ETask->et_RegFrame)

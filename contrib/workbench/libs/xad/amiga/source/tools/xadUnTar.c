@@ -3,7 +3,7 @@
 #define REVISION     "8"
 #define DATE         "04.02.2005"
 
-/*  $Id$
+/*  $Id: xadUnTar.c 43430 2012-01-01 20:12:06Z jmcmullan $
     xadUnTar - dearchives tar archives (also gzipped, bzipped, compressed)
 
     XAD library system for archive handling

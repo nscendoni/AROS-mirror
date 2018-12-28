@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile 34237 2010-08-23 04:50:57Z sonic $
 
 #MM- aminet-util-arc : aminet-util-arc-undms aminet-util-arc-unlzx
 #MM- aminet-util-arc : aminet-util-arc-testdms aminet-util-arc-lha

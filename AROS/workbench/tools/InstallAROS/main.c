@@ -1,11 +1,11 @@
 /*
     Copyright © 2003-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: main.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #define INTUITION_NO_INLINE_STDARG
 
-#define DEBUG 1
+#define DEBUG 0
 #include <aros/debug.h>
 
 #include <libraries/mui.h>
@@ -64,7 +64,7 @@
 #define inputFile_path          "Prefs/Input\""
 #define prefssrc_path           "ENV:SYS"
 #define prefs_path              "Prefs/Env-Archive/SYS"
-#define ARCH_PATH               "boot/pc"
+#define ARCH_PATH               "Arch/pc"
 #define GRUB_PATH               "grub"
 
 #define locale_prfs_file        "locale.prefs"  /* please note the suffixed \" */
@@ -149,7 +149,7 @@ char *dest_Path = NULL;         /* DOS DEVICE NAME of part used to store "aros" 
 char *work_Path = NULL;         /* DOS DEVICE NAME of part used to store "work" */
 TEXT *extras_path = NULL;       /* DOS DEVICE NAME of part used to store extras */
 
-char *boot_Device = "ahci.device";
+char *boot_Device = "ata.device";
 ULONG boot_Unit = 0;
 
 Object *check_copytowork = NULL;
@@ -1129,8 +1129,8 @@ IPTR Install__MUIM_IC_CancelInstall
             &backupOptions->opt_copycore);
         GET(data->instc_options_main->opt_copyextra, MUIA_Disabled,
             &backupOptions->opt_copyextra);
-        GET(data->instc_options_main->opt_developer, MUIA_Disabled,
-            &backupOptions->opt_developer);
+        GET(data->instc_options_main->opt_development, MUIA_Disabled,
+            &backupOptions->opt_development);
         GET(data->instc_options_main->opt_bootloader, MUIA_Disabled,
             &backupOptions->opt_bootloader);
         GET(data->instc_options_main->opt_reboot, MUIA_Disabled,
@@ -1140,7 +1140,7 @@ IPTR Install__MUIM_IC_CancelInstall
         SET(data->instc_options_main->opt_locale, MUIA_Disabled, TRUE);
         SET(data->instc_options_main->opt_copycore, MUIA_Disabled, TRUE);
         SET(data->instc_options_main->opt_copyextra, MUIA_Disabled, TRUE);
-        SET(data->instc_options_main->opt_developer, MUIA_Disabled, TRUE);
+        SET(data->instc_options_main->opt_development, MUIA_Disabled, TRUE);
         SET(data->instc_options_main->opt_bootloader, MUIA_Disabled, TRUE);
         SET(data->instc_options_main->opt_reboot, MUIA_Disabled, TRUE);
         goto donecancel;
@@ -1220,8 +1220,8 @@ IPTR Install__MUIM_IC_ContinueInstall
             (BOOL) backupOptions->opt_copycore);
         SET(data->instc_options_main->opt_copyextra, MUIA_Disabled,
             (BOOL) backupOptions->opt_copyextra);
-        SET(data->instc_options_main->opt_developer, MUIA_Disabled,
-            (BOOL) backupOptions->opt_developer);
+        SET(data->instc_options_main->opt_development, MUIA_Disabled,
+            (BOOL) backupOptions->opt_development);
         SET(data->instc_options_main->opt_bootloader, MUIA_Disabled,
             (BOOL) backupOptions->opt_bootloader);
         SET(data->instc_options_main->opt_reboot, MUIA_Disabled,
@@ -2008,7 +2008,7 @@ IPTR Install__MUIM_IC_Install(Class * CLASS, Object * self, Msg message)
         TEXT tmp[100];
         BOOL success = FALSE;
         CONST_STRPTR core_dirs[] = {
-            "boot", "boot",
+            "Arch", "Arch",
             "C", "C",
             "Classes", "Classes",
             "Devs", "Devs",
@@ -2054,7 +2054,7 @@ IPTR Install__MUIM_IC_Install(Class * CLASS, Object * self, Msg message)
         {
             D(bug
                 ("[INSTALLER] Changing Protection on Env Files failed: %d\n",
-                    IoErr()));
+                    IOErr()));
         }
     }
 
@@ -2093,22 +2093,23 @@ IPTR Install__MUIM_IC_Install(Class * CLASS, Object * self, Msg message)
 
     DoMethod(data->installer, MUIM_Application_InputBuffered);
 
-    /* STEP : COPY DEVELOPER FILES */
+    /* STEP : COPY DEVELOPMENT */
 
-    GET(data->instc_options_main->opt_developer, MUIA_Selected, &option);
+    GET(data->instc_options_main->opt_development, MUIA_Selected, &option);
     if (option && (data->inst_success == MUIV_Inst_InProgress))
     {
         ULONG srcLen = strlen(source_Path);
-        ULONG developerDirLen = srcLen + strlen("Developer") + 2;
+        ULONG developerDirLen = srcLen + strlen("Development") + 2;
         TEXT developerDir[srcLen + developerDirLen];
 
         CopyMem(source_Path, &developerDir, srcLen + 1);
-        AddPart(developerDir, "Developer", srcLen + developerDirLen);
+        AddPart(developerDir, "Development", srcLen + developerDirLen);
 
         if ((lock = Lock(developerDir, SHARED_LOCK)) != NULL)
         {
             CONST_STRPTR developer_dirs[] = {
-                "Developer", "Developer",
+                "Development", "Development",
+                "Tests", "Tests",
                 NULL
             };
             TEXT developmentpath[100];
@@ -2128,7 +2129,7 @@ IPTR Install__MUIM_IC_Install(Class * CLASS, Object * self, Msg message)
                 developer_dirs);
 
             /* Set DEVELPATH environment variable */
-            AddPart(developmentpath, "Developer", 100);
+            AddPart(developmentpath, "Development", 100);
             create_environment_variable(dest_Path, "DEVELPATH",
                 developmentpath);
 
@@ -3203,8 +3204,8 @@ int main(int argc, char *argv[])
         MUIA_Gauge_Current, 0, End);
 
     static char *opt_drivetypes[] = {
-        "AHCI/SATA",
         "IDE",
+        "AHCI/SATA",
         "USB",
         NULL
     };
@@ -3561,7 +3562,7 @@ int main(int argc, char *argv[])
                                             Child, (IPTR) check_extras,
                                             Child, (IPTR) LLabel("Install Extra Software"),
                                             Child, (IPTR) check_dev,
-                                            Child, (IPTR) LLabel("Install Debugging tools and Developer Software"),
+                                            Child, (IPTR) LLabel("Install Development Software"),
                                             Child, (IPTR) check_bootloader,
                                             Child, (IPTR) LLabel("Install Bootloader"),
                                         End,
@@ -3769,10 +3770,10 @@ int main(int argc, char *argv[])
     /* Notifications upon selection of drive type */
     DoMethod(cycle_drivetype, MUIM_Notify, (IPTR) MUIA_Cycle_Active, 0,
         (IPTR) dest_device, 3, MUIM_Set,
-        MUIA_String_Contents, "ahci.device");
+        MUIA_String_Contents, "ata.device");
     DoMethod(cycle_drivetype, MUIM_Notify, (IPTR) MUIA_Cycle_Active, 1,
         (IPTR) dest_device, 3, MUIM_Set,
-        MUIA_String_Contents, "ata.device");
+        MUIA_String_Contents, "ahci.device");
     DoMethod(cycle_drivetype, MUIM_Notify, (IPTR) MUIA_Cycle_Active, 2,
         (IPTR) dest_device, 3, MUIM_Set,
         MUIA_String_Contents, "usbscsi.device");
@@ -3881,7 +3882,7 @@ int main(int argc, char *argv[])
     install_opts->opt_locale = check_locale;
     install_opts->opt_copycore = check_core;
     install_opts->opt_copyextra = check_extras;
-    install_opts->opt_developer = check_dev;
+    install_opts->opt_development = check_dev;
     install_opts->opt_bootloader = check_bootloader;
 
     install_opts->opt_reboot = check_reboot;

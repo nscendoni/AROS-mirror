@@ -2,12 +2,9 @@
 # Generic bootiso binary package generator.
 
 BOOTLOADER=$1
-WITHCONTRIB=$2
-
-CONFIGURE_OPTIONS=""
 
 TARGET=$BUILDTARGET
-if [[ "$VARIANT" != "" ]]; then
+if [ "$VARIANT" != "" ]; then
     BUILDTARGET=$VARIANT-$TARGET
 fi
 
@@ -22,26 +19,12 @@ printi "Creating AROS/$BUILDTARGET bootiso binary packages (with $BOOTLOADER)...
 
 delete  $BUILD_BASE/AROS
 copy    $SOURCE_AROS      $BUILD_BASE/AROS
-if [[ "$WITHCONTRIB" != "no" ]]; then
-    copy    $SOURCE_CONTRIB $BUILD_BASE/AROS/contrib
-fi
-
-CONFIGURE_OPTIONS="--target=$TARGET"
-if [[ "$VARIANT" != ""  ]]; then
-     CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS --enable-target-variant=$VARIANT"
-fi
-CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS $CONFIGUREEXTRA --enable-ccache"
-if [[ ( "$AROSTOOLCHAININSTALLOPT" != "" ) && -e  $TOOLCHAIN_BASE/$BUILDCPU-aros-gcc ]]; then
-     CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS $AROSTOOLCHAININSTALLOPT $AROSTOOLCHAINOPT"
-fi
-CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS --with-bootloader=$BOOTLOADER --enable-build-type=nightly $PORTSSOURCESOPT"
+copy    $SOURCE_CONTRIB $BUILD_BASE/AROS/contrib
 
 cd      $BUILD_BASE/AROS
-execute ./configure ${=CONFIGURE_OPTIONS}
+execute ./configure --target=$TARGET --enable-target-variant=$VARIANT --enable-ccache --with-bootloader=$BOOTLOADER --enable-build-type=nightly $PORTSSOURCESOPT $AROSTOOLCHAININSTALLOPT $AROSTOOLCHAINOPT
 make    -j $MAKE_JOBS
-if [[ "$WITHCONTRIB" != "no" ]]; then
-    make    -j $MAKE_JOBS contrib
-fi
+make    -j $MAKE_JOBS contrib
 
 ISOFILE=aros-$BUILDTARGET.iso
 PACKAGE=$BASENAME-$BUILDTARGET-boot-iso

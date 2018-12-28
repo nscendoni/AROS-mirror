@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: audio.c 43651 2012-01-17 20:33:09Z twilen $
 
     Desc: Paula audio.device
     Lang: English

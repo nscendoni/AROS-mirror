@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2010-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: posixc.h 48048 2013-09-08 21:19:29Z verhaegs $
 
     Public part of PosixC libbase.
     Take care of backwards compatibility when changing something in this file.

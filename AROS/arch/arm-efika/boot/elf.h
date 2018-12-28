@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: elf.h 47619 2013-07-02 18:27:20Z neil $
 
     Desc: elf.h
     Lang: english

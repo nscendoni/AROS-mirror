@@ -1,6 +1,6 @@
 /*
     Copyright © 2007-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: wcstombs.c 48037 2013-09-08 21:17:44Z verhaegs $
 
     C99 function wcstombs().
 */

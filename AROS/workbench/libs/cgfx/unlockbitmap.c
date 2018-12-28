@@ -1,12 +1,12 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: unlockbitmap.c 48254 2013-10-08 16:18:09Z NicJA $
 
     Desc:
     Lang: english
 */
 
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <cybergraphx/cybergraphics.h>
 
 #include "cybergraphics_intern.h"

@@ -22,7 +22,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *   
- * $Id$
+ * $Id: locale.h 38936 2011-05-31 07:42:59Z mazze $
  */
 
 #include <exec/types.h>

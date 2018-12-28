@@ -2,8 +2,8 @@
 #define EXEC_TASKS_H
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2016, The AROS Development Team. All rights reserved.
+    $Id: tasks.h 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Task structure and constants
     Lang: english
@@ -118,9 +118,7 @@ struct StackSwapArgs
 #define TS_WAIT		4
 #define TS_EXCEPT	5
 #define TS_REMOVED	6
-/* AROS specific */
-#define TS_TOMBSTONED	7
-#define TS_SPIN	        8
+#define TS_SPIN	        7       /* AROS specific */
 
 /* Predefined Signals */
 #define SIGB_ABORT	0
@@ -176,6 +174,7 @@ struct ETask
     ULONG	    et_Result1;	    /* First result			*/
     APTR	    et_Result2;	    /* Result data pointer (AllocVec)	*/
     struct MsgPort  et_TaskMsgPort;
+    APTR	    et_Compatibility[4]; /* ABI_V0 compatibility: Reserve this space for compiled software to access iet_startup and iet_acpd */
     void	   *et_MemPool;	    /* Task's private memory pool	*/
 #ifdef __AROS__
     IPTR	    et_Reserved[1]; /* MorphOS Private                  */
@@ -221,9 +220,6 @@ struct ETask
 #define TASKTAG_FLAGS           (TASKTAG_Dummy + 26)
 #define TASKTAG_TCBEXTRASIZE    (TASKTAG_Dummy + 28)
 #define TASKTAG_AFFINITY        (TASKTAG_Dummy + 29)
-#define TASKAFFINITY_BOOT        0
-#define TASKAFFINITY_ANY          ((IPTR)-1)
-#define TASKAFFINITY_ALL_BUT_SELF ((IPTR)-2)
 
 #define TASKERROR_OK       0
 #define TASKERROR_NOMEMORY 1

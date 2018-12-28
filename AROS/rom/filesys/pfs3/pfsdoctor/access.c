@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: access.c 49096 2014-07-01 18:48:17Z twilen $ */
 /* $Log: access.c $
  * Revision 2.6  1999/09/11  16:45:50  Michiel
  * Bug (1024 byte blok supprort) in AccessTest fixed

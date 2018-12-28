@@ -33,7 +33,7 @@
 **  (C)Copyright 1992 by Bernd Noll for null/zero-soft
 **  All Rights Reserved
 **
-**  RCS Header: $Id$
+**  RCS Header: $Id: Flags.c 36659 2011-01-18 13:26:51Z neil $
 **
 **  Basic Functions to work with (arrays of) DME-Flags
 **  (both Local and Global Flags use these functions)

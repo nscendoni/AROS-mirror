@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getrpattrsa.c 51697 2016-03-09 21:13:10Z NicJA $
 
     Desc: Graphics function GetRPAttrsA()
     Lang: english

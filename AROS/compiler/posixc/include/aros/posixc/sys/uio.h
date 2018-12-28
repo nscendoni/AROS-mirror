@@ -2,7 +2,7 @@
 #define _POSIXC_SYS_UIO_H_
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: uio.h 48028 2013-09-08 21:13:29Z verhaegs $
 
     Desc: POSIX.1-2008 header file <sys/uio.h>
 */

@@ -2,7 +2,7 @@
 #define RPC_AUTH_H
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: auth.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /* @(#)auth.h	2.3 88/08/07 4.0 RPCSRC; from 1.17 88/02/08 SMI */

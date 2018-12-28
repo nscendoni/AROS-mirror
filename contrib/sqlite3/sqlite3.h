@@ -12,7 +12,7 @@
 ** This header file defines the interface that the SQLite library
 ** presents to client programs.
 **
-** @(#) $Id$
+** @(#) $Id: sqlite3.h 36659 2011-01-18 13:26:51Z neil $
 */
 #ifndef _SQLITE3_H_
 #define _SQLITE3_H_

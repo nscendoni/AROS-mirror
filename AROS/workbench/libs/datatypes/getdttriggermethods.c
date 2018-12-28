@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getdttriggermethods.c 44134 2012-02-20 21:09:55Z jmcmullan $
 
     Desc:
     Lang: English

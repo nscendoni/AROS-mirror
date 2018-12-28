@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sptst.c 47355 2013-05-04 17:41:24Z mazze $
 */
 
 #include "mathffp_intern.h"

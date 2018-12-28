@@ -2,7 +2,7 @@
 #define PROTO_MUIMASTER_H
 
 /*
-**	$Id$
+**	$Id: muimaster.h 48674 2014-01-02 17:51:04Z neil $
 **	Includes Release 50.1
 **
 **	Prototype/inline/pragma header file combo

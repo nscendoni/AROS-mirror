@@ -1,7 +1,7 @@
 
 /*
 **
-** $Id$
+** $Id: anim7.c 51948 2016-03-14 19:21:58Z neil $
 **  anim.datatype 41.8
 **
 ** These are "generic" software implementations of the unpacking code

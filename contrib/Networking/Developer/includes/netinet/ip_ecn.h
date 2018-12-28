@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ip_ecn.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ip_ecn.h,v 1.1 1999/12/08 06:50:19 itojun Exp $	*/

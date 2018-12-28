@@ -1,6 +1,6 @@
 /*
     Copyright © 2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getcpunumber.c 50720 2015-05-19 23:23:22Z neil $
 */
 
 #include <aros/kernel.h>

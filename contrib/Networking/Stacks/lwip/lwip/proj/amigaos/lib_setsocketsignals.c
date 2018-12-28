@@ -2,7 +2,7 @@
     Copyright © 2002-2007, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: lib_setsocketsignals.c 30794 2009-03-08 02:19:07Z neil $
 */
 
 #include <exec/types.h>

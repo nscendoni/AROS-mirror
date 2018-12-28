@@ -1,12 +1,12 @@
-#   $Id$
+#   $Id: mmakefile.src 52386 2016-03-29 22:37:20Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES := classbase methods dispatch prefs misc encoder
 #FILES stackswap 
 TESTSDIR := $(AROS_TESTS)/datatypes
 
-#MM- workbench-datatypes-animation : workbench-datatype-gifanim datatype-descriptor-gifanim
+#MM- workbench-datatypes-animation : workbench-datatype-gifanim
 #MM workbench-datatype-gifanim : includes linklibs
 
 USER_CFLAGS   := -DDEBUG=0

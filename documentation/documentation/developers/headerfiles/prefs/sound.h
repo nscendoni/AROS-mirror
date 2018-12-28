@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sound.h 30800 2009-03-08 17:28:50Z neil $
 */
 
 #ifndef EXEC_TYPES_H

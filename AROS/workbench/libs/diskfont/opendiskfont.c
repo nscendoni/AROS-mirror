@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: opendiskfont.c 35116 2010-11-04 05:24:31Z jmcmullan $
 
     Desc: Diskfont function OpenDiskFont()
     Lang: english

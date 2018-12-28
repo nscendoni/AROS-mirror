@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 52385 2016-03-29 22:36:42Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM contrib-vpdf-mcc : includes
 
@@ -22,8 +22,7 @@ FILES := \
 
 TARGETDIR := $(AROS_CONTRIB)/Utilities/Text/VPDF/libs
 USER_INCLUDES := -I$(SRCDIR)/$(CURDIR)/../aros/include -I$(SRCDIR)/$(CURDIR)/.. -idirafter $(SRCDIR)/$(CURDIR)/../include
-NOWARN_FLAGS := $(NOWARN_CPP) $(NOWARN_UNUSED_VARIABLE) $(NOWARN_UNUSED_FUNCTION)
-USER_CFLAGS := -DMUI_OBSOLETE $(NOWARN_FLAGS)
+USER_CFLAGS := -DMUI_OBSOLETE
 
 %build_linklib mmake=contrib-vpdf-mcc libname=muiclasses \
   files=$(FILES) libdir=$(TARGETDIR)

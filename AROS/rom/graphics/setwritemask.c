@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$    $Log
+    $Id: setwritemask.c 34843 2010-10-20 04:54:32Z jmcmullan $    $Log
 
     Desc: Graphics function SetWriteMask()
     Lang: english

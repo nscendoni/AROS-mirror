@@ -24,9 +24,8 @@
  * SUCH DAMAGE.
  */
 
-__FBSDID("$FreeBSD: src/lib/msun/src/s_nearbyint.c,v 1.2 2008/01/14 02:12:06 das Exp $");
+__FBSDID("$FreeBSD: src/lib/msun/src/s_nearbyint.c,v 1.1 2004/07/06 04:46:08 das Exp $");
 
-#include <float.h>
 #include <fenv.h>
 #include <math.h>
 
@@ -41,7 +40,7 @@ __FBSDID("$FreeBSD: src/lib/msun/src/s_nearbyint.c,v 1.2 2008/01/14 02:12:06 das
 type				\
 fn(type x)			\
 {				\
-	volatile type ret;	\
+	type ret;		\
 	fenv_t env;		\
 				\
 	fegetenv(&env);		\
@@ -52,9 +51,3 @@ fn(type x)			\
 
 DECL(double, nearbyint, rint)
 DECL(float, nearbyintf, rintf)
-#if (LDBL_MANT_DIG != DBL_MANT_DIG)
-DECL(long double, nearbyintl, rintl)
-#else
-AROS_MAKE_ASM_SYM(typeof(nearbyintl), nearbyintl, AROS_CSYM_FROM_ASM_NAME(nearbyintl), AROS_CSYM_FROM_ASM_NAME(nearbyint));
-AROS_EXPORT_ASM_SYM(AROS_CSYM_FROM_ASM_NAME(nearbyintl));
-#endif

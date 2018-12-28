@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: addresource.c 39128 2011-06-09 05:24:18Z sonic $
 
     Desc: Add a resource to the public list of resources.
     Lang: english
@@ -10,12 +10,12 @@
 #include <exec/execbase.h>
 #include <exec/rawfmt.h>
 #include <proto/exec.h>
+#include <proto/kernel.h>
 
 #include <string.h>
 
-#include "exec_intern.h"
 #include "exec_debug.h"
-#include "exec_locks.h"
+#include "exec_intern.h"
 
 /* Kludge for old kernels */
 #ifndef KrnStatMemory
@@ -62,14 +62,14 @@
     ((struct Node *)resource)->ln_Type=NT_RESOURCE;
 
     /* Arbitrate for the resource list */
-    EXEC_LOCK_LIST_WRITE_AND_FORBID(&SysBase->ResourceList);
+    Forbid();
 
     /* And add the resource */
     Enqueue(&SysBase->ResourceList,(struct Node *)resource);
 
     /* All done. */
-    EXEC_UNLOCK_LIST_AND_PERMIT(&SysBase->ResourceList);
-    
+    Permit();
+
     /*
      * A tricky part.
      * kernel.resource is the first one to get initialized. After that
@@ -89,6 +89,7 @@
 
 	/* If there's no MMU support, PageSize will stay zero */
 	KrnStatMemory(0, KMS_PageSize, &PrivExecBase(SysBase)->PageSize, TAG_DONE);
+	DINIT("Memory page size: %lu", PrivExecBase(SysBase)->PageSize);
 
 	/*
 	 * On MMU-less hardware kernel.resource will report zero page size.
@@ -99,8 +100,6 @@
 	 */
 	if (!PrivExecBase(SysBase)->PageSize)
 	    PrivExecBase(SysBase)->PageSize = MEMCHUNK_TOTAL;
-
-	DINIT("Memory page size: %lu", PrivExecBase(SysBase)->PageSize);
 
 	/* We print the notice here because kprintf() works only after KernelBase is set up */
 	if (PrivExecBase(SysBase)->IntFlags & EXECF_MungWall)

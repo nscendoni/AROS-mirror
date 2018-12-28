@@ -1,7 +1,7 @@
 #ifndef XADMASTER_CPIO_C
 #define XADMASTER_CPIO_C
 
-/*  $Id$
+/*  $Id: Cpio.c 36659 2011-01-18 13:26:51Z neil $
     Cpio file archiver client
 
     XAD library system for archive handling

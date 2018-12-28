@@ -1,6 +1,6 @@
 // FrameButtonMCC.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 21:11:31 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51976 $
 
 
 #include <stdlib.h>

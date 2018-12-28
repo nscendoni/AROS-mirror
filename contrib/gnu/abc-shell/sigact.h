@@ -20,7 +20,7 @@
  */
 /*
  * RCSid:
- *      $Id$
+ *      $Id: sigact.h 36659 2011-01-18 13:26:51Z neil $
  */
 /* Changes to sigact.h for pdksh, Michael Rendell <michael@cs.mun.ca>:
  *      - changed SIG_HDLR to void for use with GNU autoconf

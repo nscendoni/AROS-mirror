@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: internalloadseg_aos.c 51694 2016-03-09 20:45:33Z NicJA $
 
     Desc:
     Lang: english

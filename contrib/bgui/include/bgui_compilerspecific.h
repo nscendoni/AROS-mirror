@@ -1,7 +1,7 @@
 #ifndef BGUI_COMPILERSPECIFIC_H
 #define BGUI_COMPILERSPECIFIC_H
 /*
-**      $Id$
+**      $Id: bgui_compilerspecific.h 37181 2011-02-24 06:23:45Z jmcmullan $
 **
 **      Copyright (C) 1997 Bernardo Innocenti <bernie@cosmos.it>
 **      All rights reserved.

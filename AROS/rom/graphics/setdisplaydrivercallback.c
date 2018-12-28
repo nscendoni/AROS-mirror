@@ -1,6 +1,6 @@
 /*
     Copyright © 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setdisplaydrivercallback.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Set display driver notification callback
     Lang: english
@@ -25,7 +25,7 @@
 	AROS_LHA(APTR, userdata, A1),
 
 /*  LOCATION */
-	struct GfxBase *, GfxBase, 108, Graphics)
+	struct GfxBase *, GfxBase, 186, Graphics)
 
 /*  FUNCTION
 	Specify a display driver notification callback.

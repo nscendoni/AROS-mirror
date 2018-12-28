@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Setenv.c 45528 2012-08-13 01:41:48Z jmcmullan $
 
     Desc: Setenv CLI command
     Lang: English

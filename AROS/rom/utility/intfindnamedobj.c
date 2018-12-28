@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: intfindnamedobj.c 35076 2010-11-02 13:43:14Z jmcmullan $
 
     Desc: Find a NamedObject in a NameSpace.
     Lang: English

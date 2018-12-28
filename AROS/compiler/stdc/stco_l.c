@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stco_l.c 48031 2013-09-08 21:16:04Z verhaegs $
 
     SAS/C function stco_l().
 */

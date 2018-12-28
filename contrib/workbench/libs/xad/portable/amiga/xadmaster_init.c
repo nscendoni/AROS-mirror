@@ -2,7 +2,7 @@
     Copyright © 2014, The AROS Development Team.
     All rights reserved.
     
-    $Id$
+    $Id: xadmaster_init.c 49017 2014-05-18 18:19:06Z deadwood $
 */
 
 #define NOXADPROTOS

@@ -6,7 +6,7 @@
     This file is part of the Wanderer Preferences program, which is distributed
     under the terms of version 2 of the GNU General Public License.
     
-    $Id$
+    $Id: wpeditor.h 43622 2012-01-14 20:13:12Z deadwood $
 */
 
 #include <exec/types.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 2000-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setsockopt.c 34529 2010-09-28 09:11:26Z sonic $
 
     Desc:
     Lang: English

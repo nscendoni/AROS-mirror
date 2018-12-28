@@ -30,7 +30,7 @@
  * 
  * Author: Adam Dunkels <adam@sics.se>
  *
- * $Id$
+ * $Id: lib_arch.c 30794 2009-03-08 02:19:07Z neil $
  */
 
 /* These are generic implementations of various library functions used

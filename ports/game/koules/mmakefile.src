@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 53106 2016-12-26 15:46:50Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- ports-game : ports-game-$(AROS_TARGET_CPU)
 
@@ -18,15 +18,13 @@ include $(SRCDIR)/config/aros-contrib.cfg
 
 
 REPOSITORIES := http://archives.aros-exec.org/share/game/action/
-ARCHBASE     := koules-src-1.19
+ARCHBASE     := koules-src-1.17
 TARGETDIR    := $(AROS_CONTRIB)/Games/Action/Koules
 
 FILES := source/framebuffer source/koules source/menu source/amiga source/gameplan
 FILES := $(addprefix $(PORTSDIR)/koules/$(ARCHBASE)/,$(FILES))
 
-ifneq ("","$(strip $(WARN_ERROR))")
-CONFIG_CFLAGS := $(subst $(WARN_ERROR),,$(CONFIG_CFLAGS))
-endif
+CONFIG_CFLAGS := $(subst -Werror ,,$(CONFIG_CFLAGS))
 
 %build_prog mmake=ports-game-koules progname=Koules \
     files=$(FILES) targetdir=$(TARGETDIR) \

@@ -9,9 +9,6 @@
 #include <exec/execbase.h>
 #endif
 
-#if defined(__AROS__)
-#include <proto/timer.h>
-#endif
 
 /*
     Instance data
@@ -2494,17 +2491,8 @@ static unsigned int randomseed;
 */
 void InitRandom()
 {
-    ULONG count1;
+    ULONG count1 = (ULONG)SysBase->Elapsed;
     ULONG count2 = SysBase->IdleCount + SysBase->DispCount;
-    
-#if !defined(__AROS__)
-    count1 = (ULONG)SysBase->Elapsed;
-#else
-    struct timeval systime;
-    GetSysTime(&systime);
-    count1 = systime.tv_secs;
-#endif
-
     randomseed = (int)((count1 << 14) ^ (count1 << 4) ^ count2);
 }
 

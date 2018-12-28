@@ -30,7 +30,7 @@
  * 
  * Author: Adam Dunkels <adam@sics.se>
  *
- * $Id$
+ * $Id: lwipopts.h 30794 2009-03-08 02:19:07Z neil $
  */
 #ifndef __LWIPOPTS_H__
 #define __LWIPOPTS_H__

@@ -2,7 +2,7 @@
 #define _NETINET_IP6_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ip6.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ip6.h,v 1.3 2000/02/24 11:37:49 itojun Exp $	*/

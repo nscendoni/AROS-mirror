@@ -1,7 +1,7 @@
 /*
     Copyright © 2004, Martin Gierich. All rights reserved.
     Licensed under the terms of the AROS Public License (APL)
-    $Id$
+    $Id: layout.c 40098 2011-07-14 12:10:39Z jmcmullan $
 
     Desc: Layout engine with wordwrapper
 */

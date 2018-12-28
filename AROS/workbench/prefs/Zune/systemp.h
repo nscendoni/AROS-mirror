@@ -1,6 +1,6 @@
 /*
     Copyright © 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: systemp.h 51633 2016-03-08 00:38:42Z mazze $
 */
 
 #ifndef _ZUNE_SYSTEMP_H

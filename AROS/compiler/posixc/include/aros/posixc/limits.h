@@ -2,8 +2,8 @@
 #define _POSIXC_LIMITS_H_
 
 /*
- *  Copyright © 2004-2017 The AROS Developmemt Team. All rights reserved.
- *  $Id$
+ *  Copyright Â© 2004-2012 The AROS Developmemt Team. All rights reserved.
+ *  $Id: limits.h 48028 2013-09-08 21:13:29Z verhaegs $
  *
  *  POSIX.1-2008 header file limits.h
  */
@@ -35,7 +35,6 @@
 #define OPEN_MAX                                _POSIX_OPEN_MAX
 #define PAGESIZE                                4096
 #define PAGE_SIZE                               PAGESIZE
-#define PASS_MAX                                128
 #define PTHREAD_DESTRUCTOR_ITERATIONS           _POSIX_THREAD_DESTRUCTOR_ITERATIONS
 #define PTHREAD_KEYS_MAX                        _POSIX_THREAD_KEYS_MAX
 #define PTHREAD_STACK_MIN                       0

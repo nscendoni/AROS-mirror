@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: findgroup_class.h 52379 2016-03-29 21:38:51Z mazze $
 */
 
 #include <exec/types.h>

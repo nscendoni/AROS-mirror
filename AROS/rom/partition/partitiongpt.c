@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2012, The AROS Development Team. All rights reserved.
+    $Id: partitiongpt.c 45863 2012-10-04 19:03:14Z sonic $
     
     Desc: GPT partition table handler
 */
@@ -551,8 +551,7 @@ static LONG PartitionGPTWritePartitionTable(struct Library *PartitionBase, struc
     return ERROR_NO_FREE_STORE;
 }
 
-static LONG PartitionGPTGetPartitionAttr(struct Library *PartitionBase,
-    struct PartitionHandle *ph, const struct TagItem *tag)
+static LONG PartitionGPTGetPartitionAttr(struct Library *PartitionBase, struct PartitionHandle *ph, struct TagItem *tag)
 {
     struct GPTPartition *part = (APTR)ph + sizeof(struct GPTPartitionHandle);
 

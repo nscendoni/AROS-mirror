@@ -36,6 +36,4 @@ int main()
    delete new Application();
 
    LibrarySpool::Exit();
-
-   return 0;
 }

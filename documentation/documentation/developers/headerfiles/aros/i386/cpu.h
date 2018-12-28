@@ -2,7 +2,7 @@
 #define AROS_I386_CPU_H
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu.h 33636 2010-06-17 17:14:53Z mazze $
 
     NOTE: This file must compile *without* any other header !
 

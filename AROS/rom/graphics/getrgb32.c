@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getrgb32.c 46058 2012-11-21 01:25:27Z neil $
 
     Desc: Graphics function GetRGB32()
     Lang: english

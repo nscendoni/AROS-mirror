@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2005, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gifclass.c 34743 2010-10-15 14:57:38Z jmcmullan $
 */
 
 /*

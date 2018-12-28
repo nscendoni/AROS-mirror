@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gencall.c 49845 2014-12-10 18:32:31Z deadwood $
 */
 /* This program generates the libcall.h macroset for gcc-4.5.1 m68k-elf
  *

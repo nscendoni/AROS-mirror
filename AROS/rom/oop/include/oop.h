@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: oop.h 45204 2012-07-12 04:01:17Z jmcmullan $
 */
 
 #ifndef EXEC_TYPES_H

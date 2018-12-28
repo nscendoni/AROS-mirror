@@ -3,7 +3,7 @@
 
 /*
     Copyright  2004 - 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: iconwindow_attributes.h 42279 2011-11-05 10:01:56Z deadwood $
 */
 
 /*** Identifier Base ********************************************************/

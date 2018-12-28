@@ -1,6 +1,6 @@
 /*
     Copyright © 2005-2013, Davy Wentzler. All rights reserved.
-    $Id$
+    $Id: regs.h 46905 2013-03-12 20:25:37Z neil $
 */
 
 #ifndef _REGS_H

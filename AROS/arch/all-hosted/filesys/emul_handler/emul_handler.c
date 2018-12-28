@@ -1,6 +1,6 @@
 /*
- Copyright © 1995-2017, The AROS Development Team. All rights reserved.
- $Id$
+ Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+ $Id: emul_handler.c 50752 2015-05-25 15:20:32Z neil $
 
  Desc: Filesystem that accesses an underlying host OS filesystem.
  Lang: english
@@ -779,7 +779,7 @@ static void handlePacket(struct emulbase *emulbase, struct filehandle *fhv, stru
 
     case ACTION_SET_FILE_SIZE:
         fh = FH_FROM(dp->dp_Arg1);
-        DCMD(bug("[emul] %p ACTION_SET_FILE_SIZE: %p, mode %ld, offset %ld\n", fhv, fh, dp->dp_Arg3, dp->dp_Arg2));
+        DCMD(bug("[emul] %p ACTION_SET_FILE_SIZE: %p, mode %ld, offset %llu\n", fhv, fh, dp->dp_Arg2, dp->dp_Arg3));
 
         Res1 = DoSetSize(emulbase, fh, dp->dp_Arg2, dp->dp_Arg3, &Res2);
         if (Res2 != 0) {

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: memory.c 49919 2015-01-20 22:55:34Z NicJA $
 */
 
 #include <stdlib.h>

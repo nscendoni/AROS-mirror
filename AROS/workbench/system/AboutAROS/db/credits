@@ -19,7 +19,6 @@ HIDD subsystem:
     Stefan Berger
     Sven Drieling
     Pavel Fedin
-    Nick Andrews (Kalamatee)
 
 Intuition:
     Stefan Berger
@@ -45,7 +44,6 @@ Intuition:
     Staf Verhaegen
     Franck Charlet
     Pavel Fedin
-    Nick Andrews (Kalamatee)
 
 Graphics:
     Aaron Digulla
@@ -71,7 +69,6 @@ Graphics:
     Matthias Rustler
     Pavel Fedin
     Krzysztof Smiechowicz
-    Nick Andrews (Kalamatee)
     Toni Wilen
 
 Shell commands:
@@ -87,7 +84,6 @@ Shell commands:
     Matthias Rustler
     Olivier Tigreat
     Vidar Hokstad
-    Nick Andrews (Kalamatee)
 
 Workbench:
     Adam Chodorowski
@@ -107,14 +103,12 @@ Tools:
     Henning Kiel
     Matthias Rustler
     Jason McMullan
-    Nick Andrews (Kalamatee)
 
 Preferences:
     Georg Steger
     Peter Eriksson
     Nico François
     Magnus Holmgren
-    Nick Andrews (Kalamatee)
 
 BGUI:
     Adam Chodorowski
@@ -127,7 +121,6 @@ Zune:
     Georg Steger
     Fabio Alemagna
     Adam Chodorowski
-    Nick Andrews (Kalamatee)
    
 Kernel:
     Iain Templeton
@@ -162,7 +155,6 @@ C link library and POSIX layer:
     Fabio Alemagna
     Iain Templeton
     Henning Kiel
-    Nick Andrews (Kalamatee)
     Staf Verhaegen
 
 Datatypes:
@@ -171,7 +163,6 @@ Datatypes:
     Georg Steger
     Jörg Dietrich
     Martin Gierich
-    Nick Andrews (Kalamatee)
     Stephan Rupprecht
 
 Documentation:

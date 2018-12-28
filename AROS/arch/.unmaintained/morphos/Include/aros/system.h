@@ -4,7 +4,7 @@
 
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: system.h 36647 2011-01-17 14:01:23Z neil $
 
     Desc: Analyse the current kind of system and compiler.
     Lang: english

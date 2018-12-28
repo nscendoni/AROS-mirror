@@ -1,6 +1,6 @@
 /*
-    Copyright © 2010-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2010-2011, The AROS Development Team. All rights reserved.
+    $Id: kernel_mm.c 42936 2011-12-14 17:05:27Z jmcmullan $
 
     Desc: Page-based memory allocator, low-level routines.
     Lang: english
@@ -15,7 +15,6 @@
 #include <inttypes.h>
 
 #include <kernel_base.h>
-#include <kernel_intern.h>
 #include <kernel_debug.h>
 #include <kernel_mm.h>
 

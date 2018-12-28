@@ -6,7 +6,7 @@
     Copyright © 2009-2010, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: editpanel_class.h 39272 2011-06-17 05:44:11Z jmcmullan $
 */
 
 #include "psi.h"

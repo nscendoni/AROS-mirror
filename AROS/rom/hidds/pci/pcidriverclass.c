@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pcidriverclass.c 52807 2016-07-28 01:51:35Z neil $
 
     Desc: Base PCI driver class
     Lang: English
@@ -363,11 +363,7 @@ VOID PCIDrv__Root__Get(OOP_Class *cl, OOP_Object *o,
             case aoHidd_PCIDriver_IOBase:
                 *msg->storage = (IPTR)instance->IOBase;
                 break;
-
-            case aoHidd_PCIDriver_IRQRoutingTable:
-                *msg->storage = (IPTR)0;
-                break;
-
+            
             default:
                 OOP_DoSuperMethod(cl, o, (OOP_Msg) msg);
                 break;

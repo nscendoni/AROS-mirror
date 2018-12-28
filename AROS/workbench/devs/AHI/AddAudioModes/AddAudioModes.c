@@ -1,6 +1,5 @@
 /*
      AddAudioModes - Manipulates AHI's audio mode database 
-     Copyright (C) 2017 The AROS Dev Team
      Copyright (C) 1996-2005 Martin Blom <martin@blom.org>
      
      This program is free software; you can redistribute it and/or
@@ -17,9 +16,6 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
-
-#define DEBUG 1
-#include <aros/debug.h>
 
 #include <config.h>
 
@@ -56,10 +52,10 @@ const char version[] = "$VER: AddAudioModes " VERS "\n\r";
 
 struct {
   STRPTR *files;
-  IPTR   quiet;
-  IPTR   refresh;
-  IPTR   remove;
-  IPTR   dblscan;
+  ULONG   quiet;
+  ULONG   refresh;
+  ULONG   remove;
+  ULONG   dblscan;
 } args = {NULL, FALSE, FALSE, FALSE, FALSE};
 
 #ifdef __MORPHOS__
@@ -71,8 +67,6 @@ struct {
 void
 cleanup( void )
 {
-  D(bug("[AddAudioModes] %s()\n", __func__);)
-
 #ifdef __AMIGAOS4__
   DropInterface((struct Interface*) IAHI);
 #endif
@@ -93,12 +87,9 @@ cleanup( void )
 void
 OpenAHI( void )
 {
-  D(bug("[AddAudioModes] %s()\n", __func__);)
   if( AHIDevice != 0 )
   {
     AHImp = CreateMsgPort();
-
-    D(bug("[AddAudioModes] %s: MsgPort @ 0x%p\n", __func__, AHImp);)
 
     if( AHImp != NULL )
     {
@@ -107,7 +98,6 @@ OpenAHI( void )
 
       if( AHIio != NULL )
       {
-        D(bug("[AddAudioModes] %s: IORequest @ 0x%p\n", __func__, AHIio);)
         AHIio->ahir_Version = AHIVERSION;
 
         AHIDevice = OpenDevice( AHINAME, 
@@ -119,13 +109,12 @@ OpenAHI( void )
 
     if( AHIDevice != 0 )
     {
-      Printf( "Unable to open '%s' version %ld\n", AHINAME, AHIVERSION );
+      Printf( "Unable to open %s version %ld\n", AHINAME, AHIVERSION );
       cleanup();
       exit( RETURN_FAIL );
     }
 
     AHIBase = (struct Library *) AHIio->ahir_Std.io_Device;
-    D(bug("[AddAudioModes] %s: AHIBase @ 0x%p\n", __func__, AHIBase);)
 
 #ifdef __AMIGAOS4__
     IAHI = (struct AHIIFace *) GetInterface(AHIBase, "main", 1, NULL);
@@ -141,8 +130,6 @@ main( void )
 {
   struct RDArgs *rdargs;
   int            rc = RETURN_OK;
-
-  D(bug("[AddAudioModes] %s()\n", __func__);)
 
   GfxBase       = (struct GfxBase *) OpenLibrary( GRAPHICSNAME, 37 );
   IntuitionBase = (struct IntuitionBase *) OpenLibrary( "intuition.library", 37 );
@@ -161,11 +148,6 @@ main( void )
     return RETURN_FAIL;
   }
 
-  D(
-    bug("[AddAudioModes] %s: GfxBase @ 0x%p\n", __func__, GfxBase);
-    bug("[AddAudioModes] %s: IntuitionBase @ 0x%p\n", __func__, IntuitionBase);
-  )
-
   rdargs = ReadArgs( TEMPLATE , (SIPTR *) &args, NULL );
 
   if( rdargs != NULL )
@@ -174,17 +156,16 @@ main( void )
 
     if( args.refresh && !args.remove )
     {
-      IPTR id;
+      ULONG id;
 
       OpenAHI();
 
       /* First, empty the database */
       
       for( id = AHI_NextAudioID( AHI_INVALID_ID );
-           id != (IPTR) AHI_INVALID_ID;
+           id != (ULONG) AHI_INVALID_ID;
            id = AHI_NextAudioID( AHI_INVALID_ID ) )
       {
-        D(bug("[AddAudioModes] %s: Removing ID %08x\n", __func__, id);)
         AHI_RemoveAudioMode( id );
       }
 
@@ -194,7 +175,7 @@ main( void )
       {
         if( IS_MORPHOS )
         {
-          IPTR res;
+          ULONG res;
 
           /* Be quiet here. - Piru */
           APTR *windowptr = &((struct Process *) FindTask(NULL))->pr_WindowPtr;
@@ -235,10 +216,8 @@ main( void )
 
       while( args.files[i] )
       {
-        D(bug("[AddAudioModes] %s: Trying to load '%s' ... \n", __func__, args.files[i]);)
         if( !AHI_LoadModeFile( args.files[i] ) && !args.quiet )
         {
-          D(bug("[AddAudioModes] %s:    Failed!\n", __func__);)
           PrintFault( IoErr(), args.files[i] );
           rc = RETURN_ERROR;
         }
@@ -257,15 +236,14 @@ main( void )
       }
       else
       {
-        IPTR id;
+        ULONG id;
 
         OpenAHI();
 
         for( id = AHI_NextAudioID( AHI_INVALID_ID );
-             id != (IPTR) AHI_INVALID_ID;
+             id != (ULONG) AHI_INVALID_ID;
              id = AHI_NextAudioID( AHI_INVALID_ID ) )
         {
-          D(bug("[AddAudioModes] %s: Removing ID %08x\n", __func__, id);)
           AHI_RemoveAudioMode( id );
         }
       }
@@ -275,8 +253,8 @@ main( void )
 
     if( args.dblscan )
     {
-      IPTR          id;
-      IPTR          bestid = INVALID_ID;
+      ULONG          id;
+      ULONG          bestid = INVALID_ID;
       int            minper = INT_MAX;
       struct Screen *screen = NULL;
 
@@ -293,7 +271,7 @@ main( void )
       } buffer;
 
       for( id = NextDisplayInfo( INVALID_ID );
-           id != (IPTR) INVALID_ID;
+           id != (ULONG) INVALID_ID;
            id = NextDisplayInfo( id ) )
       {
         int period;
@@ -324,7 +302,7 @@ main( void )
 
       }
 
-      if( bestid != (IPTR) INVALID_ID && minper < 100 )
+      if( bestid != (ULONG) INVALID_ID && minper < 100 )
       {
         screen = OpenScreenTags( NULL,
                                  SA_DisplayID,  bestid,

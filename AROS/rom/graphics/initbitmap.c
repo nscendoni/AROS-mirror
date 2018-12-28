@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: initbitmap.c 36275 2010-12-27 23:02:02Z twilen $
 
     Desc:
     Lang: English

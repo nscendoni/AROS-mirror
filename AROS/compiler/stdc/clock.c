@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: clock.c 48039 2013-09-08 21:18:07Z verhaegs $
 
     Returns time passed since start of program.
 */

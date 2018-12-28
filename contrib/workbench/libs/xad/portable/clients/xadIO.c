@@ -1,7 +1,7 @@
 #ifndef XADMASTER_IO_C
 #define XADMASTER_IO_C
 
-/*  $Id$
+/*  $Id: xadIO.c 43430 2012-01-01 20:12:06Z jmcmullan $
     input/output functions
 
     XAD library system for archive handling

@@ -1,6 +1,6 @@
 
 Version = 46
-Revision= 12
+Revision= 11
 
 	.text
 
@@ -9,7 +9,7 @@ Revision= 12
 	.align 4 
 
 rom_start:
-	.word	0x1114
+	.word	0x1111
 _start:
 software_reset:
 	jmp rom_init
@@ -25,7 +25,7 @@ software_reset:
     .word 0xffff
     .word 0xffff
     .asciz "AROS ROM Operating System and Libraries"
-    .asciz "Copyright \251 1995-2018 "
+    .asciz "Copyright \251 1995-2016 "
     .asciz "The AROS Development Team, "
     .asciz "All Rights Reserved."
     .asciz ADATE
@@ -37,4 +37,4 @@ software_reset:
     .global rom_magic_reset
 rom_magic_reset:
     reset
-    jmp rom_init
+    nop

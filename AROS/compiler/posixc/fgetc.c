@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fgetc.c 48990 2014-05-04 19:41:58Z deadwood $
 
     C99 function fgetc().
 */

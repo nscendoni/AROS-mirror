@@ -1,4 +1,4 @@
-/*  $Id$
+/*  $Id: TestCopyMem.c 51565 2016-02-29 15:26:35Z NicJA $
     test program to mem copy functions
 
     XAD library system for archive handling

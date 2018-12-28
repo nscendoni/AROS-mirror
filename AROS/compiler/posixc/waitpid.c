@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: waitpid.c 48045 2013-09-08 21:18:57Z verhaegs $
 */
 
 #define DEBUG 0

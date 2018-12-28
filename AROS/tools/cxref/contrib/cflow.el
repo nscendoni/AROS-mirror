@@ -27,7 +27,7 @@
 ;; LCD Archive Entry:
 ;; cflow|Paul Barham|Paul.Barham@cl.cam.ac.uk
 ;; |C flow graph 
-;; |$Date$|$Revision$|~/packages/cflow.el
+;; |$Date: 2009-03-07 23:40:04 +0100 (Sat, 07 Mar 2009) $|$Revision: 30792 $|~/packages/cflow.el
 
 ;;; Commentary:
 

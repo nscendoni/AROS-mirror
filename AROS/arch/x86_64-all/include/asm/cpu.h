@@ -2,8 +2,8 @@
 #define ASM_X86_64_CPU_H
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright Â© 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: cpu.h 41210 2011-09-08 20:04:41Z sonic $
 
     Desc: assembler-level specific definitions for x86-64 CPU
     Lang: english
@@ -80,11 +80,6 @@ extern "C" {
 #define _EFER_NXE_B     11      /* RW: No-execute bit enable */
 #define _EFER_FFXSR_B   14      /* RW: Fast fxsave/fxrstor */
 
-/* SYSCALL/SYSRET registers */
-#define IA32_STAR   0xc0000081
-#define IA32_LSTAR  0xc0000082
-#define IA32_FMASK  0xc0000084
-
 #define _EFER_SCE   (1 << _EFER_SCE_B)
 #define _EFER_LME   (1 << _EFER_LME_B)
 #define _EFER_LMA   (1 << _EFER_LMA_B)
@@ -118,8 +113,8 @@ struct segment_desc
     uint16_t    limit_low;
     uint16_t    base_low;
     uint8_t     base_mid;
-    unsigned        type:5, dpl:2, p:1;
-    unsigned        limit_high:4, avl:1, l:1, d:1, g:1;
+    unsigned    type:5, dpl:2, p:1;
+    unsigned    limit_high:4, avl:1, l:1, d:1, g:1;
     uint8_t     base_high:8;
 } __attribute__((packed));
 
@@ -145,23 +140,6 @@ struct tss_64bit {
     uint16_t    __pad3;
     uint16_t    iopb;
     uint32_t    bmp[];
-} __attribute__((packed));
-
-struct gdt_64bit
-{
-    struct segment_desc seg0;           /* seg 0x00 */
-    struct segment_desc super_cs;       /* seg 0x08 */
-    struct segment_desc super_ds;       /* seg 0x10 */
-    struct segment_desc user_cs32;      /* seg 0x18 */
-    struct segment_desc user_ds;        /* seg 0x20 */
-    struct segment_desc user_cs;        /* seg 0x28 */
-    struct segment_desc gs;             /* seg 0x30 */
-    struct segment_desc ldt;            /* seg 0x38 */
-    struct
-    {
-        struct segment_desc tss_low;    /* seg 0x40... */
-        struct segment_ext  tss_high;
-    } tss[16];
 } __attribute__((packed));
 
 #define MMU_PAGEB_P     0
@@ -241,82 +219,6 @@ static inline void __attribute__((always_inline)) wrmsrq(uint32_t msr_no, uint64
     asm volatile("wrmsr"::"a"((uint32_t)(val & 0xffffffff)),"d"((uint32_t)(val >> 32)),"c"(msr_no));
 }
 
-/*
-Compare value stored at "addr" with "expected". If they are equal, function returns 1 and stores "xchg" value
-at "addr". If *addr != expected, function returns 0. Either "expected" or current value at *addr are stored back
-at *found. The operation is atomic
-*/
-static inline int compare_and_exchange_long(uint32_t *addr, uint32_t expected, uint32_t xchg, uint32_t *found)
-{
-    char flag;
-    uint32_t ret;
-    asm volatile("lock cmpxchg %4, %0; setz %1":"+m"(*addr),"=r"(flag),"=a"(ret):"2"(expected),"r"(xchg):"memory","cc");
-    if (found)
-        *found = ret;
-    return flag;
-}
-
-static inline int compare_and_exchange_short(uint16_t *lock, uint16_t expected, uint16_t xchg, uint16_t *found)
-{
-    char flag;
-    uint16_t ret;
-    asm volatile("lock cmpxchg %4, %0; setz %1":"+m"(*lock),"=r"(flag),"=a"(ret):"2"(expected),"r"(xchg):"memory","cc");
-    if (found)
-        *found = ret;
-    return flag;
-}
-
-static inline int compare_and_exchange_byte(uint8_t *lock, uint8_t expected, uint8_t xchg, uint8_t *found)
-{
-    char flag;
-    uint16_t ret;
-    asm volatile("lock cmpxchg %4, %0; setz %1":"+m"(*lock),"=r"(flag),"=a"(ret):"2"(expected),"r"(xchg):"memory","cc");
-    if (found)
-        *found = ret;
-    return flag;
-}
-
-static inline int bit_test_and_set_long(uint32_t *addr, int32_t bit)
-{
-    char retval = 0;
-    asm volatile("lock btsl %2, %0; setc %1":"+m"(*addr),"=q"(retval):"Ir"(bit):"memory");
-    return retval;
-}
-
-static inline int bit_test_and_set_short(uint16_t *addr, int32_t bit)
-{
-    char retval = 0;
-    asm volatile("lock btsw %2, %0; setc %1":"+m"(*addr),"=q"(retval):"Ir"(bit):"memory");
-    return retval;
-}
-
-static inline int bit_test_and_clear_long(uint32_t *addr, int32_t bit)
-{
-    char retval = 0;
-    asm volatile("lock btrl %2, %0; setc %1":"+m"(*addr),"=q"(retval):"Ir"(bit):"memory");
-    return retval;
-}
-
-static inline int bit_test_and_clear_short(uint16_t *addr, int32_t bit)
-{
-    char retval = 0;
-    asm volatile("lock btrw %2, %0; setc %1":"+m"(*addr),"=q"(retval):"Ir"(bit):"memory");
-    return retval;
-}
-
-static inline int bit_test_and_complement_long(uint32_t *addr, int32_t bit)
-{
-    char retval = 0;
-    asm volatile("lock btcl %2, %0; setc %1":"+m"(*addr),"=q"(retval):"Ir"(bit):"memory");
-    return retval;
-}
-
-static inline int bit_test_and_complement_short(uint16_t *addr, int32_t bit)
-{
-    char retval = 0;
-    asm volatile("lock btcw %2, %0; setc %1":"+m"(*addr),"=q"(retval):"Ir"(bit):"memory");
-    return retval;
-}
 
 #ifdef __cplusplus
 }

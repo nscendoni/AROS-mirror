@@ -1,5 +1,5 @@
 /* Modified version for AROS - The AROS Research OS
-** $Id$
+** $Id: 2View.c 40135 2011-07-14 20:33:26Z jmcmullan $
 */
 
 /***********************************************************************\

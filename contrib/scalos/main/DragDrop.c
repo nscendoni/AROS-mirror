@@ -1,7 +1,7 @@
 // DragDrop.c
-// $Date$
-// $Revision$
-// $Id$
+// $Date: 2016-03-14 03:33:00 +0100 (Mon, 14 Mar 2016) $
+// $Revision: 51942 $
+// $Id: DragDrop.c 51942 2016-03-14 02:33:00Z NicJA $
 
 
 #include <exec/types.h>

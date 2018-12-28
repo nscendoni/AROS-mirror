@@ -2,7 +2,7 @@
 #define HASH_H
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hash.h 51147 2015-10-15 21:11:01Z schulz $
 
     Desc: Demo of new OOP system - General hashing definitions.
     Lang: english

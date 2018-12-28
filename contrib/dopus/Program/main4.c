@@ -284,8 +284,7 @@ int readfile(name,buf,size)
 char *name,**buf;
 int *size;
 {
-    BPTR in;
-    int retval /*loadpp*/ = 0;
+    int in,retval /*loadpp*/ = 0;
 /*
     if (PPBase) {
         if ((in=ppLoadData(name,DECR_POINTER,MEMF_CLEAR,buf,size,NULL))) {

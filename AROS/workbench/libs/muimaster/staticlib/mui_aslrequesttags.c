@@ -2,7 +2,7 @@
     Copyright © 2002, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: mui_aslrequesttags.c 33390 2010-05-30 12:14:54Z mazze $
 */
 
 #define AROS_TAGRETURNTYPE BOOL

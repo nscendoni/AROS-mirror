@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 52698 2016-04-23 14:08:18Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- ports-audio-milkytracker : ports-audio-milkytracker-icons
 

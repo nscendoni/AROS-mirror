@@ -2,7 +2,7 @@
 #define _RPCSVC_YPCLNT_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ypclnt.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ypclnt.h,v 1.4 1997/09/21 10:46:20 niklas Exp $	*/

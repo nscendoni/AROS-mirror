@@ -2,8 +2,8 @@
 #define _POSIXC_UNISTD_H_
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright Â© 1995-2012, The AROS Development Team. All rights reserved.
+    $Id: unistd.h 52850 2016-08-10 05:03:23Z deadwood $
 
     Desc: POSIX.1-2008 header file unistd.h
 */
@@ -392,8 +392,7 @@ int getgroups(int gidsetlen, gid_t *gidset);
 char *getlogin(void);
 /* NOTIMPL int getlogin_r(char *, size_t); */
 int getopt(int argc, char * const argv[], const char *optstring);
-char *getpass(const char *prompt);
-pid_t getpgid(pid_t);
+/* NOTIMPL pid_t getpgid(pid_t); */
 pid_t getpgrp(void);
 pid_t getpid(void);
 pid_t getppid(void);
@@ -415,14 +414,14 @@ ssize_t read(int d, void *buf, size_t nbytes);
 ssize_t readlink(const char * restrict path, char * restrict buf, size_t bufsize);
 /* NOTIMPL ssize_t readlinkat(int, const char *restrict, char *restrict, size_t); */
 int rmdir(const char *path);
-int setegid(gid_t egid);
+/* NOTIMPL int setegid(gid_t egid); */
 int seteuid(uid_t euid);
 int setgid(gid_t gid);
 /* NOTIMPL int setpgid(pid_t pid, pid_t pgrp); */
 /* NOTIMPL int setpgrp(pid_t pid, pid_t pgrp); */
 /* NOTIMPL int setregid(gid_t rgid, gid_t egid); */
 /* NOTIMPL int setreuid(uid_t ruid, uid_t euid); */
-pid_t setsid(void);
+/* NOTIMPL pid_t setsid(void); */
 int setuid(uid_t uid);
 unsigned sleep(unsigned);
 void swab(const void * restrict src, void * restrict dst, size_t len);
@@ -430,7 +429,7 @@ int symlink(const char *name1, const char *name2);
 /* NOTIMPL int symlinkat(const char *, int, const char *); */
 void sync(void);
 long sysconf(int name);
-pid_t tcgetpgrp(int fd);
+/* NOTIMPL pid_t tcgetpgrp(int fd); */
 /* NOTIMPL int tcsetpgrp(int fd, pid_t pgrp_id); */
 int truncate(const char *path, off_t length);
 char *ttyname(int fd);

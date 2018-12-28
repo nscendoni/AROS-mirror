@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: icontrol.h 48075 2013-09-11 10:45:31Z NicJA $
 
     Desc: Icontrol prefs definitions
     Lang: english

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: printergfx.h 43850 2012-02-04 20:12:18Z jmcmullan $
 
     Desc: Printergfx prefs definitions
     Lang: english

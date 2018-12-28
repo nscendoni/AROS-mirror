@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
     Original version from libnix
-    $Id$
+    $Id: liballocpooled.c 45835 2012-09-18 17:09:55Z jmcmullan $
 */
 
 #define AROS_LIBREQ(base,ver)   /* We test for versions manually */

@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: tcp_timer.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: tcp_timer.h,v 1.3 1997/02/24 14:06:46 niklas Exp $	*/

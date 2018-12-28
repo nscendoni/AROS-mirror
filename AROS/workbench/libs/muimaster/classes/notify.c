@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: notify.c 52807 2016-07-28 01:51:35Z neil $
 */
 
 #include <stdlib.h>

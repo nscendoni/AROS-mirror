@@ -1,6 +1,6 @@
 /*
     Copyright © 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support_amigaos.h 30792 2009-03-07 22:40:04Z neil $
 */
 
 #ifndef _MUIMASTER_SUPPORT_AMIGAOS_H_

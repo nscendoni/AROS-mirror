@@ -16,7 +16,7 @@
 
  TextEditor class Support Site:  http://www.sf.net/projects/texteditor-mcc
 
- $Id$
+ $Id: private.h 51715 2016-03-09 22:58:03Z NicJA $
 
 ***************************************************************************/
 

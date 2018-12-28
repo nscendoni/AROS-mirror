@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: processevents.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: 
     Lang: english
@@ -65,7 +65,8 @@
 #define DEBUG 0
 #include <aros/debug.h>
 
-AROS_INTH1(ResetHandler, struct inputbase *, InputDevice)
+/* ABI_V0 compatibility */
+AROS_SOFTINTH1(ResetHandler, struct inputbase *, InputDevice)
 {
     AROS_INTFUNC_INIT
 

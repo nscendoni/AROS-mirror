@@ -1,7 +1,7 @@
 /*
    Copyright © 2002-2009, Chris Hodges. All rights reserved.
    Copyright © 2010-2012, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: dev.c 45856 2012-09-29 17:58:34Z neil $
 */
 
 #include <proto/exec.h>

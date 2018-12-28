@@ -1,7 +1,7 @@
 # Copyright © 2009-2010, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 52541 2016-04-06 19:18:10Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- contrib-sdl-sdl-sound : development-SDL_sound
 
@@ -9,9 +9,6 @@ include $(SRCDIR)/config/aros-contrib.cfg
 
 REPOSITORIES := http://icculus.org/SDL_sound/downloads/ \
  http://downloads.openwrt.org/sources/
- 
-USER_INCLUDES := -I$(AROS_CONTRIB_INCLUDES)
-USER_LDFLAGS := -L$(AROS_CONTRIB_LIB)
 
 %fetch_and_build_gnu_development package=SDL_sound version=1.0.3 patch=no \
     suffixes="tar.gz" package_repo="$(REPOSITORIES)" \

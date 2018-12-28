@@ -1,6 +1,6 @@
-#   $Id$
+#   $Id: mmakefile.src 52347 2016-03-29 14:21:56Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM mesa-demos-glexcess : \
 #MM	includes \
@@ -32,9 +32,7 @@ GLEXCESS_SOURCES = \
 USER_INCLUDES := \
     -I$(SRCDIR)/$(CURDIR)
 
-NOWARN_FLAGS := $(NOWARN_WRITE_STRINGS) $(NOWARN_ARRAY_BOUNDS) $(NOWARN_MISLEADING_INDENTATION)
-
-USER_CFLAGS := $(NOWARN_FLAGS) -fno-asynchronous-unwind-tables -fno-exceptions 
+USER_CFLAGS := -fno-asynchronous-unwind-tables -fno-exceptions 
 
 # Remove C-only flags
 CXX_FLAGS := $(CFLAGS) $(USER_CFLAGS) -fno-rtti -nostdinc++
@@ -57,7 +55,7 @@ mesa-demos-glexcess-cpp : mesa-demos-glexcess-cpp-directories-setup $(GLEXCESS_S
 mesa-demos-glexcess-cpp-directories-setup :
 %mkdirs_q dirs="$(GENDIR)/$(CURDIR) $(AROS_CONTRIB)/Demos/Mesa/GLExcess"
 
-USER_LDFLAGS := -L$(AROS_LIB) -static-libstdc++
+USER_LDFLAGS := -L$(AROS_LIB)
 
 #MM
 mesa-demos-glexcess :

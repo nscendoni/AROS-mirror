@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$    $Log
+    $Id: eraserect.c 45659 2012-08-25 19:45:08Z jmcmullan $    $Log
 
     Desc: Graphics function EraseRect()
     Lang: english

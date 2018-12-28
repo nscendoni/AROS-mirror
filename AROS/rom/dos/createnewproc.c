@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: createnewproc.c 49964 2015-01-28 23:04:04Z NicJA $
 
     Desc: Create a new process
     Lang: English
@@ -44,7 +44,7 @@ void internal_ChildFree(APTR tid, struct DosLibrary * DOSBase);
         AROS_LH1(struct Process *, CreateNewProc,
 
 /*  SYNOPSIS */
-        AROS_LHA(const struct TagItem *, tags, D1),
+        AROS_LHA(struct TagItem *, tags, D1),
 
 /*  LOCATION */
         struct DosLibrary *, DOSBase, 83, Dos)
@@ -111,7 +111,7 @@ void internal_ChildFree(APTR tid, struct DosLibrary * DOSBase);
     /*14 */    { NP_UserData      , (IPTR)NULL                  },
     /*15 */    { NP_ExitCode      , (IPTR)NULL                  },
     /*16 */    { NP_ExitData      , (IPTR)NULL                  },
-    /*17 */    { NP_WindowPtr     ,  0                          }, /* Default: default public screen */
+    /*17 */    { NP_WindowPtr     , (IPTR)NULL                  }, /* Default: default public screen */
     /*18 */    { NP_CopyVars      , (IPTR)TRUE                  },
     /*19 */    { NP_Synchronous   , (IPTR)FALSE                 },
     /*20 */    { NP_FreeSeglist   , (IPTR)TRUE                  },
@@ -143,9 +143,6 @@ void internal_ChildFree(APTR tid, struct DosLibrary * DOSBase);
                 defaults[9].ti_Data = parentstack;
             }
         }
-
-        if (me->pr_WindowPtr == (APTR)-1)
-            defaults[17].ti_Data = -1;
     }
 
     ApplyTagChanges(defaults, (struct TagItem *)tags);

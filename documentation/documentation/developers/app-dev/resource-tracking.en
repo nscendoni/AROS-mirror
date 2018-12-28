@@ -5,8 +5,8 @@ AROS Application Development Manual -- Resource Tracking
 :Authors:   Staf Verhaegen, Sebastian Rittau, Stefan Rieken, Matt Parsons,
             Adam Chodorowski, Fabio Alemagna, Matthias Rustler
 :Copyright: Copyright © 1995-2006, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 45860 $
+:Date:      $Date: 2012-10-04 00:05:41 +0200 (Thu, 04 Oct 2012) $
 :Status:    Unfinished; integration started (looong way left to go).
 :ToDo:      Integrate the various parts. Update and revise. Complete...
 

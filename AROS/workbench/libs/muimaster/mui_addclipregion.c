@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mui_addclipregion.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <proto/graphics.h>
@@ -23,7 +23,7 @@
         AROS_LHA(struct Region *, r, A1),
 
 /*  LOCATION */
-        struct Library *, MUIMasterBase, 30, MUIMaster)
+        struct Library *, MUIMasterBase, 26, MUIMaster)
 
 /*  FUNCTION
 

@@ -1,4 +1,4 @@
-##rem $Id$
+##rem $Id: C++_CatalogF.h 49325 2014-08-14 00:52:39Z mazze $
 
 #ifndef CATALOGF_H
 #define CATALOGF_H

@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: if_stripvar.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: if_stripvar.h,v 1.4 1997/02/24 13:34:02 niklas Exp $	*/

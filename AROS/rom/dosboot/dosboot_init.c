@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: dosboot_init.c 48810 2014-02-14 03:00:42Z neil $
 
     Desc: Boot AROS
     Lang: english

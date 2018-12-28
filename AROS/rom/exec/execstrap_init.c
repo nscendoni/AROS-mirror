@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: execstrap_init.c 39924 2011-07-08 15:37:34Z jmcmullan $
 
     Desc: Exec patches for AROS for Amiga
     Lang: english

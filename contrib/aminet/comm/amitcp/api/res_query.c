@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: res_query.c 30794 2009-03-08 02:19:07Z neil $
  *
  * Author: Tomi Ollila <too@cs.hut.fi>
  *

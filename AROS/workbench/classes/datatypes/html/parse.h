@@ -1,7 +1,7 @@
 /*
     Copyright © 2004, Martin Gierich. All rights reserved.
     Licensed under the terms of the AROS Public License (APL)
-    $Id$
+    $Id: parse.h 34744 2010-10-15 14:57:44Z jmcmullan $
 
     Desc: Structs for HTML parser with syntax checker
 */

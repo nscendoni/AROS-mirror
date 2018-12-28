@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: filesystem.c 48735 2014-01-16 20:51:00Z sonic $
  */
 
 #include <dirent.h>

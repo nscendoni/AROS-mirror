@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __stdc_ioerr2errno.c 48034 2013-09-08 21:16:47Z verhaegs $
 
     Desc: errno internals
     Lang: english

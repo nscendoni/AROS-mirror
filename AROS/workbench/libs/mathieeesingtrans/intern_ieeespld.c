@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: intern_ieeespld.c 30792 2009-03-07 22:40:04Z neil $
 */
 
 #include <libraries/mathieeesp.h>

@@ -1,17 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 52302 2016-03-28 03:42:13Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
-
-IGMA_HIDD_SOURCES := \
-            intelgma_init \
-            intelgma_i2cclass \
-            intelgma_hiddclass \
-            intelgma_bitmapclass \
-            intelgma_support \
-            intelgma_memory \
-            intelgma_startup \
-            intelgma_galliumclass \
-            intelgma_compositorclass
 
 GALLIUM_I915_SOURCES = \
     drivers/i915/i915_blit \
@@ -43,12 +32,14 @@ GALLIUM_PATH = $(SRCDIR)/workbench/libs/mesa/src/gallium/
 
 USER_INCLUDES := \
                 -I$(GALLIUM_PATH)/drivers                   \
-                -I$(AROS_DEVELOPER)/include/gallium       \
+                -I$(AROS_DEVELOPMENT)/include/gallium       \
                 -I$(GALLIUM_PATH)/include
 
-USER_CFLAGS := -std=gnu99
+    USER_CFLAGS := -std=gnu99
 
-FILES := $(IGMA_HIDD_SOURCES) intelgma_winsys 3D_blitter \
+FILES := intelG45_init intelG45_class intelG45_i2c intelG45_bitmap \
+    intelG45_lowlevel intelG45_memory compositingclass startup \
+    galliumclass aros_winsys 3D_blitter \
     $(addprefix $(GALLIUM_PATH), $(GALLIUM_I915_SOURCES))
 
 EXEDIR := $(AROSDIR)/Devs/Monitors

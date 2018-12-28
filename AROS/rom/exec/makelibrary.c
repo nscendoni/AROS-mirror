@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: makelibrary.c 44201 2012-02-23 10:08:55Z stegerg $
 
     Desc: Make a library ready for use.
     Lang: english

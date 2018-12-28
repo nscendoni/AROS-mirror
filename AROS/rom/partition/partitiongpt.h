@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: partitiongpt.h 45601 2012-08-19 10:48:41Z neil $
 */
 
 #ifndef PARTITIONGPT_H

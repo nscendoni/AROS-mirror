@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 53124 2016-12-28 18:29:18Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- ports-game : ports-game-biniax2
 
@@ -22,12 +22,11 @@ include $(SRCDIR)/config/aros-contrib.cfg
 REPOSITORIES := http://mordred.dir.bg/biniax
 ARCHBASE     := biniax2-1.30-fullsrc
 TARGETDIR    := $(AROS_CONTRIB)/Games/Action/Biniax2
-SDL_PREFIX   := $(AROS_DEVELOPER)
+SDL_PREFIX   := $(AROS_DEVELOPMENT)
 
 NOWARN_FLAGS := $(NOWARN_UNUSED_VARIABLE) $(NOWARN_CHAR_SUBSCRIPTS) $(NOWARN_UNUSED_VALUE) $(NOWARN_SWITCH)
 USER_CFLAGS  := $(NOWARN_FLAGS) $(shell $(SDL_PREFIX)/bin/sdl-config --prefix=$(SDL_PREFIX) --cflags)
-USER_INCLUDES:= -I$(AROS_CONTRIB_INCLUDES) -I$(PORTSDIR)/biniax2/biniax2-1.30 -I$(PORTSDIR)/biniax2/biniax2-1.30/desktop
-USER_LDFLAGS := -L$(AROS_CONTRIB_LIB)
+USER_INCLUDES:= -I$(PORTSDIR)/biniax2/biniax2-1.30 -I$(PORTSDIR)/biniax2/biniax2-1.30/desktop
 
 FILES := \
     $(PORTSDIR)/biniax2/biniax2-1.30/hof \
@@ -42,7 +41,7 @@ FILES := \
 
 %build_prog mmake=ports-game-biniax2 progname=Biniax2 \
     files=$(FILES) targetdir=$(TARGETDIR) \
-    uselibs="SDL_net SDL_image png jpeg SDL_mixer mikmod vorbisfile vorbis ogg SDL z"
+    uselibs="SDL_net SDL_image png jpeg SDL_mixer vorbisfile vorbis ogg SDL z"
 
 %fetch mmake=ports-game-biniax2-fetch archive=$(ARCHBASE) destination=$(PORTSDIR)/biniax2/biniax2-1.30 \
     location=$(PORTSSOURCEDIR) archive_origins=$(REPOSITORIES) suffixes="tar.gz" \

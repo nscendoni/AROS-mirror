@@ -21,7 +21,7 @@
  YAM Official Support Site :  http://www.yam.ch
  YAM OpenSource project    :  http://sourceforge.net/projects/yamos/
 
- $Id$
+ $Id: amiga-align.h 31940 2009-10-27 20:14:49Z mazze $
 
 ***************************************************************************/
 

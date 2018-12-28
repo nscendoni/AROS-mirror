@@ -1,6 +1,6 @@
 /*
     Copyright 2015-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gl_init.c 52708 2016-04-29 15:25:03Z neil $
 */
 
 //#define DEBUG 1

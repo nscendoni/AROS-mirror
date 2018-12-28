@@ -1,6 +1,6 @@
 /*
     Copyright © 2007-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: uuid_namespace.c 47370 2013-05-08 20:05:39Z jmcmullan $
 */
 
 #define DEBUG 1

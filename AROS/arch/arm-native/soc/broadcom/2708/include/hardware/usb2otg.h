@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: usb2otg.h 49005 2014-05-15 21:01:34Z NicJA $
 */
 
 #ifndef USB2OTG_H

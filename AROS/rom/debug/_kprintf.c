@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: _kprintf.c 38352 2011-04-25 11:39:13Z sonic $
 
     Desc: Low-level debugging support.
 */

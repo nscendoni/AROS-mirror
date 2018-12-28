@@ -1,6 +1,6 @@
 // DefIcons.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-24 00:46:43 +0100 (Thu, 24 Mar 2016) $
+// $Revision: 52210 $
 
 
 #include <ctype.h>

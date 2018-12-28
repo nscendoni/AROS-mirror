@@ -26,38 +26,25 @@
 
 __FBSDID("$FreeBSD: src/lib/msun/src/s_roundl.c,v 1.2 2005/12/02 13:45:06 bde Exp $");
 
-#include <float.h>
-#if defined(__x86_64__)
-#include "x86_64/ieeefp.h"
-#elif defined(__i386__)
-#include "i386/ieeefp.h"
-#endif
-
-#include "fpmath.h"
-#include "math.h"
-#include "math_private.h"
+#include <math.h>
 
 long double
 roundl(long double x)
 {
 	long double t;
-	uint16_t hx;
 
-	GET_LDBL_EXPSIGN(hx, x);
-	if ((hx & 0x7fff) == 0x7fff)
-		return (x + x);
+	if (!isfinite(x))
+		return (x);
 
-	ENTERI();
-
-	if (!(hx & 0x8000)) {
+	if (x >= 0.0) {
 		t = floorl(x);
-		if (t - x <= -0.5L)
-			t += 1;
-		RETURNI(t);
+		if (t - x <= -0.5)
+			t += 1.0;
+		return (t);
 	} else {
 		t = floorl(-x);
-		if (t + x <= -0.5L)
-			t += 1;
-		RETURNI(-t);
+		if (t + x <= -0.5)
+			t += 1.0;
+		return (-t);
 	}
 }

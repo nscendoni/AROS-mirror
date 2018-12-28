@@ -1,6 +1,6 @@
 /*
     Copyright © 2000, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: x86_IDT.c 48533 2013-12-06 21:24:19Z jmcmullan $
 
     Desc: Probe installed IDT CPUs and display relevant information
     Lang: english

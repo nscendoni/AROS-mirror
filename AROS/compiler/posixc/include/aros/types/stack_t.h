@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2010-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stack_t.h 50458 2015-04-24 14:53:27Z neil $
 
     POSIX.1-2008 stack_t type definition
 */

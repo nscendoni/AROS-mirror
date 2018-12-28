@@ -16,7 +16,7 @@
 
  TheBar class Support Site:  http://www.sf.net/projects/thebar
 
- $Id$
+ $Id: class.h 50022 2015-02-05 00:14:03Z NicJA $
 
 ***************************************************************************/
 
@@ -158,16 +158,16 @@ extern STRPTR regs[], frames[], precisions[], dismodes[],
 
 struct MUIP_Popbackground_Close
 {
-    STACKED ULONG MethodID;
-    STACKED ULONG success;
+    ULONG MethodID;
+    ULONG success;
 };
 
 struct MUIP_Popbackground_SetSpec
 {
-    STACKED ULONG                       MethodID;
-    STACKED STRPTR                      spec;
-    STACKED struct MUIS_TheBar_Gradient *grad;
-    STACKED ULONG                       flags;
+    ULONG                       MethodID;
+    STRPTR                      spec;
+    struct MUIS_TheBar_Gradient *grad;
+    ULONG                       flags;
 };
 
 enum
@@ -184,10 +184,10 @@ enum
 
 struct MUIP_Popbackground_GetSpec
 {
-    STACKED ULONG                       MethodID;
-    STACKED STRPTR                      spec;
-    STACKED struct MUIS_TheBar_Gradient *grad;
-    STACKED ULONG                       flags;
+    ULONG                       MethodID;
+    STRPTR                      spec;
+    struct MUIS_TheBar_Gradient *grad;
+    ULONG                       flags;
 };
 
 enum
@@ -205,26 +205,26 @@ enum
 
 struct MUIP_Popbackground_SelectPattern
 {
-    STACKED ULONG MethodID;
-    STACKED ULONG id;
+    ULONG MethodID;
+    ULONG id;
 };
 
 struct MUIP_Popbackground_GradientCol
 {
-    STACKED ULONG MethodID;
-    STACKED ULONG from;
+    ULONG MethodID;
+    ULONG from;
 };
 
 struct MUIP_Popbackground_SetStatus
 {
-    STACKED ULONG                            MethodID;
-    STACKED struct MUIS_Popbackground_Status *status;
+    ULONG                            MethodID;
+    struct MUIS_Popbackground_Status *status;
 };
 
 struct MUIP_Popbackground_GetStatus
 {
-    STACKED ULONG                            MethodID;
-    STACKED struct MUIS_Popbackground_Status *status;
+    ULONG                            MethodID;
+    struct MUIS_Popbackground_Status *status;
 };
 
 /* Attributes */

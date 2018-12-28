@@ -1,7 +1,7 @@
 #ifndef LINT
 /* derived from: @(#) vms.c 2.2 88/01/09 03:47:52 */
 static char vmsid[]="$Source$\n\
-$Id$";
+$Id: vms.c 30794 2009-03-08 02:19:07Z neil $";
 #endif /* LINT */
 
 /* Support routines for VAX/VMS. */

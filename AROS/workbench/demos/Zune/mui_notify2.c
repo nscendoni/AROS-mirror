@@ -3,7 +3,7 @@
     Copyright © 2002, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: mui_notify2.c 43432 2012-01-01 20:15:00Z jmcmullan $
 */
 
 /*

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: isfilesystem.c 47686 2013-07-14 17:12:51Z jmcmullan $
 
     Desc: Check if a device is a filesystem.
     Lang: English

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: serverclass.c 43077 2011-12-17 17:47:02Z neil $
 
     Desc: Class for server objects.
     Lang: english

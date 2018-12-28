@@ -7,7 +7,7 @@
  *                       Network Solutions Development, Inc.
  *                       All rights reserved.
  *
- *      $Id$
+ *      $Id: sana2errno.h 48699 2014-01-11 17:39:44Z jmcmullan $
  */
 
 extern const short io_nerr;

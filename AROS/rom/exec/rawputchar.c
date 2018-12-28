@@ -1,10 +1,12 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2010, The AROS Development Team. All rights reserved.
+    $Id: rawputchar.c 36262 2010-12-27 12:17:48Z sonic $
 
     Desc: Emit one character via raw IO
     Lang: english
 */
+
+#include <proto/kernel.h>
 
 #include "exec_intern.h"
 

@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: lru.c 49095 2014-07-01 18:46:34Z twilen $ */
 /* $Log: lru.c $
  * Revision 10.21  1999/05/14  11:31:34  Michiel
  * Long filename support implemented; bugfixes

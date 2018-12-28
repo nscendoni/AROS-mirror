@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: libraries.h 47660 2013-07-12 01:45:50Z neil $
 
     Desc: Amiga header file exec/libraries.h
     Lang: english

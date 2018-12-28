@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: numeric.c 48318 2013-10-25 06:30:33Z neil $
 */
 
 #include <devices/rawkeycodes.h>

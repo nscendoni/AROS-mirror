@@ -3,7 +3,7 @@
 
 /*
     Copyright  2008-2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: icon_attributes.h 47663 2013-07-13 03:06:45Z neil $
 */
 
 /*** Identifier base ********************************************************/

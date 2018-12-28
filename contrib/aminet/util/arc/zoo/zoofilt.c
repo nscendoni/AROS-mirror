@@ -1,7 +1,7 @@
 /* derived from: zoofilt.c 1.8 88/01/30 23:47:05 */
 
 #ifndef LINT
-static char sccsid[]="@(#) $Id$";
+static char sccsid[]="@(#) $Id: zoofilt.c 30794 2009-03-08 02:19:07Z neil $";
 #endif
 
 /*

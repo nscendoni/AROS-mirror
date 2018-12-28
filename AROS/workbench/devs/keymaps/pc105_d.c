@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pc105_d.c 52793 2016-07-21 15:40:23Z polluks $
 
     Desc: Deutsch (German) PC105 Keymap
     Lang: English

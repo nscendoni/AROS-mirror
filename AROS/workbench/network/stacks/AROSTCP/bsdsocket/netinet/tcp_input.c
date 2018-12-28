@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  *
  *	From: @(#)tcp_input.c	8.5 (Berkeley) 4/10/94
- *	$Id$
+ *	$Id: tcp_input.c 39339 2011-06-17 05:53:18Z jmcmullan $
  */
 
 #ifndef TUBA_INCLUDE

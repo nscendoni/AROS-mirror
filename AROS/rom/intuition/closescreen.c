@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
     Copyright © 2001-2013, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: closescreen.c 52365 2016-03-29 14:59:53Z jmcmullan $
 
     Close a screen.
 */

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: greece.c 51225 2015-12-03 13:36:31Z polluks $
 
     Desc: Country data for Hellas (Greece)
     Author: George Sokianos <walkero@yahoo.com>

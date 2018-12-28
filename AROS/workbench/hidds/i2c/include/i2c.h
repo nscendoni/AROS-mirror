@@ -3,7 +3,7 @@
 
 /*
     Copyright � 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: i2c.h 32556 2010-02-02 22:19:57Z schulz $
 */
 
 #ifndef EXEC_TYPES_H

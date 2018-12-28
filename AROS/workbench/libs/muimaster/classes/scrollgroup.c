@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: scrollgroup.c 48105 2013-09-19 00:44:45Z neil $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

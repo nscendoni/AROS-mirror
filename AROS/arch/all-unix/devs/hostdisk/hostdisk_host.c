@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hostdisk_host.c 52028 2016-03-17 04:36:20Z jmcmullan $
 */
 
 #ifdef HOST_OS_ios

@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile 51291 2016-01-16 19:45:55Z NicJA $
 
 # A general catch-all target. You can use this if everything compiles on your
 # machine, and you want to save yourself some typing.

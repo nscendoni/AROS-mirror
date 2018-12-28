@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: diattr.h 48674 2014-01-02 17:51:04Z neil $
 
     Desc: DrawInfo attributes
     Lang: english

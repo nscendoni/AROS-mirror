@@ -3,7 +3,7 @@
 
 /*
     Copyright  1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: classes.h 45427 2012-08-10 00:52:43Z neil $
 
     BOOPSI structures.
 */

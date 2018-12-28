@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: shellcommands_intern.h 38802 2011-05-22 04:35:08Z jmcmullan $
 
     Desc: Internal data structures for expansion.library
     Lang: english

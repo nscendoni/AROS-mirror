@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: waitforchar.c 49858 2014-12-18 01:35:24Z neil $
 
     Desc: Waits for a character to arrive at a filehandle.
     Lang: English

@@ -1,7 +1,7 @@
 #ifndef XADMASTER_VERSION_C
 #define XADMASTER_VERSION_C
 
-/*  $Id$
+/*  $Id: version.h 39561 2011-06-27 11:42:19Z NicJA $
     the xad unarchiving library system version data
 
     XAD library system for archive handling

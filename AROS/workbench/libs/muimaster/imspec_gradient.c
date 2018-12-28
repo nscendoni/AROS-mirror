@@ -2,7 +2,7 @@
     Copyright  2003, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: imspec_gradient.c 51643 2016-03-09 04:25:13Z NicJA $
 */
 
 #include <math.h>

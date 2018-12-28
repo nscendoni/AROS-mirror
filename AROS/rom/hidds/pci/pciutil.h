@@ -2,7 +2,7 @@
 #define PCIUTIL_H
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pciutil.h 49521 2014-08-24 10:48:56Z DizzyOfCRN $
 
     Desc: PCI stuff for standalone AROS
     Lang: english

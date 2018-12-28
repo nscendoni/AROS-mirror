@@ -1,6 +1,6 @@
 /*
     Copyright © 2007-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: uuid_init.c 38496 2011-05-03 07:55:04Z sonic $
 */
 
 #include <aros/symbolsets.h>

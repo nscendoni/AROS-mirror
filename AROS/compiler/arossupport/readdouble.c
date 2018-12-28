@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readdouble.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Read a big endian double floating point (64bit) from a streamhook
     Lang: english

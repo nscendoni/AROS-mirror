@@ -4,8 +4,8 @@ AROS Application Development Manual -- Localizing AROS
 
 :Authors:   Olivier Adam, Matthias Rustler
 :Copyright: Copyright (C) 1995-2008, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 45860 $
+:Date:      $Date: 2012-10-04 00:05:41 +0200 (Thu, 04 Oct 2012) $
 :Status:    Work in progress.
 
 .. Contents::
@@ -348,7 +348,7 @@ additional catalog translations as described above. A Windows port of the tool
 *FlexCat* is available at http://archives.aros-exec.org.
 
 Some applications and Zune classes are maintained outside of AROS
-(e.g. MUIbase, toolbar.mcc are available at https://sourceforge.net).
+(e.g. MUIbase, toolbar.mcc are available at http://sourceforge.net).
 You can indirectly support localized AROS versions if you do the
 translation in those repositories.
 

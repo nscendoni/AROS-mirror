@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: china.c 53051 2016-11-22 22:21:57Z polluks $
 
     Desc: Country data for Zhonghua (China)
 */

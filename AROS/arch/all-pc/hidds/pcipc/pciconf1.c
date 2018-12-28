@@ -1,6 +1,6 @@
 /*
-    Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2004-2011, The AROS Development Team. All rights reserved.
+    $Id: pciconf1.c 49536 2014-08-26 12:19:55Z DizzyOfCRN $
 
     Desc: PCI configuration mechanism 1 access functions
     Lang: English

@@ -29,6 +29,7 @@ qboolean			isDedicated;
 
 int nostdout = 0;
 
+char *basedir = ".";
 char *cachedir = "/tmp";
 
 cvar_t  sys_linerefresh = {"sys_linerefresh","0"};// set for entity display
@@ -424,7 +425,7 @@ int main (int c, char **v)
 	extern int recording;
 	int j;
 
-	static char cwd[1024];
+//	static char cwd[1024];
 
 //	signal(SIGFPE, floating_point_exception_handler);
 #if 0
@@ -451,9 +452,7 @@ int main (int c, char **v)
 	aros_membase = parms.membase;
 	printf("parms.membase: %p\n", parms.membase);
 
-	/* get name of current directory */
-	GetCurrentDirName(cwd,128);
-	parms.basedir = cwd;
+	parms.basedir = basedir;
 // caching is disabled by default, use -cachedir to enable
 //	parms.cachedir = cachedir;
 

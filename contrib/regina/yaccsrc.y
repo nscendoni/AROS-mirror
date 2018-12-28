@@ -1,7 +1,7 @@
 %{
 
 #ifndef lint
-static char *RCSid = "$Id$";
+static char *RCSid = "$Id: yaccsrc.y 43448 2012-01-02 08:07:50Z jmcmullan $";
 #endif
 
 /*

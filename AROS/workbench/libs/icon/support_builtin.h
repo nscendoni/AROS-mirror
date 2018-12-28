@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support_builtin.h 45383 2012-08-03 14:42:09Z jmcmullan $
 
     Headers for the builtin icon images and support functions.
 */

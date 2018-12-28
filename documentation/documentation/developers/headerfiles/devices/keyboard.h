@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: keyboard.h 30800 2009-03-08 17:28:50Z neil $
 
     Desc: Important defines and structures for keyboard.device
     Lang: english

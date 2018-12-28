@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: List.c 50126 2015-02-24 13:40:14Z neil $
 
     List the contents of a directory.
 */
@@ -144,7 +144,7 @@
 #include <proto/utility.h>
 #include <utility/tagitem.h>
 
-const TEXT version[] = "$VER: List 41.14 (26.01.2018)";
+const TEXT version[] = "$VER: List 41.13 (18.12.2014)\n";
 
 #define ARG_TEMPLATE "DIR/M,P=PAT/K,KEYS/S,DATES/S,NODATES/S,TO/K,SUB/K,SINCE/K,UPTO/K,QUICK/S,BLOCK/S,NOHEAD/S,FILES/S,DIRS/S,LFORMAT/K,ALL/S"
 
@@ -1151,13 +1151,6 @@ int main(void)
         
         for (i = 0; directories[i] != NULL; i++)
         {
-            if (!IsFileSystem(directories[i]))
-            {
-                Printf("\"%s\" cannot be listed: not a FileSystem device\n", directories[i]);
-                result = RETURN_FAIL;
-                break;
-            }
-
             error = listFile(directories[i], files, dirs, parsedPattern,
                              noHead, lFormat, quick, dates, noDates,
                              block, &sinceDatetime.dat_Stamp,

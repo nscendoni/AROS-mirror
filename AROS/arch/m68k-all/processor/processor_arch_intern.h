@@ -1,6 +1,6 @@
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: processor_arch_intern.h 47619 2013-07-02 18:27:20Z neil $
 */
 
 #ifndef PROCESSOR_ARCH_INTERN_H
@@ -10,7 +10,7 @@
 
 struct M68KProcessorInformation
 {
-    TEXT    ModelStringBuffer[18];
+    TEXT    ModelStringBuffer[16];
     STRPTR  ModelString;
     ULONG   CPUModel;
     ULONG   FPUModel;
@@ -41,7 +41,6 @@ struct SystemProcessors
 #define CPUMODEL_68030      4
 #define CPUMODEL_68040      5
 #define CPUMODEL_68060      6
-#define CPUMODEL_68080      7    /* Apollo 'AC68080' */
 
 
 #endif /* PROCESSOR_ARCH_INTERN_H */

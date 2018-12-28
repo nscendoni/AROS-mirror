@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vmwaresvgahardware.c 39389 2011-06-18 20:09:09Z jmcmullan $
  
     Desc: vmware svga hardware functions
     Lang: English

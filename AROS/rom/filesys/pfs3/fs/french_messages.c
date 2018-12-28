@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: french_messages.c 48424 2013-11-18 09:28:30Z neil $ */
 /* $Log: french_messages.c $
  * Revision 1.7  1999/05/14  11:31:34  Michiel
  * Long filename support implemented; bugfixes

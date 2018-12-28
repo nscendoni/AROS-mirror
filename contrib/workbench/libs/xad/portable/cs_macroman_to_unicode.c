@@ -2,7 +2,7 @@
 #ifndef XADMASTER_CS_MACROMAN_TO_UNICODE_C
 #define XADMASTER_CS_MACROMAN_TO_UNICODE_C
 
-/*  $Id$
+/*  $Id: cs_macroman_to_unicode.c 43430 2012-01-01 20:12:06Z jmcmullan $
     Character set conversion from Mac Roman to Unicode
 
     XAD library system for archive handling

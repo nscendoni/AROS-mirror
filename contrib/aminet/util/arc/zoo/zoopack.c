@@ -1,9 +1,9 @@
 #ifndef LINT
 /* derived from: @(#) zoopack.c 2.16 88/08/22 15:51:20 */
 /*$Source$*/
-/*$Id$*/
+/*$Id: zoopack.c 30794 2009-03-08 02:19:07Z neil $*/
 static char sccsid[]="$Source$\n\
-$Id$";
+$Id: zoopack.c 30794 2009-03-08 02:19:07Z neil $";
 #endif /* LINT */
 
 /*

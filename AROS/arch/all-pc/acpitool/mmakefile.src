@@ -1,17 +1,17 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
 FILES       := main locale parsers
 USER_CFLAGS := -DADATE="\"$(shell date '+%d.%m.%Y')\""
-EXEDIR      := $(AROS_DEBUG)/Hardware
+EXEDIR      := $(AROSDIR)/Tools
 
 # Build ACPITool only for PC
-#MM- workbench-pc-$(CPU) : debug-tools-acpitool
+#MM- workbench-pc-$(CPU) : workbench-tools-acpitool
 
-#MM debug-tools-acpitool : debug-tools-acpitool-icon debug-tools-acpitool-catalogs
+#MM workbench-tools-acpitool : workbench-tools-acpitool-icon workbench-tools-acpitool-catalogs
 
-%build_prog mmake=debug-tools-acpitool \
+%build_prog mmake=workbench-tools-acpitool \
     progname=ACPITool targetdir=$(EXEDIR) \
     files=$(FILES) uselibs=acpica
 

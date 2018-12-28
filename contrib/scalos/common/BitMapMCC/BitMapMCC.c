@@ -1,6 +1,6 @@
 // BitMapMCC.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 03:53:47 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51965 $
 
 
 #include <stdlib.h>

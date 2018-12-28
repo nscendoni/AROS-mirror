@@ -22,7 +22,7 @@
 
  Mailtext OpenSource project :  http://sourceforge.net/projects/mailtext/
 
- $Id$
+ $Id: demo.h 36659 2011-01-18 13:26:51Z neil $
 
  Includes and other common stuff for the MUI demo programs
 

@@ -1,6 +1,6 @@
 /*
     Copyright 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: init.c 41759 2011-10-05 20:14:17Z deadwood $
 */
 
 #include <aros/symbolsets.h>

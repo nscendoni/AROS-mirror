@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: input.h 37289 2011-03-01 14:03:30Z sonic $
 
     Desc: Input prefs definitions
     Lang: english

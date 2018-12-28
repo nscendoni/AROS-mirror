@@ -1,21 +1,18 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: _programname.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <aros/symbolsets.h>
 #include <aros/startup.h>
-#include <proto/dos.h>
+#include <proto/autoinit.h>
 
-#include "autoinit_intern.h"
 
 char *_ProgramName = NULL;
 
 void __initprogramname(struct ExecBase *SysBase)
 {
-    char *cmd = __get_command_name();
-
-    _ProgramName = FilePart(cmd);
+    ProgramNameInit((STRPTR *)&_ProgramName);
 
     __startup_entries_next();
 

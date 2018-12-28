@@ -1,6 +1,5 @@
 /*
      AHI - The AHI preferences program
-     Copyright (C) 2017 The AROS Dev Team
      Copyright (C) 1996-2005 Martin Blom <martin@blom.org>
      
      This program is free software; you can redistribute it and/or
@@ -36,8 +35,8 @@ void CleanUp(void);
 struct List * GetUnits(char * );
 struct List * GetModes(struct AHIUnitPrefs * );
 char ** List2Array(struct List * );
-char ** GetInputs(IPTR );
-char ** GetOutputs(IPTR );
+char ** GetInputs(ULONG );
+char ** GetOutputs(ULONG );
 BOOL SaveSettings(char * , struct List * );
 BOOL WriteIcon(char * );
 void FreeList(struct List * );

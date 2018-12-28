@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: supervisor.S 47545 2013-06-12 18:16:12Z twilen $
 
     Desc: Supervisor() - Execute some code in a privileged environment.
     Lang: english
@@ -117,10 +117,6 @@ Exec_Supervisor_Exit:
 	/* 68010+ version */
 	.globl Exec_Supervisor_Trap
 Exec_Supervisor_Trap:
-	/* check if this was issuper call */
-	cmp.l #Kernel_Is_Super, %sp@(2)
-	beq.s 3f
-
 	cmp.l	#Exec_Supervisor_Entry, %sp@(2)
 	bne.s	1f
 
@@ -140,11 +136,3 @@ Exec_Supervisor_Trap_00:
 	cmp.l	#Exec_Supervisor_Entry, %sp@(2)
 	beq.s	2b
 	jmp M68KFaultTable_00+8*4
-
-3:
-	/* Get SR from stack */
-	move.w %sp@,%d0
-	/* Skip move.w %sr,d0 in Kernel_Is_Super */
-	addq.l #2,%sp@(2)
-	rte
-

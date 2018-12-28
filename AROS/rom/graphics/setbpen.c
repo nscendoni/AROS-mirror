@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$    $Log
+    $Id: setbpen.c 41910 2011-10-18 13:18:09Z sonic $    $Log
 
     Desc: Graphics function SetBPen()
     Lang: english

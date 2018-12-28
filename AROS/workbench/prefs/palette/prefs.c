@@ -1,6 +1,6 @@
 /*
     Copyright © 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prefs.c 39485 2011-06-23 06:54:25Z twilen $
 
     Desc:
     Lang: English

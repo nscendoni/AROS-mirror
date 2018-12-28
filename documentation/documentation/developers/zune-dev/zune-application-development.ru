@@ -4,8 +4,8 @@
 
 :Авторы:    David Le Corfec
 :Copyright: Copyright Љ 2004, The AROS Development Team
-:Версия:    $Revision$
-:Дата:      $Date$
+:Версия:    $Revision: 30800 $
+:Дата:      $Date: 2009-03-08 18:28:50 +0100 (Sun, 08 Mar 2009) $
 :Статус:    Не завершено;
 :ToDo:      Всё.
 
@@ -238,7 +238,7 @@ __ http://main.aminet.net/dev/mui/mui38dev.lha
 Hello world
 -----------
 
-.. Figure:: /documentation/developers/zune-dev/images/hello.png
+.. Figure:: zune/images/hello.png
 
 
 С начала, так с начала. Эта программа не разочарует новичка.

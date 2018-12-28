@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stubs.c 34745 2010-10-15 14:57:52Z jmcmullan $
 */
 
 /* There are some functions that are never used, 

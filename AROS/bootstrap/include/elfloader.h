@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2006 - 2011 The AROS Development Team. All rights reserved.
- * $Id$
+ * $Id: elfloader.h 48772 2014-01-23 21:58:36Z jmcmullan $
  */
 
 #ifndef BOOTSTRAP_ELFLOADER_H_

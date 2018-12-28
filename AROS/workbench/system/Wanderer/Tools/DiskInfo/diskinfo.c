@@ -1,6 +1,6 @@
 /*
     Copyright © 2005-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: diskinfo.c 52709 2016-04-30 10:22:06Z mazze $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

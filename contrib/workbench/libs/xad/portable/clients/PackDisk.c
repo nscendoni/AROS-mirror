@@ -1,7 +1,7 @@
 #ifndef XADMASTER_PACKDISK_C
 #define XADMASTER_PACKDISK_C
 
-/*  $Id$
+/*  $Id: PackDisk.c 36659 2011-01-18 13:26:51Z neil $
     PackDisk disk archiver client
 
     XAD library system for archive handling

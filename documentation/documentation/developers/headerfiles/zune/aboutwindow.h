@@ -6,7 +6,7 @@
     This file is part of the AboutWindow class, which is distributed under
     the terms of version 2.1 of the GNU Lesser General Public License.
     
-    $Id$
+    $Id: aboutwindow.h 30800 2009-03-08 17:28:50Z neil $
 */
 
 #include <utility/tagitem.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: changelayervisibility.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc:
     Lang: english
@@ -25,7 +25,7 @@
 	AROS_LHA(int           , visible, D0),
 
 /*  LOCATION */
-	struct LayersBase *, LayersBase, 41, Layers)
+	struct LayersBase *, LayersBase, 37, Layers)
 
 /*  FUNCTION
        Makes the given layer visible or invisible.

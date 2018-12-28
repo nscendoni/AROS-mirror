@@ -1,7 +1,7 @@
 /*
-    Copyright  1995-2017, The AROS Development Team. All rights reserved.
+    Copyright  1995-2011, The AROS Development Team. All rights reserved.
     Copyright  2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: inputhandler_actions.c 42413 2011-11-11 21:33:27Z verhaegs $
 
     Responsible for executing deferred Intuition actions like MoveWindow, 
     SizeWindow, ActivateWindow, etc.
@@ -595,46 +595,39 @@ void DoSyncAction(void (*func)(struct IntuiActionMsg *, struct IntuitionBase *),
     else
     {
         struct IOStdReq   req;
-        struct MsgPort    *port = CreateMsgPort();
+        struct MsgPort    port;
         struct InputEvent ie;
 
-        if (port)
+        msg->handler = func;
+        msg->task    = me;
+        msg->done    = FALSE;
+    
+        ObtainSemaphore(&GetPrivIBase(IntuitionBase)->IntuiActionLock);
+        AddTail((struct List *)GetPrivIBase(IntuitionBase)->IntuiActionQueue, (struct Node *)msg);
+        ReleaseSemaphore(&GetPrivIBase(IntuitionBase)->IntuiActionLock);
+
+        port.mp_Flags 	= PA_SIGNAL;
+        port.mp_SigTask = me;
+        port.mp_SigBit  = SIGB_INTUITION;
+        NEWLIST(&port.mp_MsgList);
+
+        req.io_Message.mn_ReplyPort = &port;
+        req.io_Device 	    	    = GetPrivIBase(IntuitionBase)->InputIO->io_Device;
+        req.io_Unit 	    	    = GetPrivIBase(IntuitionBase)->InputIO->io_Unit;
+        req.io_Command      	    = IND_WRITEEVENT;
+        req.io_Length 	    	    = sizeof(ie);
+        req.io_Data 	    	    = &ie;
+
+        ie.ie_Class = IECLASS_NULL;
+    
+        if (!msg->done)
         {
-            msg->handler = func;
-            msg->task    = me;
-            msg->done    = FALSE;
-
-            // Free MsgPort's signal - we will be using SIGB_INTUITION
-            FreeSignal(port->mp_SigBit);
-        
-            ObtainSemaphore(&GetPrivIBase(IntuitionBase)->IntuiActionLock);
-            AddTail((struct List *)GetPrivIBase(IntuitionBase)->IntuiActionQueue, (struct Node *)msg);
-            ReleaseSemaphore(&GetPrivIBase(IntuitionBase)->IntuiActionLock);
-
-            port->mp_SigTask = me;
-            port->mp_SigBit  = SIGB_INTUITION;
-
-            req.io_Message.mn_ReplyPort = port;
-            req.io_Device 	    	    = GetPrivIBase(IntuitionBase)->InputIO->io_Device;
-            req.io_Unit 	    	    = GetPrivIBase(IntuitionBase)->InputIO->io_Unit;
-            req.io_Command      	    = IND_WRITEEVENT;
-            req.io_Length 	    	    = sizeof(ie);
-            req.io_Data 	    	    = &ie;
-
-            ie.ie_Class = IECLASS_NULL;
-        
-            if (!msg->done)
+            DoIO((APTR)&req);
+            while (!msg->done)
             {
-                DoIO((APTR)&req);
-                while (!msg->done)
-                {
-                    Wait(SIGF_INTUITION);
-                }
+                Wait(SIGF_INTUITION);
             }
-            // Set mp_SigBit to -1 so that exec does not free SIGB_INTUITION
-            port->mp_SigBit = -1;
-            DeleteMsgPort(port);
-        }        
+        }
     }
 }
 

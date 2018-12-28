@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getppid.c 48048 2013-09-08 21:19:29Z verhaegs $
 */
 
 #include <sys/types.h>
@@ -24,7 +24,6 @@
 	void)
 
 /*  FUNCTION
-	Returns the Parent process ID of the calling processes.
 
     INPUTS
 

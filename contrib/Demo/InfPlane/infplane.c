@@ -16,6 +16,7 @@
 #include <string.h>
 #include <memory.h>
 
+
 /***********************************************************************************/
 
 struct IntuitionBase 	*IntuitionBase;
@@ -36,12 +37,16 @@ static void cleanup(char *msg);
 
 /***********************************************************************************/
 
+#define C_FUNCTION
+/* comment/undefine this define to use the asm routine */
+
 #define W            	320
 #define H            	240
 
 #ifndef M_PI
 #define	M_PI		3.14159265358979323846	/* pi */
 #endif
+
 
 #define RADIUS 64
 #define DIST 256
@@ -52,11 +57,8 @@ void do_precalc(float Hp2,                     /* altitude du 2eme plan (1er = 0
 		float vx1, float vy1, float vz1, /* vecteur selon X ecran */
 		float vx2, float vy2, float vz2 /* vecteur selon Y ecran  */
 		);
-#ifdef C_FUNCTION
 void refresh1 ();
-#else
 extern void refresh_prout();   /* eh eh */
-#endif
 
 float alpha [H/8+1][W/8+1]  ;
 float zede [H/8+1][W/8+1] ;
@@ -254,7 +256,7 @@ void do_precalc(float Hp2,
   
 }
 
-#ifdef C_FUNCTION
+
 void refresh1 () {
   int i,j;    /* macro-bloc */
   int ii,jj;  /* dans bloc (interpolation) */
@@ -350,7 +352,6 @@ void refresh1 () {
       }
   
 }
-#endif
 
 /***********************************************************************************/
 
@@ -443,26 +444,38 @@ static void openlibs(void)
 
 static void getvisual(void)
 {
-    if (forcescreen)
-		wbscreen = FALSE;
-
+    if (!(scr = LockPubScreen(NULL)))
+    {
+        cleanup("Can't lock pub screen!");
+    }
+    
+    if (GetBitMapAttr(scr->RastPort.BitMap, BMA_DEPTH) <= 8)
+    {
+    	if (!forcewindow)
+	{
+	    wbscreen = FALSE;
+	}
+	else
+	{
+	    mustremap = TRUE;
+	}
+    }
+    
+    if (forcescreen) wbscreen = FALSE;
+    
     if (!wbscreen)
     {
+    	UnlockPubScreen(NULL, scr);
+        wbscreen = FALSE;
+	
         scr = OpenScreenTags(NULL, SA_Width	, W	,
 				   SA_Height	, H	,
 				   SA_Depth	, 8	,
 				   TAG_DONE);
-    	if (!scr) cleanup("Failed to open specified screen!");
-    }
-	else if (!(scr = LockPubScreen(NULL)))
-    {
-        cleanup("Failed to lock pub screen (workbench)!");
+    	if (!scr) cleanup("Can't open screen!");
     }
     
     truecolor = (GetBitMapAttr(scr->RastPort.BitMap, BMA_DEPTH) >= 15) ? TRUE : FALSE;
-
-	if ((!truecolor) && (wbscreen))
-		mustremap = TRUE;
 }
 
 /***********************************************************************************/

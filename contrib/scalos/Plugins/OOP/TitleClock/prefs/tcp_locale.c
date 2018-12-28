@@ -1,8 +1,8 @@
 /*
  *  tcp_locale.c - The locale function(s)
  *
- * $Date$
- * $Revision$
+ * $Date: 2013-12-01 23:08:26 +0100 (Sun, 01 Dec 2013) $
+ * $Revision: 48481 $
  *
  *  40.1
  *  20010719 DM Created. Only contains function for reading locale strings from

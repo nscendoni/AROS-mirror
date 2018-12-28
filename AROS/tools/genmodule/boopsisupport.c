@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2016, The AROS Development Team. All rights reserved.
+    $Id: boopsisupport.c 51340 2016-01-18 22:44:08Z NicJA $
 
     Support function for generating code for BOOPSI classes. Part of genmodule.
 */

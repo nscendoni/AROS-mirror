@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cliinit.c 50911 2015-07-03 19:34:21Z jmcmullan $
 
     Desc:
     Lang: English

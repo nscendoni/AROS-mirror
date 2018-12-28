@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Touch.c 52842 2016-08-08 09:18:34Z polluks $
 
     Desc: Touch CLI command. 
     Lang: english

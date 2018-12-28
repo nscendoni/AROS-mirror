@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: spcmp.c 48962 2014-04-23 16:02:22Z neil $
 */
 
 #include "mathffp_intern.h"

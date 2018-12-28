@@ -1,6 +1,6 @@
 /*
     Copyright © 2005-2013, Davy Wentzler. All rights reserved.
-    $Id$
+    $Id: ak_codec.h 46905 2013-03-12 20:25:37Z neil $
 */
 
 #ifndef AK_CODEC_H

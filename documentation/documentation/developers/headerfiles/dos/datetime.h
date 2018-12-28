@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: datetime.h 30800 2009-03-08 17:28:50Z neil $
 
     Desc: Structures to handle date and time
     Lang: english

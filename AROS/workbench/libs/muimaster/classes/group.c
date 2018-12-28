@@ -1,9 +1,9 @@
 /*
     Copyright © 1999, David Le Corfec.
-    Copyright © 2002-2017, The AROS Development Team.
+    Copyright © 2002-2016, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: group.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <exec/types.h>
@@ -741,16 +741,6 @@ IPTR Group__MUIM_Remove(struct IClass *cl, Object *obj,
     return TRUE;
 }
 
-/**************************************************************************
- MUIM_Family_GetChild
-**************************************************************************/
-IPTR Group__MUIM_Family_GetChild(struct IClass *cl, Object *obj,
-    struct MUIP_Group_Remove *msg)
-{
-    struct MUI_GroupData *data = INST_DATA(cl, obj);
-
-    return DoMethodA(data->family, (APTR) msg);
-}
 
 /**************************************************************************
  MUIM_ConnectParent
@@ -842,6 +832,8 @@ IPTR Group__MUIM_ExitChange(struct IClass *cl, Object *obj,
         if ((_flags(obj) & MADF_SETUP) && _win(obj))
         {
             Object *win = _win(obj);
+#if 0
+            /* ABI_V0 compatibility */
             Object *parent = obj;
 
             /* CHECKME: Don't call RecalcDisplay if one of our parents is
@@ -864,6 +856,7 @@ IPTR Group__MUIM_ExitChange(struct IClass *cl, Object *obj,
                 }
 
             }
+#endif
 
             DoMethod(win, MUIM_Window_RecalcDisplay, (IPTR) obj);
         }
@@ -888,6 +881,8 @@ IPTR Group__MUIM_ExitChange2(struct IClass *cl, Object *obj,
         if ((_flags(obj) & MADF_SETUP) && _win(obj))
         {
             Object *win = _win(obj);
+#if 0
+            /* ABI_V0 compatibility */
             Object *parent = obj;
 
             /* CHECKME: Don't call RecalcDisplay if one of our parents is
@@ -910,6 +905,7 @@ IPTR Group__MUIM_ExitChange2(struct IClass *cl, Object *obj,
                 }
 
             }
+#endif
 
             DoMethod(win, MUIM_Window_RecalcDisplay, (IPTR) obj);
         }
@@ -3381,8 +3377,6 @@ BOOPSI_DISPATCHER(IPTR, Group_Dispatcher, cl, obj, msg)
     case OM_REMMEMBER:         /* Fall through */
     case MUIM_Group_Remove:
         return Group__MUIM_Remove(cl, obj, (APTR) msg);
-    case MUIM_Family_GetChild:
-        return Group__MUIM_Family_GetChild(cl, obj, (APTR) msg);
     case MUIM_AskMinMax:
         return Group__MUIM_AskMinMax(cl, obj, (APTR) msg);
     case MUIM_Group_ExitChange:

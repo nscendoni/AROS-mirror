@@ -19,7 +19,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *   
- * $Id$
+ * $Id: idhardwareupdate.c 44557 2012-04-07 20:17:13Z verhaegs $
  */
 
 #include <string.h>

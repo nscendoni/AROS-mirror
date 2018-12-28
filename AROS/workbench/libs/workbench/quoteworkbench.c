@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: quoteworkbench.c 36648 2011-01-17 14:31:59Z neil $
 
     Open the file information window for a specified file.
 */

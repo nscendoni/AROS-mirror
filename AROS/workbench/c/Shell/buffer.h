@@ -1,6 +1,6 @@
 /*
     Copyright (C) 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: buffer.h 45541 2012-08-13 01:43:15Z jmcmullan $
  */
 
 #ifndef BUFFER_H

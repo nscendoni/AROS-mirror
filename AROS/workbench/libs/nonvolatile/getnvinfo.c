@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getnvinfo.c 47708 2013-07-17 12:22:32Z verhaegs $
 */
 #include <dos/dosextens.h>
 #include <exec/memory.h>

@@ -1,6 +1,6 @@
 #ifndef NET_SANA2CONFIG_H
 #define NET_SANA2CONFIG_H \
-"$Id$"
+"$Id: sana2config.h 30794 2009-03-08 02:19:07Z neil $"
 /* 
  * Copyright © 1994 AmiTCP/IP Group, <amitcp-group@hut.fi>
  *                  Helsinki University of Technology, Finland.

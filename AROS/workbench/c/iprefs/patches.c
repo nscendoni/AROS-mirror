@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: patches.c 40680 2011-08-11 17:49:45Z jmcmullan $
 
     Desc:
     Lang: English

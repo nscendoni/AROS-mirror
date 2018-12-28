@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2012, The AROS Development Team. All rights reserved.
+    $Id: systemalert.c 50481 2015-04-28 10:49:03Z schulz $
 
     Desc: Display an alert in supervisor mode.
     Lang: english
@@ -8,6 +8,7 @@
 
 #include <aros/debug.h>
 #include <exec/execbase.h>
+#include <proto/kernel.h>
 
 #include "etask.h"
 #include "exec_intern.h"
@@ -49,7 +50,7 @@ void Exec_SystemAlert(ULONG alertNum, APTR location, APTR stack, UBYTE type, APT
 
         struct Task * t = (struct Task*)PrivExecBase(SysBase)->SAT.sat_Params[1];
         ULONG alertNum = PrivExecBase(SysBase)->SAT.sat_Params[0];
-        struct IntETask * iet = t ? GetIntETask(t) : NULL;
+        struct IntETask * iet = GetIntETask(t);
 
         Alert_DisplayKrnAlert(t, alertNum | AT_DeadEnd, iet->iet_AlertLocation, iet->iet_AlertStack,
                             iet->iet_AlertType, (APTR)&iet->iet_AlertData, SysBase);

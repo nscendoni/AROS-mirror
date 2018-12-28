@@ -7,7 +7,7 @@
  * This program is free software; you can redistribute it and/or modify it
  * under the same terms as AROS itself.
  *
- * $Id$
+ * $Id: fat_fs.h 50996 2015-08-02 21:36:27Z neil $
  */
 
 #ifndef FAT_HANDLER_H

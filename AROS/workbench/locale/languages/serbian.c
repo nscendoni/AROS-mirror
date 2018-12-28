@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: serbian.c 52735 2016-05-19 19:40:44Z polluks $
 
     Desc: serbian.language description file.
     Char: ISO 8859-5

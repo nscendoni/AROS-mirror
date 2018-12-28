@@ -2,7 +2,7 @@
 #define	__IP_NAT_H__
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ip_nat.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ip_nat.h,v 1.17 2000/04/05 05:35:27 kjell Exp $	*/

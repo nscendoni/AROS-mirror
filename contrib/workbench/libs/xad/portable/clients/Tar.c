@@ -1,7 +1,7 @@
 #ifndef XADMASTER_TAR_C
 #define XADMASTER_TAR_C
 
-/*  $Id$
+/*  $Id: Tar.c 43430 2012-01-01 20:12:06Z jmcmullan $
     Tar file archiver client
 
     XAD library system for archive handling

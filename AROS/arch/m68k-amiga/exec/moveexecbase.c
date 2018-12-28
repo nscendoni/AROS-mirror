@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: moveexecbase.c 47619 2013-07-02 18:27:20Z neil $
 
     Desc: Additional ExecBase manipulation code
     Lang:
@@ -97,6 +97,7 @@ struct ExecBase *PrepareExecBaseMove(struct ExecBase *oldSysBase)
 	reloclist((struct List*)&PrivExecBase(newsb)->TaskStorageSlots);
 	reloclist((struct List*)&PrivExecBase(newsb)->AllocatorCtxList);
 
+	InitSemaphore(&PrivExecBase(newsb)->MemListSem);
 	InitSemaphore(&PrivExecBase(newsb)->LowMemSem);
 
 	SysBase = newsb;

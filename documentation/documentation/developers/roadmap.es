@@ -5,8 +5,8 @@ Itinerario para AROS 1.0
 
 :Authors:   Adam Chodorowski, Sergey Mineychev
 :Copyright: Copyright ¦ 2007, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 30800 $
+:Date:      $Date: 2009-03-08 18:28:50 +0100 (Sun, 08 Mar 2009) $
 
 :Abstract:  
     Este es el itinerario previsto para esbozar los requerimientos

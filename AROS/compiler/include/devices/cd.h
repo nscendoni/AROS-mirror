@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cd.h 46456 2013-02-02 19:17:57Z jmcmullan $
 
     Desc: Definitions for cd.device and CD drivers
     Lang: english

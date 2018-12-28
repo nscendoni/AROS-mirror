@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: superstate.S 39924 2011-07-08 15:37:34Z jmcmullan $
 */
 
 /*****************************************************************************

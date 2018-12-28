@@ -1,6 +1,6 @@
 /*
     Copyright � 2013-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: intr.c 50662 2015-05-13 03:32:54Z NicJA $
 */
 
 #include <inttypes.h>

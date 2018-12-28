@@ -1,6 +1,6 @@
 // about.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-23 23:54:50 +0100 (Wed, 23 Mar 2016) $
+// $Revision: 52204 $
 
 
 #include <exec/types.h>

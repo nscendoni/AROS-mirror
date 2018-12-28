@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2008, The AROS Development Team. All rights reserved.
+    $Id: newloadseg.c 46059 2012-11-21 19:47:17Z mazze $
 
     Desc: DOS function NewLoadSeg()
     Lang: english
@@ -21,7 +21,7 @@
 
 /*  SYNOPSIS */
         AROS_LHA(CONST_STRPTR, file, D1),
-        AROS_LHA(const struct TagItem *, tags, D2),
+        AROS_LHA(struct TagItem *, tags, D2),
 
 /*  LOCATION */
         struct DosLibrary *, DOSBase, 128, Dos)

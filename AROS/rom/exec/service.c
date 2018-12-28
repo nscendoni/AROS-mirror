@@ -1,16 +1,18 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: service.c 51383 2016-01-21 00:29:44Z NicJA $
 
     Desc: exec.library's internal service task. Performs memory management according
           to task scheduler's requests.
     Lang: english
 */
 
+#include <aros/debug.h>
 #include <exec/execbase.h>
 #include <exec/tasks.h>
 #include <aros/libcall.h>
 #include <proto/exec.h>
+#include <proto/kernel.h>
 
 #include "exec_intern.h"
 #include "exec_util.h"
@@ -18,27 +20,16 @@
 
 void ServiceTask(struct ExecBase *SysBase)
 {
-#if defined(__AROSEXEC_SMP__)
-    struct Task *serviceTask;
-#endif
-    struct Task *task;
-    struct MemList *mb, *mbnext;
-    BOOL taskRequeue;
-    DINIT("ServiceTask: Started up");
-
-#if defined(__AROSEXEC_SMP__)
-    serviceTask = FindTask(NULL);
-    DINIT("ServiceTask: task @ 0x%p", serviceTask);
-#endif
+    DINIT("Service task started up");
 
     do
     { /* forever */
-
+        struct Task *task;
+        struct MemList *mb, *mbnext;
 
         while ((task = (struct Task *)GetMsg(PrivExecBase(SysBase)->ServicePort)))
         {
-            DREMTASK("ServiceTask: Request for Task 0x%p, State %08X\n", task, task->tc_State);
-            taskRequeue = TRUE;
+            D(bug("[exec] Service request for task 0x%p, state %d\n", task, task->tc_State);)
 
             /*
              * If we ever need to use TSS here, we'll need to explicitly check its size here.
@@ -48,27 +39,8 @@ void ServiceTask(struct ExecBase *SysBase)
 
 	    switch (task->tc_State)
 	    {
-#if defined(__AROSEXEC_SMP__)
-            case TS_TOMBSTONED:
-                if (!(PrivExecBase(SysBase)->IntFlags & EXECF_CPUAffinity) || (GetIntETask(serviceTask)->iet_CpuNumber== (IPTR)task->tc_UserData))
-                {
-                    DREMTASK("ServiceTask: Task is running on this CPU (%03u)\n", task->tc_UserData);
-                    taskRequeue = FALSE;
-                }
-#endif
             case TS_REMOVED:
-                if (taskRequeue)
-                {
-                    DREMTASK("ServiceTask: Requeueing request for Task 0x%p <%s> (State:%08x)", task, task->tc_Node.ln_Name, task->tc_State);
-                    InternalPutMsg(PrivExecBase(SysBase)->ServicePort,
-                        (struct Message *)task, SysBase);
-                    break;
-                }
-            case TS_INVALID:
-                DREMTASK("ServiceTask: Removal request for Task 0x%p <%s> (State:%08x)", task, task->tc_Node.ln_Name, task->tc_State);
-
-                // TODO: Make sure the task has terminated..
-                task->tc_State = TS_INVALID;
+                DREMTASK("Removal request for task 0x%p <%s>", task, task->tc_Node.ln_Name);
 
                 /*
                  * Note tc_MemEntry list is part of the task structure which
@@ -86,32 +58,25 @@ void ServiceTask(struct ExecBase *SysBase)
                     /* Free one MemList node */
                     mbnext = (struct MemList *)mb->ml_Node.ln_Succ;
 
-                    DREMTASK("ServiceTask: Freeing MemList 0x%p", mb);
+                    DREMTASK("Freeing MemList 0x%p", mb);
                     FreeEntry(mb);
                 }
                 break;
 
             default:
-                if ((task->tc_Node.ln_Type == NT_TASK) || (task->tc_Node.ln_Type == NT_PROCESS))
-                {
-                    /* FIXME: Add fault handling here. Perhaps kernel-level GURU. */
-                    DREMTASK("ServiceTask: Task 0x%p <%s> not in servicable state!\n", task, task->tc_Node.ln_Name);
-                    DREMTASK("ServiceTask: State = %08X\n", task->tc_State);
+                /* FIXME: Add fault handling here. Perhaps kernel-level GURU. */
 
-                    /*
-                     * Mark the task as ready to run again. Move it back to TaskReady list.
-                     */
-#if !defined(EXEC_REMTASK_NEEDSSWITCH)
-                    task->tc_State = TS_READY;
-                    Enqueue(&SysBase->TaskReady, &task->tc_Node);
-#else
-                    krnSysCallReschedTask(task, TS_READY);
+                /* The task is ready to run again. Move it back to TaskReady list. */
+                task->tc_State = TS_READY;
+#if defined(__AROSEXEC_SMP__)
+                EXEC_SPINLOCK_LOCK(&PrivExecBase(SysBase)->TaskReadySpinLock, SPINLOCK_MODE_READ);
+                Forbid();
 #endif
-                }
-                else
-                {
-                    DREMTASK("ServiceTask: Called with something that is not a task??\n");
-                }
+                Enqueue(&SysBase->TaskReady, &task->tc_Node);
+#if defined(__AROSEXEC_SMP__)
+                EXEC_SPINLOCK_UNLOCK(&PrivExecBase(SysBase)->TaskReadySpinLock);
+                Permit();
+#endif
                 break;
             }
         }

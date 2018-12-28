@@ -33,7 +33,7 @@
 	16-Dez-92  b_null documented
 	16 Jun 93  b_null introduced "struct keyspec"
 	29-Jun-94  b_null Docs updated
-	$Date$ last update
+	$Date: 2011-01-18 14:26:51 +0100 (Tue, 18 Jan 2011) $ last update
 
 ******************************************************************************/
 

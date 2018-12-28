@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 53097 2016-12-23 15:48:26Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES := hextris stdsys arosio shape
 

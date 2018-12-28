@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: unixpkt_class.c 52732 2016-05-16 15:46:00Z schulz $
 
     Desc: Unix filedescriptor/socket IO
     Lang: english

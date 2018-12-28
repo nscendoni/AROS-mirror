@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: inquire.h 38459 2011-04-30 19:30:40Z deadwood $
 
     Desc: aros.library ArosInquire
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: imageclass.c 47696 2013-07-16 15:27:02Z neil $
 */
 
 /****************************************************************************************/

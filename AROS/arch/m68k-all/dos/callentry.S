@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: callentry.S 51242 2015-12-28 09:15:12Z twilen $
 
     Desc: Call the entry point of a BCPL style routine
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: oop_init.c 45036 2012-06-17 05:05:04Z jmcmullan $
 
     Desc: OOP Library
     Lang: english

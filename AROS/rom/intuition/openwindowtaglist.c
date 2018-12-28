@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: openwindowtaglist.c 51782 2016-03-10 17:00:57Z NicJA $
 */
 
 #include <proto/utility.h>

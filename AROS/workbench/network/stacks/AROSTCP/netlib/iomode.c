@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: iomode.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      iomode.c - set file io mode (normal or translated) (SAS/C)
  *

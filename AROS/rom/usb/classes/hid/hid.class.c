@@ -497,7 +497,7 @@ BOOL GM_UNIQUENAME(nLoadClassConfig)(struct NepHidBase *nh)
     cdc->cdc_EnableKBReset = TRUE;
     cdc->cdc_EnableRH = TRUE;
     cdc->cdc_ResetDelay = 10;
-    cdc->cdc_ShellStack = AROS_STACKSIZE;
+    cdc->cdc_ShellStack = 8192;
     strcpy(cdc->cdc_ShellCon, "CON:///130/HID Rocket Bay/CLOSE/AUTO/WAIT");
     cdc->cdc_PollingMode = FALSE;
     cdc->cdc_LLPortMode[1] = 2;
@@ -2849,9 +2849,9 @@ BOOL nParseReport(struct NepClassHid *nch, struct NepHidReport *nhr)
                                                 nhi->nhi_LogicalMin = nch->nch_HidGlobal.nhg_LogicalMin;
                                                 nhi->nhi_LogicalMax = nch->nch_HidGlobal.nhg_LogicalMax;
 
-                                                nhi->nhi_MapSize = (nhi->nhi_LogicalMax - nhi->nhi_LogicalMin)+1;
-                                                nhi->nhi_UsageMap = psdAllocVec(sizeof(ULONG) * nhi->nhi_MapSize);
-                                                nhi->nhi_ActionMap = psdAllocVec(sizeof(struct List) * nhi->nhi_MapSize);
+                                                count = nhi->nhi_MapSize = (nhi->nhi_LogicalMax - nhi->nhi_LogicalMin)+1;
+                                                usageptr = nhi->nhi_UsageMap = psdAllocVec(sizeof(ULONG) * count);
+                                                alistptr = nhi->nhi_ActionMap = psdAllocVec(sizeof(struct List) * count);
                                                 nhi->nhi_Buffer = psdAllocVec(2 * sizeof(LONG) * nhi->nhi_Count);
                                                 nhi->nhi_OldBuffer = &nhi->nhi_Buffer[nhi->nhi_Count];
                                                 nhi->nhi_PhysicalMin = nch->nch_HidGlobal.nhg_PhysicalMin;
@@ -2859,8 +2859,6 @@ BOOL nParseReport(struct NepClassHid *nch, struct NepHidReport *nhr)
                                                 nhi->nhi_UnitExp = nch->nch_HidGlobal.nhg_UnitExp;
                                                 nhi->nhi_Unit = nch->nch_HidGlobal.nhg_Unit;
 
-                                                usageptr = nhi->nhi_UsageMap;
-                                                alistptr = nhi->nhi_ActionMap;
                                                 if(!(usageptr && alistptr && nhi->nhi_Buffer))
                                                 {
                                                     psdFreeVec(usageptr);
@@ -2881,7 +2879,7 @@ BOOL nParseReport(struct NepClassHid *nch, struct NepHidReport *nhr)
                                                             nhi->nhi_LogicalMin, nhi->nhi_LogicalMax));
 
                                                 nhi->nhi_SameUsages = TRUE;
-                                                for (count = nhi->nhi_MapSize; count; count--)
+                                                do
                                                 {
                                                     nhu = (struct NepHidUsage *) nch->nch_HidDesigns.lh_Head;
                                                     if(nhu->nhu_Node.ln_Succ)
@@ -2927,17 +2925,14 @@ BOOL nParseReport(struct NepClassHid *nch, struct NepHidReport *nhr)
                                                     *usageptr++ = usageid;
                                                     NewList(alistptr);
                                                     alistptr++;
-                                                }
+                                                } while(--count);
 
                                                 if(nhi->nhi_SameUsages)
                                                 {
                                                     // if it's all the same, we can assign a usage id to this array
                                                     nhi->nhi_Usage = nhi->nhi_UsageMap[0];
                                                 }
-                                                if(nhi->nhi_MapSize)
-                                                {
-                                                    AddTail(&nhc->nhc_Items, &nhi->nhi_Node);
-                                                }
+                                                AddTail(&nhc->nhc_Items, &nhi->nhi_Node);
                                             }
                                         } /* FIXME: Clean string/delimiter stack if no usage? */
                                         bitpos += nch->nch_HidGlobal.nhg_ReportSize * nch->nch_HidGlobal.nhg_ReportCount;
@@ -2951,41 +2946,41 @@ BOOL nParseReport(struct NepClassHid *nch, struct NepHidReport *nhr)
                                 {
                                     nch->nch_HidGlobal.nhg_LogicalMax = HID_PARAM_UNDEF;
                                 }
+                                break;
                             }
-                            break;
-                        }
 
-                    case REPORT_MAIN_COLLECT:
-                        {
-                            struct NepHidUsage *nhu;
-                            struct NepHidCollection *oldnhc = nhc;
-                            KPRINTF(1, ("Collection(%lx)\n", udata));
-                            if((nhc = psdAllocVec(sizeof(struct NepHidCollection))))
+                        case REPORT_MAIN_COLLECT:
                             {
-                                NewList(&nhc->nhc_Items);
-                                nhc->nhc_Parent = oldnhc;
-                                nhu = (struct NepHidUsage *) nch->nch_HidUsages.lh_Head;
-                                if(nhu->nhu_Node.ln_Succ)
+                                struct NepHidUsage *nhu;
+                                struct NepHidCollection *oldnhc = nhc;
+                                KPRINTF(1, ("Collection(%lx)\n", udata));
+                                if((nhc = psdAllocVec(sizeof(struct NepHidCollection))))
                                 {
-                                    nhc->nhc_Usage = nhu->nhu_Usage;
-                                    nhc->nhc_Name = nGetUsageName(nch, nhu->nhu_Usage);
-                                } else {
-                                    if(nhc->nhc_Parent)
+                                    NewList(&nhc->nhc_Items);
+                                    nhc->nhc_Parent = oldnhc;
+                                    nhu = (struct NepHidUsage *) nch->nch_HidUsages.lh_Head;
+                                    if(nhu->nhu_Node.ln_Succ)
                                     {
-                                        nhc->nhc_Usage = nhc->nhc_Parent->nhc_Usage;
-                                        nhc->nhc_Name = psdCopyStr(nhc->nhc_Parent->nhc_Name);
+                                        nhc->nhc_Usage = nhu->nhu_Usage;
+                                        nhc->nhc_Name = nGetUsageName(nch, nhu->nhu_Usage);
                                     } else {
-                                        nhc->nhc_Name = psdCopyStr("Argl!");
+                                        if(nhc->nhc_Parent)
+                                        {
+                                            nhc->nhc_Usage = nhc->nhc_Parent->nhc_Usage;
+                                            nhc->nhc_Name = psdCopyStr(nhc->nhc_Parent->nhc_Name);
+                                        } else {
+                                            nhc->nhc_Name = psdCopyStr("Argl!");
+                                        }
                                     }
                                 }
-                            }
-                            node = nch->nch_HidUsages.lh_Head;
-                            while(node->ln_Succ)
-                            {
-                                KPRINTF(1, ("Removing usage %08lx\n", node));
-                                Remove(node);
-                                psdFreeVec(node);
                                 node = nch->nch_HidUsages.lh_Head;
+                                while(node->ln_Succ)
+                                {
+                                    KPRINTF(1, ("Removing usage %08lx\n", node));
+                                    Remove(node);
+                                    psdFreeVec(node);
+                                    node = nch->nch_HidUsages.lh_Head;
+                                }
                             }
                             break;
                         }
@@ -3077,12 +3072,8 @@ BOOL nParseReport(struct NepClassHid *nch, struct NepHidReport *nhr)
                         break;
 
                     case REPORT_GLOB_LOGMAX:
-                        /* Some devices (like usb-kbd in QEMU) have wrong descriptors
-                         * Try to detect and correct this here.
-                         * This only works if LogMin is defined before LogMax but that's likely common
-                         * FIXME: Is there a better way to handle this? */
-                        nch->nch_HidGlobal.nhg_LogicalMax = (data < nch->nch_HidGlobal.nhg_LogicalMin ? udata : data);
-                        KPRINTF(1, ("LogMax(%ld)\n", nch->nch_HidGlobal.nhg_LogicalMax));
+                        KPRINTF(1, ("LogMax(%ld)\n", data));
+                        nch->nch_HidGlobal.nhg_LogicalMax = data;
                         break;
 
                     case REPORT_GLOB_PHYMIN:

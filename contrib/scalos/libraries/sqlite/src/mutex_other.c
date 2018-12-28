@@ -11,7 +11,7 @@
 *************************************************************************
 ** This file contains the C functions that implement mutexes for OS/2
 **
-** $Id$
+** $Id: mutex_other.c 50039 2015-02-06 20:55:38Z NicJA $
 */
 
 /*

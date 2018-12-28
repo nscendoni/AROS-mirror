@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readjoyport.c 47628 2013-07-03 21:21:56Z mazze $
 
     Desc: 
     Lang: english

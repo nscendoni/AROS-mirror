@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: internalloadseg_support.c 49667 2014-09-30 17:35:27Z neil $
 */
 
 #include <aros/config.h>
@@ -21,7 +21,7 @@ static char *getname(BPTR file, char **bufferp, struct DosLibrary *DOSBase)
      * A real-life example of this is C:AddDataTypes
      * from AmigaOS 3.9
      */
-    if (DOSBase && ISFILEHANDLE(file)) {
+    if (ISFILEHANDLE(file) && DOSBase) {
         char *buffer = AllocMem(512, MEMF_ANY);
         if (buffer) {
             *bufferp = buffer;

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Sort.c 51711 2016-03-09 22:35:24Z NicJA $
 
     Desc: Sorts the contents of a file
     Lang: English

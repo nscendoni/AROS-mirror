@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: xorregionregionnd.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc:
     Lang: english
@@ -22,7 +22,7 @@
 	AROS_LHA(struct Region *, R2, A1),
 
 /*  LOCATION */
-	struct GfxBase *, GfxBase, 191, Graphics)
+	struct GfxBase *, GfxBase, 151, Graphics)
 
 /*  FUNCTION
 	Exclusive-OR of one region with another region.

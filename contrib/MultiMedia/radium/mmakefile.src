@@ -1,7 +1,7 @@
-#   $Id$
+#   $Id: mmakefile.src 52372 2016-03-29 16:36:36Z NicJA $
 #
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 VERSION=0.55
 VERSION_LETTER=

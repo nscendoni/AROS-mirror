@@ -1,5 +1,5 @@
 #ifndef __AROS__
-static char *RCS_ID_C="$Id$";
+static char *RCS_ID_C="$Id: socket_autoinit.c 51166 2015-10-28 11:01:06Z o1i $";
 #endif
 /*
  * autoinit.c --- SAS C auto initialization functions

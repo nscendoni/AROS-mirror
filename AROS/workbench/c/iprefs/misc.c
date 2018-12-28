@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: misc.c 32536 2010-02-01 15:27:48Z sonic $
 
     Desc:
     Lang: English

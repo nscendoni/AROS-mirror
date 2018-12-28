@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: baseredef.h 35730 2010-11-23 21:26:31Z jmcmullan $
 */
 
 #ifdef DOSBase

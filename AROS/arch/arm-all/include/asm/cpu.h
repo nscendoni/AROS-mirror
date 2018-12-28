@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu.h 50545 2015-05-01 11:40:52Z schulz $
 
     Desc: cpu.h
     Lang: english

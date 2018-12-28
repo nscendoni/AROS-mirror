@@ -1,6 +1,6 @@
 /*
     Copyright © <year>, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: findpatch.c 47619 2013-07-02 18:27:20Z neil $
 */
 
 #include <string.h>

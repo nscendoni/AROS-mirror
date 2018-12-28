@@ -1,6 +1,6 @@
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stubs.c 48675 2014-01-02 18:34:06Z neil $
 */
 
 #include <aros/system.h>

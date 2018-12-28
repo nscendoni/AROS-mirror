@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile 52302 2016-03-28 03:42:13Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -9,7 +9,7 @@ IMAGEFILES  := $(foreach f,$(IMAGES),$(TOP)/$(CURDIR)/$(f)0.h $(TOP)/$(CURDIR)/$
 demos-images-setup : $(IMAGEFILES)
 	@$(NOP)
 
-$(TOP)/$(CURDIR)/%.h : $(SRCDIR)/$(CURDIR)/%.dat $(SRCDIR)/$(CURDIR)/datfilt.awk
+$(TOP)/$(CURDIR)/%.h : %.dat datfilt.awk
 	$(MKDIR) $(TOP)/$(CURDIR)
 	cd $(TOP)/$(CURDIR); ${AWK} -f $(SRCDIR)/$(CURDIR)/datfilt.awk $<
 

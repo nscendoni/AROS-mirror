@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kbd_init.c 46554 2013-02-09 16:19:21Z sonic $
 
     Desc: kbd Hidd for standalone i386 AROS
     Lang: english

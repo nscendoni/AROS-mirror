@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: compilerspecific.h 51261 2016-01-09 01:05:26Z polluks $
 */
 
 #ifndef COMPILERSPECIFIC_H

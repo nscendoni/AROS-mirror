@@ -17,7 +17,7 @@
  */
 
 /*
- * $Id$
+ * $Id: rexx.c 39165 2011-06-12 17:58:24Z verhaegs $
  */
 #if defined(HAVE_CONFIG_H)
 # include "config.h"

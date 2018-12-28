@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gui.c 52028 2016-03-17 04:36:20Z jmcmullan $
 */
 
 /* "TODO: fs support" */

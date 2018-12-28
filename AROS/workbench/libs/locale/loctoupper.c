@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: loctoupper.c 43286 2011-12-29 02:11:58Z neil $
 
     Desc: LocToUpper - locale.library's private replacement
           of utility.library/ToUper function. IPrefs will install

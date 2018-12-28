@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: printitext.c 50936 2015-07-08 00:42:04Z jmcmullan $
 */
 
 #include <string.h>

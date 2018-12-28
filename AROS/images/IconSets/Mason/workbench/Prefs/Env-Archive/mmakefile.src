@@ -1,13 +1,13 @@
-# $Id$
+# $Id: mmakefile.src 34053 2010-08-07 05:57:59Z mazze $
 #
 # Makefile for Mason's workbench icons
 
-include $(SRCDIR)/config/aros.cfg
+include $(TOP)/config/make.cfg
 
 ICONS     := def_Disk def_RAM def_Drawer def_Project def_Tool def_Text def_Document def_Harddisk def_CDROM
 ICONDIR   := $(AROSDIR)/Prefs/Env-Archive/SYS
 
-#MM- iconset-Mason-wbench-icons-aros : iconset-Mason-wbench-icons-aros-env
+#MM- iconset-Mason-icons : masonworkbenchenvicons
 
-%build_icons mmake=iconset-Mason-wbench-icons-aros-env icons=$(ICONS) \
+%build_icons mmake=masonworkbenchenvicons icons=$(ICONS) \
              dir=$(ICONDIR)

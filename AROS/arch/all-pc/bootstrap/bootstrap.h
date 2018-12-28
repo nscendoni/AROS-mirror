@@ -3,7 +3,7 @@
 
 /*
     Copyright (C) 2006-2011 The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bootstrap.h 42469 2011-11-15 10:40:36Z sonic $
 */
 
 #include <aros/multiboot.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: posix_memalign.c 48036 2013-09-08 21:17:30Z verhaegs $
 
     POSIX.1-2008 function posix_memalign().
 */

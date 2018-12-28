@@ -1,6 +1,6 @@
 /*
     Copyright © 2005-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prometheus_intern.h 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #ifndef PROMETHEUS_INTERN_H
@@ -48,6 +48,7 @@ struct PCIBoard
    struct MinNode node;
    struct Node *owner;
    OOP_Object *aros_board;
+   struct Interrupt *aros_irq; /* ABI_V0 compatibility */
 };
 
 

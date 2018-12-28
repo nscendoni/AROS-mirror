@@ -1,7 +1,7 @@
 #ifndef XADMASTER_PROTECTION_C
 #define XADMASTER_PROTECTION_C
 
-/*  $Id$
+/*  $Id: protection.c 36659 2011-01-18 13:26:51Z neil $
     protection bit conversion
 
     XAD library system for archive handling

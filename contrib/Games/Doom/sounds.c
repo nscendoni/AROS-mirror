@@ -1,7 +1,7 @@
 // Emacs style mode select   -*- C++ -*- 
 //-----------------------------------------------------------------------------
 //
-// $Id$
+// $Id: sounds.c 30794 2009-03-08 02:19:07Z neil $
 //
 // Copyright (C) 1993-1996 by id Software, Inc.
 //
@@ -27,7 +27,7 @@
 
 
 static const char 
-rcsid[] = "$Id$";
+rcsid[] = "$Id: sounds.c 30794 2009-03-08 02:19:07Z neil $";
 
 
 #include "doomdef.h"

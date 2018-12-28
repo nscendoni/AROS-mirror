@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mathieee64bitdefines.h 30800 2009-03-08 17:28:50Z neil $
 
     Some shortcuts that provide the highest flexibility
     for 64bit and 32bit Systems.

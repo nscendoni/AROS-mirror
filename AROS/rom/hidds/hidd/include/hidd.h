@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hidd.h 46421 2013-01-29 20:39:47Z sonic $
 
     Desc: Main HIDD Include File
     Lang: english

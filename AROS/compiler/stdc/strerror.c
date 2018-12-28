@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: strerror.c 53132 2016-12-29 10:32:06Z deadwood $
 
     C99 function strerror().
 */
@@ -170,7 +170,7 @@ static const char * _errstrings[__STDC_ELAST+2] =
     /* NA              */	NULL,
     /* NA              */	NULL,
     /* NA              */	NULL,
-    /* ENOBUFS	       */	"No buffer space available",
+    /* NA              */	NULL,
     /* NA     	       */	NULL,
     /* NA              */	NULL,
     /* NA              */	NULL,
@@ -199,7 +199,27 @@ static const char * _errstrings[__STDC_ELAST+2] =
     /* NA	       */	NULL,
     /* NA   	       */	NULL,
     /* NA    	       */	NULL,
-    /* NA              */	NULL,
     /* EILSEQ	       */	"Illegal byte sequence",
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* NA    	       */	NULL,
+    /* ENOBUFS	       */	"No buffer space available",
     /* Too high        */	NULL,
 };

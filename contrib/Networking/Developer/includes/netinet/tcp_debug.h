@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: tcp_debug.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: tcp_debug.h,v 1.4 1999/01/11 02:01:35 deraadt Exp $	*/

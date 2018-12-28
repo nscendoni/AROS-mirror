@@ -1,6 +1,6 @@
 /*
     Copyright © 2009-2013, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: timer.h 46720 2013-02-28 18:48:18Z sonic $
 
     Desc:
     Lang: English

@@ -1,6 +1,6 @@
 /*
     Copyright � 2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: storage_stubs.c 36648 2011-01-17 14:31:59Z neil $
 
     Desc: Stub functions for PCI subsystem
     Lang: English

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: remmemhandler.c 36857 2011-01-28 11:46:55Z sonic $
 
     Desc: Remove a memory handler.
     Lang: english

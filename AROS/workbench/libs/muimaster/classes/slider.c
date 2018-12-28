@@ -3,7 +3,7 @@
     Copyright © 2002-2013, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: slider.c 48322 2013-10-25 17:36:38Z jmcmullan $
 */
 
 #include <string.h>
@@ -17,7 +17,7 @@
 #include <proto/utility.h>
 #include <proto/muimaster.h>
 
-//#define MYDEBUG 1
+/*#define MYDEBUG 1*/
 #include "debug.h"
 
 #include "support.h"
@@ -339,14 +339,10 @@ IPTR Slider__MUIM_Draw(struct IClass *cl, Object *obj,
     UWORD knob_frame_state;
     LONG val = 0;
 
-    D(bug("[slider] %s: obj @ 0x%p\n", __func__, obj);)
-
     DoSuperMethodA(cl, obj, (Msg) msg);
 
     if (!(msg->flags & (MADF_DRAWOBJECT | MADF_DRAWUPDATE)))
         return FALSE;
-
-    D(bug("[slider] %s: %d,%d->%d,%d (%d,%d)\n", __func__, _mleft(obj), _mtop(obj), _mright(obj), _mbottom(obj), _mwidth(obj), _mheight(obj));)
 
     if (data->flags & SLIDER_HORIZ)
         data->scale_length = _mwidth(obj);
@@ -363,12 +359,16 @@ IPTR Slider__MUIM_Draw(struct IClass *cl, Object *obj,
         data->flags |= SLIDER_VALIDOFFSET;
     }
 
-    data->knob_top = _mtop(obj);
-    data->knob_left = _mleft(obj);
     if (data->flags & SLIDER_HORIZ)
-        data->knob_left += data->knob_offset;
+    {
+        data->knob_top = _mtop(obj);
+        data->knob_left = _mleft(obj) + data->knob_offset;
+    }
     else
-        data->knob_top += data->knob_offset;
+    {
+        data->knob_top = _mtop(obj) + data->knob_offset;
+        data->knob_left = _mleft(obj);
+    }
 
     DoMethod(obj, MUIM_DrawBackground, _mleft(obj), _mtop(obj),
         _mwidth(obj), _mheight(obj), 0, 0, 0);

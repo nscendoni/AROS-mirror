@@ -1,5 +1,5 @@
 ; $Source$
-; $Id$
+; $Id: macros.ai 30794 2009-03-08 02:19:07Z neil $
 ;procedure index, used in-line to save some microseconds
 call_index	macro
 	mov	si,bx			;si = bx * 5 (5 byte hash entries)

@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: __stdcio_assert.c 48942 2014-04-18 13:17:49Z neil $
 
     C99 function assert() autodoc and stdcio.library support function
 */
@@ -101,5 +101,3 @@
     abort();
 } /* assert */
 
-AROS_MAKE_ASM_SYM(typeof(__assert), __assert, AROS_CSYM_FROM_ASM_NAME(__assert), AROS_CSYM_FROM_ASM_NAME(__stdcio_assert));
-AROS_EXPORT_ASM_SYM(AROS_CSYM_FROM_ASM_NAME(__assert));

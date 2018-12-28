@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: createproc.c 48397 2013-11-09 03:46:51Z neil $
 
     Desc: Create a new process (in an old way).
     Lang: English
@@ -77,6 +77,14 @@
     AROS_LIBFUNC_INIT
 
     struct Process *pr;       /* The process to create */
+    struct Process *parent = (struct Process *)FindTask(NULL);
+    APTR            windowPtr = NULL;
+
+    /* If the caller is a process, inherit its window pointer */
+    if (__is_process(parent))
+    {
+        windowPtr = parent->pr_WindowPtr;
+    }
 
     {
         /* Don't forget to find out some extra defaults here */
@@ -87,6 +95,7 @@
             { NP_StackSize      , stackSize       },
             { NP_Name           , (IPTR)name      },
             { NP_Priority       , pri             },
+            { NP_WindowPtr      , (IPTR)windowPtr },
             /* These arguments are necessary, for
              * AOS 3.x compatability. Specifically,
              * CreateProc() must *not* break Forbid()
@@ -100,7 +109,7 @@
             { NP_CloseOutput    , FALSE           },
             { TAG_DONE          , 0               }
         };
-
+        
         if ((pr = CreateNewProc(procTags)))
         {
             return (struct MsgPort *)&pr->pr_MsgPort;

@@ -2,7 +2,7 @@
 #define _STDC_WCHAR_H_
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: wchar.h 48028 2013-09-08 21:13:29Z verhaegs $
 
     Standard C Library: Extended multibyte and wide character utilities.
 */

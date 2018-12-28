@@ -2,7 +2,7 @@
 #define PRAGMAS_SCALOSGFX_PRAGMAS_H
 
 /*
-**	$Id$
+**	$Id: scalosgfx_pragmas.h 48481 2013-12-01 22:08:26Z mazze $
 **
 **	Direct ROM interface (pragma) definitions.
 **

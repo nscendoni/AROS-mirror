@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2002-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: list.h 50978 2015-08-02 19:22:22Z deadwood $
 */
 
 /****************************************************************************/

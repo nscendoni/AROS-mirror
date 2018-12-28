@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: filepart.c 46059 2012-11-21 19:47:17Z mazze $
 
     Returns a pointer to the first char of the filename in the give file part.
 */

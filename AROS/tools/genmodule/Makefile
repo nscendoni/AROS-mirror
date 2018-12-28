@@ -1,5 +1,5 @@
 #   Copyright © 2002-2009, The AROS Development Team. All rights reserved.
-#   $Id$
+#   $Id: Makefile 45564 2012-08-15 19:00:52Z jmcmullan $
 #
 #   Desc: Makefile to create genmodule
 #

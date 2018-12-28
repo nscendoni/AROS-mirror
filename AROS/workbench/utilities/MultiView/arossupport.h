@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: arossupport.h 33822 2010-07-16 11:04:41Z polluks $
 
     Desc:
     Lang: English

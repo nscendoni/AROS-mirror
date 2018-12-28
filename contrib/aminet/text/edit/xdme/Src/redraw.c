@@ -1,7 +1,7 @@
 /******************************************************************************
 
     MODUL
-	$Id$
+	$Id: redraw.c 36659 2011-01-18 13:26:51Z neil $
 
     DESCRIPTION
 	This contains all functionality that is needed to refresh

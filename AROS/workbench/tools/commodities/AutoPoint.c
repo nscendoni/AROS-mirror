@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: AutoPoint.c 49028 2014-05-25 12:38:18Z deadwood $
 
     AutoPoint commodity -- activates the window under the mouse pointer.
 */

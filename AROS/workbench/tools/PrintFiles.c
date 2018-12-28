@@ -1,6 +1,6 @@
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: PrintFiles.c 44393 2012-03-11 23:08:55Z mazze $
 
     Desc: Print multiple files with optional formfeed
     Lang: English

@@ -7,7 +7,7 @@
  * Network Solutions Development, Inc.
  * All rights reserved.
  *
- * $Id$
+ * $Id: usergroup.h 48699 2014-01-11 17:39:44Z jmcmullan $
  */
 
 #ifndef EXEC_TYPES_H

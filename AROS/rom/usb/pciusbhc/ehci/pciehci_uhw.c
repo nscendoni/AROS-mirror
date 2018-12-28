@@ -1,6 +1,6 @@
 /*
     Copyright © 2011-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pciehci_uhw.c 45932 2012-10-20 05:52:33Z neil $
 */
 
 #include LC_LIBDEFS_FILE

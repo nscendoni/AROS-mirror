@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: addtail.c 43453 2012-01-02 08:08:15Z jmcmullan $
 
     Desc: Add a node at the end of a list.
     Lang: english

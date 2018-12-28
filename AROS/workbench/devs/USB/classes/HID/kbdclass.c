@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2006 by Michal Schulz
-    $Id$
+    $Id: kbdclass.c 45204 2012-07-12 04:01:17Z jmcmullan $
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Library General Public License as

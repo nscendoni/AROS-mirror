@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2002-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: crawling.h 37294 2011-03-02 02:23:12Z NicJA $
 */
 
 /****************************************************************************/

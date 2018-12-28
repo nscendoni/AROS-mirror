@@ -1,6 +1,6 @@
 /*
     Copyright 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: NVGF100.c 49038 2014-06-01 10:28:12Z deadwood $
 */
 
 #include <aros/debug.h>

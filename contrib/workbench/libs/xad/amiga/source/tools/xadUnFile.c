@@ -7,7 +7,7 @@
 #define REVISION     "25"
 #define DATE	     "10.03.2002"
 
-/*  $Id$
+/*  $Id: xadUnFile.c 43430 2012-01-01 20:12:06Z jmcmullan $
     xadUnFile - dearchives file archives
 
     XAD library system for archive handling

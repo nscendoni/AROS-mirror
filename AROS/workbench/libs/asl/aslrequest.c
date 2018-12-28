@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: aslrequest.c 50057 2015-02-09 17:42:10Z neil $
 
     Desc:
     Lang: english

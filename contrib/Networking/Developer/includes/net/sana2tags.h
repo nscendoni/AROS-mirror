@@ -2,7 +2,7 @@
 #define NET_SANA2TAGS_H
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sana2tags.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 #define	ETHERTYPE_IP	0x0800		/* IP protocol */

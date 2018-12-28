@@ -1,5 +1,5 @@
 /******************************************************************************
-* $Id$
+* $Id: lmuilib.h 30794 2009-03-08 02:19:07Z neil $
 *
 * Copyright (C) 2006 Matthias Rustler.  All rights reserved.
 *

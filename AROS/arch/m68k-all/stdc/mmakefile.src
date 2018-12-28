@@ -1,66 +1,15 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 #
 
 include $(SRCDIR)/config/aros.cfg
 
-USER_AFLAGS  := -I$(GENINCDIR) -DDEBUG=0 -mc68020
-USER_CFLAGS := -I$(SRCDIR)/compiler/stdc
-
-STDC_M68K_FILES := \
-    fenv
-
-STDC_M68K_ASMFILES := \
-    longjmp \
-    setjmp
-
-# Add FPU based runtime-replacement math functions ..
-STDC_M68K_ASMFILES += \
-    math/e_acos-881 \
-    math/e_asin-881 \
-    math/e_atanh-881 \
-    math/e_cosh-881 \
-    math/e_exp-881 \
-    math/e_fmod-881 \
-    math/e_hypot-881 \
-    math/e_log-881 \
-    math/e_log10-881 \
-    math/e_log2-881 \
-    math/e_remainder-881 \
-    math/e_sinh-881 \
-    math/e_sqrt-881 \
-    math/s_atan-881 \
-    math/s_ceil-881 \
-    math/s_copysign-881 \
-    math/s_cos-881 \
-    math/s_exp2-881 \
-    math/s_fabs-881 \
-    math/s_fdim-881 \
-    math/s_floor-881 \
-    math/s_fma-881 \
-    math/s_fmax-881 \
-    math/s_fmin-881 \
-    math/s_fpclassify-881 \
-    math/s_isfinite-881 \
-    math/s_isinf-881 \
-    math/s_isnan-881 \
-    math/s_isnormal-881 \
-    math/s_lround-881 \
-    math/s_nearbyint-881 \
-    math/s_round-881 \
-    math/s_signbit-881 \
-    math/s_sin-881 \
-    math/s_tan-881 \
-    math/s_tanh-881 \
-    math/s_trunc-881
-
-STDC_M68K_FILES += \
-    __stdc_fpumath
+USER_AFLAGS  := -I$(GENINCDIR) -DDEBUG=0
 
 %build_archspecific \
   mainmmake=compiler-stdc \
   maindir=compiler/stdc \
   arch=m68k \
-  files="$(STDC_M68K_FILES)" asmfiles="$(STDC_M68K_ASMFILES)"
+  files="fenv" asmfiles="longjmp setjmp"
 
 #MM- compiler-stdc-m68k : includes-asm_h-m68k
 

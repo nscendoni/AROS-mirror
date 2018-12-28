@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fcntl.c 52859 2016-08-14 18:56:33Z deadwood $
 */
 
 #include <proto/dos.h>

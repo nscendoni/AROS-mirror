@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ResList.c 52028 2016-03-17 04:36:20Z jmcmullan $
 
     Desc: 
     Lang: english
@@ -50,12 +50,6 @@
 #include <dos/dosextens.h>
 #include <proto/dos.h>
 
-#if defined(__AROSPLATFORM_SMP__)
-#include <aros/types/spinlock_s.h>
-#include <proto/execlock.h>
-#include <resources/execlock.h>
-#endif
-
 const TEXT version[] = "$VER: reslist 41.3 (11.3.2015)\n";
 
 struct res
@@ -95,44 +89,20 @@ static int addres(struct Node *r, struct res **l, STRPTR *e)
 
 static int fillbuffer(struct res **buffer, IPTR size)
 {
-#if defined(__AROSPLATFORM_SMP__)
-	void *ExecLockBase = OpenResource("execlock.resource");
-#endif
     STRPTR end=(STRPTR)*buffer+size;
     struct Node *r;
-#if defined(__AROSPLATFORM_SMP__)
-    if (ExecLockBase)
-        ObtainSystemLock(&SysBase->ResourceList, SPINLOCK_MODE_READ, LOCKF_FORBID);
-    else
-        Forbid();
-#else
     Forbid();
-#endif
     for(r=(struct Node *)SysBase->ResourceList.lh_Head;
         r->ln_Succ!=NULL;
         r=(struct Node *)r->ln_Succ)
     {
         if(!addres(r,buffer,&end))
         {
-#if defined(__AROSPLATFORM_SMP__)
-            if (ExecLockBase)
-                ReleaseSystemLock(&SysBase->ResourceList, LOCKF_FORBID);
-            else
-                Permit();
-#else
             Permit();
-#endif
             return 0;
         }
     }
-#if defined(__AROSPLATFORM_SMP__)
-    if (ExecLockBase)
-        ReleaseSystemLock(&SysBase->ResourceList, LOCKF_FORBID);
-    else
-        Permit();
-#else
     Permit();
-#endif
     return 1;
 }
 
@@ -153,19 +123,11 @@ int main(void)
         ress=buffer;
         if(fillbuffer(&ress,size))
         {
-#if (__WORDSIZE == 64)
-	    FPuts(Output(),"       Address  Name\n");
-#else
-	    FPuts(Output(),"   Address  Name\n");
-#endif
+	    FPuts(Output(),"address\t\tname\n"
+                           "------------------------------------------------------------\n");
 	    for(ress2=buffer;ress2<ress;ress2++)
 	    {
-#if (__WORDSIZE == 64)
-                Printf("0x%012.ix  %s\n",
-#else
-                Printf("0x%08.ix  %s\n",
-#endif
-                    ress2->address, ress2->name);
+		Printf("0x%08.ix\t%s\n", ress2->address, ress2->name);
 	    }
 	    FreeVec(buffer);
             return 0; 

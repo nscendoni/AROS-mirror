@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: addexceptionhandler.c 47708 2013-07-17 12:22:32Z verhaegs $
 
     Desc:
 */
@@ -121,7 +121,7 @@ int krnRunExceptionHandlers(struct KernelBase *KernelBase, uint8_t exception, vo
     int ret = 0;
 
     /* We can be called really early. Protect against this. */
-    if (!KernelBase || (EXCEPTIONS_COUNT < exception))
+    if (!KernelBase)
     	return 0;
 
     ForeachNodeSafe(&KernelBase->kb_Exceptions[exception], in, in2)

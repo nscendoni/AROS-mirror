@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2016, The AROS Development Team. All rights reserved.
+    $Id: config.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Code to parse the command line options and the module config file for
     the genmodule program
@@ -20,7 +20,7 @@
 const static char bannertemplate[] =
     "/*\n"
     "    *** Automatically generated from '%s'. Edits will be lost. ***\n"
-    "    Copyright \xA9 1995-%4u, The AROS Development Team. All rights reserved.\n"
+    "    Copyright © 1995-%4u, The AROS Development Team. All rights reserved.\n"
     "*/\n";
 
 char*
@@ -743,7 +743,7 @@ static void readsectionconfig(struct config *cfg, struct classinfo *cl, struct i
             const char *names[] =
             {
                 "basename", "libbase", "libbasetype", "libbasetypeextern",
-                "version", "date", "copyright", "libcall", "forcebase", "superclass",
+                "version", "date", "copyright", "libcall", "___", "superclass",
                 "superclass_field", "residentpri", "options", "sysbase_field",
                 "seglist_field", "rootbase_field", "classptr_field", "classptr_var",
                 "classid", "classdatatype", "beginio_func", "abortio_func", "dispatcher",
@@ -835,12 +835,6 @@ static void readsectionconfig(struct config *cfg, struct classinfo *cl, struct i
 
             case 8: /* libcall */
                 fprintf(stderr, "libcall specification is deprecated and ignored\n");
-                break;
-
-            case 9: /* forcebase */
-                if (inclass)
-                    exitfileerror(20, "forcebase not valid config option when in a class section\n");
-                slist_append(&cfg->forcelist, s);
                 break;
 
             case 10: /* superclass */
@@ -1672,6 +1666,13 @@ static void readsectionfunctionlist(const char *type, struct functionhead **func
                     exitfileerror(20, ".private has to come after a function declaration\n");
 
                 (*funclistptr)->priv = 1;
+            }
+            else if (strncmp(s, "hidden", 6)==0)
+            {
+                if (*funclistptr == NULL)
+                    exitfileerror(20, ".hidden has to come after a function declaration\n");
+
+                (*funclistptr)->hidden = 1;
             }
             else if (strncmp(s, "novararg", 8)==0)
             {

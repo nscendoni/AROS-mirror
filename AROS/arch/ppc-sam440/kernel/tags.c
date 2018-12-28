@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: tags.c 49667 2014-09-30 17:35:27Z neil $
 */
 
 #include <inttypes.h>
@@ -60,6 +60,6 @@ intptr_t krnGetTagData(Tag tagValue, intptr_t defaultVal, struct TagItem *tagLis
     if (tagList && (ti = krnFindTagItem(tagValue, tagList)))
         return ti->ti_Data;
 
-    return defaultVal;
+        return defaultVal;
 }
 

@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lbitlib.c 47953 2013-09-02 05:00:46Z mazze $
 ** Standard library for bitwise operations
 ** See Copyright Notice in lua.h
 */

@@ -1,4 +1,4 @@
-#   $Id$
+#   $Id: mmakefile.src 52978 2016-10-10 19:00:53Z deadwood $
 #
 #   Generate libGL.a
 #
@@ -109,7 +109,7 @@ GLSL_C_SOURCES = \
             ralloc.c \
 
 USER_INCLUDES := \
-            -I$(AROS_DEVELOPER)/include/gallium \
+            -I$(AROS_DEVELOPMENT)/include/gallium \
             -I$(SRCDIR)/$(CURDIR)/../../../include \
             -I$(SRCDIR)/$(CURDIR)/../../../include/GL \
             -I$(SRCDIR)/$(CURDIR)/../../mesa \

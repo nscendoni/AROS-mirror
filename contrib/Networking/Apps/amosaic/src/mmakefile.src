@@ -1,8 +1,8 @@
-#   $Id$
+#   $Id: mmakefile.src 52373 2016-03-29 16:40:07Z NicJA $
 #
 #   Makefile to make AMosaic.
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES := globals \
 	Boingtransfer \
@@ -40,7 +40,7 @@ FILES := globals \
 
 EXEDIR := $(AROS_CONTRIB)/Networking/Apps/AMosaic
 
-NOWARN_FLAGS := $(NOWARN_PARENTHESES) $(NOWARN_FORMAT_CONTAINS_NUL) $(NOWARN_UNINITIALIZED) $(NOWARN_STRICT_ALIASING)
+NOWARN_FLAGS := $(NOWARN_PARENTHESES) $(NOWARN_FORMAT_CONTAINS_NUL)
 USER_INCLUDES := -I$(SRCDIR)/$(CURDIR)/../libwww2
 USER_CFLAGS  += $(NOWARN_FLAGS)
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: longjmp.s 48032 2013-09-08 21:16:22Z verhaegs $
 
     Desc: longjmp
     Lang: english

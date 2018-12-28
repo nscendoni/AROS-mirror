@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$	  $Log
+    $Id: setfont.c 30792 2009-03-07 22:40:04Z neil $	  $Log
 
     Desc: Graphics function SetFont()
     Lang: english

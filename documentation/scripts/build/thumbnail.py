@@ -1,9 +1,9 @@
 # -*- coding: iso-8859-1 -*-
-# Copyright © 2002-2017, The AROS Development Team. All rights reserved.
-# $Id$
+# Copyright © 2002, The AROS Development Team. All rights reserved.
+# $Id: thumbnail.py 30800 2009-03-08 17:28:50Z neil $
 
 import os.path
-from PIL import Image
+import Image
 
 def makeThumbnailPath( originalPath ):
     head, tail = os.path.split( originalPath )

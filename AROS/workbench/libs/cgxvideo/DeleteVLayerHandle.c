@@ -1,9 +1,9 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2010, The AROS Development Team. All rights reserved.
+    $Id: DeleteVLayerHandle.c 33817 2010-07-16 09:09:06Z sonic $
 */
 #include <aros/debug.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #include "cgxvideo_intern.h"
 

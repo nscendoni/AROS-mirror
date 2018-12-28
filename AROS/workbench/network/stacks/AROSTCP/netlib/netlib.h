@@ -1,5 +1,5 @@
 /*
- *      $Id$
+ *      $Id: netlib.h 36648 2011-01-17 14:31:59Z neil $
  *
  *      netlib.h - common Network Support Library definitions
  *

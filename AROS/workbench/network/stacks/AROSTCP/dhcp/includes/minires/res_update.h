@@ -22,7 +22,7 @@
  */
 
 /*
- *	$Id$
+ *	$Id: res_update.h 36648 2011-01-17 14:31:59Z neil $
  */
 
 #ifndef __RES_UPDATE_H

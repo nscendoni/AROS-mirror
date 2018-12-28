@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2012, The AROS Development Team. All rights reserved.
+    $Id: genmodule.h 47619 2013-07-02 18:27:20Z neil $
 
     Desc: genmodule.h include file for arm-le systems
     Lang: english

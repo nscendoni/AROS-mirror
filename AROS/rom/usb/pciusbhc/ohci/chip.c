@@ -1,7 +1,7 @@
 /*
    Copyright © 2002-2009, Chris Hodges. All rights reserved.
    Copyright © 2009-2012, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: chip.c 53132 2016-12-29 10:32:06Z deadwood $
  */
 
 #include <devices/usb_hub.h>
@@ -202,7 +202,8 @@ static void PrintED(const char *txt, struct EDNode *ed,
 #endif
 
 /* /// "ResetHandler()" */
-static AROS_INTH1(ResetHandler, struct PCIController *, hc)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(ResetHandler, struct PCIController *, hc)
 {
     AROS_INTFUNC_INIT
 
@@ -1034,7 +1035,8 @@ void UpdateFrameCounter(struct PCIController *hc)
 /* \\\ */
 
 /* /// "CompleteInt()" */
-static AROS_INTH1(CompleteInt, struct PCIController *, hc)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(CompleteInt, struct PCIController *, hc)
 {
     AROS_INTFUNC_INIT
 

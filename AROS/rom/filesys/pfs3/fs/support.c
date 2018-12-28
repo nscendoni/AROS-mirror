@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: support.c 48424 2013-11-18 09:28:30Z neil $ */
 /* $Log: support.c $
  * Revision 10.11  1998/09/27  11:26:37  Michiel
  * ErrorMsg extra param.

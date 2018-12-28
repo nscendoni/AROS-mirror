@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: igmp_var.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: igmp_var.h,v 1.3 1997/02/05 15:48:22 deraadt Exp $	*/

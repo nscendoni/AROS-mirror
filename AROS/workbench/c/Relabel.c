@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Relabel.c 34700 2010-10-13 20:29:32Z jmcmullan $
 */
 
 /******************************************************************************

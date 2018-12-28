@@ -2,7 +2,7 @@
 #define SANA2_SANA2DEVICE_H 1
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sana2.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 

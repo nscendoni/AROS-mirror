@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-97, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: JumpEd.c 30794 2009-03-08 02:19:07Z neil $
 
     Desc: JumpEd Game
     Lang: english

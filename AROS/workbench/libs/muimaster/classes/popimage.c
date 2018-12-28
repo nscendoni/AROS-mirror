@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: popimage.c 45872 2012-10-08 13:57:13Z neil $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

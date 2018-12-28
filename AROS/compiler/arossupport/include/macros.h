@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: macros.h 51456 2016-01-28 06:01:35Z NicJA $
 
     Desc: Miscellanous macros
     Lang: english

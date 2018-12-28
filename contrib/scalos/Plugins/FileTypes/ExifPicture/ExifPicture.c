@@ -1,6 +1,6 @@
 // ExifPicture.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-17 17:00:31 +0100 (Thu, 17 Mar 2016) $
+// $Revision: 52035 $
 
 #include <exec/types.h>
 #include <exec/libraries.h>

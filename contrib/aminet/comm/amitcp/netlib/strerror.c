@@ -1,4 +1,4 @@
-/*RCS_ID_C="$Id$";*/
+/*RCS_ID_C="$Id: strerror.c 30794 2009-03-08 02:19:07Z neil $";*/
 /*
  * strerror.c --- network errno support for AmiTCP/IP
  *

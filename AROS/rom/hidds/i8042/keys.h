@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: keys.h 31808 2009-09-19 17:00:28Z neil $
 
     Desc: PC keymap.
     Lang: English.

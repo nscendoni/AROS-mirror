@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA
  *
- * $Id$
+ * $Id: svq1.c 30794 2009-03-08 02:19:07Z neil $
  */
 
 #define FAST_MC

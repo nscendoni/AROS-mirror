@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vbeampos.c 47627 2013-07-03 20:56:37Z mazze $
 
     Desc: Read the current vertical position of the beam
     Lang: english

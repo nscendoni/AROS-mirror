@@ -1,6 +1,6 @@
 /*
     Copyright © 2009-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: closepubscreen.c 39897 2011-07-08 04:15:13Z jmcmullan $
 */
 
 #include <libraries/muiscreen.h>

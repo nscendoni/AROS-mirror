@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cachepostdma_.S 44109 2012-02-19 16:43:29Z twilen $
 */
 
 /******************************************************************************

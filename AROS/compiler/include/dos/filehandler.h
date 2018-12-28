@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: filehandler.h 40025 2011-07-12 10:08:50Z sonic $
 
     Constants for filehandlers.
 */

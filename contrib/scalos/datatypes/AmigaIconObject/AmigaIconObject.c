@@ -1,6 +1,6 @@
 // AmigaIconObject.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-14 00:26:26 +0100 (Mon, 14 Mar 2016) $
+// $Revision: 51939 $
 
 
 #include <exec/types.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: menuitem.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <exec/memory.h>
@@ -74,6 +74,7 @@ static int Menuitem_FillNewMenu(Object *obj, struct NewMenu *menu,
     Object *child;
     struct MinList *ChildList = NULL;
     int num = 0;
+    BOOL abiv0compat = FALSE; /* ABI_V0 compatibility */
 
     if (depth > 2)
         return 0;
@@ -108,9 +109,19 @@ static int Menuitem_FillNewMenu(Object *obj, struct NewMenu *menu,
             get(child, MUIA_Menuitem_Type, &type);
 
             if (type == MUIV_Menuitem_Type_Menuitem)
+            {
                 /* Depth 0 Menuitems are to become items of current menu,
                  * not menus. MUI behavior */
                 menu->nm_Type = NM_ITEM;
+
+                /* ABI_V0 compatibility */
+                /* If first object is a depth 0 Menuitem, assume old-style abuse of Menuitems, example: EdiSyn */
+                if (!abiv0compat && num == 0)
+                    abiv0compat = TRUE;
+
+                if (abiv0compat)
+                    menu->nm_Type = NM_TITLE;
+            }
             else
                 menu->nm_Type = NM_TITLE;
         }

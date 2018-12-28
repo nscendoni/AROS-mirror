@@ -1,5 +1,8 @@
+#ifndef ELF_H_
+#define ELF_H_
+
 /*
- * $Id$
+ * $Id: elf.h 36647 2011-01-17 14:01:23Z neil $
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,9 +19,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  * MA 02111-1307 USA
  */
-
-#ifndef ELF_H_
-#define ELF_H_
 
 #include "context.h"
 

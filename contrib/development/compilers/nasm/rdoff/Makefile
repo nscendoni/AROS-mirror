@@ -1,5 +1,5 @@
 # Generated automatically from Makefile.in by configure.
-# $Id$
+# $Id: Makefile 30794 2009-03-08 02:19:07Z neil $
 #
 # Auto-configuring Makefile for RDOFF object file utils; part of the
 # Netwide Assembler

@@ -1,6 +1,6 @@
 // GetPNGPicture.c
-// $Date$
-// $Revision$
+// $Date: 2013-12-08 23:03:36 +0100 (Sun, 08 Dec 2013) $
+// $Revision: 48552 $
 
 
 #include <exec/types.h>

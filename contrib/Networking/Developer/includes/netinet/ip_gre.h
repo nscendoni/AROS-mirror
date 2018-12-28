@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ip_gre.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*      $OpenBSD: ip_gre.h,v 1.1 2000/01/07 21:38:01 angelos Exp $ */

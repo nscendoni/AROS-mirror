@@ -27,9 +27,9 @@ struct Data
 
 DEFNEW
 {
-	char *contents = (char *)GetTagData(MUIA_Annotation_Contents, (IPTR)"", INITTAGS);
+	char *contents = GetTagData(MUIA_Annotation_Contents, "", INITTAGS);
 	
-	obj = (Object *)DoSuperNew(cl, obj,
+	obj = DoSuperNew(cl, obj,
 				MUIA_Group_Horiz, FALSE,
 				MUIA_Alpha, 50,
 #if defined(MUIA_Floating)
@@ -53,12 +53,12 @@ DEFNEW
 		
 		data->x = GetTagData(MUIA_Annotation_PosX, 0, INITTAGS);
 		data->y = GetTagData(MUIA_Annotation_PosY, 0, INITTAGS);
-		data->refobj = (Object *)GetTagData(MUIA_Annotation_RefObject, (IPTR)NULL, INITTAGS);
+		data->refobj = GetTagData(MUIA_Annotation_RefObject, NULL, INITTAGS);
 		data->visible = 0;
 		data->contents = contents;
 	}
 				
-	return (IPTR)obj;
+	return obj;
 }
 
 DEFDISP

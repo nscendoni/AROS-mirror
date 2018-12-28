@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 53099 2016-12-23 19:31:55Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- ports-scientific : ports-scientific-mathomatic
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cgxbootpic_intern.h 48424 2013-11-18 09:28:30Z neil $
 */
 #ifndef _CGXBOOTPIC_INTERN_H_
 #define _CGXBOOTPIC_INTERN_H_

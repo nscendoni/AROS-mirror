@@ -1,4 +1,4 @@
-#   $Id$
+#   $Id: mmakefile.src 52302 2016-03-28 03:42:13Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -6,7 +6,7 @@ FILES := pictureclass colorhandling prefs
 
 #MM workbench-datatypes-picture : includes linklibs
 
-USER_CFLAGS := -DCOMPILE_DATATYPE -DMYDEBUG $(CFLAGS_NO_INLINE_SMALL_FUNCTIONS)
+USER_CFLAGS   := -DCOMPILE_DATATYPE -DMYDEBUG
 USER_LDFLAGS := -static
 
 %build_module mmake=workbench-datatypes-picture \

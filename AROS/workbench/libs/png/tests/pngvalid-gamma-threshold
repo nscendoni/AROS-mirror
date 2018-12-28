@@ -1,2 +1,2 @@
 #!/bin/sh
-exec ./pngvalid --strict --gamma-threshold
+exec ./pngvalid --gamma-threshold

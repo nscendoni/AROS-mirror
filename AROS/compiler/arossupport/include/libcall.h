@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: libcall.h 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #ifndef AROS_LIBCALL_H
@@ -9,7 +9,7 @@
 /******************************************************************************
 
     MODUL
-	$Id$
+	$Id: libcall.h 53132 2016-12-29 10:32:06Z deadwood $
 
     DESCRIPTION
 	Some macros to build functions with registerized parameters on the
@@ -105,7 +105,10 @@ typedef unsigned int (*ULONG_FUNC)();
 #define __AROS_LH_BASE(basetype,basename)   basetype basename
 #endif
 #ifndef __AROS_LP_BASE
-#define __AROS_LP_BASE(basetype,basename)   basetype
+/*
+ * ABI_V0 compatibility
+ */
+#define __AROS_LP_BASE(basetype,basename)   void *
 #endif
 #ifndef __AROS_LC_BASE
 #define __AROS_LC_BASE(basetype,basename)   basename

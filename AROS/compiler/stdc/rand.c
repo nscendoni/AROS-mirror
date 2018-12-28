@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rand.c 53047 2016-11-10 12:34:57Z neil $
 
     C99 functions rand() and srand().
 */

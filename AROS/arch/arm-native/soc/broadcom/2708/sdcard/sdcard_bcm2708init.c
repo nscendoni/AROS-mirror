@@ -1,6 +1,6 @@
 /*
     Copyright © 2013-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sdcard_bcm2708init.c 50340 2015-04-11 20:35:23Z schulz $
 */
 
 #define DEBUG 0

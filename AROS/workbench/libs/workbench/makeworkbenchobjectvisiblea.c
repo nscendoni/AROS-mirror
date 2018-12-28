@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: makeworkbenchobjectvisiblea.c 40674 2011-08-11 17:49:10Z jmcmullan $
 
     Desc: Scroll the contents of a drawer so an specific icon becomes visible.
     Lang: english

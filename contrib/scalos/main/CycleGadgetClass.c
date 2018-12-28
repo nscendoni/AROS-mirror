@@ -1,6 +1,6 @@
 // CycleGadgetClass.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-14 03:33:00 +0100 (Mon, 14 Mar 2016) $
+// $Revision: 51942 $
 
 
 #include <exec/types.h>

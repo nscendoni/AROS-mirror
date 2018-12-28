@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: printer.h 47641 2013-07-09 20:51:26Z jmcmullan $
 
     Desc: printer device commands and structures
     Lang: english

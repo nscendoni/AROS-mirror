@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bootscan.c 48822 2014-02-25 17:13:37Z neil $
 
     Desc: Discover all mountable partitions
     Lang: english

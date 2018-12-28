@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prefs.h 32594 2010-02-07 18:59:54Z mazze $
 */
 
 #include <prefs/pointer.h>

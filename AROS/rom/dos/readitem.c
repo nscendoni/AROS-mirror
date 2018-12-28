@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readitem.c 49182 2014-07-29 16:11:07Z neil $
 
     Desc:
     Lang: english

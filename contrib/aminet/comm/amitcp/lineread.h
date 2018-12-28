@@ -8,7 +8,7 @@
  * Created: Fri Nov 29 03:23:03 1991 too
  * Last modified: Wed Jul  7 20:42:54 1993 too
  * 
- * $Id$
+ * $Id: lineread.h 30794 2009-03-08 02:19:07Z neil $
  *
  * HISTORY
  * $Log$

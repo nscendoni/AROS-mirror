@@ -1,7 +1,7 @@
 #ifndef XADMASTER_FS_SOS_C
 #define XADMASTER_FS_SOS_C
 
-/*  $Id$
+/*  $Id: FS_SOS.c 36659 2011-01-18 13:26:51Z neil $
     SanityOS filesystem client
 
     XAD library system for archive handling

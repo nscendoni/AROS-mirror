@@ -1,7 +1,7 @@
 /*
     Copyright © 2004-2014, Davy Wentzler. All rights reserved.
     Copyright © 2010-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: interrupt.h 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #ifndef AHI_Drivers_interrupt_h
@@ -20,8 +20,8 @@ void RecordInterrupt(struct ExceptionContext *pContext, struct ExecBase *SysBase
 
 #elif defined(__AROS__)
 AROS_INTP(CardInterrupt);
-AROS_INTP(PlaybackInterrupt);
-AROS_INTP(RecordInterrupt);
+AROS_SOFTINTP(PlaybackInterrupt); /* ABI_V0 compatibility */
+AROS_SOFTINTP(RecordInterrupt); /* ABI_V0 compatibility */
 
 #else
 

@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: addintserver.c 47748 2013-07-21 21:40:34Z jmcmullan $
 
     Desc: Add interrupt client to chain of interrupt servers
     Lang: english
@@ -12,11 +12,11 @@
 #include <exec/interrupts.h>
 #include <hardware/intbits.h>
 #include <proto/exec.h>
+#include <proto/kernel.h>
 
-#include "exec_intern.h"
 #include "exec_debug.h"
+#include "exec_intern.h"
 #include "chipset.h"
-#include "exec_locks.h"
 
 static void krnIRQwrapper(void *data1, void *data2)
 {
@@ -69,12 +69,12 @@ static void krnIRQwrapper(void *data1, void *data2)
         return;
     }
 
-    EXEC_LOCK_LIST_WRITE_AND_DISABLE(&SysBase->IntrList);
+    Disable();
 
     Enqueue((struct List *)SysBase->IntVects[intNumber].iv_Data, &interrupt->is_Node);
     CUSTOM_ENABLE(intNumber);
-    
-    EXEC_UNLOCK_LIST_AND_ENABLE(&SysBase->IntrList);
+
+    Enable();
 
     AROS_LIBFUNC_EXIT
 } /* AddIntServer */

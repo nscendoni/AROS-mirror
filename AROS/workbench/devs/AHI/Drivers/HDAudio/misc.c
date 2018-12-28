@@ -68,8 +68,8 @@ static int force_speaker_nid = 0;
 
 #ifdef __AROS__
 #define DebugPrintF bug
-INTGW(static, void,  playbackinterrupt, PlaybackInterrupt);
-INTGW(static, void,  recordinterrupt,   RecordInterrupt);
+SOFTINTGW(static, void,  playbackinterrupt, PlaybackInterrupt); /* ABI_V0 compatibility */
+SOFTINTGW(static, void,  recordinterrupt,   RecordInterrupt); /* ABI_V0 compatibility */
 INTGW(static, ULONG, cardinterrupt,  CardInterrupt);
 #endif
 
@@ -247,6 +247,7 @@ void FreeDriverData(struct HDAudioChip* card, struct DriverBase*  AHIsubBase)
     }
 }
 
+
 #define CNT_VEN_ID_ATI_SB       0x437B1002
 #define CNT_VEN_ID_ATI_SB2      0x43831002
 #define CNT_VEN_ID_ATI_HUDSON   0x780D1022
@@ -264,6 +265,7 @@ static const UWORD intel_no_snoop_list[] =
     0x3a6e,
     0
 };
+
 
 /* This is the controller specific portion, for fixes to southbridge */
 static void perform_controller_specific_settings(struct HDAudioChip *card)
@@ -337,6 +339,7 @@ static void perform_controller_specific_settings(struct HDAudioChip *card)
             outb_config(0x3C, 11, card->pci_dev);
     }
 }
+
 
 int card_init(struct HDAudioChip *card)
 {
@@ -838,13 +841,8 @@ static BOOL allocate_corb(struct HDAudioChip *card)
     card->corb = pci_alloc_consistent(4 * card->corb_entries, NULL, 128); // todo: virtual
 
     // Set CORB base
-#if defined(__AROS__) && (__WORDSIZE==64)
-    pci_outl((ULONG)((IPTR)card->corb & 0xFFFFFFFF), HD_CORB_LOW, card);
-    pci_outl((ULONG)(((IPTR)card->corb >> 32) & 0xFFFFFFFF), HD_CORB_HIGH, card);
-#else
     pci_outl((ULONG) card->corb, HD_CORB_LOW, card);
     pci_outl(0, HD_CORB_HIGH, card);
-#endif
 
     //bug("Before reset rp: corbrp = %x\n", pci_inw(0x4A, card));
 
@@ -904,13 +902,8 @@ static BOOL allocate_rirb(struct HDAudioChip *card)
     card->rirb_rp = 0;
 
     // Set rirb base
-#if defined(__AROS__) && (__WORDSIZE==64)
-    pci_outl((ULONG)((IPTR)card->rirb & 0xFFFFFFFF), HD_RIRB_LOW, card);
-    pci_outl((ULONG)(((IPTR)card->rirb >> 32) & 0xFFFFFFFF), HD_RIRB_HIGH, card);
-#else
     pci_outl((ULONG) card->rirb, HD_RIRB_LOW, card);
     pci_outl(0, HD_RIRB_HIGH, card);
-#endif
 
     // Reset read pointer: if we set this, it will not come out of reset??
     //outw_setbits(HD_RIRBWPRST, HD_RIRBWP, card);
@@ -938,16 +931,8 @@ static BOOL allocate_rirb(struct HDAudioChip *card)
 static BOOL allocate_pos_buffer(struct HDAudioChip *card)
 {
     card->dma_position_buffer = pci_alloc_consistent(sizeof(APTR) * 36, NULL, 128);
-
-//warning: DMA poition buffer is unused?
-#if defined(__AROS__) && (__WORDSIZE==64)
-    pci_outl(0, HD_DPLBASE, card);
-    pci_outl(0, HD_DPUBASE, card);
-#else
     //pci_outl((ULONG) card->dma_position_buffer | HD_DPLBASE_ENABLE, HD_DPLBASE, card);
-    pci_outl(0, HD_DPLBASE, card);
     pci_outl(0, HD_DPUBASE, card);
-#endif
 
     if (card->dma_position_buffer)
     {

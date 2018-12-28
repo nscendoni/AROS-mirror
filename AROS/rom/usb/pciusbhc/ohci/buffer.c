@@ -1,7 +1,7 @@
 /*
    Copyright © 2002-2009, Chris Hodges. All rights reserved.
    Copyright © 2009-2012, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: buffer.c 48424 2013-11-18 09:28:30Z neil $
  */
 
 #include <devices/usbhardware.h>

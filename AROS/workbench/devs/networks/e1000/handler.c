@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: handler.c 50146 2015-02-27 06:00:12Z NicJA $
  */
 /*
     This program is free software; you can redistribute it and/or modify
@@ -85,7 +85,7 @@ static const UWORD supported_commands[] =
     S2_TRACKTYPE,
     S2_UNTRACKTYPE,
     S2_GETTYPESTATS,
-//    S2_GETSPECIALSTATS,
+    S2_GETSPECIALSTATS,
     S2_GETGLOBALSTATS,
     S2_ONEVENT,
     S2_READORPHAN,

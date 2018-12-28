@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: initsemaphore.c 36262 2010-12-27 12:17:48Z sonic $
 
     Desc: Initialize a SignalSemaphore
     Lang: english
@@ -64,10 +64,6 @@
 
     /* Semaphore has no queue */
     sigSem->ss_QueueCount = -1;
-
-#if defined(__AROSEXEC_SMP__)
-    EXEC_SPINLOCK_INIT(&sigSem->ss_MultipleLink.sr_SpinLock);
-#endif
 
     AROS_LIBFUNC_EXIT
 } /* InitSemaphore */

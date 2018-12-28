@@ -1,10 +1,10 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: pointerclass.c 46612 2013-02-15 21:44:49Z jmcmullan $
 */
 
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <intuition/intuition.h>
 #include <intuition/intuitionbase.h>
 #include <intuition/classes.h>

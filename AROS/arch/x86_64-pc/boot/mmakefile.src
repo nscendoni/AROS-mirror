@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -30,13 +30,12 @@ include $(SRCDIR)/config/aros.cfg
 #MM			   kernel-timer    		 \
 #MM			   kernel-expansion    		 \
 #MM			   kernel-pc-acpica  		 \
-#MM			   kernel-hidd-acpibutton	 \
 #MM			   kernel-pc-hpet    		 \
 #MM			   kernel-hidd-i8042    	 \
 #MM			   kernel-pc-i386-serial    	 \
 #MM			   kernel-pc-i386-parallel    	 \
-#MM			   kernel-hidd-vgagfx    	 \
-#MM			   kernel-hidd-vesagfx    	 \
+#MM			   kernel-hidd-vga    		 \
+#MM			   kernel-hidd-vesa    		 \
 #MM			   kernel-hidd-pci    		 \
 #MM			   kernel-hidd-pci-pcipc    	 \
 #MM			   kernel-processor
@@ -47,7 +46,7 @@ KLIBS       := acpica
 KLIBS_ARCH  := expansion
 KDEVS       := ata ahci
 KDEVS_ARCH  := timer
-KHIDDS      := parallel pci pcipc serial vesagfx vgagfx storage system ata_pci i8042 acpibutton
+KHIDDS      := parallel pci pcipc serial vesagfx vgah storage system ata_pci i8042
 
 %make_package mmake=kernel-bsp-pc-x86_64 file=$(AROSARCHDIR)/aros-bsp.pkg \
 	devs=$(KDEVS) arch_devs=$(KDEVS_ARCH) hidds=$(KHIDDS) libs=$(KLIBS) \

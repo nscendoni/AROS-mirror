@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fillrexxmsg.c 52807 2016-07-28 01:51:35Z neil $
 
     Desc:
     Lang: english

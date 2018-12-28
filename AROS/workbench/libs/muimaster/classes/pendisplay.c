@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pendisplay.c 52152 2016-03-22 02:21:00Z NicJA $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

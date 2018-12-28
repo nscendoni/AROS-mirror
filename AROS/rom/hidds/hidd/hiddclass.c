@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hiddclass.c 47359 2013-05-04 21:15:08Z mazze $
 
     Desc: Main class for HIDD.
     Lang: english
@@ -270,7 +270,7 @@ OOP_Object *HIDDCl__Root__New(OOP_Class *cl, OOP_Object *o, struct pRoot_New *ms
 {
     struct Library *UtilityBase = CSD(cl)->cs_UtilityBase;
     EnterFunc(bug("HIDD::New(cl=%s)\n", cl->ClassNode.ln_Name));
-    D(bug("DoSuperMethod:%p\n", cl->cl_DoSuperMethod));
+    D(bug("DoSuperMethod:%p\n", cl->DoSuperMethod));
     o = (OOP_Object *)OOP_DoSuperMethod(cl, o, (OOP_Msg)msg);
     if(o)
     {

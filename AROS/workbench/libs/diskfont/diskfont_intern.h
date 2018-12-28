@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: diskfont_intern.h 52973 2016-10-06 03:28:07Z neil $
 */
 
 #ifndef DISKFONT_INTERN_H

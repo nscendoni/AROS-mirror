@@ -16,7 +16,7 @@
 
  TheBar class Support Site:  http://www.sf.net/projects/thebar
 
- $Id$
+ $Id: class.h 50022 2015-02-05 00:14:03Z NicJA $
 
 ***************************************************************************/
 
@@ -217,7 +217,7 @@ struct MUI_DragImage
 
 #ifndef MUIM_DeleteDragImage
 #define MUIM_DeleteDragImage 0x80423037UL
-struct MUIP_DeleteDragImage {STACKED ULONG MethodID; STACKED struct MUI_DragImage *di;};
+struct MUIP_DeleteDragImage {ULONG MethodID; struct MUI_DragImage *di;};
 #endif
 
 /****************************************************************************/

@@ -9,7 +9,7 @@ gallium
 ----------
 
 ======================================= ======================================= ======================================= ======================================= 
-`BltPipeResourceRastPort()`_            `CreatePipe()`_                         `CreatePipeScreen()`_                   `DestroyPipeScreen()`_                  
+`BltPipeResourceRastPort()`_            `BltPipeSurfaceRastPort()`_             `CreatePipeScreen()`_                   `DestroyPipeScreen()`_                  
 
 ======================================= ======================================= ======================================= ======================================= 
 
@@ -23,7 +23,6 @@ Synopsis
 ::
 
  void BltPipeResourceRastPort(
-          PipeHandle_t pipe,
           struct pipe_resource * srcPipeResource,
           LONG xSrc,
           LONG ySrc,
@@ -55,53 +54,40 @@ Inputs
 
 ----------
 
-CreatePipe()
-============
+BltPipeSurfaceRastPort()
+========================
 
 Synopsis
 ~~~~~~~~
 ::
 
- PipeHandle_t CreatePipe(
-          struct TagItem * tags );
- 
- PipeHandle_t CreatePipeTags(
-          TAG tag, ... );
+ void BltPipeSurfaceRastPort(
+          struct pipe_surface * srcPipeSurface,
+          LONG xSrc,
+          LONG ySrc,
+          struct RastPort * destRP,
+          LONG xDest,
+          LONG yDest,
+          LONG xSize,
+          LONG ySize );
 
 Function
 ~~~~~~~~
 ::
 
-     Instantiates a gallium pipe.
+     Copies part of pipe surface onto rast port. Clips output by using layers of
+     rastport.
 
 
 Inputs
 ~~~~~~
 ::
 
-     tags - a pointer to tags to be used during creation.
-
-
-Tags
-~~~~
-::
-
-     CPS_PipeFriendBitmap - a bitmap our pipe screen will target.
-     CPS_PipeScreenDriver * - where to store the driver.
-     CPS_GalliumInterfaceVersion - Indicates a version of gallium interface
-         that a client is expected to receive. The client expected version
-         must ideally match with the version that the driver provides,
-         because gallium interface is not backwards compatible. This tag is
-         required. Unless otherwise needed, the value
-         GALLIUM_INTERFACE_VERSION should be passed.
-         See also CreatePipeV.
-
-
-Result
-~~~~~~
-::
-
-     A valid pipe instance or NULL if creation was not successful.
+     srcPipeSurface - Copy from this pipe surface.
+     xSrc, ySrc - This is the upper left corner of the area to copy.
+     destRP - Destination RastPort.
+     xDest, yDest - Upper left corner where to place the copy
+     xSize, ySize - The size of the area to copy
 
 
 
@@ -115,7 +101,10 @@ Synopsis
 ::
 
  struct pipe_screen * CreatePipeScreen(
-          PipeHandle_t pipe );
+          struct TagItem * tags );
+ 
+ struct pipe_screen * CreatePipeScreenTags(
+          TAG tag, ... );
 
 Function
 ~~~~~~~~
@@ -128,7 +117,20 @@ Inputs
 ~~~~~~
 ::
 
-     pipe - a pipe handle created using CreatePipe().
+     tags - a pointer to tags to be used during creation.
+
+
+Tags
+~~~~
+::
+
+     CPS_GalliumInterfaceVersion - Indicates a version of gallium interface
+         that a client is expected to receive. The client expected version
+         must ideally match with the version that the driver provides,
+         because gallium interface is not backwards compatible. This tag is
+         required. Unless otherwise needed, the value
+         GALLIUM_INTERFACE_VERSION should be passed.
+         See also CreatePipeScreenV.
 
 
 Result
@@ -149,8 +151,7 @@ Synopsis
 ::
 
  void DestroyPipeScreen(
-          PipeHandle_t pipe,
-          struct pipe_screen * pscreen );
+          struct pipe_screen * screen );
 
 Function
 ~~~~~~~~

@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: preparecontext.c 43432 2012-01-01 20:15:00Z jmcmullan $
 
     Desc: PrepareContext() - Prepare a task context for dispatch, x86-64 version
     Lang: english
@@ -9,13 +9,11 @@
 #include <exec/execbase.h>
 #include <exec/memory.h>
 #include <utility/tagitem.h>
+#include <proto/kernel.h>
 #include <aros/x86_64/cpucontext.h>
 
 #include "exec_intern.h"
 #include "exec_util.h"
-#if defined(__AROSEXEC_SMP__)
-#include "etask.h"
-#endif
 
 extern void TaskExitStub(void);
 
@@ -41,13 +39,7 @@ BOOL PrepareContext(struct Task *task, APTR entryPoint, APTR fallBack,
     {
         switch(t->ti_Tag)
         {
-#if defined(__AROSEXEC_SMP__)
-            case TASKTAG_AFFINITY:
-                if ((IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuAffinity) && ((IPTR)IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuAffinity != TASKAFFINITY_ANY))
-                    KrnFreeCPUMask(IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuAffinity);
-                IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuAffinity = (void *)t->ti_Data;
-                break;
-#endif
+
 #define REGARG(x, reg)                \
         case TASKTAG_ARG ## x:        \
             ctx->reg = t->ti_Data;    \

@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: _lseek.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      _lseek.c - lseek() which knows sockets (SAS/C)
  *

@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: opendevice.c 50481 2015-04-28 10:49:03Z schulz $
 
     Desc: Open a device.
     Lang: english
@@ -14,10 +14,6 @@
 #include <aros/libcall.h>
 #include <exec/libraries.h>
 #include <proto/exec.h>
-
-#include "exec_intern.h"
-#include "exec_debug.h"
-#include "exec_locks.h"
 
 /*****************************************************************************
 
@@ -92,15 +88,11 @@
     	  flags, GET_THIS_TASK->tc_Node.ln_Name));
 
     /* Arbitrate for the device list */
-    EXEC_LOCK_LIST_READ_AND_FORBID(&SysBase->DeviceList);
+    Forbid();
 
     /* Look for the device in our list */
     iORequest->io_Unit   = NULL;
-
     iORequest->io_Device = (struct Device *)FindName(&SysBase->DeviceList, devName);
-
-    EXEC_UNLOCK_LIST(&SysBase->DeviceList);
-
     D(bug("[OpenDevice] Found resident 0x%p\n", iORequest->io_Device));
 
     /* Something found ? */

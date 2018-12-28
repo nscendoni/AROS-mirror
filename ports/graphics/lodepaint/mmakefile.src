@@ -1,26 +1,18 @@
-# $Id$
+# $Id: mmakefile.src 53103 2016-12-25 21:40:52Z wawa $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
-#MM- ports-graphics : ports-graphics-lodepaint
+#DISABLED #MM- ports-graphics : ports-graphics-lodepaint
 
 #MM  ports-graphics-lodepaint : \
-#MM    includes linklibs contrib-sdl \
-#MM    ports-graphics-lodepaint-fetch \
+#MM    includes linklibs ports-graphics-lodepaint-fetch \
 #MM    ports-graphics-lodepaint-skins
-
-#MM  ports-graphics-lodepaint-skins : ports-graphics-lodepaint-fetch
 
 REPOSITORIES := http://archives.aros-exec.org/share/graphics/edit
 ARCHBASE     := lodepaint_src_svn146
 TARGETDIR    := $(AROS_CONTRIB)/MultiMedia/Gfx/Lodepaint
-
-NOWARN_FLAGS := $(NOWARN_WRITE_STRINGS) $(NOWARN_MISLEADING_INDENTATION) \
-    $(NOWARN_MAYBE_UNINITIALIZED) $(NOWARN_UNUSED_FUNCTION) $(NOWARN_VOLATILE_REGISTER_VAR) \
-    $(NOWARN_RETURN_TYPE) $(NOWARN_STRICT_ALIASING) $(NOWARN_TAUTOLOGICAL_COMPARE)
+NOWARN_FLAGS := $(NOWARN_WRITE_STRINGS) $(NOWARN_MISLEADING_INDENTATION) $(NOWARN_MAYBE_UNINITIALIZED) $(NOWARN_UNUSED_FUNCTION) $(NOWARN_VOLATILE_REGISTER_VAR) $(NOWARN_RETURN_TYPE)
 USER_CXXFLAGS:= $(NOWARN_FLAGS) -DDATAROOTDIR="\"PROGDIR:\""
-USER_INCLUDES:= -I$(AROS_CONTRIB_INCLUDES)
-USER_LDFLAGS := -L$(AROS_CONTRIB_LIB) -static-libstdc++
 
 CXXFILES := \
     main_program/src/imalg/alpha \
@@ -148,8 +140,6 @@ CXXFILES := $(addprefix $(PORTSDIR)/lodepaint/$(ARCHBASE)/,$(CXXFILES))
     location=$(PORTSSOURCEDIR) archive_origins=$(REPOSITORIES) suffixes="tar.bz2" \
     patches_specs=lodepaint_src_svn146.diff:$(ARCHBASE):-p1
 
-%create_patch mmake=ports-graphics-lodepaint-create-patch \
-    archive=$(ARCHBASE) destination=$(PORTSDIR)/lodepaint suffixes="tar.bz2"
 
 %copy_dir_recursive mmake=ports-graphics-lodepaint-skins \
     src=$(PORTSDIR)/lodepaint/$(ARCHBASE)/main_program/Skins dst=$(TARGETDIR)/Skins excludefiles=

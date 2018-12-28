@@ -658,7 +658,7 @@ BOOL IsHex( CONST_STRPTR text,
         else
             return FALSE;
 
-        if (strlen(text + i) <= sizeof(*result) * 2) {
+        if (strlen(text + i) < 9) {
             *result = strtol(text + i, NULL, 16);
             return TRUE;
         }
@@ -682,7 +682,7 @@ BOOL IsUHex( CONST_STRPTR text,
         else
             return FALSE;
 
-        if (strlen(text + i) <= sizeof(*result) * 2) {
+        if (strlen(text + i) < 9) {
             *result = strtoul(text + i, NULL, 16);
             return TRUE;
         }

@@ -4,7 +4,7 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: intuition_debug.h 49823 2014-12-05 00:20:26Z NicJA $
 */
 
 #define DEBUG_ASSERTS		0 /* Enables pointer validation assertions */

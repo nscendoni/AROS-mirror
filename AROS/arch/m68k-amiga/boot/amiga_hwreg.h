@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: amiga_hwreg.h 42135 2011-10-30 18:44:31Z twilen $
 
     Desc: m68k-amiga hardware registers
     Lang: english

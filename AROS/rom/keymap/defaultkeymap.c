@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: defaultkeymap.c 44450 2012-03-25 14:41:13Z mazze $
 
     Desc: 
     Lang: english

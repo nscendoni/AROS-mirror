@@ -1,6 +1,6 @@
 /*
-    Copyright © 2003-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2003-2015, The AROS Development Team. All rights reserved.
+    $Id: ati_init.c 51032 2015-08-29 22:49:55Z NicJA $
 */
 
 #include <aros/symbolsets.h>
@@ -24,7 +24,7 @@
 
 #include <hidd/i2c.h>
 #include <hidd/pci.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #include "ati.h"
 #include "ids.h"
@@ -33,7 +33,6 @@
 #include "radeon_macros.h"
 #include LC_LIBDEFS_FILE
 
-#undef HiddAttrBase
 #undef HiddPCIDeviceAttrBase
 #undef HiddGfxAttrBase
 #undef HiddPixFmtAttrBase
@@ -41,7 +40,6 @@
 #undef HiddBitMapAttrBase
 #undef HiddI2CAttrBase
 #undef HiddI2CDeviceAttrBase
-#define HiddAttrBase            (LIBBASE->sd.hiddAttrBase)
 #define HiddPCIDeviceAttrBase   (LIBBASE->sd.pciAttrBase)
 #define HiddATIBitMapAttrBase   (LIBBASE->sd.atiBitMapAttrBase)
 #define HiddBitMapAttrBase      (LIBBASE->sd.bitMapAttrBase)
@@ -214,13 +212,12 @@ static int ATI_Init(LIBBASETYPEPTR LIBBASE)
 
     struct OOP_ABDescr attrbases[] =
     {
-        { (STRPTR)IID_Hidd,             &HiddAttrBase },
         { (STRPTR)IID_Hidd_PCIDevice,   &HiddPCIDeviceAttrBase },
         { (STRPTR)IID_Hidd_BitMap,      &HiddBitMapAttrBase },
         { (STRPTR)IID_Hidd_PixFmt,      &HiddPixFmtAttrBase },
         { (STRPTR)IID_Hidd_Sync,        &HiddSyncAttrBase },
         { (STRPTR)IID_Hidd_Gfx,         &HiddGfxAttrBase },
-        { (STRPTR)IID_Hidd_BitMap_ATI,   &HiddATIBitMapAttrBase },
+        { (STRPTR)IID_Hidd_ATIBitMap,   &HiddATIBitMapAttrBase },
         { (STRPTR)IID_Hidd_I2C,         &HiddI2CAttrBase },
         { (STRPTR)IID_Hidd_I2CDevice,   &HiddI2CDeviceAttrBase },
         { (STRPTR)IID_Hidd_PlanarBM,    &__IHidd_PlanarBM },
@@ -307,13 +304,12 @@ static int ATI_Expunge(LIBBASETYPEPTR LIBBASE)
 
     struct OOP_ABDescr attrbases[] =
     {
-        { (STRPTR)IID_Hidd,             &HiddAttrBase },
         { (STRPTR)IID_Hidd_PCIDevice,   &HiddPCIDeviceAttrBase },
         { (STRPTR)IID_Hidd_BitMap,      &HiddBitMapAttrBase },
         { (STRPTR)IID_Hidd_PixFmt,      &HiddPixFmtAttrBase },
         { (STRPTR)IID_Hidd_Sync,        &HiddSyncAttrBase },
         { (STRPTR)IID_Hidd_Gfx,         &HiddGfxAttrBase },
-        { (STRPTR)IID_Hidd_BitMap_ATI,   &HiddATIBitMapAttrBase },
+        { (STRPTR)IID_Hidd_ATIBitMap,   &HiddATIBitMapAttrBase },
         { (STRPTR)IID_Hidd_I2C,         &HiddI2CAttrBase },
         { (STRPTR)IID_Hidd_I2CDevice,   &HiddI2CDeviceAttrBase },
         { (STRPTR)IID_Hidd_PlanarBM,    &__IHidd_PlanarBM },
@@ -343,4 +339,4 @@ static int ATI_Expunge(LIBBASETYPEPTR LIBBASE)
 
 ADD2INITLIB(ATI_Init, 0)
 ADD2EXPUNGELIB(ATI_Expunge, 0)
-ADD2LIBS((STRPTR)"gfx.hidd", 0, static struct Library *, __gfxbase);
+ADD2LIBS((STRPTR)"graphics.hidd", 0, static struct Library *, __gfxbase);

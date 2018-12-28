@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-97, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: consoledemo.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Demo for the console.device
     Lang: english
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     
     D(bug("Opening CON:\n"));
     
-    fh = Open("CON:5/5/200/200/Test Console/CLOSE/WAIT", MODE_NEWFILE);
+    fh = Open("CON:", MODE_NEWFILE);
     if (fh)
     {
     	LONG ret;

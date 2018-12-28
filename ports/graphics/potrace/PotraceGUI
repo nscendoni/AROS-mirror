@@ -2,7 +2,7 @@
 -- $VER: PotraceGUI 1.0 (24.07.2014)
 -- This is Public Domain software; use at your own risk
 
--- $Id$
+-- $Id: PotraceGUI 49150 2014-07-24 13:38:33Z mazze $
 
 require "muidefs"
 require "muifuncs"

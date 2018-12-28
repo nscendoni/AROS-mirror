@@ -1,6 +1,6 @@
 /*
     Copyright © 2008-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Shutdown.c 48905 2014-04-03 17:15:39Z neil $
 */
 
 #include <exec/tasks.h>

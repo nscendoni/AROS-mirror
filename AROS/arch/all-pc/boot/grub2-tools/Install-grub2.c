@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Install-grub2.c 49959 2015-01-28 02:15:32Z neil $
 */
 /******************************************************************************
 
@@ -53,7 +53,7 @@
 
 ******************************************************************************/
 
-#define DEBUG 1
+#define DEBUG 0
 #include <aros/debug.h>
 
 #include <string.h>

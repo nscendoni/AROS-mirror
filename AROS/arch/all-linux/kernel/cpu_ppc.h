@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu_ppc.h 45249 2012-07-18 15:06:24Z jmcmullan $
 
     Desc: Macros to handle unix signals, PPC version
     Lang: english

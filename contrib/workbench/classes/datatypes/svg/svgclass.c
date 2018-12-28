@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2005, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: svgclass.c 48675 2014-01-02 18:34:06Z neil $
 */
 
 /**********************************************************************/

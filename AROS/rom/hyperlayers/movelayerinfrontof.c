@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: movelayerinfrontof.c 40139 2011-07-14 20:33:45Z jmcmullan $
 
     Desc:
     Lang: english

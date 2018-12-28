@@ -2,7 +2,7 @@
 #define CLIB_SOCKET_INLINES_H
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: socket_inlines.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 #define select        _static_inline_select

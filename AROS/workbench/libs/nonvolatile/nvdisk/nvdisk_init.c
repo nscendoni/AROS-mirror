@@ -1,13 +1,13 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: nvdisk_init.c 46475 2013-02-03 03:47:26Z jmcmullan $
 
     Desc: Nonvolatile disk based storage library initialization code.
     Lang: English
 */
 
 
-#define  DEBUG  0
+#define  DEBUG  1
 
 #include "nvdisk_intern.h"
 

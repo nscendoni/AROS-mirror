@@ -1,5 +1,5 @@
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- contrib-games : contrib-games-spout
 #MM- spout : contrib-games-spout-quick
@@ -7,9 +7,6 @@ include $(SRCDIR)/config/aros-contrib.cfg
 
 #MM- contrib-games-quick : contrib-games-spout-quick
 #MM- spout-quick : contrib-games-spout-quick
-
-USER_INCLUDES := -I$(AROS_CONTRIB_INCLUDES)
-USER_LDFLAGS := -L$(AROS_CONTRIB_LIB)
 
 %build_with_configure mmake=contrib-games-spout nix=yes \
 	extraoptions="--disable-sdl-test" \

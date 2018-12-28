@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stackswap.c 46152 2012-12-24 02:47:53Z neil $
 
     Desc: StackSwap() - Swap the stack of a task.
     Lang: english

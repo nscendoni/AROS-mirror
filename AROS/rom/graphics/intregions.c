@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: intregions.c 46618 2013-02-16 00:00:40Z jmcmullan $
 
     Desc: Code for various operations on Regions and Rectangles
     Lang: English

@@ -1,6 +1,6 @@
 /*
     Copyright 2009-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mesa3dgl_glaswapbuffers.c 50857 2015-06-23 22:21:44Z NicJA $
 */
 
 #include <proto/exec.h>
@@ -48,7 +48,7 @@
         /* Flush rendering cache before blitting */
         _ctx->st->flush(_ctx->st, ST_FLUSH_FRONT, NULL);
 
-        BltPipeResourceRastPort(_ctx->driver, _ctx->framebuffer->render_resource, 0, 0, 
+        BltPipeResourceRastPort(_ctx->framebuffer->render_resource, 0, 0, 
             _ctx->visible_rp, _ctx->left, _ctx->top, 
             _ctx->framebuffer->width, _ctx->framebuffer->height);
     }

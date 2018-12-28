@@ -1,7 +1,7 @@
-#   $Id$
+#   $Id: mmakefile.src 52344 2016-03-29 14:16:14Z NicJA $
 #
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES := PlayMF filter divdi3 qdivrem
 

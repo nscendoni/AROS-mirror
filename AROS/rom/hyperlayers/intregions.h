@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: intregions.h 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Some common macros for rectangles and regions.
     Lang: english
@@ -47,6 +47,8 @@ do                                    \
     (region)->RegionRectangle = NULL; \
 } while (0)
 
+#if 0
+/* ABI_V0 compatibility */
 static inline struct Region *_NewRectRegion(WORD MinX, WORD MinY, WORD MaxX, WORD MaxY, struct GfxBase *GfxBase)
 {
     struct Region *region = NewRegion();
@@ -64,5 +66,6 @@ static inline struct Region *_NewRectRegion(WORD MinX, WORD MinY, WORD MaxX, WOR
     return NULL;
 
 } /* NewRectRegion */
+#endif
 
 #endif /* !INTREGIONS_H */

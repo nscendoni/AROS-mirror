@@ -4,8 +4,8 @@ Introducción al Shell de AROS
 
 :Authors:   Matthias Rustler 
 :Copyright: Copyright © 2006, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 30800 $
+:Date:      $Date: 2009-03-08 18:28:50 +0100 (Sun, 08 Mar 2009) $
 :Status:    Draft
 
 -------------

@@ -1,6 +1,6 @@
 /*
     Copyright © 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: card.h 50458 2015-04-24 14:53:27Z neil $
 */
 
 #ifndef RESOURCES_CARD_H

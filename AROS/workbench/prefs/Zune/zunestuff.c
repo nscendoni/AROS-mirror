@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: zunestuff.c 47908 2013-08-30 15:25:28Z mazze $
 */
 
 #include <proto/exec.h>

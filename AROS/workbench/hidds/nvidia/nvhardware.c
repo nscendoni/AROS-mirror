@@ -1,6 +1,6 @@
 /*
-    Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2004-2006, The AROS Development Team. All rights reserved.
+    $Id: nvhardware.c 49956 2015-01-27 03:03:43Z jmcmullan $
 
     Desc: nvidia.hidd initialization
     Lang: English
@@ -65,7 +65,7 @@
 #include <oop/oop.h>
 
 #include <hidd/pci.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #define DEBUG 0
 #include <aros/debug.h>

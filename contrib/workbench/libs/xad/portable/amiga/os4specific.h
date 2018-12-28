@@ -1,7 +1,7 @@
 #ifndef XADMASTER_OS4SPECIFIC_H
 #define XADMASTER_OS4SPECIFIC_H
 
-/*  $Id$
+/*  $Id: os4specific.h 30794 2009-03-08 02:19:07Z neil $
     OS4 specific library initialization stuff
 
     XAD library system for archive handling

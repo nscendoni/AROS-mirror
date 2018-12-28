@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pclose.c 48051 2013-09-08 21:19:51Z verhaegs $
 
     POSIX.1-2008 function pclose().
 */

@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2001, The AROS Development Team. All rights reserved.
+    $Id: strftime.c 51814 2016-03-11 06:22:08Z NicJA $
 */
 
 #include <time.h>
@@ -115,7 +115,7 @@ static size_t strfnumb(char *s, size_t maxsize, signed int places, size_t value)
         if (*format == '%')
         {
             tmp = 0;
-
+            
             switch(*++format)
             {
                 case 'a':
@@ -198,20 +198,21 @@ static size_t strfnumb(char *s, size_t maxsize, signed int places, size_t value)
         
         format++;
     }
-
+  
     STOR('\0');
-
+    
     if (size > maxsize)
     { 
         s -= size;
-
+        
         if (maxsize) /* Don't know if this is necessary, therefore it's here ;-) */
         {
             s[maxsize - 1] = '\0';
         }
-
+        
         size = 1;
     }
-
+    
     return size - 1;
 }
+

@@ -1,7 +1,7 @@
 #ifndef XADMASTER_XDISK_C
 #define XADMASTER_XDISK_C
 
-/*  $Id$
+/*  $Id: xDisk.c 36659 2011-01-18 13:26:51Z neil $
     xDisk disk archiver client
 
     XAD library system for archive handling

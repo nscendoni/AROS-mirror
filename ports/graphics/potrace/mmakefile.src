@@ -1,13 +1,13 @@
-# $Id$
+# $Id: mmakefile.src 52716 2016-05-02 19:55:57Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- ports-graphics : ports-graphics-potrace
 
 #MM- ports-graphics-potrace : ports-graphics-potrace-cpy
 
 PACKAGE      := potrace
-VERSION      := 1.14
+VERSION      := 1.13
 TARGETDIR    := $(AROS_CONTRIB)/MultiMedia/Gfx/Potrace
 REPOSITORIES := sf://potrace
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: displayalert.c 42300 2011-11-07 06:55:27Z sonic $
 
     Desc: Display an alert in Android GUI if possible
     Lang: english

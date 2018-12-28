@@ -2,7 +2,7 @@
 #define KEYMAP_INTERN_H
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: keymap_intern.h 44448 2012-03-25 12:02:13Z mazze $
 
     Desc: Keymaps internal structure
     Lang: english

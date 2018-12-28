@@ -1,6 +1,6 @@
 /*
     Copyright © 2007-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: RXLIB.c 39649 2011-06-30 07:42:57Z sonic $
 
     Manipulate ARexx lib list
 */

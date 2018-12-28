@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: doio.c 36286 2010-12-29 07:40:34Z twilen $
 
     Desc: Start an IO request and wait until it completes.
     Lang: english

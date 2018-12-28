@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setfunction.c 41542 2011-09-22 12:58:40Z sonic $
 
     Desc: Patch a library or device function
     Lang: english

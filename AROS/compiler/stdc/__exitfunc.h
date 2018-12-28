@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2002, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __exitfunc.h 48031 2013-09-08 21:16:04Z verhaegs $
 */
 
 #include <exec/lists.h>

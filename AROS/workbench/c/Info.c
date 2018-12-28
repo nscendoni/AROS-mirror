@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Info.c 52237 2016-03-25 15:02:04Z jmcmullan $
 
     Desc: Info Cli Command
     Lang: English

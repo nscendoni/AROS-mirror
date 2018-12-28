@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getdtstring.c 40677 2011-08-11 17:49:27Z jmcmullan $
 
     Desc:
     Lang: English

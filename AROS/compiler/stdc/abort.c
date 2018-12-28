@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: abort.c 48041 2013-09-08 21:18:19Z verhaegs $
 
     C99 function exit().
 */

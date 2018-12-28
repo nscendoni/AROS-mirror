@@ -1,6 +1,6 @@
 /*
     Copyright © 2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pcixhci_intern.h 50632 2015-05-09 06:58:35Z dizzyofcrn $
 
     Desc:
     Lang: English

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: locrawdofmt.c 52786 2016-07-17 10:29:40Z deadwood $
 
     Desc: Locale_RawDoFmt - locale.library's private replacement
           of exec.library/RawDoFmt function. IPrefs will install
@@ -211,7 +211,7 @@ AROS_UFH3(VOID, LocRawDoFmtFormatStringFunc_SysV,
     ULONG *iStream;
     APTR dStream;
     ULONG iSize = 0, dSize = 0;
-#if defined(__arm__) || defined(__x86_64__) || defined(__powerpc__)
+#if defined(__arm__) || defined(__x86_64__)
     va_list nullarg = {};
 #else
     va_list nullarg = 0;

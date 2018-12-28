@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: initstruct.c 40531 2011-08-03 17:43:00Z weissms $
 
     Desc: Initialize a structure.
     Lang: english

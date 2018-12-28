@@ -1,6 +1,6 @@
 /*
     Copyright © 2015-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: platform_bcm2708.c 52973 2016-10-06 03:28:07Z neil $
 */
 
 #include <aros/types/spinlock_s.h>

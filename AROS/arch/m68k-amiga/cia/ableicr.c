@@ -1,6 +1,6 @@
 /*
     Copyright © 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ableicr.c 50459 2015-04-24 15:10:12Z neil $
 
     Desc: AbleICR() function.
     Lang: english

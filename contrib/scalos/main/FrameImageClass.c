@@ -1,6 +1,6 @@
 // FrameImageClass.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-24 02:10:36 +0100 (Thu, 24 Mar 2016) $
+// $Revision: 52216 $
 
 
 #include <exec/types.h>

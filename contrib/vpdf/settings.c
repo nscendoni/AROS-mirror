@@ -126,7 +126,7 @@ static int setWrite(char *fname)
 				{
 				
 					case ETYPE_NUMERIC:
-						fprintf(f, "%s 0x%x\n", attributes[id].name, attributes[id].value);
+						fprintf(f, "%s 0x%lx\n", attributes[id].name, attributes[id].value);
 						break;
 					case ETYPE_STRING:
 					{
@@ -208,7 +208,7 @@ static int setUse(void)
 	return setWrite("ENV:VPDF.config");
 }
 
-static Object *buildGroupSeparator(const char *title)
+static Object *buildGroupSeparator(char *title)
 {
 		Object *p1;
 		Object *grp = HGroup,
@@ -227,7 +227,7 @@ static Object *buildGroupSeparator(const char *title)
 
 DEFNEW
 {
-	obj = (Object *) DoSuperNew(cl, obj,
+	obj = DoSuperNew(cl, obj,
                 Child,  PageGroup,
                // MUIA_Group_ActivePage, 1,
 					Child, VGroup,
@@ -279,7 +279,7 @@ DEFNEW
                                     MUIA_String_Contents, "PS:",
                                     MUIA_String_MaxLen, 512,       
                                     End,
-								MUIA_String_Contents, VPDF_SGROUP_PRINTER, ETYPE_STRING, (IPTR) "PS:"),
+								MUIA_String_Contents, VPDF_SGROUP_PRINTER, ETYPE_STRING, "PS:"),
 						
 						Child, 	register_attribute(ATTR(MUIA_VPDFSettings_PrintingMode),
                                 CheckMark(TRUE),
@@ -308,7 +308,7 @@ DEFNEW
 		setWrite("ENVARC:VPDF.config");
 	}
 
-	return (IPTR)obj;
+	return (ULONG)obj;
 }
 
 DEFGET

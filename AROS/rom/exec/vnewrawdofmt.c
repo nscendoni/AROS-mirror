@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vnewrawdofmt.c 40986 2011-08-30 08:51:26Z sonic $
 
     Desc: Format a string and emit it.
     Lang: english

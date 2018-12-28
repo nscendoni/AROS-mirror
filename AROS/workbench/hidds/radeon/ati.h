@@ -2,8 +2,8 @@
 #define _ATI_H
 
 /*
-    Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright ï¿½ 2004-2015, The AROS Development Team. All rights reserved.
+    $Id: ati.h 51032 2015-08-29 22:49:55Z NicJA $
 */
 
 #include <exec/types.h>
@@ -21,7 +21,7 @@
 #include <aros/libcall.h>
 #include <aros/asmcall.h>
 
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #include <oop/oop.h>
 
@@ -30,9 +30,9 @@
 
 #include "radeon.h"
 
-#define IID_Hidd_Gfx_Ati    "hidd.gfx.radeon"
-#define IID_Hidd_BitMap_ATI  "hidd.bitmap.radeon"
-#define CLID_Hidd_Gfx_Ati   "hidd.gfx.radeon"
+#define IID_Hidd_Gfx_Ati    "IRadeonDriver"
+#define IID_Hidd_ATIBitMap  "IRadeonBitmap"
+#define CLID_Hidd_Gfx_Ati   "RadeonDriver"
 
 extern OOP_AttrBase HiddPCIDeviceAttrBase;
 extern OOP_AttrBase HiddBitMapAttrBase;
@@ -117,7 +117,6 @@ struct ati_staticdata {
     OOP_Class       *OffBMClass;
     OOP_Class       *PlanarBMClass;
 
-    OOP_AttrBase    hiddAttrBase;
     OOP_AttrBase    pciAttrBase;
     OOP_AttrBase    atiBitMapAttrBase;
     OOP_AttrBase    bitMapAttrBase;

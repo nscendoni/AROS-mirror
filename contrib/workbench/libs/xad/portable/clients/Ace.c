@@ -1,7 +1,7 @@
 #ifndef XADMASTER_ACE_C
 #define XADMASTER_ACE_C
 
-/*  $Id$
+/*  $Id: Ace.c 36659 2011-01-18 13:26:51Z neil $
     Ace file archiver client
 
     XAD library system for archive handling

@@ -279,16 +279,15 @@ VOID CopyPacket(struct EMACBase *EMACBase, struct EMACUnit *unit,
 {
     struct Opener *opener;
     BOOL filtered = FALSE;
-    UBYTE *ptr, *address;
+    UBYTE *ptr;
 
     D(bug("[EMAC%d] CopyPacket(packet @ %x, len = %d)\n", unit->eu_UnitNum, buffer, packet_size));
 
     /* Set multicast and broadcast flags */
 
     request->ios2_Req.io_Flags &= ~(SANA2IOF_BCAST | SANA2IOF_MCAST);
-    address = buffer->eth_packet_dest;
-    if((*((ULONG *)address) == 0xffffffff) &&
-            (*((UWORD *)(address + 4)) == 0xffff))
+    if((*((ULONG *)(buffer->eth_packet_dest)) == 0xffffffff) &&
+            (*((UWORD *)(buffer->eth_packet_dest + 4)) == 0xffff))
     {
         request->ios2_Req.io_Flags |= SANA2IOF_BCAST;
         D(bug("[EMAC%d] CopyPacket: BROADCAST Flag set\n", unit->eu_UnitNum));
@@ -527,7 +526,8 @@ void rx_int(struct EMACUnit *unit, struct ExecBase *SysBase)
     }
 }
 
-static AROS_INTH1(EMAC_RX_Int, struct EMACUnit *, unit)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(EMAC_RX_Int, struct EMACUnit *, unit)
 {
     AROS_INTFUNC_INIT
 
@@ -690,7 +690,8 @@ void tx_int(struct EMACUnit *unit, struct ExecBase *SysBase)
 
 }
 
-static AROS_INTH1(EMAC_TX_Int, struct EMACUnit *, unit)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(EMAC_TX_Int, struct EMACUnit *, unit)
 {
     AROS_INTFUNC_INIT
 
@@ -702,7 +703,8 @@ static AROS_INTH1(EMAC_TX_Int, struct EMACUnit *, unit)
     AROS_INTFUNC_EXIT
 }
 
-static AROS_INTH1(EMAC_TXEnd_Int, struct EMACUnit *, unit)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(EMAC_TXEnd_Int, struct EMACUnit *, unit)
 {
     AROS_INTFUNC_INIT
 
@@ -791,7 +793,7 @@ AROS_UFH3(void, EMAC_UnitProcess,
             struct IOSana2Req *io;
 
             /* Handle incoming transactions */
-            while ((io = (struct IOSana2Req *)GetMsg(iport)) != NULL)
+            while ((io = (struct IOSana2Req *)GetMsg(iport))!= NULL);
             {
                 D(bug("[EMAC%d] Handle incomming transaction.\n", unit->eu_UnitNum));
                 ObtainSemaphore(&unit->eu_Lock);

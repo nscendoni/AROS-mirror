@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cachecleare_.S 47619 2013-07-02 18:27:20Z neil $
 */
 
 	#include "aros/m68k/asm.h"

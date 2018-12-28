@@ -1,6 +1,6 @@
 /*
     Copyright © 2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ps3eye.c 51168 2015-10-29 18:18:39Z dizzyofcrn $
 
     Desc:
     Lang: English
@@ -12,9 +12,6 @@
 #define DEBUG 1
 
 #include <aros/debug.h>
-
-#include <exec/types.h>
-#include <stdlib.h>
 
 #include <proto/exec.h>
 #include <proto/dos.h>
@@ -33,24 +30,7 @@
 #include <cybergraphx/cybergraphics.h>
 #include <graphics/gfx.h>
 
-//#include "ov534.h"
-//#include "ov772x.h"
-
-#define OV534_REG_CTRL              0xF5
-#define OV534_REG_DI                0xF4
-#define OV534_REG_DO                0xF3
-#define OV534_REG_MS_ADDRESS        0xF2
-#define OV534_REG_MS_ID             0xF1
-#define OV534_REG_SYS_CTRL          0xE7
-#define OV534_OP_WRITE_3            0x37
-#define OV534_OP_WRITE_2            0x33
-#define OV534_OP_READ_2             0xf9
-#define OV534_REG_GPIO_V0           0x23
-#define OV534_REG_GPIO_C0           0x21
-
-#define OV772X_SLAVE_ADDRESS_WRITE  0x42
-#define OV772X_REG_VER              0x0B
-#define OV772X_REG_PID              0x0A
+#include <stdlib.h>
 
 #define MYBUG_LEVEL 1
 #define mybug(l, x) D(if ((l>=MYBUG_LEVEL)||(l==-1)) { do { { bug x; } } while (0); } )
@@ -58,7 +38,6 @@
 #define MUIA_Resolution             (TAG_USER | 0x80420000) + 0
 //#define MUIM_Action_HandlePsdEvents (TAG_USER | 0x80420000) + 1
 #define MUIM_Action_HandleTmrEvents (TAG_USER | 0x80420000) + 2
-
 
 extern char kitty640_pure[];
 //extern char kitty640_video[];
@@ -74,8 +53,6 @@ struct InstData {
     BOOL resolutionvga;
 
     UWORD pos;
-
-    Object *self;
 
     struct MsgPort *ps3eye_epmsgport;
 //    struct PsdEventHook *psdeventhandler;
@@ -96,82 +73,25 @@ struct InstData {
 
 };
 
-ULONG ov534_reg_write(struct InstData *data, UBYTE reg, UBYTE *val) {
-    mybug(-1, ("ov534_reg_write register %01x with value %01x\n", reg, *val));
+ULONG bridge_write(struct InstData *data, UWORD reg, UWORD *val) {
+    mybug(-1, ("bridge_write register %x with value %x\n", reg, *val));
 
     psdPipeSetup(data->ps3eye_ep0pipe, URTF_OUT|URTF_VENDOR|URTF_DEVICE, 0x01, 0x00, reg);
-
     return(psdDoPipe(data->ps3eye_ep0pipe, val, 1));
+
 }
 
-ULONG ov534_reg_read(struct InstData *data, UBYTE reg, UBYTE *val) {
+ULONG bridge_read(struct InstData *data, UWORD reg, UWORD *val) {
 
     ULONG ioerr;
 
     psdPipeSetup(data->ps3eye_ep0pipe, URTF_IN|URTF_VENDOR|URTF_DEVICE, 0x01, 0x00, reg);
     ioerr =psdDoPipe(data->ps3eye_ep0pipe, val, 1);
 
-    mybug(-1, ("ov534_reg_read register %01x returns value %01x (ioerr %x)\n", reg, *val, ioerr));
+    mybug(-1, ("bridge_read register %x returns value %x (ioerr %x)\n", reg, *val, ioerr));
 
     return(ioerr);
-}
 
-ULONG ov534_reg_bitset(struct InstData *data, UBYTE reg, UBYTE *bitset) {
-
-    UBYTE tmp;
-    ULONG ioerr;
-
-    ioerr = ov534_reg_read(data, reg, &tmp);
-    if(ioerr) {
-        return(ioerr);
-    }
-
-    tmp |= *bitset;
-    return(ov534_reg_write(data, reg, &tmp));
-}
-
-ULONG ov534_reg_bitclr(struct InstData *data, UBYTE reg, UBYTE *bitset) {
-
-    UBYTE tmp;
-    ULONG ioerr;
-
-    if(ioerr = ov534_reg_read(data, reg, &tmp)) {
-        return(ioerr);
-    }
-
-    tmp &= ~(*bitset);
-    return(ov534_reg_write(data, reg, &tmp));
-}
-
-void ov772x_reg_write(struct InstData *data, UBYTE reg, UBYTE *val) {
-
-    UBYTE tmp = reg;
-
-	ov534_reg_write(data, OV534_REG_MS_ADDRESS, &tmp);
-
-    tmp = *val;
-	ov534_reg_write(data, OV534_REG_DO, &tmp);
-
-    tmp = OV534_OP_WRITE_3;
-	ov534_reg_write(data, OV534_REG_CTRL, &tmp);
-
-}
-
-UBYTE ov772x_reg_read(struct InstData *data, UBYTE reg) {
-
-    UBYTE tmp = reg;
-
-	ov534_reg_write(data, OV534_REG_MS_ADDRESS, &tmp);
-
-    tmp = OV534_OP_WRITE_2;
-	ov534_reg_write(data, OV534_REG_CTRL, &tmp);
-
-    tmp = OV534_OP_READ_2;
-	ov534_reg_write(data, OV534_REG_CTRL, &tmp);
-
-	ov534_reg_read(data, OV534_REG_DI, &tmp);
-
-    return(tmp);
 }
 
 void freedevice(struct InstData *data) {
@@ -179,13 +99,13 @@ void freedevice(struct InstData *data) {
     if(data->ps3eye_ep0pipe) {
         psdFreePipe(data->ps3eye_ep0pipe); // Allowed to be NULL
         data->ps3eye_ep0pipe = NULL;
-        mybug(-1, ("releasehook freed endpoint 0 pipe\n"));
+        mybug(-1, ("freedevice released endpoint 0 pipe\n"));
     }
 
     if(data->ps3eye_ep1pipe) {
         psdFreePipe(data->ps3eye_ep1pipe); // Allowed to be NULL
         data->ps3eye_ep1pipe = NULL;
-        mybug(-1, ("releasehook freed endpoint 1 pipe\n"));
+        mybug(-1, ("freedevice released endpoint 1 pipe\n"));
     }
 
     if(data->pab) {
@@ -209,7 +129,7 @@ AROS_UFH3(void, releasehook, AROS_UFHA(struct Hook *, hook, A0), AROS_UFHA(APTR,
 
 void allocdevice(struct InstData *data) {
 
-    UBYTE regval, tmp;
+    UWORD regval;
 
     /*
         Try to find FREE PS3Eye camera (DA_Binding = FALSE)
@@ -241,21 +161,15 @@ void allocdevice(struct InstData *data) {
                         if((data->ps3eye_ep1pipe = psdAllocPipe(data->pd, data->ps3eye_epmsgport, data->ps3eye_ep1in))) {
                             mybug(-1, ("allocdevice allocated endpoint 1 pipe (BULK)\n"));
 
-                            /*
-                                We need to call our set method in order for the led to luminate or not depending on the tick box (may have been pressed before usb connection)
-                                Well, it seems to work...
-                            */
-                            SetAttrs(data->self, MUIA_Resolution, data->resolutionvga, TAG_DONE);
+                            /* Turn red led on */
+                            regval = 0x80;
+                            bridge_write(data, 0x21, &regval);
+                            bridge_write(data, 0x23, &regval);
 
-                            /* Turn the camera on */
-                            regval = 0x3a;
-                            ov534_reg_write(data, OV534_REG_SYS_CTRL, &regval);
-
-                            regval = OV772X_SLAVE_ADDRESS_WRITE;
-                            ov534_reg_write(data, OV534_REG_MS_ID, &regval);
-
-                            /* probe the sensor */
-                        	mybug(-1, ("Sensor ID: %02x%02x\n", ov772x_reg_read(data, OV772X_REG_PID), ov772x_reg_read(data, OV772X_REG_VER)));
+                            UWORD i;
+                            for(i=0;i<0x100;i++) {
+                                bridge_read(data, i, &regval);
+                            }
 
                             return;
 
@@ -286,7 +200,7 @@ IPTR mNew(Class *cl, Object *obj, struct opSet *msg) {
 
     if((obj = (Object *) DoSuperMethodA(cl, obj, (Msg) msg))) {
         struct InstData *data = INST_DATA(cl, obj);
-        //mybug(-1, ("resolutionvga %d\n", data->resolutionvga));
+        mybug(-1, ("resolutionvga %d\n", data->resolutionvga));
         data->resolutionvga = FALSE;
 
         data->pd = NULL;
@@ -303,11 +217,9 @@ IPTR mNew(Class *cl, Object *obj, struct opSet *msg) {
 //                data->psdeventihn.ihn_Method = MUIM_Action_HandlePsdEvents;
 
                 data->tmreventihn.ihn_Object = obj;
-                data->tmreventihn.ihn_Millis = 40;
+                data->tmreventihn.ihn_Millis = 10;
                 data->tmreventihn.ihn_Flags  = MUIIHNF_TIMER;
                 data->tmreventihn.ihn_Method = MUIM_Action_HandleTmrEvents;
-
-                data->self = obj;
 
                 return (IPTR)obj;
 //            }
@@ -323,7 +235,7 @@ IPTR mDispose(Class *cl, Object *obj, struct opGet *msg) {
 	mybug(-1, ("mDispose gets called\n"));
 
     struct InstData *data = INST_DATA(cl, obj);
-    //mybug(-1, ("resolutionvga %d\n", data->resolutionvga));
+    mybug(-1, ("resolutionvga %d\n", data->resolutionvga));
 
 //    if(data->psdeventhandler){
 //        psdRemEventHandler(data->psdeventhandler);
@@ -373,27 +285,11 @@ IPTR mSet(Class *cl, Object *obj, struct opSet *msg) {
     struct TagItem *tags  = msg->ops_AttrList;
     struct TagItem *tag;
 
-    UBYTE regval;
-
     while ((tag = NextTagItem(&tags)) != NULL) {
         switch(tag->ti_Tag) {
             case MUIA_Resolution:
                 data->resolutionvga = tag->ti_Data;
-
-                if(data->ps3eye_ep1pipe) {
-                    if(data->resolutionvga) {
-                        /* Turn red led on */
-                        regval = 0x80;
-                        ov534_reg_bitset(data, OV534_REG_GPIO_C0, &regval);
-                        ov534_reg_bitset(data, OV534_REG_GPIO_V0, &regval);
-                    } else {
-                        /* Turn red led off */
-                        regval = 0x80;
-                        ov534_reg_bitset(data, OV534_REG_GPIO_C0, &regval);
-                        ov534_reg_bitclr(data, OV534_REG_GPIO_V0, &regval);
-                    }
-                }
-
+                mybug(-1, ("mSet MUIA_Resolution = %d\n", data->resolutionvga));
                 SetAttrs(_win(obj), MUIA_Window_Open, FALSE, MUIA_Window_Open, TRUE, TAG_DONE);
             break;
 
@@ -493,7 +389,7 @@ void DoEffect(UBYTE *src, UBYTE *dest, ULONG w, ULONG h) {
 
     l = w*h;
 
-    z += (w/320)*2;
+    z += (w/320);
     if(z>(LONG)h) {
         z = -(h/10);
     }
@@ -551,14 +447,12 @@ IPTR mDraw(Class *cl, Object *obj, struct MUIP_Draw *msg) {
 
     WORD    	      y;
     IPTR    	      retval;
-
-    static ULONG sec=0, mic=0, lastTick=0, currTick=0;
     
     retval = DoSuperMethodA(cl, obj, (Msg)msg);
     
     if (!(msg->flags & (MADF_DRAWOBJECT | MADF_DRAWUPDATE))) return 0;
 
-    if(data->ps3eye_ep1pipe) {        
+    if(data->ps3eye_ep0pipe) {        
         for(y= 0; y < _mheight(obj); y++) {
             WORD col;
             col = ((y + data->pos) / 8) % 2;
@@ -578,13 +472,6 @@ IPTR mDraw(Class *cl, Object *obj, struct MUIP_Draw *msg) {
             WritePixelArray(kitty, 0, 0, 320*4, _rp(obj), _mleft(obj), _mtop(obj), _mwidth(obj), _mheight(obj), RECTFMT_RGB032);
         }
     }
-
-
-    //lastTick = currTick;
-    //CurrentTime(&sec, &mic);
-    //currTick = ((sec * 1000) + (mic / 1000));
-    //mybug(-1, ("Delta %d mS\n", currTick-lastTick));
-
     return retval;
 }
 
@@ -670,8 +557,6 @@ BOOPSI_DISPATCHER(IPTR, classdispatcher, cl, obj, msg) {
 BOOPSI_DISPATCHER_END
 
 int main(void) {
-
-    SetTaskPri(FindTask(NULL), 15);
 
     struct MUI_CustomClass *mcc;
 

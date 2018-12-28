@@ -1,6 +1,6 @@
 /*
     Copyright © 2013-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Print.c 48905 2014-04-03 17:15:39Z neil $
 
     Desc:
     Lang: English

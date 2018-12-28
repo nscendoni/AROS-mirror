@@ -19,7 +19,7 @@
 
   MUIBuilder Support Site: http://sourceforge.net/projects/muibuilder/
 
-  $Id$
+  $Id: slider.c 48675 2014-01-02 18:34:06Z neil $
 
 ***************************************************************************/
 

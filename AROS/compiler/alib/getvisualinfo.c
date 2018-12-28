@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getvisualinfo.c 33390 2010-05-30 12:14:54Z mazze $
 
     Desc: Get a (private) visual info structure
     Lang: english

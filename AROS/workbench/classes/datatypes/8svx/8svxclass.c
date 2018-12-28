@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2005, The AROS Development Team. All rights reserved.
+    $Id: 8svxclass.c 30792 2009-03-07 22:40:04Z neil $
 */
 
 /**********************************************************************/
@@ -154,7 +154,7 @@ BOOL Read8SVX(Class *cl, Object *o)
 		     file_vhd->vh_Volume[3];
     
     D(bug("8svx.datatype: OneShotHiSamples : %d\n"
-    	  "               RepeatHiSamples : %d\n"
+    	  "               RepeatHiSampoles : %d\n"
 	  "               SamplesPerHiCycle: %d\n"
 	  "               SamplesPerSec    : %d\n"
 	  "               Octaves          : %d\n"

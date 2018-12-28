@@ -9,7 +9,7 @@
         Distribution:   PD
         Project page:   http://sf.net/p/adtools/code/HEAD/tree/trunk/sdi/
         Description:    defines to hide OS specific library function definitions
-        Id:             $Id$
+        Id:             $Id: SDI_lib.h 49591 2014-09-08 22:06:08Z mazze $
         URL:            $URL: svn://svn.code.sf.net/p/adtools/code/trunk/sdi/SDI_lib.h $
 
  1.0   09.05.04 : initial version which allows to hide OS specific shared

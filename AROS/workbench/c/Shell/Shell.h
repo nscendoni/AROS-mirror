@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Shell.h 49184 2014-07-29 17:47:44Z neil $
 */
 
 #ifndef SHELL_H

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: writechunkypixels.c 41134 2011-09-06 08:20:31Z sonic $
 
     Desc:
     Lang: english

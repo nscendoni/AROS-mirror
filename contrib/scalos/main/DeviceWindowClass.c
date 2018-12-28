@@ -1,6 +1,6 @@
 // DeviceWindowClass.c
-// $Date$
-// $Revision$
+// $Date: 2016-04-02 04:34:37 +0200 (Sat, 02 Apr 2016) $
+// $Revision: 52516 $
 
 
 #include <exec/types.h>

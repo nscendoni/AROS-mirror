@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright © 2002, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: html.py 51112 2015-09-25 07:37:55Z mazze $
 
 # The core framework classes
 # ==========================

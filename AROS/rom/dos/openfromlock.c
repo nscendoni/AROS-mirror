@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: openfromlock.c 48951 2014-04-19 09:33:59Z deadwood $
 
     Desc: Open a file from a lock
     Lang: english

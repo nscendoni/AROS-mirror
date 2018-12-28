@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: arosinquire.c 48790 2014-02-01 15:40:36Z mazze $
 
     Desc: Retrieve information about the OS
     Lang: english

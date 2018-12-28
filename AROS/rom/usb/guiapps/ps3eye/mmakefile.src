@@ -1,11 +1,8 @@
-#   $Id$
+#   $Id: mmakefile.src 52306 2016-03-28 11:39:31Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
 FILES := ps3eye AROS640_pure AROS320_pure
-
-NOWARN_FLAGS := $(NOWARN_UNUSED_VARIABLE) $(NOWARN_MAYBE_UNINITIALIZED)
-USER_CFLAGS := $(NOWARN_FLAGS)
 
 %build_prog mmake=ps3eye progname=ps3eye \
     files="$(FILES)" targetdir=$(AROS_TESTS)

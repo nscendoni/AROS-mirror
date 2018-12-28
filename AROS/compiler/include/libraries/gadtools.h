@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gadtools.h 33331 2010-05-22 17:12:19Z neil $
 
     Desc: Definitions and structures for gadtools.library.
     Lang: english

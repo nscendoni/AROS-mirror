@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2013, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: genindex.py 46857 2013-03-09 16:14:25Z mazze $
 
 """Generate Index.guide.
 

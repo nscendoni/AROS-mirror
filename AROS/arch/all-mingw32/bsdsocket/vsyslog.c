@@ -1,6 +1,6 @@
 /*
     Copyright © 2000-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vsyslog.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc:
     Lang: English

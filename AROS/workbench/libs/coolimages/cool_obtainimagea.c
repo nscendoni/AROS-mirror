@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cool_obtainimagea.c 30792 2009-03-07 22:40:04Z neil $
 */
 
 #include <proto/exec.h>

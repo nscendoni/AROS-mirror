@@ -88,4 +88,4 @@ On the x86, "double f(); main(){f();}" wasn't popping the FP register stack.
 On the x86, ECX was saved by the callee, when it should have been
 saved by the caller.
 
-$Id$
+$Id: LOG 30794 2009-03-08 02:19:07Z neil $

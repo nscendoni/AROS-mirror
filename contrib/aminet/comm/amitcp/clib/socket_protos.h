@@ -2,7 +2,7 @@
 #define CLIB_SOCKET_PROTOS_H
 
 /*
- * $Id$
+ * $Id: socket_protos.h 30794 2009-03-08 02:19:07Z neil $
  * $Release$
  *
  * Prototypes of AmiTCP/IP bsdsocket.library

@@ -4,8 +4,8 @@ Linken
 
 :Author:    Adam Chodorowski
 :Copyright: Copyright © 2001, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 30800 $
+:Date:      $Date: 2009-03-08 18:28:50 +0100 (Sun, 08 Mar 2009) $
 :Status:    Done.
 
 Een eenvoudige manier om uw steun te betuigen aan AROS is het plaatsen van een link naar AROS op uw website. U doet er ons een groot plezier mee. Voor dit doel kunt u één van de onderstaande banners gebruiken, zoals de originele AROS banner gemaakt door Cyb0rg / Resistance

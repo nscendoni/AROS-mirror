@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: sana2errlist.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      sana2errlist.c - Errlist for Sana-II Errors
  *

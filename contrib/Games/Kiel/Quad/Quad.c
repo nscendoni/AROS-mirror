@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-98, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Quad.c 51875 2016-03-12 04:09:26Z NicJA $
 
     Desc: Quad Game
     Lang: english

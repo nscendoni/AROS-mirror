@@ -4,7 +4,7 @@
 /*
     Copyright © 2011, Thore Böckelmann. All rights reserved.
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pixmap.h 45798 2012-09-14 19:47:19Z neil $
 */
 
 /*** Name *******************************************************************/

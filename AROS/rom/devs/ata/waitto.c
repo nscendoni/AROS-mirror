@@ -1,6 +1,6 @@
 /*
     Copyright © 2013-2014, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: waitto.c 51930 2016-03-13 22:12:58Z jmcmullan $
 */
 
 #include <exec/types.h>

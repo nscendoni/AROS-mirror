@@ -16,7 +16,7 @@
 
  TextEditor class Support Site:  http://www.sf.net/projects/texteditor_mcc
 
- $Id$
+ $Id: mcc_common.h 43773 2012-01-29 15:22:01Z mazze $
 
 ***************************************************************************/
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cleanup.c 47022 2013-03-21 01:22:01Z neil $
 */
 
 #include <aros/asmcall.h>

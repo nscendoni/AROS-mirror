@@ -3,15 +3,11 @@
 
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: alib_protos.h 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Prototypes for amiga.lib
     Lang: english
 */
-
-#if defined(RT_ENABLE) && RT_ENABLE
-#include <aros/rt.h>
-#endif
 
 #include <aros/asmcall.h>
 #include <devices/inputevent.h>
@@ -38,10 +34,6 @@ struct Locale;
 IPTR CallHookA (struct Hook * hook, APTR obj, APTR param);
 IPTR CallHook (struct Hook * hook, APTR obj, ...) __stackparm;
 UBYTE * ACrypt(UBYTE * buffer, const UBYTE * password, const UBYTE * user);
-
-/* Dos support */
-BPTR ErrorOutput(void);
-BPTR SelectErrorOutput(BPTR fh);
 
 /* Exec support */
 VOID BeginIO (struct IORequest *ioReq);
@@ -80,16 +72,12 @@ struct  InputEvent *InvertStringForwd(STRPTR str, struct KeyMap *km);
 
 /* Graphics */
 #ifndef ObtainBestPen
-LONG ObtainBestPen( struct ColorMap * cm, ULONG r, ULONG g, ULONG b, Tag tag1, ...) __stackparm;
+LONG ObtainBestPen( struct ColorMap * cm, ULONG R, ULONG G, ULONG B, Tag tag1, ...) __stackparm;
 #endif
 
 #ifndef GetRPAttrs
 void GetRPAttrs( struct RastPort * rp, Tag tag1, ...) __stackparm;
 #endif
-
-BOOL AndRectRect(struct Rectangle *rect1, struct Rectangle *rect2, struct Rectangle *intersect);
-struct Region *CopyRegion(struct Region *region);
-struct Region *NewRectRegion(WORD MinX,	WORD MinY, WORD MaxX, WORD MaxY);
 
 /* Intuition */
 #ifndef SetWindowPointer 

@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: getprefs.c 48422 2013-11-17 16:07:33Z neil $
 */
 
 #include <intuition/preferences.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support.c 51649 2016-03-09 05:29:53Z NicJA $
 */
 
 #include <exec/memory.h>

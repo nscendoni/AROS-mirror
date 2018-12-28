@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  *
  *	@(#)tcp_subr.c	8.1 (Berkeley) 6/10/93
- * $Id$
+ * $Id: tcp_subr.c 51822 2016-03-11 06:57:18Z NicJA $
  */
 
 #include <sys/param.h>

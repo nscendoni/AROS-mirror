@@ -1,13 +1,10 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: setsignal.c 50721 2015-05-20 01:07:11Z NicJA $
 
     Desc: Examine and/or modify the signals of a task.
     Lang: english
 */
-
-#define DEBUG 0
-
 #include <exec/execbase.h>
 #include <aros/libcall.h>
 #include <proto/exec.h>
@@ -55,24 +52,27 @@
 {
     AROS_LIBFUNC_INIT
 
-    struct Task *thisTask = GET_THIS_TASK;
+    struct Task *ThisTask = GET_THIS_TASK;
     ULONG *sig;
-    ULONG old = 0;
+    ULONG old;
 
-    if (thisTask)
-    {
-        /* Protect the signal mask against access by other tasks. */
-        Disable();
+    /* Protect the signal mask against access by other tasks. */
+#if defined(__AROSEXEC_SMP__)
+    EXEC_SPINLOCK_LOCK(&IntETask(ThisTask->tc_UnionETask.tc_ETask)->iet_TaskLock, SPINLOCK_MODE_WRITE);
+#endif
+    Disable();
 
-        /* Get address */
-        sig = &thisTask->tc_SigRecvd;
+    /* Get address */
+    sig = &ThisTask->tc_SigRecvd;
 
-        /* Change only the bits in 'mask' */
-        old = *sig;
-        *sig = (old & ~signalSet) | (newSignals & signalSet);
+    /* Change only the bits in 'mask' */
+    old = *sig;
+    *sig = (old & ~signalSet) | (newSignals & signalSet);
 
-        Enable();
-    }
+#if defined(__AROSEXEC_SMP__)
+    EXEC_SPINLOCK_UNLOCK(&IntETask(ThisTask->tc_UnionETask.tc_ETask)->iet_TaskLock);
+#endif
+    Enable();
 
     return old;
     AROS_LIBFUNC_EXIT

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: registermodule.c 48986 2014-05-03 18:18:49Z deadwood $
 
     Desc:
 */

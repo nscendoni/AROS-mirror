@@ -1,8 +1,8 @@
 /*
-    (C) 1995-2018 The AROS Development Team
+    (C) 1995-2014 The AROS Development Team
     (C) 2002-2005 Harry Sintonen
     (C) 2005-2007 Pavel Fedin
-    $Id$
+    $Id: Mount.c 52028 2016-03-17 04:36:20Z jmcmullan $
 
     Desc: Mount CLI command
     Lang: English
@@ -207,10 +207,8 @@ typedef struct UtilityBase *UtilityBase_t;
 #define BSTR_EXTRA 2
 #define BSTR_OFFSET 1
 #define bstrcpy(dest, src, len) \
-{ \
 	dest[0] = len; \
-	strcpy(&dest[1], src); \
-}
+	strcpy(&dest[1], src);
 #endif
 
 static const int __nocommandline __attribute__((used));

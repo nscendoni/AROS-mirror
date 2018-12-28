@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: if_arc.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: if_arc.h,v 1.3 2000/04/26 21:02:02 jakob Exp $	*/

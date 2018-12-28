@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setcxobjpri.c 47689 2013-07-14 21:00:14Z verhaegs $
 
     Desc:
     Lang: English

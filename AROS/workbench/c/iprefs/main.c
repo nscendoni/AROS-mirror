@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: main.c 49651 2014-09-21 05:40:35Z deadwood $
 	
     Desc: Iprefs
     Lang: English

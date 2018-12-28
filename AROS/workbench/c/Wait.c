@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Wait.c 37304 2011-03-03 06:14:28Z jmcmullan $
 
     Wait CLI Command.
 */

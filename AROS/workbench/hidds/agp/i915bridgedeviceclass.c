@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: i915bridgedeviceclass.c 48273 2013-10-09 15:43:52Z neil $
 */
 
 #include <hidd/agp.h>

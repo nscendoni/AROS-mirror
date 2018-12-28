@@ -19,7 +19,7 @@
 
   MUIBuilder Support Site: http://sourceforge.net/projects/muibuilder/
 
-  $Id$$
+  $Id: child.c 51894 2016-03-13 01:19:10Z NicJA $$
 
 ***************************************************************************/
 

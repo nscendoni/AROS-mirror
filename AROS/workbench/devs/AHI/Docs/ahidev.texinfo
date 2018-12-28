@@ -61,7 +61,7 @@ publication, even if advised of the possibility of such damage.}
 
 @example
 
-$Id$
+$Id: ahidev.texinfo 30794 2009-03-08 02:19:07Z neil $
 $Log: ahidev.texinfo,v $
 Revision 5.3.2.3  2005/02/02 21:49:52  martin
 * Updated all copyright years to 2005.

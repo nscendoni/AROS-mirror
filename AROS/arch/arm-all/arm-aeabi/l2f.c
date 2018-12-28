@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2009-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: l2f.c 50720 2015-05-19 23:23:22Z neil $
 */
 
 #include <inttypes.h>

@@ -3,8 +3,8 @@
 /*
 **	$VER: scalospreviewplugin.h 41.1 (28 Apr 2006 19:34:08)
 **
-** $Date$
-** $Revision$
+** $Date: 2013-12-01 23:08:26 +0100 (Sun, 01 Dec 2013) $
+** $Revision: 48481 $
 **
 **	Special methods and tags for Scalos menu preferences plugin
 **

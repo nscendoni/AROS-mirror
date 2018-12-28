@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gels_internal.h 45538 2012-08-13 01:42:55Z jmcmullan $
 
     Desc: 
     Lang: english

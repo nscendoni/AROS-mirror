@@ -1,6 +1,6 @@
 /*
     Copyright � 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vfork_longjmp.s 48048 2013-09-08 21:19:29Z verhaegs $
 */
 
 /* This function works the same as longjmp() except it lacks the argument 

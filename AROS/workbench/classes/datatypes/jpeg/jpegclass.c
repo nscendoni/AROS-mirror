@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2005, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: jpegclass.c 44978 2012-06-07 14:02:25Z mazze $
 */
 
 /**********************************************************************/

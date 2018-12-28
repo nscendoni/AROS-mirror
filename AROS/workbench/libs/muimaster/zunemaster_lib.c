@@ -2,7 +2,7 @@
     Copyright © 2002, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: zunemaster_lib.c 30792 2009-03-07 22:40:04Z neil $
 
     Library code for AmigaOS, based on Dirk Stöckers Libary
     Example

@@ -1,6 +1,6 @@
 /*
     Copyright 2010-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: p_aros_version.h 41764 2011-10-05 20:18:03Z deadwood $
 */
 
 #ifndef P_AROS_VERSION_H

@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2016, The AROS Development Team. All rights reserved.
+    $Id: writestart.c 52755 2016-06-03 18:20:12Z schulz $
 
     Print the library magic and init code in the file modname_start.c.
     This code is partly based on code in CLib37x.lha from Andreas R. Kleinert
@@ -571,7 +571,7 @@ static void writeresident(FILE *out, struct config *cfg)
     else
     {
         rt_skip = "GM_UNIQUENAME(End)";
-        fprintf(out, "extern int %s(void);\n", rt_skip);
+        fprintf(out, "extern const int %s;\n", rt_skip);
     }
     fprintf(out,
             "extern const APTR GM_UNIQUENAME(FuncTable)[];\n"

@@ -7,7 +7,7 @@
 **  (C)Copyright 1992 by Bernd Noll for null/zero-soft
 **  All Rights Reserved
 **
-**  RCS Header: $Id$
+**  RCS Header: $Id: Vars.c 36659 2011-01-18 13:26:51Z neil $
 **
 **  compiling with
 **  "#define PATCH_NULL"

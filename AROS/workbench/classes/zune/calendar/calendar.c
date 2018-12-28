@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: calendar.c 48773 2014-01-23 21:58:44Z jmcmullan $
 */
 
 #include <utility/date.h>

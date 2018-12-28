@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: UUIDGen.c 40572 2011-08-06 04:56:31Z jmcmullan $
 
     Desc: Generate UUIDs
     Lang: English

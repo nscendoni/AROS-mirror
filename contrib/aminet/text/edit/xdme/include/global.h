@@ -1,7 +1,7 @@
 /******************************************************************************
 
     MODUL
-	$Id$
+	$Id: global.h 36659 2011-01-18 13:26:51Z neil $
 
     DESCRIPTION
 	Defines/structs that mostly all sources depend on.

@@ -1,6 +1,6 @@
 /*
-    Copyright © 2003-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2003, The AROS Development Team. All rights reserved.
+    $Id: misc.c 32284 2010-01-05 16:27:00Z mazze $
 */
 
 #include <exec/types.h>
@@ -20,7 +20,7 @@ VOID ShowMessage(CONST_STRPTR msg)
         {
             es.es_StructSize   = sizeof(es);
             es.es_Flags        = 0;
-            es.es_Title        = (CONST_STRPTR) _(MSG_NAME);
+            es.es_Title        = (CONST_STRPTR) "Serial";
             es.es_TextFormat   = (CONST_STRPTR) msg;
             es.es_GadgetFormat = _(MSG_OK);
 
@@ -28,7 +28,7 @@ VOID ShowMessage(CONST_STRPTR msg)
         }
         else
         {
-            Printf("%s: %s\n", _(MSG_NAME), msg);
+            Printf("Serial: %s\n", msg);
         }
     }
 }

@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 52385 2016-03-29 22:36:42Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM contrib-vpdf-poppler-goo : includes
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 2007-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: uuid_pack.c 36648 2011-01-17 14:31:59Z neil $
 */
 
 #define DEBUG 1

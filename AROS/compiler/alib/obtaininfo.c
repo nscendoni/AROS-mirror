@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: obtaininfo.c 33390 2010-05-30 12:14:54Z mazze $
 
     Desc: Obtain information about a Bullet GlyphEngine
     Lang: english

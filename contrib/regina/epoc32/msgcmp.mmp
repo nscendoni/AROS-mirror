@@ -5,7 +5,7 @@
 // based on RECPDF.MMP:
 // Copyright (c) 2000 Sander van der Wal
 //
-// $Id$
+// $Id: msgcmp.mmp 30794 2009-03-08 02:19:07Z neil $
 //
 
 TARGET         msgcmp.exe

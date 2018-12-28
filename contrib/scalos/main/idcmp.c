@@ -1,6 +1,6 @@
 // idcmp.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-24 02:40:07 +0100 (Thu, 24 Mar 2016) $
+// $Revision: 52220 $
 
 
 #include <exec/types.h>

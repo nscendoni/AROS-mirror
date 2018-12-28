@@ -61,7 +61,7 @@ publication, even if advised of the possibility of such damage.}
 
 @example
 
-$Id$
+$Id: ahiusr.texinfo 30794 2009-03-08 02:19:07Z neil $
 $Log: ahiusr.texinfo,v $
 Revision 5.9.2.8  2005/09/22 20:09:18  martin
 Docs/ahiusr.texinfo: Added Gunther Nikl and Davy Wentzler to

@@ -1,8 +1,8 @@
-#   $Id$
+#   $Id: mmakefile.src 52352 2016-03-29 14:32:31Z NicJA $
 #
 #   Makefile to make uae.
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 UAESRCDIR := $(SRCDIR)/$(CURDIR)
 

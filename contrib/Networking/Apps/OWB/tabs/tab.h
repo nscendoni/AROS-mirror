@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: tab.h 36659 2011-01-18 13:26:51Z neil $
 */
 
 #include <utility/tagitem.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support.c 50125 2015-02-23 16:45:40Z neil $
 
     Desc: Support functions for the colorwheel class
     Lang: English

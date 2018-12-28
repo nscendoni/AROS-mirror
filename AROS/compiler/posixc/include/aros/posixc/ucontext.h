@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ucontext.h 48028 2013-09-08 21:13:29Z verhaegs $
 
     Desc: POSIX.1-2004 header file ucontext.h
           This file is deprecated and not present in POSIX.1-2008

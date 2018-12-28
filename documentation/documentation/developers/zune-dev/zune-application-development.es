@@ -4,8 +4,8 @@ Manual para el Desarrollo de Aplicaciones con Zune
 
 :Authors:   David Le Corfec
 :Copyright: Copyright © 2004, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 30800 $
+:Date:      $Date: 2009-03-08 18:28:50 +0100 (Sun, 08 Mar 2009) $
 :Status:    Unfinished;
 :ToDo:      All
 
@@ -228,7 +228,7 @@ procesamiento de eventos invocado en el bucle principal::
 Hola, mundo
 -----------
 
-.. Figure:: /documentation/developers/zune-dev/images/hello.png
+.. Figure:: zune/images/hello.png
 
     First things first! I knew you would be all excited.
     ¡Primero lo primero! Sé que estarás exitado.

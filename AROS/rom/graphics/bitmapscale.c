@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bitmapscale.c 47660 2013-07-12 01:45:50Z neil $
 
     Desc: Graphics function BitMapScale()
     Lang: english

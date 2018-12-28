@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: battmem.h 30792 2009-03-07 22:40:04Z neil $
 */
 
 #ifndef PROTO_BATTMEM_H

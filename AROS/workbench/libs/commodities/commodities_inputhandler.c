@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: commodities_inputhandler.c 45416 2012-08-09 03:42:46Z jmcmullan $
 
     Desc: Commodities input handler
     Lang: English

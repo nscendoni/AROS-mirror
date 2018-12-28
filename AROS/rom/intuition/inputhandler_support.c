@@ -1,17 +1,14 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: inputhandler_support.c 48208 2013-10-05 05:05:56Z NicJA $
 
     Support functions for InputHandler.
 */
 
 /****************************************************************************************/
 
-#include <aros/config.h>
-
 #include <proto/exec.h>
-#include <proto/execlock.h>
 #include <proto/intuition.h>
 #include <proto/alib.h>
 #include <proto/layers.h>
@@ -28,7 +25,7 @@
 #include <intuition/cghooks.h>
 #include <intuition/sghooks.h>
 #include <devices/inputevent.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <string.h>
 
 #include "inputhandler.h"
@@ -1334,14 +1331,10 @@ void WindowNeedsRefresh(struct Window * w,
         {
             struct IntuiMessage *IM;
             BOOL                         found = FALSE;
-#if defined(__AROSEXEC_SMP__)
-            struct ExecLockBase *ExecLockBase = GetPrivIBase(IntuitionBase)->ExecLockBase;
-#endif
+
             /* Can use Forbid() for this */
             Forbid();
-#if defined(__AROSEXEC_SMP__)
-            if (ExecLockBase) ObtainLock(&w->UserPort->mp_SpinLock, SPINLOCK_MODE_READ, 0);
-#endif
+
             IM = (struct IntuiMessage *)w->UserPort->mp_MsgList.lh_Head;
 
             ForeachNode(&w->UserPort->mp_MsgList, IM)
@@ -1356,9 +1349,7 @@ void WindowNeedsRefresh(struct Window * w,
                     break;
                 }
             }
-#if defined(__AROSEXEC_SMP__)
-            if (ExecLockBase) ReleaseLock(&w->UserPort->mp_SpinLock, 0);
-#endif
+
             Permit();
 
             if (!found)

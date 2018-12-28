@@ -23,15 +23,13 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/msun/src/s_conjf.c,v 1.2 2008/08/07 14:39:56 das Exp $
+ * $FreeBSD: src/lib/msun/src/s_conjf.c,v 1.1 2004/05/30 09:21:56 stefanf Exp $
  */
 
 #include <complex.h>
 
-#include "math_private.h"
-
 float complex
 conjf(float complex z)
 {
-	return (CMPLXF(crealf(z), -cimagf(z)));
+	return crealf(z) - I * cimagf(z);
 }

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: coretest.c 42505 2011-11-17 07:52:18Z sonic $
 */
 
 #include <exec/lists.h>

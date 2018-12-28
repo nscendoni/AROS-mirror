@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2009-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: netpeditor.h 48909 2014-04-05 19:40:16Z neil $
 */
 
 #include <exec/types.h>

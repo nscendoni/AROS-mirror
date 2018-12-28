@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ParallelClass.c 35724 2010-11-23 14:21:18Z sonic $
 
     Desc: Parallel hidd class implementation.
     Lang: english

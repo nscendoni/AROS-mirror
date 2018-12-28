@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fputs.c 47361 2013-05-05 14:19:35Z mazze $
 
     Desc:
     Lang: english

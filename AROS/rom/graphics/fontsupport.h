@@ -2,7 +2,7 @@
 #define FONTSUPPORT_H
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fontsupport.h 33499 2010-06-08 12:42:51Z sonic $
 
     Desc: Misc definitions internal to fonts.
     Lang: english

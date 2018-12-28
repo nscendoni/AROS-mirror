@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: if_atm.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*      $OpenBSD: if_atm.h,v 1.3 1996/07/03 17:14:32 chuck Exp $       */

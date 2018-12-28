@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: duplockfromfh.c 48951 2014-04-19 09:33:59Z deadwood $
 
     Desc: dos.library function DupLockFromFH()
     Lang: english

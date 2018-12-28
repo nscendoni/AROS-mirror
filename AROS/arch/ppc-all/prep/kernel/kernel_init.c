@@ -1,6 +1,6 @@
 /*
     Copyright C 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kernel_init.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: kernel.resource startup file
     Lang: English

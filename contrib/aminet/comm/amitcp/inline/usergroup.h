@@ -2,7 +2,7 @@
 #define _INLINE_USERGROUP_H
 
 /*
- * $Id$
+ * $Id: usergroup.h 30794 2009-03-08 02:19:07Z neil $
  * $Release$
  *
  * Gcc inlines for usergroup.library. 

@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: debug.c 50721 2015-05-20 01:07:11Z NicJA $
 
     Desc: Internal debugger.
     Lang: english
@@ -10,6 +10,7 @@
 #include <exec/interrupts.h>
 #include <libraries/debug.h>
 #include <proto/exec.h>
+#include <proto/kernel.h>
 #include <proto/debug.h>
 
 #include <ctype.h>

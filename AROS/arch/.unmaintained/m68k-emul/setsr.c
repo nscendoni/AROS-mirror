@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setsr.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Modify the SR of the CPU (if supported)
     Lang: english

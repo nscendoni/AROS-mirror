@@ -1,8 +1,8 @@
-#   $Id$
+#   $Id: mmakefile.src 52626 2016-04-13 01:17:35Z NicJA $
 #
 #   Makefile to make FileMaster.
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES := about commodity config copy dir diskinfo drives event execute \
 	 fileclick fm fmdos fmgui locale operate request showicon showpic showtext \

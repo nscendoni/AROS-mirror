@@ -1,7 +1,7 @@
 # Copyright © 2009-2016, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 52724 2016-05-13 13:04:17Z neil $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- contrib-curl : contrib-openssl development-curl
 

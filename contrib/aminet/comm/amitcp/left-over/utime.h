@@ -1,7 +1,7 @@
 #ifndef	UTIME_H
 #define	UTIME_H
 /*
- * $Id$
+ * $Id: utime.h 30794 2009-03-08 02:19:07Z neil $
  *
  * definitions and prototype for the utime() (in the net.lib)
  *

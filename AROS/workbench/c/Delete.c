@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Delete.c 52804 2016-07-27 11:54:52Z polluks $
 
     Delete CLI Command.
 */

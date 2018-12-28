@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: insert.c 45292 2012-07-22 19:34:02Z mazze $
 
     Desc: Insert a node into a list.
     Lang: english

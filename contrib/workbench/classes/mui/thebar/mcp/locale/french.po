@@ -1,5 +1,5 @@
 # Translation catalog description file (pot-style)
-# $Id$
+# $Id: french.po 49424 2014-08-16 07:30:44Z mazze $
 # 
 # version 26
 # Translators:

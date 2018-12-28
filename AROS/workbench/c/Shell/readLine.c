@@ -1,6 +1,6 @@
 /*
     Copyright (C) 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readLine.c 45541 2012-08-13 01:43:15Z jmcmullan $
  */
 
 #include <dos/stdio.h>

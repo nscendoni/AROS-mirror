@@ -1,5 +1,5 @@
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 ENCODING := ISO8859
 

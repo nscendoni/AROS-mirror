@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: norwegian.c 49681 2014-10-01 19:05:00Z deadwood $
 
     Desc: norwegian.language description file.
 */

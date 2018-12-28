@@ -1,6 +1,6 @@
 /*
     Copyright © 2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: wbpatternprefs.c 40096 2011-07-14 12:10:20Z jmcmullan $
 
     Desc:
     Lang: English

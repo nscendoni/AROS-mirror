@@ -2,7 +2,7 @@
     Copyright © 2002, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: prefsio.c 30792 2009-03-07 22:40:04Z neil $
 */
 
 #include <string.h>

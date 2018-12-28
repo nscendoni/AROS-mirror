@@ -1,6 +1,6 @@
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: SetPatchAROS.c 47619 2013-07-02 18:27:20Z neil $
 
     Desc: Code to dynamically load ELF executables under AOS.
     Lang: english

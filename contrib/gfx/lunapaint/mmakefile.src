@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 52511 2016-04-02 00:44:02Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- contrib-gfx : contrib-gfx-$(AROS_TARGET_CPU)
 

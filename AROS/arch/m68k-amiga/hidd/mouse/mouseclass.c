@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mouseclass.c 45571 2012-08-16 06:17:16Z jmcmullan $
 
     Desc: The main mouse class.
     Lang: English.

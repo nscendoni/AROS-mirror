@@ -1,6 +1,6 @@
 /*
     Copyright C 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: startup.S 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Bootstrap code for AROS/PPC on PReP
     Lang: English

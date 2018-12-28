@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: findtagitem.c 49964 2015-01-28 23:04:04Z NicJA $
 
     Desc:
     Lang: english
@@ -9,6 +9,7 @@
 #include <exec/types.h>
 #include <utility/utility.h>
 #include <utility/tagitem.h>
+#include <aros/libcall.h>
 #include <proto/arossupport.h>
 
 /*****************************************************************************
@@ -20,7 +21,7 @@
 
 /*  SYNOPSIS */
 	AROS_LHA(Tag,                    tagValue, D0),
-	AROS_LHA(const struct TagItem *, tagList,  A0),
+	AROS_LHA(struct TagItem *, tagList,  A0),
 
 /*  LOCATION */
 	struct UtilityBase *, UtilityBase, 5, Utility)
@@ -40,6 +41,8 @@
     SEE ALSO
 
     INTERNALS
+
+    HISTORY
 
 *****************************************************************************/
 {

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: modifyirqhandler.c 50470 2015-04-27 23:58:50Z NicJA $
 
     Desc:
 */
@@ -31,7 +31,7 @@
         AROS_LHA(void *, handlerData2, A2),
 
 /*  LOCATION */
-        struct KernelBase *, KernelBase, 37, Kernel)
+        struct KernelBase *, KernelBase, 39, Kernel)
 
 /*  FUNCTION
 	Modify the data passed to a raw hardware IRQ handler.

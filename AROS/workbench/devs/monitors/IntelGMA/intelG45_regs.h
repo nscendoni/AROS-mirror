@@ -2,7 +2,7 @@
  * intelG45_regs.h
  *
  *  Created on: Apr 17, 2010
- *      $Id$
+ *      $Id: intelG45_regs.h 45935 2012-10-21 12:07:18Z Sami $
  */
 
 #include <stdint.h>

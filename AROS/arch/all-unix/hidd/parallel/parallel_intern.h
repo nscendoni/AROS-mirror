@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010 The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: parallel_intern.h 35724 2010-11-23 14:21:18Z sonic $
 */
 
 #ifndef PARALLEL_HIDD_INTERN_H

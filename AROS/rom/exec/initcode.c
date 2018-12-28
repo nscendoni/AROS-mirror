@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: initcode.c 40517 2011-08-03 09:42:50Z sonic $
 
     Desc: Initialize resident modules
     Lang: english

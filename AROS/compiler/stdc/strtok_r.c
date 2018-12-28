@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: strtok_r.c 48285 2013-10-13 15:19:54Z jmcmullan $
   
     POSIX.1-2001 function strtok_r().
 */

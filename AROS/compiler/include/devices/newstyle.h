@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: newstyle.h 42900 2011-12-13 16:00:16Z neil $
 
     Desc: New Style Device standard as described on Amiga Developer CD
     Lang: english

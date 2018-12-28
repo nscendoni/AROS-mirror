@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: alert_cpu.c 44142 2012-02-21 23:48:07Z neil $
 
     Desc: CPU context parsing routines. Dummy nonfunctional template.
           See code in arch/i386-all/exec/alert_cpu.c for working example.

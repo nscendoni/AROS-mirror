@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: smb_abstraction.c 52669 2016-04-20 15:05:49Z NicJA $
  *
  * :ts=4
  *

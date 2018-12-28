@@ -1,6 +1,5 @@
 /*
      AHI - The AHI preferences program
-     Copyright (C) 2017 The AROS Dev Team
      Copyright (C) 1996-2005 Martin Blom <martin@blom.org>
 
      This program is free software; you can redistribute it and/or
@@ -17,9 +16,6 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
-
-#define DEBUG 1
-#include <aros/debug.h>
 
 #include <config.h>
 
@@ -232,8 +228,6 @@ static void UpdateStrings(void) {
   struct NewMenu   *menuptr;
   char           ***stringptr;
 
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   menuptr   = (struct NewMenu *) &Menus;
   stringptr = (char ***) &strings;
 
@@ -249,6 +243,7 @@ static void UpdateStrings(void) {
     }
     menuptr++;
   }
+
 
   PageNames[0] = (char *) msgPageMode;
   PageNames[1] = (char *) msgPageAdvanced;
@@ -270,12 +265,13 @@ static void UpdateStrings(void) {
   ScaleLabels[4] = (char *) msgSM6dB;
 }
 
+
 static Object *MUIWindow,*MUIList,*MUIInfos,*MUIUnit;
 static Object *MUIFreq,*MUIChannels,*MUIOutvol,*MUIMonvol,*MUIGain,*MUIInput,*MUIOutput;
 static Object *MUILFreq,*MUILChannels,*MUILOutvol,*MUILMonvol,*MUILGain,*MUILInput,*MUILOutput,*MUIPlay;
 static Object *MUIDebug,*MUIEcho,*MUISurround,*MUIClipvol,*MUICpu,*MUIACTime,*MUIScalemode;
 
-SIPTR xget(Object * obj, ULONG attribute)
+LONG xget(Object * obj, ULONG attribute)
 {
   LONG x = 0;
 
@@ -285,8 +281,6 @@ SIPTR xget(Object * obj, ULONG attribute)
 
 static void GUINewSettings(void)
 {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   set(MUIUnit,MUIA_Cycle_Entries,Units);
   set(MUIUnit,MUIA_Cycle_Active,state.UnitSelected);
   set(MUIDebug, MUIA_Cycle_Active, globalprefs.ahigp_DebugLevel);
@@ -302,8 +296,6 @@ static void GUINewSettings(void)
 
 static void GUINewUnit(void)
 {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   DoMethod(MUIList, MUIM_List_Clear);
   set(MUIList, MUIA_List_Quiet, TRUE);
   DoMethod(MUIList, MUIM_List_Insert, Modes, -1, MUIV_List_Insert_Bottom);
@@ -323,8 +315,6 @@ static void GUINewMode(void)
   char* arg5 = getVersion();
   char* arg6 = getAnnotation();
 
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   buffer = AllocVec( strlen( arg1 ) +
                      strlen( arg2 ) +
                      strlen( arg3 ) +
@@ -336,8 +326,8 @@ static void GUINewMode(void)
 
   if( buffer != NULL )
   {
-    sprintf( buffer,"0x%08x\n%s\n%s\n%s\nDevs:AHI/%s.audio\n%s\n%s",
-      (ULONG)getAudioMode(),
+    sprintf( buffer,"0x%08lx\n%s\n%s\n%s\nDevs:AHI/%s.audio\n%s\n%s",
+      (unsigned long)getAudioMode(),
       arg1,
       arg2,
       arg3,
@@ -434,44 +424,42 @@ static void GUINewMode(void)
 static VOID
 SliderHookFunc( struct Hook *hook,
                 Object *obj,
-                IPTR** arg )
+                ULONG** arg )
 {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   if(obj == MUIFreq)
   {
-    state.FreqSelected = (LONG)(IPTR)(*arg);
-    set(MUILFreq, MUIA_Text_Contents, (IPTR) getFreq());
+    state.FreqSelected = (LONG) (*arg);
+    set(MUILFreq,MUIA_Text_Contents, (IPTR) getFreq());
   }
   else if(obj == MUIChannels )
   {
-    state.ChannelsSelected = (LONG)(IPTR)(*arg);
-    set(MUILChannels, MUIA_Text_Contents, (IPTR) getChannels());
+    state.ChannelsSelected = (LONG) (*arg);
+    set(MUILChannels,MUIA_Text_Contents, (IPTR) getChannels());
   }
   else if(obj == MUIOutvol )
   {
-    state.OutVolSelected = (LONG)(IPTR)(*arg);
-    set(MUILOutvol, MUIA_Text_Contents, (IPTR) getOutVol());
+    state.OutVolSelected = (LONG) (*arg);
+    set(MUILOutvol,MUIA_Text_Contents, (IPTR) getOutVol());
   }
   else if(obj == MUIMonvol )
   {
-    state.MonVolSelected = (LONG)(IPTR)(*arg);
-    set(MUILMonvol, MUIA_Text_Contents, (IPTR) getMonVol());
+    state.MonVolSelected = (LONG) (*arg);
+    set(MUILMonvol,MUIA_Text_Contents, (IPTR) getMonVol());
   }
   else if(obj == MUIGain )
   {
-    state.GainSelected = (LONG)(IPTR)(*arg);
-    set(MUILGain, MUIA_Text_Contents, (IPTR) getGain());
+    state.GainSelected = (LONG) (*arg);
+    set(MUILGain,MUIA_Text_Contents, (IPTR) getGain());
   }
   else if(obj == MUIInput )
   {
-    state.InputSelected = (LONG)(IPTR)(*arg);
-    set(MUILInput, MUIA_Text_Contents, (IPTR) getInput());
+    state.InputSelected = (LONG) (*arg);
+    set(MUILInput,MUIA_Text_Contents, (IPTR) getInput());
   }
   else if(obj == MUIOutput )
   {
-  state.OutputSelected = (LONG)(IPTR)(*arg);
-  set(MUILOutput, MUIA_Text_Contents, (IPTR) getOutput());
+  state.OutputSelected = (ULONG) (*arg);
+  set(MUILOutput,MUIA_Text_Contents, (IPTR) getOutput());
   }
 }
 
@@ -491,8 +479,6 @@ static Object *MUIApp,*MUIMenu;
 
 static Object* SpecialLabel(STRPTR label)
 {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   return(TextObject,
       MUIA_HorizWeight, 75,
       MUIA_Text_Contents, label,
@@ -504,8 +490,6 @@ static Object* SpecialButton(STRPTR label)
 {
   Object *button = NULL;
   STRPTR lab;
-
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
 
   lab = AllocVec(strlen(label)+1,0);
 
@@ -541,8 +525,6 @@ static Object* SpecialButton(STRPTR label)
 
 static Object* SpecialSlider(LONG min, LONG max, LONG value)
 {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   return(SliderObject,
 	 MUIA_CycleChain,     1,
 	 MUIA_Slider_Quiet,   TRUE,
@@ -559,14 +541,12 @@ BOOL BuildGUI(char *screenname)
   Object *page1,*page2;
   Object *MUITFreq,*MUITChannels,*MUITOutvol,*MUITMonvol,*MUITGain,*MUITInput,*MUITOutput,*MUITDebug,*MUITEcho,*MUITSurround,*MUITClipvol,*MUITCpu,*MUITACTime,*MUITScalemode;
 
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   UpdateStrings();
 
   MUIMasterBase = (void *)OpenLibrary("muimaster.library", MUIMASTER_VLATEST);
   if(MUIMasterBase == NULL)
   {
-    Printf((char *) msgTextNoOpen, "muimaster.library", MUIMASTER_VLATEST);
+    Printf((char *) msgTextNoOpen, (ULONG) "muimaster.library", MUIMASTER_VLATEST);
     Printf("\n");
     return FALSE;
   }
@@ -575,12 +555,13 @@ BOOL BuildGUI(char *screenname)
   IMUIMaster = (struct MUIMasterIFace *) GetInterface(MUIMasterBase, "main", 1, NULL);
   if(IMUIMaster == NULL)
   {
-    Printf((char *) msgTextNoOpen, "MUIMaster main interface", 1);
+    Printf((char *) msgTextNoOpen, (ULONG) "MUIMaster main interface", 1);
     Printf("\n");
     CloseLibrary((struct Library*) MUIMasterBase);
     return FALSE;
   }
 #endif
+
 
   page1 = HGroup,
     Child, VGroup,
@@ -708,19 +689,19 @@ BOOL BuildGUI(char *screenname)
   End;
 
   MUIApp = ApplicationObject,
-    MUIA_Application_Title, (IPTR) msgTextProgramName,
+    MUIA_Application_Title, (char *) msgTextProgramName,
     MUIA_Application_Version, Version,
-    MUIA_Application_Copyright, (IPTR) "©1996-2005 Martin Blom",
-    MUIA_Application_Author, (IPTR) "Stéphane Barbaray/Martin Blom",
-    MUIA_Application_Description, (IPTR) msgTextProgramName,
-    MUIA_Application_Base, (IPTR) "AHI",
+    MUIA_Application_Copyright, "©1996-2005 Martin Blom",
+    MUIA_Application_Author, "Stéphane Barbaray/Martin Blom",
+    MUIA_Application_Description, (char *) msgTextProgramName,
+    MUIA_Application_Base, "AHI",
     MUIA_Application_HelpFile, HELPFILE,
     MUIA_Application_Menustrip, MUIMenu = MUI_MakeObject(MUIO_MenustripNM,Menus,0),
     MUIA_Application_SingleTask, TRUE,
     SubWindow, MUIWindow = WindowObject,
-      MUIA_Window_Title, (IPTR) msgTextProgramName,
+      MUIA_Window_Title, (char *) msgTextProgramName,
       MUIA_Window_ID   , MAKE_ID('M','A','I','N'),
-      MUIA_HelpNode, (IPTR) "AHI",
+      MUIA_HelpNode, "AHI",
       WindowContents, VGroup,
        Child, RegisterGroup(PageNames),
          MUIA_CycleChain, 1,
@@ -795,8 +776,6 @@ BOOL BuildGUI(char *screenname)
 
 void CloseGUI(void)
 {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   if (MUIApp)
     MUI_DisposeObject(MUIApp);
   if (MUIMasterBase)
@@ -815,11 +794,9 @@ void EventLoop(void)
 {
   ULONG sigs = 0UL;
 
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   while (1)
   {
-    IPTR rc = DoMethod(MUIApp, MUIM_Application_NewInput, &sigs);
+    ULONG rc = DoMethod(MUIApp, MUIM_Application_NewInput, &sigs);
 
     switch(rc)
     {
@@ -834,9 +811,8 @@ void EventLoop(void)
             ASLFR_Window, xget(MUIWindow, MUIA_Window_Window),
             ASLFR_TitleText, msgTextProgramName,
             ASLFR_RejectIcons, TRUE,
-            ASLFR_InitialDrawer, (IPTR)"SYS:Prefs/Presets",
+            ASLFR_InitialDrawer, "SYS:Prefs/Presets",
             TAG_DONE );
-
         if( request != NULL )
         {
           DoMethod(MUIApp, MUIA_Application_Sleep, TRUE);
@@ -875,7 +851,7 @@ void EventLoop(void)
             ASLFR_TitleText, msgTextProgramName,
             ASLFR_RejectIcons, TRUE,
             ASLFR_DoSaveMode, TRUE,
-            ASLFR_InitialDrawer, (IPTR)"SYS:Prefs/Presets",
+            ASLFR_InitialDrawer, "SYS:Prefs/Presets",
             TAG_DONE);
 
         if(request != NULL )
@@ -1015,8 +991,8 @@ void EventLoop(void)
       case ACTID_ACTIME:
       case ACTID_SCALEMODE:
       {
-        IPTR debug = AHI_DEBUG_NONE, surround = FALSE, echo = 0, cpu = 90;
-        IPTR clip = FALSE, actime = 0, scalemode = AHI_SCALE_FIXED_0_DB;
+        ULONG debug = AHI_DEBUG_NONE, surround = FALSE, echo = 0, cpu = 90;
+        ULONG clip = FALSE, actime = 0, scalemode = AHI_SCALE_FIXED_0_DB;
 
         get(MUIDebug, MUIA_Cycle_Active, &debug);
         get(MUISurround, MUIA_Cycle_Active, &surround);

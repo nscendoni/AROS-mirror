@@ -3,7 +3,7 @@
     This file is part of the About program, which is distributed under
     the terms of version 2 of the GNU General Public License.
     
-    $Id$
+    $Id: locale.c 52402 2016-03-30 09:40:39Z mazze $
 */
 
 #include <aros/symbolsets.h>

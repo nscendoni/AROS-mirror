@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-15 -*-
 # Copyright © 2002-2008, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: authors2header.py 50156 2015-02-28 11:28:13Z mazze $
 
 import os, sys, string
 

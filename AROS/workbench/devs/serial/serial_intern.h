@@ -2,7 +2,7 @@
 #define SERIAL_INTERN_H
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: serial_intern.h 37826 2011-03-27 19:15:57Z verhaegs $
 
     Desc: Private definitions for Serial device.
     Lang:

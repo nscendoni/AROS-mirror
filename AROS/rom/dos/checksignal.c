@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: checksignal.c 46059 2012-11-21 19:47:17Z mazze $
 
     Desc: Checks for signals in a mask.
     Lang: english

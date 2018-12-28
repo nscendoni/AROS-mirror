@@ -1,6 +1,6 @@
 // blit.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-13 23:53:41 +0100 (Sun, 13 Mar 2016) $
+// $Revision: 51936 $
 
 #include <exec/types.h>
 #include <graphics/gels.h>

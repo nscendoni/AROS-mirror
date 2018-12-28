@@ -3,7 +3,7 @@
     Copyright © 2002, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: clipboard.c 45683 2012-08-29 16:17:40Z neil $
 */
 
 #include <ctype.h>

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: static_mid.h 42014 2011-10-24 14:33:48Z jmcmullan $
 */
 
 #ifndef OOP_OOP_H

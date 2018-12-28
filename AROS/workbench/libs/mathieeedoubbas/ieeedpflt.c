@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2003, The AROS Development Team. All rights reserved.
+    $Id: ieeedpflt.c 47354 2013-05-04 17:12:25Z mazze $
 */
 
 #include "mathieeedoubbas_intern.h"
@@ -18,28 +18,18 @@
         struct MathIeeeDoubBasBase *, MathIeeeDoubBasBase, 6, MathIeeeDoubBas)
 
 /*  FUNCTION
-        Convert an integer into an IEEE double precision floating point
-        number.
 
     INPUTS
-        y - a 32-bit integer.
 
     RESULT
-        x - IEEE double precision floating point number.
+        IEEE double precision number
 
 	Flags:
 	  zero	   : result is zero
 	  negative : result is negative
 	  overflow : 0
 
-    NOTES
-
-    EXAMPLE
-
     BUGS
-
-    SEE ALSO
-        IEEEDPFix()
 
     INTERNALS
 

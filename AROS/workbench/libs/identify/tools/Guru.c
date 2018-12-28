@@ -19,7 +19,7 @@
  *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  *   
- *  $Id$
+ *  $Id: Guru.c 52471 2016-03-31 08:42:33Z mazze $
  */
 
 #include <libraries/identify.h>

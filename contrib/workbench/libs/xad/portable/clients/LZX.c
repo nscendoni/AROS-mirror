@@ -1,7 +1,7 @@
 #ifndef XADMASTER_LZX_C
 #define XADMASTER_LZX_C
 
-/*  $Id$
+/*  $Id: LZX.c 36659 2011-01-18 13:26:51Z neil $
     LZX file archiver client
 
     XAD library system for archive handling

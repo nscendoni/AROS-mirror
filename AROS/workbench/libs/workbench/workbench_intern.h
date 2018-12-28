@@ -3,7 +3,7 @@
 
 /*
     Copyright  1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: workbench_intern.h 45368 2012-08-01 16:42:02Z neil $
 
     Internal header file for workbench.library.
 */

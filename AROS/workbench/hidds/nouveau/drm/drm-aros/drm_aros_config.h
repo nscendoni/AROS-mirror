@@ -1,6 +1,6 @@
 /*
     Copyright 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: drm_aros_config.h 41758 2011-10-05 20:14:12Z deadwood $
 */
 
 #if !defined(DRM_AROS_CONFIG_H)

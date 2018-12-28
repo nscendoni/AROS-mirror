@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mathieeedoubtrans_intern.h 52050 2016-03-18 14:31:18Z NicJA $
 */
 #ifndef __MATHIEEEDOUBTRANS_INTERN_H__
 #define __MATHIEEEDOUBTRANS_INTERN_H__

@@ -1,7 +1,7 @@
 #ifndef USB_CORE_H_
 #define USB_CORE_H_
 
-/* $Id$ */
+/* $Id: usb_core.h 36648 2011-01-17 14:31:59Z neil $ */
 
 #include <inttypes.h>
 

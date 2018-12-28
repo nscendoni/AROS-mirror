@@ -27,7 +27,7 @@
  */
 
 #if !defined(lint) && !defined(SABER) && !defined(__AROS__)
-static const char rcsid[] = "$Id$";
+static const char rcsid[] = "$Id: res_mkupdate.c 51761 2016-03-10 02:16:12Z NicJA $";
 #endif /* not lint */
 
 #include <sys/types.h>

@@ -33,7 +33,7 @@
 
 #if 0
 static char copyright[] =
-"$Id$ Copyright (c) 2004-2005 Internet Systems Consortium.  All rights reserved.\n";
+"$Id: packet.c 38234 2011-04-16 16:24:36Z mazze $ Copyright (c) 2004-2005 Internet Systems Consortium.  All rights reserved.\n";
 #endif
 
 #include "dhcpd.h"

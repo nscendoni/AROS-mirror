@@ -3,7 +3,7 @@
     Copyright © 2009-2011, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: screenpanel_class.c 37808 2011-03-27 13:04:51Z verhaegs $
 */
 
 #include <proto/intuition.h>

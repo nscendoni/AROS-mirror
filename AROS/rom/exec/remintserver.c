@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: remintserver.c 47748 2013-07-21 21:40:34Z jmcmullan $
 
     Desc: Remove an interrupt handler.
     Lang:
@@ -10,12 +10,12 @@
 #include <exec/interrupts.h>
 #include <hardware/intbits.h>
 #include <proto/exec.h>
+#include <proto/kernel.h>
 #include <aros/libcall.h>
 
-#include "exec_intern.h"
 #include "exec_debug.h"
+#include "exec_intern.h"
 #include "chipset.h"
-#include "exec_locks.h"
 
 /*****************************************************************************
 
@@ -57,12 +57,12 @@
         return;
     }
 
-    EXEC_LOCK_LIST_WRITE_AND_DISABLE(&SysBase->IntrList);
-    
+    Disable();
+
     Remove((struct Node *)interrupt);
     CUSTOM_DISABLE(intNumber, SysBase->IntVects[intNumber].iv_Data);
-    
-    EXEC_UNLOCK_LIST_AND_ENABLE(&SysBase->IntrList);
+
+    Enable();
 
     AROS_LIBFUNC_EXIT
 } /* RemIntServer */

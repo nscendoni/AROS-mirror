@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: debug.h 47376 2013-05-08 20:06:12Z jmcmullan $
 
     Debugging macros.
     This include file can be included several times!
@@ -158,11 +158,7 @@
 /* The trick with THIS_FILE allows us to reuse the same static string
  * instead of allocating a new copy for each invocation of these macros.
  */
-#ifndef __SRCFILENAME__
 #define THIS_FILE __FILE__
-#else
-#define THIS_FILE __SRCFILENAME__
-#endif
 
 #define ASSERT(x) do {						\
 	if (!(x)) {						\

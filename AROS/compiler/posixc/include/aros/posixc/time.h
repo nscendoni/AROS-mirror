@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: time.h 48056 2013-09-08 21:20:57Z verhaegs $
 
     POSIX.1-2008 header file time.h
 */

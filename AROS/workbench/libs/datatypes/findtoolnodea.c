@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: findtoolnodea.c 40677 2011-08-11 17:49:27Z jmcmullan $
 
     Desc:
     Lang: English

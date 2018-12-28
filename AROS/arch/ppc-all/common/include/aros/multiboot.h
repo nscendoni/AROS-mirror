@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2002, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: multiboot.h 30792 2009-03-07 22:40:04Z neil $
  
     Desc: Multiboot information structures
     Lang: english

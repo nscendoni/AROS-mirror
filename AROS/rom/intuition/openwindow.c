@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: openwindow.c 51767 2016-03-10 13:23:03Z NicJA $
 */
 
 #include <exec/memory.h>

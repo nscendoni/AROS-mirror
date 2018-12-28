@@ -1,6 +1,6 @@
 /*
     Copyright © 2009-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __stdc_startup.c 48940 2014-04-17 17:24:02Z deadwood $
 */
 #include <dos/stdio.h>
 #include <exec/alerts.h>

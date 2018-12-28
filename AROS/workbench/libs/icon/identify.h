@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: identify.h 35656 2010-11-20 21:01:00Z jmcmullan $
 */
 
 #include <workbench/workbench.h>

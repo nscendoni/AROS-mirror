@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ownblitter.c 46616 2013-02-16 00:00:27Z jmcmullan $
 
     Desc: Try to own the blitter for private usage
     Lang: english

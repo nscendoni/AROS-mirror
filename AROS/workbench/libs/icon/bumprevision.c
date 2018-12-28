@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bumprevision.c 40110 2011-07-14 12:12:14Z jmcmullan $
 */
 
 #include <stdio.h>

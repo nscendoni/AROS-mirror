@@ -1,17 +1,18 @@
 /*
-    Copyright ï¿½ 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: kernel_debug.c 49667 2014-09-30 17:35:27Z neil $
 */
 
 #include <bootconsole.h>
 
 #include "kernel_base.h"
-#include "kernel_intern.h"
 #include "kernel_debug.h"
+#include "kernel_intern.h"
 
-#if defined(__AROSEXEC_SMP__)
-volatile ULONG   safedebug = 1;
-#endif
+#define __save_flags(x)		__asm__ __volatile__("pushfq ; popq %0":"=g" (x): /* no input */)
+#define __restore_flags(x) 	__asm__ __volatile__("pushq %0 ; popfq": /* no output */ :"g" (x):"memory", "cc")
+#define __cli() 		__asm__ __volatile__("cli": : :"memory")
+#define __sti()			__asm__ __volatile__("sti": : :"memory")
 
 int krnPutC(int c, struct KernelBase *KernelBase)
 {

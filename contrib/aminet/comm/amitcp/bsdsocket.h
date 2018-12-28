@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: bsdsocket.h 30794 2009-03-08 02:19:07Z neil $
  *
  * Compiler dependent prototypes and inlines for bsdsocket.library
  *

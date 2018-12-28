@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getargstr.c 49137 2014-07-23 01:01:20Z vidarh $
 
     Desc:
     Lang: english

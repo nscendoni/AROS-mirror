@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: stubs.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      stubs.c - common stubs for bsdsocket.library
  *

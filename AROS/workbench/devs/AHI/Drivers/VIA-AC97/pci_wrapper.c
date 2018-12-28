@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pci_wrapper.c 46698 2013-02-25 01:57:03Z neil $
 */
 
 #include <exec/types.h>

@@ -1,5 +1,5 @@
 # Copyright © 2004, 2013, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 52302 2016-03-28 03:42:13Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -18,10 +18,8 @@ $(AROS_ENVARC)/% : %
             $(CP) $< $@ ;        \
         fi
 
-$(AROS_ENVARC)/SYS/theme.var : $(SRCDIR)/$(CURDIR)/mmakefile.src
+#MM
+workbench-prefs-envarc-theme:
 	@$(ECHO) "THEMES:$(AROS_GUI_THEME)" > $(AROS_ENVARC)/SYS/theme.var
 	@$(MKDIR) $(AROS_PREFS)/Presets
 	@$(ECHO) "THEMES:$(AROS_GUI_THEME)" > $(AROS_PREFS)/Presets/theme.default
-
-#MM
-workbench-prefs-envarc-theme: $(AROS_ENVARC)/SYS/theme.var

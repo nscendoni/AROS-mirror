@@ -2,7 +2,7 @@
 #define __CON_HANDLER_INTERN_H
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: con_handler_intern.h 49653 2014-09-21 16:27:58Z otigreat $
 
     Desc: Internal header-file for emulation-handler.
     Lang: english

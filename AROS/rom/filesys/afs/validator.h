@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: validator.h 33023 2010-04-18 23:44:46Z neil $
 */
 
 /*

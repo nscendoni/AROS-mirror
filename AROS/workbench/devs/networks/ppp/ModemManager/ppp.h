@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: ppp.h 36648 2011-01-17 14:31:59Z neil $
  */
 
 #ifndef _PPP_H

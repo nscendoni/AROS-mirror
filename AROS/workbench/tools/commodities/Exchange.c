@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Exchange.c 53045 2016-11-02 09:19:56Z neil $
 
     Exchange -- controls commodities.
 */

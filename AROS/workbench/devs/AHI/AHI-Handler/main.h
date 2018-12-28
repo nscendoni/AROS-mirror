@@ -41,7 +41,7 @@ struct HandlerData {
     LONG            *buffersize;
     LONG            *unit;
 
-    IPTR            format;
+    UWORD            format;
   }                  args;
 
 };

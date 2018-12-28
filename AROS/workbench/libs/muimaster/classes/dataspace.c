@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: dataspace.c 48942 2014-04-18 13:17:49Z neil $
 */
 
 #include <stdlib.h>

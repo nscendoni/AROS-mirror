@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: preferences.h 43795 2012-01-30 06:42:06Z jmcmullan $
 
     Old-style preferences structures and defines.
 */

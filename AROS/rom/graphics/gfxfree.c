@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gfxfree.c 33058 2010-04-22 14:07:05Z sonic $
 
     Desc:
     Lang: english

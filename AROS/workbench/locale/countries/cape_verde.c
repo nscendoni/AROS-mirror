@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cape_verde.c 52794 2016-07-21 16:39:13Z polluks $
 
     Desc: Country data for Cabo Verde
     Author: João Ralha

@@ -2,7 +2,7 @@
 #define REXX_ERRORS_H
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: errors.h 41567 2011-09-22 19:42:01Z verhaegs $
 
     Desc: ARexx data structures
     Lang: English

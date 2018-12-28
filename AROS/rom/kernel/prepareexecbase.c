@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prepareexecbase.c 42197 2011-11-02 10:41:11Z sonic $
 
     ExecBase initialization, no-MMU version.
 */

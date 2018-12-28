@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: wbconfig.c 36648 2011-01-17 14:31:59Z neil $
 
     Undocumented WBConfig
 */

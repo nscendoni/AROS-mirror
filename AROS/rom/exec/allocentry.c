@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: allocentry.c 40000 2011-07-11 07:40:55Z sonic $
 
     Desc: Allocate memory.
     Lang: english

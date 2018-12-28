@@ -3,8 +3,8 @@ SCALOS_I	SET	1
 **
 **  $VER: scalos.h 41.9 (05 Feb 2011 20:24:29)
 **
-** $Date$
-** $Revision$
+** $Date: 2013-12-01 23:08:26 +0100 (Sun, 01 Dec 2013) $
+** $Revision: 48481 $
 **
 **      Scalos.library include
 **

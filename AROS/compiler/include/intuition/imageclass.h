@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: imageclass.h 47568 2013-06-17 20:54:23Z sonic $
 
     Desc: Headerfile for Intuitions' IMAGECLASS
     Lang: english

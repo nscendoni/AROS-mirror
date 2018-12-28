@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: allocmem.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Allocate some memory
     Lang: english
@@ -9,7 +9,6 @@
 #include <exec/execbase.h>
 #include <aros/libcall.h>
 #include <aros/asmcall.h>
-#include <aros/rt.h>
 #include <aros/macros.h>
 #include <aros/config.h>
 #include <aros/arossupportbase.h>
@@ -74,9 +73,6 @@ AROS_LH2(APTR, AllocMem,
     {    	
     	if (requirements & MEMF_CLEAR)
 	    memset(res, 0, byteSize);
-#if ENABLE_RT
-	RT_Add(RTT_MEMORY, res, byteSize);
-#endif
     }
     else
     {

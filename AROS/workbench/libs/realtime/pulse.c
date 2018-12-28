@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pulse.c 51747 2016-03-10 01:10:19Z NicJA $
 
     Desc:
     Lang: English

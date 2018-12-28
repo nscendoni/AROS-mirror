@@ -11,6 +11,6 @@ struct ExceptionContext
 	IPTR  a[8];
 	UWORD sr;
 	IPTR  pc;
-} __packed;
+} __attribute__((__packed__));
 
 #endif

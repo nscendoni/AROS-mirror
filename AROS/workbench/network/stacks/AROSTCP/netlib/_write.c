@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: _write.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      _write.c - write() for both files and sockets (SAS/C)
  *

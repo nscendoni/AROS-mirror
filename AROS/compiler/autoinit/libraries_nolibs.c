@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2005, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: libraries_nolibs.c 45604 2012-08-19 18:39:04Z jmcmullan $
 
     Desc: autoinit library - automatic library opening/closing handling
           Dummy functions to be used in case no libraries have to be opened/closed

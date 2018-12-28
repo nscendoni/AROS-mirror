@@ -1,6 +1,6 @@
 /*
-    Copyright © 2004-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2004-2018, The AROS Development Team. All rights reserved.
+    $Id: lowlevel.c 55495 2018-11-22 01:59:45Z neil $
 
     Desc:
     Lang: English
@@ -10,7 +10,7 @@
  * TODO:
  * - put a critical section around DMA transfers (shared dma channels)
  */
-
+ 
 // use #define xxx(a) D(a) to enable particular sections.
 #if DEBUG
 #define DIRQ(a) D(a)
@@ -371,18 +371,17 @@ static BOOL ata_WaitBusyTO(struct ata_Unit *unit, UWORD tout, BOOL irq,
     BOOL fake_irq, UBYTE *stout)
 {
     struct ata_Bus *bus = unit->au_Bus;
-    UBYTE status = 0xff;
+    UBYTE status;
     ULONG step = 0;
     BOOL res = TRUE;
 
     if (bus->ab_Base->ata_Poll)
         irq = FALSE;
 
+    status = PIO_InAlt(bus, ata_AltStatus);
+
     if (irq)
     {
-        /* Do not read ata_Status in irq mode. It can cause random lost interrupts. */
-        if (bus->haveAltIO)
-            status = PIO_InAlt(bus, ata_AltStatus);
         /*
          * wait for either IRQ or timeout
          */
@@ -415,7 +414,6 @@ static BOOL ata_WaitBusyTO(struct ata_Unit *unit, UWORD tout, BOOL irq,
     }
     else
     {
-        status = PIO_InAlt(bus, ata_AltStatus);
         while (status & ATAF_BUSY)
         {
             ++step;
@@ -883,23 +881,9 @@ static BYTE ata_exec_blk(struct ata_Unit *unit, ata_CommandBlock *blk)
     ULONG part;
     ULONG max=256;
     ULONG count=blk->sectors;
-    APTR buffer = blk->buffer;
-    APTR bounce_buffer = NULL;
-    IPTR bounce_buffer_length = 0;
 
     if (blk->type == CT_LBA48)
         max <<= 8;
-
-    if (((IPTR)blk->buffer > 0xffffffffULL || ((IPTR)blk->buffer + (count << unit->au_SectorShift)) > 0xffffffffULL) &&
-        (blk->method == CM_DMARead || blk->method == CM_DMAWrite))
-    {
-        DATA(bug("[ATA%02ld] ata_exec_blk: attempt to do DMA transfer outside 32bit address space\n", unit->au_UnitNum));
-        DATA(bug("[ATA%02ld] ata_exec_blk: ptr %p, length %d, %s\n", unit->au_UnitNum, blk->buffer, count << unit->au_SectorShift, blk->method == CM_DMARead ? "DMARead" : "DMAWrite"));
-
-        bounce_buffer_length = count << unit->au_SectorShift;
-        bounce_buffer = AllocPooled(unit->au_Bus->ab_BounceBufferPool, bounce_buffer_length);
-        blk->buffer = bounce_buffer;
-    }
 
     DATA(bug("[ATA%02ld] ata_exec_blk: Accessing %ld sectors starting from %x%08x\n", unit->au_UnitNum, count, (ULONG)(blk->blk >> 32), (ULONG)blk->blk));
     while ((count > 0) && (err == 0))
@@ -909,35 +893,13 @@ static BYTE ata_exec_blk(struct ata_Unit *unit, ata_CommandBlock *blk)
         blk->length  = part << unit->au_SectorShift;
 
         DATA(bug("[ATA%02ld] Transfer of %ld sectors from %x%08x\n", unit->au_UnitNum, part, (ULONG)(blk->blk >> 32), (ULONG)blk->blk));
-        // If bounce buffer is active, 
-        if (bounce_buffer && blk->method == CM_DMAWrite)
-        {
-            DATA(bug("[ATA%02ld] Copy %d bytes from source %p to bounce buffer %p\n", unit->au_UnitNum, blk->length, buffer, bounce_buffer));
-            CopyMemQuick(buffer, bounce_buffer, blk->length);
-            buffer = (APTR)((IPTR)buffer + blk->length);
-        }
         err = ata_exec_cmd(unit, blk);
         DATA(bug("[ATA%02ld] ata_exec_blk: ata_exec_cmd returned %lx\n", unit->au_UnitNum, err));
-        if (bounce_buffer)
-        {
-            if (blk->method == CM_DMARead)
-            {
-                DATA(bug("[ATA%02ld] Copy %d bytes from bounce buffer %p to destination %p\n", unit->au_UnitNum, blk->length, bounce_buffer, buffer));
-                CopyMemQuick(bounce_buffer, buffer, part << unit->au_SectorShift);
-                buffer = (APTR)((IPTR)buffer + (part << unit->au_SectorShift));
-            }
-        }
-        else
-        {
-            blk->buffer  = (APTR)((IPTR)blk->buffer + (part << unit->au_SectorShift));
-        }
+
         blk->blk    += part;
+        blk->buffer  = &((char*)blk->buffer)[part << unit->au_SectorShift];
         count -= part;
     }
-
-    if (bounce_buffer)
-        FreePooled(unit->au_Bus->ab_BounceBufferPool, bounce_buffer, bounce_buffer_length);
-
     return err;
 }
 
@@ -1970,6 +1932,7 @@ int atapi_TestUnitOK(struct ata_Unit *unit)
     struct SCSICmd sc = {
        0
     };
+    UWORD i;
 
     D(bug("[ATA%02ld] atapi_TestUnitOK()\n", unit->au_UnitNum));
 
@@ -1980,7 +1943,11 @@ int atapi_TestUnitOK(struct ata_Unit *unit)
     sc.scsi_Flags = SCSIF_AUTOSENSE;
 
     DATAPI(bug("[ATA%02ld] atapi_TestUnitOK: Testing Unit Ready sense...\n", unit->au_UnitNum));
-    unit->au_DirectSCSI(unit, &sc);
+
+    /* Send command twice, and take the second result, as some drives give
+     * invalid (or at least not so useful) sense data straight after reset */
+    for (i = 0; i < 2; i++)
+        unit->au_DirectSCSI(unit, &sc);
     unit->au_SenseKey = sense[2];
 
     /*
@@ -2184,8 +2151,10 @@ static ULONG ata_ReadSignature(struct ata_Bus *bus, int unit,
 static void ata_ResetBus(struct ata_Bus *bus)
 {
     struct ataBase *ATABase = bus->ab_Base;
+    OOP_Object *obj = OOP_OBJECT(ATABase->busClass, bus);
     ULONG TimeOut;
     BOOL  DiagExecuted = FALSE;
+    IPTR haveAltIO;
 
     /*
      * Set and then reset the soft reset bit in the Device Control
@@ -2197,7 +2166,8 @@ static void ata_ResetBus(struct ata_Bus *bus)
     ata_WaitNano(400, ATABase);
     //ata_WaitTO(bus->ab_Timer, 0, 1, 0);
 
-    if (bus->haveAltIO)
+    OOP_GetAttr(obj, aHidd_ATABus_UseIOAlt, &haveAltIO);
+    if (haveAltIO)
     {
         PIO_OutAlt(bus, ATACTLF_RESET | ATACTLF_INT_DISABLE, ata_AltControl);
         ata_WaitTO(bus->ab_Timer, 0, 10, 0);    /* sleep 10us; min: 5us */
@@ -2277,9 +2247,6 @@ static void ata_ResetBus(struct ata_Bus *bus)
 
 void ata_InitBus(struct ata_Bus *bus)
 {
-    struct ataBase *ATABase = bus->ab_Base;
-    OOP_Object *obj = OOP_OBJECT(ATABase->busClass, bus);
-    IPTR haveAltIO;
     UBYTE tmp1, tmp2;
     UWORD i;
 
@@ -2287,9 +2254,6 @@ void ata_InitBus(struct ata_Bus *bus)
      * initialize timer for the sake of scanning
      */
     bus->ab_Timer = ata_OpenTimer(bus->ab_Base);
-
-    OOP_GetAttr(obj, aHidd_ATABus_UseIOAlt, &haveAltIO);
-    bus->haveAltIO = haveAltIO != 0;
 
     DINIT(bug("[ATA  ] ata_InitBus(%p)\n", bus));
 

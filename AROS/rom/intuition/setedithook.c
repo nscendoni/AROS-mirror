@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: setedithook.c 52756 2016-06-10 17:06:26Z neil $
 */
 
 #include "intuition_intern.h"

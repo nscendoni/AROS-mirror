@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: writepixel.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Graphics function WritePixel()
     Lang: english
@@ -24,8 +24,8 @@ static LONG pix_write(APTR pr_data, OOP_Object *bm, OOP_Object *gc,
 
 /*  SYNOPSIS */
 	AROS_LHA(struct RastPort *, rp, A1),
-	AROS_LHA(WORD             , x, D0),
-	AROS_LHA(WORD             , y, D1),
+	AROS_LHA(LONG             , x, D0),
+	AROS_LHA(LONG             , y, D1),
 
 /*  LOCATION */
 	struct GfxBase *, GfxBase, 54, Graphics)

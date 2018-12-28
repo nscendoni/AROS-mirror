@@ -1,6 +1,6 @@
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ASCIITable.c 45096 2012-06-18 14:56:38Z olivieradam $
 
     ASCIITable -- Insert characters to clipboard from GUI.
  */

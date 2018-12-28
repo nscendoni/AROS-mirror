@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: newobject.c 48792 2014-02-01 17:14:41Z mazze $
 
     Desc: Create a new BOOPSI object
     Lang: english

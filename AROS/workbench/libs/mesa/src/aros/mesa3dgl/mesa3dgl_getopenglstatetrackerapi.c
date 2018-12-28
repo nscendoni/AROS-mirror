@@ -1,6 +1,6 @@
 /*
     Copyright 2014-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mesa3dgl_getopenglstatetrackerapi.c 50856 2015-06-23 22:01:54Z NicJA $
 */
 
 #include <proto/exec.h>

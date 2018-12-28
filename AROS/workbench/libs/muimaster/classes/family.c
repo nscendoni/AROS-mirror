@@ -3,7 +3,7 @@
     Copyright © 2002-2015, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: family.c 51091 2015-09-15 18:55:48Z neil $
 */
 
 #include <exec/types.h>

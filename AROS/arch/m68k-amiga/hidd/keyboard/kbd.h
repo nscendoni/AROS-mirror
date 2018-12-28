@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kbd.h 44642 2012-04-18 19:00:24Z twilen $
 
     Desc: Include for the kbd HIDD.
     Lang: English.

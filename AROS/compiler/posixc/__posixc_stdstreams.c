@@ -1,6 +1,6 @@
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __posixc_stdstreams.c 48048 2013-09-08 21:19:29Z verhaegs $
 
     Get pointer to standard IO streams.
     These function is both in static linklib as in posixc.library.

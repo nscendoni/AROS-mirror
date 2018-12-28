@@ -1,7 +1,7 @@
 #ifndef XADMASTER_XADCLIENT_H
 #define XADMASTER_XADCLIENT_H
 
-/*  $Id$
+/*  $Id: xadClient.h 36659 2011-01-18 13:26:51Z neil $
     UNIX part of client interface to get portable clients
 
     XAD library system for archive handling

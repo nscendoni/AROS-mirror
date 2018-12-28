@@ -1,6 +1,6 @@
 /*
-    Copyright © 2007-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2007-2011, The AROS Development Team. All rights reserved.
+    $Id: uuid_parse.c 38495 2011-05-03 07:22:38Z sonic $
 */
 
 #include <aros/symbolsets.h>
@@ -113,9 +113,7 @@ AROS_LH2(void, UUID_Unparse,
 {
     AROS_LIBFUNC_INIT
 
-    char _uuidbuffer[UUID_STRLEN + 1];
-
-    snprintf(_uuidbuffer, UUID_STRLEN + 1, "%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x",
+    snprintf(out, UUID_STRLEN, "%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x",
             (unsigned int)uuid->time_low,
             uuid->time_mid,
             uuid->time_hi_and_version,
@@ -123,8 +121,6 @@ AROS_LH2(void, UUID_Unparse,
             uuid->clock_seq_low,
             uuid->node[0],uuid->node[1],uuid->node[2],
             uuid->node[3],uuid->node[4],uuid->node[5]);
-
-    CopyMem(_uuidbuffer, out, UUID_STRLEN);
-
+    
     AROS_LIBFUNC_EXIT
 }

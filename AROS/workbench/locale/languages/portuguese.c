@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: portuguese.c 49681 2014-10-01 19:05:00Z deadwood $
 
     Desc: portuguese.language description file.
 */
@@ -9,7 +9,7 @@
 #define NLANGSTR    "português"         /* Native version of LANGSTR    */
 #define LANGVER     41                  /* Version number of language   */
 #define LANGREV     2                   /* Revision number of language  */
-#define LANGTAG     "\0$VER: " LANGSTR ".language 41.2 (09.06.2017)"
+#define LANGTAG     "\0$VER: " LANGSTR ".language 41.2 (30.09.2014)"
 #define NLANGTAG    "$NLANG:" NLANGSTR
 
 #include "lang_openclose.inc"
@@ -80,10 +80,10 @@ const STRPTR ___strings[] =
     "AM", "PM",
 
     /* Soft and hard hyphens */
-    "\xAD", "-",
+    "-", "-",
 
     /* Open and close quotes */
-    "«", "»",
+    "\"", "\"",
 
     /* Days: But not actual day names
        Yesterday - the day before the current

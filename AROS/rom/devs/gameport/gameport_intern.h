@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gameport_intern.h 33493 2010-06-08 10:41:12Z sonic $
 
     Desc:
     Lang: English

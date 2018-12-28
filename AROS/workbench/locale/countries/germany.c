@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: germany.c 52794 2016-07-21 16:39:13Z polluks $
 
     Desc: Country data for Deutschland (Germany)
     Author: Sebastian Rittau <srittau@jroger.in-berlin.de>

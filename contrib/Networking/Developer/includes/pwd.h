@@ -2,7 +2,7 @@
 #define	_PWD_H_
 /*
     Copyright © 2003-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pwd.h 32359 2010-01-16 22:25:24Z verhaegs $
 */
 
 #include <sys/cdefs.h>

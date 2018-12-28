@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(MetaMake,0.6)
-AC_REVISION($Revision$)dnl
+AC_REVISION($Revision: 52651 $)dnl
 AC_PREREQ(2.61)
 AC_CONFIG_AUX_DIR(.)
 AC_CONFIG_SRCDIR(mmake.c)
@@ -57,5 +57,5 @@ AC_SUBST(mmake_objdir)
 AC_SUBST(METAMAKE_BUILDDIR)
 AC_SUBST(METAMAKE_SRCDIR)
 
-AC_CONFIG_HEADERS(config.h)
+AM_CONFIG_HEADER(config.h)
 AC_OUTPUT(Makefile)

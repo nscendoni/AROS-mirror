@@ -1,6 +1,6 @@
 /*
     Copyright © 2005-2013, Davy Wentzler. All rights reserved.
-    $Id$
+    $Id: accel.c 46905 2013-03-12 20:25:37Z neil $
 */
 
 #include <config.h>

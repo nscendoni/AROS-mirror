@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: memory.h 50839 2015-06-19 01:44:31Z NicJA $
 
     Desc: Memory handling
     Lang: english

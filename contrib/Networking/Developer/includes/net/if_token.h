@@ -2,7 +2,7 @@
 #define _NET_IF_TOKEN_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: if_token.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: if_token.h,v 1.1 1999/12/27 21:47:23 fgsch Exp $	*/

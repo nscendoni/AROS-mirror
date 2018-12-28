@@ -1,51 +1,10 @@
-#ifndef APIC_IA32_H
-#define APIC_IA32_H
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: apic_ia32.h 42229 2011-11-03 07:19:55Z sonic $
 
     Desc: IA-32 APIC hardware definitions.
     Lang: english
 */
-
-#include "i8259a.h"
-
-// From CPU and LAPIC point of view we have 256 interrupt vectors. The first 32 are reserved
-// for CPU exceptions. Further, there are 16 vectors reserved for legacy XT-PIC (which can be
-// eventually remapped to LAPIC with help of IOAPIC). Official APIC IRQ base starts right
-// after legacy XT-PIC
-#define APIC_IRQ_MAX            256
-#define X86_CPU_EXCEPT_COUNT    32
-#define APIC_IRQ_BASE           (X86_CPU_EXCEPT_COUNT + I8259A_IRQCOUNT)
-
-// Local APIC exceptions, with SysCall being the last (int $0xff)! The numeric values start
-// at X86_CPU_EXCEPT_COUNT in order to make the handler simplier
-enum
-{
-    APIC_EXCEPT_HEARTBEAT = X86_CPU_EXCEPT_COUNT,
-    APIC_EXCEPT_IPI_NOP,
-    APIC_EXCEPT_IPI_IPI_STOP,
-    APIC_EXCEPT_IPI_RESUME,
-    APIC_EXCEPT_IPI_RESCHEDULE,
-    APIC_EXCEPT_IPI_CALL_HOOK,
-    APIC_EXCEPT_IPI_CAUSE,
-    APIC_EXCEPT_ERROR,
-    APIC_EXCEPT_SYSCALL,
-    APIC_EXCEPT_SPURIOUS,
-    APIC_EXCEPT_TOP
-};
-
-#define APIC_CPU_EXCEPT_COUNT   (APIC_EXCEPT_TOP - X86_CPU_EXCEPT_COUNT)
-#define APIC_CPU_EXCEPT_BASE    (APIC_IRQ_MAX - APIC_CPU_EXCEPT_COUNT)
-#define APIC_IRQ_COUNT          (APIC_CPU_EXCEPT_BASE - APIC_IRQ_BASE)
-
-#define APIC_CPU_EXCEPT_TO_VECTOR(num)  ((num) - X86_CPU_EXCEPT_COUNT + APIC_CPU_EXCEPT_BASE)
-#define GET_EXCEPTION_NUMBER(irq) \
-    ((irq) < X86_CPU_EXCEPT_COUNT ? (irq) : ((irq) - APIC_CPU_EXCEPT_BASE + X86_CPU_EXCEPT_COUNT))
-#define GET_DEVICE_IRQ(irq)     ((irq) - X86_CPU_EXCEPT_COUNT)
-#define IS_APIC_EXCEPTION(irq)  (((irq) >= APIC_CPU_EXCEPT_BASE) && ((irq) < APIC_EXCEPT_SYSCALL))
-#define IS_EXCEPTION(irq)       ((irq) < X86_CPU_EXCEPT_COUNT || (irq) >= APIC_CPU_EXCEPT_BASE)
-
 
 /* Local APIC base address register (MSR #27) */
 #define MSR_LAPIC_BASE 0x1B
@@ -146,5 +105,3 @@ enum
 
 /* Register access macro to make the code more readable */
 #define APIC_REG(base, reg) *((volatile ULONG *)(base + reg))
-
-#endif /* !APIC_IA32_H */

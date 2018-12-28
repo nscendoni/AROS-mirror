@@ -22,7 +22,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *   
- * $Id$
+ * $Id: identify_intern.h 39152 2011-06-10 21:08:25Z mazze $
  */
 
 #include <exec/types.h>

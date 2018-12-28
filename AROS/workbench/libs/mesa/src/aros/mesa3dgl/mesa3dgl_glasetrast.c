@@ -1,6 +1,6 @@
 /*
     Copyright 2011-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mesa3dgl_glasetrast.c 50858 2015-06-23 22:30:34Z NicJA $
 */
 
 #define DEBUG 0

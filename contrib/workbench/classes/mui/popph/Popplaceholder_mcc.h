@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Popplaceholder_mcc.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 #include <libraries/mui.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: switzerland.c 52794 2016-07-21 16:39:13Z polluks $
 
     Desc: Country data for Suisse / Svizzera / Schweiz (Switzerland)
           based on the Amiga Developer CD 2.1 file -:

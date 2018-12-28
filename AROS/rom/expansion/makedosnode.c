@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: makedosnode.c 39861 2011-07-06 19:59:06Z jmcmullan $
 
     Desc: MakeDosNode() - Create a DOS DeviceNode structure.
     Lang: English

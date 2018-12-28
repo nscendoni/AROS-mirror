@@ -1,6 +1,6 @@
 /*
     Copyright © 2001-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: iconlist.c 52028 2016-03-17 04:36:20Z jmcmullan $
 */
 
 #include "../portable_macros.h"
@@ -513,8 +513,8 @@ static void IconList_InvertLassoOutlines(Object *obj, struct IconList_DATA *data
     clip.MaxY = _mbottom(obj);
     
     /* horizontal lasso lines */
-    IconList_InvertPixelRect(_rp(obj), lasso.MinX + 2, lasso.MinY, lasso.MaxX - 1, lasso.MinY + 1, &clip);
-    IconList_InvertPixelRect(_rp(obj), lasso.MinX, lasso.MaxY, lasso.MaxX + 1, lasso.MaxY + 1, &clip);
+    IconList_InvertPixelRect(_rp(obj), lasso.MinX, lasso.MinY, lasso.MaxX-1, lasso.MinY + 1, &clip);
+    IconList_InvertPixelRect(_rp(obj), lasso.MinX, lasso.MaxY, lasso.MaxX-1, lasso.MaxY + 1, &clip);
 
     /* vertical lasso lines */
     IconList_InvertPixelRect(_rp(obj), lasso.MinX, lasso.MinY, lasso.MinX + 1, lasso.MaxY - 1, &clip);
@@ -735,54 +735,6 @@ static LONG LastVisibleColumnNumber(struct IconList_DATA *data)
     
 }
 
-///NullifyLasso()
-// Remove the lasso from the screen
-static void NullifyLasso(struct IconList_DATA *data, Object *obj)
-{
-    /* End Lasso-selection */
-    struct Rectangle    old_lasso;
-    struct IconEntry    *node = NULL;
-    struct Window       *thisWindow = NULL;
-
-#if defined(DEBUG_ILC_EVENTS) || defined(DEBUG_ILC_LASSO)
-                            D(bug("[IconList] %s: Removing Lasso\n", __PRETTY_FUNCTION__));
-#endif
-
-    /* Stop handling INTUITICKS */
-    GET(obj, MUIA_Window, &thisWindow);
-    if (thisWindow)
-    {
-        ModifyIDCMP(thisWindow, (thisWindow->IDCMPFlags & ~(IDCMP_INTUITICKS)));
-        if ((data->ehn.ehn_Events & IDCMP_INTUITICKS))
-        {
-            DoMethod(_win(obj), MUIM_Window_RemEventHandler, (IPTR)&data->ehn);
-            data->ehn.ehn_Events &= ~IDCMP_INTUITICKS;
-            DoMethod(_win(obj), MUIM_Window_AddEventHandler, (IPTR)&data->ehn);
-        }
-    }
-
-    /* Clear Lasso Frame.. */
-    GetAbsoluteLassoRect(data, &old_lasso);
-    IconList_InvertLassoOutlines(obj, data, &old_lasso);
-
-    data->icld_LassoActive = FALSE;
-
-    /* Remove Lasso flag from affected icons.. */
-#if defined(__AROS__)
-    ForeachNode(&data->icld_IconList, node)
-#else
-    Foreach_Node(&data->icld_IconList, node);
-#endif
-    {
-        if (node->ie_Flags & ICONENTRY_FLAG_LASSO)
-        {
-            node->ie_Flags &= ~ICONENTRY_FLAG_LASSO;
-        }
-    }
-    SET(obj, MUIA_IconList_SelectionChanged, TRUE);
-}
-///
-
 static void RenderEntryField(Object *obj, struct IconList_DATA *data,
         struct IconEntry *entry, struct Rectangle *rect, LONG index, BOOL firstvis,
         BOOL lastvis, struct RastPort * rp)
@@ -827,7 +779,7 @@ static void RenderEntryField(Object *obj, struct IconList_DATA *data,
         case INDEX_LASTACCESS:
             text = AllocVec(strlen(entry->ie_TxtBuf_DATE) + strlen(entry->ie_TxtBuf_TIME) + 5, MEMF_CLEAR);
             if (text)
-                sprintf(text, "%s %s", entry->ie_TxtBuf_DATE,
+                sprintf(text, "%s at %s", entry->ie_TxtBuf_DATE,
                     entry->ie_TxtBuf_TIME);
             break;
 
@@ -898,7 +850,7 @@ static void RenderEntryField(Object *obj, struct IconList_DATA *data,
 
         if (((rect->MaxY - rect->MinY + 1) - data->icld_IconLabelFont->tf_YSize) > 0)
         {
-            rect->MinY += ((rect->MaxY - rect->MinY + 1) - data->icld_IconLabelFont->tf_YSize) / 2;
+            rect->MinY += ((rect->MaxY - rect->MinY + 1) - data->icld_IconLabelFont->tf_YSize)/2;
         }
         
         switch(data->icld_LVMAttribs->lmva_ColumnHAlign[index])
@@ -996,7 +948,7 @@ IPTR IconList__MUIM_IconList_DrawEntry(struct IClass *CLASS, Object *obj, struct
         for(i = 0; i < NUM_COLUMNS; i++)
         {
             struct Rectangle field_rect;
-            LONG index = data->icld_LVMAttribs->lmva_ColumnPos[i];
+            LONG                      index = data->icld_LVMAttribs->lmva_ColumnPos[i];
 
             if (!(data->icld_LVMAttribs->lmva_ColumnFlags[i] & LVMCF_COLVISIBLE)) continue;
 
@@ -2281,7 +2233,7 @@ IPTR IconList__OM_NEW(struct IClass *CLASS, Object *obj, struct opSet *message)
 #if defined(DEBUG_ILC_FUNCS)
     D(bug("[IconList] %s: MaxLineLen : %ld\n", __PRETTY_FUNCTION__, data->icld__Option_LabelTextMaxLen));
 #endif
-    data->ehn.ehn_Events   = IDCMP_MOUSEBUTTONS | IDCMP_RAWKEY | IDCMP_NEWSIZE | IDCMP_MENUVERIFY;
+    data->ehn.ehn_Events   = IDCMP_MOUSEBUTTONS | IDCMP_RAWKEY | IDCMP_NEWSIZE;
     data->ehn.ehn_Priority = 0;
     data->ehn.ehn_Flags    = 0;
     data->ehn.ehn_Object   = obj;
@@ -3359,6 +3311,7 @@ D(bug("[IconList]: %s(obj @ 0x%p)\n", __PRETTY_FUNCTION__, obj));
 
             if (!(data->icld_LVMAttribs->lmva_ColumnFlags[index] & LVMCF_COLVISIBLE)) continue;
 
+            BOOL                outside = FALSE;
             struct Rectangle         field_rect;
 
             field_rect.MinX = (i == firstvis) ? linerect.MinX : x;
@@ -3371,16 +3324,35 @@ D(bug("[IconList]: %s(obj @ 0x%p)\n", __PRETTY_FUNCTION__, obj));
                in any of this rectangles need to be drawn      */
             if (data->update_rect1)
             {
-                RectAndRect(&field_rect, data->update_rect1);
+                if (!RectAndRect(&field_rect, data->update_rect1))
+                    outside = TRUE;
             }
 
             if (data->update_rect2)
             {
-                RectAndRect(&field_rect, data->update_rect2);
+                if (data->update_rect1)
+                {
+                    if ((outside == TRUE) && RectAndRect(&field_rect, data->update_rect2))
+                        outside = FALSE;
+                }
+                else
+                {
+                    if (!RectAndRect(&field_rect, data->update_rect2))
+                        outside = TRUE;
+                }
             }
 
-            RenderListViewModeHeaderField(obj, data, &field_rect, index, FALSE);
-            x += data->icld_LVMAttribs->lmva_ColumnWidth[index];
+            if (outside != TRUE)
+            {
+                RenderListViewModeHeaderField(obj, data, &field_rect, index, FALSE);
+                x += data->icld_LVMAttribs->lmva_ColumnWidth[index];
+            }
+#if defined(DEBUG_ILC_ICONRENDERING)
+            else
+            {
+                D(bug("[IconList] %s: Column '%s' outside of update area .. skipping\n", __PRETTY_FUNCTION__, data->icld_LVMAttribs->lmva_ColumnTitle[i]));
+            }
+#endif
         }
 
         if ((data->icld_LVMAttribs->lvma_Flags & LVMAF_HEADERDRAWTOEND) == LVMAF_HEADERDRAWTOEND)
@@ -3775,7 +3747,7 @@ IPTR IconList__MUIM_Draw(struct IClass *CLASS, Object *obj, struct MUIP_Draw *me
                     yrect.MaxY = _mtop(obj) - data->update_scrolldy;
 
                     OrRectRegion(region, &yrect);
-                    
+
                     data->update_rect2 = &yrect;
                 }
 
@@ -3784,26 +3756,13 @@ IPTR IconList__MUIM_Draw(struct IClass *CLASS, Object *obj, struct MUIP_Draw *me
 #endif
                 if (data->icld_DisplayRastPort == data->icld_BufferRastPort)
                 {
-                    if ((data->icld_DisplayFlags & ICONLIST_DISP_MODELIST) == ICONLIST_DISP_MODELIST)
-                    {
-                        ScrollRasterBF(data->icld_BufferRastPort,
-                                                data->update_scrolldx,
-                                                data->update_scrolldy,
-                                                _mleft(obj),
-                                                _mtop(obj) + (data->update_scrolldx ? 0 : data->icld_LVMAttribs->lmva_HeaderHeight),
-                                                _mright(obj),
-                                                _mbottom(obj));
-                    }
-                    else
-                    {
-                        ScrollRasterBF(data->icld_BufferRastPort,
-                                                data->update_scrolldx,
-                                                data->update_scrolldy,
-                                                _mleft(obj),
-                                                _mtop(obj),
-                                                _mright(obj),
-                                                _mbottom(obj));
-                    }
+                    ScrollRasterBF(data->icld_BufferRastPort,
+                                            data->update_scrolldx,
+                                            data->update_scrolldy,
+                                            _mleft(obj),
+                                            _mtop(obj),
+                                            _mright(obj),
+                                            _mbottom(obj));
                 }
                 else
                 {
@@ -4926,9 +4885,6 @@ IPTR IconList__MUIM_HandleEvent(struct IClass *CLASS, Object *obj, struct MUIP_H
                             rawkey_handled = TRUE;
                             break;
                     }
-
-                    /* Remove the lasso if a key is pressed or the mouse wheel is used */
-                    NullifyLasso(data, obj);
 
                     if (rawkey_handled)
                     {
@@ -6112,7 +6068,45 @@ IPTR IconList__MUIM_HandleEvent(struct IClass *CLASS, Object *obj, struct MUIP_H
                     {
                         if (data->icld_LassoActive == TRUE)
                         {
-                            NullifyLasso(data, obj);
+#if defined(DEBUG_ILC_EVENTS) || defined(DEBUG_ILC_LASSO)
+                            D(bug("[IconList] %s: Removing Lasso\n", __PRETTY_FUNCTION__));
+#endif
+                            /* End Lasso-selection */
+                            struct Rectangle    old_lasso;
+                            struct IconEntry    *node = NULL;
+                            struct Window       *thisWindow = NULL;
+
+                            /* Stop handling INTUITICKS */
+                            GET(obj, MUIA_Window, &thisWindow);
+                            if (thisWindow)
+                            {
+                                ModifyIDCMP(thisWindow, (thisWindow->IDCMPFlags & ~(IDCMP_INTUITICKS)));
+                                if ((data->ehn.ehn_Events & IDCMP_INTUITICKS))
+                                {
+                                    DoMethod(_win(obj), MUIM_Window_RemEventHandler, (IPTR)&data->ehn);
+                                    data->ehn.ehn_Events &= ~IDCMP_INTUITICKS;
+                                    DoMethod(_win(obj), MUIM_Window_AddEventHandler, (IPTR)&data->ehn);
+                                }
+                            }
+                            /* Clear Lasso Frame.. */
+                            GetAbsoluteLassoRect(data, &old_lasso); 
+                            IconList_InvertLassoOutlines(obj, data, &old_lasso);
+
+                            data->icld_LassoActive = FALSE;
+
+                            /* Remove Lasso flag from affected icons.. */
+#if defined(__AROS__)
+                            ForeachNode(&data->icld_IconList, node)
+#else
+                            Foreach_Node(&data->icld_IconList, node);
+#endif
+                            {
+                                if (node->ie_Flags & ICONENTRY_FLAG_LASSO)
+                                {
+                                    node->ie_Flags &= ~ICONENTRY_FLAG_LASSO;
+                                }
+                            }
+                            SET(obj, MUIA_IconList_SelectionChanged, TRUE);
                         }
                         else if (data->icld_LVMAttribs->lmva_LastSelectedColumn != -1)
                         {
@@ -6421,20 +6415,8 @@ IPTR IconList__MUIM_HandleEvent(struct IClass *CLASS, Object *obj, struct MUIP_H
 
                     return MUI_EventHandlerRC_Eat;
                 }
-                break;
 
-            case IDCMP_MENUVERIFY:
-
-#if defined(DEBUG_ILC_EVENTS)
-        D(bug("[IconList] %s: IDCMP_MENUVERIFY\n", __PRETTY_FUNCTION__));
-#endif
-
-                if (data->icld_LassoActive == TRUE)
-                {
-                    /* Remove the lasso if the right mouse button is pressed */
-                    NullifyLasso(data, obj);
-                }
-                break;
+            break;
         }
     }
 

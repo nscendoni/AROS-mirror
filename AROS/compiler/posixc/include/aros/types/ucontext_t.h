@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2010-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ucontext_t.h 50458 2015-04-24 14:53:27Z neil $
 
     Desc: POSIX.1-2004 mcontext_t and ucontext_t type definition
           Not present anymore in POSIX.1-2008

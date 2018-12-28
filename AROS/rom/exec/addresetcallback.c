@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: addresetcallback.c 37025 2011-02-10 22:24:45Z neil $
 
     Desc: Add a reset callback to internal list
     Lang: english

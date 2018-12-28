@@ -1,7 +1,6 @@
 /***************************************************************************
 
  TextEditor.mcc - Textediting MUI Custom Class
- Copyright (C) 2017 The AROS Dev Team
  Copyright (C) 1997-2000 Allan Odgaard
  Copyright (C) 2005-2014 TextEditor.mcc Open Source Team
 
@@ -17,7 +16,7 @@
 
  TextEditor class Support Site:  http://www.sf.net/projects/texteditor-mcc
 
- $Id$
+ $Id: ClipboardServer.c 49436 2014-08-16 11:30:27Z mazze $
 
 ***************************************************************************/
 
@@ -933,7 +932,6 @@ BOOL StartClipboardServer(void)
     if(serverProcess !=  NULL)
     {
       // we use one global reply port with a static signal bit
-      memset( &replyPort, 0, sizeof( replyPort ) );
       replyPort.mp_Node.ln_Type = NT_MSGPORT;
       NewList(&replyPort.mp_MsgList);
       replyPort.mp_SigBit = SIGB_SINGLE;

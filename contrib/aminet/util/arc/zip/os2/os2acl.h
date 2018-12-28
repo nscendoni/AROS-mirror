@@ -12,7 +12,7 @@
  * Created: Fri Mar 29 1996
  */
 
-/* $Id$ */
+/* $Id: os2acl.h 36659 2011-01-18 13:26:51Z neil $ */
 
 /*
  * $Log: os2acl.h,v $

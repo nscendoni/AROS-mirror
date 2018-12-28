@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: removeslist.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Remove a node from a single linked list
     Lang: english

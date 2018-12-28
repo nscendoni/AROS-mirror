@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pci_aros.c 46698 2013-02-25 01:57:03Z neil $
 */
 
 #define __OOP_NOATTRBASES__

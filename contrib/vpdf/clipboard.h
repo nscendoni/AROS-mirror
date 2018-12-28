@@ -7,7 +7,7 @@
  *  Copyright © 2007-2010 Ilkka Lehtoranta <ilkleht@isoveli.org>
  *  All rights reserved.
  *
- *  $Id$
+ *  $Id: clipboard.h 49501 2014-08-21 18:42:23Z mazze $
  */
 
 

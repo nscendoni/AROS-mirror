@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: movesprite.c 33365 2010-05-27 13:23:56Z sonic $
 
     Desc: Graphics function MoveSprite()
     Lang: english

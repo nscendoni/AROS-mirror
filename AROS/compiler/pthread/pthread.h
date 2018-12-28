@@ -150,9 +150,9 @@ typedef struct pthread_mutex pthread_mutex_t;
 #define NULL_SEMAPHOREREQUEST {NULL_MINNODE, 0}
 #define NULL_SEMAPHORE {NULL_NODE, 0, NULL_MINLIST, NULL_SEMAPHOREREQUEST, 0, 0}
 
-#define PTHREAD_MUTEX_INITIALIZER {PTHREAD_MUTEX_NORMAL, NULL_SEMAPHORE, 0}
-#define PTHREAD_RECURSIVE_MUTEX_INITIALIZER {PTHREAD_MUTEX_RECURSIVE, NULL_SEMAPHORE, 0}
-#define PTHREAD_ERRORCHECK_MUTEX_INITIALIZER {PTHREAD_MUTEX_ERRORCHECK, NULL_SEMAPHORE, 0}
+#define PTHREAD_MUTEX_INITIALIZER {PTHREAD_MUTEX_NORMAL, NULL_SEMAPHORE}
+#define PTHREAD_RECURSIVE_MUTEX_INITIALIZER {PTHREAD_MUTEX_RECURSIVE, NULL_SEMAPHORE}
+#define PTHREAD_ERRORCHECK_MUTEX_INITIALIZER {PTHREAD_MUTEX_ERRORCHECK, NULL_SEMAPHORE}
 
 //
 // Condition variables
@@ -437,9 +437,6 @@ int pthread_kill(pthread_t thread, int sig);
 #endif
 
 #if defined(CLIB_BSDSOCKET_PROTOS_H) || defined(CLIB_SOCKET_PROTOS_H)
-#if defined(DEFINES_BSDSOCKET_PROTOS_H) || defined(DEFINES_SOCKET_PROTOS_H)
-#include <defines/pthreadsocket.h>
-#else /* !DEFINES_BSDSOCKET_PROTOS_H && !DEFINES_SOCKET_PROTOS_H */
 #define accept(...) (pthread_testcancel(), accept(__VA_ARGS__))
 #define connect(...) (pthread_testcancel(), connect(__VA_ARGS__))
 #define CloseSocket(...) (pthread_testcancel(), CloseSocket(__VA_ARGS__))
@@ -452,7 +449,6 @@ int pthread_kill(pthread_t thread, int sig);
 #define send(...) (pthread_testcancel(), send(__VA_ARGS__))
 #define sendmsg(...) (pthread_testcancel(), sendmsg(__VA_ARGS__))
 #define sendto(...) (pthread_testcancel(), sendto(__VA_ARGS__))
-#endif /* !DEFINES_BSDSOCKET_PROTOS_H && !DEFINES_SOCKET_PROTOS_H */
 #endif
 
 #ifdef  __cplusplus

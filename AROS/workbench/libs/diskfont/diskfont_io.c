@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: diskfont_io.c 37702 2011-03-21 14:14:07Z jmcmullan $
 
     Functions for reading disk font files.
 */

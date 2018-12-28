@@ -1,7 +1,7 @@
 /*
    Copyright © 2002-2009, Chris Hodges. All rights reserved.
    Copyright © 2009-2012, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: roothub.c 45650 2012-08-25 10:32:15Z jmcmullan $
 */
 
 #include <devices/usb_hub.h>

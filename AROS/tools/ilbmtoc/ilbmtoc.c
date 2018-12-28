@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ilbmtoc.c 51904 2016-03-13 02:41:53Z NicJA $
 
     Desc: Tool to convert IFF ILBM images into C source.
 	      

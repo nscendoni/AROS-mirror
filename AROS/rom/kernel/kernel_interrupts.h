@@ -1,8 +1,6 @@
-#ifndef KERNEL_INTERRUPTS_H
-#define KERNEL_INTERRUPTS_H
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: kernel_interrupts.h 47346 2013-05-04 11:37:40Z mazze $
 
     Desc:
 */
@@ -18,8 +16,8 @@ struct IntrNode
     void                *in_Handler;
     void                *in_HandlerData;
     void                *in_HandlerData2;
-    uint32_t             in_nr;
     uint8_t             in_type;
+    uint8_t             in_nr;
 };
 
 enum intr_types
@@ -29,7 +27,5 @@ enum intr_types
 };
 
 /* Functions to be called by machine-specific code */
-int krnRunExceptionHandlers(struct KernelBase *, uint8_t, void *); /* Run user-supplied exception handlers */
-void krnRunIRQHandlers(struct KernelBase *, uint8_t);		   /* Run user-supplied IRQ handlers       */
-
-#endif /* !KERNEL_INTERRUPTS_H */
+int krnRunExceptionHandlers(struct KernelBase *KernelBase, uint8_t exception, void *ctx); /* Run user-supplied exception handlers */
+void krnRunIRQHandlers(struct KernelBase *KernelBase, uint8_t exception);		   /* Run user-supplied IRQ handlers       */

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$	$Log
+    $Id: initrastport.c 53132 2016-12-29 10:32:06Z deadwood $	$Log
 
     Desc: Graphics function InitRastPort()
     Lang: english
@@ -19,7 +19,7 @@
     NAME */
 #include <proto/graphics.h>
 
-	AROS_LH1(void, InitRastPort,
+	AROS_LH1(BOOL, InitRastPort,
 
 /*  SYNOPSIS */
 	AROS_LHA(struct RastPort *, rp, A1),
@@ -68,6 +68,8 @@
     rp->LinePtrn = 0xFFFF;
 
     SetFont (rp, GfxBase->DefaultFont);
+
+    return TRUE;
 
     AROS_LIBFUNC_EXIT
     

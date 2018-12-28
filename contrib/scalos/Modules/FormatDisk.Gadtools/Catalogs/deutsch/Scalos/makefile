@@ -1,7 +1,7 @@
 # makefile for FormatDisk.ct (translated Texts : deutsch)
 # $Date: 2$
-# $Revision$
-# $Id$
+# $Revision: 48481 $
+# $Id: makefile 48481 2013-12-01 22:08:26Z mazze $
 
 .SUFFIXES: .ct .catalog
 

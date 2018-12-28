@@ -1,6 +1,6 @@
 /*
     Copyright 2010-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: tls.c 48167 2013-09-28 19:09:01Z deadwood $
 */
 
 #include "tls.h"

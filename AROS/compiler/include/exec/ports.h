@@ -2,23 +2,18 @@
 #define EXEC_PORTS_H
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: ports.h 49754 2014-11-04 02:06:22Z neil $
 
     Desc: Message ports and messages
     Lang: english
 */
-
-#include <aros/config.h>
 
 #ifndef EXEC_NODES_H
 #   include "exec/nodes.h"
 #endif
 #ifndef EXEC_LISTS_H
 #   include "exec/lists.h"
-#endif
-#if defined(__AROSPLATFORM_SMP__)
-#include <aros/types/spinlock_s.h>
 #endif
 
 /* MsgPort */
@@ -29,13 +24,6 @@ struct MsgPort
     UBYTE	mp_SigBit;  /* Signal bit number */
     void      * mp_SigTask; /* Object to be signalled */
     struct List mp_MsgList; /* Linked list of messages */
-#if defined(__AROSPLATFORM_SMP__)
-#if defined(__AROSEXEC_SMP__)
-    spinlock_t mp_SpinLock;
-#else
-    spinlock_t mp_Pad;
-#endif
-#endif
 };
 
 #define mp_SoftInt mp_SigTask	/* Alias */

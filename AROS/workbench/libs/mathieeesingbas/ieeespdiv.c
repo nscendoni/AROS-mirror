@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ieeespdiv.c 48933 2014-04-17 16:29:58Z neil $
 */
 
 #include "mathieeesingbas_intern.h"

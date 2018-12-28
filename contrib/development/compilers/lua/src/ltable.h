@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: ltable.h 44506 2012-04-03 09:22:53Z mazze $
 ** Lua tables (hash)
 ** See Copyright Notice in lua.h
 */

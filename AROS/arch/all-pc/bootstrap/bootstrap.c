@@ -1,6 +1,6 @@
 /*
     Copyright © 2006-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bootstrap.c 49101 2014-07-05 11:37:16Z NicJA $
 
     Desc: 32-bit bootstrap code used to boot the 64-bit AROS kernel.
     Lang: English

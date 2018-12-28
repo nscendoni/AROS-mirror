@@ -1,7 +1,7 @@
 /******************************************************************************
 
     MODUL
-	$Id$
+	$Id: Alias.c 36659 2011-01-18 13:26:51Z neil $
 
     DESCRIPTION
 	macros for DME/XDME
@@ -29,7 +29,7 @@
 **  (C)Copyright 1992 by Bernd Noll for null/zero-soft
 **  All Rights Reserved
 **
-**  RCS Header: $Id$
+**  RCS Header: $Id: Alias.c 36659 2011-01-18 13:26:51Z neil $
 **
 **  compiling with
 **  "#define PATCH_NULL"

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setregion.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: (AROS only) Graphics function SetRegion()
     Lang: english
@@ -22,7 +22,7 @@
         AROS_LHA(struct Region *, dest, A1),
 
 /*  LOCATION */
-	struct GfxBase *, GfxBase, 181, Graphics)
+	struct GfxBase *, GfxBase, 195, Graphics)
 
 /*  FUNCTION
         Sets the destination region to the source region.

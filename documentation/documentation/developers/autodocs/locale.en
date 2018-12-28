@@ -124,8 +124,7 @@ Inputs
 ~~~~~~
 ::
 
-     locale      - The Locale to use for this conversion or NULL for
-                   the system default locale.
+     locale      - The Locale to use for this conversion.
      character   - The character to convert to lower case.
 
 
@@ -171,8 +170,7 @@ Inputs
 ~~~~~~
 ::
 
-     locale      - The Locale to use for this conversion or NULL for
-                   the system default locale.
+     locale      - The Locale to use for this conversion.
      character   - The character to convert.
 
 
@@ -226,8 +224,7 @@ Inputs
 ::
 
 
- locale        --  the locale to use when formatting the string or NULL
-                   for the system default locale.
+ locale        --  the locale to use when formatting the string
  formatString  --  the formatting template string; this is much like the
                    printf() formatting style, i.e. a % followed by a
                    formatting command. The following commands exist:
@@ -431,8 +428,7 @@ Inputs
 ~~~~~~
 ::
 
-     locale      - The Locale to use for this function or NULL
-                   for the system default locale.
+     locale      - The Locale to use for this function.
      character   - the character to test
 
 
@@ -448,6 +444,8 @@ Result
 Notes
 ~~~~~
 ::
+
+     The Locale MUST be supplied.
 
      These functions require a 32-bit character to support future
      multi-byte character sets.
@@ -466,7 +464,7 @@ Synopsis
  struct Catalog * OpenCatalogA(
           const struct Locale  * locale,
           CONST_STRPTR name,
-          const struct TagItem * tags );
+          struct TagItem * tags );
  
  struct Catalog * OpenCatalog(
           const struct Locale  * locale,
@@ -557,8 +555,7 @@ Inputs
 ~~~~~~
 ::
 
-     locale      -   the locale to use for the formatting or NULL for
-                     the system default locale.
+     locale      -   the locale to use for the formatting
      date        -   where to put the converted date. If this is NULL,
                      then this function can be used to verify a date
                      string.
@@ -672,8 +669,7 @@ Inputs
 ~~~~~~
 ::
 
-     locale      -   the Locale to use for the transformation or
-                     NULL for the system default locale.
+     locale      -   the Locale to use for the transformation.
      string      -   the string to be transformed
      buffer      -   the destination for the transformed string.
                      This buffer may need to be larger than the
@@ -731,8 +727,7 @@ Inputs
 ~~~~~~
 ::
 
-     locale      -   Which locale to use for this comparison or
-                     NULL for the system default locale.
+     locale      -   Which locale to use for this comparison.
      string1     -   NULL terminated string.
      string2     -   NULL terminated string.
      length      -   Maximum length of string to compare, or -1 to

@@ -198,7 +198,7 @@ DEFNEW
 
 	}
 
-	return (IPTR)obj;
+	return (ULONG)obj;
 
 }
 

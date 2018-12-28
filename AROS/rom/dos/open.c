@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: open.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Open a file with the specified mode.
     Lang: english
@@ -145,6 +145,23 @@ static LONG InternalOpen(CONST_STRPTR name, LONG accessMode,
     {
         SetIoErr(ERROR_TOO_MANY_LEVELS);
         return DOSFALSE;
+    }
+
+    /* ABI_V0 compatibility */
+    switch(accessMode)
+    {
+        case MODE_NEWFILE:
+        case MODE_READWRITE:
+        case MODE_OLDFILE:
+            break;
+        default:
+            if (accessMode & (1L<<5)) /* FMF_CLEAR */
+                accessMode = MODE_NEWFILE;
+            else if (accessMode & (1L<<4)) /* FMF_CREATE */
+                accessMode = MODE_READWRITE;
+            else if (accessMode & ((1L<<3)|(1L<<2))) /* FMF_READ | FMF_WRITE */
+                accessMode = MODE_OLDFILE;
+
     }
 
     /* IN:, OUT:, ERR: pseudodevices

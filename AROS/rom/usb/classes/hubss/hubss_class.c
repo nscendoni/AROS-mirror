@@ -1,6 +1,6 @@
 /*
     Copyright © 2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hubss_class.c 49303 2014-08-11 18:33:00Z DizzyOfCRN $
 
     Desc: SuperSpeed USB3.0 hub for Poseidon (based upon hub.class.c by Chris Hodges <chrisly@platon42.de>)
     Lang: english
@@ -690,7 +690,7 @@ AROS_UFH0(void, GM_UNIQUENAME(nHubssTask)) {
 /* /// "nAllocHub()" */
 struct NepClassHub * GM_UNIQUENAME(nAllocHub)(void) {
     struct UsbSSHubDesc *usshd;
-    //struct UsbStdBOSDesc *usbosd;
+    struct UsbStdBOSDesc *usbosd;
     struct Task *thistask;
     struct NepClassHub *nch;
     struct UsbHubStatus uhhs;

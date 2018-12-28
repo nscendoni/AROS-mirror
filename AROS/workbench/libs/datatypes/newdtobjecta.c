@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: newdtobjecta.c 51208 2015-11-09 16:40:19Z neil $
 
     Desc:
     Lang: English

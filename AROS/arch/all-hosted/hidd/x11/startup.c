@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: startup.c 53031 2016-10-25 16:45:22Z deadwood $
 */
 
 /*

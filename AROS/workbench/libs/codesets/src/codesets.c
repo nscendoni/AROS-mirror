@@ -20,7 +20,7 @@
  from the source code of SimpleMail (http://www.sf.net/projects/simplemail)
  with full permissions by its authors.
 
- $Id$
+ $Id: codesets.c 49689 2014-10-04 04:50:52Z jmcmullan $
 
 ***************************************************************************/
 

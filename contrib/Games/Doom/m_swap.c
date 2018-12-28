@@ -1,7 +1,7 @@
 // Emacs style mode select   -*- C++ -*- 
 //-----------------------------------------------------------------------------
 //
-// $Id$
+// $Id: m_swap.c 30794 2009-03-08 02:19:07Z neil $
 //
 // Copyright (C) 1993-1996 by id Software, Inc.
 //
@@ -25,7 +25,7 @@
 //-----------------------------------------------------------------------------
 
 static const char
-rcsid[] = "$Id$";
+rcsid[] = "$Id: m_swap.c 30794 2009-03-08 02:19:07Z neil $";
 
 
 #ifdef __GNUG__
@@ -36,6 +36,8 @@ rcsid[] = "$Id$";
 
 // Needed with big endian.
 #ifdef __BIG_ENDIAN__
+
+#error "??????????????????????????????????????"
 
 // Swap 16bit, that is, MSB and LSB byte.
 unsigned short SwapSHORT(unsigned short x)

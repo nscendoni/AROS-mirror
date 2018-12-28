@@ -1,11 +1,11 @@
 /*
-    Copyright © 2013-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2013-2014, The AROS Development Team. All rights reserved.
+    $Id: screenclass.c 48719 2014-01-13 14:20:21Z neil $
 */
 
 #include <aros/debug.h>
 #include <cybergraphx/cybergraphics.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <hidd/hidd.h>
 #include <graphics/driver.h>
 #include <graphics/sprite.h>

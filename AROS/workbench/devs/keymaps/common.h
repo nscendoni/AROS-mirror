@@ -1,11 +1,47 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: common.h 53132 2016-12-29 10:32:06Z deadwood $
 
     Lang: English
 */
 
 #include <devices/keymap.h>
+
+/* ABI_V0 compatibility */
+#if defined(__i386__)
+
+#define DEFINE_KEYMAP(kmname)                   \
+                                                 \
+STATIC char  keymapname[] = kmname;             \
+                                                \
+STATIC CONST UBYTE lokeymaptypes[];             \
+STATIC CONST IPTR  lokeymap[];                  \
+STATIC CONST UBYTE locapsable[];                \
+STATIC CONST UBYTE lorepeatable[];              \
+                                                \
+STATIC CONST UBYTE hikeymaptypes[];             \
+STATIC CONST IPTR  hikeymap[];                  \
+STATIC CONST UBYTE hicapsable[];                \
+STATIC CONST UBYTE hirepeatable[];              \
+                                                \
+CONST struct KeyMapNode km =                    \
+{                                               \
+    {                                           \
+        NULL, NULL, keymapname, 0, 0            \
+    },                                          \
+    {                                           \
+        (UBYTE *)lokeymaptypes,                 \
+        (IPTR  *)lokeymap,                      \
+        (UBYTE *)locapsable,                    \
+        (UBYTE *)lorepeatable,                  \
+        (UBYTE *)hikeymaptypes,                 \
+        (IPTR  *)hikeymap,                      \
+        (UBYTE *)hicapsable,                    \
+        (UBYTE *)hirepeatable                   \
+    }                                           \
+};
+
+#else
 
 #define DEFINE_KEYMAP(kmname)                   \
                                                  \
@@ -37,3 +73,5 @@ CONST struct KeyMapNode km =                    \
         (UBYTE *)hirepeatable                   \
     }                                           \
 };
+
+#endif

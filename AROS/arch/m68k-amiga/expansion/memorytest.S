@@ -5,7 +5,7 @@
  *
  * Licensed under the AROS PUBLIC LICENSE (APL) Version 1.1
  * 
- * $Id$
+ * $Id: memorytest.S 48674 2014-01-02 17:51:04Z neil $
  */
 
 #include <aros/config.h>

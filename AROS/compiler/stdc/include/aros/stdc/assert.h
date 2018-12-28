@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: assert.h 48028 2013-09-08 21:13:29Z verhaegs $
 
     C99 header file assert.h
 */

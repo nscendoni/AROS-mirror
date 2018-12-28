@@ -1,8 +1,8 @@
-#   $Id$
+#   $Id: mmakefile.src 52348 2016-03-29 14:28:20Z NicJA $
 #
 #   Makefile to make ChocolateCastle
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES := \
     main generator castleapp support muigenerator methodlist \
@@ -14,7 +14,7 @@ FILES := \
  
 #MM contrib-development-gui-chocolatecastle-source : includes linklib
 
-EXEDIR := $(AROS_CONTRIB)/$(AROS_DIR_DEVELOPER)/ChocolateCastle
+EXEDIR := $(AROS_CONTRIB)/Development/ChocolateCastle
 
 NOWARN_FLAGS := $(NOWARN_PARENTHESES)
 USER_CFLAGS	:= $(NOWARN_FLAGS) -D__NOLIBBASE__ -DUSE_INLINE_STDARG

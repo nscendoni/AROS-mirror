@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Date.c 48592 2013-12-19 22:17:46Z hkiel $
 
     Desc: Date CLI command
     Lang: English

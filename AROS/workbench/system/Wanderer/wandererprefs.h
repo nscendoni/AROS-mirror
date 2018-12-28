@@ -3,7 +3,7 @@
 
 /*
     Copyright  2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: wandererprefs.h 43063 2011-12-17 14:37:09Z deadwood $
 */
 
 #include <exec/types.h>

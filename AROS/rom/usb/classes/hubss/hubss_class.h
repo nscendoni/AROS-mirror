@@ -1,6 +1,6 @@
 /*
     Copyright © 2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hubss_class.h 49266 2014-08-08 14:12:24Z DizzyOfCRN $
 
     Desc: SuperSpeed USB3.0 hub for Poseidon (based upon hub.h by Chris Hodges <chrisly@platon42.de>)
     Lang: English

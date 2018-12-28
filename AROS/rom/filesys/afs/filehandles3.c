@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: filehandles3.c 50360 2015-04-12 20:40:00Z neil $
 */
 
 #ifndef DEBUG

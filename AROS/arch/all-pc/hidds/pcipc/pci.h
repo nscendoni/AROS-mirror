@@ -1,8 +1,3 @@
-/*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
-*/
-
 #ifndef _PCI_H
 #define _PCI_H
 
@@ -32,34 +27,28 @@
 #define LEGACY_SUPPORT
 #endif
 
-
-struct pcipc_staticdata
+struct pci_staticdata
 {
-    OOP_AttrBase        hiddPCIDriverAB;
-    OOP_AttrBase        hiddAB;
+    OOP_AttrBase   hiddPCIDriverAB;
+    OOP_AttrBase   hiddAB;
 
-    OOP_AttrBase        hidd_PCIDeviceAB;
+    OOP_AttrBase   hidd_PCIDeviceAB;
 
-    OOP_Class	        *driverClass;
+    OOP_Class	  *driverClass;
 
     /* Low-level sub-methods */
-    ULONG	        (*ReadConfigLong)(UBYTE bus, UBYTE dev, UBYTE sub, UWORD reg);
-    void	        (*WriteConfigLong)(UBYTE bus, UBYTE dev, UBYTE sub, UWORD reg, ULONG val);
+    ULONG	 (*ReadConfigLong)(UBYTE bus, UBYTE dev, UBYTE sub, UWORD reg);
+    void	 (*WriteConfigLong)(UBYTE bus, UBYTE dev, UBYTE sub, UWORD reg, ULONG val);
 
-    /* ACPI related */
-    ACPI_TABLE_MCFG     *pcipc_acpiMcfgTbl;
-    struct MinList      pcipc_irqRoutingTable;
+    ACPI_TABLE_MCFG *mcfg_tbl;
+
 };
 
 struct pcibase
 {
     struct Library	    LibNode;
-    struct pcipc_staticdata   psd;
+    struct pci_staticdata   psd;
 };
-
-#define BASE(lib) ((struct pcibase*)(lib))
-#define PSD(cl) (&((struct pcibase*)cl->UserData)->psd)
-#define _psd PSD(cl)
 
 /* PCI configuration mechanism 1 registers */
 #define PCI_AddressPort	0x0cf8
@@ -79,11 +68,19 @@ struct pcibase
  */
 #define PCI_MechSelect	0x0cfb
 
+#define PCICS_VENDOR	0x00
 #define PCICS_PRODUCT   0x02
+#define PCICS_SUBCLASS	0x0a
 
-#define PCIBR_SUBCLASS  0x0a
-#define PCIBR_SECBUS    0x19
+#define PCI_CLASS_BRIDGE_HOST	0x0600
+#define PCI_CLASS_DISPLAY_VGA	0x0300
 
+#define PCI_VENDOR_INTEL	0x8086
+#define PCI_VENDOR_COMPAQ	0x0e11
+
+#define BASE(lib) ((struct pcibase*)(lib))
+
+#define PSD(cl) (&((struct pcibase*)cl->UserData)->psd)
 
 typedef union _pcicfg
 {
@@ -92,8 +89,7 @@ typedef union _pcicfg
     UBYTE   ub[4];
 } pcicfg;
 
-static inline UWORD ReadConfigWord(struct pcipc_staticdata *psd, UBYTE bus,
-    UBYTE dev, UBYTE sub, UWORD reg)
+static inline UWORD ReadConfigWord(struct pci_staticdata *psd, UBYTE bus, UBYTE dev, UBYTE sub, UWORD reg)
 {
     pcicfg temp;
 
@@ -101,25 +97,16 @@ static inline UWORD ReadConfigWord(struct pcipc_staticdata *psd, UBYTE bus,
     return temp.uw[(reg&2)>>1];
 }
 
-static inline UWORD ReadConfigByte(struct pcipc_staticdata *psd, UBYTE bus,
-    UBYTE dev, UBYTE sub, UWORD reg)
-{
-    pcicfg temp;
-
-    temp.ul = psd->ReadConfigLong(bus, dev, sub, reg);
-    return temp.ub[reg & 3];
-}
-
 ULONG ReadConfig1Long(UBYTE bus, UBYTE dev, UBYTE sub, UWORD reg);
 void WriteConfig1Long(UBYTE bus, UBYTE dev, UBYTE sub, UWORD reg, ULONG val);
 
 #ifdef LEGACY_SUPPORT
 
-void PCIPC_ProbeConfMech(struct pcipc_staticdata *psd);
+void ProbePCI(struct pci_staticdata *psd);
 
 #else
 
-#define PCIPC_ProbeConfMech(x)
+#define ProbePCI(x)
 
 #endif
 

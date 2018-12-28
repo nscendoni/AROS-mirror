@@ -1,6 +1,6 @@
 // DrawerContents.h
-// $Date$
-// $Revision$
+// $Date: 2013-12-17 00:38:36 +0100 (Tue, 17 Dec 2013) $
+// $Revision: 48586 $
 
 #ifndef DRAWERCONTENTS_H
 #define DRAWERCONTENTS_H

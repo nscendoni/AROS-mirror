@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: _fpmath.h 48031 2013-09-08 21:16:04Z verhaegs $
 
     IEEE floating point layout; m68k version
 */
@@ -14,11 +14,6 @@ union IEEEl2bits {
 		unsigned int		manh	:32;
 		unsigned int		manl	:32;
 	} bits;
-	struct {
-		unsigned int 	expsign	:16;
-		unsigned int	junk	:16;
-		unsigned long long man	:64;
-	} xbits;
 };
 
 #define	LDBL_NBIT	0x80000000

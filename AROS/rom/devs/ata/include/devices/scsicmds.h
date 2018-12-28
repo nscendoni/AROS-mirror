@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: scsicmds.h 46569 2013-02-10 21:24:53Z sonic $
 
     Desc: SCSI commands
     Lang: english

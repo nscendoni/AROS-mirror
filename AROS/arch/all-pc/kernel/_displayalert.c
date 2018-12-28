@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: _displayalert.c 49667 2014-09-30 17:35:27Z neil $
 */
 
 #include <bootconsole.h>
@@ -68,20 +68,11 @@ static inline void PrintFrame(char c, struct KernelBase *KernelBase)
     krnPutC(0xDB, KernelBase);
     krnPutC('\n', KernelBase);
 }
-#if defined(__AROSEXEC_SMP__)
-#include <aros/atomic.h>
-#include <asm/cpu.h>
-extern volatile ULONG   safedebug;
-#endif
+
 void krnDisplayAlert(const char *text, struct KernelBase *KernelBase)
 {
     unsigned int i;
-#if defined(__AROSEXEC_SMP__)
-    if (safedebug & 1)
-    {
-        while (bit_test_and_set_long((ULONG*)&safedebug, 1)) { asm volatile("pause"); };
-    }
-#endif
+
     if (scr_Type == SCR_UNKNOWN)
     {
        	/* Default alert width (for possible serial output). */
@@ -114,10 +105,4 @@ void krnDisplayAlert(const char *text, struct KernelBase *KernelBase)
 	PrintChars(0xDC, scr_Width, KernelBase);
 	krnPutC('\n', KernelBase);
     }
-#if defined(__AROSEXEC_SMP__)
-    if (safedebug & 1)
-    {
-        __AROS_ATOMIC_AND_L(safedebug, ~(1 << 1));
-    }
-#endif
 }

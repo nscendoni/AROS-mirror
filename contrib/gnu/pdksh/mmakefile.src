@@ -1,8 +1,8 @@
 
-# Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-# $Id$
+# Copyright © 2004, The AROS Development Team. All rights reserved.
+# $Id: mmakefile.src 52357 2016-03-29 14:48:26Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 ##MM- contrib-gnu : contrib-gnu-pdksh
 ##MM- contrib-gnu-pdksh : development-pdksh
@@ -19,6 +19,6 @@ ARCHBASE := pdksh-5.2.14
 
 
 %build_with_configure mmake=development-pdksh srcdir=$(PORTSDIR)/pdksh/$(ARCHBASE) \
-     nix=yes prefix=$(AROS_DEVELOPER) aros_prefix=/$(AROS_DIR_DEVELOPER)
+     nix=yes prefix=$(AROS_DEVELOPMENT) aros_prefix=/Development
 
 

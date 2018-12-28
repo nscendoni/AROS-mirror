@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: libnexttagitem.c 52074 2016-03-20 11:47:30Z NicJA $
 */
 
 #include <proto/arossupport.h>

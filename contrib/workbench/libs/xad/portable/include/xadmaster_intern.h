@@ -1,7 +1,7 @@
 #ifndef XADMASTER_INTERN_H
 #define XADMASTER_INTERN_H
 
-/*  $Id$
+/*  $Id: xadmaster_intern.h 48675 2014-01-02 18:34:06Z neil $
     internal libbase structure
 
     XAD library system for archive handling

@@ -1,7 +1,7 @@
 # Copyright © 2010, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 33564 2010-06-13 08:40:23Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(TOP)/config/make.cfg
 
 #MM- iconset-Gorilla-contrib-icons-extras : iconset-Gorilla-contrib-icons-extras-utilities
 

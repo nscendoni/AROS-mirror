@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: dispatch.c 45693 2012-08-30 16:13:34Z neil $
 
     Desc: 
     Lang: english
@@ -10,6 +10,7 @@
 #include <exec/execbase.h>
 #include <aros/libcall.h>
 #include <aros/atomic.h>
+#include <proto/kernel.h>
 
 #include "exec_intern.h"
 

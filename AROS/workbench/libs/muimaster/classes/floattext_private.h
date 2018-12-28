@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: floattext_private.h 46029 2012-11-12 16:14:47Z neil $
 */
 
 #ifndef _FLOATTEXT_PRIVATE_H_

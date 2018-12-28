@@ -33,13 +33,7 @@
 
 #define FILENAME_LENGTH     512
 #define VERSION_LENGTH      16
-#if (__WORDSIZE == 64)
-#define ADDRESS_LENGTH      32
-#define ADDRESS_FORMAT      "$%016lx"
-#else
 #define ADDRESS_LENGTH      16
-#define ADDRESS_FORMAT      "$%08lx"
-#endif
 #define PATH_LENGTH         512
 #define PATH_LENGTH_CHAR    "512"
 #define NODENAME_LENGTH     512

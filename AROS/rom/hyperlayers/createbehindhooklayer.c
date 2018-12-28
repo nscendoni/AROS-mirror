@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: createbehindhooklayer.c 39920 2011-07-08 14:20:44Z sonic $
 
     Desc:
     Lang: english

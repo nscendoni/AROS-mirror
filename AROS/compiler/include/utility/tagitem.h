@@ -2,8 +2,8 @@
 #define UTILITY_TAGITEM_H
 
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2010, The AROS Development Team. All rights reserved.
+    $Id: tagitem.h 51770 2016-03-10 14:29:11Z NicJA $
 
     Desc: Tag-lists
     Lang: english
@@ -12,7 +12,9 @@
 #ifndef EXEC_TYPES_H
 #   include <exec/types.h>
 #endif
-#include <stdarg.h>
+#ifdef AROS_SLOWSTACKTAGS
+#   include <stdarg.h>
+#endif
 
 typedef ULONG Tag;
 
@@ -38,7 +40,7 @@ __END_DECLS
 #define TAG_SKIP   (3UL)   /* skip this and the next ti_Data items         */
 
 /* What separates user tags from system tags */
-#define TAG_USER    (1UL<<31)
+#define TAG_USER    ((STACKULONG)(1UL<<31))
 #define TAG_OS	    (16UL)   /* The first tag used by the OS */
 
 /* Tag-Offsets for the OS */
@@ -109,18 +111,7 @@ __END_DECLS
 #	define AROS_NR_SLOWSTACKTAGS_POST
 #	define AROS_SLOWSTACKTAGS_PRE(arg) AROS_TAGRETURNTYPE retval;
 #	define AROS_SLOWSTACKTAGS_PRE_AS(arg, rettype) rettype retval;
-/*
- * In the following macro, we pretend to use a va_list, to stop GCC
- * discarding varargs given to inlined functions. If this stops working
- * in the future, we may have to enable slow stack tags for all archs.
- */
-#	define AROS_SLOWSTACKTAGS_ARG(arg)		\
-	    ((struct TagItem *)({			\
-		va_list _dummy_args;			\
-		va_start(_dummy_args, arg);		\
-		va_end(_dummy_args);			\
-		&(arg);					\
-	    }))
+#	define AROS_SLOWSTACKTAGS_ARG(arg) ((struct TagItem *)&(arg))
 #	define AROS_SLOWSTACKTAGS_POST     return retval;
 #endif
 

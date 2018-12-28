@@ -1,6 +1,16 @@
-## version $VER: ReqTools.catalog 3.0 (30.6.2017)
-## language nederlands
+;**************************
+;
+;   ReqTools Preferences
+;
+;   Nederlands
+;
+;**************************
+;
+## version $VER: reqtoolsprefs.catalog 38.5 (18.2.96)
 ## codeset 0
+## language nederlands
+;
+; *** Misc ***
 ;
 MSG_WINDOW_TITLE
 ReqTools instellingen
@@ -14,8 +24,64 @@ Bestand requester
 MSG_SIZE
 Grootte (% van zichtbare grootte):
 ;
+MSG_SET
+Kies...
+;
+MSG_TEST
+Test...
+;
+MSG_SAVE
+Bewaar
+;
+MSG_USE
+Gebruik
+;
+MSG_CANCEL
+Annuleer
+;
+MSG_ABORT
+Afbreken
+;
+; Note: there are two spaces around the Ok string to make it 4 chars wide.
 MSG_OK
-Ok
+ Ok
+;
+; *** Menus ***
+;
+MSG_PROJECT_MENU
+Project
+;
+MSG_PROJECT_OPEN
+O\0Open...
+;
+MSG_PROJECT_SAVEAS
+A\0Bewaar als...
+;
+MSG_PROJECT_ABOUT
+?\0Over...
+;
+MSG_PROJECT_QUIT
+Q\0Einde
+;
+MSG_EDIT_MENU
+Bewerk
+;
+MSG_EDIT_RESET
+D\0Herstel standaardinstelling
+;
+MSG_EDIT_LASTSAVED
+L\0Laatst bewaarde versie
+;
+MSG_EDIT_RESTORE
+R\0Herstel
+;
+MSG_OPTIONS_MENU
+Opties
+;
+MSG_OPTIONS_CREATEICONS
+I\0Iconen aanmaken?
+;
+; *** Switches ***
 ;
 MSG_POPSCREEN
 Haal scherm naar voren
@@ -35,32 +101,35 @@ Diskactiviteit-LED
 MSG_DEFAULTFONT
 Gebruik systeem standaardfont
 ;
+; ** 2.2d **
+;
 MSG_FKEYS
 Gebruik functietoetsen
 ;
-MSG_DEFAULTS
-Instellingen
+; *** Requester Type ***
 ;
 MSG_REQUESTER
-\33bRequester:
+Instellingen voor
 ;
 MSG_FILEREQ
-Bestand
+Bestand requester
 ;
 MSG_FONTREQ
-Font
+Font requester
 ;
 MSG_PALETTEREQ
-Palet
+Palet requester
 ;
 MSG_SCRMODEREQ
-Schermmodus
+Schermmodus requester
 ;
 MSG_VOLUMEREQ
-Volume
+Volume requester
 ;
 MSG_OTHERREQ
-Andere
+Andere requesters
+;
+; *** Position ***
 ;
 MSG_POSITION
 Positie:
@@ -81,14 +150,62 @@ MSG_TOPLEFTSCR
 Links-boven op scherm
 ;
 MSG_OFFSET
-\33bPlaats
+Plaats:
+;
+; *** Entries ***
 ;
 MSG_NR_OF_ENTRIES
-\33bAantal zichtbare regels
+Aantal zichtbare regels:
 ;
 MSG_MIN
-Minimum:
+Minimum
 ;
 MSG_MAX
-Maximum:
+Maximum
+;
+; *** Errors ***
+;
+MSG_YOU_NEED_REQTOOLS38
+U heeft reqtools.library V38+ nodig!
+;
+MSG_WRONG_REQTOOLS_VERSION
+De versie van reqtools.library die u heeft\n\
+ondersteunt geen instellingen!
+;
+MSG_ALL_PREFS_NOT_SUPPORTED
+WAARSCHUWING: Deze versie van de instellingenbewerker\n\
+ondersteunt niet alle instellingen van uw\n\
+geïnstalleerde reqtools.library!
+;
+MSG_NO_WB_LIB
+Kon workbench.library niet openen!
+;
+MSG_NO_UTILITY_LIB
+Kon utility.library niet openen!
+;
+MSG_NO_ICON_LIB
+Kon icon.library niet openen!
+;
+MSG_COULDNT_LOCK_PUBSCREEN
+Publiek scherm niet gevonden!
+;
+MSG_ERROR_GETSCREENDRAWINFO
+Kon 'DrawInfo' niet verkrijgen!
+;
+MSG_ERROR_GETVISUALINFO
+Kon 'VisualInfo' niet verkrijgen!
+;
+MSG_COULDNT_OPEN_WINDOW
+Kon venster niet openen!
+;
+MSG_ERROR_ACCESSING_FILE
+Fout bij benaderen bestand\n\
+%s,\n\
+%s
+;
+MSG_READ_ERROR
+Leesfout!
+;
+MSG_ERROR_SAVING_PREFS
+Fout bij bewaren instellingen!
 ;

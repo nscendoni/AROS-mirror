@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cmove.c 38154 2011-04-10 14:15:48Z jmcmullan $
 
     Desc: Graphics function CMove()
     Lang: english

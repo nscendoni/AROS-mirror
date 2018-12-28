@@ -14,7 +14,7 @@
 
  openurl.library project: http://sourceforge.net/projects/openurllib/
 
- $Id$
+ $Id: libinit.c 49591 2014-09-08 22:06:08Z mazze $
 
 ***************************************************************************/
 

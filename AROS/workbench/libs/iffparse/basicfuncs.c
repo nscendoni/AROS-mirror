@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: basicfuncs.c 37149 2011-02-22 18:41:29Z jmcmullan $
 
     Basic help functions needed by iffparse.
 */

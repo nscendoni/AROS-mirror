@@ -1,6 +1,6 @@
 /*
  Copyright  1995-2011, The AROS Development Team. All rights reserved.
- $Id$
+ $Id: emul_init.c 48448 2013-11-24 09:16:14Z deadwood $
  
  Desc: Filesystem that accesses an underlying host OS filesystem.
  Lang: english

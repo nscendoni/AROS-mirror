@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: misc.h 36648 2011-01-17 14:31:59Z neil $
  */
 
  struct EasyTimer{

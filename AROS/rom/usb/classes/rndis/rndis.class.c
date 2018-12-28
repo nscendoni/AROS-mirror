@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: rndis.class.c 48424 2013-11-18 09:28:30Z neil $
  */
 
 #include "debug.h"

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: catalog_funcs.c 43286 2011-12-29 02:11:58Z neil $
 */
 
 #include <libraries/locale.h>
@@ -15,13 +15,13 @@ void dispose_catalog(struct IntCatalog * cat,
 {
     if (cat->ic_StringChunk)
     {
-        FreeVec(cat->ic_StringChunk);
+            FreeVec(cat->ic_StringChunk);
         cat->ic_StringChunk = NULL;
     }
     
     if (cat->ic_CatStrings)
     {
-        FreeVec(cat->ic_CatStrings);
+            FreeVec(cat->ic_CatStrings);
         cat->ic_CatStrings = NULL;
     }
     

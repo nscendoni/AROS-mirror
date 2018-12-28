@@ -3,12 +3,19 @@
 
 /*
     Copyright © 2010, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: ahci.h 43538 2012-01-09 06:37:56Z jmcmullan $
 */
 
 #include <exec/types.h>
 #include <inttypes.h>
 
+#ifndef __packed
+#ifdef __GNUC__
+#define __packed __attribute__((__packed__))
+#else
+#define __packed
+#endif
+#endif
 
 #define AHCI_VERSION_0_95   0x00000095
 #define AHCI_VERSION_1_00   0x00010000

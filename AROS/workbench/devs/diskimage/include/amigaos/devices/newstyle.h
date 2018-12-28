@@ -2,7 +2,7 @@
 #define     DEVICES_NEWSTYLE_H
 /*------------------------------------------------------------------------*/
 /*
- * $Id$
+ * $Id: newstyle.h 44698 2012-04-30 05:42:46Z mazze $
  *
  * Support header for the New Style Device standard
  *

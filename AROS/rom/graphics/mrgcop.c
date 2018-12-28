@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mrgcop.c 47530 2013-06-10 16:45:48Z jmcmullan $
 
     Desc: Graphics function MrgCop()
     Lang: english

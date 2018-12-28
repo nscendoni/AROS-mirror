@@ -1,6 +1,6 @@
 /*
     Copyright © 2006-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: patches.c 51665 2016-03-09 15:59:04Z NicJA $
 */
 
 #include <aros/debug.h>

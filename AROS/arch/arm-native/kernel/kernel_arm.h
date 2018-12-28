@@ -5,7 +5,7 @@
 
 /*
     Copyright © 2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kernel_arm.h 50720 2015-05-19 23:23:22Z neil $
 */
 
 struct ARM_Implementation

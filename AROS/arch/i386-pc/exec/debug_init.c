@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: debug_init.c 42353 2011-11-09 16:29:14Z sonic $
 
     Desc: Early bootup section
     Lang: english
@@ -8,6 +8,7 @@
 
 #include <aros/symbolsets.h>
 #include <proto/exec.h>
+#include <proto/kernel.h>
 
 #include <string.h>
 

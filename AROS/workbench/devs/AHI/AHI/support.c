@@ -1,6 +1,5 @@
 /*
      AHI - The AHI preferences program
-     Copyright (C) 2017 The AROS Dev Team
      Copyright (C) 1996-2005 Martin Blom <martin@blom.org>
      
      This program is free software; you can redistribute it and/or
@@ -17,9 +16,6 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
-
-#define DEBUG 1
-#include <aros/debug.h>
 
 #include <config.h>
 
@@ -184,7 +180,7 @@ EndianSwap( size_t size, void* data) {
       *((ULONG*) (data + 4)) = tmp;
       break;
     }
-
+      
     default:
       Printf( "Unknown size: %ld\n", size );
       abort();
@@ -209,8 +205,6 @@ EndianSwap( size_t size, void* data) {
 ******************************************************************************/
 
 BOOL Initialize(void) {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   LocaleBase = OpenLibrary("locale.library", 38);
 
 #ifdef __AMIGAOS4__
@@ -219,7 +213,7 @@ BOOL Initialize(void) {
   GadToolsBase = OpenLibrary("gadtools.library", 37);
 
   if( GadToolsBase == NULL) {
-    Printf((char *) msgTextNoOpen, (IPTR) "gadtools.library", 37);
+    Printf((char *) msgTextNoOpen, (ULONG) "gadtools.library", 37);
     Printf("\n");
     return FALSE;
   }
@@ -231,18 +225,15 @@ BOOL Initialize(void) {
 
   AHImp=CreateMsgPort();
 
-  if ( AHImp != NULL ) {
-    D(bug("[AHI:Prefs] %s: MsgPort @ 0x%p\n", __func__, AHImp);)
+  if( AHImp != NULL ) {
     AHIio = (struct AHIRequest *)CreateIORequest(
         AHImp,sizeof(struct AHIRequest));
 
-    if ( AHIio != NULL ) {
-      D(bug("[AHI:Prefs] %s: IORequest @ 0x%p\n", __func__, AHIio);)
+    if( AHIio != NULL ) {
       AHIio->ahir_Version = 4;
-      AHIDevice = OpenDevice(AHINAME, AHI_NO_UNIT, (struct IORequest *)AHIio, 0);
-      if ( AHIDevice == 0 ) {
+      AHIDevice = OpenDevice(AHINAME,AHI_NO_UNIT,(struct IORequest *)AHIio,0);
+      if(AHIDevice == 0) {
         AHIBase   = (struct Library *)AHIio->ahir_Std.io_Device;
-        D(bug("[AHI:Prefs] %s: AHIBase @ 0x%p\n", __func__, AHIBase);)
 #ifdef __AMIGAOS4__
 	IAHI = (struct AHIIFace *) GetInterface(AHIBase, "main", 1, NULL);
 #endif
@@ -251,7 +242,7 @@ BOOL Initialize(void) {
     }
   }
 
-  Printf((char *) msgTextNoOpen, "ahi.device", 4);
+  Printf((char *) msgTextNoOpen, (ULONG) "ahi.device", 4);
   Printf("\n");
   return FALSE;
 }
@@ -261,8 +252,6 @@ BOOL Initialize(void) {
 ******************************************************************************/
 
 void CleanUp(void) {
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
 #ifdef __AMIGAOS4__
   DropInterface((struct Interface*) IAHI);
   DropInterface((struct Interface*) IGadTools);
@@ -288,15 +277,11 @@ void CleanUp(void) {
 static BOOL AddUnit(struct List *list, int unit) {
   struct UnitNode *u;
 
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   u = AllocVec(sizeof(struct UnitNode), MEMF_CLEAR);
 
   if(u == NULL) {
     return FALSE;
   }
-
-  D(bug("[AHI:Prefs] %s: unit @ 0x%p\n", __func__, u);)
 
   u->prefs.ahiup_Unit           = unit;
   u->prefs.ahiup_Channels       = 1;
@@ -309,10 +294,7 @@ static BOOL AddUnit(struct List *list, int unit) {
   u->prefs.ahiup_Output         = 0;
 
   FillUnitName(u);
-  D(
-    bug("[AHI:Prefs] %s:       '%s'\n", __func__, u->name);
-    bug("[AHI:Prefs] %s:       mode %08x\n", __func__, u->prefs.ahiup_AudioMode);
-  )
+
   u->node.ln_Pri = -unit;
   Enqueue(list, (struct Node *) u);
 
@@ -346,8 +328,6 @@ struct List *GetUnits(char *name) {
   BOOL lownode = FALSE;
   int i;
 
-  D(bug("[AHI:Prefs] %s('%s')\n", __func__, name);)
-
   // Reasonable defaults
   globalprefs.ahigp_DebugLevel       = AHI_DEBUG_NONE;
   globalprefs.ahigp_DisableSurround  = FALSE;
@@ -365,7 +345,7 @@ struct List *GetUnits(char *name) {
     NewList(list);
     
     if(name && (iff = AllocIFF())) {
-      iff->iff_Stream = (IPTR) Open(name, MODE_OLDFILE);
+      iff->iff_Stream = (ULONG) Open(name, MODE_OLDFILE);
       if(iff->iff_Stream) {
         InitIFFasDOS(iff);
         if(!OpenIFF(iff, IFFF_READ)) {
@@ -407,7 +387,7 @@ struct List *GetUnits(char *name) {
 		  globalprefs.ahigp_AntiClickTime = 0;
 		  globalprefs.ahigp_ScaleMode     = AHI_SCALE_FIXED_SAFE;
 		}
-
+		
 		if( AHIBase->lib_Version >= 5 )
 		{
 		  globalprefs.ahigp_DisableSurround  = FALSE;
@@ -425,8 +405,6 @@ struct List *GetUnits(char *name) {
                 if(u == NULL)
                   break;
 
-                D(bug("[AHI:Prefs] %s: unit #%02d @ 0x%p\n", __func__, ci_cnt, u);)
-
 		u->prefs.ahiup_Unit          = ci_cnt;
 		u->prefs.ahiup_Channels      = 1;
 		u->prefs.ahiup_AudioMode     = AHI_DEFAULT_ID;
@@ -438,7 +416,7 @@ struct List *GetUnits(char *name) {
 		u->prefs.ahiup_Output        = 0;
 
 		++ci_cnt;
-
+		
 		CopyIfValid( struct AHIUnitPrefs, ahiup_Unit,
 			     *p, u->prefs, ci->ci_Size );
 		CopyIfValid( struct AHIUnitPrefs, ahiup_Channels,
@@ -457,23 +435,19 @@ struct List *GetUnits(char *name) {
 			     *p, u->prefs, ci->ci_Size );
 		CopyIfValid( struct AHIUnitPrefs, ahiup_Output,
 			     *p, u->prefs, ci->ci_Size );
-
+		
                 FillUnitName(u);
-                D(
-                    bug("[AHI:Prefs] %s:       '%s'\n", __func__, u->name);
-                    bug("[AHI:Prefs] %s:       mode %08x\n", __func__, u->prefs.ahiup_AudioMode);
-                )
-
+                
                 u->node.ln_Pri = -(u->prefs.ahiup_Unit);
                 Enqueue(list, (struct Node *) u);
-
+                
                 if(u->prefs.ahiup_Unit == AHI_NO_UNIT) {
                   lownode = TRUE;
                 }
                 else if(u->prefs.ahiup_Unit < UNITNODES) {
                   devnodes[u->prefs.ahiup_Unit] = TRUE;
                 }
-
+                
                 ci=ci->ci_Next;
               }
             }
@@ -484,6 +458,7 @@ struct List *GetUnits(char *name) {
       }
       FreeIFF(iff);
     }
+
 
     // Fill up to lowlevel + UNITNODES device nodes, if not found in prefs file
 
@@ -504,12 +479,10 @@ struct List *GetUnits(char *name) {
 struct List *GetModes(struct AHIUnitPrefs *prefs) {
   struct List *list;
 
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   list = AllocVec(sizeof(struct List), MEMF_CLEAR);
   
   if(list) {
-    IPTR id = AHI_NextAudioID(AHI_INVALID_ID);
+    ULONG id = AHI_NextAudioID(AHI_INVALID_ID);
 
     NewList(list);
 
@@ -518,9 +491,8 @@ struct List *GetModes(struct AHIUnitPrefs *prefs) {
       struct Node     *node;
       
       t = AllocVec( sizeof(struct ModeNode), MEMF_CLEAR);
-  
-      if( t != NULL )
-      {
+
+      if( t != NULL ) {
         LONG realtime;
 
         t->node.ln_Name = t->name;
@@ -530,31 +502,22 @@ struct List *GetModes(struct AHIUnitPrefs *prefs) {
         
         AHI_GetAudioAttrs(id, NULL,
             AHIDB_BufferLen,  80,
-            AHIDB_Name,       (IPTR) t->node.ln_Name,
-            AHIDB_Realtime,   (IPTR) &realtime,
+            AHIDB_Name,       (ULONG) t->node.ln_Name,
+            AHIDB_Realtime,   (ULONG) &realtime,
             TAG_DONE);
 
         if((prefs->ahiup_Unit == AHI_NO_UNIT) ||
-	   (realtime && (id & 0x00ff0000) != 0x00030000 /* Argh!! */))
-        {
+	   (realtime && (id & 0x00ff0000) != 0x00030000 /* Argh!! */)) {
           // Insert node alphabetically
           for(node = list->lh_Head;
               node->ln_Succ;
-              node = node->ln_Succ)
-          {
+              node = node->ln_Succ) {
             if(Stricmp(t->node.ln_Name,node->ln_Name) < 0)
-            {
-                break;
-            }
+              break;
           }
-
-          if(t != NULL)
-          {
-            Insert(list, (struct Node *) t, node->ln_Pred);
-          }
+          Insert(list, (struct Node *) t, node->ln_Pred);
         }
-        else
-        {
+        else {
           FreeVec(t);
         }
       }
@@ -572,8 +535,6 @@ char **List2Array(struct List *list) {
   char **strings, **rstrings;
   int i;
   struct Node *n;
-
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
 
   for(n = list->lh_Head, i = 0; n->ln_Succ; n = n->ln_Succ) {
     i++;
@@ -595,14 +556,13 @@ char **List2Array(struct List *list) {
 **** Returns a char* array with inputs names **********************************
 ******************************************************************************/
 
-char **GetInputs(IPTR id) {
+char **GetInputs(ULONG id) {
   char **strings, **rstrings;
   LONG inputs = 0, i;
 
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
 
   AHI_GetAudioAttrs(id, NULL,
-      AHIDB_Inputs, (IPTR) &inputs,
+      AHIDB_Inputs, (ULONG) &inputs,
       TAG_DONE);
 
   strings = AllocVec(sizeof(char *) * (inputs + 1) + (32 * inputs), MEMF_CLEAR);
@@ -615,7 +575,7 @@ char **GetInputs(IPTR id) {
       if(AHI_GetAudioAttrs(id, NULL,
           AHIDB_BufferLen, 32,
           AHIDB_InputArg,  i,
-          AHIDB_Input,     (IPTR) string,
+          AHIDB_Input,     (ULONG) string,
           TAG_DONE)) {
         *strings++ = string;
         while(*string++);
@@ -630,14 +590,13 @@ char **GetInputs(IPTR id) {
 **** Returns a char* array with outputs names *********************************
 ******************************************************************************/
 
-char **GetOutputs(IPTR id) {
+char **GetOutputs(ULONG id) {
   char **strings, **rstrings;
   LONG outputs = 0, i;
 
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
 
   AHI_GetAudioAttrs(id, NULL,
-      AHIDB_Outputs, (IPTR) &outputs,
+      AHIDB_Outputs, (ULONG) &outputs,
       TAG_DONE);
 
   strings = AllocVec(sizeof(char *) * (outputs + 1) + (32 * outputs), MEMF_CLEAR);
@@ -650,7 +609,7 @@ char **GetOutputs(IPTR id) {
       if(AHI_GetAudioAttrs(id, NULL,
           AHIDB_BufferLen, 32,
           AHIDB_OutputArg,  i,
-          AHIDB_Output,     (IPTR) string,
+          AHIDB_Output,     (ULONG) string,
           TAG_DONE)) {
         *strings++ = string;
         while(*string++);
@@ -671,10 +630,8 @@ BOOL SaveSettings(char *name, struct List *list) {
   struct Node       *n;
   BOOL               success = FALSE;
 
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   if(name && (iff = AllocIFF())) {
-    iff->iff_Stream = (IPTR) Open(name, MODE_NEWFILE);
+    iff->iff_Stream = (ULONG) Open(name, MODE_NEWFILE);
     if(iff->iff_Stream) {
       InitIFFasDOS(iff);
       if(!OpenIFF(iff, IFFF_WRITE)) {
@@ -773,8 +730,6 @@ BOOL WriteIcon(char *name) {
   STRPTR* oldtooltypes;
   BOOL success = FALSE;
 
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   /* Use the already present icon */
   
   dobj=GetDiskObject(name);
@@ -826,8 +781,6 @@ BOOL WriteIcon(char *name) {
 void FreeList(struct List *list) {
   struct Node *n;
 
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
   if(list == NULL)
     return;
 
@@ -847,8 +800,6 @@ void FreeList(struct List *list) {
 
 struct Node *GetNode(int index, struct List *list) {
   struct Node *n;
-
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
 
   if(list == NULL || list->lh_Head->ln_Succ == NULL)
     return NULL;
@@ -870,9 +821,7 @@ BOOL PlaySound( struct AHIUnitPrefs* prefs )
 {
   struct AHIAudioCtrl* actrl;
   BOOL                 rc = FALSE;
-
-  D(bug("[AHI:Prefs] %s()\n", __func__);)
-
+  
   actrl = AHI_AllocAudio( AHIA_AudioID,  prefs->ahiup_AudioMode,
                           AHIA_MixFreq,  prefs->ahiup_Frequency,
                           AHIA_Channels, 1,
@@ -910,7 +859,7 @@ BOOL PlaySound( struct AHIUnitPrefs* prefs )
                                      AHIC_Output,        prefs->ahiup_Output,
                                      TAG_DONE ) == AHIE_OK )
         {
-	  IPTR volume = 0x10000;
+	  ULONG volume = 0x10000;
 	  
 	  switch( globalprefs.ahigp_ScaleMode )
 	  {

@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: chmod.c 50462 2015-04-25 19:56:48Z schulz $
  *
  *      chmod.c - chmod() for usergroup link library
  *

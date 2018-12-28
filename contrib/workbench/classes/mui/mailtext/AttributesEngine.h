@@ -22,7 +22,7 @@
 
  Mailtext OpenSource project :  http://sourceforge.net/projects/mailtext/
 
- $Id$
+ $Id: AttributesEngine.h 36659 2011-01-18 13:26:51Z neil $
 
  Header for the attribute engine
 

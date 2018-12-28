@@ -1469,11 +1469,10 @@ ProcessCleanup(register __d1 BPTR SegList)
 STATIC struct Process *
 SegmentSplit(STRPTR Name,LONG StackSize,APTR Function)
 {
-	struct Process			*Parent, *Child;
+	struct Process			*Child;
 	struct CommandLineInterface	*CLI;
 
-        Parent = (struct Process *)FindTask(NULL);
-	CLI = (struct CommandLineInterface *)BADDR(Parent -> pr_CLI);
+	CLI = (struct CommandLineInterface *)BADDR(((struct Process *)SysBase -> ThisTask) -> pr_CLI);
 
 	Forbid();
 
@@ -1500,7 +1499,7 @@ LONG start(void)
 	CONST_STRPTR errorstring;
 	struct Process *myproc;
 
-	myproc = (struct Process *)FindTask(NULL);
+	myproc = (struct Process *)SysBase -> ThisTask;
 
 	if( myproc->pr_CLI )
 	{

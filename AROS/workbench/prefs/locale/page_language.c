@@ -1,6 +1,6 @@
 /*
    Copyright © 2003-2016, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: page_language.c 52956 2016-09-22 15:45:48Z neil $
  */
 
 #include <aros/debug.h>

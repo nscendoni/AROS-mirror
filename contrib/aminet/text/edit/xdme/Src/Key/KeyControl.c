@@ -32,7 +32,7 @@
     HISTORY
 	15-Dez-92  b_null created
 	16-Dez-92  b_null documented
-	$Date$ last update
+	$Date: 2011-01-18 14:26:51 +0100 (Tue, 18 Jan 2011) $ last update
 
 ******************************************************************************/
 

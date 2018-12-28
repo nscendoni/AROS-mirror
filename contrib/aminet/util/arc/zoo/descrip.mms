@@ -1,6 +1,6 @@
 # derived from: @(#) descrip.mms 2.2 88/01/09 12:10:49
 # $Source$
-# $Id$
+# $Id: descrip.mms 30794 2009-03-08 02:19:07Z neil $
 #Make Zoo for VAX/VMS
 #
 #The contents of this makefile are hereby released to the public domain.

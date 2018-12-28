@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: alert_cpu.c 45727 2012-09-04 16:41:08Z sonic $
 
     Desc: PowerPC CPU context parsing routines.
     Lang: english

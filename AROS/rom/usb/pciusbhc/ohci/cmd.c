@@ -1,7 +1,7 @@
 /*
    Copyright © 2002-2009, Chris Hodges. All rights reserved.
-   Copyright © 2009-2017, The AROS Development Team. All rights reserved.
-   $Id$
+   Copyright © 2009-2012, The AROS Development Team. All rights reserved.
+   $Id: cmd.c 53132 2016-12-29 10:32:06Z deadwood $
  */
 
 #include <devices/usb_hub.h>
@@ -151,13 +151,12 @@ struct Unit *Open_Unit(struct IOUsbHWReq *ioreq,
 
             CopyMem(unit->hu_TimerReq, &unit->hu_NakTimeoutReq,
                 sizeof(struct timerequest));
-            memset( &unit->hu_NakTimeoutMsgPort, 0, sizeof( unit->hu_NakTimeoutMsgPort ) );
+            unit->hu_NakTimeoutReq.tr_node.io_Message.mn_ReplyPort =
+                &unit->hu_NakTimeoutMsgPort;
             unit->hu_NakTimeoutMsgPort.mp_Node.ln_Type = NT_MSGPORT;
             unit->hu_NakTimeoutMsgPort.mp_Flags = PA_SOFTINT;
             unit->hu_NakTimeoutMsgPort.mp_SigTask = &unit->hu_NakTimeoutInt;
             NewList(&unit->hu_NakTimeoutMsgPort.mp_MsgList);
-            unit->hu_NakTimeoutReq.tr_node.io_Message.mn_ReplyPort =
-                &unit->hu_NakTimeoutMsgPort;
             Cause(&unit->hu_NakTimeoutInt);
             return &unit->hu_Unit;
         }
@@ -736,7 +735,8 @@ void CheckSpecialCtrlTransfers(struct PCIController *hc,
 /* \\\ */
 
 /* /// "NakTimeoutInt()" */
-AROS_INTH1(NakTimeoutInt, struct PCIUnit *, unit)
+/* ABI_V0 compatibility */
+AROS_SOFTINTH1(NakTimeoutInt, struct PCIUnit *, unit)
 {
     AROS_INTFUNC_INIT
 

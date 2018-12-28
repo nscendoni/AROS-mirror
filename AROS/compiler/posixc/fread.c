@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fread.c 49155 2014-07-24 18:56:37Z deadwood $
 
     C99 function fread().
 */

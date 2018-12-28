@@ -1,6 +1,6 @@
 /*
     Copyright © 2002, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: infinity.c 48035 2013-09-08 21:17:21Z verhaegs $
 
     Definition of infinity and NaN.
 */

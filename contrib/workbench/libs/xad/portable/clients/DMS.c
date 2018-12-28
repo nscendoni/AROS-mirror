@@ -1,7 +1,7 @@
 #ifndef XADMASTER_DMS_CANY
 #define XADMASTER_DMS_C
 
-/*  $Id$
+/*  $Id: DMS.c 51911 2016-03-13 13:25:19Z NicJA $
     DMS and related disk/file archiver clients
 
     XAD library system for archive handling

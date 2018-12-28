@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: muimiamipanel_funcs.c 39338 2011-06-17 05:52:44Z jmcmullan $
 */
 
 #include <proto/exec.h>

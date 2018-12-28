@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: createmenusa.c 30792 2009-03-07 22:40:04Z neil $
 */
 #include "gadtools_intern.h"
 #include <exec/memory.h>

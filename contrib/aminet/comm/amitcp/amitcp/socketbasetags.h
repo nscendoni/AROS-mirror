@@ -1,7 +1,7 @@
 #ifndef AMITCP_SOCKETBASETAGS_H
 #define AMITCP_SOCKETBASETAGS_H
 /*
- * $Id$
+ * $Id: socketbasetags.h 30794 2009-03-08 02:19:07Z neil $
  *
  * Copyright (c) 1994 AmiTCP/IP Group, <amitcp-group@hut.fi>
  *                    Helsinki University of Technology, Finland.

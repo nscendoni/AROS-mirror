@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: SetClock.c 40163 2011-07-15 14:11:24Z sonic $
 
     Desc: SetClock - set/save the date from/to the BBU clock.
     Lang: English

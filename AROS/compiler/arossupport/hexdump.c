@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hexdump.c 52974 2016-10-09 17:40:11Z deadwood $
 
     Desc: Prints a hexdump of a memory region
     Lang: english

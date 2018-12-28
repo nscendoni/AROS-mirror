@@ -1,10 +1,12 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2010, The AROS Development Team. All rights reserved.
+    $Id: rawmaygetchar.c 45730 2012-09-04 18:33:18Z jmcmullan $
 
     Desc: Check if there is a character on the raw console
     Lang: english
 */
+
+#include <proto/kernel.h>
 
 #include "exec_intern.h"
 

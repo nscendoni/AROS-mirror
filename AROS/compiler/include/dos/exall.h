@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: exall.h 51632 2016-03-07 16:39:55Z neil $
 
     Desc: ExAll() handling.
     Lang: english

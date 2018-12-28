@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: trackdisk_hw.c 39369 2011-06-18 20:06:53Z jmcmullan $
 
     Desc: Intel HW floppy stuff
     Lang: English

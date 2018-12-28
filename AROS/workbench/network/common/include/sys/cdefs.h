@@ -2,7 +2,7 @@
 #define _SYS_CDEFS_H_
 /*
  * Copyright 1995-2002, The AROS Development Team. All rights reserved.
- * $Id$
+ * $Id: cdefs.h 48699 2014-01-11 17:39:44Z jmcmullan $
  *
  * <sys/cdefs.h> header file, would you believe it's mostly the same as
  * <aros/system.h>, except that here we define all the things that

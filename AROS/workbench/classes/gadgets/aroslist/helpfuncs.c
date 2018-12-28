@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2005, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: helpfuncs.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Help functions for aroslistclass.
     Lang: english

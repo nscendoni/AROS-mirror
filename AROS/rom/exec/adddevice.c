@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2001, The AROS Development Team. All rights reserved.
+    $Id: adddevice.c 36262 2010-12-27 12:17:48Z sonic $
 
     Desc: Add a device to the public list of devices.
     Lang: english
@@ -10,10 +10,6 @@
 #include <exec/devices.h>
 #include <aros/libcall.h>
 #include <proto/exec.h>
-
-#include "exec_intern.h"
-#include "exec_debug.h"
-#include "exec_locks.h"
 
 /*****************************************************************************
 
@@ -62,14 +58,13 @@
     SumLibrary(&device->dd_Library);
 
     /* Arbitrate for the device list */
-    EXEC_LOCK_LIST_WRITE_AND_FORBID(&SysBase->DeviceList);
+    Forbid();
 
     /* And add the device */
     Enqueue(&SysBase->DeviceList,&device->dd_Library.lib_Node);
 
     /* All done. */
-    EXEC_UNLOCK_LIST_AND_PERMIT(&SysBase->DeviceList);
-
+    Permit();
     AROS_LIBFUNC_EXIT
 } /* AddDevice */
 

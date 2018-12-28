@@ -1,6 +1,6 @@
 /*
     Copyright © 2000, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: x86_NatSemi.c 48533 2013-12-06 21:24:19Z jmcmullan $
 
     Desc: Probe installed National Semiconductor  Geode CPUs and display relevant information
     Lang: english

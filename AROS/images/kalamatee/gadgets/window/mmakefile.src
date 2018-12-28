@@ -1,4 +1,4 @@
-include $(SRCDIR)/config/aros.cfg
+include $(TOP)/config/make.cfg
 
 DIRS = os1.x os3.1 special #xen
 

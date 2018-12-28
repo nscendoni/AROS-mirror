@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: privatestubs.c 42414 2011-11-11 21:33:33Z verhaegs $
 
     Desc: Stubs for private methods.
     Lang: english

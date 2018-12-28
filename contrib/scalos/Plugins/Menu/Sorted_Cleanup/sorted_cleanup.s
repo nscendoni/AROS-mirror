@@ -1,7 +1,7 @@
 ; sorted_cleanup.s
 ; Scalos Sorted Cleanup PlugIn
-; $Date$
-; $Revision$
+; $Date: 2014-01-02 19:34:06 +0100 (Thu, 02 Jan 2014) $
+; $Revision: 48675 $
 
 ;---------------------------------------------------------------
 	machine	68020

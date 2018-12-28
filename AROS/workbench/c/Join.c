@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Join.c 34741 2010-10-15 14:57:20Z jmcmullan $
 
     Join - Create a single file from several.
 */

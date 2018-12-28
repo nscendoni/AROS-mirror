@@ -1,6 +1,6 @@
 #include "c.h"
 
-static char rcsid[] = "$Id$";
+static char rcsid[] = "$Id: gen.c 30794 2009-03-08 02:19:07Z neil $";
 
 #define readsreg(p) \
 	(generic((p)->op)==INDIR && (p)->kids[0]->op==VREG+P)

@@ -3,7 +3,7 @@
 
 /*
    Copyright © 2004-2010, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: page_timezone.h 40161 2011-07-15 13:05:27Z sonic $
 */
 
 #include <exec/types.h>

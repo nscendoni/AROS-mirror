@@ -1,7 +1,7 @@
 #ifndef XADMASTER_XADCLIENT_H
 #define XADMASTER_XADCLIENT_H
 
-/*  $Id$
+/*  $Id: xadClient.h 39585 2011-06-28 08:58:00Z NicJA $
     Amiga part of client interface to get portable clients
 
     XAD library system for archive handling

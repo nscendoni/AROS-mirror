@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: timer.h 37689 2011-03-20 16:15:51Z verhaegs $
 
     Desc: Timer device
     Lang: english

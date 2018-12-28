@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: changeworkbenchselectiona.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Change the selection state of icons in a named drawer.
     Lang: english

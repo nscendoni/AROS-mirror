@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Echo.c 42496 2011-11-16 15:39:02Z Sami $
 
     Desc:
     Lang:

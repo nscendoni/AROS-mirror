@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Install-grub2-i386-pc.c 48905 2014-04-03 17:15:39Z neil $
 */
 /******************************************************************************
 

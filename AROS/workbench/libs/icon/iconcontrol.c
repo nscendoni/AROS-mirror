@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: iconcontrol.c 44444 2012-03-23 03:49:42Z jmcmullan $
 */
 
 #include <exec/types.h>

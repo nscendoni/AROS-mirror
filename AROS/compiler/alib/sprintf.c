@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sprintf.c 51947 2016-03-14 18:25:23Z neil $
 */
 
 #include <exec/rawfmt.h>

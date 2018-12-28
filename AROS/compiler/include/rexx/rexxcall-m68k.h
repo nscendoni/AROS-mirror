@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rexxcall-m68k.h 52973 2016-10-06 03:28:07Z neil $
 
     Desc: Macros to make calling ARexx library querying functions portable
     Lang: English

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: basicfuncs.c 55379 2018-07-27 19:43:45Z neil $
 
     Desc: Basic helpfuncs for Asl.
     Lang: english

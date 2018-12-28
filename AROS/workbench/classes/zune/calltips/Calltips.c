@@ -1,7 +1,7 @@
 /*
     Copyright © 2014, Thore Böckelmann. All rights reserved.
     Copyright © 2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Calltips.c 50720 2015-05-19 23:23:22Z neil $
 */
 
 #include <proto/alib.h>

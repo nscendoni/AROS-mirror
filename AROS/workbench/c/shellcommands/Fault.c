@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Fault.c 34499 2010-09-24 18:37:53Z agreppin $
 
     Desc: Fault - Display an informative message about an error number.
     Lang: English

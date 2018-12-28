@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: p96call.c 36646 2011-01-17 13:48:43Z neil $
 */
 /* This program generates the p96call.h macroset for gcc-4.5.1 m68k-elf
  *

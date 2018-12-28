@@ -1,7 +1,7 @@
 #ifndef XADMASTER_XMASH_C
 #define XADMASTER_XMASH_C
 
-/*  $Id$
+/*  $Id: xMash.c 36659 2011-01-18 13:26:51Z neil $
     xMash disk archiver client
 
     XAD library system for archive handling

@@ -2,8 +2,8 @@
 #define _LIBRARIES_STDC_H
 
 /*
-    Copyright © 2012-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2012-2013, The AROS Development Team. All rights reserved.
+    $Id: stdc.h 53132 2016-12-29 10:32:06Z deadwood $
 
     Public part of StdC libbase.
     Take care of backwards compatibility when changing something in this file.
@@ -19,8 +19,8 @@ struct StdCBase
 
     /* ctype.h */
     const unsigned short int * __ctype_b;
-    const unsigned char * __ctype_toupper;
-    const unsigned char * __ctype_tolower;
+    const int * __ctype_toupper;
+    const int * __ctype_tolower;
 
     /* errno.h */
     int _errno;
@@ -46,8 +46,6 @@ int *__stdc_set_errorptr(int *errorptr);
 int *__stdc_get_errorptr(void);
 void __stdc_set_exitjmp(jmp_buf exitjmp, jmp_buf previousjmp);
 void __stdc_jmp2exit(int normal, int returncode) __noreturn;
-void *__stdc_set_fpuprivate(void *fpuprivate);
-void *__stdc_get_fpuprivate(void);
 
 __END_DECLS
 

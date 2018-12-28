@@ -1,6 +1,6 @@
 /* 
     Copyright © 2002-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: balance.c 47636 2013-07-09 17:43:50Z neil $
 */
 
 #include <string.h>

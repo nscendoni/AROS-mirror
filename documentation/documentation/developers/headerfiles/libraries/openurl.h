@@ -17,7 +17,7 @@
 
  openurl.library project: http://sourceforge.net/projects/openurllib/
 
- $Id$
+ $Id: openurl.h 33636 2010-06-17 17:14:53Z mazze $
 
 ***************************************************************************/
 

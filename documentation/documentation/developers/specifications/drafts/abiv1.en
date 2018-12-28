@@ -4,8 +4,8 @@ ABI V1
 
 :Author:    Staf Verhaegen, Marcus Weiss
 :Copyright: Copyright © 2008-2010, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 48056 $
+:Date:      $Date: 2013-09-08 23:20:57 +0200 (Sun, 08 Sep 2013) $
 
 .. Contents::
 
@@ -588,7 +588,7 @@ Example of assembler stub::
 
     /*
     Copyright © 2008, The AROS Development Team. All rights reserved.
-        $Id$
+        $Id: abiv1.en 48056 2013-09-08 21:20:57Z verhaegs $
 
         Desc: alib variadic stubs
         Lang: english

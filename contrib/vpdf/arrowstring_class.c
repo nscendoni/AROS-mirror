@@ -31,20 +31,20 @@ struct Data
 	ULONG Min;
 };
 
-IPTR ArrowString_New(struct IClass *cl, Object *obj,  struct opSet *msg)
+ULONG ArrowString_New(struct IClass *cl, Object *obj,  struct opSet *msg)
 {
 	struct Data tmp;
 
-	memset(&tmp, 0, sizeof(tmp));
+	memset(&tmp, sizeof(tmp), 0);
 
-	obj = (Object *) DoSuperNew(cl, obj, MUIA_Group_Horiz, TRUE, MUIA_Group_HorizSpacing, 0,
+	obj = DoSuperNew(cl, obj, MUIA_Group_Horiz, TRUE, MUIA_Group_HorizSpacing, 0,
 		Child, tmp.ST_Number = StringObject, StringFrame,
 			MUIA_CycleChain, TRUE,
 			MUIA_String_Accept, "0123456789",
 			MUIA_String_MaxLen, 5,
 			MUIA_FixWidthTxt, "123456",
 			MUIA_String_Format, MUIV_String_Format_Right,
-			MUIA_String_Contents, (IPTR) "1",
+			MUIA_String_Contents, "1",
 		End,
 		Child, tmp.BT_Increase = ImageObject, ImageButtonFrame,
 			MUIA_InputMode, MUIV_InputMode_RelVerify,
@@ -93,13 +93,13 @@ IPTR ArrowString_New(struct IClass *cl, Object *obj,  struct opSet *msg)
 		DoMethod(data->ST_Number, MUIM_Notify, MUIA_String_Acknowledge, MUIV_EveryTime,
 			obj, 3, MUIM_Set, MA_ArrowString_Changed, TRUE);
 
-		return (IPTR)obj;
+		return (ULONG)obj;
 	}
 
 	return (0);
 }
 
-IPTR ArrowString_Get(struct IClass *cl, Object *obj, struct opGet *msg)
+ULONG ArrowString_Get(struct IClass *cl, Object *obj, struct opGet *msg)
 {
 	switch (msg->opg_AttrID)
 	{
@@ -112,7 +112,7 @@ IPTR ArrowString_Get(struct IClass *cl, Object *obj, struct opGet *msg)
 	return(DoSuperMethodA(cl, obj, (APTR)msg));
 }
 
-IPTR ArrowString_Increase(struct IClass *cl, Object *obj)
+ULONG ArrowString_Increase(struct IClass *cl, Object *obj)
 {
 	struct Data *data = INST_DATA(cl, obj);
 	ULONG no = xget(data->ST_Number, MUIA_String_Integer);
@@ -123,7 +123,7 @@ IPTR ArrowString_Increase(struct IClass *cl, Object *obj)
 	return (0);
 }
 
-IPTR ArrowString_Decrease(struct IClass *cl, Object *obj)
+ULONG ArrowString_Decrease(struct IClass *cl, Object *obj)
 {
 	struct Data *data = INST_DATA(cl, obj);
 	ULONG no = xget(data->ST_Number, MUIA_String_Integer);
@@ -137,7 +137,7 @@ IPTR ArrowString_Decrease(struct IClass *cl, Object *obj)
 	return (0);
 }
 
-IPTR ArrowString_Dispose(struct IClass *cl, Object *obj, Msg msg)
+ULONG ArrowString_Dispose(struct IClass *cl, Object *obj, Msg msg)
 {
 	return(DoSuperMethodA(cl, obj, (Msg)msg));
 }

@@ -1,6 +1,6 @@
 /*
     Copyright © 2014-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getparenttaskstorageslot.c 50721 2015-05-20 01:07:11Z NicJA $
 */
 
 #include <aros/debug.h>
@@ -49,7 +49,7 @@
     AROS_LIBFUNC_INIT
 
     struct Task *ThisTask = GET_THIS_TASK;
-    struct ETask *et = ThisTask ? GetETask(ThisTask) : NULL;
+    struct ETask *et = GetETask(ThisTask);
     IPTR result = (IPTR)NULL;
 
     if (!et)

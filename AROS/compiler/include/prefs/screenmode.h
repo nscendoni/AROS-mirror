@@ -2,8 +2,8 @@
 #define PREFS_SCREENMODE_H
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2001, The AROS Development Team. All rights reserved.
+    $Id: screenmode.h 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Screenmode prefs definitions
     Lang: english
@@ -31,8 +31,8 @@ struct ScreenModePrefs
     UWORD smp_Control;
 };
 
-#define SMB_AUTOSCROLL 0
+#define SMB_AUTOSCROLL 1
 
-#define SMF_AUTOSCROLL (1 << SMB_AUTOSCROLL)
+#define SMF_AUTOSCROLL (1<<0)
 
 #endif /* PREFS_SCREENMODE_H */

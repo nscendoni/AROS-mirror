@@ -1,8 +1,8 @@
-#   $Id$
+#   $Id: mmakefile.src 52736 2016-05-21 17:00:19Z deadwood $
 #
 #   Makefile to make lha.
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES := append extract larc lhext maketree slide crcio header lhadd\
 lhlist patmatch dhuf huf lharc maketbl shuf util

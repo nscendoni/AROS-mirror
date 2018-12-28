@@ -1,6 +1,6 @@
 #
 #   Copyright © 2010-2011, The AROS Development Team. All rights reserved.
-#   $Id$
+#   $Id: leaveinterrupt_x86_64.s 43164 2011-12-22 06:18:19Z sonic $
 #
 #   Desc: Exit from emulated interrupt with enabling, x86-64 version
 #   Lang: English

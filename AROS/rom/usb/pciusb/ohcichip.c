@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2013, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: ohcichip.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 /* Enable debug level 1000, keeps an eye on TD DoneQueue consistency */
@@ -64,7 +64,8 @@ static void PrintED(const char *txt, struct OhciED *oed, struct PCIController *h
 #define PrintED(txt, oed, hc)
 #endif
 
-static AROS_INTH1(OhciResetHandler, struct PCIController *, hc)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(OhciResetHandler, struct PCIController *, hc)
 {
     AROS_INTFUNC_INIT
 
@@ -1036,7 +1037,8 @@ void ohciUpdateFrameCounter(struct PCIController *hc)
     Enable();
 }
 
-static AROS_INTH1(ohciCompleteInt, struct PCIController *,hc)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(ohciCompleteInt, struct PCIController *,hc)
 {
     AROS_INTFUNC_INIT
 

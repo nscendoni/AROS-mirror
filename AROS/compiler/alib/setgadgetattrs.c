@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setgadgetattrs.c 48792 2014-02-01 17:14:41Z mazze $
 
     Desc: Change the attributes of a BOOPSI gadget
     Lang: english

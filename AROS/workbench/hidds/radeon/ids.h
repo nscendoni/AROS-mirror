@@ -2,7 +2,7 @@
 #define IDS_H_
 /*
     Copyright © 2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ids.h 30792 2009-03-07 22:40:04Z neil $
 
     Desc: PCI ids for ATI
     Lang: English

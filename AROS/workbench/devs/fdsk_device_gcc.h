@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fdsk_device_gcc.h 43306 2011-12-29 15:04:41Z olivieradam $
 */
 
 #include <aros/libcall.h>

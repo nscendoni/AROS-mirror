@@ -22,7 +22,7 @@
 
  Mailtext OpenSource project : http://sourceforge.net/projects/mailtext/
 
- $Id$
+ $Id: Mailtext_mcp_private.h 36659 2011-01-18 13:26:51Z neil $
 
  Sourcecode for Mailtext.mcc
 

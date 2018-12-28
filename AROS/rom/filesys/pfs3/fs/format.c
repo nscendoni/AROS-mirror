@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: format.c 49095 2014-07-01 18:46:34Z twilen $ */
 /* $Log: format.c $
  * Revision 11.29  1999/05/14  11:21:33  Michiel
  * Bigger reserved area (2x)

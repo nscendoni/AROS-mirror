@@ -30,7 +30,7 @@ the existing commercial status of Directory Opus 5.
 
 #include "diskop.h"
 
-int  main(argc,argv)
+void main(argc,argv)
 int argc;
 char *argv[];
 {
@@ -175,7 +175,7 @@ char *portname;
 	}
 }
 
-int dopus_message(cmd,data,portname)
+dopus_message(cmd,data,portname)
 int cmd;
 APTR data;
 char *portname;
@@ -250,7 +250,7 @@ int mask,*count;
 
 int error_rets[]={1,0};
 
-int check_error(reqbase,str,gadtxt)
+check_error(reqbase,str,gadtxt)
 struct RequesterBase *reqbase;
 char *str;
 int gadtxt;
@@ -286,7 +286,7 @@ ULONG *sector;
 	return(sum);
 }
 
-int do_writeblock(device_req,buffer,offset)
+do_writeblock(device_req,buffer,offset)
 struct IOExtTD *device_req;
 APTR buffer;
 ULONG offset;
@@ -302,9 +302,9 @@ void inhibit_drive(device,state)
 char *device;
 ULONG state;
 {
-#if 0
 	struct MsgPort *handler;
 
+#if 0
 	if (DOSBase->dl_lib.lib_Version<36) {
 		if (handler=(struct MsgPort *)DeviceProc(device))
 			SendPacket(handler,ACTION_INHIBIT,&state,1);
@@ -382,7 +382,7 @@ char *name;
 	if (dl = LockDosList(LDF_DEVICES | LDF_READ))
 		dl = (APTR)FindDosEntry(dl,name,LDF_DEVICES);
 	UnLockDosList(LDF_DEVICES | LDF_READ);
-	return (struct DeviceNode *)dl;
+	return dl;
 #endif
 }
 
@@ -408,21 +408,21 @@ char *alike;
       
     while ((devnode = (struct DeviceNode *)NextDosEntry((struct DosList *)devnode,LDF_DEVICES))) {
         if (/*devnode->dn_Type==DLT_DEVICE && devnode->dn_Task &&*/
-            (long)devnode->dn_Startup>512) {
+            devnode->dn_Startup>512) {
             if (!alikenode || like_devices(devnode,alikenode)) 
                 ++count;
         }
 //        devnode=(struct DeviceNode *) BADDR(devnode->dn_Next);
     }
           
-    if ((listtable=LAllocRemember(key,count*sizeof(APTR),MEMF_CLEAR))) {
+    if ((listtable=LAllocRemember(key,count*4,MEMF_CLEAR))) {
         devnode = (struct DeviceNode *)LockDosList(LDF_READ | LDF_DEVICES);
 //        devnode=(struct DeviceNode *) BADDR(dosinfo->di_DevInfo);
         count=0;
         while ((devnode = (struct DeviceNode *)NextDosEntry((struct DosList *)devnode,LDF_DEVICES))) {
 //        while (devnode) {
             if (/*devnode->dn_Type==DLT_DEVICE && devnode->dn_Task &&*/
-                (long)devnode->dn_Startup>512) {
+                devnode->dn_Startup>512) {
                 if (!alikenode || like_devices(devnode,alikenode)) {
                     BtoCStr((BPTR)devnode->dn_Name,devname,32);
                     strcat(devname,":");
@@ -460,7 +460,7 @@ char **table;
 			}
 }
 
-int check_disk(reqbase,device_req,name,prot)
+check_disk(reqbase,device_req,name,prot)
 struct RequesterBase *reqbase;
 struct IOExtTD *device_req;
 char *name;
@@ -491,7 +491,7 @@ int prot;
 	return(1);
 }
 
-int check_abort(window)
+check_abort(window)
 struct Window *window;
 {
 	struct IntuiMessage *msg;
@@ -505,7 +505,7 @@ struct Window *window;
 	return(abort);
 }
 
-int check_blank_disk(reqbase,device,action)
+check_blank_disk(reqbase,device,action)
 struct RequesterBase *reqbase;
 char *device,*action;
 {
@@ -560,8 +560,7 @@ struct Gadget *gadget;
 int count;
 struct DOpusListView *list;
 {
-	BPTR file;
-	int listid=MAKE_ID('L','I','S','T'); // FIXME: endiannes?
+	int file,listid='LIST';
 	UWORD len;
 	char envname[80],null=0;
 
@@ -603,8 +602,7 @@ struct Gadget *firstgadget;
 int count;
 struct DOpusListView *list;
 {
-	BPTR file;
-	int size,a,b,*lbuf;
+	int file,size,a,b,*lbuf;
 	char envname[80],*nptr;
 	struct Gadget *gadget;
 	UWORD gadgettype,gadgetid,len,*buf;
@@ -625,7 +623,7 @@ struct DOpusListView *list;
 
 	for (a=0;a<size/2;) {
 		lbuf=(int *)&buf[a];
-		if (lbuf[0]==MAKE_ID('L','I','S','T')) { // FIXME: endiannes?
+		if (lbuf[0]=='LIST') {
 			a+=2;
 			nptr=(char *)&buf[a];
 			if (list) {
@@ -707,7 +705,7 @@ char *exclude;
 	list->topitem=def;
 }
 
-int like_devices(node,likenode)
+like_devices(node,likenode)
 struct DeviceNode *node,*likenode;
 {
 	struct DosEnvec *envec,*likeenvec;
@@ -727,7 +725,7 @@ struct DeviceNode *node,*likenode;
 	return(1);
 }
 
-int open_device(device,handle)
+open_device(device,handle)
 char *device;
 struct DeviceHandle *handle;
 {

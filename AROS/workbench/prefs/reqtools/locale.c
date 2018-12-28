@@ -1,6 +1,6 @@
 /*
-    Copyright © 2013-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2013, The AROS Development Team. All rights reserved.
+    $Id: locale.c 52469 2016-03-31 06:22:07Z mazze $
 */
 
 #define DEBUG 0
@@ -13,7 +13,7 @@
 #include "strings.h"
 
 #define CATALOG_NAME     "System/Prefs/ReqTools.catalog"
-#define CATALOG_VERSION  3
+#define CATALOG_VERSION  39
 
 /*** Variables **************************************************************/
 struct Catalog *catalog;

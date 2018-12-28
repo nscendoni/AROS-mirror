@@ -2,7 +2,7 @@
     Copyright © 2010, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: pm_layoutmenu.c 33390 2010-05-30 12:14:54Z mazze $
 */
 
 #include <utility/tagitem.h>

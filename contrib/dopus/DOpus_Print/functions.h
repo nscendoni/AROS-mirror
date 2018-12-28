@@ -31,7 +31,6 @@ the existing commercial status of Directory Opus 5.
 struct PrintHandle;
 
 #if defined(__AROS__)
-#include <stdio.h>
 #define lsprintf sprintf
 #endif
 //void lsprintf __ARGS((char *,char *,...));

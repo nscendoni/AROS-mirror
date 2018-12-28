@@ -3,7 +3,7 @@
     Copyright © 2002, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: mui_notify1.c 39324 2011-06-17 05:51:04Z jmcmullan $
 */
 
 #include <exec/types.h>

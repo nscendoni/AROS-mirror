@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gensets.c 48831 2014-03-07 18:48:01Z neil $
 */
 
 #include <stdio.h>

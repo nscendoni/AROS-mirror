@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: strtok.c 48303 2013-10-17 05:02:50Z mazze $
 
     C99 function strtok().
 */

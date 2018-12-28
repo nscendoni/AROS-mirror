@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: asmcall.h 51105 2015-09-17 16:26:45Z neil $
 */
 
 #ifndef AROS_ASMCALL_H
@@ -9,7 +9,7 @@
 /******************************************************************************
 
     MODUL
-	$Id$
+	$Id: asmcall.h 51105 2015-09-17 16:26:45Z neil $
 
     DESCRIPTION
 	Some macros to build and call functions with registerized parameters on

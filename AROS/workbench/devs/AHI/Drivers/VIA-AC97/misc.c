@@ -1,7 +1,7 @@
 /*
     Copyright © 2005-2013, Davy Wentzler. All rights reserved.
     Copyright © 2010-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: misc.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <config.h>
@@ -64,8 +64,8 @@ static const unsigned long IO_FM = 0xe000;
 static const unsigned long IO_MIDI = 0xe400;
 
 #ifdef __AROS__
-INTGW(static, void,  playbackinterrupt, PlaybackInterrupt);
-INTGW(static, void,  recordinterrupt,   RecordInterrupt);
+SOFTINTGW(static, void,   playbackinterrupt, PlaybackInterrupt); /* ABI_V0 compatibility */
+SOFTINTGW(static, void,   recordinterrupt,   RecordInterrupt); /* ABI_V0 compatibility */
 INTGW(static, ULONG, cardinterrupt,  CardInterrupt);
 #endif
 

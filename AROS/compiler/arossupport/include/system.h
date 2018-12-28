@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: system.h 52021 2016-03-17 04:35:02Z jmcmullan $
 
     Desc: Analyse the current kind of system and compiler.
     Lang: english
@@ -32,7 +32,6 @@
 #else
 #    define __GNUC_PREREQ(maj, min) 0
 #endif
-#define __GNUC_PREREQ__ __GNUC_PREREQ
 
 
 /*
@@ -101,8 +100,6 @@
 #ifndef __packed
 #if __GNUC_PREREQ(2,5)
 #   define __packed __attribute__((__packed__))
-#else
-#   error Define __packed appropriately for your compiler!
 #endif
 #endif
 

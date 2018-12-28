@@ -6,7 +6,7 @@
     This file is part of the AboutWindow class, which is distributed under
     the terms of version 2.1 of the GNU Lesser General Public License.
     
-    $Id$
+    $Id: aboutwindow_private.h 39045 2011-06-06 22:57:48Z mazze $
 */
 
 #include <exec/types.h>

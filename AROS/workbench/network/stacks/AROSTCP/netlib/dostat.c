@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: dostat.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      dostat.c - *stat() function common part 
  *

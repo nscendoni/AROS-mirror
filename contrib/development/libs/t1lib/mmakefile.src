@@ -1,7 +1,7 @@
 # Copyright © 2015-2016, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 52561 2016-04-08 18:20:50Z neil $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- contrib-development : contrib-development-libs-t1lib
 

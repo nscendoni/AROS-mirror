@@ -1,6 +1,6 @@
 /*
     Copyright © 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support_messages.c 43500 2012-01-07 18:53:07Z deadwood $
 */
 
 #include "support_messages.h"

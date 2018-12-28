@@ -16,7 +16,7 @@
 
  BetterString class Support Site:  http://www.sf.net/projects/bstring-mcc/
 
- $Id$
+ $Id: HotkeyString_mcc.h 33636 2010-06-17 17:14:53Z mazze $
 
 ***************************************************************************/
 

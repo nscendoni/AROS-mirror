@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ieeesplog10.c 47351 2013-05-04 15:29:44Z mazze $
 */
 
 #include "mathieeesingtrans_intern.h"

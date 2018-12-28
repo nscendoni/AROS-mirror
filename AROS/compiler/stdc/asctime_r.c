@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: asctime_r.c 48031 2013-09-08 21:16:04Z verhaegs $
 
     Convert a time into a string, reentrant.
 */

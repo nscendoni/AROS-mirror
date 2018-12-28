@@ -1,7 +1,7 @@
 #ifndef XADMASTER_TR_DOS_C
 #define XADMASTER_TR_DOS_C
 
-/*  $Id$
+/*  $Id: TR-DOS.c 36659 2011-01-18 13:26:51Z neil $
     TR-DOS FS this is a filesystem client for TR-DOS disk images
 
     XAD library system for archive handling

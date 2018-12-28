@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readlink.c 48957 2014-04-20 18:29:34Z deadwood $
 
     POSIX.1-2008 function readlink().
 */

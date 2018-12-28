@@ -1,6 +1,6 @@
 /*
     Copyright © 1999, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: window.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Demo showing moving and sizing of windows
     Lang: English.

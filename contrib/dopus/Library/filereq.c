@@ -72,23 +72,23 @@ struct IntuiText
 const static struct Gadget
     defaultgadgets[9]={
         {NULL,64,47,240,8,GADGHCOMP,RELVERIFY|TOGGLESELECT,STRGADGET,
-            NULL,NULL,NULL,0,NULL,FILENAME,NULL},
+            NULL,NULL,NULL,NULL,NULL,FILENAME,NULL},
         {NULL,64,34,240,8,GADGHCOMP,RELVERIFY|TOGGLESELECT,STRGADGET,
-            NULL,NULL,NULL,0,NULL,DRAWERNAME,NULL},
+            NULL,NULL,NULL,NULL,NULL,DRAWERNAME,NULL},
         {NULL,8,59,132,12,GADGHCOMP,RELVERIFY,BOOLGADGET,NULL,NULL,
-            NULL,0,NULL,OKAY,NULL},
+            NULL,NULL,NULL,OKAY,NULL},
         {NULL,176,59,132,12,GADGHCOMP,RELVERIFY,BOOLGADGET,NULL,NULL,
-            NULL,0,NULL,CANCEL,NULL},
+            NULL,NULL,NULL,CANCEL,NULL},
         {NULL,292,14,16,8,GADGHCOMP,GADGIMMEDIATE|RELVERIFY,BOOLGADGET,
-            NULL,NULL,NULL,0,NULL,FILENAMEUP,NULL},
+            NULL,NULL,NULL,NULL,NULL,FILENAMEUP,NULL},
         {NULL,292,22,16,8,GADGHCOMP,GADGIMMEDIATE|RELVERIFY,BOOLGADGET,
-            NULL,NULL,NULL,0,NULL,FILENAMEDOWN,NULL},
+            NULL,NULL,NULL,NULL,NULL,FILENAMEDOWN,NULL},
         {NULL,8,14,132,12,GADGHCOMP,RELVERIFY,BOOLGADGET,NULL,NULL,
-            NULL,0,NULL,PARENT,NULL},
+            NULL,NULL,NULL,PARENT,NULL},
         {NULL,176,14,132,12,GADGHCOMP,RELVERIFY,BOOLGADGET,NULL,NULL,
-            NULL,0,NULL,DRIVES,NULL},
+            NULL,NULL,NULL,DRIVES,NULL},
         {NULL,296,30,8,22,GADGHNONE,GADGIMMEDIATE|FOLLOWMOUSE|RELVERIFY,PROPGADGET,
-            NULL,NULL,NULL,0,NULL,FILENAMEPOS,NULL}};
+            NULL,NULL,NULL,NULL,NULL,FILENAMEPOS,NULL}};
 
 const static struct NewWindow defaultwindow={
     15,25,316,115,0,1,IDCMP_GADGETUP|IDCMP_GADGETDOWN|IDCMP_MOUSEMOVE|IDCMP_MOUSEBUTTONS,
@@ -937,7 +937,7 @@ int __saveds DoFileRequest(register struct DOpusFileReq *freq __asm("a0"))
                     }
                     if (freq->flags&DFRF_MULTI && fr->fr_NumArgs>0) {
                         if ((freq->filearray=
-                            DoAllocRemember(&freq->filearraykey,(fr->fr_NumArgs+1)*sizeof(APTR),MEMF_CLEAR))) {
+                            DoAllocRemember(&freq->filearraykey,(fr->fr_NumArgs+1)*4,MEMF_CLEAR))) {
                             for (a=0;a<fr->fr_NumArgs;a++) {
                                 if (freq->filearray[a]=DoAllocRemember(&freq->filearraykey,
                                     strlen(fr->fr_ArgList[a].wa_Name)+1,MEMF_CLEAR)) {

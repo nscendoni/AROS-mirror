@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: hash.c 51550 2016-02-27 06:01:07Z jmcmullan $
 
    Desc: Common code for handling hashing.
    Lang: english

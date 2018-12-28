@@ -24,7 +24,7 @@
 
  Mailtext OpenSource project :  http://sourceforge.net/projects/mailtext/
 
- $Id$
+ $Id: DynStr.h 36659 2011-01-18 13:26:51Z neil $
 
  Header for dynamic string handling
 

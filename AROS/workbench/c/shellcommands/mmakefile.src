@@ -1,4 +1,4 @@
-#   $Id$
+#   $Id: mmakefile.src 52302 2016-03-28 03:42:13Z NicJA $
 #
 #   Makefile for shell commands
 
@@ -61,11 +61,6 @@ USER_LDFLAGS := -static
 USER_CFLAGS := -D__NOLIBBASE__ \
 		   -DADATE="\"$(shell date "+%d.%m.%Y")\""
 USER_CFLAGS += -DUSE_EMBEDDED_COMMANDS
-ifeq ($(AROS_TARGET_CPU),m68k)
-# Make sure we optimize this code for size on m68k..
-OPTIMIZATION_CFLAGS := -Os
-USER_CFLAGS   += -D__DOS_NOLIBINLINE__ 
-endif
 
 OBJDIR := $(OBJDIR).kernel
 

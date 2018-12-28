@@ -2,7 +2,7 @@
 #define _NETINET_IF_FDDI_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: if_fddi.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: if_fddi.h,v 1.2 1997/02/24 13:33:59 niklas Exp $	*/

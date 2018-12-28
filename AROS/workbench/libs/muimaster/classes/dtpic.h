@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2002-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: dtpic.h 49611 2014-09-11 06:59:44Z mazze $
 */
 
 /*** Name *******************************************************************/

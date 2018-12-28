@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: endscreennotify.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Remove an Intuition Notification.
 */
@@ -24,7 +24,7 @@
         AROS_LHA(APTR, notify, A0),
 
 /*  LOCATION */
-        struct IntuitionBase *, IntuitionBase, 155, Intuition)
+        struct IntuitionBase *, IntuitionBase, 162, Intuition)
 
 /*  FUNCTION
         Remove a Screen Notification from Intuition.

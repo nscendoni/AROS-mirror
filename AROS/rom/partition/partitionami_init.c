@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2002, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: partitionami_init.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: AmigaOS specific partition initialization code.
     Lang: English.

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: linuxinput_intern.h 47619 2013-07-02 18:27:20Z neil $
 
     Desc: Linux /dev/input/eventX hidd for AROS
     Lang: English.

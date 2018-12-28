@@ -1,6 +1,6 @@
 // FileTypes.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 21:39:37 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51980 $
 
 #include <stdlib.h>
 #include <string.h>

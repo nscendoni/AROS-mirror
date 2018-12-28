@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: htmlclass.c 50099 2015-02-22 01:09:59Z polluks $
 
     Based on ascii.datatype
 */

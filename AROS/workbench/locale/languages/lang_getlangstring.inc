@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: lang_getlangstring.inc 50941 2015-07-09 12:40:21Z polluks $
 
     Desc: common code for language description files
 */

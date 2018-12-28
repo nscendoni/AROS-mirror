@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kernel_romtags.h 47346 2013-05-04 11:37:40Z mazze $
 
     Desc:
 */

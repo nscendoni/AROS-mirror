@@ -1,7 +1,7 @@
 // Kbdbr_PortugueseBrazilian_pkf.txt
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pc105_br.c 51236 2015-12-19 16:58:58Z polluks $
 
     Desc: Portuguese Brazilian PC105 Keymap
     Lang: English

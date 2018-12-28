@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ilbmtoicon.c 50017 2015-02-04 22:53:42Z NicJA $
 
     Desc: Tool to convert IFF ILBM images into Amiga icon file.
 

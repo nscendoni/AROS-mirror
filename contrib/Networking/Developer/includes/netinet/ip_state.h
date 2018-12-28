@@ -2,7 +2,7 @@
 #define	__IP_STATE_H__
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ip_state.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ip_state.h,v 1.14 2000/04/13 17:13:42 kjell Exp $	*/

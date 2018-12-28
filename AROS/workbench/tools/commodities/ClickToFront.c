@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ClickToFront.c 49028 2014-05-25 12:38:18Z deadwood $
 
     ClickToFront commodity -- puts windows to front when clicked in.
 */

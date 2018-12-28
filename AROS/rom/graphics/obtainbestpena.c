@@ -1,11 +1,10 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2007, The AROS Development Team. All rights reserved.
+    $Id: obtainbestpena.c 34843 2010-10-20 04:54:32Z jmcmullan $
 
     Desc: Obtain the best pen available for a given color
     Lang: english
 */
-
 #include "graphics_intern.h"
 #include <proto/utility.h>
 #include <utility/tagitem.h>
@@ -119,7 +118,7 @@
 	** color, otherwise increase the shared counter for that color.
 	** If only a little amount of colors is free for allocation in the
 	** colormap the restrictions towards color matching should be
-	** much looser than if the amount of allocated colors is close to 0.
+	** much looser than if the amount of free colors is close to 0.
 	** The autodocs say that.
 	*/
 	if (

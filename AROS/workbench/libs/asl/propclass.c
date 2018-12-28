@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: propclass.c 48109 2013-09-19 19:52:44Z mazze $
 */
 
 #include <proto/alib.h>

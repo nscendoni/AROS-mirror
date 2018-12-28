@@ -8,8 +8,8 @@
 ** within the ScaClassInfo structure points to the actual function which
 ** performs the task required (adding text to the titles of screens,
 ** windows etc).
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 05:14:25 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51969 $
 */
 
 #include <exec/types.h>

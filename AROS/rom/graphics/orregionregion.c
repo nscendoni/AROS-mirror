@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: orregionregion.c 41943 2011-10-20 09:39:47Z sonic $
 
     Desc: Graphics function OrRegionRegion()
     Lang: english

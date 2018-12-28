@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prefs.h 50988 2015-08-02 19:22:50Z deadwood $
 
     Desc:
     Lang: English

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2002-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: macros.h 50938 2015-07-08 10:19:22Z polluks $
 
     Macros available in original MUI and also some additional ones.
 */

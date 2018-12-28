@@ -1,6 +1,6 @@
 /*
-    Copyright ï¿½ 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: memory.h 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc:
     Lang:
@@ -13,12 +13,18 @@
 #include <exec/memory.h>
 #include <stddef.h>
 
-#if defined(__AROSEXEC_SMP__)
-#define MEM_LOCK        do { Forbid(); EXEC_SPINLOCK_LOCK(&PrivExecBase(SysBase)->MemListSpinLock, NULL, SPINLOCK_MODE_WRITE); } while(0)
-#define MEM_LOCK_SHARED do { Forbid(); EXEC_SPINLOCK_LOCK(&PrivExecBase(SysBase)->MemListSpinLock, NULL, SPINLOCK_MODE_READ); } while(0)
-#define MEM_UNLOCK      do { EXEC_SPINLOCK_UNLOCK(&PrivExecBase(SysBase)->MemListSpinLock); Permit(); } while(0)
-#else
-#if defined(__AROSEXEC_BROKENMEMLOCK__)
+/*
+ * EXPERIMENTAL: use semaphore protection instead of Forbid()/Permit() for
+ * system memory allocation routines.
+ * In case of problems use definitions below.
+ *
+ * Many m68k programs assume forbid state won't get broken.
+ */
+/* ABI_V0 compatibility:
+ * Some existing software (i.e. packet.handler) allocate memory from within soft int handler. It is not allowed
+ * to work with semaphores in Supervisor mode as it may lead to deadlock.
+ */
+#if 0 //ndef __mc68000
 #define MEM_LOCK        ObtainSemaphore(&PrivExecBase(SysBase)->MemListSem)
 #define MEM_LOCK_SHARED ObtainSemaphoreShared(&PrivExecBase(SysBase)->MemListSem)
 #define MEM_UNLOCK      ReleaseSemaphore(&PrivExecBase(SysBase)->MemListSem)
@@ -26,7 +32,6 @@
 #define MEM_LOCK        Forbid()
 #define MEM_LOCK_SHARED Forbid()
 #define MEM_UNLOCK      Permit()
-#endif
 #endif
 
 #define POOL_MAGIC AROS_MAKE_ID('P','o','O','l')

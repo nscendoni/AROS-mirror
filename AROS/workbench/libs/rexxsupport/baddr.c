@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: baddr.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Convert BCPL address to C pointer
     Lang: English

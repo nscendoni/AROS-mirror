@@ -1,5 +1,5 @@
 @DATABASE "xdme_cmds.guide"
-@REMARK $Id$
+@REMARK $Id: xdme_cmds_guide_src.head 30794 2009-03-08 02:19:07Z neil $
 @INDEX "index"
 @NODE "MAIN" "XDME commands overview"
 @TOC "MAIN"

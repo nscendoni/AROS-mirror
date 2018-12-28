@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: charmapconclass.c 51702 2016-03-09 22:03:29Z NicJA $
 
     Desc: Code for CONU_CHARMAP console units.
     Lang: english
@@ -1085,10 +1085,9 @@ static VOID charmapcon_copy(Class *cl, Object *o, Msg copymsg)
     {
         /* AROS conclip format */
         D(bug("AROS conclip\n"));
-        
-        memset( &replyport, 0, sizeof( replyport ) );
-
         replyport.mp_Node.ln_Type = NT_MSGPORT;
+        replyport.mp_Node.ln_Name = NULL;
+        replyport.mp_Node.ln_Pri = 0;
         replyport.mp_Flags = PA_SIGNAL;
         replyport.mp_SigBit = SIGB_SINGLE;
         replyport.mp_SigTask = FindTask(NULL);

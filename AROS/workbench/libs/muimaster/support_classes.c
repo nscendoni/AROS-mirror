@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support_classes.c 51713 2016-03-09 22:53:00Z NicJA $
 */
 
 #include <string.h>

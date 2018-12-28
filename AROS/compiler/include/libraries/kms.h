@@ -1,6 +1,6 @@
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kms.h 37306 2011-03-03 07:19:31Z sonic $
 */
 
 #ifndef LIBRARIES_KMS_H

@@ -1,21 +1,14 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
-FILES    := \
-             kernel_startup \
-             platform_init \
-             kernel_cpu \
-             kernel_debug \
-             kernel_memory \
-             kernel_bootmem \
-             mmu
-FUNCS	 :=
-ASMFILES := \
-             core_interrupts
+FILES    := kernel_startup platform_init kernel_cpu kernel_debug kernel_memory kernel_bootmem \
+	    intr acpi_tables mmu smp
+FUNCS	 := getcpucount getcpunumber
+ASMFILES := core_interrupts
 
 MAINDIR	      := rom/kernel
-USER_AFLAGS   := -I$(GENINCDIR) -I$(SRCDIR)/arch/all-pc/kernel
+USER_AFLAGS   := -I$(GENINCDIR)
 USER_INCLUDES := $(PRIV_KERNEL_INCLUDES) -I$(SRCDIR)/arch/all-native/kernel \
 		 -isystem $(SRCDIR)/arch/all-native/bootconsole/include
 
@@ -31,20 +24,20 @@ USER_INCLUDES := $(PRIV_KERNEL_INCLUDES) -I$(SRCDIR)/arch/all-native/kernel \
 # This builds SMP bootstrap code
 
 OBJDIR  := $(GENDIR)/$(CURDIR)
-ARCHOBJDIR := $(GENDIR)/$(MAINDIR)/arch
+DESTDIR := $(GENDIR)/$(MAINDIR)/arch
 
-kernel-kernel-pc-x86_64 :: $(ARCHOBJDIR)/smpboot.bin.o 
-kernel-kernel-pc-x86_64-quick :: $(ARCHOBJDIR)/smpboot.bin.o 
-kernel-kernel-pc-x86_64-kobj :: $(ARCHOBJDIR)/smpboot.bin.o
-kernel-kernel-pc-x86_64-kobj-quick :: $(ARCHOBJDIR)/smpboot.bin.o
+#MM
+kernel-kernel-pc-x86_64 :: $(OBJDIR) $(DESTDIR)/smpboot.bin.o
+#MM
+kernel-kernel-pc-x86_64-kobj :: $(OBJDIR) $(DESTDIR)/smpboot.bin.o
 
 %rule_assemble_multi basenames=smpbootstrap targetdir=$(OBJDIR)
 
 # Without -N the linker tries to page-align .text section and produces a huge file (over 2MB)
-%rule_link_binary file=$(ARCHOBJDIR)/smpboot.bin.o name=smpbootstrap objs=$(OBJDIR)/smpbootstrap.o
+%rule_link_binary file=$(DESTDIR)/smpboot.bin.o name=smpbootstrap objs=$(OBJDIR)/smpbootstrap.o
 
-$(OBJDIR)/smpbootstrap.o : | $(OBJDIR)
-
-GLOB_MKDIRS += $(ARCHOBJDIR) $(OBJDIR)
+$(OBJDIR):
+	@$(ECHO) Creating $@...
+	@$(MKDIR) $@
 
 %common

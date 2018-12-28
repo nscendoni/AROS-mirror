@@ -1,7 +1,7 @@
 #ifndef XADMASTER_HOOK_STREAM_C
 #define XADMASTER_HOOK_STREAM_C
 
-/*  $Id$
+/*  $Id: hook_stream.c 39571 2011-06-28 01:31:58Z NicJA $
     XAD Stream IO hooks
 
     XAD library system for archive handling

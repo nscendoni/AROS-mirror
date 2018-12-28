@@ -1,7 +1,7 @@
 /******************************************************************************
 
     MODUL
-	$Id$
+	$Id: cmd.c 36659 2011-01-18 13:26:51Z neil $
 
     DESCRIPTION
 	In this file you find all routines for programming like

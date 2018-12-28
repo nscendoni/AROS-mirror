@@ -1,6 +1,6 @@
 /*
     Copyright (C) 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: convertBackTicks.c 45587 2012-08-17 16:25:49Z jmcmullan $
  */
 
 #include <proto/dos.h>

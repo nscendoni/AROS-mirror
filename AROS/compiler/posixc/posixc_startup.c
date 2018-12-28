@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: posixc_startup.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Additional startup code for posixc.library that is executed during
     init of a program that uses the library.
@@ -10,7 +10,7 @@
 
 #include <proto/stdc.h>
 #include <proto/stdcio.h>
-#include <proto/posixc.h>
+#include <libraries/posixc.h>
 
 static int __posixc_startup(void)
 {

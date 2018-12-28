@@ -7,11 +7,10 @@ ICU_VERSION := 4.2.1
 ICU_PKGNAME := icu4c
 ICU_PKGVERSION=$(subst .,_,$(ICU_VERSION))
 
-ICU_EXTRA_OPTS = \
+ICU_EXTRA_OPTS= \
         --bindir=$(CROSSTOOLSDIR) \
         --sbindir=$(CROSSTOOLSDIR) \
         --enable-static \
-        --disable-strict \
         --disable-dyload \
         --disable-shared \
         --disable-tests \
@@ -24,12 +23,8 @@ BINUTILS_VERSION = $(TARGET_BINUTILS_VER)
 BINUTILS_EXTRA_OPTS := --target=$(AROS_TARGET_CPU)-aros
 BINUTILS_EXTRA_OPTS += -bindir=$(CROSSTOOLSDIR)
 BINUTILS_EXTRA_OPTS += --libdir=$(CROSSTOOLSDIR)/lib
-BINUTILS_EXTRA_OPTS += --with-sysroot=$(AROS_DEVELOPER)
+BINUTILS_EXTRA_OPTS += --with-sysroot=$(AROS_DEVELOPMENT)
 BINUTILS_EXTRA_OPTS += --disable-werror
-BINUTILS_EXTRA_OPTS += --disable-nls
-ifeq (yes, $(TARGET_LTO))
-BINUTILS_EXTRA_OPTS += --enable-plugins --enable-lto
-endif
 
 GCC_VERSION     = $(TARGET_GCC_VER)
 $(eval UNUSEDREMAINDER := $$$(GCC_VERSION))
@@ -65,7 +60,7 @@ else
 GCC_EXTRA_OPTS += --with-dwarf2
 endif
 
-GCC_EXTRA_OPTS += --with-sysroot=$(AROS_DEVELOPER)
+GCC_EXTRA_OPTS += --with-sysroot=$(AROS_DEVELOPMENT)
 GCC_EXTRA_OPTS += --with-native-system-header-dir=/include
 GCC_EXTRA_OPTS += --bindir=$(CROSSTOOLSDIR)
 GCC_EXTRA_OPTS += --libdir=$(CROSSTOOLSDIR)/lib
@@ -78,16 +73,13 @@ GCC_EXTRA_OPTS += --disable-isl-version-check
 GCC_EXTRA_OPTS += --disable-bootstrap 
 GCC_EXTRA_OPTS += --disable-sjlj-exceptions
 GCC_EXTRA_OPTS += --disable-tls
-ifneq (yes, $(TARGET_LTO))
 GCC_EXTRA_OPTS += --disable-plugins
-endif
-GCC_EXTRA_OPTS += --disable-nls
 GCC_EXTRA_OPTS += --disable-libssp
 GCC_EXTRA_OPTS += --disable-libstdcxx-pch
 GCC_EXTRA_OPTS += --disable-build-with-cxx
 GCC_EXTRA_OPTS += --disable-build-poststage1-with-cxx
 
-GCC_PATH = `LANG=en_US $(CROSSTOOLSDIR)/$(AROS_TARGET_CPU)-aros-gcc -print-search-dirs | grep "programs: =" | cut -c 12-`
+GCC_PATH        = `LANG=en_US $(CROSSTOOLSDIR)/$(AROS_TARGET_CPU)-aros-gcc -print-search-dirs | grep "programs: =" | cut -c 12-`
 
 GDB_VERSION=7.9
 
@@ -96,8 +88,8 @@ GDB_EXTRA_OPTS += --bindir=$(CROSSTOOLSDIR)
 GDB_EXTRA_OPTS += --libdir=$(CROSSTOOLSDIR)/lib
 
 GNU_REPOSITORY := gnu://
-ISL_REPOSITORY := ftp://gcc.gnu.org/pub/gcc/infrastructure
-MPC_REPOSITORY := ftp://ftp.gnu.org/gnu/mpc http://ftp.osuosl.org/pub/lfs/lfs-packages/7.8
+ISL_REPOSITORY :=  ftp://gcc.gnu.org/pub/gcc/infrastructure
+MPC_REPOSITORY := http://www.multiprecision.org/mpc/download http://ftp.osuosl.org/pub/lfs/lfs-packages/7.3
 ICU_REPOSITORY := http://download.icu-project.org/files/$(ICU_PKGNAME)/$(ICU_VERSION)
 
 binutils-installflag := $(CROSSTOOLSDIR)/.installflag-binutils-$(BINUTILS_VERSION)-$(AROS_TARGET_CPU)
@@ -105,7 +97,7 @@ gmp-installflag := $(CROSSTOOLSDIR)/.installflag-gmp-$(GMP_VERSION)
 isl-installflag := $(CROSSTOOLSDIR)/.installflag-isl-$(ISL_VERSION)
 mpfr-installflag := $(CROSSTOOLSDIR)/.installflag-mpfr-$(MPFR_VERSION)
 mpc-installflag := $(CROSSTOOLSDIR)/.installflag-mpc-$(MPC_VERSION)
-gcc-installflag := $(CROSSTOOLSDIR)/.installflag-gcc-$(GCC_VERSION)-$(AROS_TARGET_CPU)
+gcc-installflag      := $(CROSSTOOLSDIR)/.installflag-gcc-$(GCC_VERSION)-$(AROS_TARGET_CPU)
 icu-installflag := $(CROSSTOOLSDIR)/.installflag-icu-$(ICU_VERSION)
 gdb-installflag := $(CROSSTOOLSDIR)/.installflag-gdb-$(GDB_VERSION)
 
@@ -237,7 +229,7 @@ tools-crosstools-gcc :
 tools-crosstools-icu :
 	@$(IF) ! $(TEST) -d $(CROSSTOOLSDIR) \
 	    || ! $(TEST) -f $(icu-installflag) ; then \
-	       $(RM) $(CROSSTOOLSDIR)/$(ICU_PKGNAME)/.files-touched \
+	       $(RM) $(HOSTGENDIR)/$(CURDIR)/icu/.files-touched \
 	    && $(MAKE) -f ./mmakefile crosstools-icu--fetch \
 	    && $(MAKE) -f ./mmakefile crosstools-icu--build_and_install-quick \
 	    && $(TOUCH) $(icu-installflag) ; \
@@ -245,12 +237,12 @@ tools-crosstools-icu :
 
 HOST_CXXFLAGS := $(subst -Wno-pointer-sign,, $(subst -Werror-implicit-function-declaration,, $(HOST_CXXFLAGS)))
 
-# specify the gendir for icu to be in HOSTDIR so it ends up under CROSSTOOLSDIR, and can be reused
-%fetch_and_build mmake=crosstools-icu package=$(ICU_PKGNAME) version=$(ICU_PKGVERSION)-src compiler=host \
+# specify the gendir for icu to be in the crosstools directory so it can be reused
+%fetch_and_build mmake=crosstools-icu package=icu4c version=$(ICU_PKGVERSION)-src compiler=host \
 	package_repo="$(ICU_REPOSITORY)" suffixes="tgz" \
-	patch=yes srcdir=icu builddir=source gendir=$(CROSSTOOLSDIR) basedir= \
+	patch=yes srcdir=icu builddir=source gendir=$(CROSSTOOLSDIR) \
 	prefix="$(CROSSTOOLSDIR)" \
-	extraoptions="$(ICU_EXTRA_OPTS)" extracflags=$(ICU_FLAGS)
+	extraoptions="$(ICU_EXTRA_OPTS)"
 
 #MM
 tools-crosstools-gdb :
@@ -283,7 +275,7 @@ LLVM_HOST         := "$(AROS_TARGET_CPU)"
 
 LLVM_CMAKETARGET  :=
 LLVM_CMAKEOPTIONS :=  \
-    -DDEFAULT_SYSROOT="$(AROS_DEVELOPER)" \
+    -DDEFAULT_SYSROOT="$(AROS_DEVELOPMENT)" \
     -DCMAKE_INSTALL_BINDIR="$(CROSSTOOLSDIR)" \
     -DLLVM_EXTERNAL_LLD_SOURCE_DIR:PATH="$(HOSTDIR)/Ports/host/llvm-lld/$(LLVMLLD_ARCHBASE)" \
     -DLLVM_EXTERNAL_CLANG_SOURCE_DIR:PATH="$(HOSTDIR)/Ports/host/clang/$(CLANG_ARCHBASE)" \

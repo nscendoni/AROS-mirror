@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: sana2perror.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      sana2perror.c - print SANA-II error message
  *

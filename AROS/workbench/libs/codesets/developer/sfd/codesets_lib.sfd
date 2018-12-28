@@ -1,4 +1,4 @@
-==id $Id$
+==id $Id: codesets_lib.sfd 30792 2009-03-07 22:40:04Z neil $
 ==base _CodesetsBase
 ==basetype struct Library *
 ==libname codesets.library

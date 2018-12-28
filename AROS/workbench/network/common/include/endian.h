@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2003-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: endian.h 48699 2014-01-11 17:39:44Z jmcmullan $
 */
 
 /*

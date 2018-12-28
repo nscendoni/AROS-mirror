@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: collectpixelslayer.c 41928 2011-10-19 08:01:14Z sonic $
 
     Desc:
     Lang: english

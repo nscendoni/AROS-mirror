@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: icontroleditor.h 48081 2013-09-11 15:34:26Z NicJA $
 */
 
 #include <exec/types.h>

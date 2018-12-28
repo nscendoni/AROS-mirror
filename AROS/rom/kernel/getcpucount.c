@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getcpucount.c 48424 2013-11-18 09:28:30Z neil $
 
     Desc:
 */
@@ -20,7 +20,7 @@
 /*  SYNOPSIS */
 
 /*  LOCATION */
-	struct KernelBase *, KernelBase, 40, Kernel)
+	struct KernelBase *, KernelBase, 36, Kernel)
 
 /*  FUNCTION
 	Return total number of processors in the system

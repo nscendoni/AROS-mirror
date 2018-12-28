@@ -13,7 +13,7 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
- $Id$
+ $Id: SetGet.h 37254 2011-02-28 05:55:35Z jmcmullan $
 
 ***************************************************************************/
 

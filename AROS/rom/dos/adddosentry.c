@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: adddosentry.c 46126 2012-12-09 19:59:03Z mazze $
 
     Desc: Adds a given dos list entry to the dos list.
     Lang: English

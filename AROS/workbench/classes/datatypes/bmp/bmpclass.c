@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bmpclass.c 49969 2015-01-29 03:51:53Z neil $
 */
 
 /**********************************************************************/

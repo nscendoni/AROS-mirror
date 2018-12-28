@@ -1,10 +1,10 @@
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- contrib-development : contrib-libxslt
 #MM- contrib-libxslt : development-libxml2 development-libxslt
 
 %fetch_and_build_gnu_development package=libxslt version=1.1.24 \
     patch="yes" suffixes="tar.gz" package_repo="http://xmlsoft.org/sources" \
-    extraoptions="--without-crypto --without-plugins --with-libxml-prefix=$(AROS_DEVELOPER) --with-libxml-include-prefix=$(AROS_INCLUDES)/libxml2 --with-libxml-libs-prefix=$(AROS_DEVELOPER)/lib --without-python --libdir=$(AROS_LIB)"
+    extraoptions="--without-crypto --without-plugins --with-libxml-prefix=$(AROS_DEVELOPMENT) --with-libxml-include-prefix=$(AROS_INCLUDES)/libxml2 --with-libxml-libs-prefix=$(AROS_DEVELOPMENT)/lib --without-python --libdir=$(AROS_LIB)"
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 2008-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cities.h 53075 2016-12-11 02:28:48Z polluks $
 
     Desc: Array of Cities with their time difference to GMT
     Lang: English
@@ -81,9 +81,12 @@ static const struct CityType CityArray[] =
  {"Tehran", +330},
  {"Tijuana (PST)", -800},
  {"Tokyo (JST)", +900},
+ {"USA Central Daylight (CDT)", -500},
  {"USA Central Standard", -600},
  {"USA Eastern Standard (EST)", -500},
+ {"USA Mountain Daylight", -600},
  {"USA Mountain Standard (MST)", -700},
+ {"USA Pacific Daylight (PDT)", -700},
  {"USA Pacific Standard", -800},
  { NULL, 0}
 };

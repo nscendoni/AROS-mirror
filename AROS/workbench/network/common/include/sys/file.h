@@ -2,7 +2,7 @@
 #define _SYS__FILE_H_
 /*
     Copyright © 2008-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: file.h 48699 2014-01-11 17:39:44Z jmcmullan $
     
     Desc: 4.4BSD header file sys/file.h
           This file is not part of POSIX.1-2008 standard

@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: scrollbutton.c 45798 2012-09-14 19:47:19Z neil $
 */
 
 #include <string.h>

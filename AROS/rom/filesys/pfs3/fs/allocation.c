@@ -9,7 +9,7 @@
  *
  * Revision History:
  *
- *  $Id$
+ *  $Id: allocation.c 49086 2014-06-24 07:54:30Z twilen $
  *
  *  $Log: allocation.c $
  * Revision 14.8  1999/09/11  17:05:14  Michiel

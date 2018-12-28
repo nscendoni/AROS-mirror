@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: x11_hostlib.c 53089 2016-12-22 14:49:32Z neil $
 */
 
 #include "x11_debug.h"

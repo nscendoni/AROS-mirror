@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: displaymode.c 49007 2014-05-18 03:39:51Z neil $
 */
 
 #include <aros/debug.h>

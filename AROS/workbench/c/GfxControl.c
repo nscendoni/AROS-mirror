@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: GfxControl.c 45720 2012-09-02 16:46:15Z jmcmullan $
 
     Desc: Change some internal options of cybergraphics.library.
     Lang: English

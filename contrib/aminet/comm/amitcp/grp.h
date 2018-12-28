@@ -3,8 +3,8 @@
 /*
 **      $Filename: grp.h $
 **	$Release$
-**      $Revision$
-**      $Date$
+**      $Revision: 30794 $
+**      $Date: 2009-03-08 03:19:07 +0100 (Sun, 08 Mar 2009) $
 **
 **	Definitions of gid_t and group structure for 32 bit C compilers
 **

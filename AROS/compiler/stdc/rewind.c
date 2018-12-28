@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rewind.c 48044 2013-09-08 21:18:52Z verhaegs $
 
     C99 function rewind()
 */

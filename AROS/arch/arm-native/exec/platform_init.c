@@ -1,6 +1,6 @@
 /*
     Copyright © 2013-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: platform_init.c 52756 2016-06-10 17:06:26Z neil $
 */
 
 #define DEBUG 1

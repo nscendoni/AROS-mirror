@@ -3,7 +3,7 @@
 ***************
 *** 1,148 ****
 ! /*
-!  * $Id$
+!  * $Id: sock.diffs 30794 2009-03-08 02:19:07Z neil $
 !  * $Release$
 !  *
 !  * Gcc inlines for bsdsocket.library. 

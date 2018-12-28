@@ -1,6 +1,6 @@
 /*
     Copyright © 1997-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: atomic.h 49845 2014-12-10 18:32:31Z deadwood $
 
     Desc: Atomic access functions to be used by macros in atomic.h.
     Lang: english

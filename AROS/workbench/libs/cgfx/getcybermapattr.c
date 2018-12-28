@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: getcybermapattr.c 47604 2013-06-24 21:28:04Z sonic $
 
     Desc:
     Lang: english
@@ -8,7 +8,7 @@
 
 #include <aros/debug.h>
 #include <cybergraphx/cybergraphics.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <proto/oop.h>
 #include <proto/utility.h>
 

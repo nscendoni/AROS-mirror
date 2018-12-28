@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bus_class.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <aros/debug.h>
@@ -50,7 +50,8 @@ static void Hidd_ATABus_HandleIRQ(UBYTE status, struct ata_Bus *bus)
     });
 }
 
-static AROS_INTH1(ataBus_Reset, struct ata_Bus *, bus)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(ataBus_Reset, struct ata_Bus *, bus)
 {
     AROS_INTFUNC_INIT
 

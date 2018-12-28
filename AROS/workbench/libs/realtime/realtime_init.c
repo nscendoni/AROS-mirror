@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: realtime_init.c 51461 2016-01-30 04:57:10Z NicJA $
 
     Desc: Realtime.library initialization code.
     Lang: English.

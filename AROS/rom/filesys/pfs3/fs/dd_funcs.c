@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: dd_funcs.c 49095 2014-07-01 18:46:34Z twilen $ */
 /* $Log: dd_funcs.c $
  * Revision 1.20  1999/09/11  17:05:14  Michiel
  * bugfix version 18.4

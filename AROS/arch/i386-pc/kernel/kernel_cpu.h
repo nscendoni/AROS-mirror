@@ -1,9 +1,11 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
-
-    Desc: CPU-specific definitions.
-*/
+ * CPU-specific definitions.
+ *
+ * Architectures with the same CPU will likely share single kernel_cpu.h
+ * in arch/$(CPU)-all/kernel/kernel_cpu.h
+ *
+ * As you can see, this file is just a sample.
+ */
 
 #ifndef KERNEL_CPU_H_
 #define KERNEL_CPU_H_
@@ -11,6 +13,12 @@
 #include <aros/i386/cpucontext.h>
 
 #include "segments.h"
+
+/*
+ * We handle all 255 exception vectors. However vectors starting from 0x20
+ * are hardware IRQs which are handled separately. So - 32 raw exceptions.
+ */
+#define EXCEPTIONS_COUNT 32
 
 /* We use native context format, no conversion needed */
 #define regs_t struct ExceptionContext
@@ -28,7 +36,7 @@
 #define goBack(mode)
 
 /* A command to issue a syscall */
-#define krnSysCall(num) asm volatile("int $0xfe"::"a"(num):"memory")
+#define krnSysCall(num) asm volatile("int $0x80"::"a"(num):"memory")
 
 #define IN_USER_MODE \
 	({  short __value; \
@@ -36,13 +44,11 @@
 	(__value & 0x03);	})
 
 #define PRINT_CPUCONTEXT(regs)										\
-{													\
     bug("[Kernel] Flags=0x%08X\n", regs->Flags);							\
-    bug("[Kernel] stack=%04x:%08x eflags=%08x eip=%04x:%08x ds=0x%04X\n",				\
+    bug("[Kernel] stack=%04x:%08x rflags=%08x ip=%04x:%08x ds=0x%04X\n",				\
                  regs->ss, regs->esp, regs->eflags, regs->cs, regs->eip, regs->ds);			\
-    bug("[Kernel] eax=%08x ebx=%08x ecx=%08x edx=%08x\n", regs->eax, regs->ebx, regs->ecx, regs->edx);	\
-    bug("[Kernel] esi=%08x edi=%08x ebp=%08x esp=%08x\n", regs->esi, regs->edi, regs->ebp, regs->esp);	\
-}
+    bug("[Kernel] rax=%08x rbx=%08x rcx=%08x rdx=%08x\n", regs->eax, regs->ebx, regs->ecx, regs->edx);	\
+    bug("[Kernel] rsi=%08x rdi=%08x rbp=%08x rsp=%08x\n", regs->esi, regs->edi, regs->ebp, regs->esp);
 
 #define SP(regs) regs->esp
 

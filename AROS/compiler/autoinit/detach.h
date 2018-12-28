@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: detach.h 37795 2011-03-26 21:41:32Z verhaegs $
 */
 
 #ifndef DETACH_H

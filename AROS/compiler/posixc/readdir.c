@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readdir.c 48292 2013-10-15 20:31:29Z mazze $
 
     POSIX.1-2008 function readdir().
 */

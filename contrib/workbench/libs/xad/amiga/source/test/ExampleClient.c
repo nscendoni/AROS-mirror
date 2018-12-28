@@ -1,7 +1,7 @@
 #ifndef XADMASTER_EXAMPLE_C
 #define XADMASTER_EXAMPLE_C
 
-/*  $Id$
+/*  $Id: ExampleClient.c 30794 2009-03-08 02:19:07Z neil $
     Example disk or file archiver client
 
     XAD library system for archive handling

@@ -1,6 +1,6 @@
 /*
     Copyright © 2005-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: oopsupport.c 51340 2016-01-18 22:44:08Z NicJA $
 
     Desc: Support functions for oop.library classes. Part of genmodule.
 */

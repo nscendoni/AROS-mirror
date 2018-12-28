@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: diskfont_init.c 52756 2016-06-10 17:06:26Z neil $
 
     Desc: Diskfont initialization code.
     Lang: English.

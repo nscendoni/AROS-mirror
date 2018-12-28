@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: init.c 37335 2011-03-04 10:30:52Z sonic $
 */
 
 

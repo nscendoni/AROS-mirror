@@ -1,6 +1,6 @@
 /*
     Copyright  1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: battclock_intern.h 36647 2011-01-17 14:01:23Z neil $
 
     Desc: Internal data structures for battclock.resource and HIDD
     Lang: english

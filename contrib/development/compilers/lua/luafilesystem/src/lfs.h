@@ -2,7 +2,7 @@
 ** LuaFileSystem
 ** Copyright Kepler Project 2003 (http://www.keplerproject.org/luafilesystem)
 **
-** $Id$
+** $Id: lfs.h 31126 2009-04-18 00:01:10Z mazze $
 */
 
 /* Define 'chdir' for systems that do not implement it */

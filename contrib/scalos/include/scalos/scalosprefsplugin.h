@@ -3,8 +3,8 @@
 /*
 **	$VER: scalosprefsplugin.h 40.33 (14 Apr 2005 21:15:40)
 **
-** $Date$
-** $Revision$
+** $Date: 2016-03-15 22:56:01 +0100 (Tue, 15 Mar 2016) $
+** $Revision: 51982 $
 **
 **	Interface definitions for Scalos prefs plugins
 **

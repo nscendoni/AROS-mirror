@@ -1,7 +1,7 @@
 #ifndef _UNIT_H_
 #define _UNIT_H_
 /*
- * $Id$
+ * $Id: unit.h 30792 2009-03-07 22:40:04Z neil $
  */
 /*
     This program is free software; you can redistribute it and/or modify

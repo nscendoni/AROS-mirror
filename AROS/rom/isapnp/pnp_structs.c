@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: pnp_structs.c 48297 2013-10-16 16:38:31Z neil $ */
 
 /*
      ISA-PnP -- A Plug And Play ISA software layer for AmigaOS.

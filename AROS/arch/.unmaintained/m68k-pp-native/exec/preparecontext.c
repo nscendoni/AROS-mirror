@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: preparecontext.c 42507 2011-11-17 11:01:21Z sonic $
 */
 
 #include <exec/execbase.h>

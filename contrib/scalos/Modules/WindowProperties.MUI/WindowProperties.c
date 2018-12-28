@@ -1,6 +1,6 @@
 // WindowProperties.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 03:45:36 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51963 $
 
 
 #ifdef __AROS__

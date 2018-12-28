@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: amiga_config.h 30794 2009-03-08 02:19:07Z neil $
  *
  * kern/amiga_config.h --- configuration declarations
  *

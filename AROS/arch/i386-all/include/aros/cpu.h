@@ -3,17 +3,13 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu.h 53132 2016-12-29 10:32:06Z deadwood $
 
     NOTE: This file must compile *without* any other header !
 
     Desc: CPU-specific definitions for 32-bit x86 processors
     Lang: english
 */
-
-typedef  unsigned char cpuid_t;
-typedef  unsigned char apicid_t;
-typedef  void *cpumask_t;
 
 /* Information about size and alignment,
  * the defines have to be numeric constants */
@@ -114,7 +110,13 @@ extern void aros_not_implemented ();
 
 #define AROS_STACKSIZE  40960
 
+#if 0
+/*
+ * ABI_V0 compatibility:
+ * Use original call macros
+ */
 /* Some defines to set the cpu specific libcall.h interface */
 #define __AROS_LIBCALL_H_FILE "aros/i386/libcall.h"
+#endif
 
 #endif /* AROS_I386_CPU_H */

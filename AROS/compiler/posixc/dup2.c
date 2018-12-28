@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: dup2.c 49864 2014-12-22 17:00:14Z neil $
 
     POSIX.1-2008 function dup2().
 */

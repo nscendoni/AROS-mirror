@@ -332,12 +332,10 @@ D(bug("[FEC] S2CmdConfigInterface()\n"));
 
 static BOOL CmdBroadcast(struct FECBase *FECBase, struct IOSana2Req *request)
 {
-    UWORD i;
-
     /* Fill in the broadcast address as destination */
 
-    for(i = 0; i < ETH_ADDRESSSIZE; i++)
-        request->ios2_DstAddr[i] = 0xff;
+    *((ULONG *)request->ios2_DstAddr) = 0xffffffff;
+    *((UWORD *)(request->ios2_DstAddr + 4)) = 0xffff;
 
     /* Queue the write as normal */
 

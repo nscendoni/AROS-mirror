@@ -18,7 +18,7 @@
 #
 # BetterString class Support Site:  http://www.sf.net/projects/bstring-mcc/
 #
-# $Id$
+# $Id: mkrelease.sh 47873 2013-08-24 15:07:05Z mazze $
 #
 ############################################################################
 

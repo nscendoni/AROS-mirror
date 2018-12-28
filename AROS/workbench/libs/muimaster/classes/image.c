@@ -1,6 +1,6 @@
 /*
     Copyright  2002-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: image.c 43432 2012-01-01 20:15:00Z jmcmullan $
 */
 
 #include <stdio.h>

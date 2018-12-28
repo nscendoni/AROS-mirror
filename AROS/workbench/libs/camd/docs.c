@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: docs.c 35478 2010-11-14 15:14:13Z mazze $
 
     Desc: Autodocs for macros in camd.library.
 */

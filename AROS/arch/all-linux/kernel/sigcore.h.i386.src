@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sigcore.h.i386.src 35956 2010-12-06 07:08:22Z sonic $
 
     Desc: System-dependent definitions to handle unix signals
     Lang: english

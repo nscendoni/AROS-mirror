@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freeraster.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Return the memory occupied by a single bitplane to the system.
     Lang: english
@@ -19,8 +19,8 @@
 
 /*  SYNOPSIS */
 	AROS_LHA(PLANEPTR, p,      A0),
-	AROS_LHA(UWORD,    width,  D0),
-	AROS_LHA(UWORD,    height, D1),
+	AROS_LHA(ULONG,    width,  D0),
+	AROS_LHA(ULONG,    height, D1),
 
 /*  LOCATION */
 	struct GfxBase *, GfxBase, 83, Graphics)

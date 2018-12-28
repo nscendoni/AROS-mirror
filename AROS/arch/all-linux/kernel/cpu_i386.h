@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu_i386.h 46260 2013-01-13 14:59:02Z sonic $
 
     Desc: Macros to handle i386 Linux signals
     Lang: english

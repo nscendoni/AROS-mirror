@@ -1,7 +1,7 @@
 #ifndef XADMASTER_XADXPK_C
 #define XADMASTER_XADXPK_C
 
-/*  $Id$
+/*  $Id: xadXPK.c 30794 2009-03-08 02:19:07Z neil $
     xpk decrunch handling for Unix
 
     XAD library system for archive handling

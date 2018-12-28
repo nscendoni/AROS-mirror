@@ -14,7 +14,7 @@
 
  openurl.library project: http://sourceforge.net/projects/openurllib/
 
- $Id$
+ $Id: OpenURL.c 52028 2016-03-17 04:36:20Z jmcmullan $
 
 ***************************************************************************/
 

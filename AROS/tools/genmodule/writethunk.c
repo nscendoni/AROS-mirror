@@ -1,6 +1,6 @@
 /*
     Copyright © 2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: writethunk.c 50768 2015-05-30 02:59:05Z jmcmullan $
 
     The code for creating a thunk file for the functions present in the module
 */

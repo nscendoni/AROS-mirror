@@ -1,9 +1,9 @@
 # Copyright © 2003, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 52938 2016-09-14 00:06:07Z mmartinka $
 
 include $(SRCDIR)/config/aros.cfg
 
-CATALOGS:=czech french
+CATALOGS:=czech
 
 # The need to update french catalog
 

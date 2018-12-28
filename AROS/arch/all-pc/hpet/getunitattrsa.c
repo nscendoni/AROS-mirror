@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: getunitattrsa.c 49964 2015-01-28 23:04:04Z NicJA $
 */
 
 #include <resources/hpet.h>
@@ -17,7 +17,7 @@
 
 /*  SYNOPSIS */
 	AROS_LHA(ULONG, unit, D0),
-	AROS_LHA(const struct TagItem *, tags, A0),
+	AROS_LHA(struct TagItem *, tags, A0),
 
 /*  LOCATION */
 	struct HPETBase *, base, 4, Hpet)

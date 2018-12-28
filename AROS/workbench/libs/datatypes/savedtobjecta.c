@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: savedtobjecta.c 34749 2010-10-15 14:58:14Z jmcmullan $
 */
 
 #include <string.h>

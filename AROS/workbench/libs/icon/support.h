@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support.h 48123 2013-09-25 02:08:10Z neil $
 */
 
 #include "icon_intern.h"

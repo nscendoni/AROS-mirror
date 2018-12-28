@@ -1,6 +1,6 @@
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: smattributes.c 52028 2016-03-17 04:36:20Z jmcmullan $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

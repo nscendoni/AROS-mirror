@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: functions.c 45604 2012-08-19 18:39:04Z jmcmullan $
 
     Desc: autoinit library - functions sets handling
     Lang: english

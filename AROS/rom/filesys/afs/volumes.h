@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: volumes.h 43310 2011-12-29 15:28:24Z olivieradam $
 */
 
 #include "os.h"

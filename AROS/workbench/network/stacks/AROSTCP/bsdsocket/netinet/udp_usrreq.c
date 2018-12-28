@@ -33,7 +33,7 @@
  * SUCH DAMAGE.
  *
  *	@(#)udp_usrreq.c	8.4 (Berkeley) 1/21/94
- * $Id$
+ * $Id: udp_usrreq.c 41432 2011-09-18 09:15:02Z mazze $
  */
 
 #include <sys/param.h>

@@ -3,7 +3,7 @@
     Copyright  2002, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: prefs.h 31088 2009-04-09 12:35:45Z sszymczy $
 */
 #ifndef __ZUNE_PREFS_H__
 #define __ZUNE_PREFS_H__

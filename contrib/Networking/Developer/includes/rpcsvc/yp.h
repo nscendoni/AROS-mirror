@@ -2,7 +2,7 @@
 #define _YP_H_RPCGEN
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: yp.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*

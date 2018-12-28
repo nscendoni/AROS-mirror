@@ -1,7 +1,7 @@
 /*
  * Definitions for tcp compression routines.
  *
- * $Id$
+ * $Id: vj.h 30794 2009-03-08 02:19:07Z neil $
  *
  * Copyright (c) 1989 Regents of the University of California.
  * All rights reserved.

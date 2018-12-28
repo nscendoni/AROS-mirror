@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: NewShell.c 46604 2013-02-15 16:38:05Z jmcmullan $
 
     Desc: NewShell CLI Command
     Lang: English

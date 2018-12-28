@@ -1,6 +1,6 @@
 /*
     Copyright © 2011-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kernel_cpu.c 51149 2015-10-17 01:12:39Z neil $
 
     Desc: i386 native CPU supplementals for task scheduler
     Lang: english
@@ -23,6 +23,12 @@
 #include "apic.h"
 
 #define D(x)
+
+static inline unsigned long long RDTSC() {
+   unsigned long long _tsc;
+   asm volatile (".byte 0x0f, 0x31" : "=A" (_tsc));
+   return _tsc;
+} 
 
 void cpu_Dispatch(struct ExceptionContext *regs)
 {

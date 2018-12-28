@@ -3,7 +3,7 @@
 
 /*
     Copyright (C) 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: uae_integration.h 38611 2011-05-09 14:55:17Z jmcmullan $
 */
 
 #include <exec/types.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: identify.c 45361 2012-07-30 11:10:49Z neil $
 */
 
 #include <aros/debug.h>
@@ -467,9 +467,9 @@ struct DiskObject *__GetDefaultIconFromName_WB
 {
     return GetIconTags
     (
-        NULL,
-        ICONGETA_GetDefaultName, (IPTR)name,
-        TAG_END
+        NULL, 
+        ICONGETA_GetDefaultName, (IPTR) name, 
+        TAG_END,
     );
 }
 
@@ -481,7 +481,7 @@ struct DiskObject *__GetDefaultIconFromType_WB
     return GetIconTags
     (
         NULL,
-        ICONGETA_GetDefaultType, type,
-        TAG_END
+        ICONGETA_GetDefaultType,        type,
+        TAG_END,
     );
 }

@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: netisr.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: netisr.h,v 1.14 1999/12/08 15:58:30 itojun Exp $	*/

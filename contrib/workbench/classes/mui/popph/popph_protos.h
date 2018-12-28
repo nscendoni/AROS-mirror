@@ -1,6 +1,6 @@
 
 /*
-** $Id$
+** $Id: popph_protos.h 30794 2009-03-08 02:19:07Z neil $
 **
 ** © 1999 Marcin Orlowski <carlos@amiga.com.pl>
 */

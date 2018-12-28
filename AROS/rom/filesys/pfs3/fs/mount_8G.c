@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: mount_8G.c 48424 2013-11-18 09:28:30Z neil $ */
 /* $Log: mount.c $
  * Revision 10.9  1998/09/03  07:12:14  Michiel
  * Test for 5GB

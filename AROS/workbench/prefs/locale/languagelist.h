@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: languagelist.h 48578 2013-12-16 01:50:52Z neil $
 */
 
 #include <exec/types.h>

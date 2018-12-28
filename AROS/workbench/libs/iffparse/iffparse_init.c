@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: iffparse_init.c 30792 2009-03-07 22:40:04Z neil $
 
     IFFParse initialization code.
 */

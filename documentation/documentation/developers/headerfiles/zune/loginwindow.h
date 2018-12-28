@@ -4,7 +4,7 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
     
-    $Id$
+    $Id: loginwindow.h 30800 2009-03-08 17:28:50Z neil $
 */
 
 #include <libraries/mui.h>

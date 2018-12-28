@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: closelibrary.c 50481 2015-04-28 10:49:03Z schulz $
 
     Desc: Close a library.
     Lang: english

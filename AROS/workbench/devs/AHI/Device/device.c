@@ -1,6 +1,5 @@
 /*
      AHI - Hardware independent audio subsystem
-     Copyright (C) 2017 The AROS Dev Team
      Copyright (C) 1996-2005 Martin Blom <martin@blom.org>
      
      This library is free software; you can redistribute it and/or
@@ -246,11 +245,9 @@ _DevOpen ( struct AHIRequest* ioreq,
   BOOL  error = FALSE;
   struct AHIDevUnit *iounit=NULL;
 
-  ahibug("[AHI:Device] %s()\n", __func__);
-
   if(AHIBase->ahib_DebugLevel >= AHI_DEBUG_LOW)
   {
-    KPrintF("OpenDevice(%ld, 0x%p, %ld)", unit, (IPTR)ioreq, flags);
+    KPrintF("OpenDevice(%ld, 0x%08lx, %ld)", unit, (ULONG) ioreq, flags);
   }
 
 // Check if size includes the ahir_Version field
@@ -287,7 +284,7 @@ _DevOpen ( struct AHIRequest* ioreq,
   {
     // Load database if not already loaded
 
-    if(AHI_NextAudioID(AHI_INVALID_ID) == (IPTR) AHI_INVALID_ID)
+    if(AHI_NextAudioID(AHI_INVALID_ID) == (ULONG) AHI_INVALID_ID)
     {
       AHI_LoadModeFile("DEVS:AudioModes");
 
@@ -305,7 +302,7 @@ _DevOpen ( struct AHIRequest* ioreq,
 
       // Load Void driver if no real hardware was found
 
-      if(AHI_NextAudioID(AHI_INVALID_ID) == (IPTR) AHI_INVALID_ID)
+      if(AHI_NextAudioID(AHI_INVALID_ID) == (ULONG) AHI_INVALID_ID)
       {
         AHI_LoadModeFile("SYS:Storage/AudioModes/VOID");
       }
@@ -406,8 +403,6 @@ _DevClose ( struct AHIRequest* ioreq,
   struct AHIDevUnit *iounit;
   BPTR  seglist=0;
 
-  ahibug("[AHI:Device] %s()\n", __func__);
-
   if(AHIBase->ahib_DebugLevel >= AHI_DEBUG_LOW)
   {
     KPrintF("CloseDevice(0x%P)\n", (IPTR)ioreq);
@@ -456,8 +451,6 @@ InitUnit ( ULONG unit,
            struct AHIBase *AHIBase )
 {
   struct AHIDevUnit *iounit;
-
-  ahibug("[AHI:Device] %s()\n", __func__);
 
   if( unit == AHI_NO_UNIT )
   {
@@ -553,8 +546,6 @@ ExpungeUnit ( struct AHIDevUnit *iounit,
   struct Task *unittask;
   BYTE signal;
 
-  ahibug("[AHI:Device] %s()\n", __func__);
-
   signal = AllocSignal(-1);
   if(signal == -1)
   {
@@ -592,9 +583,7 @@ ReadConfig ( struct AHIDevUnit *iounit,
   struct IFFHandle *iff;
   struct StoredProperty *ahig;
   struct CollectionItem *ci;
-  IPTR *mode;
-
-  ahibug("[AHI:Device] %s()\n", __func__);
+  ULONG *mode;
 
   if(iounit)
   {
@@ -776,7 +765,7 @@ ReadConfig ( struct AHIDevUnit *iounit,
     mode = &iounit->AudioMode;
   else
     mode = &AHIBase->ahib_AudioMode;
-  if(mode[0] == (IPTR) AHI_INVALID_ID)
+  if(mode[0] == (ULONG) AHI_INVALID_ID)
   { static const Tag tags[] = { AHIDB_Realtime,TRUE,TAG_DONE };
     mode[0] = AHI_BestAudioIDA((struct TagItem *)tags);
   }
@@ -799,8 +788,6 @@ AllocHardware ( struct AHIDevUnit *iounit,
   ULONG fullduplex = FALSE;
   ULONG stereo     = FALSE;
   ULONG panning    = FALSE;
-
-  ahibug("[AHI:Device] %s()\n", __func__);
 
   /* Allocate the hardware */
   iounit->AudioCtrl = AHI_AllocAudio(
@@ -865,8 +852,6 @@ void
 FreeHardware ( struct AHIDevUnit *iounit,
                struct AHIBase *AHIBase )
 {
-  ahibug("[AHI:Device] %s()\n", __func__);
-
   if(iounit->AudioCtrl)
   {
     if(iounit->ChannelInfoStruct)
@@ -894,8 +879,6 @@ DevProc( void )
   struct StartupMessage *sm;
   struct AHIDevUnit *iounit;
   BYTE  signalbit;
-
-  ahibug("[AHI:Device] %s()\n", __func__);
 
   proc = (struct Process *)FindTask(NULL);
   WaitPort(&proc->pr_MsgPort);

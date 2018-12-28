@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: releasesemaphore.c 51383 2016-01-21 00:29:44Z NicJA $
 
     Desc: Release a semaphore.
     Lang: english

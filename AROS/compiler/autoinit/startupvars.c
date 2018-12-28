@@ -1,6 +1,6 @@
 /*
     Copyright © 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: startupvars.c 31570 2009-07-08 15:04:57Z verhaegs $
 
     Desc: autoinit library - global variables for the startup code
 */

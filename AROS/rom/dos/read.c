@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: read.c 49863 2014-12-21 16:20:14Z desperado $
 
     Desc: Read a couple of bytes from a file.
     Lang: english

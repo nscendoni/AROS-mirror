@@ -1,7 +1,7 @@
 #ifndef XADMASTER_HOOK_DISKARC_C
 #define XADMASTER_HOOK_DISKARC_C
 
-/*  $Id$
+/*  $Id: hook_diskarc.c 39571 2011-06-28 01:31:58Z NicJA $
     diskarc input file IO hook
 
     XAD library system for archive handling

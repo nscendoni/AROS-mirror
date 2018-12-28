@@ -1,6 +1,6 @@
 /*
     Copyright © 2016-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: findgroup_class.c 55161 2018-05-04 21:44:34Z neil $
 */
 
 #include <proto/dos.h>

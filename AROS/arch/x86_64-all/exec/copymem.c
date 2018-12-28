@@ -1,6 +1,6 @@
 /*
     Copyright © 2009-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: copymem.c 47740 2013-07-20 11:30:00Z mazze $
 
     Desc: Copy memory.
     Lang: english

@@ -16,7 +16,7 @@
 
  TheBar class Support Site:  http://www.sf.net/projects/thebar
 
- $Id$
+ $Id: private.h 49424 2014-08-16 07:30:44Z mazze $
 
 ***************************************************************************/
 

@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: dostohandlerinterface.c 49086 2014-06-24 07:54:30Z twilen $ */
 /* $Log: dostohandlerinterface.c $
  * Revision 13.10  1999/05/14  11:31:34  Michiel
  * Long filename support implemented; bugfixes

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: extstrings.h 30792 2009-03-07 22:40:04Z neil $
 */
 
 #include "os.h"

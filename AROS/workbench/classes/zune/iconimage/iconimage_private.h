@@ -6,7 +6,7 @@
     This file is part of the IconImage class, which is distributed under
     the terms of version 2.1 of the GNU Lesser General Public License.
     
-    $Id$
+    $Id: iconimage_private.h 30792 2009-03-07 22:40:04Z neil $
 */
 
 #include <workbench/icon.h>

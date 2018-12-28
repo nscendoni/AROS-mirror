@@ -1,6 +1,6 @@
 /*
-    Copyright © 2008-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright Â© 2008-2012, The AROS Development Team. All rights reserved.
+    $Id: kernel_cpu.c 52579 2016-04-11 10:34:38Z NicJA $
 
     Desc: CPU-specific add-ons for Windows-hosted scheduler.
           Context save, restore, and task exception handling.
@@ -11,8 +11,8 @@
 #include <proto/exec.h>
 
 #include "kernel_base.h"
-#include "kernel_intern.h"
 #include "kernel_debug.h"
+#include "kernel_mingw32.h"
 #include "kernel_scheduler.h"
 
 #define D(x)

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: loadrgb32.c 46616 2013-02-16 00:00:27Z jmcmullan $
 
     Desc:
     Lang: english

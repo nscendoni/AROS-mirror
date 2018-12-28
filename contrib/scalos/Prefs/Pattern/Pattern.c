@@ -1,6 +1,6 @@
 // Pattern.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-16 02:15:43 +0100 (Wed, 16 Mar 2016) $
+// $Revision: 51988 $
 
 
 #include <stdlib.h>

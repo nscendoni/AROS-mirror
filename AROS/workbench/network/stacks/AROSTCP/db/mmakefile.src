@@ -1,8 +1,8 @@
-# $Id$
+# $Id: mmakefile.src 52302 2016-03-28 03:42:13Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
 #MM- workbench-network-stacks-arostcp : workbench-network-stacks-arostcp-db
 
-%copy_files_q mmake=workbench-network-stacks-arostcp-db files="$(filter-out mmakefile.src mmakefile, $(call WILDCARD, *))" \
+%copy_files_q mmake=workbench-network-stacks-arostcp-db files="$(filter-out mmakefile.src, $(call WILDCARD, *))" \
     dst=$(AROS_SYSTEM)/Network/AROSTCP/db

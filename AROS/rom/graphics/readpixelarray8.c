@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readpixelarray8.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc:
     Lang: english
@@ -44,10 +44,10 @@ static ULONG rp8_render(APTR rp8r_data, WORD srcx, WORD srcy,
 
 /*  SYNOPSIS */
 	AROS_LHA(struct RastPort *	, rp		, A0),
-	AROS_LHA(WORD             	, xstart	, D0),
-	AROS_LHA(WORD             	, ystart	, D1),
-	AROS_LHA(WORD             	, xstop		, D2),
-	AROS_LHA(WORD             	, ystop		, D3),
+	AROS_LHA(LONG             	, xstart	, D0),
+	AROS_LHA(LONG             	, ystart	, D1),
+	AROS_LHA(LONG             	, xstop		, D2),
+	AROS_LHA(LONG             	, ystop		, D3),
 	AROS_LHA(UBYTE * 		, array		, A2),
 	AROS_LHA(struct RastPort *	, temprp	, A1),
 

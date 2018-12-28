@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: kernel_debug.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <bootconsole.h>
@@ -10,8 +10,15 @@
 #include "kernel_debug.h"
 #include "kernel_intern.h"
 
+#define __save_flags(x)		__asm__ __volatile__("pushf ; pop %0":"=g" (x): /* no input */)
+#define __restore_flags(x) 	__asm__ __volatile__("push %0 ; popf": /* no output */ :"g" (x):"memory", "cc")
+#define __cli() 		__asm__ __volatile__("cli": : :"memory")
+#define __sti()			__asm__ __volatile__("sti": : :"memory")
+
 __attribute__((section(".data"))) static unsigned int debug_y_resolution = 0;
 __attribute__((section(".data"))) static void *debug_framebuffer = NULL;
+
+#define MIN_WIDTH   480
 
 int krnPutC(int c, struct KernelBase *KernelBase)
 {
@@ -20,7 +27,7 @@ int krnPutC(int c, struct KernelBase *KernelBase)
     __save_flags(flags);
 
     /*
-     * Don't use Disable/Enable, because we want the interrupt enabled flag
+     * stegerg: Don't use Disable/Enable, because we want  interrupt enabled flag
      * to stay the same as it was before the Disable() call
      */
     __cli();
@@ -44,7 +51,7 @@ int krnPutC(int c, struct KernelBase *KernelBase)
 
     /*
      * Interrupt flag is stored in flags - if it was enabled before,
-     * it will be re-enabled when the flags are restored
+     * it will be renabled when the flags are restored
      */
     __restore_flags(flags);
 
@@ -59,13 +66,14 @@ void vesahack_Init(char *cmdline, struct vbe_mode *vmode)
 
 	/*
 	 * VESA hack.
-	 * It divides screen height by 2 and increments framebuffer pointer.
-	 * This allows VESA driver to use only upper half of the screen, while
-	 * lower half will still be used for debug output.
+	 * It divides screen into two parts.
+	 * This allows VESA driver to use only upper part of the screen, while
+	 * lower part will still be used for debug output. At minimum, 480
+	 * lines are needed to boot into Wanderer.
 	 */
-	vmode->y_resolution >>= 1;
 
-	debug_y_resolution = vmode->y_resolution;
+	debug_y_resolution = vmode->y_resolution - MIN_WIDTH;
+	vmode->y_resolution = MIN_WIDTH;
 	debug_framebuffer  = (void *)(unsigned long)vmode->phys_base + vmode->y_resolution * vmode->bytes_per_scanline;
     }
 }

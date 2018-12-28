@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: layers.h 41952 2011-10-20 16:04:39Z weissms $
 
     Desc: Layer description
     Lang: english

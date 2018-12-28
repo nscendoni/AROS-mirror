@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support.h 30802 2009-03-08 19:25:45Z neil $
 */
 
 #include <exec/types.h>

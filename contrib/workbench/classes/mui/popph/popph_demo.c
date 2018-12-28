@@ -1,6 +1,6 @@
 
 /*
-** $Id$
+** $Id: popph_demo.c 42866 2011-12-11 08:01:27Z jmcmullan $
 **
 ** Popplaceholder.mcc - demonstration program
 ** © 1999 Marcin Orlowski <carlos@amiga.com.pl>

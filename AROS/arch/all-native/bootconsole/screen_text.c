@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: screen_text.c 40289 2011-07-22 14:10:59Z sonic $
 
     Desc: Hardware text mode (IBM-compatible) screen console.
 */

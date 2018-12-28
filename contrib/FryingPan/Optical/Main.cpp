@@ -688,6 +688,4 @@ int main()
 
    DoLibMethodA(ARRAY(DRV_EndDrive, dcl));
    CleanUp();
-
-   return 0;
 }

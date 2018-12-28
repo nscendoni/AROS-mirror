@@ -1,13 +1,12 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: prepareexecbase.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Sets up the ExecBase a bit. (Mostly clearing).
     Lang:
 */
 
-#define DEBUG 0
-
+#include <aros/config.h>
 #include <aros/asmcall.h>
 #include <aros/debug.h>
 #include <aros/kernel.h>
@@ -25,6 +24,7 @@
 
 #include <proto/alib.h>
 #include <proto/exec.h>
+#include <proto/kernel.h>
 
 #include LC_LIBDEFS_FILE
 #include "etask.h"
@@ -35,15 +35,11 @@
 
 #undef kprintf /* This can't be used in the code here */
 
-#if defined(__AROSEXEC_SMP__)
-extern struct Library *ExecLock__PrepareBase(struct MemHeader *);
-#endif
-
 extern void *LIBFUNCTABLE[];
 
 extern struct Resident Exec_resident; /* Need this for lib_IdString */
 
-extern void Exec_TrapHandler(ULONG trapNum, struct ExceptionContext *ctx);
+extern void Exec_TrapHandler(ULONG trapNum);
 AROS_LD3(ULONG, MakeFunctions,
 	 AROS_LDA(APTR, target, A0),
 	 AROS_LDA(CONST_APTR, functionArray, A1),
@@ -167,8 +163,6 @@ struct ExecBase *PrepareExecBase(struct MemHeader *mh, struct TagItem *msg)
     ULONG i;
     char *args;
 
-    D(bug("[Exec] %s()\n", __func__));
-
     /*
      * Copy reset proof pointers if old SysBase is valid.
      * Additional platform-specific code is needed in order to test
@@ -222,70 +216,35 @@ struct ExecBase *PrepareExecBase(struct MemHeader *mh, struct TagItem *msg)
     SysBase->LibNode.lib_PosSize      = sizeof(struct IntExecBase);
     SysBase->LibNode.lib_Flags        = LIBF_CHANGED | LIBF_SUMUSED;
 
-#if defined(__AROSEXEC_SMP__)
-    EXEC_SPINLOCK_INIT(&PrivExecBase(SysBase)->MemListSpinLock);
-#endif
     NEWLIST(&SysBase->MemList);
     SysBase->MemList.lh_Type = NT_MEMORY;
-
-#if defined(__AROSEXEC_SMP__)
-    EXEC_SPINLOCK_INIT(&PrivExecBase(SysBase)->ResourceListSpinLock);
-#endif
+    
     NEWLIST(&SysBase->ResourceList);
     SysBase->ResourceList.lh_Type = NT_RESOURCE;
     
-#if defined(__AROSEXEC_SMP__)
-    EXEC_SPINLOCK_INIT(&PrivExecBase(SysBase)->DeviceListSpinLock);
-#endif
     NEWLIST(&SysBase->DeviceList);
     SysBase->DeviceList.lh_Type = NT_DEVICE;
 
-#if defined(__AROSEXEC_SMP__)
-    EXEC_SPINLOCK_INIT(&PrivExecBase(SysBase)->IntrListSpinLock);
-#endif
     NEWLIST(&SysBase->IntrList);
     SysBase->IntrList.lh_Type = NT_INTERRUPT;
 
-#if defined(__AROSEXEC_SMP__)
-    EXEC_SPINLOCK_INIT(&PrivExecBase(SysBase)->LibListSpinLock);
-#endif
     NEWLIST(&SysBase->LibList);
     SysBase->LibList.lh_Type = NT_LIBRARY;
 
     /* Add exec.library to system library list */
     ADDHEAD(&SysBase->LibList, &SysBase->LibNode.lib_Node);
 
-#if defined(__AROSEXEC_SMP__)
-    EXEC_SPINLOCK_INIT(&PrivExecBase(SysBase)->PortListSpinLock);
-#endif
     NEWLIST(&SysBase->PortList);
     SysBase->PortList.lh_Type = NT_MSGPORT;
 
-#if defined(__AROSEXEC_SMP__)
-    EXEC_SPINLOCK_INIT(&PrivExecBase(SysBase)->TaskRunningSpinLock);
-    NEWLIST(&PrivExecBase(SysBase)->TaskRunning);
-    PrivExecBase(SysBase)->TaskRunning.lh_Type = NT_TASK;
-
-    EXEC_SPINLOCK_INIT(&PrivExecBase(SysBase)->TaskSpinningLock);
-    NEWLIST(&PrivExecBase(SysBase)->TaskSpinning);
-    PrivExecBase(SysBase)->TaskSpinning.lh_Type = NT_TASK;
-
-    EXEC_SPINLOCK_INIT(&PrivExecBase(SysBase)->TaskReadySpinLock);
-#endif
     NEWLIST(&SysBase->TaskReady);
     SysBase->TaskReady.lh_Type = NT_TASK;
 
-#if defined(__AROSEXEC_SMP__)
-    EXEC_SPINLOCK_INIT(&PrivExecBase(SysBase)->TaskWaitSpinLock);
-#endif
     NEWLIST(&SysBase->TaskWait);
     SysBase->TaskWait.lh_Type = NT_TASK;
 
-#if defined(__AROSEXEC_SMP__)
-    EXEC_SPINLOCK_INIT(&PrivExecBase(SysBase)->SemListSpinLock);
-#endif
     NEWLIST(&SysBase->SemaphoreList);
-    SysBase->SemaphoreList.lh_Type = NT_SEMAPHORE;
+    SysBase->TaskWait.lh_Type = NT_SEMAPHORE;
 
     NEWLIST(&SysBase->ex_MemHandlers);
 
@@ -299,15 +258,11 @@ struct ExecBase *PrepareExecBase(struct MemHeader *mh, struct TagItem *msg)
     NEWLIST(&PrivExecBase(SysBase)->AllocMemList);
     NEWLIST(&PrivExecBase(SysBase)->AllocatorCtxList);
 
-#if defined(__AROSEXEC_BROKENMEMLOCK__)
     InitSemaphore(&PrivExecBase(SysBase)->MemListSem);
-#endif
     InitSemaphore(&PrivExecBase(SysBase)->LowMemSem);
 
     SysBase->SoftVer        = VERSION_NUMBER;
-#if !defined(__AROSEXEC_SMP__)
-    SCHEDQUANTUM_SET(SCHEDQUANTUM_VALUE);
-#endif
+    SysBase->Quantum        = 4;
     SysBase->TaskTrapCode   = Exec_TrapHandler;
     SysBase->TaskExceptCode = NULL;
     SysBase->TaskExitCode   = Exec_TaskFinaliser;
@@ -351,6 +306,17 @@ struct ExecBase *PrepareExecBase(struct MemHeader *mh, struct TagItem *msg)
 
     NEWLIST(&PrivExecBase(SysBase)->TaskStorageSlots);
 
+#if defined(__AROSEXEC_SMP__)
+    EXEC_SPINLOCK_INIT(&PrivExecBase(SysBase)->TaskRunningSpinLock);
+    NEWLIST(&PrivExecBase(SysBase)->TaskRunning);
+    PrivExecBase(SysBase)->TaskRunning.lh_Type = NT_TASK;
+    EXEC_SPINLOCK_INIT(&PrivExecBase(SysBase)->TaskSpinningLock);
+    NEWLIST(&PrivExecBase(SysBase)->TaskSpinning);
+    PrivExecBase(SysBase)->TaskSpinning.lh_Type = NT_TASK;
+    EXEC_SPINLOCK_INIT(&PrivExecBase(SysBase)->TaskReadySpinLock);
+    EXEC_SPINLOCK_INIT(&PrivExecBase(SysBase)->TaskWaitSpinLock);
+#endif
+
     SetSysBaseChkSum();
 
     /* Add our initial MemHeader */
@@ -365,12 +331,11 @@ struct ExecBase *PrepareExecBase(struct MemHeader *mh, struct TagItem *msg)
     SysBase->KickCheckSum = KickCheckSum;
 
     SysBase->DebugAROSBase = PrepareAROSSupportBase(mh);
-#if defined(__AROSEXEC_SMP__)
-    PrivExecBase(SysBase)->ExecLockBase = NULL;
-    PrivExecBase(SysBase)->ExecLockBase = ExecLock__PrepareBase(mh);
-#endif
 
-    D(bug("[Exec] %s: Preperation complete.\n"));
+#if (AROS_FLAVOUR & AROS_FLAVOUR_STANDALONE)
+    /* ABI_V0 compatibility */
+    *(struct ExecBase**)4UL = SysBase;
+#endif
 
     return SysBase;
 }

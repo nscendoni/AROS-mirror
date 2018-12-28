@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: putmidi.c 35478 2010-11-14 15:14:13Z mazze $
 
     Desc: 
     Lang: English

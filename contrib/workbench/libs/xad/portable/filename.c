@@ -1,7 +1,7 @@
 #ifndef XADMASTER_FILENAME_C
 #define XADMASTER_FILENAME_C
 
-/*  $Id$
+/*  $Id: filename.c 43430 2012-01-01 20:12:06Z jmcmullan $
     filename conversion
 
     XAD library system for archive handling

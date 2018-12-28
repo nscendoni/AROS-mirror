@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: easyrequestargs.c 52028 2016-03-17 04:36:20Z jmcmullan $
 */
 
 #include "intuition_intern.h"

@@ -1,6 +1,6 @@
 /*
   Copyright  2004-2011, The AROS Development Team. All rights reserved.
-  $Id$
+  $Id: iconwindow_drawerlist.c 47663 2013-07-13 03:06:45Z neil $
 */
 
 #define ZCC_QUIET

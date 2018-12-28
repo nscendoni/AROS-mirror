@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: debug.h 33636 2010-06-17 17:14:53Z mazze $
 
     Debugging macros.
     This include file can be included several times!

@@ -11,7 +11,7 @@
         Description:    defines to hide compiler specific function stuff.
                         This header is ment to keep all minor functions
                         like PutChProc() used by RawDoFMT().
-        Id:             $Id$
+        Id:             $Id: SDI_misc.h 49589 2014-09-08 18:47:02Z mazze $
         URL:            $URL: https://svn.code.sf.net/p/adtools/code/trunk/sdi/SDI_misc.h $
 
  1.0   17.05.05 : inspired by the SDI_#?.h files made by Jens Langner

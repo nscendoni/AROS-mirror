@@ -14,7 +14,7 @@
 #
 # openurl.library project: http://sourceforge.net/projects/openurllib/
 #
-# $Id$
+# $Id: Makefile 47915 2013-08-30 22:11:52Z mazze $
 #
 #***************************************************************************/
 

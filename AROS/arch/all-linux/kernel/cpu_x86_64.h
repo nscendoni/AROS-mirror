@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu_x86_64.h 44910 2012-06-01 03:24:52Z jmcmullan $
 
     Desc: Macros to handle unix signals, x86_64 version.
     Lang: english
@@ -14,7 +14,6 @@
 #ifdef __AROS_EXEC_LIBRARY__
 
 struct ucontext;
-typedef struct ucontext regs_t;
 
 #else
 
@@ -39,8 +38,6 @@ typedef struct ucontext regs_t;
 #define __KERNEL_STRICT_NAMES
 #endif
 #include <bits/sigcontext.h>
-
-typedef ucontext_t regs_t;
 
 /* name and type of the signal handler */
 #define SIGHANDLER	linux_sighandler
@@ -216,6 +213,7 @@ typedef ucontext_t regs_t;
 
 #define EXCEPTIONS_COUNT 17
 
+typedef struct ucontext regs_t;
 
 /* Use this structure to save/restore registers */
 struct AROSCPUContext

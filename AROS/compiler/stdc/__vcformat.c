@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: __vcformat.c 49818 2014-12-02 19:50:29Z neil $
 
     Function to format a string like printf().
 */
@@ -58,11 +58,10 @@
 #define LALIGNFLAG    4  /* '-' is set */
 #define BLANKFLAG     8  /* ' ' is set */
 #define SIGNFLAG      16 /* '+' is set */
-#define LDBLFLAG      64 /* Processing a long double */
 
 const unsigned char *const __decimalpoint = ".";
 
-static size_t format_long(char *buffer, char type, int base, unsigned long v)
+static size_t format_long(char *buffer, char type, unsigned long v)
 {
     size_t size = 0;
     char hex = 'a' - 10;
@@ -73,28 +72,25 @@ static size_t format_long(char *buffer, char type, int base, unsigned long v)
     {
     case 'X':
         hex = 'A' - 10;
+
     case 'x':
         shift   = 4;
         mask    = 0x0F;
-        if (base == 10)
-            base = 16;
         break;
 
     case 'o':
     	shift   = 3;
     	mask    = 0x07;
-        if (base == 10)
-            base = 8;
     	break;
 
     default:	/* 'd' and 'u' */
     	/* Use slow divide operations for decimal numbers */
     	do
     	{
-    	    char c = v % base;
+    	    char c = v % 10;
 
             *--buffer = c + '0';
-            v /= base;
+            v /= 10;
             size++;
     	} while (v);
 
@@ -121,7 +117,7 @@ static size_t format_long(char *buffer, char type, int base, unsigned long v)
  * This is used to process long long values on 32-bit machines. 64-bit
  * operations are performed slower there, and may need to call libgcc routines.
  */
-static size_t format_longlong(char *buffer, char type, int base, unsigned long long v)
+static size_t format_longlong(char *buffer, char type, unsigned long long v)
 {
     size_t size = 0;
     char hex = 'a' - 10;
@@ -136,15 +132,11 @@ static size_t format_longlong(char *buffer, char type, int base, unsigned long l
     case 'x':
         shift = 4;
         mask = 0x0F;
-        if (base == 10)
-            base = 16;
         break;
 
     case 'o':
     	shift = 3;
     	mask  = 0x07;
-        if (base == 10)
-            base = 8;
     	break;
 
     default:
@@ -161,10 +153,10 @@ static size_t format_longlong(char *buffer, char type, int base, unsigned long l
 #ifndef STDC_LIB32
     	do
     	{
-    	    char c = v % base;
+    	    char c = v % 10;
 
             *--buffer = c + '0';
-            v /= base;
+            v /= 10;
             size++;
     	} while (v);
 #endif
@@ -203,7 +195,7 @@ static size_t format_longlong(char *buffer, char type, int base, unsigned long l
 	to print.
 
     INPUTS
-	data - This is passed to the user callback outc as its second argument.
+	data - This is passed to the usercallback outc
 	outc - Call this function for every character that should be
 		emitted. The function should return EOF on error and
 		> 0 otherwise.
@@ -243,10 +235,6 @@ static size_t format_longlong(char *buffer, char type, int base, unsigned long l
       size_t size1 = 0, size2 = 0;/* How many chars in buffer? */
       const char *ptr=format+1;    /* pointer to format string */
       size_t i,pad;		   /* Some temporary variables */
-      union {			   /* floating point arguments %[aAeEfFgG] */
-	double dbl;
-	long double ldbl;
-      } fparg;
 
       do /* read flags */
 	for(i=0;i<sizeof(flagc);i++)
@@ -312,7 +300,6 @@ static size_t format_longlong(char *buffer, char type, int base, unsigned long l
           unsigned long long llv = 0;
 #endif
           unsigned long v = 0;
-          int base = 10;
 
 	  if (type=='p') /* This is written as 0x08lx (or 0x016lx on 64 bits) */
 	  {
@@ -407,10 +394,10 @@ static size_t format_longlong(char *buffer, char type, int base, unsigned long l
 	   * when not needed.
 	   */
 	  if (lltype)
-	      size2 = format_longlong(buffer2, type, base, llv);
+	      size2 = format_longlong(buffer2, type, llv);
 	  else
 #endif
-	      size2 = format_long(buffer2, type, base, v);
+	      size2 = format_long(buffer2, type, v);
 	  /* Position to the beginning of the string */
 	  buffer2 -= size2;
 
@@ -466,34 +453,26 @@ static size_t format_longlong(char *buffer, char type, int base, unsigned long l
 	  break;
 
 #ifdef FULL_SPECIFIERS
-      case 'a':
-      case 'A':
       case 'f':
-      case 'F':
       case 'e':
       case 'E':
       case 'g':
       case 'G':
       {
+          double v;
 	  char killzeros=0,sign=0; /* some flags */
 	  int ex1,ex2; /* Some temporary variables */
 	  size_t size,dnum,dreq;
 	  char *udstr=NULL;
 
-	  if (subtype=='L')
-	  { flags|=LDBLFLAG;
-            fparg.ldbl=va_arg(args,long double);
-          }else
-	  { flags&=~LDBLFLAG;
-            fparg.dbl=va_arg(args,double);
-          }
+	  v=va_arg(args,double);
 
-	  if(isinf(fparg.dbl))
-	  { if(fparg.dbl>0)
+	  if(isinf(v))
+	  { if(v>0)
 	      udstr="+inf";
 	    else
 	      udstr="-inf";
-	  }else if(isnan(fparg.dbl))
+	  }else if(isnan(v))
 	    udstr="NaN";
 
 	  if(udstr!=NULL)
@@ -505,12 +484,9 @@ static size_t format_longlong(char *buffer, char type, int base, unsigned long l
 	  if(preci==ULONG_MAX) /* old default */
 	    preci=6; /* new default */
 
-	  if(((subtype!='L') && (fparg.dbl<0.0)) || ((subtype=='L') && (fparg.ldbl<0.0)))
+	  if(v<0.0)
 	  { sign='-';
-            if (subtype=='L')
-	      fparg.ldbl=-fparg.ldbl;
-            else
-	      fparg.dbl=-fparg.dbl;
+	    v=-v;
 	  }else
 	  { if(flags&SIGNFLAG)
 	      sign='+';
@@ -519,46 +495,27 @@ static size_t format_longlong(char *buffer, char type, int base, unsigned long l
 	  }
 
 	  ex1=0;
-          if (subtype!='L')
-          { if(fparg.dbl!=0.0)
-	    { ex1=log10(fparg.dbl);
-	      if(fparg.dbl<1.0)
-	        fparg.dbl=fparg.dbl*pow(10,- --ex1); /* Caution: (int)log10(.5)!=-1 */
-	      else
-	        fparg.dbl=fparg.dbl/pow(10,ex1);
-	      if(fparg.dbl<1.0) /* adjust if we are too low (log10(.1)=-.999999999) */
-	      { fparg.dbl*=10.0; /* luckily this cannot happen with FLT_MAX and FLT_MIN */
- 	        ex1--; } /* The case too high (log(10.)=.999999999) is done later */
-	    }
-          }else
-          { if(fparg.ldbl!=0.0)
-	    { ex1=log10l(fparg.ldbl);
-	      if(fparg.ldbl<1.0)
-	        fparg.ldbl=fparg.ldbl*powl(10,- --ex1);
-	      else
-	        fparg.ldbl=fparg.ldbl/powl(10,ex1);
-	      if(fparg.ldbl<1.0)
-	      { fparg.ldbl*=10.0;
- 	        ex1--; }
-	    }
-          }
+	  if(v!=0.0)
+	  { ex1=log10(v);
+	    if(v<1.0)
+	      v=v*pow(10,- --ex1); /* Caution: (int)log10(.5)!=-1 */
+	    else
+	      v=v/pow(10,ex1);
+	    if(v<1.0) /* adjust if we are too low (log10(.1)=-.999999999) */
+	    { v*=10.0; /* luckily this cannot happen with FLT_MAX and FLT_MIN */
+	      ex1--; } /* The case too high (log(10.)=.999999999) is done later */
+	  }
 
 	  ex2=preci;
-	  if(type=='f' || type=='F')
+	  if(type=='f')
 	    ex2+=ex1;
 	  if(tolower(type)=='g')
 	    ex2--;
-          if (subtype!='L')
-          { fparg.dbl+=.5/pow(10,ex2<MINFLOATSIZE?ex2:MINFLOATSIZE); /* Round up */
-            if(fparg.dbl>=10.0) /* Adjusts log10(10.)=.999999999 too */
-	    { fparg.dbl/=10.0;
-	      ex1++; }
-          }else
-          { fparg.ldbl+=.5/powl(10,ex2<MINFLOATSIZE?ex2:MINFLOATSIZE); /* Round up */
-	    if(fparg.ldbl>=10.0) /* Adjusts log10(10.)=.999999999 too */
-	    { fparg.ldbl/=10.0;
-	      ex1++; }
-          }
+	  v+=.5/pow(10,ex2<MINFLOATSIZE?ex2:MINFLOATSIZE); /* Round up */
+
+	  if(v>=10.0) /* Adjusts log10(10.)=.999999999 too */
+	  { v/=10.0;
+	    ex1++; }
 
 	  if(tolower(type)=='g') /* This changes to one of the other types */
 	  { if(ex1<(signed long)preci&&ex1>=-4)
@@ -577,19 +534,14 @@ static size_t format_longlong(char *buffer, char type, int base, unsigned long l
 
 	  dnum=0;
 	  while(dnum<dreq&&dnum<MINFLOATSIZE) /* Calculate all decimal places needed */
-	  { if (subtype!='L')
-            { buffer[dnum++]=(char)fparg.dbl+'0';
-	      fparg.dbl=(fparg.dbl-(double)(char)fparg.dbl)*10.0;
-            }else
-            { buffer[dnum++]=(char)fparg.ldbl+'0';
-	      fparg.ldbl=(fparg.ldbl-(long double)(char)fparg.ldbl)*10.0;
-            }
-          }
+	  { buffer[dnum++]=(char)v+'0';
+	    v=(v-(double)(char)v)*10.0; }
+
 	  if(killzeros) /* Kill trailing zeros if possible */
 	    while(preci&&(dreq-->dnum||buffer[dreq]=='0'))
 	      preci--;
 
-	  if(tolower(type)=='f')/* Calculate actual size of string (without sign) */
+	  if(type=='f')/* Calculate actual size of string (without sign) */
 	  { size=preci+1; /* numbers after decimal point + 1 before */
 	    if(ex1>0)
 	      size+=ex1; /* numbers >= 10 */
@@ -617,19 +569,7 @@ static size_t format_longlong(char *buffer, char type, int base, unsigned long l
 	    OUT(sign);
 
 	  dreq=0;
-	  if(tolower(type)=='a')
-	  { // TODO: Implement hexfloat literals
-            OUT('0');
-	    OUT('x');
-	    OUT('0');
-	    OUT('.');
-	    OUT('0');
-            if (type=='A')
-	      OUT('P');
-            else
-	      OUT('p');
-	    OUT('0');
-          }else if(tolower(type)=='f')
+	  if(type=='f')
 	  { if(ex1<0)
 	      OUT('0');
 	    else

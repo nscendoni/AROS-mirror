@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __env.c 48043 2013-09-08 21:18:34Z verhaegs $
 
     Internal functions for environment variables handling.
 */

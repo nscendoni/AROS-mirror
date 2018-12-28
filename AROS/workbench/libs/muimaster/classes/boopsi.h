@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: boopsi.h 45802 2012-09-15 17:08:34Z neil $
 */
 
 #ifndef _MUI_CLASSES_BOOPSI_H

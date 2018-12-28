@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: makelink.c 46510 2013-02-05 03:30:45Z neil $
 
     Desc: Create a hard or soft link.
     Lang: English

@@ -33,7 +33,7 @@ Commits
 
 .. raw:: html
 
-   <object width="100%" height="400" data="../commits.php"></object></td></tr></table>
+   <?php include("../rsfeed/commits.php"); ?></td></tr></table>
 
 
 .. raw:: html

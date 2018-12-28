@@ -4,8 +4,7 @@ package: Paquet
 documentation: Documentation
 sources: Sources
 binaries: Fichiers binaires
-developer-tools: ABI-v1 Outils de développement
-development-tools: ABI-v0 Outils de développement
+development-tools: Outils de développement
 date: Date
 
 [links]
@@ -74,9 +73,6 @@ pc-x86_64-boot-iso:
     La version native pour PC avec processeur x86_64.
     Cette archive contient l'image du CDROM bootable,
     ainsi que tous les programmes de contribution.
-smp-pc-x86_64-boot-iso:
-    This is a highly experimental SMP build for pc-x86_64.
-    Only recommended for Developers. This is a bootable CD-ROM ISO image.
 pc-i386-contrib:
     Cette archive contient tous les programmes de contribution
     compilés pour l'architecture i386. Ils fonctionneront à la fois

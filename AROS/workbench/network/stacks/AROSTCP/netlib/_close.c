@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: _close.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      _close.c - close a file (SAS/C)
  *

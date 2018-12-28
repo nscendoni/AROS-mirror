@@ -1,7 +1,7 @@
 # Copyright © 2010, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 32573 2010-02-04 18:24:14Z mazze $
 
-include $(SRCDIR)/config/aros.cfg
+include $(TOP)/config/make.cfg
 
 #MM- workbench-complete : workbench-images-pointers
 

@@ -1,30 +1,19 @@
 #ifndef KERNEL_INTERN_H_
 #define KERNEL_INTERN_H_
-/*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
-
-    Desc: 64bit x86 kernel_intern.h
-    Lang: english
-*/
 
 #include <inttypes.h>
 
+#include <exec/nodes.h>
+#include <exec/lists.h>
 #include <aros/kernel.h>
 #include <utility/tagitem.h>
 #include <asm/cpu.h>
 
-typedef struct int_gate_64bit apicidt_t;
+#define STACK_SIZE      65536
+#define PAGE_SIZE	0x1000
+#define PAGE_MASK	0x0FFF
 
-#include "apic.h"
-#include "tls.h"
-
-#define STACK_SIZE              65536
-
-#define DEF_IRQRETFUNC          core_DefaultIRETQ
-
-struct ACPIData;
-struct IOAPICData;
+struct APICData;
 
 /*
  * Boot-time private data.
@@ -32,70 +21,61 @@ struct IOAPICData;
  */
 struct KernBootPrivate
 {
-    IPTR		        _APICBase;		/* Bootstrap APIC base address				*/
-    UWORD                       kbp_APIC_BSPID;		/* Bootstrap APIC logical ID				*/
-    unsigned short	        debug_y_resolution;	/* Parameters of screen's lower half ('vesahack' mode)	*/
-    void	                *debug_framebuffer;
-    IPTR	                SystemStack;		/* System stack base address	       			*/
-    APTR                        BOOTTLS,
-                                BOOTGDT,
-                                BOOTIDT;
-    void	                *TSS;
-    struct CPUMMUConfig         MMU;
+    IPTR		_APICBase;		/* Bootstrap APIC base address				*/
+    UWORD               kbp_APIC_BSPID;		/* Bootstrap APIC logical ID				*/
+    unsigned short	debug_y_resolution;	/* Parameters of screen's lower half ('vesahack' mode)	*/
+    void	       *debug_framebuffer;
+    IPTR	        SystemStack;		/* System stack base address	       			*/
+    void	       *GDT;			/* Self-explanatory					*/
+    void	       *TSS;
+    void	       *system_tls;
+    void	       *IDT;
+    void	       *PML4;
+    void	       *PDP;
+    void	       *PDE;
+    void	       *PTE;
+    int		        used_page;
 };
 
 extern struct KernBootPrivate *__KernBootPrivate;
 
-#define IDT_SIZE                sizeof(struct int_gate_64bit) * 256
-#define GDT_SIZE                sizeof(struct gdt_64bit) + 128
-#define TLS_SIZE                sizeof(tls_t)
-#define TLS_ALIGN               sizeof(APTR)
+/* Platform-specific part of KernelBase */
+struct PlatformData
+{
+    APTR     kb_APIC_TrampolineBase;	/* Starting address of secondary core bootstrap code	*/
+    uint16_t kb_XTPIC_Mask;		/* Current XT-PIC interrupt mask			*/
+    struct   APICData *kb_APIC;		/* APIC global data					*/
+};
 
-#define __save_flags(x)		__asm__ __volatile__("pushfq ; popq %0":"=g" (x): /* no input */)
-#define __restore_flags(x) 	__asm__ __volatile__("pushq %0 ; popfq": /* no output */ :"g" (x):"memory", "cc")
-
-#define krnLeaveSupervisorRing(_flags)                          \
-    asm volatile (                                              \
-            "mov %[user_ds],%%ds\n\t"                           \
-            "mov %[user_ds],%%es\n\t"                           \
-            "mov %%rsp,%%r12\n\t"                               \
-            "pushq %[ds]\n\t"      	                        \
-            "pushq %%r12\n\t"                                   \
-            "pushq %[iflags]\n\t"                               \
-            "pushq %[cs]\n\t"		                        \
-            "movabsq $1f,%%r12\n\t"                         \
-            "pushq %%r12\n\t"                                     \
-            "iretq\n1:"                                        \
-            : : [user_ds] "r" (USER_DS), [ds] "i" (USER_DS),    \
-                [cs] "i" (USER_CS), [iflags] "i" (_flags)       \
-            : "r12")
-
-#define FLAGS_INTENABLED        0x3002
+#define KBL_INTERNAL    0
+#define KBL_XTPIC       1
+#define KBL_APIC        2
 
 /* Main boot code */
 void core_Kick(struct TagItem *msg, void *target);
 void kernel_cstart(const struct TagItem *msg);
-void PlatformPostInit(void);
 
-/** CPU Related Functions **/
-void core_SetupGDT(struct KernBootPrivate *, apicid_t, APTR, APTR, APTR);
-
-void core_SetupMMU(struct CPUMMUConfig *, IPTR memtop);
-void core_InitMMU(struct CPUMMUConfig *);
-void core_LoadMMU(struct CPUMMUConfig *);
-
-void core_CPUSetup(apicid_t, APTR, IPTR);
-
-/* */
+/** CPU Functions **/
+void core_SetupIDT(struct KernBootPrivate *);
+void core_SetupGDT(struct KernBootPrivate *);
+void core_SetupMMU(struct KernBootPrivate *, IPTR memtop);
+void core_CPUSetup(UBYTE, IPTR);
 void core_ProtKernelArea(intptr_t addr, intptr_t length, char p, char rw, char us);
+void core_DefaultIRETQ();
+ULONG acpi_Initialize(void);
+void ictl_Initialize(void);
+
+struct ExceptionContext;
+
+/* Interrupt processing */
+void core_LeaveInterrupt(struct ExceptionContext *);
 void core_Supervisor(struct ExceptionContext *);
 
-/* HW IRQ Related Functions */
-struct ExceptionContext;
-extern const void *IntrDefaultGates[256];
+//void core_Reboot(void);
 
-void ictl_Initialize(struct KernelBase *KernelBase);
+void PlatformPostInit(void);
 
-void core_LeaveInterrupt(struct ExceptionContext *);
+//int smp_Setup(void);
+//int smp_Wake(void);
 
 #endif /*KERNEL_INTERN_H_*/

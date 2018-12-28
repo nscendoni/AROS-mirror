@@ -28,27 +28,23 @@ __FBSDID("$FreeBSD: src/lib/msun/src/s_roundf.c,v 1.4 2005/12/02 13:45:06 bde Ex
 
 #include <math.h>
 
-#include "math_private.h"
-
 float
 roundf(float x)
 {
 	float t;
-	uint32_t hx;
 
-	GET_FLOAT_WORD(hx, x);
-	if ((hx & 0x7fffffff) == 0x7f800000)
-		return (x + x);
+	if (!isfinite(x))
+		return (x);
 
-	if (!(hx & 0x80000000)) {
+	if (x >= 0.0) {
 		t = floorf(x);
-		if (t - x <= -0.5F)
-			t += 1;
+		if (t - x <= -0.5)
+			t += 1.0;
 		return (t);
 	} else {
 		t = floorf(-x);
-		if (t + x <= -0.5F)
-			t += 1;
+		if (t + x <= -0.5)
+			t += 1.0;
 		return (-t);
 	}
 }

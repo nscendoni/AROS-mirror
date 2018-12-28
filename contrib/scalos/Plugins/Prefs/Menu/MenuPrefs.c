@@ -1,6 +1,6 @@
 // MenuPrefs.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-17 15:10:07 +0100 (Thu, 17 Mar 2016) $
+// $Revision: 52032 $
 
 #ifdef __AROS__
 #define MUIMASTER_YES_INLINE_STDARG

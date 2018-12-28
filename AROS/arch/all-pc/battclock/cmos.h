@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cmos.h 40155 2011-07-15 08:23:32Z sonic $
 
     Desc: CMOS offsets.
     Lang: English

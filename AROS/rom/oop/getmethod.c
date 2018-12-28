@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getmethod.c 49655 2014-09-21 23:01:25Z neil $
 
     Desc: Get a pointer to a method for an object
     Lang: english

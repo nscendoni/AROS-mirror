@@ -1,6 +1,6 @@
 /*
     Copyright © 2005-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prometheus_init.c 46667 2013-02-21 09:43:19Z neil $
 
     Desc: Prometheus initialisation code.
     Lang: English.

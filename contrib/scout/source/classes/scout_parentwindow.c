@@ -40,13 +40,13 @@ struct ChildWindowNode {
 };
 
 struct MUIP_AddChildWindowMessage {
-    STACKED ULONG MethodID;
-    STACKED APTR window;
+    ULONG MethodID;
+    APTR window;
 };
 
 struct MUIP_RemChildWindowMessage {
-    STACKED ULONG MethodID;
-    STACKED APTR window;
+    ULONG MethodID;
+    APTR window;
 };
 
 STATIC void CloseChildWindow( struct ParentWinData *pwd,

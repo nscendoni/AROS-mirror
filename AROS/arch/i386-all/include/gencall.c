@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gencall.c 43168 2011-12-22 11:41:52Z verhaegs $
 */
 /*
  * This program generates the libcall.h macroset for gcc 

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: changeextspritea.c 33936 2010-07-28 08:55:57Z sonic $
 
     Desc: Graphics function ChangeExtSpriteA()
     Lang: english

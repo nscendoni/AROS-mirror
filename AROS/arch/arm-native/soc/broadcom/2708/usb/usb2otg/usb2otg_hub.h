@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: usb2otg_hub.h 50277 2015-04-01 01:16:56Z NicJA $
 */
 
 #include <devices/usb_hub.h>

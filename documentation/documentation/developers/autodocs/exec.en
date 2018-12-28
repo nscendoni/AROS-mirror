@@ -25,29 +25,29 @@ exec
 `CopyMemQuick()`_                       `CreateIORequest()`_                    `CreateMsgPort()`_                      `CreatePool()`_                         
 `Deallocate()`_                         `Debug()`_                              `DeleteIORequest()`_                    `DeleteMsgPort()`_                      
 `DeletePool()`_                         `Disable()`_                            `Dispatch()`_                           `DoIO()`_                               
-`Enable()`_                             `Enqueue()`_                            `Exec_FindChild()`_                     `ExitIntr()`_                           
-`FindName()`_                           `FindPort()`_                           `FindResident()`_                       `FindSemaphore()`_                      
-`FindTask()`_                           `FindTaskByPID()`_                      `Forbid()`_                             `FreeEntry()`_                          
-`FreeMem()`_                            `FreePooled()`_                         `FreeSignal()`_                         `FreeTaskStorageSlot()`_                
-`FreeTrap()`_                           `FreeVec()`_                            `FreeVecPooled()`_                      `GetCC()`_                              
-`GetMsg()`_                             `GetParentTaskStorageSlot()`_           `GetTaskStorageSlot()`_                 `InitCode()`_                           
-`InitResident()`_                       `InitSemaphore()`_                      `InitStruct()`_                         `Insert()`_                             
-`MakeFunctions()`_                      `MakeLibrary()`_                        `NewAddTask()`_                         `NewAllocEntry()`_                      
-`NewCreateTaskA()`_                     `NewMinList()`_                         `NewStackSwap()`_                       `ObtainQuickVector()`_                  
-`ObtainSemaphoreList()`_                `ObtainSemaphoreShared()`_              `OldOpenLibrary()`_                     `OpenDevice()`_                         
-`OpenLibrary()`_                        `OpenResource()`_                       `Permit()`_                             `Procure()`_                            
-`PutMsg()`_                             `RawDoFmt()`_                           `ReadGayle()`_                          `ReleaseSemaphore()`_                   
-`ReleaseSemaphoreList()`_               `RemDevice()`_                          `RemHead()`_                            `RemIntServer()`_                       
-`RemLibrary()`_                         `RemMemHandler()`_                      `Remove()`_                             `RemPort()`_                            
-`RemResetCallback()`_                   `RemResource()`_                        `RemSemaphore()`_                       `RemTail()`_                            
-`RemTask()`_                            `ReplyMsg()`_                           `Reschedule()`_                         `RestoreTaskStorage()`_                 
-`SaveTaskStorage()`_                    `Schedule()`_                           `SendIO()`_                             `SetExcept()`_                          
-`SetFunction()`_                        `SetIntVector()`_                       `SetSignal()`_                          `SetSR()`_                              
-`SetTaskPri()`_                         `SetTaskStorageSlot()`_                 `ShutdownA()`_                          `Signal()`_                             
-`StackSwap()`_                          `SumKickData()`_                        `SumLibrary()`_                         `SuperState()`_                         
-`Supervisor()`_                         `Switch()`_                             `TypeOfMem()`_                          `UserState()`_                          
-`Vacate()`_                             `VNewRawDoFmt()`_                       `Wait()`_                               `WaitIO()`_                             
-`WaitPort()`_                           
+`Enable()`_                             `Enqueue()`_                            `ExitIntr()`_                           `FindName()`_                           
+`FindPort()`_                           `FindResident()`_                       `FindSemaphore()`_                      `FindTask()`_                           
+`FindTaskByPID()`_                      `Forbid()`_                             `FreeEntry()`_                          `FreeMem()`_                            
+`FreePooled()`_                         `FreeSignal()`_                         `FreeTaskStorageSlot()`_                `FreeTrap()`_                           
+`FreeVec()`_                            `FreeVecPooled()`_                      `GetCC()`_                              `GetMsg()`_                             
+`GetParentTaskStorageSlot()`_           `GetTaskStorageSlot()`_                 `InitCode()`_                           `InitResident()`_                       
+`InitSemaphore()`_                      `InitStruct()`_                         `Insert()`_                             `MakeFunctions()`_                      
+`MakeLibrary()`_                        `NewAddTask()`_                         `NewAllocEntry()`_                      `NewCreateTaskA()`_                     
+`NewMinList()`_                         `NewStackSwap()`_                       `ObtainQuickVector()`_                  `ObtainSemaphoreList()`_                
+`ObtainSemaphoreShared()`_              `OldOpenLibrary()`_                     `OpenDevice()`_                         `OpenLibrary()`_                        
+`OpenResource()`_                       `Permit()`_                             `Procure()`_                            `PutMsg()`_                             
+`RawDoFmt()`_                           `ReadGayle()`_                          `ReleaseSemaphore()`_                   `ReleaseSemaphoreList()`_               
+`RemDevice()`_                          `RemHead()`_                            `RemIntServer()`_                       `RemLibrary()`_                         
+`RemMemHandler()`_                      `Remove()`_                             `RemPort()`_                            `RemResetCallback()`_                   
+`RemResource()`_                        `RemSemaphore()`_                       `RemTail()`_                            `RemTask()`_                            
+`ReplyMsg()`_                           `Reschedule()`_                         `RestoreTaskStorage()`_                 `SaveTaskStorage()`_                    
+`Schedule()`_                           `SendIO()`_                             `SetExcept()`_                          `SetFunction()`_                        
+`SetIntVector()`_                       `SetSignal()`_                          `SetSR()`_                              `SetTaskPri()`_                         
+`SetTaskStorageSlot()`_                 `ShutdownA()`_                          `Signal()`_                             `StackSwap()`_                          
+`SumKickData()`_                        `SumLibrary()`_                         `SuperState()`_                         `Supervisor()`_                         
+`Switch()`_                             `TypeOfMem()`_                          `UserState()`_                          `Vacate()`_                             
+`VNewRawDoFmt()`_                       `Wait()`_                               `WaitIO()`_                             `WaitPort()`_                           
+
 ======================================= ======================================= ======================================= ======================================= 
 
 -----------
@@ -2409,8 +2409,8 @@ Function
 ~~~~~~~~
 ::
 
-     ChildOrphan() will detach the specified task from its parent
-     task's child task tree. This is useful if the parent task will be
+     ChildOrphan() will detach the specified task from the its parent
+     task child task tree. This is useful if the parent task will be
      exiting, and no longer needs to be told about child task events.
 
      Note that the default Task finaliser will orphan any remaining
@@ -3071,7 +3071,7 @@ Function
 ~~~~~~~~
 ::
 
-     This function will prevent interrupts from occuring (*). You can
+     This function will prevent interrupts from occuring. You can
      start the interrupts again with a call to Enable().
 
      Note that calls to Disable() nest, and for every call to
@@ -3079,11 +3079,15 @@ Function
 
      ***** WARNING *****
 
-     Using this function is considered very harmful, and it should only
-     ever be used to protect data that could also be accessed in interrupts.
+     Using this function is considered very harmful, and it is
+     not recommended to use this function for ** ANY ** reason.
 
      It is quite possible to either crash the system, or to prevent
      normal activities (disk/port i/o) from occuring.
+
+     Note: As taskswitching is driven by the interrupts subsystem,
+           this function has the side effect of disabling
+           multitasking.
 
 
 Result
@@ -3097,7 +3101,7 @@ Example
 ~~~~~~~
 ::
 
-     In most userspace code, you will not want to use this function.
+     No you DEFINITELY don't want to use this function.
 
 
 Notes
@@ -3108,15 +3112,6 @@ Notes
 
      To prevent deadlocks calling Wait() in disabled state breaks
      the disable - thus interrupts may happen again.
-
-     As the schedulers pre-emption is interrupt driven,
-     this function has the side effect of disabling
-     multitasking.
-
-     (*) On EXECSMP builds, Disable() only aplies to the processor
-         it is called from (and needs to be re-enabled there also)
-         Data which needs to be protected from parallel access will
-         also require a spinlock.            
 
 
 Bugs
@@ -3229,7 +3224,7 @@ Function
 ~~~~~~~~
 ::
 
-     This function will allow interrupts to occur (*) after they have
+     This function will allow interrupts to occur after they have
      been disabled by Disable().
 
      Note that calls to Disable() nest, and for every call to
@@ -3237,12 +3232,15 @@ Function
 
      ***** WARNING *****
 
-
-     Using this function is considered very harmful, and it should only
-     ever be used to protect data that could also be accessed in interrupts.
+     Using this function is considered very harmful, and it is
+     not recommended to use this function for ** ANY ** reason.
 
      It is quite possible to either crash the system, or to prevent
      normal activities (disk/port i/o) from occuring.
+
+     Note: As taskswitching is driven by the interrupts subsystem,
+           this function has the side effect of disabling
+           multitasking.
 
 
 Inputs
@@ -3263,7 +3261,7 @@ Example
 ~~~~~~~
 ::
 
-     In most userspace code, you will not want to use this function.
+     No you DEFINITATELY don't want to use this function.
 
 
 Notes
@@ -3274,14 +3272,6 @@ Notes
 
      To prevent deadlocks calling Wait() in disabled state breaks
      the disable - thus interrupts may happen again.
-
-     As the schedulers pre-emption is interrupt driven,
-     this function has the side effect of disabling
-     multitasking.
-
-     (*) On EXECSMP builds, Enable() only aplies to the processor
-         it is called from. Data which needs to be protected from
-         parallel access will also require a spinlock.            
 
 
 Bugs
@@ -3358,52 +3348,6 @@ Notes
 
      The list has to be in descending order in respect to the field
      ln_Pri of all nodes.
-
-
-
-----------
-
-Exec_FindChild()
-================
-
-Synopsis
-~~~~~~~~
-::
-
-  struct ETask * Exec_FindChild(
-     ULONG       id,
-     struct ExecBase *SysBase)
-
-
-Function
-~~~~~~~~
-::
-
-     Scan through the current tasks children list searching for the task
-     whose et_UniqueID field matches.
-
-
-Inputs
-~~~~~~
-::
-
-     id      -   The task ID to match.
-
-
-Result
-~~~~~~
-::
-
-     Address of the ETask structure that matches, or
-     NULL otherwise.
-
-
-Notes
-~~~~~
-::
-
-     This is an internal exec.library function not exported from the
-     library.
 
 
 
@@ -3703,7 +3647,7 @@ Function
 ~~~~~~~~
 ::
 
-     Forbid any further taskswitches (*) until a matching call to Permit().
+     Forbid any further taskswitches until a matching call to Permit().
      Naturally disabling taskswitches means:
 
      THIS CALL IS DANGEROUS
@@ -3735,10 +3679,7 @@ Example
 ~~~~~~~
 ::
 
-     On uniprocessor builds of AROS, it is generally not necessary/
-     desirable to use Forbid()/Permit() in most userspace code - however for
-     EXECSMP builds, you will need to protect spinlocks against
-     task switches on the local processor..
+     No you really don't want to use this function.
 
 
 Notes
@@ -3749,10 +3690,6 @@ Notes
 
      To prevent deadlocks calling Wait() in forbidden state breaks
      the forbid - thus taskswitches may happen again.
-
-     (*) On EXECSMP builds, Forbid() only aplies to the processor
-         it is called from. Data which needs to be protected from
-         parallel access will also require a spinlock.  
 
 
 Bugs
@@ -5137,7 +5074,7 @@ Function
 ~~~~~~~~
 ::
 
-     This function will reactivate the task dispatcher (*) after a call
+     This function will reactivate the task dispatcher after a call
      to Forbid(). Note that calls to Forbid() nest, and for every
      call to Forbid() you need a matching call to Permit().
 
@@ -5160,10 +5097,7 @@ Example
 ~~~~~~~
 ::
 
-     On uniprocessor builds of AROS, it is generally not necessary/
-     desirable to use Forbid()/Permit() in most userspace code - however for
-     EXECSMP builds, you will need to protect spinlocks against
-     task switches on the local processor..
+     No you really don't want to use this function.
 
 
 Notes
@@ -5174,10 +5108,6 @@ Notes
 
      To prevent deadlocks calling Wait() in forbidden state breaks
      the forbid - thus taskswitches may happen again.
-
-     (*) On EXECSMP builds, Forbid() only aplies to the processor
-         it is called from. Data which needs to be protected from
-         parallel access will also require a spinlock.  
 
 
 Bugs

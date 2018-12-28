@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: misc.c 42458 2011-11-15 04:08:12Z jmcmullan $
 
     Desc:
     Lang: English

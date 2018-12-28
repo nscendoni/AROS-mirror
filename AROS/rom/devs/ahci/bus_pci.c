@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bus_pci.c 47063 2013-03-24 01:06:19Z neil $
 
     Desc: PCI bus driver for ahci.device
     Lang: English

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$	$Log
+    $Id: text.c 45615 2012-08-20 03:18:55Z jmcmullan $	$Log
 
     Desc: Graphics function Text()
     Lang: english

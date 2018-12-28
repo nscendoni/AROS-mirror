@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ParallelClass.c 50912 2015-07-03 19:34:27Z jmcmullan $
 
     Desc: Parallel hidd class implementation.
     Lang: english

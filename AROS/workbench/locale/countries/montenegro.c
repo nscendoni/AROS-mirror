@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: montenegro.c 51226 2015-12-03 13:53:57Z polluks $
 
     Desc: Country data for Crna Gora (Montenegro)
     Author: Stefan Haubenthal <polluks@sdf.lonestar.org>

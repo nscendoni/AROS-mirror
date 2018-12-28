@@ -1,7 +1,7 @@
 #ifndef XADMASTER_STUFFIT_C
 #define XADMASTER_STUFFIT_C
 
-/*  $Id$
+/*  $Id: StuffIt.c 43430 2012-01-01 20:12:06Z jmcmullan $
     StuffIt file archiver client
 
     XAD library system for archive handling

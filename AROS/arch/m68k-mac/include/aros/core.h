@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2000, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: core.h 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Interrupt core, part of kernel.resource
     Lang: english

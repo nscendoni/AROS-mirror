@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2001, The AROS Development Team. All rights reserved.
+    $Id: refreshtagitemclones.c 49964 2015-01-28 23:04:04Z NicJA $
 
     Desc: RefreshTagItemClones()
     Lang: english
@@ -17,7 +17,7 @@
 
 /*  SYNOPSIS */
 	AROS_LHA(struct TagItem *, clone, A0),
-	AROS_LHA(const struct TagItem *, original, A1),
+	AROS_LHA(struct TagItem *, original, A1),
 
 /*  LOCATION */
 	struct UtilityBase *, UtilityBase, 14, Utility)
@@ -62,6 +62,12 @@
 	CloneTagItems()
 
     INTERNALS
+
+    HISTORY
+	29-10-95    digulla automatically created from
+			    utility_lib.fd and clib/utility_protos.h
+	11-08-96    iaint   Based on the 3.0/2.04 version.
+	05-09-96    iaint   Updated autodoc, and removed another variable.
 
 *****************************************************************************/
 {

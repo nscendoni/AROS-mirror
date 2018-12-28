@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setconductorstate.c 51460 2016-01-30 04:42:09Z NicJA $
 
     Desc:
     Lang: English

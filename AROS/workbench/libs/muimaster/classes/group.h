@@ -6,7 +6,7 @@
     Copyright © 2002-2012, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: group.h 46048 2012-11-16 17:53:22Z neil $
 */
 
 /*** Name *******************************************************************/

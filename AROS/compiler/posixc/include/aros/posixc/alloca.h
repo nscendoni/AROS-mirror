@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: alloca.h 48028 2013-09-08 21:13:29Z verhaegs $
 
     UNIX header file <alloca.h>
     It is not part of POSIX or C99 but we provide for legacy applications.

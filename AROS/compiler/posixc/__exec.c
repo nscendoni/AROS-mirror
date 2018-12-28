@@ -1,6 +1,6 @@
 /*
     Copyright © 2008-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __exec.c 49116 2014-07-13 06:08:50Z deadwood $
 
     Support functions for POSIX exec*() functions.
 */

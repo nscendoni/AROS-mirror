@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 52342 2016-03-29 10:15:57Z mazze $
 # Makefile to make Find tool.
 
 include $(SRCDIR)/config/aros.cfg

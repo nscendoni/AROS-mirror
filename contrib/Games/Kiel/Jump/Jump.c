@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-98, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Jump.c 30794 2009-03-08 02:19:07Z neil $
 
     Desc: Jump Game
     Lang: english

@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2013-2017, The AROS Development Team.
-    $Id$
+    Copyright (C) 2013, The AROS Development Team.
+    $Id: main.c 52917 2016-08-30 14:07:27Z mmartinka $
 */
 
 #include <aros/debug.h>
@@ -10,7 +10,7 @@
 #include <exec/memory.h>
 #include <hidd/hidd.h>
 #include <hidd/system.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <hidd/storage.h>
 #include <libraries/asl.h>
 #include <mui/NListtree_mcc.h>
@@ -54,8 +54,6 @@ const struct OOP_ABDescr abd[] =
     {NULL            ,  NULL          }
 };
 
-int sysExplGlobalCount;
-
 /*
  * This lists contains handlers for known public classes.
  * It specifies information window class, as well as function
@@ -96,27 +94,18 @@ AROS_UFH3S(BOOL, enumFunc,
 
     if (objValid)
     {
-        int objnum;
-
         /* This is either HW or HIDD subclass */
         OOP_GetAttr(obj, aHW_ClassName, (IPTR *)&name);
         if (!name)
             OOP_GetAttr(obj, aHidd_HardwareName, (IPTR *)&name);
 
-        objnum = ++sysExplGlobalCount;
         tn = (APTR)DoMethod(hidd_tree, MUIM_NListtree_Insert, name, &msg,
                             parent, MUIV_NListtree_Insert_PrevNode_Sorted, flags);
-
         D(bug("Inserted TreeNode 0x%p <%s> UserData 0x%p\n", tn, tn->tn_Name, tn->tn_User));
 
         /* If we have enumerator for this class, call it now */
         if (clHandlers && clHandlers->enumFunc && (flags & TNF_LIST))
             clHandlers->enumFunc(obj, tn);
-
-        if (objnum == sysExplGlobalCount)
-        {
-            tn->tn_Flags &= ~flags;
-        }
     }
     return FALSE; /* Continue enumeration */
 
@@ -142,7 +131,7 @@ struct ClassHandlerNode *FindClassHandler(CONST_STRPTR classid, struct List *_ha
     {
         if (!strncmp(classid, curHandler->ch_Node.ln_Name, strlen(classid)))
         {
-            D(bug("[SysExplorer] Returning class '%s'\n", curHandler->ch_Node.ln_Name));
+            bug("[SysExplorer] Returning class '%s'\n", curHandler->ch_Node.ln_Name);
             return curHandler;
         }
     }
@@ -156,14 +145,14 @@ struct ClassHandlerNode *FindObjectHandler(OOP_Object *obj, struct List *_handle
     ForeachNode(_handlers, curHandler)
     {
         OOP_Class *cl;
-        D(bug("[SysExplorer]    class '%s'\n", curHandler->ch_Node.ln_Name));
+        bug("[SysExplorer]    class '%s'\n", curHandler->ch_Node.ln_Name);
 
         for (cl = OOP_OCLASS(obj); cl ; cl = cl->superclass)
         {
-            D(bug("[SysExplorer]        obj '%s'\n", cl->ClassNode.ln_Name));
+            bug("[SysExplorer]        obj '%s'\n", cl->ClassNode.ln_Name);
             if (!strncmp(cl->ClassNode.ln_Name, curHandler->ch_Node.ln_Name, strlen(curHandler->ch_Node.ln_Name)))
             {
-                D(bug("[SysExplorer] Returning obj class '%s'\n", curHandler->ch_Node.ln_Name));
+                bug("[SysExplorer] Returning obj class '%s'\n", curHandler->ch_Node.ln_Name);
                 return curHandler;
             }
         }
@@ -251,7 +240,7 @@ AROS_UFH3S(void, propertyFunc,
 
     if (node == NULL)
     {
-        /* if we were called from menu we must first find the current entry */
+        /* if we were called from menu we must 1st find the current entry */
         node = (struct MUI_NListtree_TreeNode *)XGET(hidd_tree, MUIA_NListtree_Active);
     }
 
@@ -352,8 +341,6 @@ static BOOL GUIinit()
 
         if (hwRoot)
         {
-            sysExplGlobalCount = 0;
-
             /* This will kick our recursive enumeration into action */
             CALLHOOKPKT((struct Hook *)&enum_hook, hwRoot, MUIV_NListtree_Insert_ListNode_Root);
         }
@@ -435,13 +422,13 @@ BOOL RegisterClassHandler(CONST_STRPTR classid, BYTE pri, struct MUI_CustomClass
         if (newClass->enumFunc != hwEnum)
             return FALSE;
 
-        D(bug("[SysExplorer] Updating '%s'..\n", classid));
+        bug("[SysExplorer] Updating '%s'..\n", classid);
         add = FALSE;
     }
 
     if (add)
     {
-        D(bug("[SysExplorer] Registering '%s'..\n", classid));
+        bug("[SysExplorer] Registering '%s'..\n", classid);
         newClass = AllocMem(sizeof(struct ClassHandlerNode), MEMF_CLEAR);
     }
 
@@ -463,7 +450,7 @@ BOOL RegisterClassHandler(CONST_STRPTR classid, BYTE pri, struct MUI_CustomClass
 
 BOOL sysexplorer_init(void)
 {
-    D(bug("[SysExplorer] Initialising..\n"));
+    bug("[SysExplorer] Initialising..\n");
     NEWLIST(&seClassHandlers);
 
     RegisterClassHandler(CLID_Hidd_Storage, 90, NULL, hwEnum, NULL);
@@ -472,8 +459,6 @@ BOOL sysexplorer_init(void)
     RegisterClassHandler(CLID_HW_Root, 0, &ComputerWindow_CLASS,  hwEnum, NULL);
     RegisterClassHandler(CLID_HW, -30, NULL, hwEnum, NULL);
     RegisterClassHandler(CLID_Hidd, -60, &GenericWindow_CLASS, NULL, NULL);
-
-    D(bug("[SysExplorer] Init complete\n"));
 
     return TRUE;
 }

@@ -1,6 +1,6 @@
 // PNGPicture.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 21:24:33 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51979 $
 
 #include <exec/types.h>
 #include <exec/libraries.h>

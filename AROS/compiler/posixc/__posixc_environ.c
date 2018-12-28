@@ -1,6 +1,6 @@
 /*
     Copyright © 2012-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __posixc_environ.c 48043 2013-09-08 21:18:34Z verhaegs $
 
     Desc: AROS specific function for environ emulation handling
 */

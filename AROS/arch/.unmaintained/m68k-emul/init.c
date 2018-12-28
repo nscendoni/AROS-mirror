@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: init.c 33231 2010-05-12 09:59:06Z sonic $
 */
 
 #include <exec/execbase.h>

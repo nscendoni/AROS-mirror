@@ -3,7 +3,7 @@
 
 /*
     Copyright  2002-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: zunestuff.h 51639 2016-03-08 18:01:34Z mazze $
 */
 
 #include <intuition/classusr.h>

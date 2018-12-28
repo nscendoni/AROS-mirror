@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: debug.h 33784 2010-07-10 19:38:51Z deadwood $
 */
 
 #ifndef __DEBUG_H

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: doasynclayout.c 51156 2015-10-21 19:15:04Z neil $
 
     Desc:
     Lang: English

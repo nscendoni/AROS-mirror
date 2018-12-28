@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: date2amiga.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Convert a human understandable date to a machine form.
     Lang: english

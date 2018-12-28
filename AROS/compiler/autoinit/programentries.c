@@ -1,6 +1,6 @@
 /*
     Copyright © 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: programentries.c 45604 2012-08-19 18:39:04Z jmcmullan $
 
     Desc: autoinit library - functions for handling the PROGRAM_ENTRIES symbolset
 */

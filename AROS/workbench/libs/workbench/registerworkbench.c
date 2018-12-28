@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: registerworkbench.c 45368 2012-08-01 16:42:02Z neil $
 */
 
 #include "workbench_intern.h"

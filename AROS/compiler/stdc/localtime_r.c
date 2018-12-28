@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: localtime_r.c 48039 2013-09-08 21:18:07Z verhaegs $
 
     Convert a time into a string, reentrant.
 */

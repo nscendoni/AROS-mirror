@@ -1,7 +1,7 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
     Copyright © 2001-2013, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: intuition_init.c 51655 2016-03-09 13:32:20Z NicJA $
 */
 
 /****************************************************************************************/
@@ -12,7 +12,7 @@
 #include <exec/memory.h>
 #include <exec/execbase.h>
 #include <exec/alerts.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <oop/oop.h>
 #include <proto/graphics.h>
 #include <proto/exec.h>
@@ -91,9 +91,7 @@ static int IntuitionInit(LIBBASETYPEPTR LIBBASE)
     };
 
     DEBUG_INIT(dprintf("LIB_Init: base 0x%p\n", LIBBASE));
-#if defined(__AROSEXEC_SMP__)
-    GetPrivIBase(LIBBASE)->ExecLockBase = OpenResource("execlock.resource");
-#endif
+
     /* Open our dependencies */
     if (!(GetPrivIBase(LIBBASE)->UtilityBase = OpenLibrary("utility.library", 0))) {
         return FALSE;
@@ -279,15 +277,15 @@ static int IntuitionInit(LIBBASETYPEPTR LIBBASE)
     InitSemaphore(&GetPrivIBase(LIBBASE)->MonitorListSem);
     SetDisplayDriverCallback(DisplayDriverNotify, LIBBASE);
 
+#if defined(__AROS_ARCH_pc__)    /* for now */
     /* Install reset handler to display manual shutdown screen */
-    GetPrivIBase(LIBBASE)->ShutdownHandler.is_Node.ln_Name =
-        LIBBASE->Base.LibNode.lib_Node.ln_Name;
     GetPrivIBase(LIBBASE)->ShutdownHandler.is_Node.ln_Pri = -96;
     GetPrivIBase(LIBBASE)->ShutdownHandler.is_Code =
         (VOID_FUNC)ShutdownScreenHandler;
     GetPrivIBase(LIBBASE)->ShutdownHandler.is_Data =
         &GetPrivIBase(LIBBASE)->ShutdownHandler;
     AddResetCallback(&GetPrivIBase(LIBBASE)->ShutdownHandler);
+#endif
 
     DEBUG_INIT(dprintf("LIB_Init: done\n"));
 

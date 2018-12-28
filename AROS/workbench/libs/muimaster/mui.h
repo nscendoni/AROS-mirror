@@ -1,6 +1,6 @@
 /*
-    Copyright  2002-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright  2002-2018, The AROS Development Team. All rights reserved.
+    $Id: mui.h 55511 2018-12-21 23:40:54Z neil $
 */
 
 #ifndef LIBRARIES_MUI_H
@@ -312,6 +312,14 @@ struct MUI_RGBcolor
     ULONG red;
     ULONG green;
     ULONG blue;
+};
+
+struct MUI_AlphaData
+{
+    LONG width;
+    LONG height;
+    LONG dummy[2];
+    LONG data[0];
 };
 
 #ifndef _MUI_CLASSES_NOTIFY_H

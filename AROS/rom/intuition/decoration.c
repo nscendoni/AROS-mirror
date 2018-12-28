@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: decoration.c 47643 2013-07-09 20:51:38Z jmcmullan $
 
     Decoration support code
 */

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: makecountry.c 52777 2016-07-11 16:43:11Z polluks $
 
     Desc: Program that makes country files
     Lang: english

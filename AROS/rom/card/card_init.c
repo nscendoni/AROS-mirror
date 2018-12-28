@@ -1,6 +1,6 @@
 /*
     Copyright © 2011-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: card_init.c 49553 2014-08-28 15:36:11Z neil $
 
     Desc: dummy file
     Lang: English

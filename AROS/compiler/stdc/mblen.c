@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mblen.c 48037 2013-09-08 21:17:44Z verhaegs $
 
     C99 function mblen().
 */

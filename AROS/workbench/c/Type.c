@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Type.c 44374 2012-03-07 03:14:40Z jmcmullan $
 
     Desc: Type CLI command
     Lang: English

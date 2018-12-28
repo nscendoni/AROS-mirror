@@ -1,17 +1,13 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
-#MM kernel-hidd-gfx-amiga-m68k: kernel-hidd-includes
+USER_CFLAGS += -D__OOP_NOATTRBASES__ -D__OOP_NOMETHODBASES__ \
+               -D__OOP_NOLIBBASE__ \
+               -D__GRAPHICS_NOLIBBASE__ \
+               -D__UTILITY_NOLIBBASE__ \
+               -D__GRAPHICS_
 
-FILES  := rgbconv
-AFILES := 
-
-USER_CFLAGS := -I$(SRCDIR)/rom/hidds/gfx
-
-%build_archspecific \
-  mainmmake=kernel-hidd-gfx maindir=rom/hidds/gfx \
-  asmfiles=$(AFILES) files=$(FILES) \
-  arch=amiga-m68k
-
-%common
+%build_module mmake=kernel-amiga-m68k-amigavideo \
+    modname=amigavideo modtype=hidd \
+    files="startup amigavideogfx amigavideobitmap chipset blitter" uselibs="hiddstubs"

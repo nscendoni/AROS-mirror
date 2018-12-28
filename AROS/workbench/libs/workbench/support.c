@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support.c 37855 2011-03-28 03:57:11Z jmcmullan $
 
     Miscellanous support functions.
 */

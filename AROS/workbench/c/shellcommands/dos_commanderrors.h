@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: dos_commanderrors.h 44553 2012-04-07 12:45:11Z verhaegs $
 
     Desc: 
     Lang: English

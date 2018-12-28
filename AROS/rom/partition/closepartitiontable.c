@@ -1,6 +1,7 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2001, The AROS Development Team. All rights reserved.
+    $Id: closepartitiontable.c 30792 2009-03-07 22:40:04Z neil $
+
 */
 
 #include <exec/memory.h>
@@ -14,20 +15,20 @@
     NAME */
 #include <libraries/partition.h>
 
-        AROS_LH1(void, ClosePartitionTable,
+   AROS_LH1(void, ClosePartitionTable,
 
 /*  SYNOPSIS */
-        AROS_LHA(struct PartitionHandle *, root,       A1),
+   AROS_LHA(struct PartitionHandle *, root,       A1),
 
 /*  LOCATION */
-        struct Library *, PartitionBase, 8, Partition)
+   struct Library *, PartitionBase, 8, Partition)
 
 /*  FUNCTION
-        Close a partition table (and discard all changes). All partitions
-        and subpartitions in root->list will be removed recursively.
+    close a partition table (and discard all changes)
+    all partitions and subpartitions in root->list will be removed recursivly
 
     INPUTS
-        root - partition table to close
+    root - partition table to close
 
     RESULT
 
@@ -40,6 +41,9 @@
     SEE ALSO
 
     INTERNALS
+
+    HISTORY
+    21-02-02    first version
 
 *****************************************************************************/
 {
@@ -57,3 +61,4 @@
 
     AROS_LIBFUNC_EXIT
 }
+

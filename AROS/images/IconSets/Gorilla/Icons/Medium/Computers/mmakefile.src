@@ -1,7 +1,7 @@
 # Copyright © 2004, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 48341 2013-10-28 07:53:56Z mazze $
 
-include $(SRCDIR)/config/aros.cfg
+include $(TOP)/config/make.cfg
 
 ICONS := Amiga Linux Networked_Amiga Networked_Linux Networked_Windows Generic \
          MacOS Networked_Generic Networked_MacOS Windows

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kernel_romtags.c 47492 2013-06-01 06:25:47Z twilen $
 
     ROMTag scanner.
 */

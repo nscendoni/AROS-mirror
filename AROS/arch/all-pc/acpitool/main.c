@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2003-2015, The AROS Development Team.
-    $Id$
+    $Id: main.c 50879 2015-06-25 02:33:20Z NicJA $
 */
 
 #include <proto/acpica.h>

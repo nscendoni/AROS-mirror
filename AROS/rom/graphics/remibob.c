@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: remibob.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Remove a Bob from the gel list an the RastPort
     Lang: english

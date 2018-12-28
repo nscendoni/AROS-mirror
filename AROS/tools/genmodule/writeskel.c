@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2009, The AROS Development Team. All rights reserved.
+    $Id: writeskel.c 48665 2013-12-31 08:20:42Z mazze $
 
     The code for creating skeleton files for the functions present in the module
 */
@@ -28,8 +28,8 @@ static void writeskelfunc(struct config *cfg, struct functionhead *funclist)
 
     fprintf(out,
         "/*\n"
-        "    Copyright \xA9 <year>, The AROS Development Team. All rights reserved.\n"
-        "    $I" "d$\n"
+        "    Copyright © <year>, The AROS Development Team. All rights reserved.\n"
+        "    $Id: writeskel.c 48665 2013-12-31 08:20:42Z mazze $\n"
         "*/\n\n"
     );
 

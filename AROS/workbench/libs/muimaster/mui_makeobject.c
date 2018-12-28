@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mui_makeobject.c 50864 2015-06-24 19:43:50Z deadwood $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

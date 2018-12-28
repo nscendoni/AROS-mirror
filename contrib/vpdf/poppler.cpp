@@ -73,7 +73,7 @@ struct SignalSemaphore semaphore;
 extern struct Library *CairoBase;
 #endif
 
-/* all of this is just to not having to expose GBool in poppler.h... */
+/* all of this is just to not having to expose GBool in ppoppler.h... */
 
 struct abortcallbackcontext
 {
@@ -83,6 +83,8 @@ struct abortcallbackcontext
 };
 
 /* this is bit hacky but we can't/shouldn't use boopsi in poppler.c */
+
+#define D(x) x
 
 extern "C" {
 	void vpdfErrorFunction(int pos, char *message);

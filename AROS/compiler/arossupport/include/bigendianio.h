@@ -2,8 +2,8 @@
 #define AROS_STRUCTDESC_H
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2001, The AROS Development Team. All rights reserved.
+    $Id: bigendianio.h 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Read and write big endian structures from and to a file
     Lang: english
@@ -58,7 +58,6 @@ struct BEIOM_Ignore
 #define SDT_IFILL_BYTE 12 /* Ignore and fill x bytes */
 #define SDT_IFILL_LONG 13 /* Ignore and fill x longs */
 #define SDT_SPECIAL    14 /* Call user routine */
-#define SDT_COPY    15 /* Copy the specified number of bytes */
 
 struct SDData
 {
@@ -77,7 +76,6 @@ struct SDData
 #define SDM_ULONG(offset)               SDT_ULONG, offset
 #define SDM_FLOAT(offset)               SDT_FLOAT, offset
 #define SDM_DOUBLE(offset)              SDT_DOUBLE, offset
-#define SDM_COPY(offset,n)              SDT_COPY, offset, n
 #define SDM_STRING(offset)              SDT_STRING, offset
 #define SDM_STRUCT(offset,sd)           SDT_STRUCT, offset, ((IPTR)sd)
 #define SDM_PTR(offset,sd)              SDT_PTR, offset, ((IPTR)sd)

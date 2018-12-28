@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: initresident.c 48942 2014-04-18 13:17:49Z neil $
 
     Desc: Build a library or device from a resident structure.
     Lang: english
@@ -164,21 +164,11 @@
 
 	/* ...or let the library do it. */
 	if (resident->rt_Init) {
-#if !defined(__mc68000__)
             library = AROS_UFC3(struct Library *, resident->rt_Init,
                 AROS_UFCA(struct Library *,  0L, D0),
                 AROS_UFCA(BPTR,              segList, A0),
                 AROS_UFCA(struct ExecBase *, SysBase, A6)
             );
-#else
-            library = AROS_UFC4(struct Library *, resident->rt_Init,
-                AROS_UFCA(struct Library *,  0L, D0),
-                AROS_UFCA(BPTR,              segList, A0),
-                // Dummy variable. Bad programs may not preserve A4.
-                AROS_UFCA(ULONG,             0L, A4),
-                AROS_UFCA(struct ExecBase *, SysBase, A6)
-            );
-#endif
         }
     }
 

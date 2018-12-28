@@ -1,6 +1,6 @@
 /*
     Copyright © 2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bcm2708_boot.h 50720 2015-05-19 23:23:22Z neil $
 */
 
 #ifndef _BCM2708_BOOT_H

@@ -10,7 +10,7 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
- $Id$
+ $Id: library.c 30794 2009-03-08 02:19:07Z neil $
 
 ***************************************************************************/
 

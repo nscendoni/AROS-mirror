@@ -1,5 +1,8 @@
+#ifndef CONTEXT_H_
+#define CONTEXT_H_
+
 /*
- * $Id$
+ * $Id: context.h 36647 2011-01-17 14:01:23Z neil $
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,9 +19,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  * MA 02111-1307 USA
  */
-
-#ifndef CONTEXT_H_
-#define CONTEXT_H_
 
 #include "uboot.h"
 
@@ -48,7 +48,7 @@ typedef struct context {
 
 	int (*c_my_netloop) (char *filename, void *dump_here);
 
-	char *(*c_getenv) (char *);
+	char *(*c_getenv) (unsigned char *);
 	void (*c_setenv) (char *, char *);
 
 	void *(*c_alloc_mem_for_iobuffers) (const int size);
@@ -97,65 +97,65 @@ typedef struct context {
 } context_t;
 
 void context_init(context_t * ctx);
-context_t *context_get(void);
+inline context_t *context_get(void);
 
 /* terminal IO functions */
 #define printf(FMT, ARGS...) context_get()->c_printf((FMT), ##ARGS)
-int getc(void);
+inline int getc(void);
 
 /* devices functions */
-void *get_scan_list(void);
-list_t *get_devices_list(void);
-SCAN_HANDLE get_curr_device(void);
-SCAN_HANDLE start_unit_scan(const void *scan_list,
-			    uint32_t * const blocksize);
-SCAN_HANDLE next_unit_scan(SCAN_HANDLE h, unsigned int *const blocksize);
-int open_specific_unit(const SCAN_HANDLE h);
-void end_unit_scan(SCAN_HANDLE h);
-void end_global_scan(void);
-int loadsector(const unsigned int sectn,
-	       const unsigned int sect_size,
-	       const unsigned int numb_sects, void *const dest_buf);
-int netloop(char *filename, void *dump_here);
+inline void *get_scan_list(void);
+inline list_t *get_devices_list(void);
+inline SCAN_HANDLE get_curr_device(void);
+inline SCAN_HANDLE start_unit_scan(const void *scan_list,
+				   uint32_t * const blocksize);
+inline SCAN_HANDLE next_unit_scan(SCAN_HANDLE h, unsigned int *const blocksize);
+inline int open_specific_unit(const SCAN_HANDLE h);
+inline void end_unit_scan(SCAN_HANDLE h);
+inline void end_global_scan(void);
+inline int loadsector(const unsigned int sectn,
+		      const unsigned int sect_size,
+		      const unsigned int numb_sects, void *const dest_buf);
+inline int netloop(char *filename, void *dump_here);
 
 /* memory functions */
-void *malloc(int size);
-void free(void *ptr);
-void *memmove(void *dest, const void *src, int count);
+inline void *malloc(int size);
+inline void free(void *ptr);
+inline void *memmove(void *dest, const void *src, int count);
 
 /* ENV functions */
-char *getenv(char *var);
-void setenv(char *var, char *value);
+inline char *getenv(unsigned char *var);
+inline void setenv(char *var, char *value);
 
 /* misc functions */
-int tstc(void);
-void udelay(unsigned long t);
+inline int tstc(void);
+inline void udelay(unsigned long t);
 #define sprintf(BUF, FMT, ARGS...) context_get()->c_sprintf((BUF), (FMT), ##ARGS)
 
 /* video functions */
-void video_clear(void);
-void video_draw_box(int style, int attr, char *title, int separate,
-		    int x, int y, int w, int h);
-void video_draw_text(int x, int y, int attr, char *text, int field);
-void video_repeat_char(int x, int y, int repcnt, int repchar, int attr);
-unsigned short video_set_partial_scroll_limits(const short start,
-					       const short end);
-void video_get_partial_scroll_limits(short *const start,
-				     short *const end);
-int video_get_key(void);
-int video_display_bitmap(unsigned long, int, int);
+inline void video_clear(void);
+inline void video_draw_box(int style, int attr, char *title, int separate,
+			   int x, int y, int w, int h);
+inline void video_draw_text(int x, int y, int attr, char *text, int field);
+inline void video_repeat_char(int x, int y, int repcnt, int repchar, int attr);
+inline unsigned short video_set_partial_scroll_limits(const short start,
+						      const short end);
+inline void video_get_partial_scroll_limits(short *const start,
+					    short *const end);
+inline int video_get_key(void);
+inline int video_display_bitmap(unsigned long, int, int);
 
 /* ext2fs functions */
-int ext2fs_set_blk_dev_full(block_dev_desc_t * const rbdd,
-			    disk_partition_t * const p);
-int ext2fs_open(char *filename);
-int ext2fs_read(char *buf, unsigned len);
-int ext2fs_mount(unsigned part_length);
-int ext2fs_close(void);
+inline int ext2fs_set_blk_dev_full(block_dev_desc_t * const rbdd,
+				   disk_partition_t * const p);
+inline int ext2fs_open(char *filename);
+inline int ext2fs_read(char *buf, unsigned len);
+inline int ext2fs_mount(unsigned part_length);
+inline int ext2fs_close(void);
 
 /* booting functions */
-int bootm(cmd_tbl_t * cmdtp, int flag, int argc, char *argv[]);
-void set_load_addr(void *const la);
-int bootu(char *device);
+inline int bootm(cmd_tbl_t * cmdtp, int flag, int argc, char *argv[]);
+inline void set_load_addr(void *const la);
+inline int bootu(char *device);
 
 #endif /*CONTEXT_H_ */

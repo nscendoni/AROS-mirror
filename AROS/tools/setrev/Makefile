@@ -1,5 +1,5 @@
 #   Copyright © 2011, The AROS Development Team. All rights reserved.
-#   $Id$
+#   $Id: Makefile 38641 2011-05-11 06:10:02Z mazze $
 #
 #   Desc: Makefile for setrev
 #

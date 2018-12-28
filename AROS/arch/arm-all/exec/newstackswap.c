@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: newstackswap.c 53021 2016-10-22 19:19:37Z deadwood $
 
     Desc: NewStackSwap() - Call a function with swapped stack, ARM version
     Lang: english

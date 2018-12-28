@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: CheckAccess.c 48424 2013-11-18 09:28:30Z neil $ */
 /* $Log: CheckAccess.c $
  * Revision 1.1  1996/01/03  10:18:38  Michiel
  * Initial revision

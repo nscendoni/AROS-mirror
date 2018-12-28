@@ -1,6 +1,6 @@
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: InitPrinter.c 44322 2012-03-03 22:05:39Z mazze $
 */
 
 #include <devices/printer.h>

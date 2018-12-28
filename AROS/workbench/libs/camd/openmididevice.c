@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: openmididevice.c 42900 2011-12-13 16:00:16Z neil $
 
     Desc: 
     Lang: English

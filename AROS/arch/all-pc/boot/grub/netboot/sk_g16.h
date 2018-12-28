@@ -4,7 +4,7 @@
  * of the GNU Public License, incorporated herein by reference.
  *
  * Module         : sk_g16.h
- * Version        : $Revision$
+ * Version        : $Revision: 30792 $
  *
  * Author         : M.Hipp (mhipp@student.uni-tuebingen.de)
  * changes by     : Patrick J.D. Weichmann

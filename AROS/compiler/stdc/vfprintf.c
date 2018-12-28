@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vfprintf.c 48044 2013-09-08 21:18:52Z verhaegs $
 
     Format a string and call a usercallback to output each char.
 */

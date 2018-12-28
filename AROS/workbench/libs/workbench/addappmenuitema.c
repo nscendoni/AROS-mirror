@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: addappmenuitema.c 45368 2012-08-01 16:42:02Z neil $
 
     Add a menuitem to Workbench's list of AppMenuItems.
 */

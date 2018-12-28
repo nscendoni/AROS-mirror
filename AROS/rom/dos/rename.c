@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rename.c 49161 2014-07-25 18:34:16Z deadwood $
 
     Desc: Rename a file
     Lang: english

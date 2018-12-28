@@ -1,6 +1,6 @@
 /*
     Copyright © 2011-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: taskstorage.h 49201 2014-08-01 16:06:20Z deadwood $
 */
 #ifndef TASKSTORAGE_H
 #define TASKSTORAGE_H

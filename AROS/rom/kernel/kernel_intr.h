@@ -1,16 +1,11 @@
-#ifndef KERNEL_INTR_H
-#define KERNEL_INTR_H
-
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: kernel_intr.h 47346 2013-05-04 11:37:40Z mazze $
 
     Desc:
 */
 
 #include <proto/exec.h>
-
-#include "exec_platform.h"
 
 /* Main scheduler entry points */
 void core_ExitInterrupt(regs_t *regs);
@@ -20,7 +15,7 @@ void core_SysCall(int sc, regs_t *regs);
 void cpu_Switch(regs_t *regs);
 void cpu_Dispatch(regs_t *regs);
 
-/* This constant can be redefined in arch-specific includes */
+/* This constant can be redefined this in arch-specific includes */
 #ifndef _CUSTOM
 #define _CUSTOM NULL
 #endif
@@ -45,7 +40,7 @@ static inline int core_Trap(ULONG code, void *regs)
     if (SysBase)
     {
 	void (*trapHandler)(ULONG, void *) = SysBase->TaskTrapCode;
-        struct Task *t = GET_THIS_TASK;
+        struct Task *t = SysBase->ThisTask;
 
         if (t)
 	{
@@ -61,4 +56,3 @@ static inline int core_Trap(ULONG code, void *regs)
     }
     return 0;
 }
-#endif /* !KERNEL_INTR_H */

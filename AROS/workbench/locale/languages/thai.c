@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: thai.c 51396 2016-01-22 08:45:08Z polluks $
 
     Desc: thai.language description file.
     Char: ISO 8859-11

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: convtoupper.c 43286 2011-12-29 02:11:58Z neil $
 
     Desc: ConvToUpper() - stub for the language toupper() function.
     Lang: english
@@ -32,8 +32,7 @@
         Otherwise it will return the original character.
 
     INPUTS
-        locale      - The Locale to use for this conversion or NULL for
-                      the system default locale.
+        locale      - The Locale to use for this conversion.
         character   - The character to convert.
 
     RESULT
@@ -57,13 +56,6 @@
     AROS_LIBFUNC_INIT
 
     ULONG retval;
-    struct Locale *def_locale = NULL;
-
-    if (locale == NULL)
-    {
-        locale = OpenLocale(NULL);
-        def_locale = (struct Locale *)locale;
-    }
 
     DEBUG_CONVTOUPPER(dprintf("ConvToUpper: locale 0x%lx char 0x%lx\n",
             locale, character));
@@ -82,9 +74,7 @@
 
     DEBUG_CONVTOUPPER(dprintf("ConvToUpper: retval 0x%lx\n", retval));
 
-    CloseLocale(def_locale);
-
-    return retval;
+    return (retval);
 
     AROS_LIBFUNC_EXIT
 }

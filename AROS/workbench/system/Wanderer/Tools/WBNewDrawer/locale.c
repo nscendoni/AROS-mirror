@@ -1,6 +1,6 @@
 /*
     Copyright © 2006-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: locale.c 52411 2016-03-30 10:48:52Z mazze $
 */
 
 #include <aros/symbolsets.h>

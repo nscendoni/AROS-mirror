@@ -2,7 +2,7 @@
 #define _NET_IF_GRE_H
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: if_gre.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*      $OpenBSD: if_gre.h,v 1.2 2000/01/07 23:25:22 angelos Exp $ */

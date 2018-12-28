@@ -1,7 +1,7 @@
 #ifndef LINT
 /* derived from: misc.c 2.6 88/08/15 16:17:23 */
 static char sccsid[]="$Source$\n\
-$Id$";
+$Id: misc.c 30794 2009-03-08 02:19:07Z neil $";
 #endif /* LINT */
 
 /*

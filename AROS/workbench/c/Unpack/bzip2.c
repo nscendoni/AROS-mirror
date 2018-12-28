@@ -1,6 +1,6 @@
 /*
     Copyright © 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bzip2.c 34741 2010-10-15 14:57:20Z jmcmullan $
 */
 
 #include <proto/exec.h>

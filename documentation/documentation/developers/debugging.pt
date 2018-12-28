@@ -4,8 +4,8 @@ Manual de Correcção de Erros (Debugging) AROS Manual
 
 :Authors:   David Le Corfec
 :Copyright: Copyright © 2004, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 30800 $
+:Date:      $Date: 2009-03-08 18:28:50 +0100 (Sun, 08 Mar 2009) $
 :Status:    Work in progress.
 
 Este Manual explica as várias opções para corrigir o AROS.

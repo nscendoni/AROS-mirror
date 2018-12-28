@@ -4,7 +4,7 @@
  * prints lcc dag operator set for a given set of type sizes.
  */
 
-static char rcsid[] = "$Id$";
+static char rcsid[] = "$Id: ops.c 30794 2009-03-08 02:19:07Z neil $";
 
 static char list[] = { 'c', 's', 'i', 'l', 'h', 'f', 'd', 'x', 'p', 0 };
 static int sizes[] = {  1,   2,   4,   4,   8,   4,   8,  16,   8 };

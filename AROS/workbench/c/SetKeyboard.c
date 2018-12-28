@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: SetKeyboard.c 45720 2012-09-02 16:46:15Z jmcmullan $
 
     Desc:
     Lang: English

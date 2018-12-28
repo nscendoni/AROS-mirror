@@ -2,7 +2,7 @@
 #ifndef XADMASTER_CS_UNICODE_TO_ISO8859_1_C
 #define XADMASTER_CS_UNICODE_TO_ISO8859_1_C
 
-/*  $Id$
+/*  $Id: cs_unicode_to_iso8859-1.c 43430 2012-01-01 20:12:06Z jmcmullan $
     Character set conversion from Unicode to ISO 8859-1
 
     XAD library system for archive handling

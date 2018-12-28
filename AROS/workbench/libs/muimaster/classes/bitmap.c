@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bitmap.c 49647 2014-09-18 23:22:47Z mazze $
 */
 
 #include <graphics/gfx.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freenvdata.c 47708 2013-07-17 12:22:32Z verhaegs $
 */
 
 #include <proto/exec.h>

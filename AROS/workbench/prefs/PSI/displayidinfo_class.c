@@ -3,7 +3,7 @@
     Copyright © 2009-2010, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: displayidinfo_class.c 33557 2010-06-12 20:08:25Z mazze $
 */
 
 #include <proto/intuition.h>

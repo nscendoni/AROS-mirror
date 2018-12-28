@@ -1,6 +1,6 @@
 /*
     Copyright  1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: disk_startup.c 53077 2016-12-16 02:26:27Z neil $
 
     Desc: Disk-resident part of X11 display driver
     Lang: english

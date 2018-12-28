@@ -4,7 +4,7 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
     
-    $Id$
+    $Id: loginwindow_private.h 30792 2009-03-07 22:40:04Z neil $
 */
 
 /*** Instance data **********************************************************/

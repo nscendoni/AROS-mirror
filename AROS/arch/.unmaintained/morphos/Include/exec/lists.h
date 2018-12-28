@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: lists.h 30792 2009-03-07 22:40:04Z neil $
 */
 
 #ifndef EXEC_LISTS_H
@@ -9,7 +9,7 @@
 /******************************************************************************
 
     FILE
-	$Id$
+	$Id: lists.h 30792 2009-03-07 22:40:04Z neil $
 
     DESCRIPTION
 	Prototypes and macros for exec-lists.

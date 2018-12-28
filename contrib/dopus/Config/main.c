@@ -41,7 +41,7 @@ void chkabort(void) { return; }
 
 int onworkbench=0;
 
-int main(argc,argv)
+main(argc,argv)
 int argc;
 char *argv[];
 {
@@ -162,9 +162,9 @@ char *argv[];
 
         if (wbmsg->sm_NumArgs>1) {
             num=atoi(wbmsg->sm_ArgList[1].wa_Name);
-            lsprintf(portname,"dopus4_config_port%ld",(long int)num);
+            lsprintf(portname,"dopus4_config_port%ld",num);
             if (!(conport=LCreatePort(portname,20))) quit();
-            lsprintf(rportname,"dopus4_config_reply%ld",(long int)num);
+            lsprintf(rportname,"dopus4_config_reply%ld",num);
             Forbid();
             if (!(cmdport=FindPort(rportname))) {
                 LDeletePort(conport);
@@ -665,7 +665,7 @@ int flag,flag2;
     if (!num) return;
 
     if (!(tickgad=LAllocRemember(&tickkey,sizeof(struct Gadget)*num,MEMF_CLEAR)) ||
-        !(namearray=LAllocRemember(&tickkey,num*sizeof(APTR),MEMF_CLEAR))) return;
+        !(namearray=LAllocRemember(&tickkey,num*4,MEMF_CLEAR))) return;
 
     y=y_off+46;
     lasty=y;
@@ -870,7 +870,7 @@ void removetickgads()
         x_bot,y_bot);
 }
 
-int processtickgad(gads,flag,sel,num)
+processtickgad(gads,flag,sel,num)
 struct ConfigGadget *gads;
 int flag,sel,num;
 {
@@ -1189,7 +1189,7 @@ void makestring(char *buf,...)
     if (first) ActivateStrGad(first,Window);
 }
 
-int getstring(text,buf,len,num)
+getstring(text,buf,len,num)
 char *text,*buf;
 int len,num;
 {
@@ -1212,7 +1212,7 @@ int len,num;
     req.strbuf=buf;
     req.strlen=len;
     req.flags=num|SRF_BORDERS|SRF_RECESSHI|SRF_EXTEND;
-    req.value=(long)&stringex;
+    req.value=(int)&stringex;
     req.font=NULL;
     req.title="ConfigOpus";
     busy();
@@ -1221,13 +1221,13 @@ int len,num;
     return(a);
 }
 
-int request(text)
+request(text)
 char *text;
 {
     return(do_request(text,cfg_string[STR_OKAY],cfg_string[STR_CANCEL]));
 }
 
-int do_request(text,pos,neg)
+do_request(text,pos,neg)
 char *text,*pos,*neg;
 {
     struct DOpusSimpleRequest req;
@@ -1394,7 +1394,6 @@ int num;
 void load_palette(screen,palette,numcols)
 struct Screen *screen;
 ULONG *palette;
-int numcols;
 {
     if (!screen) {
         /*if (version2>=OSVER_39)*/ {
@@ -1403,8 +1402,7 @@ int numcols;
             for (a=0,b=0;a<numcols;a++) {
                 SetRGB32(&Window->WScreen->ViewPort,
                     screen_pens[a].pen,
-                    palette[b],palette[b+1],palette[b+2]);
-                b+=3;
+                    palette[b++],palette[b++],palette[b++]);
             }
         }
     }

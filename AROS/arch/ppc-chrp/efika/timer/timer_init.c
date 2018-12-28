@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: timer_init.c 34523 2010-09-27 13:36:20Z sonic $
 
     Desc: Timer startup and device commands
 */

@@ -1,7 +1,7 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
     Copyright © 2001-2013, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: openscreen.c 51051 2015-08-30 23:44:35Z NicJA $
 
     Open a new screen.
 */
@@ -44,7 +44,7 @@
 #include <proto/cybergraphics.h>
 #include <cybergraphx/cybergraphics.h>
 #else
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #endif
 #include "intuition_intern.h"
 #include "intuition_customize.h"
@@ -1791,10 +1791,10 @@ static const char THIS_FILE[] = __FILE__;
 
         if (NULL != layer_info_hook)
         {
-            DEBUG_OPENSCREEN(dprintf("OpenScreen: install layerinfohook\n"));
+            DEBUG_OPENSCREEN(dprintf("OpenScreen: instal layerinfohook\n"));
             InstallLayerInfoHook(&screen->Screen.LayerInfo, layer_info_hook);
         }
-        D(bug("layers inited screen\n"));
+        D(bug("layers intited screen\n"));
 
         /* AROS: We have already obtained resolution data from DisplayInfo */
 #ifdef __AROS__

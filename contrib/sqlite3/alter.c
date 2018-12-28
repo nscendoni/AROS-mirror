@@ -12,7 +12,7 @@
 ** This file contains C code routines that used to generate VDBE code
 ** that implements the ALTER TABLE command.
 **
-** $Id$
+** $Id: alter.c 30794 2009-03-08 02:19:07Z neil $
 */
 #include "sqliteInt.h"
 #include <ctype.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getconsoletask.c 46059 2012-11-21 19:47:17Z mazze $
 
     Desc: Get the "task" belonging to the process's console.
     Lang: English

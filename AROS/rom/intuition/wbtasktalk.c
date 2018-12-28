@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: wbtasktalk.c 30792 2009-03-07 22:40:04Z neil $
  
     Tell Workbench task that it shall open/close its windows.
 */

@@ -1,50 +1,21 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: signal.c 51383 2016-01-21 00:29:44Z NicJA $
 
     Desc: Send some signal to a given task
     Lang: english
 */
-
 #define DEBUG 0
-#include <aros/debug.h>
 
+#include <aros/debug.h>
 #include <exec/execbase.h>
 #include <aros/libcall.h>
 #include <proto/exec.h>
 
-#define __AROS_KERNEL__
 #include "exec_intern.h"
-
 #if defined(__AROSEXEC_SMP__)
-#include <utility/hooks.h>
-
-#include "kernel_ipi.h"
-
-AROS_UFH3(IPTR, signal_hook,
-    AROS_UFHA(struct IPIHook *, hook, A0), 
-    AROS_UFHA(APTR, object, A2), 
-    AROS_UFHA(APTR, message, A1)
-)
-{
-    AROS_USERFUNC_INIT
-
-    struct ExecBase *SysBase = (struct ExecBase *)hook->ih_Args[0];
-    struct Task *target = (struct Task *)hook->ih_Args[1];
-    ULONG sigset = (ULONG)hook->ih_Args[2];
-
-    D(
-        struct KernelBase *KernelBase = __kernelBase;
-        int cpunum = KrnGetCPUNumber();
-        bug("[Exec] CPU%03d: Using IPI to do Signal(%p, %08x), SysBase=%p\n", cpunum, msg->target, msg->sigset, SysBase);
-    );
-    
-    Signal(target, sigset);
-
-    return 0;
-
-    AROS_USERFUNC_EXIT
-}
+#include <proto/kernel.h>
+#include "etask.h"
 #endif
 
 /*****************************************************************************
@@ -89,186 +60,118 @@ AROS_UFH3(IPTR, signal_hook,
 {
     AROS_LIBFUNC_INIT
 
-    struct Task *thisTask = GET_THIS_TASK;
+    struct Task *ThisTask = GET_THIS_TASK;
+#if defined(__AROSEXEC_SMP__)
+    spinlock_t *task_listlock = NULL;
+    int cpunum = KrnGetCPUNumber();
+#endif
+
+    D(
+        bug("[Exec] Signal(0x%p, %08lX)\n", task, signalSet);
+        bug("[Exec] Signal: signaling '%s' (state %08x)\n", task->tc_Node.ln_Name, task->tc_State);
+        bug("[Exec] Signal: from '%s'\n", ThisTask->tc_Node.ln_Name);
+    )
 
 #if defined(__AROSEXEC_SMP__)
-    struct KernelBase *KernelBase = __kernelBase;
-    int cpunum = KrnGetCPUNumber();
+    EXEC_SPINLOCK_LOCK(&IntETask(task->tc_UnionETask.tc_ETask)->iet_TaskLock, SPINLOCK_MODE_WRITE);
+#endif
+    Disable();
+    /* Set the signals in the task structure. */
+    task->tc_SigRecvd |= signalSet;
+#if defined(__AROSEXEC_SMP__)
+    EXEC_SPINLOCK_UNLOCK(&IntETask(task->tc_UnionETask.tc_ETask)->iet_TaskLock);
+    Enable();
+#endif
 
-    /*
-        * # If current CPU number is not the task's CPU and the task is running now, send signal to that task
-        *   from CPU which the task is running on.
-        * # If task is not running and the current CPU is not in the Affinitymask, send signal to CPU form Affinity mask
-        * # If task is not running and the current CPU is in the Affinity mask, just proceed with regular signal
-    */
-    if ((PrivExecBase(SysBase)->IntFlags & EXECF_CPUAffinity) &&
-        ((IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuNumber != cpunum && task->tc_State == TS_RUN) ||
-        !KrnCPUInMask(cpunum, IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuAffinity)))
+    /* Do those bits raise exceptions? */
+    if (task->tc_SigRecvd & task->tc_SigExcept)
     {
-        struct Hook h;
-        IPTR args[3];
-        // We cannot use KrnAllocCPUMask() since this function uses AllocMem
-        // And we cannot use AllocMem from interrupts (where Signal() is allowed)...
-        ULONG mask[8] = { 0, 0, 0, 0, 0, 0, 0, 0 }; // CPU mask large enough for 256 CPUs...
-        void *cpu_mask = &mask; 
+        /* Yes. Set the exception flag. */
+        task->tc_Flags |= TF_EXCEPT;
 
-        args[0] = (IPTR)SysBase;
-        args[1] = (IPTR)task;
-        args[2] = (IPTR)signalSet;
+        D(bug("[Exec] Signal: TF_EXCEPT set\n");)
 
-        /* Task is running *now* on another CPU, send signal there */
+        /* 
+                if the target task is running (called from within interrupt handler),
+                raise the exception or defer it for later.
+            */
         if (task->tc_State == TS_RUN)
         {
-            KrnGetCPUMask(IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuNumber, cpu_mask);
-        }
-        else
-        {
-            int i;
-            int cpumax = KrnGetCPUCount();
-
-            /* Task is not running now, find first cpu suitable to run this task. Use CPU balancing some day... */
-            for (i=0; i < cpumax; i++)
+            D(bug("[Exec] Signal: signaling running task\n");)
+#if defined(__AROSEXEC_SMP__)
+            if (IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuNumber == cpunum)
             {
-                if (KrnCPUInMask(i, IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuAffinity))
-                {
-                    KrnGetCPUMask(i, cpu_mask);
-                    break;
-                }
+#endif
+            /* Order a reschedule */
+            Reschedule();
+#if defined(__AROSEXEC_SMP__)
             }
+            else
+            {
+                D(bug("[Exec] Signal:\n");)
+            }
+#else
+            Enable();
+#endif
+
+            /* All done. */
+            return;
         }
-
-        D(bug("[Exec] Signal: Signaling from CPU%03d -> CPU%03d using IPI...\n", cpunum, IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuNumber));
-
-        h.h_Entry = signal_hook;
-
-        D(bug("[Exec] Sending IPI...\n"));
-        core_DoCallIPI(&h, cpu_mask, 1, 3, args, (void *)KernelBase);
-        D(bug("[Exec] IPI Sent\n"));
     }
-    else
+
+    /*
+        Is the task receiving the signals waiting on them
+        (or on a exception) ?
+    */
+    if ((task->tc_State == TS_WAIT) &&
+       (task->tc_SigRecvd & (task->tc_SigWait | task->tc_SigExcept)))
     {
+        D(bug("[Exec] Signal: signaling waiting task\n");)
 
-        if (cpunum != 0)
-        {
-            D(bug("[Exec] Signal(0x%p, %08lX) on CPU%03d\n", task, signalSet, cpunum));
-        }
-#else
-        D(bug("[Exec] Signal(0x%p, %08lX)\n", task, signalSet);)
-#endif
-
-        D(
-            bug("[Exec] Signal: Signaling '%s', state = %08x\n", task->tc_Node.ln_Name, task->tc_State);
-            if (((struct KernelBase *)KernelBase)->kb_ICFlags & KERNBASEF_IRQPROCESSING)
-                bug("[Exec] Signal: (Called from Interrupt)\n");
-            else
-                bug("[Exec] Signal: (Called from '%s')\n", thisTask->tc_Node.ln_Name);
-        )
-
-        Disable();
-        D(bug("[Exec] Signal: Target signal flags : %08x ->", task->tc_SigRecvd);)
-        /* Set the signals in the task structure. */
+        /* Yes. Move it to the ready list. */
 #if defined(__AROSEXEC_SMP__)
-        __AROS_ATOMIC_OR_L(task->tc_SigRecvd, signalSet);
-#else
-        task->tc_SigRecvd |= signalSet;
+        task_listlock = &PrivExecBase(SysBase)->TaskWaitSpinLock;
+        EXEC_SPINLOCK_LOCK(task_listlock, SPINLOCK_MODE_WRITE);
+        Forbid();
 #endif
-        D(bug(" %08x\n", task->tc_SigRecvd);)
-
-        /* Do those bits raise exceptions? */
-        if (task->tc_SigRecvd & task->tc_SigExcept)
-        {
-            /* Yes. Set the exception flag. */
+        Remove(&task->tc_Node);
+        task->tc_State = TS_READY;
 #if defined(__AROSEXEC_SMP__)
-            __AROS_ATOMIC_OR_B(task->tc_Flags, TF_EXCEPT);
-#else
-            task->tc_Flags |= TF_EXCEPT;
+        EXEC_SPINLOCK_UNLOCK(task_listlock);
+        Permit();
+        task_listlock = EXEC_SPINLOCK_LOCK(&PrivExecBase(SysBase)->TaskReadySpinLock, SPINLOCK_MODE_WRITE);
+        Forbid();
 #endif
-            D(bug("[Exec] Signal: TF_EXCEPT set\n");)
-
-            /* 
-                    if the target task is running (called from within interrupt handler, or from another processor),
-                    raise the exception or defer it for later.
-                */
-            if (task->tc_State == TS_RUN)
+        Enqueue(&SysBase->TaskReady, &task->tc_Node);
+#if defined(__AROSEXEC_SMP__)
+        EXEC_SPINLOCK_UNLOCK(task_listlock);
+        Permit();
+        task_listlock = NULL;
+#endif
+        /* Has it a higher priority as the current one? */
+        if (
+#if defined(__AROSEXEC_SMP__)
+            (IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuAffinity & KrnGetCPUMask(cpunum)) &&
+#endif
+            (task->tc_Node.ln_Pri > ThisTask->tc_Node.ln_Pri))
+        {
+            /*
+                Yes. A taskswitch is necessary. Prepare one if possible.
+                (If the current task is not running it is already moved)
+            */
+            if (ThisTask->tc_State == TS_RUN)
             {
-#if defined(__AROSEXEC_SMP__)
-                if (!(PrivExecBase(SysBase)->IntFlags & EXECF_CPUAffinity) ||
-                    (IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuNumber == cpunum))
-                {
-#endif
-                D(bug("[Exec] Signal: Raising Exception for 'running' Task\n");)
-                /* Order a reschedule */
                 Reschedule();
-#if defined(__AROSEXEC_SMP__)
-                }
-                else
-                {
-                    (bug("[Exec] Signal: Raising Exception for 'running' Task on CPU %03u\n", IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuNumber));
-                    KrnScheduleCPU(IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuAffinity);
-                }
-#endif
-                Enable();
-
-                /* All done. */
-                return;
             }
         }
-        /*
-            Is the task receiving the signals waiting on them
-            (or on a exception) ?
-        */
-        if ((task->tc_State == TS_WAIT) &&
-        (task->tc_SigRecvd & (task->tc_SigWait | task->tc_SigExcept)))
-        {
-            D(bug("[Exec] Signal: Signaling 'waiting' Task\n");)
-
-            /* Yes. Move it to the ready list. */
-#if defined(__AROSEXEC_SMP__)
-            krnSysCallReschedTask(task, TS_READY);
-#else
-            Remove(&task->tc_Node);
-            task->tc_State = TS_READY;
-            Enqueue(&SysBase->TaskReady, &task->tc_Node);
-#endif
-            /* Has it a higher priority as the current one? */
-            if (
-#if defined(__AROSEXEC_SMP__)
-                (!(PrivExecBase(SysBase)->IntFlags & EXECF_CPUAffinity) ||
-                (KrnCPUInMask(cpunum, IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuAffinity))) &&
-#endif
-                (task->tc_Node.ln_Pri >= thisTask->tc_Node.ln_Pri))
-            {
-                /*
-                    Yes. A taskswitch is necessary. Prepare one if possible.
-                    (If the current task is not running it is already moved)
-                */
-                if (thisTask->tc_State == TS_RUN)
-                {
-                    D(bug("[Exec] Signal: Rescheduling 'running' Task to let it process the signal...\n"));
-                    Reschedule();
-                }
-            }
-#if defined(__AROSEXEC_SMP__)
-            else if ((PrivExecBase(SysBase)->IntFlags & EXECF_CPUAffinity) &&
-                !(KrnCPUInMask(cpunum, IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuAffinity)))
-            {
-                D(bug("[Exec] Signal: Signaling task on another CPU\n"));
-                krnSysCallReschedTask(task, TS_READY);
-                KrnScheduleCPU(IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuAffinity);
-            }
-#endif
-            else
-            {
-                D(bug("[Exec] Signal: Letting Task process signal when next scheduled to run...\n"););
-            }
-        }
-
-        Enable();
-
-        D(bug("[Exec] Signal: 0x%p finished signal processing\n", task);)
-#if defined(__AROSEXEC_SMP__)
     }
+
+#if !defined(__AROSEXEC_SMP__)
+    Enable();
 #endif
+
+    D(bug("[Exec] Signal: 0x%p finished signal processing\n", task);)
 
     AROS_LIBFUNC_EXIT
 }
+

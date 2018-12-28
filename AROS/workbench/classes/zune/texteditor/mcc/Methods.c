@@ -16,7 +16,7 @@
 
  TextEditor class Support Site:  http://www.sf.net/projects/texteditor-mcc
 
- $Id$
+ $Id: Methods.c 49436 2014-08-16 11:30:27Z mazze $
 
 ***************************************************************************/
 

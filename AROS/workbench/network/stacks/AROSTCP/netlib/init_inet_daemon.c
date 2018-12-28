@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: init_inet_daemon.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      init_inet_daemon.c - obtain socket accepted by the inetd
  *

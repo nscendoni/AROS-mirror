@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: lock.c 47632 2013-07-05 19:31:36Z twilen $
 
     Desc: Locks a file or directory.
     Lang: English

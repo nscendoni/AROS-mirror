@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: puticontaglist.c 48928 2014-04-14 15:51:34Z neil $
 */
 
 #include <aros/debug.h>

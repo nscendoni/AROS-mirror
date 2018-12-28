@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fenv.h 42487 2011-11-16 12:06:28Z sonic $
 
     Desc: FPU-specific definitions for ARM processors
     Lang: english

@@ -22,7 +22,7 @@
 
  Mailtext OpenSource project :  http://sourceforge.net/projects/mailtext/
 
- $Id$
+ $Id: Mailtext.c 43433 2012-01-01 20:16:02Z jmcmullan $
 
  Sourcecode for Mailtext.mcc
 
@@ -118,10 +118,10 @@ struct Data
 
 #ifndef __AROS__
 #include <mui/mccbase.c>
+#endif
 
 struct Library *LocaleBase;
 struct Library *DiskfontBase;
-#endif
 
 #if defined(__amigaos4__)
 struct LocaleIFace   * ILocale   = NULL;

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: newstackswap.S 49908 2015-01-15 18:40:07Z twilen $
 
     Desc: NewStackSwap() - Call a function with swapped stack.
     Lang: english

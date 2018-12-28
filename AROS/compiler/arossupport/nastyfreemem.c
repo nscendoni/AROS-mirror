@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: nastyfreemem.c 48241 2013-10-08 01:38:31Z jmcmullan $
 
     Desc: Erase contents of memory before freeing it.
     Lang: english

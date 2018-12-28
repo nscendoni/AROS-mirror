@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: iovec_s.h 50458 2015-04-24 14:53:27Z neil $
 */
 
 #include <aros/types/size_t.h>

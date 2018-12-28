@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sdcard_device.c 50904 2015-07-02 20:32:18Z schulz $
 */
 
 #define DEBUG 0

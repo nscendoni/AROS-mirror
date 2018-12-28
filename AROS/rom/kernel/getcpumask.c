@@ -1,6 +1,6 @@
 /*
-    Copyright © 2015-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2015, The AROS Development Team. All rights reserved.
+    $Id: getcpumask.c 50720 2015-05-19 23:23:22Z neil $
 
     Desc:
 */
@@ -15,23 +15,22 @@
     NAME */
 #include <proto/kernel.h>
 
-        AROS_LH2(void, KrnGetCPUMask,
+        AROS_LH1(uint32_t, KrnGetCPUMask,
 
 /*  SYNOPSIS */
 	AROS_LHA(uint32_t, id, D0),
-	AROS_LHA(void *, mask, A0),
 
 /*  LOCATION */
-	struct KernelBase *, KernelBase, 45, Kernel)
+	struct KernelBase *, KernelBase, 38, Kernel)
 
 /*  FUNCTION
-	Set the CPU number's bit in the mask.
+	Return the affinity mask for the specified CPU number 
 
     INPUTS
 	CPU number (as returned by KrnGetCPUNumber())
-	Affinity Mask (as returned by KrnAllocCPUMask())
 
     RESULT
+	CPU's affinity mask
 
     NOTES
 
@@ -40,7 +39,7 @@
     BUGS
 
     SEE ALSO
-	KrnGetCPUNumber(), KrnAllocCPUMask(), KrnClearCPUMask(), KrnCPUInMask()
+	KrnGetCPUNumber()
 
     INTERNALS
 
@@ -49,7 +48,7 @@
     AROS_LIBFUNC_INIT
 
     /* The actual implementation is entirely architecture-specific */
-    return;
+    return (1 << 0);
 
     AROS_LIBFUNC_EXIT
 }

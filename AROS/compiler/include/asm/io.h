@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: io.h 38081 2011-04-06 07:51:33Z sonic $
 
     I/O operations, generic header.
 */

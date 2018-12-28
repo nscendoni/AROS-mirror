@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: parse.h 38728 2011-05-18 03:18:01Z mazze $
 
     Desc:
     Lang: English

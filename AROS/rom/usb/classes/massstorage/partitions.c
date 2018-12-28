@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: partitions.c 47715 2013-07-18 03:32:42Z jmcmullan $
 
     Desc: Find and mount partitions.
     Lang: English

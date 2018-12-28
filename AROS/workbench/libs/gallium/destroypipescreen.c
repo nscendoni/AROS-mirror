@@ -1,6 +1,6 @@
 /*
-    Copyright 2010-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright 2010, The AROS Development Team. All rights reserved.
+    $Id: destroypipescreen.c 47689 2013-07-14 21:00:14Z verhaegs $
 */
 
 #include "gallium_intern.h"
@@ -9,14 +9,13 @@
 
     NAME */
 
-      AROS_LH2(void, DestroyPipeScreen,
+      AROS_LH1(void, DestroyPipeScreen,
 
 /*  SYNOPSIS */ 
-      AROS_LHA(PipeHandle_t, pipe, A0),
-      AROS_LHA(struct pipe_screen *, pscreen, A1),
+      AROS_LHA(struct pipe_screen *, screen, A0),
 
 /*  LOCATION */
-      struct Library *, GalliumBase, 8, Gallium)
+      struct Library *, GalliumBase, 6, Gallium)
 
 /*  FUNCTION
         Disposes the pipe screen
@@ -38,9 +37,9 @@
 {
     AROS_LIBFUNC_INIT
     
-    if (pscreen)
+    if (screen)
     {
-        pscreen->destroy(pscreen);
+        screen->destroy(screen);
     }
     
     AROS_LIBFUNC_EXIT

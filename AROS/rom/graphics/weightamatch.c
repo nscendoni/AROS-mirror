@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: weightamatch.c 42985 2011-12-16 06:15:23Z jmcmullan $
 
     Desc:
     Lang: english

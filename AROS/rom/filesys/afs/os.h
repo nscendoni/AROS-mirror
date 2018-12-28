@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: os.h 33105 2010-04-28 19:52:34Z neil $
 */
 
 #ifdef __AROS__

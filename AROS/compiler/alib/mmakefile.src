@@ -1,4 +1,4 @@
-#   $Id$
+#   $Id: mmakefile.src 53132 2016-12-29 10:32:06Z deadwood $
 #
 #   Generate the amiga.lib library (normally called libamiga.a).
 #
@@ -17,7 +17,6 @@ FILES	:= \
     allocdosobjecttags \
     allocnamedobject \
     allocspritedata \
-    andrectrect \
     argarraydone \
     argarrayinit \
     argint \
@@ -36,7 +35,6 @@ FILES	:= \
     changeextsprite \
     checkrexxmsg \
     coercemethod \
-    copyregion \
     closeworkbenchobject \
     createextio \
     creategadget \
@@ -56,7 +54,6 @@ FILES	:= \
     dosupernew \
     drawbevelbox \
     easyrequest \
-    erroroutput \
     extendfonttags \
     fastrand \
     freeievents \
@@ -87,7 +84,6 @@ FILES	:= \
     newloadsegtags \
     newobject \
     newrawdofmt \
-    newrectregion \
     obtainbestpen \
     obtaininfo \
     openamigaguide \
@@ -101,7 +97,6 @@ FILES	:= \
     refreshdtobjects \
     releaseinfo \
     removeamigaguidehost \
-    selecterroroutput \
     sendamigaguidecmd \
     sendamigaguidecontext \
     setamigaguideattrs \

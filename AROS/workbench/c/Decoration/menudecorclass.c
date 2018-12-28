@@ -1,6 +1,6 @@
 /*
     Copyright  2011-2012, The AROS Development Team.
-    $Id$
+    $Id: menudecorclass.c 44662 2012-04-22 01:21:37Z NicJA $
 */
 
 #define DEBUG 0

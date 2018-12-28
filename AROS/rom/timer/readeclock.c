@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readeclock.c 38960 2011-06-01 12:50:17Z sonic $
 
     Desc: ReadEClock() - read the base frequency of timers.
     Lang: english

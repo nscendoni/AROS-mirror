@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: _open.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      _open.c - Unix compatible open() (SAS/C)
  *

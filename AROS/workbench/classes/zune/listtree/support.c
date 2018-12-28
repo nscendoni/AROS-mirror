@@ -1,6 +1,6 @@
 /*
     Copyright © 2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support.c 51101 2015-09-17 10:23:20Z deadwood $
 */
 
 #include <proto/muimaster.h>

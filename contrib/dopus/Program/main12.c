@@ -146,9 +146,9 @@ getnewdisk:
                         sprintf(buf1,"%qd",a);
 #endif
                         b=strlen(buf1);
-                        lsprintf(buf,"%ld",(long int)infodata.id_NumBlocks);
+                        lsprintf(buf,"%ld",infodata.id_NumBlocks);
                         lsprintf(formstr,"%%%lds %s; %%%ldld %s; %%s",
-                            (long int)b,globstring[STR_DISKINFO_BYTES],
+                            b,globstring[STR_DISKINFO_BYTES],
                             strlen(buf),globstring[STR_DISKINFO_BLOCKS]);
                         getsizestring(buf,a);
                         lsprintf(disktxt[2],formstr,buf1,infodata.id_NumBlocks,buf);
@@ -180,9 +180,9 @@ getnewdisk:
                             buf,globstring[STR_DISKINFO_FULL],
                             buf1,globstring[STR_DISKINFO_SFREE]);
                         lsprintf(disktxt[6],"%ld %s",
-                            (long int)infodata.id_BytesPerBlock,
+                            infodata.id_BytesPerBlock,
                             globstring[STR_DISKINFO_BYTESPERBLOCK]);
-                        lsprintf(disktxt[7],"%ld",(long int)infodata.id_NumSoftErrors);
+                        lsprintf(disktxt[7],"%ld",infodata.id_NumSoftErrors);
                         switch (infodata.id_DiskState) {
                             case ID_VALIDATING:
                                 strcpy(disktxt[8],globstring[STR_VALIDATING]);

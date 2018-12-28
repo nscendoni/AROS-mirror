@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: createmsgport.c 50481 2015-04-28 10:49:03Z schulz $
 
     Desc: Create a new message port.
     Lang: english

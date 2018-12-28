@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: con_handler.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <proto/exec.h>
@@ -31,12 +31,6 @@
 #define SDEBUG 0
 #define DEBUG 0
 #include <aros/debug.h>
-
-#if defined(__AROSPLATFORM_SMP__)
-#include <aros/types/spinlock_s.h>
-#include <proto/execlock.h>
-#include <resources/execlock.h>
-#endif
 
 static char *BSTR2C(BSTR srcs)
 {
@@ -85,7 +79,7 @@ static const struct NewWindow default_nw =
     0,              /* Screen */
     0,              /* Bitmap */
     100,            /* MinWidth */
-    70,             /* MinHeight */
+    120,            /* MinHeight */
     32767,          /* MaxWidth */
     32767,          /* MaxHeight */
     WBENCHSCREEN    /* type */
@@ -250,9 +244,6 @@ static void close_con(struct filehandle *fh)
 
 static struct filehandle *open_con(struct DosPacket *dp, LONG *perr)
 {
-#if defined(__AROSPLATFORM_SMP__)
-    void *ExecLockBase = OpenResource("execlock.resource");
-#endif
     char *filename, *fn;
     struct filehandle *fh;
     struct DeviceNode *dn;
@@ -269,26 +260,9 @@ static struct filehandle *open_con(struct DosPacket *dp, LONG *perr)
     fh->dosbase = (APTR) OpenLibrary("dos.library", 0);
     fh->utilbase = (APTR) OpenLibrary("utility.library", 0);
     fh->workbenchbase = (APTR) OpenLibrary("workbench.library", 0);
-
-#if defined(__AROSPLATFORM_SMP__)
-    if (ExecLockBase)
-        ObtainSystemLock(&SysBase->DeviceList, SPINLOCK_MODE_READ, LOCKF_FORBID);
-    else
-        Forbid();
-#else
     Forbid();
-#endif
-
     fh->inputbase = (struct Device *) FindName(&SysBase->DeviceList, "input.device");
-
-#if defined(__AROSPLATFORM_SMP__)
-    if (ExecLockBase)
-        ReleaseSystemLock(&SysBase->DeviceList, LOCKF_FORBID);
-    else
-        Permit();
-#else
     Permit();
-#endif
 
     if (!fh->intuibase || !fh->dosbase || !fh->utilbase || !fh->inputbase)
     {
@@ -319,7 +293,7 @@ static struct filehandle *open_con(struct DosPacket *dp, LONG *perr)
     fh->conreadmp = AllocVec(sizeof(struct MsgPort) * 2, MEMF_PUBLIC | MEMF_CLEAR);
     if (fh->conreadmp)
     {
-        memset( fh->conreadmp, 0, sizeof( *fh->conreadmp ) );
+
         fh->conreadmp->mp_Node.ln_Type = NT_MSGPORT;
         fh->conreadmp->mp_Flags = PA_SIGNAL;
         fh->conreadmp->mp_SigBit = AllocSignal(-1);
@@ -328,7 +302,6 @@ static struct filehandle *open_con(struct DosPacket *dp, LONG *perr)
 
         fh->conwritemp = fh->conreadmp + 1;
 
-        memset( fh->conwritemp, 0, sizeof( *fh->conwritemp ) );
         fh->conwritemp->mp_Node.ln_Type = NT_MSGPORT;
         fh->conwritemp->mp_Flags = PA_SIGNAL;
         fh->conwritemp->mp_SigBit = AllocSignal(-1);

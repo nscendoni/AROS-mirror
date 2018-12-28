@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bus_ppc460.c 47619 2013-07-02 18:27:20Z neil $
 
     Desc: PCI bus driver for ata.device
     Lang: English

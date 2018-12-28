@@ -16,7 +16,7 @@
 
  TheBar class Support Site:  http://www.sf.net/projects/thebar
 
- $Id$
+ $Id: class.h 50023 2015-02-05 00:17:11Z NicJA $
 
 ***************************************************************************/
 

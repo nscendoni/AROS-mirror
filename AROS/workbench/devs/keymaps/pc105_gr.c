@@ -1,6 +1,6 @@
 /*
     Copyright © 2009-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pc105_gr.c 50780 2015-06-06 17:17:05Z polluks $
 
     Desc: Hellenic (Greek) PC105 Keymap
     Lang: Hellenic

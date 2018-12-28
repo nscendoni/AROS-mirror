@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: main.c 52431 2016-03-30 13:21:37Z mazze $
 */
 
 #include <proto/alib.h>

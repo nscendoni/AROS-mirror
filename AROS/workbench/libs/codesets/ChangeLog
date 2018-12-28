@@ -2,8 +2,8 @@
 codesets.library - Library for handling different codesets
 ----------------------------------------------------------
 
-$Id$
-$URL$
+$Id: ChangeLog 49448 2014-08-16 13:27:47Z mazze $
+$URL: https://svn.aros.org/svn/aros/branches/ABI_V0-20161228/AROS/workbench/libs/codesets/ChangeLog $
 
 #### 6.18 RELEASE ########################################################
 

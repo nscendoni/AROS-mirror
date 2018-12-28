@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2006 by Michal Schulz
-    $Id$
+    $Id: uhciclass.c 53132 2016-12-29 10:32:06Z deadwood $
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Library General Public License as
@@ -51,7 +51,8 @@
 
 OOP_AttrBase HiddUHCIAttrBase;
 
-static AROS_INTH1(HubInterrupt, UHCIData *, uhci)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(HubInterrupt, UHCIData *, uhci)
 {
     AROS_INTFUNC_INIT
 

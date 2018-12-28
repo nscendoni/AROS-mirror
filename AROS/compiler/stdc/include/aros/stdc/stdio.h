@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stdio.h 48044 2013-09-08 21:18:52Z verhaegs $
 
     C99 header file stdio.h
 */

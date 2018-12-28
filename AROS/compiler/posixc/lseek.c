@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: lseek.c 48990 2014-05-04 19:41:58Z deadwood $
 
     Reposition read/write file offset.
 */

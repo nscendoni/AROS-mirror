@@ -10,7 +10,7 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
- $Id$
+ $Id: SetGet.c 43433 2012-01-01 20:16:02Z jmcmullan $
 
 ***************************************************************************/
 

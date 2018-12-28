@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: writedouble.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Write a big endian floating point (64bit) from a streamhook
     Lang: english

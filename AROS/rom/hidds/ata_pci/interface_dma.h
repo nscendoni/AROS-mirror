@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: interface_dma.h 48385 2013-11-07 03:28:01Z neil $
 
     Desc: PCI-DMA hardware definitions
     Lang: English

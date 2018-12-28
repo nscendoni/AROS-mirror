@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: deleteextio.c 49735 2014-10-28 23:37:03Z neil $
 
     Desc: Free a structure created by CreateExtIO()
     Lang: english

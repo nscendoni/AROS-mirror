@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: _displayalert.c 45547 2012-08-13 03:44:21Z jmcmullan $
 
     Desc: Display an alert in Android GUI if possible
     Lang: english

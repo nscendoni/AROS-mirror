@@ -1,6 +1,6 @@
 /*
     Copyright © 2008-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: countryprefs.c 51225 2015-12-03 13:36:31Z polluks $
 
     Desc: makecountry code that needs access to AROS structures and types
     Lang: english
@@ -24,17 +24,17 @@ unsigned long getCountryPrefsSize()
 
 unsigned long getCountryPrefsVers(struct IntCountryPrefs *cp)
 {
-    return (unsigned long)cp->country_Version;
+    return cp->country_Version;
 }
 
 unsigned long getCountryPrefsFlag(struct IntCountryPrefs *cp)
 {
-    return (unsigned long)cp->country_Flag;
+    return cp->country_Flag;
 }
 
 unsigned long getCountryNames(struct IntCountryPrefs *cp)
 {
-    return (unsigned long)cp->country_NativeNames;
+    return cp->country_NativeNames;
 }
 
 void convertEndianness(struct CountryPrefs *cp)

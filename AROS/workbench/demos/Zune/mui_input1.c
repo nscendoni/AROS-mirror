@@ -3,7 +3,7 @@
     Copyright © 2002-2003, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: mui_input1.c 30792 2009-03-07 22:40:04Z neil $
 */
 
 #define MUIMASTER_NO_INLINE_STDARG

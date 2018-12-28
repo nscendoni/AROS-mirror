@@ -16,7 +16,7 @@
 
  codesets.library project: http://sourceforge.net/projects/codesetslib/
 
- $Id$
+ $Id: lib.h 49448 2014-08-16 13:27:47Z mazze $
 
 ***************************************************************************/
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mathieeedoubbas_intern.h 45502 2012-08-10 19:09:06Z twilen $
 */
 #ifndef __MATHIEEEDOUBBAS_INTERN_H__
 #define __MATHIEEEDOUBBAS_INTERN_H__

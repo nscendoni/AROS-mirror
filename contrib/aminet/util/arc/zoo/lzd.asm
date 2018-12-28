@@ -1,6 +1,6 @@
 title	Lempel-Ziv Decompressor
 ; $Source$
-; $Id$
+; $Id: lzd.asm 30794 2009-03-08 02:19:07Z neil $
 
 ;Derived from Tom Pfau's public domain assembly code.
 ;The contents of this file are hereby released to the public domain.

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __sighandler_t.h 48027 2013-09-08 21:13:16Z verhaegs $
 
     __sighandler_t type definition
 */

@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: device_protos.h 36648 2011-01-17 14:31:59Z neil $
  */
 
 struct PPP_DevUnit *InitPPPUnit(LIBBASETYPEPTR LIBBASE,ULONG s2unit);

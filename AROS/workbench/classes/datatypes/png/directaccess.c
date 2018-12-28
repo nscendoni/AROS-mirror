@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: directaccess.c 49554 2014-08-28 15:43:44Z neil $
 */
 
 #include <dos/dos.h>

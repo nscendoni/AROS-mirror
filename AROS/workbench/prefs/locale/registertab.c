@@ -1,6 +1,6 @@
 /*
    Copyright © 2003-2013, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: registertab.c 47228 2013-04-14 00:11:16Z NicJA $
  */
 
 #include <aros/debug.h>

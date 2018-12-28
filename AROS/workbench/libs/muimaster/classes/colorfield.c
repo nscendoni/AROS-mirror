@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: colorfield.c 52146 2016-03-21 17:47:44Z NicJA $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

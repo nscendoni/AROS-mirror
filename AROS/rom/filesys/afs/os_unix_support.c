@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: os_unix_support.c 42703 2011-12-02 07:30:48Z sonic $
 */
 
 /*

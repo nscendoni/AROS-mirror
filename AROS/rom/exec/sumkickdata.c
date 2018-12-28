@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sumkickdata.c 40930 2011-08-28 16:26:15Z sonic $
 
     Desc: Build checksum for Kickstart.
     Lang: english

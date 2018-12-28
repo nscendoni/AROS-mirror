@@ -19,7 +19,7 @@
 
  NList classes Support Site:  http://www.sf.net/projects/nlist-classes
 
- $Id$
+ $Id: version.h 50452 2015-04-22 20:22:49Z NicJA $
 
 ***************************************************************************/
 

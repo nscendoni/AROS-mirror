@@ -1,6 +1,6 @@
 /*
     Copyright 2009-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hostgl_support.c 52704 2016-04-27 21:42:31Z mazze $
 */
 
 //#define DEBUG 1

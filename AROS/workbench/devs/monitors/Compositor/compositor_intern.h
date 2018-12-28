@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2010-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: compositor_intern.h 48683 2014-01-05 15:55:03Z deadwood $
 */
 
 #include "compositor.h"

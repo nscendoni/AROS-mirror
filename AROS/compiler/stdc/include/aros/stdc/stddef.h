@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stddef.h 49900 2015-01-03 06:50:32Z NicJA $
 
     Desc: C99 header file stddef.h
 */

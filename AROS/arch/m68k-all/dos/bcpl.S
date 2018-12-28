@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bcpl.S 44788 2012-05-10 19:31:48Z jmcmullan $
 
     Desc: BCPL stubs that call into Exec and Dos libraries.
     Lang: english

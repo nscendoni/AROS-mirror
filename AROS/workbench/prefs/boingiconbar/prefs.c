@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prefs.c 44811 2012-05-15 06:54:07Z mazze $
 
     Desc:
     Lang: English

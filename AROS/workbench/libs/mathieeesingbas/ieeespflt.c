@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ieeespflt.c 47352 2013-05-04 15:56:20Z mazze $
 */
 
 #include "mathieeesingbas_intern.h"

@@ -3,7 +3,7 @@
     Copyright © 2002-2015, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: application.c 51713 2016-03-09 22:53:00Z NicJA $
 */
 
 #include <exec/types.h>

@@ -32,21 +32,14 @@ Function
 ::
 
      Calculate the absolute value of the given IEEE double precision
-     floating point number.
-
-
-Inputs
-~~~~~~
-::
-
-     y - IEEE double precision floating point number.
+     floating point number
 
 
 Result
 ~~~~~~
 ::
 
-     x - absolute value of y.
+     absolute value of y
 
      Flags:
        zero     : result is zero
@@ -54,11 +47,6 @@ Result
        overflow : 0
 
 
-
-See also
-~~~~~~~~
-
-`IEEEDPNeg()`_ 
 
 ----------
 
@@ -77,27 +65,19 @@ Function
 ~~~~~~~~
 ::
 
-     Calculate the sum of two IEEE double precision numbers.
-
-
-Inputs
-~~~~~~
-::
-
-     y - first addend.
-     z - first addend.
+     Calculate the sum of two IEEE double precision numbers
 
 
 Result
 ~~~~~~
 ::
 
-     x - sum of y and z.
+     sum of y and z
 
      Flags:
        zero     : result is zero
        negative : result is negative
-       overflow : result is too large or too small for IEEE DP format
+       overflow : result is too large or too small for ffp format
 
 
 
@@ -117,21 +97,12 @@ Function
 ~~~~~~~~
 ::
 
-     Calculates the ceiling value of an IEEE double precision number.
-
-
-Inputs
-~~~~~~
-::
-
-     y - IEEE double precision floating point number.
+     Calculates the ceil-value of a IEEE double precision number
 
 
 Result
 ~~~~~~
 ::
-
-     x - ceiling of y.
 
      Flags:
        zero     : result is zero
@@ -143,7 +114,7 @@ Result
 See also
 ~~~~~~~~
 
-`IEEEDPFloor()`_ `IEEEDPFix()`_ 
+`IEEEDPFloor()`_ 
 
 ----------
 
@@ -162,25 +133,16 @@ Function
 ~~~~~~~~
 ::
 
-     Compares two IEEE double precision numbers.
-
-
-Inputs
-~~~~~~
-::
-
-     y - IEEE double precision floating point number.
-     z - IEEE double precision floating point number.
+     Compares two IEEE double precision numbers
 
 
 Result
 ~~~~~~
 ::
 
-     c -
-         +1: y > z
-          0: y = z
-         -1: y < z
+    +1 : y > z
+     0 : y = z
+    -1 : y < z
 
      Flags:
        zero     : y = z
@@ -188,11 +150,6 @@ Result
        overflow : 0
 
 
-
-See also
-~~~~~~~~
-
-`IEEEDPTst()`_ 
 
 ----------
 
@@ -211,22 +168,28 @@ Function
 ~~~~~~~~
 ::
 
-     Divides two IEEE double precision numbers.
-
-
-Inputs
-~~~~~~
-::
-
-     y - dividend.
-     z - divisor.
+     Divides two IEEE double precision numbers
 
 
 Result
 ~~~~~~
 ::
 
-     x - quotient.
+    +1 : y > z
+     0 : y = z
+    -1 : y < z
+
+     Flags:
+       zero     : y = z
+       negative : y < z
+       overflow : 0
+
+
+Bugs
+~~~~
+::
+
+     This function is unimplemented.
 
 
 
@@ -246,21 +209,14 @@ Function
 ~~~~~~~~
 ::
 
-     Converts an IEEE double precision floating point number to an integer.
-
-
-Inputs
-~~~~~~
-::
-
-     y - IEEE double precision floating point number.
+     Convert IEEE double precision floating point number to integer
 
 
 Result
 ~~~~~~
 ::
 
-     x - the closest signed 32-bit integer to y.
+     absolute value of y
 
      Flags:
        zero     : result is zero
@@ -268,11 +224,6 @@ Result
        overflow : ieeedp out of integer-range
 
 
-
-See also
-~~~~~~~~
-
-`IEEEDPFlt()`_ `IEEEDPFloor()`_ `IEEEDPCeil()`_ 
 
 ----------
 
@@ -290,33 +241,23 @@ Function
 ~~~~~~~~
 ::
 
-     Calculates the floor value of an IEEE double precision number.
-
-
-Inputs
-~~~~~~
-::
-
-     y - IEEE double precision floating point number.
+     Calculates the floor-value of a IEEE double precision number
 
 
 Result
 ~~~~~~
 ::
 
-     x - floor of y.
+    +1 : y > z
+     0 : y = z
+    -1 : y < z
 
      Flags:
-       zero     : result is zero
-       negative : result is negative
+       zero     : y = z
+       negative : y < z
        overflow : 0
 
 
-
-See also
-~~~~~~~~
-
-`IEEEDPCeil()`_ `IEEEDPFix()`_ 
 
 ----------
 
@@ -330,26 +271,11 @@ Synopsis
  double IEEEDPFlt(
           LONG y );
 
-Function
-~~~~~~~~
-::
-
-     Convert an integer into an IEEE double precision floating point
-     number.
-
-
-Inputs
-~~~~~~
-::
-
-     y - a 32-bit integer.
-
-
 Result
 ~~~~~~
 ::
 
-     x - IEEE double precision floating point number.
+     IEEE double precision number
 
      Flags:
        zero     : result is zero
@@ -357,11 +283,6 @@ Result
        overflow : 0
 
 
-
-See also
-~~~~~~~~
-
-`IEEEDPFix()`_ 
 
 ----------
 
@@ -380,22 +301,21 @@ Function
 ~~~~~~~~
 ::
 
-     Multiplies two IEEE double precision numbers.
-
-
-Inputs
-~~~~~~
-::
-
-     y - first multiplicand.
-     z - second multiplicand.
+     Multiplies two IEEE double precision numbers
 
 
 Result
 ~~~~~~
 ::
 
-     x - product.
+     +1 : y > z
+      0 : y = z
+     -1 : y < z
+
+     Flags:
+       zero     : y = z
+       negative : y < z
+       overflow : 0
 
 
 
@@ -415,22 +335,15 @@ Function
 ~~~~~~~~
 ::
 
-     Switches the sign of the given IEEE double precision floating point
-     number.
-
-
-Inputs
-~~~~~~
-::
-
-     y - IEEE double precision floating point number.
+     Switch the sign of the given IEEE double precision
+     floating point number
 
 
 Result
 ~~~~~~
 ::
 
-     x - the negation of y.
+     -y
 
      Flags:
        zero     : result is zero
@@ -438,11 +351,6 @@ Result
        overflow : 0
 
 
-
-See also
-~~~~~~~~
-
-`IEEEDPAbs()`_ 
 
 ----------
 
@@ -461,29 +369,23 @@ Function
 ~~~~~~~~
 ::
 
-     Subtracts two IEEE double precision floating point numbers.
-
-
-Inputs
-~~~~~~
-::
-
-     y - minuend.
-     z - subtrahend.
+     Subtracts two IEEE double precision numbers
 
 
 Result
 ~~~~~~
 ::
 
-     x - difference.
+    +1 : y > z
+     0 : y = z
+    -1 : y < z
+
+     Flags:
+       zero     : y = z
+       negative : y < z
+       overflow : 0
 
 
-
-See also
-~~~~~~~~
-
-`IEEEDPNeg()`_ 
 
 ----------
 
@@ -501,24 +403,16 @@ Function
 ~~~~~~~~
 ::
 
-     Compares an IEEE double precision floting point number against zero.
-
-
-Inputs
-~~~~~~
-::
-
-     y - IEEE double precision floating point number.
+     Compare a IEEE double precision floting point number against zero.
 
 
 Result
 ~~~~~~
 ::
 
-     c -
-         +1: y > 0.0
-          0: y = 0.0
-         -1: y < 0.0
+     +1 : y > 0.0
+      0 : y = 0.0
+     -1 : y < 0.0
 
      Flags:
        zero     : result is zero
@@ -526,9 +420,4 @@ Result
        overflow : 0
 
 
-
-See also
-~~~~~~~~
-
-`IEEEDPCmp()`_ 
 

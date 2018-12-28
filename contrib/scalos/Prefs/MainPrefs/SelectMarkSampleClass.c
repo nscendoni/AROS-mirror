@@ -1,5 +1,5 @@
 // SelectMarkSampleClass.c
-// $Date$
+// $Date: 2016-03-16 02:07:14 +0100 (Wed, 16 Mar 2016) $
 
 
 #include <stdlib.h>

@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile 52599 2016-04-11 23:13:58Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- ports : ports-scientific
 #MM- ports-scientific : ports-scientific-$(AROS_TARGET_CPU)

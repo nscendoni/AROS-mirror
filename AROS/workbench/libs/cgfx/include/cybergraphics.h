@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cybergraphics.h 48196 2013-10-04 01:20:21Z NicJA $
 */
 
 #ifndef GRAPHICS_DISPLAYINFO_H

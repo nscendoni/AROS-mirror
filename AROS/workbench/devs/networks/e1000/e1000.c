@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: e1000.c 51638 2016-03-08 17:05:25Z NicJA $
  */
 /*
     This program is free software; you can redistribute it and/or modify

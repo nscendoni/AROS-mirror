@@ -2,7 +2,7 @@
 #define _NETINET_IN_GIF_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: in_gif.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: in_gif.h,v 1.1 1999/12/08 06:50:19 itojun Exp $	*/

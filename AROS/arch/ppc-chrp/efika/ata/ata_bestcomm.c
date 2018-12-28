@@ -1,6 +1,6 @@
 /*
     Copyright © 2009-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ata_bestcomm.c 49667 2014-09-30 17:35:27Z neil $
 */
 
 #define DEBUG 1

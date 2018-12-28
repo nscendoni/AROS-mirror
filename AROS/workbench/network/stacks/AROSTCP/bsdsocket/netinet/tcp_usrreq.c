@@ -31,7 +31,7 @@
  * SUCH DAMAGE.
  *
  *	From: @(#)tcp_usrreq.c	8.2 (Berkeley) 1/3/94
- *	$Id$
+ *	$Id: tcp_usrreq.c 39339 2011-06-17 05:53:18Z jmcmullan $
  */
 
 #include <sys/param.h>

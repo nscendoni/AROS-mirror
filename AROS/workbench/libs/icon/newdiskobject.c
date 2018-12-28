@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: newdiskobject.c 48163 2013-09-28 13:07:02Z neil $
 */
 
 #include <exec/types.h>

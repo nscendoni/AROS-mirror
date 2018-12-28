@@ -2,7 +2,7 @@
 #define DEVICES_NETINFO_H
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: netinfo.h 30794 2009-03-08 02:19:07Z neil $
  */
 
 #ifndef EXEC_TYPES_H

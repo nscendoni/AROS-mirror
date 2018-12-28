@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: vmwaresvga_init.c 51032 2015-08-29 22:49:55Z NicJA $
 
     Desc: VMWare SVGA Hidd initialisation code
     Lang: english
@@ -15,7 +15,7 @@
 #include <proto/oop.h>
 #include <exec/types.h>
 #include <exec/lists.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <hidd/pci.h>
 #include <oop/oop.h>
 #include <utility/utility.h>

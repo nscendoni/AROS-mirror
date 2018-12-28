@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: resolve.c 51754 2016-03-10 01:45:26Z NicJA $
  *
  * resolve.c --- resolve the given IP address or hostname
  *

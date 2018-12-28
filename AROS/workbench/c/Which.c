@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Which.c 51484 2016-02-14 08:04:35Z mazze $
 
     Desc: Find the whereabouts of an executable file
     Lang: English

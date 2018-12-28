@@ -1,6 +1,5 @@
 /*
 
-Copyright (C) 2012-2017 The AROS Dev team
 Copyright (C) 2001-2012 Neil Cafferkey
 
 This program is free software; you can redistribute it and/or modify
@@ -160,7 +159,7 @@ static const UBYTE port_masks[] =
 */
 
 struct DevUnit *CreateUnit(ULONG index, APTR card,
-   const struct TagItem *io_tags, UWORD generation, UWORD bus,
+   struct TagItem *io_tags, UWORD generation, UWORD bus,
    struct DevBase *base)
 {
    BOOL success = TRUE;
@@ -2415,7 +2414,7 @@ static VOID UnitTask(struct ExecBase *sys_base)
 
    /* Get parameters */
 
-   task = FindTask(NULL);
+   task = AbsExecBase->ThisTask;
    unit = task->tc_UserData;
    base = unit->device;
 

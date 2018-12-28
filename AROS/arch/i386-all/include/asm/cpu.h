@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu.h 47619 2013-07-02 18:27:20Z neil $
 
     Desc: assembler-level specific definitions for x86 CPU
     Lang: english
@@ -15,18 +15,11 @@
 
 #define HALT asm volatile("hlt")
 
-/* Selector used for lgdt and lidt commands */
-struct segment_selector
+/* Table descriptor used for lgdt and lidt commands */
+struct table_desc
 {
     unsigned short size;
     unsigned long  base;
-} __attribute__((packed));
-
-struct int_gate_32bit {
-    uint16_t    offset_low;
-    uint16_t    selector;
-    unsigned    ist:3, __pad0:5, type:5, dpl:2, p:1;
-    uint16_t    offset_high;
 } __attribute__((packed));
 
 /* Segment descriptor in the GDT */
@@ -82,83 +75,6 @@ static inline uint32_t __attribute__((always_inline)) rdmsri(uint32_t msr_no)
 
     asm volatile("rdmsr":"=a"(ret):"c"(msr_no));
     return ret;
-}
-
-/*
-Compare value stored at "addr" with "expected". If they are equal, function returns 1 and stores "xchg" value
-at "addr". If *addr != expected, function returns 0. Either "expected" or current value at *addr are stored back
-at *found. The operation is atomic
-*/
-static inline int compare_and_exchange_long(uint32_t *addr, uint32_t expected, uint32_t xchg, uint32_t *found)
-{
-    char flag;
-    uint32_t ret;
-    asm volatile("lock cmpxchg %4, %0; setz %1":"+m"(*addr),"=q"(flag),"=a"(ret):"2"(expected),"r"(xchg):"memory","cc");
-    if (found)
-        *found = ret;
-    return flag;
-}
-
-static inline int compare_and_exchange_short(uint16_t *lock, uint16_t expected, uint16_t xchg, uint16_t *found)
-{
-    char flag;
-    uint16_t ret;
-    asm volatile("lock cmpxchg %4, %0; setz %1":"+m"(*lock),"=q"(flag),"=a"(ret):"2"(expected),"r"(xchg):"memory","cc");
-    if (found)
-        *found = ret;
-    return flag;
-}
-
-static inline int compare_and_exchange_byte(uint8_t *lock, uint8_t expected, uint8_t xchg, uint8_t *found)
-{
-    char flag;
-    uint16_t ret;
-    asm volatile("lock cmpxchg %4, %0; setz %1":"+m"(*lock),"=q"(flag),"=a"(ret):"2"(expected),"q"(xchg):"memory","cc");
-    if (found)
-        *found = ret;
-    return flag;
-}
-
-static inline int bit_test_and_set_long(uint32_t *addr, int32_t bit)
-{
-    char retval = 0;
-    asm volatile("lock btsl %2, %0; setc %1":"+m"(*addr),"=q"(retval):"Ir"(bit):"memory");
-    return retval;
-}
-
-static inline int bit_test_and_set_short(uint16_t *addr, int32_t bit)
-{
-    char retval = 0;
-    asm volatile("lock btsw %2, %0; setc %1":"+m"(*addr),"=q"(retval):"Ir"(bit):"memory");
-    return retval;
-}
-
-static inline int bit_test_and_clear_long(uint32_t *addr, int32_t bit)
-{
-    char retval = 0;
-    asm volatile("lock btrl %2, %0; setc %1":"+m"(*addr),"=q"(retval):"Ir"(bit):"memory");
-    return retval;
-}
-
-static inline int bit_test_and_clear_short(uint16_t *addr, int32_t bit)
-{
-    char retval = 0;
-    asm volatile("lock btrw %2, %0; setc %1":"+m"(*addr),"=q"(retval):"Ir"(bit):"memory");
-    return retval;
-}
-
-static inline int bit_test_and_complement_long(uint32_t *addr, int32_t bit)
-{
-    char retval = 0;
-    asm volatile("lock btcl %2, %0; setc %1":"+m"(*addr),"=q"(retval):"Ir"(bit):"memory");
-    return retval;
-}
-
-static inline int bit_test_and_complement_short(uint16_t *addr, int32_t bit)
-{
-    char retval = 0;
-    asm volatile("lock btcw %2, %0; setc %1":"+m"(*addr),"=q"(retval):"Ir"(bit):"memory");
-    return retval;
 }
 
 #endif

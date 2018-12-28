@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: addtask.c 41077 2011-09-04 16:51:40Z verhaegs $
 
     Desc: Add a task.
     Lang: english

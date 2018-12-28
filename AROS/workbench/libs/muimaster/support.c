@@ -2,7 +2,7 @@
     Copyright © 2002, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: support.c 45710 2012-08-31 19:01:54Z neil $
 */
 
 #include <string.h>

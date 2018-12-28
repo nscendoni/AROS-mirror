@@ -1,8 +1,8 @@
 #ifndef HIDD_COMPOSITOR_H
 #define HIDD_COMPOSITOR_H
 /*
-    Copyright © 2010-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2010-2015, The AROS Development Team. All rights reserved.
+    $Id: compositor.h 51032 2015-08-29 22:49:55Z NicJA $
 */
 
 #ifndef EXEC_TYPES_H
@@ -18,7 +18,7 @@
 #endif
 
 #ifndef HIDD_GRAPHICS
-#   include <hidd/gfx.h>
+#   include <hidd/graphics.h>
 #endif
 
 /*
@@ -32,8 +32,8 @@
  * Changing this breaks binary compatibility. graphics.library recognizes
  * this class by its name.
  */
-#define CLID_Hidd_Compositor   "hidd.gfx.compositor"
-#define IID_Hidd_Compositor    "hidd.gfx.compositor"
+#define CLID_Hidd_Compositor   "hidd.graphics.compositor"
+#define IID_Hidd_Compositor    "hidd.graphics.compositor"
 
 /* Compositor class methods */
 

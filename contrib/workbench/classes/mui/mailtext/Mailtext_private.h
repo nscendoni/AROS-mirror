@@ -22,7 +22,7 @@
 
  Mailtext OpenSource project : http://sourceforge.net/projects/mailtext/
 
- $Id$
+ $Id: Mailtext_private.h 36659 2011-01-18 13:26:51Z neil $
 
  Sourcecode for Mailtext.mcc
 
@@ -206,10 +206,6 @@
     #ifdef __amigaos4__
         #define BUG DebugPrintF
     #else
-        #ifdef __AROS__
-            #define DEBUG 1
-            #include <aros/debug.h>
-        #endif
         #define BUG kprintf
     #endif
 #else

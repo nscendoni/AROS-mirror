@@ -3,7 +3,7 @@
 
 /*
     Copyright  2002-2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: iconlist_attributes.h 43398 2011-12-31 11:58:48Z deadwood $
 */
 
 /*** Identifier base ********************************************************/

@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getfsstat.c 48034 2013-09-08 21:16:47Z verhaegs $
 */
 
 #include <aros/debug.h>

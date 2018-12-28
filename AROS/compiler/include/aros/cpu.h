@@ -2,7 +2,7 @@
 #define AROS_CPU_H
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu.h 52445 2016-03-30 15:24:07Z NicJA $
 
     CPU independent version of the <aros/cpu.h> header. This is the one
     that normal programs can include.
@@ -75,7 +75,7 @@
 #endif
 
 #ifndef AROS_32BIT_TYPE
-#define AROS_32BIT_TYPE     int
+#define AROS_32BIT_TYPE     long
 #endif
 
 #ifndef AROS_16BIT_TYPE

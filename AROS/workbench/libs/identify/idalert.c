@@ -19,7 +19,7 @@
  *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  *  IN THE SOFTWARE.
  *   
- *  $Id$
+ *  $Id: idalert.c 43432 2012-01-01 20:15:00Z jmcmullan $
  */
 
 #include <exec/alerts.h>

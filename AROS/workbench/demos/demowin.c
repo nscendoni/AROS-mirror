@@ -1,12 +1,10 @@
 /*
     Copyright © 1995-96, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: demowin.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: A short demo for the features of Intuition and Graphics
     Lang: english
 */
-#define ENABLE_RT	1
-#define ENABLE_PURIFY	1
 
 #include <exec/memory.h>
 #include <dos/dos.h>
@@ -27,7 +25,6 @@
 #include <graphics/gfxmacros.h>
 #include <ctype.h>
 #include <stdio.h>
-#include <aros/rt.h>
 #include <intuition/classusr.h>
 #include <intuition/gadgetclass.h>
 #include <intuition/imageclass.h>
@@ -65,8 +62,8 @@ void Refresh (struct RastPort * rp)
 
     SetDrPt (rp, 0xF0F0);
     len = 150;
-    x = 320;
-    y = 170;
+    x = 340;
+    y = 150;
 
     xy[0] = x; xy[1] = y+len;
     xy[2] = x+len; xy[3] = y+len;
@@ -140,8 +137,8 @@ void Refresh (struct RastPort * rp)
     Move (rp, 300, 100);
     Text (rp, "Hello World.", 12);
 
-    Move (rp, 20, 360);
-    Text (rp, "Press \"Complement\" to flip PropGadgets", 38);
+    Move (rp, 20, 350);
+    Text (rp, "Press \"Complement\" to flip PropGadgets", 39);
 
     tend = 10;
     t = 0;
@@ -526,8 +523,6 @@ int main (int argc, char ** argv)
     int cont, draw;
     int prop;
 
-    RT_Init ();
-
     printf ("Welcome to the window demo of AROS\n");
 
     GfxBase=(struct GfxBase *)OpenLibrary(GRAPHICSNAME,39);
@@ -596,7 +591,6 @@ int main (int argc, char ** argv)
 			    | IDCMP_GADGETUP
 			    | IDCMP_CLOSEWINDOW
 	, WA_SimpleRefresh, TRUE
-	, WA_GimmeZeroZero, TRUE
 	, WA_Gadgets,	    (IPTR)&ExitGadget
 	, TAG_END
     );
@@ -982,8 +976,6 @@ end:
 
     if (ConsoleDevice)
 	CloseDevice ((struct IORequest *)&cioreq);
-
-    RT_Exit ();
 
     return 0;
 }

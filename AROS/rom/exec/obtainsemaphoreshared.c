@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: obtainsemaphoreshared.c 43363 2011-12-30 09:43:34Z sonic $
 
     Desc: Get a shared lock on a semaphore.
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fputc.c 49819 2014-12-02 19:55:59Z neil $
 
     Desc:
     Lang: English

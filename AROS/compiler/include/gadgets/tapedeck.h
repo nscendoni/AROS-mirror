@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: tapedeck.h 51344 2016-01-18 22:50:24Z NicJA $
 
     Desc: MethodIDs and AttrIDs for the tapedeck class.
     Lang: english

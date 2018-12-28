@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getcwd.c 48034 2013-09-08 21:16:47Z verhaegs $
 
     POSIX.1-2008 function getcwd().
 */

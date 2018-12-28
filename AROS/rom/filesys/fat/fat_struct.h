@@ -7,7 +7,7 @@
  * This program is free software; you can redistribute it and/or modify it
  * under the same terms as AROS itself.
  *
- * $Id$
+ * $Id: fat_struct.h 50940 2015-07-09 01:16:32Z neil $
  */
 
 #define FAT_MAX_SHORT_NAME 11
@@ -21,7 +21,8 @@ struct FATEBPB
     ULONG bs_volid;
     UBYTE bs_vollab[FAT_MAX_SHORT_NAME];
     UBYTE bs_filsystype[8];
-} __packed;
+}
+__attribute__ ((__packed__));
 
 struct FATBootSector
 {
@@ -53,12 +54,14 @@ struct FATBootSector
             UWORD bpb_back_bootsec;
             UBYTE bpb_reserved[12];
             struct FATEBPB ebpb;
-        } __packed ebpb32;
+        }
+        __attribute__ ((__packed__)) ebpb32;
     }
     ebpbs;
     UBYTE pad[420];
     UBYTE bpb_signature[2];
-} __packed;
+}
+__attribute__ ((__packed__));
 
 struct FATFSInfo
 {
@@ -69,7 +72,8 @@ struct FATFSInfo
     ULONG next_free;
     UBYTE reserved2[12];
     ULONG trail_sig;
-} __packed;
+}
+__attribute__ ((__packed__));
 
 #define FSI_LEAD_SIG 0x41615252
 #define FSI_STRUCT_SIG 0x61417272
@@ -89,7 +93,8 @@ struct FATDirEntry
     UWORD write_date;
     UWORD first_cluster_lo;
     ULONG file_size;
-} __packed;
+}
+__attribute__ ((__packed__));
 
 #define ATTR_READ_ONLY  0x01
 #define ATTR_HIDDEN     0x02
@@ -112,4 +117,5 @@ struct FATLongDirEntry
     UWORD name2[6];
     UWORD first_cluster_lo;
     UWORD name3[2];
-} __packed;
+}
+__attribute__ ((__packed__));

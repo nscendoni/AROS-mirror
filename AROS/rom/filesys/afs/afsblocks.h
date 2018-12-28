@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: afsblocks.h 30792 2009-03-07 22:40:04Z neil $
 */
 
 #define T_SHORT	2

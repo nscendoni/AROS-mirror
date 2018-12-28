@@ -4,8 +4,8 @@ Subversion:in kanssa työskentely
 
 :Authors:   Aaron Digulla, Adam Chodorowski 
 :Copyright: Copyright (C) 1995-2002, The AROS Development Team
-:Version:   $Revision$
-:Date:      $Date$
+:Version:   $Revision: 30800 $
+:Date:      $Date: 2009-03-08 18:28:50 +0100 (Sun, 08 Mar 2009) $
 :Status:    Done.
 :Abstract:
     Subversion (lyhyesti SVN) on versionhallinta työkalu joka ylläpitää
@@ -26,7 +26,6 @@ Subversion:in kanssa työskentely
 .. Contents::
 
 
-
 Esittely
 ========
 
@@ -38,7 +37,6 @@ palvelimelle. Kun kehittäjä haluaa jakaa tekemänsä muutokset muiden tiimin
 jäsenten kanssa, hän tekee muutokset ("commit") palvelimelle käyttäen
 asiakasohjelmaa joka huolehtii tiedon siirtämisestä ja liittämisestä yhteen
 muiden tekemien muutosten kanssa.
-
 
 
 Ohjelmisto
@@ -65,8 +63,6 @@ Amigalle joka löytyy AmiNET__ (etsi "subversion").
 
 __ http://main.aminet.net/
 
-
-
 Palvelimelle kirjautuminen
 ==========================
 
@@ -81,7 +77,6 @@ kysyy tarvittaessa käyttäjänimeä ja salasanaa.
     anonyymi lukuoikeus evätty.
 
 __ contribute#joining-the-team
-
 
 
 AROS:in lähdekoodin hankkiminen
@@ -103,8 +98,6 @@ kaikille AROS versioille kun se aiemmin tarvittiin vain i386-pc portille::
 
     "checkout":in jälkeen SVN muistaa mistä lähdekoodi on peräisin.
 
-
-
 Lisäkoodin hankinta
 ===================
 
@@ -120,8 +113,6 @@ ohjelman.
 Saatavilla olevat moduulit voit listata näin::
 
     > svn ls https://svn.aros.org/svn/aros/trunk/
-
-
 
 Lähdekoodin päivitys
 ====================
@@ -149,7 +140,6 @@ käsin.
     tulisi aina tarkistaa yhdistetyt tiedostot ongelmia välttääksesi.
 
 
-
 Muutosten teko
 ==============
 
@@ -174,7 +164,6 @@ muutostesi lähettämistä. Varmista myös että olet testannut muutoksesi ennen
 kuin lähetät ne; ainakin niin etteivät ne riko käännösvaihetta.
 
 
-
 Uusien tiedostojen ja hakemistojen lisääminen
 =============================================
 
@@ -186,7 +175,6 @@ Lisätäksesi tiedostoja ja hakemistoja varastoon, käytä "add" komentoa::
 SVN ei matkaa automaattisesti uusien hakemistojen lävitse ja lisää niiden
 sisältöä; sinun täytyy tehdä tämä itse. Kun olet lisännyt tiedostosi ja
 hakemistosi, täytyy ne liittää kokonaisuuteen "commit" komennolla.
-
 
 
 Tuonti
@@ -230,8 +218,6 @@ on surkeasti kirjoitettu, joten esimerkki taitaa olla paikallaan:
       > svn import -m "Initial import of SVN 1.11.12" 
       \ https://svn.aros.org/svn/aros/trunk/contrib/development/versioning/svn
 
-
-
 Lisälukemista
 =============
 
@@ -244,5 +230,5 @@ Seuraavat sivut ovat erityisen suositeltavia:
 + `Subversion Home`_
 
 .. _`Version Control with Subversion`: http://svnbook.red-bean.com/
-.. _`Subversion Home`:		       http://subversion.apache.org/
+.. _`Subversion Home`:		       http://subversion.tigris.org/
 

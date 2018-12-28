@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: LibList.c 52028 2016-03-17 04:36:20Z jmcmullan $
 
     Desc: 
     Lang: english
@@ -49,12 +49,6 @@
 #include <proto/exec.h>
 #include <dos/dosextens.h>
 #include <proto/dos.h>
-
-#if defined(__AROSPLATFORM_SMP__)
-#include <aros/types/spinlock_s.h>
-#include <proto/execlock.h>
-#include <resources/execlock.h>
-#endif
 
 const TEXT version[] = "$VER: LibList 41.3 (11.3.2015)\n";
 
@@ -105,44 +99,18 @@ static int fillbuffer(struct lib **buffer, IPTR size)
 {
     STRPTR end=(STRPTR)*buffer+size;
     struct Library *lib;
-#if defined(__AROSPLATFORM_SMP__)
-    void *ExecLockBase = OpenResource("execlock.resource");
-#endif
-
-#if defined(__AROSPLATFORM_SMP__)
-    if (ExecLockBase)
-        ObtainSystemLock(&SysBase->LibList, SPINLOCK_MODE_READ, LOCKF_FORBID);
-    else
-        Forbid();
-#else
     Forbid();
-#endif
     for(lib=(struct Library *)SysBase->LibList.lh_Head;
         lib->lib_Node.ln_Succ!=NULL;
         lib=(struct Library *)lib->lib_Node.ln_Succ)
     {
         if(!addlib(lib,buffer,&end))
         {
-#if defined(__AROSPLATFORM_SMP__)
-            if (ExecLockBase)
-                ReleaseSystemLock(&SysBase->LibList, LOCKF_FORBID);
-            else
-                Permit();
-#else
             Permit();
-#endif
             return 0;
         }
     }
-#if defined(__AROSPLATFORM_SMP__)
-    if (ExecLockBase)
-        ReleaseSystemLock(&SysBase->LibList, LOCKF_FORBID);
-    else
-        Permit();
-#else
     Permit();
-#endif
-
     return 1;
 }
 
@@ -167,18 +135,11 @@ int main(void)
         libs=buffer;
         if(fillbuffer(&libs,size))
         {
-#if (__WORDSIZE == 64)
-	    FPuts(Output(),"       Address  Version  Rev  OpenCnt  Flags  Name\n");
-#else
-	    FPuts(Output(),"   Address  Version  Rev  OpenCnt  Flags  Name\n");
-#endif
+	    FPuts(Output(),"address\t\tversion\trev\topencnt\tflags\tname\n"
+                           "------------------------------------------------------------\n");
 	    for(libs2=buffer;libs2<libs;libs2++)
 	    {
-#if (__WORDSIZE == 64)
-        Printf("0x%012.ix  %7ld %4ld  %7ld   0x%02lx  %s\n",
-#else
-        Printf("0x%08.ix  %7ld %4ld  %7ld   0x%02lx  %s\n",
-#endif
+		Printf("0x%08.ix\t%ld\t%ld\t%ld\t0x%lx\t%s\n",
 		        libs2->address, (ULONG)libs2->version,
 		        (ULONG)libs2->revision,
 		        (ULONG)libs2->opencnt,

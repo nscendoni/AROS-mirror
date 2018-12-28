@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: colorhandling.c 48582 2013-12-16 02:23:59Z neil $
 */
 
 #include <stdio.h>

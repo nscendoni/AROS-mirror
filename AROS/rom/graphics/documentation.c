@@ -1,6 +1,6 @@
 /*
     Copyright © 2008-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: documentation.c 35479 2010-11-14 15:37:48Z mazze $
 
     Desc: Autodocs for function macros
     Lang: english

@@ -2,7 +2,7 @@
 #define	__IP_FRAG_H__
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ip_frag.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ip_frag.h,v 1.12 2000/03/13 23:40:18 kjell Exp $	*/

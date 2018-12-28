@@ -31,7 +31,7 @@
  * SUCH DAMAGE.
  *
  *	@(#)tcp.h	8.1 (Berkeley) 6/10/93
- * $Id$
+ * $Id: tcp.h 48707 2014-01-12 04:41:16Z jmcmullan $
  */
 
 #ifndef _NETINET_TCP_H_

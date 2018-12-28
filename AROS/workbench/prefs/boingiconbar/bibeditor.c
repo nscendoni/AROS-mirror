@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bibeditor.c 51612 2016-03-05 07:47:02Z mazze $
 */
 
 // #define DEBUG 1

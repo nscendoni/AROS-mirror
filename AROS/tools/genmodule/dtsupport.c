@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2005, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: dtsupport.c 48665 2013-12-31 08:20:42Z mazze $
 
     Functions to support datatypes. Part of genmodule.
 */

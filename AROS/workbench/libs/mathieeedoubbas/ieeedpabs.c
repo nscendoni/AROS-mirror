@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2003, The AROS Development Team. All rights reserved.
+    $Id: ieeedpabs.c 47354 2013-05-04 17:12:25Z mazze $
 */
 
 #include "mathieeedoubbas_intern.h"
@@ -19,31 +19,23 @@
 
 /*  FUNCTION
         Calculate the absolute value of the given IEEE double precision
-        floating point number.
+        floating point number
 
     INPUTS
-        y - IEEE double precision floating point number.
 
     RESULT
-        x - absolute value of y.
+	absolute value of y
 
 	Flags:
 	  zero	   : result is zero
 	  negative : 0
 	  overflow : 0
 
-    NOTES
-
-    EXAMPLE
-
     BUGS
 
-    SEE ALSO
-        IEEEDPNeg()
-
     INTERNALS
-        Algorithm:
-        Set the sign-bit to zero.
+        ALGORITHM:
+	set the sign-bit to zero
 
 *****************************************************************************/
 {

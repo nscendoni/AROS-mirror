@@ -1,6 +1,6 @@
 /*
 
-Copyright (C) 2001-2017 Neil Cafferkey
+Copyright (C) 2001-2012 Neil Cafferkey
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -31,14 +31,15 @@ MA 02111-1307, USA.
 #include <devices/sana2specialstats.h>
 #include <devices/sana2wireless.h>
 #include <devices/timer.h>
+#include <dos/dosextens.h>
 
 #include "wireless.h"
 #include "io.h"
 
 #define DEVICE_NAME "prism2.device"
 #define VERSION 2
-#define REVISION 6
-#define DATE "9.5.2017"
+#define REVISION 5
+#define DATE "9.10.2012"
 
 #define UTILITY_VERSION 39
 #define PROMETHEUS_VERSION 2
@@ -134,6 +135,7 @@ enum
 {
    INTERSIL_FIRMWARE,
    SYMBOL_FIRMWARE,
+//   AIRONET_FIRMWARE
    LUCENT_FIRMWARE,
    HERMES2_FIRMWARE,
    HERMES2G_FIRMWARE,
@@ -260,7 +262,7 @@ struct DevUnit
    UWORD channel;
    UWORD firmware_type;
    UWORD auth_types;
-   UWORD ssid_length;
+   UWORD ssid_length;	// ???
    UWORD tx_key_no;
    struct KeyUnion keys[WIFI_KEYCOUNT];
    UWORD iv_sizes[ENC_COUNT];
@@ -329,7 +331,6 @@ struct AddressRange
 
 #define UNITF_SHARED (1 << 0)
 #define UNITF_ONLINE (1 << 1)
-#define UNITF_TASKADDED (1 << 2)
 #define UNITF_HAVEADAPTER (1 << 3)
 #define UNITF_CONFIGURED (1 << 4)
 #define UNITF_PROM (1 << 5)

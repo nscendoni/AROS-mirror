@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pc104_usa2.c 51235 2015-12-19 16:24:36Z polluks $
 
     Desc: Dvorak PC104/PC101 Keymap
     Lang: English

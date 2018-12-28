@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: install.c 48832 2014-03-07 20:40:42Z neil $
 */
 
 #include <errno.h>

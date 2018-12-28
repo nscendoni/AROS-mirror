@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: nouveau_init.c 51039 2015-08-29 23:58:02Z NicJA $
 */
 
 #include "nouveau_intern.h"
@@ -12,7 +12,6 @@
 
 /* GLOBALS */
 APTR NouveauMemPool;
-struct SignalSemaphore globalLock;
 
 /* This pointer is necessary to limit the number of changes function signatures
    of xf86-video-nouveau codes. Without, carddata needs to be passed to each
@@ -25,7 +24,6 @@ static ULONG Nouveau_Init(LIBBASETYPEPTR LIBBASE)
 {
     struct OOP_ABDescr attrbases[] = 
     {
-    { IID_Hidd,                 &LIBBASE->sd.hiddAttrBase },
     { IID_Hidd_BitMap,          &LIBBASE->sd.bitMapAttrBase },
     { IID_Hidd_PixFmt,	        &LIBBASE->sd.pixFmtAttrBase },
     { IID_Hidd_Sync,            &LIBBASE->sd.syncAttrBase },
@@ -39,8 +37,6 @@ static ULONG Nouveau_Init(LIBBASETYPEPTR LIBBASE)
     { IID_Hidd_BitMap_Nouveau,  &LIBBASE->sd.bitMapNouveauAttrBase },
     { NULL, NULL }
     };
-
-    InitSemaphore(&globalLock);
 
     if (!OOP_ObtainAttrBases(attrbases))
         return FALSE;

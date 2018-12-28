@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getcpunumber.c 50470 2015-04-27 23:58:50Z NicJA $
 
     Desc:
 */
@@ -20,7 +20,7 @@
 /*  SYNOPSIS */
 
 /*  LOCATION */
-	struct KernelBase *, KernelBase, 41, Kernel)
+	struct KernelBase *, KernelBase, 37, Kernel)
 
 /*  FUNCTION
 	Return number of the caller CPU

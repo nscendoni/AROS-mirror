@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fgetc.c 48974 2014-04-27 15:28:33Z deadwood $
 
     Desc:
     Lang: english

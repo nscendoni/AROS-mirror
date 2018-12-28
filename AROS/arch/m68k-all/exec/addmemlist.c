@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: addmemlist.c 47619 2013-07-02 18:27:20Z neil $
 
     Desc: Add memory to the public list of memory.
     Lang: english

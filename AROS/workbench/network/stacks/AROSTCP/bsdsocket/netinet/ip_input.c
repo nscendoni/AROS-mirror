@@ -131,11 +131,6 @@ static	struct ip_srcrt {
 	struct	in_addr route[MAX_IPOPTLEN/sizeof(struct in_addr)];
 } ip_srcrt;
 
-struct ip_srcrt_opts {
-	char	nop;				/* one NOP to align */
-	char	srcopt[IPOPT_OFFSET + 1];	/* OPTVAL, OLEN and OFFSET */
-};
-
 #if USE_IF_MATRIX
 extern	int if_index;
 u_long	*ip_ifmatrix = NULL;
@@ -883,9 +878,11 @@ ip_srcroute()
 	if (m == 0)
 		return ((struct mbuf *)0);
 
+#define OPTSIZ	(sizeof(ip_srcrt.nop) + sizeof(ip_srcrt.srcopt))
+
 	/* length is (nhops+1)*sizeof(addr) + sizeof(nop + srcrt header) */
 	m->m_len = ip_nhops * sizeof(struct in_addr) + sizeof(struct in_addr) +
-	    sizeof(struct ip_srcrt_opts);
+	    OPTSIZ;
 #if DIAGNOSTIC
 	if (ipprintfs)
 		printf("ip_srcroute: nhops %ld mlen %ld", ip_nhops, m->m_len);
@@ -904,13 +901,13 @@ ip_srcroute()
 	/*
 	 * Copy option fields and padding (nop) to mbuf.
 	 */
-	struct ip_srcrt_opts *tmpOpts = (struct ip_srcrt_opts *)&ip_srcrt.nop;
 	ip_srcrt.nop = IPOPT_NOP;
 	ip_srcrt.srcopt[IPOPT_OFFSET] = IPOPT_MINOFF;
-	aligned_bcopy_const((caddr_t)tmpOpts,
-	    mtod(m, caddr_t) + sizeof(struct in_addr), sizeof(struct ip_srcrt_opts));
+	aligned_bcopy_const((caddr_t)&ip_srcrt.nop,
+	    mtod(m, caddr_t) + sizeof(struct in_addr), OPTSIZ);
 	q = (struct in_addr *)(mtod(m, caddr_t) +
-	    sizeof(struct in_addr) + sizeof(struct ip_srcrt_opts));
+	    sizeof(struct in_addr) + OPTSIZ);
+#undef OPTSIZ
 	/*
 	 * Record return path as an IP source route,
 	 * reversing the path (pointers are now aligned).

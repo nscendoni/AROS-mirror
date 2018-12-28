@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2008-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __vfork.h 49116 2014-07-13 06:08:50Z deadwood $
 */
 
 #include <exec/types.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stripfont.c 33499 2010-06-08 12:42:51Z sonic $
 
     Desc: Graphics function StripFont()
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: adddisplayinfodata.c 48424 2013-11-18 09:28:30Z neil $
 
     Desc: Add a display mode information to the database
     Lang: english

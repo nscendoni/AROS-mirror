@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2016, The AROS Development Team. All rights reserved.
+    $Id: alert.c 52756 2016-06-10 17:06:26Z neil $
 
     Desc: Display an alert.
     Lang: english
@@ -11,6 +11,7 @@
 #include <exec/execbase.h>
 #include <exec/rawfmt.h>
 #include <proto/exec.h>
+#include <proto/kernel.h>
 #include <string.h>
 
 #include "exec_intern.h"

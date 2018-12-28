@@ -1,6 +1,6 @@
 /*
     Copyright (C) 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: easyrequest.c 52900 2016-08-29 06:49:37Z deadwood $
 
     Desc: Varargs version of EasyRequestArgs() (intuition.library)
     Lang: english

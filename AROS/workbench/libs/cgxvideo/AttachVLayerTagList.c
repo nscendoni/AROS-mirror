@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: AttachVLayerTagList.c 47342 2013-05-04 10:34:30Z mazze $
 */
 #include <aros/debug.h>
 

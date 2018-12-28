@@ -2,7 +2,7 @@
 #define _LIBRARIES_BSDSOCKET_H
 
 /*
- * $Id$
+ * $Id: bsdsocket.h 48716 2014-01-12 20:43:46Z jmcmullan $
  *
  * :ts=8
  *

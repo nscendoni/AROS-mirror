@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: groupsp.c 53623 2017-02-13 17:55:17Z neil $
 */
 
 #include <graphics/gfx.h>

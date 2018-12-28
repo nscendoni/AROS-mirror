@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mui_addclipping.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <proto/graphics.h>
@@ -25,7 +25,7 @@
         AROS_LHA(WORD, height, D3),
 
 /*  LOCATION */
-        struct Library *, MUIMasterBase, 28, MUIMaster)
+        struct Library *, MUIMasterBase, 24, MUIMaster)
 
 /*  FUNCTION
 

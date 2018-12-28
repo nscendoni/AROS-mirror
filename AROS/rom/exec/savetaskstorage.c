@@ -1,6 +1,6 @@
 /*
     Copyright © 2012-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: savetaskstorage.c 51383 2016-01-21 00:29:44Z NicJA $
 */
 
 #include <exec/nodes.h>
@@ -49,8 +49,7 @@
 {
     AROS_LIBFUNC_INIT
 
-    struct Task *ThisTask = GET_THIS_TASK;
-    struct ETask *et = ThisTask ? GetETask(ThisTask) : NULL;
+    struct ETask *et = GetETask(GET_THIS_TASK);
     IPTR *taskstorage, *tsout;
     IPTR slots;
     

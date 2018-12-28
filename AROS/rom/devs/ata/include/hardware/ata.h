@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2004-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ata.h 49655 2014-09-21 23:01:25Z neil $
 
     Desc: ATA hardware register definitions
     Lang: English

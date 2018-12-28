@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-98, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Wumpus.c 51877 2016-03-12 04:13:56Z NicJA $
 
     Desc: Wumpus Game
     Lang: english

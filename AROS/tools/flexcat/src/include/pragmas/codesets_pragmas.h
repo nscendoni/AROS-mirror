@@ -19,7 +19,7 @@
 
  codesets.library project: http://sourceforge.net/projects/codesetslib/
 
- $Id$
+ $Id: codesets_pragmas.h 49325 2014-08-14 00:52:39Z mazze $
 
 ***************************************************************************/
 

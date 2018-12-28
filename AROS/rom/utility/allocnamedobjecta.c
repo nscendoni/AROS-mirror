@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: allocnamedobjecta.c 50752 2015-05-25 15:20:32Z neil $
 
     Desc: AllocNamedObject() - allocate a NamedObject.
     Lang: english

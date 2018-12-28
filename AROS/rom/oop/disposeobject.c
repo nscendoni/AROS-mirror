@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: disposeobject.c 50838 2015-06-19 00:14:32Z NicJA $
 
     Desc: Create a new OOP object
     Lang: english

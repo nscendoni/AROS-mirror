@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pathpart.c 46059 2012-11-21 19:47:17Z mazze $
 
     Desc: Return a pointer to after the directories in a path.
     Lang: English

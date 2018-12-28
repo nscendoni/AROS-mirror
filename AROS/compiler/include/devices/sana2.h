@@ -3,7 +3,7 @@
 
 /*
     Copyright (C) 2005 Neil Cafferkey
-    $Id$
+    $Id: sana2.h 48726 2014-01-14 07:02:09Z jmcmullan $
 
     Desc: Definitions for SANA-II devices
     Lang: english

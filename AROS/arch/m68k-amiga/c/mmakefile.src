@@ -1,5 +1,5 @@
 # Copyright © 2003-2010, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 52624 2016-04-13 00:11:26Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -68,11 +68,12 @@ CFILES	      := mmudump
     files=$(CFILES) targetdir=$(AROS_C) \
     usestartup=no
 
-CFILES		:= SetPatch
+CFILES		:= SetPatch patches
+AFILES		:= copymem_040 copymem_060
 #USER_INCLUDES := -isystem
 
 %build_prog mmake=workbench-c-m68k-setpatch progname=SetPatch \
-    files=$(CFILES) targetdir=$(AROS_C) \
+    files=$(CFILES) asmfiles=$(AFILES) targetdir=$(AROS_C) \
     uselibs=setpatch usestartup=no
 
 %common

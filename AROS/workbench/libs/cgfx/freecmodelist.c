@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freecmodelist.c 47438 2013-05-20 02:30:36Z neil $
 
     Desc:
     Lang: english

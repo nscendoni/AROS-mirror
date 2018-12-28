@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bptr.h 30800 2009-03-08 17:28:50Z neil $
 
     Desc: AROS version of BPTRs
     Lang: english

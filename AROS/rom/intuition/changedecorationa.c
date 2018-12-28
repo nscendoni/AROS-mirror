@@ -1,7 +1,7 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: changedecorationa.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <proto/utility.h>
@@ -27,7 +27,7 @@
         AROS_LHA(struct NewDecorator *, nd, A0),
 
 /*  LOCATION */
-        struct IntuitionBase *, IntuitionBase, 152, Intuition)
+        struct IntuitionBase *, IntuitionBase, 153, Intuition)
 
 /*  FUNCTION
         Setup a new decorator for intuition windows, screens or menus.
@@ -103,7 +103,7 @@
             nd->nd_ScreenMenuObjOffset = ((IPTR) ( (char *)&((struct IntScreen *)0)->MenuDecorObj - (char *)0 ));
             nd->nd_ScreenWindowObjOffset = ((IPTR) ( (char *)&((struct IntScreen *)0)->WinDecorObj - (char *)0 ));
 
-            D(bug("intuition.decor: offsets titleobj = %d, menuobj = %d, winobj = %d\n", nd->nd_ScreenObjOffset, nd->nd_ScreenMenuObjOffset, nd->nd_ScreenWindowObjOffset);)
+            bug("intuition.decor: offsets titleobj = %d, menuobj = %d, winobj = %d\n", nd->nd_ScreenObjOffset, nd->nd_ScreenMenuObjOffset, nd->nd_ScreenWindowObjOffset);
             Enqueue(&((struct IntIntuitionBase *)(IntuitionBase))->Decorations, (struct Node *)nd);
 
             if (global)

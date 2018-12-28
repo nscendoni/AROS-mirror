@@ -1,5 +1,5 @@
-# Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-# $Id$
+# Copyright © 1995-2016, The AROS Development Team. All rights reserved.
+# $Id: make.cfg.in 53132 2016-12-29 10:32:06Z deadwood $
 #
 # Static makefile rule file for AROS.
 
@@ -28,8 +28,6 @@ TARGETDIR   := $(TOP)/bin/$(AROS_TARGET_ARCH)-$(AROS_TARGET_CPU)$(AROS_TARGET_SU
 
 GENDIR      := $(TARGETDIR)/gen
 
-CC_PREFIX := @aros_cc_pre@
-
 -include $(GENDIR)/config/make.defaults
 -include $(GENDIR)/config/make.opts
 
@@ -56,7 +54,7 @@ SPECS                := $(GENDIR)/config/specs
 AROSDIR	             := $(TARGETDIR)/AROS
 
 # Relative paths for standard directories
-AROS_DIR_BOOT        := boot
+AROS_DIR_BOOT        := Arch
 AROS_DIR_C           := C
 AROS_DIR_CLASSES     := Classes
 AROS_DIR_DATATYPES   := $(AROS_DIR_CLASSES)/Datatypes
@@ -67,14 +65,14 @@ AROS_DIR_FS          := L
 AROS_DIR_LIBRARIES   := Libs
 AROS_DIR_LOCALE      := Locale
 AROS_DIR_S           := S
-AROS_DIR_DEVELOPER := Developer
-AROS_DIR_INCLUDE     := include
-AROS_DIR_LIB         := lib
+AROS_DIR_DEVELOPMENT := Development
+AROS_DIR_INCLUDE     := $(AROS_DIR_DEVELOPMENT)/include
+AROS_DIR_LIB         := $(AROS_DIR_DEVELOPMENT)/lib
 AROS_DIR_CONTRIB     := Extras
 ifeq ($(AROS_TARGET_ARCH),pc)
-AROS_DIR_ARCH        := boot/$(AROS_TARGET_ARCH)
+AROS_DIR_ARCH        := Arch/$(AROS_TARGET_ARCH)
 else
-AROS_DIR_ARCH        := boot/$(AROS_TARGET_ARCH)$(AROS_TARGET_SUFFIX)
+AROS_DIR_ARCH        := Arch/$(AROS_TARGET_ARCH)$(AROS_TARGET_SUFFIX)
 endif
 
 # Absolute paths for standard directories
@@ -108,17 +106,13 @@ AROS_THEMES          := $(AROS_PREFS)/Presets/Themes
 AROS_IMAGES          := $(AROS_SYSTEM)/Images
 AROS_TOOLS           := $(AROSDIR)/Tools
 AROS_UTILITIES       := $(AROSDIR)/Utilities
+AROS_TESTS           := $(AROSDIR)/Tests
 
-AROS_DEVELOPER       := $(AROSDIR)/$(AROS_DIR_DEVELOPER)
-AROS_DEBUG           := $(AROS_DEVELOPER)/Debug
-AROS_TESTS           := $(AROS_DEBUG)/Tests
-AROS_INCLUDES	     := $(AROS_DEVELOPER)/$(AROS_DIR_INCLUDE)
-AROS_LIB             := $(AROS_DEVELOPER)/$(AROS_DIR_LIB)
+AROS_DEVELOPMENT     := $(AROSDIR)/$(AROS_DIR_DEVELOPMENT)
+AROS_INCLUDES	     := $(AROSDIR)/$(AROS_DIR_INCLUDE)
+AROS_LIB             := $(AROSDIR)/$(AROS_DIR_LIB)
 
-AROS_CONTRIB            := $(AROSDIR)/$(AROS_DIR_CONTRIB)
-AROS_CONTRIB_DEVELOPER  := $(AROS_CONTRIB)/$(AROS_DIR_DEVELOPER)
-AROS_CONTRIB_INCLUDES   := $(AROS_CONTRIB_DEVELOPER)/$(AROS_DIR_INCLUDE)
-AROS_CONTRIB_LIB        := $(AROS_CONTRIB_DEVELOPER)/$(AROS_DIR_LIB)
+AROS_CONTRIB         := $(AROSDIR)/$(AROS_DIR_CONTRIB)
 
 # The generated files all go under the GENDIR path
 SCRIPTDIR            := $(GENDIR)/scripts
@@ -180,23 +174,13 @@ GENINCDIR	:= $(GENDIR)/include
 
 .PHONY : all clean setup subdirs
 
-BASE_CFLAGS := $(CONFIG_BASE_CFLAGS)
-BASE_CXXFLAGS := $(CONFIG_BASE_CXXFLAGS)
-BASE_CPPFLAGS := $(CONFIG_BASE_CPPFLAGS)
-
 # Was debugging enabled? Better set up the options.
 ifeq ($(DEBUG),yes)
-BASE_CFLAGS += $(DEBUG_CFLAGS)
-BASE_CXXFLAGS += $(DEBUG_CXXFLAGS)
-BASE_CPPFLAGS += $(DEBUG_CPPFLAGS)
 CONFIG_CFLAGS += $(DEBUG_CFLAGS)
-CONFIG_CXXFLAGS += $(DEBUG_CXXFLAGS)
-CONFIG_CPPFLAGS += $(DEBUG_CPPFLAGS)
 CONFIG_AFLAGS += $(DEBUG_AFLAGS)
 CONFIG_LDFLAGS += $(DEBUG_LDFLAGS)
 HOST_CFLAGS += $(DEBUG_CFLAGS)
-HOST_CXXFLAGS += $(DEBUG_CXXFLAGS)
-HOST_CPPFLAGS += $(DEBUG_CPPFLAGS)
+HOST_CXXFLAGS += $(DEBUG_CFLAGS) $(DEBUG_CXXFLAGS)
 HOST_AFLAGS += $(DEBUG_AFLAGS)
 HOST_LDFLAGS += $(DEBUG_LDFLAGS)
 MECHO	:= $(ECHO)
@@ -204,31 +188,18 @@ else
 MECHO	:= $(NOP)
 endif
 
+# Optimization and instruction set architecture flags
+CONFIG_CFLAGS += $(OPTIMIZATION_CFLAGS)
+CONFIG_CFLAGS += $(ISA_FLAGS)
+CONFIG_AFLAGS += $(ISA_FLAGS)
+
+CONFIG_CXXFLAGS := $(subst -Wno-pointer-sign,, $(subst -Werror-implicit-function-declaration,, $(CONFIG_CFLAGS)))
+
 # compiler and assembler flags are set depending upon the directory
-CFLAGS      = $(TARGET_CFLAGS)
-CXXFLAGS    = $(TARGET_CXXFLAGS)
-CPPFLAGS = $(TARGET_CPPFLAGS)
-AFLAGS	    = $(ISA_FLAGS) $(USER_AFLAGS) $(CONFIG_AFLAGS)
+CFLAGS      = $(USER_INCLUDES) $(CONFIG_CFLAGS) $(USER_CFLAGS)
+CXXFLAGS    = $(USER_INCLUDES) $(CONFIG_CXXFLAGS) $(USER_CXXFLAGS)
+AFLAGS	    = $(USER_AFLAGS) $(CONFIG_AFLAGS)
 LDFLAGS     = $(USER_LDFLAGS) $(CONFIG_LDFLAGS)
-
-# Target arch/CPU-specific options that we can't set in 'configure'
-# (these could be added to CFLAGS instead of using a new variable, except
-# that CFLAGS is unfortunately also passed to host and kernel compilers,
-# which might not recognise the same options)
-ifeq ($(AROS_TARGET_CPU),i386)
-    SAFETY_CFLAGS = $(CFLAGS_NO_IPA_CP)
-endif
-ifeq ($(AROS_TARGET_CPU),m68k)
-    SAFETY_CFLAGS += $(CFLAGS_NO_IPA_CP)
-endif
-
-# if LTO is desired use these flags ...
-# NB: make.tmpl builds the objects individually
-#     so we don't include -fwhole-program for
-#     binaries by default.
-LTO_CFLAGS  = $(CFLAGS_LTO)
-LTO_BINARY_CFLAGS = $(LTO_CFLAGS)
-LTO_BINARYWHOLE_CFLAGS = $(LTO_BINARY_CFLAGS) $(CFLAGS_WHOLE_PROGRAM)
 
 # Apple iOS stuff for gcc
 IOS_LDFLAGS  := -F$(IOS_SDK_PATH)/System/Library/Frameworks

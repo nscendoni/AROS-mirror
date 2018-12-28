@@ -1,6 +1,6 @@
 /*
-    Copyright © 2015-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2015, The AROS Development Team. All rights reserved.
+    $Id: NextTaskEntry.c 51597 2016-03-03 18:35:26Z mazze $
 */
 
 #define DEBUG 0
@@ -13,7 +13,7 @@
 
 #include <resources/task.h>
 
-#include "task_intern.h"
+#include "taskres_intern.h"
 
 /*****************************************************************************
 
@@ -23,8 +23,8 @@
         AROS_LH2(struct Task *, NextTaskEntry,
 
 /*  SYNOPSIS */
-        AROS_LHA(struct TaskList *, tlist, A0),
-        AROS_LHA(ULONG           , flags, D0),
+        AROS_LHA(struct TaskList *, tlist, D1),
+        AROS_LHA(ULONG           , flags, D2),
 
 /*  LOCATION */
 	struct TaskResBase *, TaskResBase, 3, Task)
@@ -58,33 +58,41 @@
 
     struct TaskListPrivate *taskList = (struct TaskListPrivate *)tlist;
     struct Task *retVal = NULL;
-#ifdef TASKRES_ENABLE
-    ULONG matchFlags = taskList->tlp_Flags & ~LTF_WRITE;
-    ULONG matchState = 0;
-
-    if (flags)
-        matchFlags &= flags;
-#endif /* TASKRES_ENABLE */
 
     D(bug("[TaskRes] NextTaskEntry: tlist @ 0x%p, flags = $%lx\n", tlist, flags));
 
-#ifdef TASKRES_ENABLE
     if (taskList)
     {
-        if (matchFlags & LTF_RUNNING)
-            matchState |= TS_RUN;
-
-        if (matchFlags & LTF_READY)
-            matchState |= (TS_READY|TS_RUN);
-
-        if (matchFlags & LTF_WAITING)
-            matchState |= (TS_WAIT|TS_SPIN);
-
-        while ((taskList->tlp_Next) &&
-                   ((!taskList->tlp_Next->tle_Task) ||
-                    (!(taskList->tlp_Next->tle_Task->tc_State & matchState))))
+        if ((taskList->tlp_Flags & ~LTF_WRITE) != 0)
         {
-             taskList->tlp_Next = (struct TaskListEntry *)GetSucc(taskList->tlp_Next);
+            if (taskList->tlp_Flags & LTF_RUNNING)
+            {
+                while (taskList->tlp_Next &&
+                           ((!taskList->tlp_Next->tle_Task) ||
+                            (taskList->tlp_Next->tle_Task->tc_State != TS_RUN)))
+                {
+                     taskList->tlp_Next = (struct TaskListEntry *)GetSucc(taskList->tlp_Next);
+                }
+            }
+            else if (taskList->tlp_Flags & LTF_READY)
+            {
+                while (taskList->tlp_Next &&
+                           ((!taskList->tlp_Next->tle_Task) ||
+                            (taskList->tlp_Next->tle_Task->tc_State != TS_READY)))
+                {
+                     taskList->tlp_Next = (struct TaskListEntry *)GetSucc(taskList->tlp_Next);
+                }
+            }
+            else if (taskList->tlp_Flags & LTF_WAITING)
+            {
+                while (taskList->tlp_Next && 
+                          ((!taskList->tlp_Next->tle_Task) ||
+                          !((taskList->tlp_Next->tle_Task->tc_State == TS_WAIT) ||
+                            (taskList->tlp_Next->tle_Task->tc_State == TS_SPIN))))
+                {
+                     taskList->tlp_Next = (struct TaskListEntry *)GetSucc(taskList->tlp_Next);
+                }
+            }
         }
 
         if (taskList->tlp_Next)
@@ -93,47 +101,6 @@
             taskList->tlp_Next = (struct TaskListEntry *)GetSucc(taskList->tlp_Next);
         }
     }
-#else
-    if (taskList)
-    {
-        if (!taskList->tlp_TaskList)
-        {
-            if (flags & LTF_READY)
-                taskList->tlp_TaskList = &SysBase->TaskReady;
-            else if (flags & LTF_WAITING)
-                taskList->tlp_TaskList = &SysBase->TaskWait;
-
-            return FindTask(NULL);
-        }
-        else
-        {
-            if (!taskList->tlp_Current)
-            {
-                D(bug("[TaskRes] NextTaskEntry: returning first list entry...\n", tlist, flags));
-                if (((taskList->tlp_Current = (struct Task *)GetHead(taskList->tlp_TaskList)) == NULL) &&
-                    ((flags & LTF_WAITING) && (taskList->tlp_TaskList == &SysBase->TaskReady)))
-                {
-                    taskList->tlp_TaskList = &SysBase->TaskWait;
-                    taskList->tlp_Current = (struct Task *)GetHead(taskList->tlp_TaskList);
-                }
-            }
-
-            if (taskList->tlp_Current)
-            {
-                if ((retVal = (struct Task *)GetSucc(taskList->tlp_Current)) != NULL)
-                    taskList->tlp_Current = (struct Task *)retVal;
-                else if ((flags & LTF_WAITING) && (taskList->tlp_TaskList == &SysBase->TaskReady))
-                {
-                    taskList->tlp_TaskList = &SysBase->TaskWait;
-                    taskList->tlp_Current = (struct Task *)GetHead(taskList->tlp_TaskList);
-                }
-                else
-                    taskList->tlp_Current = NULL;
-            }
-        }
-        retVal = taskList->tlp_Current;
-    }        
-#endif /* TASKRES_ENABLE */
 
     return retVal;
 

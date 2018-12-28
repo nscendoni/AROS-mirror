@@ -30,7 +30,7 @@ the existing commercial status of Directory Opus 5.
 
 #include "config.h"
 
-int dofiletypeconfig()
+dofiletypeconfig()
 {
     ULONG class;
     UWORD code,gadgetid;
@@ -298,7 +298,7 @@ struct DOpusRemember **key;
     LFreeRemember(key);
     type=firsttype;
     for (count=0;type;count++,type=type->next);
-    if (!(list=LAllocRemember(key,(count+1)*sizeof(APTR),MEMF_CLEAR))) return(NULL);
+    if (!(list=LAllocRemember(key,(count+1)*4,MEMF_CLEAR))) return(NULL);
     type=firsttype;
     for (a=0;a<count;a++) {
         if (list[a]=LAllocRemember(key,60,MEMF_CLEAR)) {
@@ -319,7 +319,7 @@ char **list;
     RefreshListView(&filetypeactionlist,1);
 }
 
-int doinitfiletypetext(id)
+doinitfiletypetext(id)
 int id;
 {
     int mode=-1;
@@ -352,7 +352,7 @@ struct dopusfiletype *type;
     doscreentitle(title);
 }
 
-int editfiletype(type,key,new)
+editfiletype(type,key,new)
 struct dopusfiletype *type;
 struct DOpusRemember **key;
 int new;
@@ -392,7 +392,7 @@ int new;
     return(b);
 }
 
-int editclass(class,new)
+editclass(class,new)
 struct fileclass *class;
 int new;
 {
@@ -478,10 +478,9 @@ void readfileclasses()
     FreeMem(classbuf,size);
 }
 
-int importfileclasses()
+importfileclasses()
 {
-    BPTR in;
-    int size,pos,lsize,num,a,b,tpos,ret=0;
+    int in,size,pos,lsize,num,a,b,tpos,ret=0;
     char *classbuf,**classlist,*classarray,**classtypeid,**classrecog,buf[256],buf2[256];
     struct DOpusRemember *key;
 
@@ -513,9 +512,9 @@ int importfileclasses()
     for (a=0,num=0;a<size;a++) if (!classbuf[a]) ++num;
     num/=2;
 
-    if ((classlist=LAllocRemember(&key,(num+1)*sizeof(APTR),MEMF_CLEAR)) &&
-        (classtypeid=LAllocRemember(&key,(num+1)*sizeof(APTR),MEMF_CLEAR)) &&
-        (classrecog=LAllocRemember(&key,(num+1)*sizeof(APTR),MEMF_CLEAR)) &&
+    if ((classlist=LAllocRemember(&key,(num+1)*4,MEMF_CLEAR)) &&
+        (classtypeid=LAllocRemember(&key,(num+1)*4,MEMF_CLEAR)) &&
+        (classrecog=LAllocRemember(&key,(num+1)*4,MEMF_CLEAR)) &&
         (classarray=LAllocRemember(&key,num+1,MEMF_CLEAR))) {
         pos=0; a=0;
         FOREVER {
@@ -552,7 +551,7 @@ int importfileclasses()
     return(ret);
 }
 
-int savefileclasses()
+savefileclasses()
 {
     struct fileclass *fclass;
     BPTR out;
@@ -569,18 +568,15 @@ D(bug("classname: %s\n",classname));
     fclass=firstclass;
     while (fclass) {
         if (fclass->type[0]) {
-            a=strlen(fclass->type);
-            if (Write(out,fclass->type,a)<a) break;
+            if ((Write(out,fclass->type,(a=strlen(fclass->type))))<a) break;
             if (fclass->typeid[0]) {
                 Write(out,&g,1);
-                a=strlen(fclass->typeid);
-                if (Write(out,fclass->typeid,a)<a) break;
+                if ((Write(out,fclass->typeid,(a=strlen(fclass->typeid))))<a) break;
             }
         }
         Write(out,&f,1);
         if (fclass->recognition) {
-            a=strlen(fclass->recognition)+1;
-            if (Write(out,fclass->recognition,a)<a)
+            if ((Write(out,fclass->recognition,(a=(strlen(fclass->recognition)+1))))<a)
                 break;
         }
         else Write(out,&f,1);
@@ -590,7 +586,7 @@ D(bug("classname: %s\n",classname));
     return(1);
 }
 
-int addfileclass(type,typeid,recog)
+addfileclass(type,typeid,recog)
 char *type,*typeid,*recog;
 {
     struct fileclass *fclass,*newclass,*last;
@@ -658,7 +654,7 @@ struct DOpusRemember **key;
     if (!firstclass) return(NULL);
     fclass=firstclass;
     for (count=0;fclass;count++,fclass=fclass->next);
-    if (!(list=LAllocRemember(key,(count+1)*sizeof(APTR),MEMF_CLEAR))) return(NULL);
+    if (!(list=LAllocRemember(key,(count+1)*4,MEMF_CLEAR))) return(NULL);
     fclass=firstclass;
     for (a=0;a<count;a++) {
         if (list[a]=LAllocRemember(key,40,MEMF_CLEAR)) strcpy(list[a],fclass->type);
@@ -667,7 +663,7 @@ struct DOpusRemember **key;
     return(list);
 }
 
-int readline(buf,pos,buf1,size)
+readline(buf,pos,buf1,size)
 char *buf;
 int pos;
 char *buf1;
@@ -688,7 +684,7 @@ int size;
     return(pos);
 }
 
-int editfileclass(fclass,new)
+editfileclass(fclass,new)
 struct fileclass *fclass;
 int new;
 {
@@ -853,8 +849,7 @@ int new;
                             class=0;
                             while (IMsg=getintuimsg()) {
                                 if (IMsg->Class==IDCMP_MOUSEMOVE || IMsg->Class==IDCMP_MOUSEBUTTONS)
-                                    class=IMsg->Class;
-                                code=IMsg->Code;
+                                    class=IMsg->Class; code=IMsg->Code;
                                 ReplyMsg((struct Message *)IMsg);
                                 if (class==IDCMP_MOUSEBUTTONS && code==SELECTUP) break;
                             }
@@ -1167,7 +1162,7 @@ char **classlist,*classtype;
 int entry;
 {
     if (entry<MAXFUNCS-1) {
-        CopyMem(&classlist[entry+1],&classlist[entry],(MAXFUNCS-1-entry)*sizeof(APTR));
+        CopyMem(&classlist[entry+1],&classlist[entry],(MAXFUNCS-1-entry)*4);
         CopyMem(&classtype[entry+1],&classtype[entry],(MAXFUNCS-1-entry));
     }
     classlist[MAXFUNCS-1]=NULL;
@@ -1183,8 +1178,8 @@ int type;
     int a;
 
     a=MAXFUNCS-entry-1;
-    CopyMem(&classlist[entry],templist,a*sizeof(APTR));
-    CopyMem(templist,&classlist[entry+1],a*sizeof(APTR));
+    CopyMem(&classlist[entry],templist,a*4);
+    CopyMem(templist,&classlist[entry+1],a*4);
     classlist[entry]=getcopy(string,-1,NULL);
     CopyMem(&classtype[entry],temptype,a);
     CopyMem(temptype,&classtype[entry+1],a);
@@ -1417,7 +1412,7 @@ void show_file_view(void)
             if (fileview_lines<=line+fileview_topline) file_view_text(NULL,line);
             else {
                 off=(fileview_topline+line)*16;
-                lsprintf(buf,"%08lx: ",(long unsigned int)off);
+                lsprintf(buf,"%08lx: ",off);
                 old=off; ox=px=-1;
                 for (a=0;a<4;a++) {
 /*                    lsprintf(buf2,"%02lx%02lx%02lx%02lx ",
@@ -1453,7 +1448,7 @@ void show_file_view(void)
                 }
                 if (ox>-1) {
                     SetAPen(rp,screen_pens[2].pen);
-                    lsprintf(buf2,"%02lx",(long unsigned int)fileview_buf[fileview_offset]);
+                    lsprintf(buf2,"%02lx",fileview_buf[fileview_offset]);
                     Move(rp,x_off+9+(10+ox)*char_w,y_off+27+(line*8));
                     Text(rp,buf2,2);
                     buf2[0]=(isprint(fileview_buf[fileview_offset])?fileview_buf[fileview_offset]:'.');
@@ -1482,8 +1477,8 @@ int num,pos;
     }
     else {
         y=y_off+39+(26*pos);
-        if (fileview_type==0) lsprintf(buf,"$%08lx",(long unsigned int)num);
-        else lsprintf(buf,"%09ld",(long int)num);
+        if (fileview_type==0) lsprintf(buf,"$%08lx",num);
+        else lsprintf(buf,"%09ld",num);
         UScoreText(rp,buf,x_off+543,y,-1);
     }
 }

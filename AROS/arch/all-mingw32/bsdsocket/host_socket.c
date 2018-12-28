@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: host_socket.c 49667 2014-09-30 17:35:27Z neil $
 */
 
 #include <aros/irq.h>
@@ -33,7 +33,7 @@ static DWORD WINAPI ResolverThread(struct SocketController *ctl)
 
 	}
 	ctl->Command = 0;
-	KrnCauseSystemIRQ(ctl->ResolverIRQ);
+	KrnCauseIRQ(ctl->ResolverIRQ);
     }
 }
 
@@ -50,12 +50,12 @@ struct SocketController * __declspec(dllexport) __aros sock_init(void)
     if (state)
 	return NULL;
 
-    irq = KrnAllocSystemIRQ();
+    irq = KrnAllocIRQ();
     if (irq != -1)
     {
 	ctl.SocketIRQ = irq;
 
-	irq = KrnAllocSystemIRQ();
+	irq = KrnAllocIRQ();
 	if (irq != -1)
 	{
 	    ctl.ResolverIRQ = irq;
@@ -70,13 +70,13 @@ struct SocketController * __declspec(dllexport) __aros sock_init(void)
 		{
 		    CloseHandle(thread);
 
-		    ctl.SocketEvent = KrnGetSystemIRQObject(ctl.SocketIRQ);
+		    ctl.SocketEvent = KrnGetIRQObject(ctl.SocketIRQ);
 		    return &ctl;
 		}
 		CloseHandle(ctl.ResolverEvent);
 	    }
 	}
-	KrnFreeSystemIRQ(ctl.SocketIRQ);
+	KrnFreeIRQ(ctl.SocketIRQ);
     }
 
     return NULL;
@@ -92,8 +92,8 @@ int __declspec(dllexport) __aros sock_shutdown(struct SocketController *ctl)
     ctl->Command = SOCK_CMD_SHUTDOWN;
     SetEvent(ctl->ResolverEvent);
 
-    KrnFreeSystemIRQ(ctl->ResolverIRQ);
-    KrnFreeSystemIRQ(ctl->SocketIRQ);
+    KrnFreeIRQ(ctl->ResolverIRQ);
+    KrnFreeIRQ(ctl->SocketIRQ);
 
     return 0;
 }

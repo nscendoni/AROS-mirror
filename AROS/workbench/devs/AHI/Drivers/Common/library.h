@@ -17,17 +17,17 @@ ReqA( const char*        text,
       struct DriverBase* AHIsubBase );
 
 #define Req(a0, args...) \
-        ({IPTR _args[] = { args }; ReqA((a0), (APTR)_args, AHIsubBase);})
+        ({ULONG _args[] = { args }; ReqA((a0), (APTR)_args, AHIsubBase);})
 
 void
 MyKPrintFArgs( UBYTE*           fmt, 
-	       IPTR*           args,
+	       ULONG*           args,
 	       struct DriverBase* AHIsubBase );
 
 #if !defined(__AMIGAOS4__)
 #define KPrintF( fmt, ... )        \
 ({                                 \
-  IPTR _args[] = { __VA_ARGS__ }; \
+  ULONG _args[] = { __VA_ARGS__ }; \
   MyKPrintFArgs( (fmt), _args, AHIsubBase ); \
 })
 #else
@@ -90,6 +90,23 @@ MyKPrintFArgs( UBYTE*           fmt,
         "\t.set " #n "," #f     \
     );
 # define INTERRUPT_NODE_TYPE NT_INTERRUPT
+
+/* ABI_V0 compatibility */
+# define SOFTINTGW_void(q,n,f)                          \
+    q AROS_SOFTINTH1(n, void *, d) { \
+        AROS_INTFUNC_INIT \
+        f(d); \
+        return FALSE; \
+        AROS_INTFUNC_EXIT \
+    }
+# define SOFTINTGW_ULONG(q,n,f)                         \
+    q AROS_SOFTINTH1(n, void *, d) { \
+        AROS_INTFUNC_INIT \
+        return f(d); \
+        AROS_INTFUNC_EXIT \
+    }
+# define SOFTINTGW(q,t,n,f) \
+    SOFTINTGW_##t(q,n,f)
 
 #elif defined(__AMIGAOS4__)
 

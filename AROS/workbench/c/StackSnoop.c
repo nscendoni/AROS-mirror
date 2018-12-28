@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: StackSnoop.c 52365 2016-03-29 14:59:53Z jmcmullan $
  
     Desc: 
     Lang: English              

@@ -1,6 +1,6 @@
 /*
-    Copyright © 2011-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2011, The AROS Development Team. All rights reserved.
+    $Id: cpu_traps.c 46172 2012-12-30 09:09:42Z neil $
 
     Desc: Common trap handling routines for x86 CPU
     Lang: English
@@ -25,7 +25,7 @@ static void PrintContext(struct ExceptionContext *regs, unsigned long error_code
 {
     int i;
     unsigned long *ptr;
-    struct Task *t = GET_THIS_TASK;
+    struct Task *t = SysBase->ThisTask;
 
     if (t)
     {
@@ -55,8 +55,7 @@ static void PrintContext(struct ExceptionContext *regs, unsigned long error_code
  * This table is used to translate x86 trap number
  * to AmigaOS trap number to be passed to exec exception handler.
  */
-#define AMIGATRAP_COUNT 19
-static const char AmigaTraps[AMIGATRAP_COUNT] =
+static const char AmigaTraps[] =
 {
      5,  9, -1,  4, 11, 2,
      4,  0,  8, 11,  3, 3,
@@ -71,10 +70,10 @@ void cpu_Trap(struct ExceptionContext *regs, unsigned long error_code, unsigned 
     if (krnRunExceptionHandlers(KernelBase, irq_number, regs))
 	return;
 
-    if ((irq_number < AMIGATRAP_COUNT) && (AmigaTraps[irq_number] != -1))
-    {
-        D(bug("[Kernel] Passing on to exec, Amiga trap %d\n", AmigaTraps[irq_number]));
+    D(bug("[Kernel] Passing on to exec, Amiga trap %d\n", AmigaTraps[irq_number]));
 
+    if (AmigaTraps[irq_number] != -1)
+    {
 	if (core_Trap(AmigaTraps[irq_number], regs))
 	{
 	    /* If the trap handler returned, we can continue */

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rexxsyslib_init.c 45533 2012-08-13 01:42:18Z jmcmullan $
 
     Desc: RexxSys initialization code.
     Lang: English

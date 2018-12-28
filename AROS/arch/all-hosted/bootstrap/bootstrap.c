@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bootstrap.c 52687 2016-04-21 20:08:02Z mazze $
 */
 
 #include <ctype.h>

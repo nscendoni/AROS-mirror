@@ -3,7 +3,7 @@
 
 /*
     Copyright  1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: menudecorclass.h 51660 2016-03-09 13:49:57Z NicJA $
 
     Desc: Headerfile for Intuition's MENUDECORCLASS
     Lang: english

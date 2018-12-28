@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ChangeTaskPri.c 40680 2011-08-11 17:49:45Z jmcmullan $
 
     Desc: Change the priority of a task.
     Lang: english

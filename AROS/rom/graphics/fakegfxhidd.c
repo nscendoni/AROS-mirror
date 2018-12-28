@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: fakegfxhidd.c 51047 2015-08-30 20:07:38Z NicJA $
 */
 
 #include <string.h>
@@ -9,7 +9,7 @@
 #include <proto/oop.h>
 #include <proto/utility.h>
 #include <oop/oop.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <aros/atomic.h>
 #include <proto/arossupport.h>
 

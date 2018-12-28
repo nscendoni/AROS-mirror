@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2010-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: stdcio.h 48044 2013-09-08 21:18:52Z verhaegs $
 
     Public part of StdCIO libbase.
     Take care of backwards compatibility when changing something in this file.

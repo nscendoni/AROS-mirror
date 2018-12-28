@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lundump.h 47953 2013-09-02 05:00:46Z mazze $
 ** load precompiled Lua chunks
 ** See Copyright Notice in lua.h
 */

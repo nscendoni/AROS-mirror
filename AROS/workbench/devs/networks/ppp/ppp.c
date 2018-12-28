@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: ppp.c 37661 2011-03-19 17:12:40Z Sami $
  */
 
 #include "ppp.h"

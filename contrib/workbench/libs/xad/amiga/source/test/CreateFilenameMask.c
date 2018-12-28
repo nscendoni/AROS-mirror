@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-/*  $Id$
+/*  $Id: CreateFilenameMask.c 50043 2015-02-06 22:51:30Z NicJA $
     test program to test protection bit handling
 
     XAD library system for archive handling

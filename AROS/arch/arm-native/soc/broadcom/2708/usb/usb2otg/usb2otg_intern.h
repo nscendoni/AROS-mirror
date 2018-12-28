@@ -2,7 +2,7 @@
 #define USB2OTG_INTERN_H
 /*
     Copyright © 2013-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: usb2otg_intern.h 50277 2015-04-01 01:16:56Z NicJA $
 */
 
 #include LC_LIBDEFS_FILE

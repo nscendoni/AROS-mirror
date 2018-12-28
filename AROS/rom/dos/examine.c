@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: examine.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: dos.library function Examine().
     Lang: English
@@ -59,7 +59,10 @@
     LONG ret;
 
     ASSERT_VALID_PTR_OR_NULL(BADDR(lock));
-    ASSERT_VALID_FILELOCK(lock);
+    /* ABI_V0 compatibility */
+    /* Up to 2010-12-03 ExamineFH was an alias/define to Examine */
+    if (ABIV0_IS_FL_A_FH(fl))
+        return ExamineFH(lock, fib);
 
     D(bug("[Examine] lock=%x fib=%x\n", fl, fib));
     ret = dopacket2(DOSBase, NULL, fl ? fl->fl_Task : GetFileSysTask(), ACTION_EXAMINE_OBJECT, lock, MKBADDR(fib));

@@ -7,7 +7,7 @@
  * This program is free software; you can redistribute it and/or modify it
  * under the same terms as AROS itself.
  *
- * $Id$
+ * $Id: lock.c 51797 2016-03-10 19:49:26Z NicJA $
  */
 
 #define AROS_ALMOST_COMPATIBLE

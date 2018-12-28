@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prefs.c 41947 2011-10-20 10:22:27Z sonic $
 */
 
 #include <dos/dos.h>

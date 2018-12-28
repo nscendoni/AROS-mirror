@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setlocale.c 48031 2013-09-08 21:16:04Z verhaegs $
 
     C99 function localeconv().
 */

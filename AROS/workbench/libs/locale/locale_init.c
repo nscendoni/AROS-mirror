@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: locale_init.c 49668 2014-10-01 18:36:48Z deadwood $
 
     Desc: Initialisation for the locale.library.
     Lang: english

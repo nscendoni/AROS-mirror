@@ -6,7 +6,7 @@
     Copyright © 2002-2015, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: window.h 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 /*** Name *******************************************************************/
@@ -420,19 +420,39 @@ struct MUI_RenderInfo
  MUI_EventHandlerNode as used by
  MUIM_Window_AddEventHandler/RemoveEventHandler
 **************************************************************************/
-
+/* ABI_V0 compatibility */
+#ifdef __AROS__
+#if defined(__i386__)
+/* AROS Nodes are not necessarily binary compatible with AOS ones, so
+ * the (MUI_EventHandlerNode *) -> (Node *) cast hack doesnt work.
+ */
 struct MUI_EventHandlerNode
 {
-    struct MinNode ehn_Node;    /* embedded node structure, private! */
-    BYTE ehn_Reserved;          /* private! */
-    BYTE ehn_Priority;          /* sorted by priority. */
-    UWORD ehn_Flags;            /* some flags, see below */
-    Object *ehn_Object;     /* object which should receive MUIM_HandleEvent. */
-    struct IClass *ehn_Class;   /* Class for CoerceMethod(). If NULL,
-                                 * DoMethod() is used */
-    ULONG ehn_Events;           /* the IDCMP flags the handler should be
-                                 * invoked with */
+    struct Node    ehn_Node;     /* embedded node structure, private! */
+    UWORD          ehn_Flags;    /* some flags, see below */
+    Object        *ehn_Object;   /* object which should receive MUIM_HandleEvent. */
+    struct IClass *ehn_Class;    /* Class for CoerceMethod(). If NULL DoMethod() is used */
+    ULONG          ehn_Events;   /* the IDCMP flags the handler should be invoked. */
+    BYTE           ehn_Priority; /* sorted by priority. */
 };
+#define MUI_EVENTHANDLERNODE_DEFINED
+#endif
+#endif
+
+#ifndef MUI_EVENTHANDLERNODE_DEFINED
+struct MUI_EventHandlerNode
+{
+    struct MinNode ehn_Node;     /* embedded node structure, private! */
+    BYTE           ehn_Reserved; /* private! */
+    BYTE           ehn_Priority; /* sorted by priority. */
+    UWORD          ehn_Flags;    /* some flags, see below */
+    Object        *ehn_Object;   /* object which should receive MUIM_HandleEvent. */
+    struct IClass *ehn_Class;    /* Class for CoerceMethod(). If NULL DoMethod() is used */
+    ULONG          ehn_Events;   /* the IDCMP flags the handler should be invoked. */
+};
+#endif
+
+#undef MUI_EVENTHANDLERNODE_DEFINED
 
 /* here are the flags for ehn_Flags */
 #define MUI_EHF_ALWAYSKEYS  (1<<0)

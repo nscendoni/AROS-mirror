@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: locale.h 49673 2014-10-01 18:37:08Z deadwood $
 
     Desc: Definitions for locale.library
     Lang: english

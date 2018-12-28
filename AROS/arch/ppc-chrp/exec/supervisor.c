@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: supervisor.c 47740 2013-07-20 11:30:00Z mazze $
 
     Desc: Supervisor() - Execute some code in a privileged environment.
     Lang: english

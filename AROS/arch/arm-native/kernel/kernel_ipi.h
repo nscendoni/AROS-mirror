@@ -2,7 +2,7 @@
 #define KERNEL_IPI_H_
 /*
     Copyright © 2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kernel_ipi.h 50720 2015-05-19 23:23:22Z neil $
 */
 
 /*

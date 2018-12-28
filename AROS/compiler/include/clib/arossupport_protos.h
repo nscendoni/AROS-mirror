@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: arossupport_protos.h 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Prototypes for aros.lib
     Lang: english
@@ -85,12 +85,6 @@ BOOL WriteDouble (struct Hook *, DOUBLE data, void * stream);
 BOOL WriteString (struct Hook *, STRPTR data, void * stream);
 BOOL WriteStruct (struct Hook *, APTR   data, void * stream, const IPTR * desc);
 void FreeStruct  (APTR s,  const IPTR * desc);
-
-/* RastPort manipulations */
-struct RastPort *CreateRastPort(void);
-struct RastPort *CloneRastPort(struct RastPort *rp);
-void DeinitRastPort(struct RastPort *rp);
-void FreeRastPort(struct RastPort *rp);
 
 __END_DECLS
 

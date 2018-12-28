@@ -2,7 +2,7 @@
 #define _NET_IF_HDLC_H_ 1
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: if_sppp.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$NetBSD: if_sppp.h,v 1.2.2.1 1999/04/04 06:57:39 explorer Exp $	*/

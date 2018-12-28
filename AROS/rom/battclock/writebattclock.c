@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: writebattclock.c 35468 2010-11-14 10:23:20Z mazze $
 
     Desc: WriteBattClock()
     Lang: english

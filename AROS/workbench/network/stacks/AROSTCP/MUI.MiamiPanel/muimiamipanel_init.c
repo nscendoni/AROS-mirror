@@ -2,7 +2,7 @@
     Copyright © 2002-2008, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: muimiamipanel_init.c 36648 2011-01-17 14:31:59Z neil $
 */
 
 #include <exec/types.h>

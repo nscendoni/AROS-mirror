@@ -3,7 +3,7 @@
 #define REVISION     "6"
 #define DATE	     "07.08.2002"
 
-/*  $Id$
+/*  $Id: xadLibInfo.c 39553 2011-06-27 03:24:44Z NicJA $
     xadLibInfo - show informations about xad Clients
 
     XAD library system for archive handling

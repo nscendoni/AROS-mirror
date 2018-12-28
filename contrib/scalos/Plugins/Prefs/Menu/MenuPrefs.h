@@ -1,6 +1,6 @@
 // MenuPrefs.h
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 08:13:31 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51972 $
 
 
 #ifndef SCALOS_MENUPREFS_H

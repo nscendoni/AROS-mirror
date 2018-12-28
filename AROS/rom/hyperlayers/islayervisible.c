@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: islayervisible.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc:
     Lang: english
@@ -24,7 +24,7 @@
 	AROS_LHA(struct Layer *, l      , A0),
 
 /*  LOCATION */
-	struct LayersBase *, LayersBase, 43, Layers)
+	struct LayersBase *, LayersBase, 40, Layers)
 
 /*  FUNCTION
        Checks whether the layer is visible or not.

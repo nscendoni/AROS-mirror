@@ -147,28 +147,40 @@ void openlibs(void)
 
 /***********************************************************************************/
 
-static void getvisual(void)
+void getvisual(void)
 {
-    if (forcescreen)
-		wbscreen = FALSE;
-
+    if (!(scr = LockPubScreen(NULL)))
+    {
+        cleanup("Can't lock pub screen!");
+    }
+    
+    if (GetBitMapAttr(scr->RastPort.BitMap, BMA_DEPTH) <= 8)
+    {
+    	if (!forcewindow)
+	{
+	    wbscreen = FALSE;
+	}
+	else
+	{
+	    mustremap = TRUE;
+	}
+    }
+    
+    if (forcescreen) wbscreen = FALSE;
+    
     if (!wbscreen)
     {
+    	UnlockPubScreen(NULL, scr);
+        wbscreen = FALSE;
+	
         scr = OpenScreenTags(NULL, SA_Width	, screenwidth	,
 				   SA_Height	, screenheight	,
 				   SA_Depth	, 8	    	,
 				   TAG_DONE);
-    	if (!scr) cleanup("Failed to open specified screen!");
-    }
-	else if (!(scr = LockPubScreen(NULL)))
-    {
-        cleanup("Failed to lock pub screen (workbench)!");
+    	if (!scr) cleanup("Can't open screen!");
     }
     
     truecolor = (GetBitMapAttr(scr->RastPort.BitMap, BMA_DEPTH) >= 15) ? TRUE : FALSE;
-
-	if ((!truecolor) && (wbscreen))
-		mustremap = TRUE;
 }
 
 /***********************************************************************************/

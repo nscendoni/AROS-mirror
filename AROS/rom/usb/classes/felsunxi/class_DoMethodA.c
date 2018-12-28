@@ -1,6 +1,6 @@
 /*
     Copyright © 2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: class_DoMethodA.c 50599 2015-05-03 13:40:45Z dizzyofcrn $
 
     Desc:
     Lang: English

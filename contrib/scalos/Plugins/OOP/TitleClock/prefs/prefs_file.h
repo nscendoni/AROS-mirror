@@ -1,8 +1,8 @@
 /*
  *  prefs_file.h
  *
- * $Date$
- * $Revision$
+ * $Date: 2013-12-01 23:08:26 +0100 (Sun, 01 Dec 2013) $
+ * $Revision: 48481 $
  *
  *  20010716 DM Created. Will be used by prefs and plugin programs.
  *              Headers for functions to read and write prefs files.

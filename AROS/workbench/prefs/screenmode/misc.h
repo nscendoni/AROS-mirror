@@ -1,6 +1,6 @@
 /*
     Copyright © 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: misc.h 32511 2010-01-30 22:30:26Z mazze $
 */
 
 #ifndef _MISC_H

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: doresetcallbacks.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Execute installed reset handlers.
     Lang: english
@@ -34,6 +34,7 @@ void Exec_DoResetCallbacks(struct IntExecBase *IntSysBase, UBYTE action)
         D(bug("[DoResetCallbacks] Calling handler: '%s'\n",
             i->is_Node.ln_Name));
         i->is_Node.ln_Type = action;
-        AROS_INTC1(i->is_Code, i->is_Data);
+        /* ABI_V0 compatibility */
+        AROS_SOFTINTC1(i->is_Code, i->is_Data);
     }
 }

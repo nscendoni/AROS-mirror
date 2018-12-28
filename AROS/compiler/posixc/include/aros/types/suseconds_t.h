@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2010-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: suseconds_t.h 48027 2013-09-08 21:13:16Z verhaegs $
 
     suseconds_t type definition
 */

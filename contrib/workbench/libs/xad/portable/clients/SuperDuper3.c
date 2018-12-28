@@ -1,7 +1,7 @@
 #ifndef XADMASTER_SUPERDUPER3_C
 #define XADMASTER_SUPERDUPER3_C
 
-/*  $Id$
+/*  $Id: SuperDuper3.c 36659 2011-01-18 13:26:51Z neil $
     SuperDuper3 disk image client
 
     XAD library system for archive handling

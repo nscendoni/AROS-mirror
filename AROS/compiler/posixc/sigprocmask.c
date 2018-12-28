@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: sigprocmask.c 48053 2013-09-08 21:20:12Z verhaegs $
 
     POSIX.1-2008 function sigprocmask().
 */
@@ -22,8 +22,6 @@
 	sigset_t *oldset)
 
 /*  FUNCTION
-        Allow the caller to examine or change (or both) the 
-        signal mask of the calling thread. 
 
     INPUTS
 

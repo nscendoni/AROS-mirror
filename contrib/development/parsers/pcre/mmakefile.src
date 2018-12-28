@@ -1,20 +1,11 @@
-# Copyright © 2003-2017, The AROS Development Team. All rights reserved.
-# $Id$
+# Copyright © 2003, The AROS Development Team. All rights reserved.
+# $Id: mmakefile.src 52541 2016-04-06 19:18:10Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- contrib-development : contrib-development-parsers-pcre
-#MM- contrib-development-parsers-pcre : linklibs-startup linklibs-amiga linklibs-arossupport linklibs-clib
+#MM- linklibs : contrib-development-parsers-pcre
+#MM contrib-development-parsers-pcre : linklibs-startup linklibs-amiga linklibs-arossupport linklibs-clib
 
-PACKAGE      := pcre
-VERSION      := 8.41
-TARGETDIR    := $(AROS_DEVELOPER)
-REPOSITORIES := https://ftp.pcre.org/pub/pcre/
-
-#USER_INCLUDES:= -I$(AROS_CONTRIB_INCLUDES)
-#USER_LDFLAGS := -L$(AROS_CONTRIB_LIB)
-
-%fetch_and_build mmake=contrib-development-parsers-pcre prefix=$(TARGETDIR) \
-	package=$(PACKAGE) version=$(VERSION) suffixes="tar.gz" \
-	patch=no package_repo=$(REPOSITORIES) nix=yes \
-	extraoptions="--disable-stack-for-recursion --disable-jit --disable-cpp --libdir=$(AROS_LIB)"
+%build_with_configure mmake=contrib-development-parsers-pcre prefix=$(AROS_DEVELOPMENT) nix=yes \
+    extraoptions="--disable-stack-for-recursion --without-pic --disable-shared --libdir=$(AROS_LIB)"

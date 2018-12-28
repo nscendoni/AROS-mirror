@@ -1,5 +1,5 @@
 /*      @(#)stab.h 1.11 92/05/11 SMI      */
-/* $Id$ */
+/* $Id: stab.h 30794 2009-03-08 02:19:07Z neil $ */
 /*
  * Copyright (c) 1990 by Sun Microsystems, Inc.
  */

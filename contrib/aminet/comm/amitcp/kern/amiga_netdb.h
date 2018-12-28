@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: amiga_netdb.h 30794 2009-03-08 02:19:07Z neil $
  *
  * kern/amiga_netdb.h --- local NetDB functions
  *

@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: openrootpartition.c 47654 2013-07-12 01:02:05Z neil $
 
 */
 
@@ -14,24 +14,24 @@
 /*****************************************************************************
 
     NAME */
-        AROS_LH2(struct PartitionHandle *, OpenRootPartition,
+   AROS_LH2(struct PartitionHandle *, OpenRootPartition,
 
 /*  SYNOPSIS */
-        AROS_LHA(CONST_STRPTR, Device, A1),
-        AROS_LHA(LONG,     Unit, D1),
+   AROS_LHA(CONST_STRPTR, Device, A1),
+   AROS_LHA(LONG,     Unit, D1),
 
 /*  LOCATION */
-        struct Library *, PartitionBase, 5, Partition)
+   struct Library *, PartitionBase, 5, Partition)
 
 /*  FUNCTION
-        Create a root handle by opening a trackdisk-compatible device.
+    Create a root handle by opening a trackdisk-compatible device.
 
     INPUTS
-        Device - name of the block device
-        Unit - unit of the block device
+    Device - name of the block device
+    Unit - unit of the block device
 
     RESULT
-        Handle to the device
+    handle to the device
 
     NOTES
 

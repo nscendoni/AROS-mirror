@@ -1,6 +1,6 @@
 /*
     Copyright � 2003-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freevecpooled.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <aros/libcall.h>
@@ -20,7 +20,7 @@
         AROS_LHA(APTR, memory, A1),
 
 /* LOCATION */
-        struct ExecBase *, SysBase, 170, Exec)
+        struct ExecBase *, SysBase, 150, Exec)
 
 /*  FUNCTION
         Free memory that was allocated out of a private memory pool by

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: abortpkt.c 49109 2014-07-13 00:01:31Z vidarh $
 
     Desc: Cancel an asynchronous packet.
     Lang: English

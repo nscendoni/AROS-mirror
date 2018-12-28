@@ -1,7 +1,7 @@
 #ifndef XADMASTER_LIBINIT_C
 #define XADMASTER_LIBINIT_C
 
-/*  $Id$
+/*  $Id: libinit.c 36659 2011-01-18 13:26:51Z neil $
     all the library initialization stuff
 
     XAD library system for archive handling

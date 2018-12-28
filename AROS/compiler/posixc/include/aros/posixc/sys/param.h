@@ -2,7 +2,7 @@
 #define _POSIXC_SYS_PARAM_H_
 /*
     Copyright © 1995-2002, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: param.h 48028 2013-09-08 21:13:29Z verhaegs $
 
     sys/param.h header file.
 

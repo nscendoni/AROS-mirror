@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: gethostnamadr.c 30794 2009-03-08 02:19:07Z neil $
  *
  * Last modified: Sat Feb 26 20:10:41 1994 jraja
  *

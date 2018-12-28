@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: strtodate.c 47441 2013-05-21 11:37:03Z NicJA $
 
     Desc: Converts a string into a date
     Lang: english

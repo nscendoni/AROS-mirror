@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: configboard.c 49097 2014-07-02 08:39:58Z twilen $
 
     Desc:
     Lang: english

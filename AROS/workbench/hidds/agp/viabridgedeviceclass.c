@@ -1,6 +1,6 @@
 /*
     Copyright 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: viabridgedeviceclass.c 40104 2011-07-14 12:11:34Z jmcmullan $
 */
 
 #include <hidd/agp.h>

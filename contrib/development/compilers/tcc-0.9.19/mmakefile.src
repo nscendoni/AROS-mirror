@@ -1,9 +1,9 @@
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES  := tcc
 
-EXEDIR := $(AROS_CONTRIB)/$(AROS_DIR_DEVELOPER)/TCC-0.9.19
+EXEDIR := $(AROS_CONTRIB)/Development/TCC-0.9.19
 
 USER_CFLAGS  := -Wall -DCONFIG_TCC_STATIC -DCONFIG_TCC_ALWAYS_RELOCATABLE
 USER_LDFLAGS := -ltcc1

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readpixel.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Graphics function ReadPixel()
     Lang: english
@@ -32,8 +32,8 @@ static LONG pix_read_lut8(APTR prlr_data, OOP_Object *bm, OOP_Object *gc,
 
 /*  SYNOPSIS */
 	AROS_LHA(struct RastPort *, rp, A1),
-	AROS_LHA(WORD             , x, D0),
-	AROS_LHA(WORD             , y, D1),
+	AROS_LHA(LONG             , x, D0),
+	AROS_LHA(LONG             , y, D1),
 
 /*  LOCATION */
 	struct GfxBase *, GfxBase, 53, Graphics)

@@ -1,5 +1,5 @@
 #   Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-#   $Id$
+#   $Id: Makefile 45346 2012-07-28 13:06:08Z mazze $
 #
 #   Desc: Makefile for ilbmtoc
 #

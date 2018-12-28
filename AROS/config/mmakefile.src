@@ -1,5 +1,5 @@
-# $Id$
-include $(SRCDIR)/config/aros.cfg
+# $Id: mmakefile.src 49684 2014-10-02 22:19:37Z neil $
+include $(TOP)/config/make.cfg
 
 #MM
 clean ::

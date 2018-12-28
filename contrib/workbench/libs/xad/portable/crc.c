@@ -1,7 +1,7 @@
 #ifndef XADMASTER_CRC_C
 #define XADMASTER_CRC_C
 
-/*  $Id$
+/*  $Id: crc.c 36659 2011-01-18 13:26:51Z neil $
     Information handling functions
 
     XAD library system for archive handling

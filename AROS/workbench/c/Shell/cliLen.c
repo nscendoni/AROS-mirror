@@ -1,6 +1,6 @@
 /*
     Copyright (C) 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cliLen.c 38778 2011-05-21 05:17:33Z mazze $
  */
 
 #include "Shell.h"

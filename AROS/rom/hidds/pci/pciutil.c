@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pciutil.c 49521 2014-08-24 10:48:56Z DizzyOfCRN $
 
     Desc: PCI utility functions
     Lang: english

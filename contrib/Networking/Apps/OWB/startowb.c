@@ -1,6 +1,6 @@
 /*
     Copyright © 2009-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: startowb.c 49887 2015-01-02 14:32:06Z deadwood $
 */
 
 #include <exec/types.h>

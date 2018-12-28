@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: diskobj35io.c 48123 2013-09-25 02:08:10Z neil $
 */
 
 /****************************************************************************************/
@@ -401,14 +401,14 @@ fail:
 BOOL ReadIcon35(struct NativeIcon *icon, struct Hook *streamhook,
     	    	void *stream, struct IconBase *IconBase)
 {
-    static const LONG stopchunks[] =
+    static const LONG const stopchunks[] =
     {
-        ID_ICON, ID_FACE,
-        ID_ICON, ID_IMAG,
-        ID_ICON, ID_png,
-        ID_ICON, ID_ARGB,
+    	ID_ICON, ID_FACE,
+	ID_ICON, ID_IMAG,
+	ID_ICON, ID_png,
+	ID_ICON, ID_ARGB,
     };
-
+    
     struct IFFHandle 	    *iff;
     struct Hook     	     iffhook;
     struct FileFaceChunk     fc;

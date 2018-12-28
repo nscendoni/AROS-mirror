@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2002, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: openport.c 48778 2014-01-23 21:59:19Z jmcmullan $
 
     Desc: Rexx function to create a MsgPort
     Lang: English

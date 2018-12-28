@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright © 2002-2007, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: utility.py 46010 2012-11-06 15:56:26Z desperado $
 
 import os, shutil
 from build.settings import *

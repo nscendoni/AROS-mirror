@@ -20,7 +20,7 @@
     slouken@libsdl.org
 */
 
-/* $Id$ */
+/* $Id: SDL_ttf.h 30794 2009-03-08 02:19:07Z neil $ */
 
 /* This library is a wrapper around the excellent FreeType 2.0 library,
    available at:

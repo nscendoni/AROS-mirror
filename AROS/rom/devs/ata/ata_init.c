@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2016, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: ata_init.c 51929 2016-03-13 22:12:54Z jmcmullan $
 
     Desc:
     Lang: English

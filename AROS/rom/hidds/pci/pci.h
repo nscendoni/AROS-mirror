@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2004-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pci.h 49776 2014-11-08 21:01:50Z neil $
 */
 
 #include <exec/types.h>
@@ -35,7 +35,7 @@ typedef struct DeviceData {
     OOP_Object          *driver;
     UBYTE               bus,dev,sub;
     UBYTE               isBridge;
-    UBYTE               secbus;
+    UBYTE               subbus;
     UWORD               VendorID;
     UWORD               ProductID;
     UBYTE               RevisionID;

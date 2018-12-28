@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setsr.S 47619 2013-07-02 18:27:20Z neil $
 
     Desc: SetSR() - Modify the CPU status register.
     Lang: english

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu.h 51959 2016-03-15 01:23:43Z jmcmullan $
 
     NOTE: This file must compile *without* any other header !
 

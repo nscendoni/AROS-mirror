@@ -1,5 +1,5 @@
 /*
- *  $Id$
+ *  $Id: cons.c 39325 2011-06-17 05:51:13Z jmcmullan $
  *
  *	DISCLAIMER:
  *

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: obtainattrbase.c 50838 2015-06-19 00:14:32Z NicJA $
 
     Desc: OOP function OOP_ObtainAttrBase
     Lang: english

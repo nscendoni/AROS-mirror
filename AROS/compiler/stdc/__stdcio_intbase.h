@@ -1,6 +1,6 @@
 /*
     Copyright © 2012-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __stdcio_intbase.h 48044 2013-09-08 21:18:52Z verhaegs $
 
     This file defines the private part of StdCIOBase.
     This should only be used internally in stdcio.library code so

@@ -1,5 +1,5 @@
 #   Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-#   $Id$
+#   $Id: make.tail 52712 2016-05-01 14:04:46Z deadwood $
 #
 #   Desc: General rules included at the end of a generated mmakefile
 #

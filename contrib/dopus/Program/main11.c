@@ -57,19 +57,19 @@ struct Gadget
         GFLG_GADGHNONE|GFLG_RELRIGHT,
         GACT_RIGHTBORDER,
         GTYP_BOOLGADGET,
-        NULL,NULL,NULL,0,NULL,0,NULL},
+        NULL,NULL,NULL,NULL,NULL,0,NULL},
     iconbutpropgad={
         &dummybordergad,-14,0,11,0,
         GFLG_GADGHNONE|GFLG_RELRIGHT,
         GACT_IMMEDIATE|GACT_RELVERIFY|GACT_FOLLOWMOUSE|GACT_RIGHTBORDER,
         GTYP_PROPGADGET,
-        (APTR)&iconbutpropimage,NULL,NULL,0,(APTR)&iconbutpropinfo,BUTPROP,NULL},
+        (APTR)&iconbutpropimage,NULL,NULL,NULL,(APTR)&iconbutpropinfo,BUTPROP,NULL},
     iconbutexitgad={
         &iconbutpropgad,0,0,11,10,
         GFLG_GADGIMAGE|GFLG_GADGHIMAGE|GFLG_RELRIGHT,
         GACT_RELVERIFY|GACT_RIGHTBORDER,
         GTYP_BOOLGADGET,(APTR)&uniconifyimage[0],(APTR)&uniconifyimage[1],
-        NULL,0,NULL,BUTEXIT,NULL};
+        NULL,NULL,NULL,BUTEXIT,NULL};
 
 struct NewWindow
     icon_win={
@@ -94,8 +94,8 @@ static struct timerequest iconify_timereq;
 static struct DiskObject iconify_appicon={
     0,0,
         {NULL,0,0,80,41,GFLG_GADGBACKFILL,0,0,
-        (APTR)&appicon_image,NULL,NULL,0,NULL,0,NULL},
-    0,NULL,NULL,NO_ICON_POSITION,NO_ICON_POSITION,NULL,NULL,0};
+        (APTR)&appicon_image,NULL,NULL,NULL,NULL,NULL,NULL},
+    0,NULL,NULL,NO_ICON_POSITION,NO_ICON_POSITION,NULL,NULL,NULL};
 
 void iconify(louise,buttons,banknum)
 int louise,buttons,banknum;
@@ -109,7 +109,7 @@ int louise,buttons,banknum;
         wmes,chipc,fast,h,m,s,waitbits,
         a,b,nheight,nwidth,buttonrows,oldrows,olddata_gadgetrow_offset,x,y,x1,y1,c,d,w,
         fastnum,chipnum,bankcount,bankstep,menunum,itemnum,num,cdelay,
-        __unused usage,__unused oldusage=100;
+        usage,oldusage=100;
     char date[16],time[16],buf[50],buf1[50],buf2[50],ampm,formstring[100],*old;
     struct dopusgadgetbanks *bank,*oldbank,**bankarray;
     struct dopushotkey *hotkey;
@@ -160,7 +160,7 @@ int louise,buttons,banknum;
             ++bankcount;
             bank=bank->next;
         }
-        if ((bankarray=LAllocRemember(&icon_key,bankcount*sizeof(APTR),MEMF_CLEAR))) {
+        if ((bankarray=LAllocRemember(&icon_key,bankcount*4,MEMF_CLEAR))) {
             bank=dopus_firstgadbank;
             for (a=0;a<bankcount;a++) {
                 bankarray[a]=bank;
@@ -230,15 +230,13 @@ int louise,buttons,banknum;
                     if (fastnum<2) strcat(buf,globstring[STR_CLOCK_MEM]);
                     else strcat(buf,globstring[STR_CLOCK_CHIP]);
                 }
-                for (a=0;a<chipnum;a++) buf1[a]='8';
-                buf1[a]=0;
+                for (a=0;a<chipnum;a++) buf1[a]='8'; buf1[a]=0;
                 strcat(buf,buf1);
                 if (fastnum>1) {
                     if (icon_type&ICON_C_AND_F) lsprintf(buf2," %lc:",globstring[STR_CLOCK_FAST][0]);
                     else lsprintf(buf2," %s",globstring[STR_CLOCK_FAST]);
                     strcat(buf,buf2);
-                    for (a=0;a<fastnum;a++) buf1[a]='8';
-                    buf1[a]=0;
+                    for (a=0;a<fastnum;a++) buf1[a]='8'; buf1[a]=0;
                     strcat(buf,buf1);
                 }
                 strcat(buf," ");
@@ -354,7 +352,7 @@ int louise,buttons,banknum;
         }
     }
     else if (icon_type&ICON_APPICON && !screennotify) Window=OpenWindowTags(&appicon_win,
-                                                                            WA_PubScreenName,     "Workbench",
+                                                                            WA_PubScreenName,     (Tag)"Workbench",
                                                                             WA_PubScreenFallBack, TRUE,
                                                                             TAG_END);
 
@@ -384,24 +382,24 @@ int louise,buttons,banknum;
                 if (fastnum>1) {
                     if (icon_type&ICON_C_AND_F) {
                         lsprintf(buf1,"%lc:%%%ldld %lc:%%%ldld ",
-                            globstring[STR_CLOCK_CHIP][0],(long int)chipnum,
-                            globstring[STR_CLOCK_FAST][0],(long int)fastnum);
+                            globstring[STR_CLOCK_CHIP][0],chipnum,
+                            globstring[STR_CLOCK_FAST][0],fastnum);
                     }
                     else {
                         lsprintf(buf1,"%s%%%ldld %s%%%ldld ",
-                            globstring[STR_CLOCK_CHIP],(long int)chipnum,
-                            globstring[STR_CLOCK_FAST],(long int)fastnum);
+                            globstring[STR_CLOCK_CHIP],chipnum,
+                            globstring[STR_CLOCK_FAST],fastnum);
                     }
                     lsprintf(buf,buf1,chipc,fast);
                 }
                 else {
                     if (icon_type&ICON_C_AND_F) {
                         lsprintf(buf1,"%lc:%%%ldld ",
-                            globstring[STR_CLOCK_MEM][0],(long int)chipnum);
+                            globstring[STR_CLOCK_MEM][0],chipnum);
                     }
                     else {
                         lsprintf(buf1,"%s%%%ldld ",
-                            globstring[STR_CLOCK_MEM],(long int)chipnum);
+                            globstring[STR_CLOCK_MEM],chipnum);
                     }
                     lsprintf(buf,buf1,chipc);
                 }
@@ -435,7 +433,7 @@ int louise,buttons,banknum;
                     if (h>11) { ampm='P'; h-=12; }
                     else ampm='A';
                     if (h==0) h=12;
-                    lsprintf(time,"%2ld:%02ld:%02ld%lc",(long int)h,(long int)m,(long int)s,ampm);
+                    lsprintf(time,"%2ld:%02ld:%02ld%lc",h,m,s,ampm);
                 }
                 strcat(formstring,time);
                 strcat(formstring," ");

@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2014, Davy Wentzler. All rights reserved.
-    $Id$
+    $Id: ak_codec.c 52484 2016-03-31 15:25:06Z neil $
 */
 
 #include <proto/exec.h>

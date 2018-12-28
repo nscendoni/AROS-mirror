@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-98, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Mine.c 51874 2016-03-12 04:07:21Z NicJA $
 
     Desc: Mine Game
     Lang: german
@@ -203,7 +203,7 @@ BYTE i;
   }
   open_hsfile();
   killme = FALSE;
-  parent=FindTask(NULL);
+  parent=SysBase->ThisTask;
   sigbit1=AllocSignal(-1);
   if(sigbit1!=0)
   {

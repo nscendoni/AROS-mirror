@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: unlocklayerrom.c 45659 2012-08-25 19:45:08Z jmcmullan $
 
     Desc: Graphics function UnlockLayerRom()
     Lang: english

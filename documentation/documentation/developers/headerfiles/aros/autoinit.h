@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: autoinit.h 30800 2009-03-08 17:28:50Z neil $
     
     Desc: header exporting support functions from libautoinit.a
 */

@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -6,7 +6,7 @@ include $(SRCDIR)/config/aros.cfg
 
 USER_INCLUDES := -isystem $(GENINCDIR) $(KERNEL_INCLUDES)
 
-FILES := startup androidgfx_hiddclass androidgfx_bitmap android_kbdclass android_mouseclass android_server
+FILES := startup agfx abitmap akbd amouse server
 
 %build_module mmake=kernel-hidd-androidgfx \
   modname=androidgfx modtype=hidd \

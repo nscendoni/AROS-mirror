@@ -41,7 +41,7 @@
 
 #if 0
 static char copyright[] =
-"$Id$ Copyright (c) 2004 Internet Systems Consortium.  All rights reserved.\n";
+"$Id: comapi.c 40050 2011-07-13 01:15:51Z jmcmullan $ Copyright (c) 2004 Internet Systems Consortium.  All rights reserved.\n";
 #endif
 
 #include "dhcpd.h"

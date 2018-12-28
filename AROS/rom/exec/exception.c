@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: exception.c 50691 2015-05-17 03:22:48Z NicJA $
 
     Desc: Exception - Perform a task exception.
     Lang: english

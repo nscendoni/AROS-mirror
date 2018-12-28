@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gadtools_intern.h 52221 2016-03-24 09:04:52Z stegerg $
 
     Desc: Internal definitions for gadtools.library.
     Lang: english

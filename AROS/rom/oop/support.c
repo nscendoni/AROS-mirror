@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support.c 39376 2011-06-18 20:07:39Z jmcmullan $
 
     Desc: 
     Lang: english

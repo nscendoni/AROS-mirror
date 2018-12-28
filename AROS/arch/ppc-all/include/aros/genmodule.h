@@ -1,8 +1,8 @@
 #ifndef AROS_PPC_GENMODULE_H
 #define AROS_PPC_GENMODULE_H
 /*
-    Copyright © 2012-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2012, The AROS Development Team. All rights reserved.
+    $Id: genmodule.h 47619 2013-07-02 18:27:20Z neil $
 
     NOTE: This file must compile *without* any other header !
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 2012-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __signal.c 48042 2013-09-08 21:18:26Z verhaegs $
 */
 
 #include <proto/exec.h>

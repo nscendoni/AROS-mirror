@@ -3,7 +3,7 @@
 
 /*
     Copyright (C) 2011-2013 Neil Cafferkey
-    $Id$
+    $Id: sana2wireless.h 53002 2016-10-18 01:32:11Z neil $
 
     Desc: Definitions for SANA-II wireless devices
     Lang: english

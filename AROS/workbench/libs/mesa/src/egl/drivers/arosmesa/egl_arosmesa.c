@@ -1,6 +1,6 @@
 /*
     Copyright 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: egl_arosmesa.c 48944 2014-04-18 16:46:17Z deadwood $
 */
 
 #include "eglsurface.h"

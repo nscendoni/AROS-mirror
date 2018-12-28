@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$ 
+    $Id: amiga_lib_functions.c 37233 2011-02-28 04:28:37Z jmcmullan $ 
 */
 
 #define NO_INLINE_STDARG   /* turn off inline def */

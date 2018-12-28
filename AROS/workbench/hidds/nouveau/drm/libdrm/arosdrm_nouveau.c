@@ -1,6 +1,6 @@
 /*
     Copyright 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: arosdrm_nouveau.c 36648 2011-01-17 14:31:59Z neil $
 */
 
 #include "arosdrm.h"

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: timer.h 49007 2014-05-18 03:39:51Z neil $
 
     Desc: Definitions for the Timer HIDD system.
     Lang: english

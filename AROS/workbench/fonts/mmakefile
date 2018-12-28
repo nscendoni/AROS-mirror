@@ -1,4 +1,4 @@
-# $Id$
+# $Id: mmakefile 52302 2016-03-28 03:42:13Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 

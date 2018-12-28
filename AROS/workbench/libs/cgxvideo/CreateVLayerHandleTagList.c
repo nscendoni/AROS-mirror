@@ -1,10 +1,10 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2010, The AROS Development Team. All rights reserved.
+    $Id: CreateVLayerHandleTagList.c 47532 2013-06-10 16:46:04Z jmcmullan $
 */
 
 #include <aros/debug.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <proto/oop.h>
 #include <proto/utility.h>
 

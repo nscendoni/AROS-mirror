@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 52373 2016-03-29 16:40:07Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 CLISERVTESTS = test.server test.client
 

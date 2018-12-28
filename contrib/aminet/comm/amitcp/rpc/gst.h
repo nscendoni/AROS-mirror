@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: gst.h 30794 2009-03-08 02:19:07Z neil $
  *
  * Include file for the SAS/C Global Symbol Table generation
  *

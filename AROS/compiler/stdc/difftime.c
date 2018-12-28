@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: difftime.c 48031 2013-09-08 21:16:04Z verhaegs $
 
     Return the number of seconds elapsed between time2 and time1.
 */

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: execute.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Execute a CLI command
     Lang: English
@@ -17,7 +17,7 @@
     NAME */
 #include <proto/dos.h>
 
-        AROS_LH3(BOOL, Execute,
+        AROS_LH3(LONG, Execute,
 
 /*  SYNOPSIS */
         AROS_LHA(CONST_STRPTR, string, D1),

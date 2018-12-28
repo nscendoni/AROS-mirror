@@ -1,4 +1,4 @@
-include $(SRCDIR)/config/aros.cfg
+include $(TOP)/config/make.cfg
 
 FILES := \
     70scurve.png \

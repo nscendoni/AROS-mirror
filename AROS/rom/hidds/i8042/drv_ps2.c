@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: drv_ps2.c 49867 2014-12-23 03:34:16Z neil $
 
     Desc: PS/2 mouse driver.
     Lang: English.

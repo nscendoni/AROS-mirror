@@ -1,6 +1,6 @@
 /*
     Copyright © 1998, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: test_text.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Demo showing x11gfx.hidd
     Lang: English.

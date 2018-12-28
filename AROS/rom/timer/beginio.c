@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: beginio.c 48790 2014-02-01 15:40:36Z mazze $
 
     Desc: BeginIO - Start up a timer.device request, generic version for software timer emulation
     Lang: english

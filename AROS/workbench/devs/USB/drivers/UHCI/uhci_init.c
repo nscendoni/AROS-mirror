@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2006 by Michal Schulz
-    $Id$
+    $Id: uhci_init.c 46592 2013-02-14 02:40:59Z jmcmullan $
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Library General Public License as 

@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
+    $Id: emul_host.c 55278 2018-06-10 03:08:51Z neil $
 */
 
 #include "unix_hints.h"
@@ -499,7 +499,8 @@ LONG DoOpen(struct emulbase *emulbase, struct filehandle *fh, LONG access, LONG 
 	/* Object is a directory */
 	fh->fd = emulbase->pdata.SysIFace->opendir(fh->hostname);
 #ifndef HOST_OS_android
-        fh->ph.dirpos_first = emulbase->pdata.SysIFace->telldir(fh->fd);
+        if (fh->fd != NULL)
+            fh->ph.dirpos_first = emulbase->pdata.SysIFace->telldir(fh->fd);
 #endif
 	AROS_HOST_BARRIER
 
@@ -700,7 +701,8 @@ LONG DoMkDir(struct emulbase *emulbase, struct filehandle *fh, ULONG protect)
 	fh->type = FHD_DIRECTORY;
 	fh->fd   = emulbase->pdata.SysIFace->opendir(fh->hostname);
 #ifndef HOST_OS_android
-        fh->ph.dirpos_first = emulbase->pdata.SysIFace->telldir(fh->fd);
+        if (fh->fd != NULL)
+            fh->ph.dirpos_first = emulbase->pdata.SysIFace->telldir(fh->fd);
 #endif
 	AROS_HOST_BARRIER
     }

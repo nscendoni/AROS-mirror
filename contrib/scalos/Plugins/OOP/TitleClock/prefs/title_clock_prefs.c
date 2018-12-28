@@ -1,7 +1,7 @@
 /*  title_clock_prefs.c
  *
- * $Date$
- * $Revision$
+ * $Date: 2013-12-01 23:08:26 +0100 (Sun, 01 Dec 2013) $
+ * $Revision: 48481 $
  *
  *  40.3
  *  20010804    DM  + Fixed a couple of enforcer hits on startup in interface.c/ShowExample()

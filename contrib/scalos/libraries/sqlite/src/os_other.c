@@ -1,6 +1,6 @@
 /*
-** $Date$
-** $Revision$
+** $Date: 2015-02-06 21:55:38 +0100 (Fri, 06 Feb 2015) $
+** $Revision: 50039 $
 **
 ** The author disclaims copyright to this source code.  In place of
 ** a legal notice, here is a blessing:

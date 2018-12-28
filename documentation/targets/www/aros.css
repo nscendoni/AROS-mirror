@@ -25,6 +25,7 @@ body {
 div.document {
     padding: 0px 10px 0px 10px }
 
+
 div.gallerygroup {
 	clear: left;
 }
@@ -33,8 +34,8 @@ div.gallery {
 	margin: 4px;
 	padding: 2px;
 	border: 1px solid #000000;
-	height: 400px;
-	width: 320px;
+	height: 400;
+	width: 320;
 	float: left;
 	text-align: center;
 }
@@ -80,25 +81,6 @@ table.layout {
   margin-top:    0 ;
   margin-bottom: 0 }
 
-table.layout.nightly {
-  border-collapse: collapse;
-  margin-top:    0 ;
-  margin-bottom: 0 }
-
 td.layout, th.layout {
   padding-left:  0 ;
   padding-right: 0 }
-
-td.layout.nightly, th.layout.nightly {
-  border: 1px solid #000000;
-  padding-left:  0 ;
-  padding-right: 0 }
-
-td.layout.padded {
-  border: 1px solid #000000;
-  padding: 8px }
-
-td.layout.invis {
-  background-color: #ffffff;
-  border: 0;
-  padding: 8px }

@@ -1,6 +1,6 @@
 /*
     Copyright © 1997-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: atomic.h 44285 2012-02-27 23:21:25Z jmcmullan $
 
     Desc: Atomic access functions to be used by macros in atomic.h.
     Lang: english

@@ -1,11 +1,11 @@
-#   $Id$
+#   $Id: mmakefile.src 52302 2016-03-28 03:42:13Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
 INCLUDE_FILES := $(call WILDCARD, include/*.h)
 USER_LDFLAGS := -static
 
-FILES := gallium_class gallium_init
+FILES := galliumclass init
 
 #MM includes-copy
 %copy_includes path=hidd dir=include
@@ -14,7 +14,7 @@ FILES := gallium_class gallium_init
 #MM hidd-gallium : includes
 
 USER_INCLUDES := \
-            -I$(AROS_DEVELOPER)/include/gallium \
+            -I$(AROS_DEVELOPMENT)/include/gallium \
 
 %build_module mmake=hidd-gallium modname=gallium modtype=hidd \
     files="$(FILES)"

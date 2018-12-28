@@ -1,5 +1,5 @@
 # Copyright © 2004-2014, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
@@ -11,7 +11,6 @@ GRUBOPTS += --enable-affs --disable-fat --disable-ffs --disable-minix --disable-
             --disable-packet-retransmission --disable-ext2fs --disable-serial \
             --disable-hercules
 endif
-GRUBCFLAGS := $(OPTIMIZATION_CFLAGS) -Wl,--build-id=none
 
 #MM
 grub-copy-stages : $(AROSARCHDIR)/grub/stage1 $(AROSARCHDIR)/grub/stage2 $(AROSARCHDIR)/grub/stage2_hdisk $(AROSARCHDIR)/grub/iso9660_stage1_5
@@ -20,7 +19,7 @@ grub-copy-stages : $(AROSARCHDIR)/grub/stage1 $(AROSARCHDIR)/grub/stage2 $(AROSA
 # OR MAKE SURE -fno-stack-protector IS DETECTED IF COMPILER SUPPORTS IT
 
 %build_with_configure mmake=grub compiler=kernel install_target= \
-    extraoptions="$(GRUBOPTS)" extracflags="$(GRUBCFLAGS)"
+    extraoptions="$(GRUBOPTS)" extracflags="-Wl,--build-id=none"
 
 $(AROSARCHDIR)/grub/stage1: $(GENDIR)/$(CURDIR)/stage1/stage1
 	%mkdirs_q $(dir $@)

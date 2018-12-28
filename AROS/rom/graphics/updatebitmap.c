@@ -1,6 +1,6 @@
 /*
-    Copyright © 2011-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2011-2013, The AROS Development Team. All rights reserved.
+    $Id: updatebitmap.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Update specified region of the bitmap, taking software composition into account.
     	  Private function for cybergraphics.library support.
@@ -11,7 +11,7 @@
 #include "compositor_driver.h"
 #include "gfxfuncsupport.h"
 
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 AROS_LH5(void, UpdateBitMap,
 	 AROS_LHA(struct BitMap *, bitmap, A0),
@@ -19,7 +19,7 @@ AROS_LH5(void, UpdateBitMap,
 	 AROS_LHA(UWORD, y     , D1),
 	 AROS_LHA(UWORD, width , D2),
 	 AROS_LHA(UWORD, height, D3),
-	 struct GfxBase *, GfxBase, 201, Graphics)
+	 struct GfxBase *, GfxBase, 202, Graphics)
 {
     AROS_LIBFUNC_INIT
 

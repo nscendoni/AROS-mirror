@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support_classes.h 45710 2012-08-31 19:01:54Z neil $
 */
 
 #ifndef _MUIMASTER_SUPPORT_CLASSES_H

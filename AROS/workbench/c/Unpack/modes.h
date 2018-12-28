@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: modes.h 30792 2009-03-07 22:40:04Z neil $
 */
 
 #define MODE_READ  0

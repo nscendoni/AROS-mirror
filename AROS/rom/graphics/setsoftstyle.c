@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setsoftstyle.c 45538 2012-08-13 01:42:55Z jmcmullan $
 
     Desc: Graphics function SetSoftStyle()
     Lang: English

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: printertxt.h 43792 2012-01-30 00:43:18Z jmcmullan $
 */
 
 #ifndef PREFS_PRINTERTXT_H

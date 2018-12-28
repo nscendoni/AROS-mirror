@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: meminfonvd.c 38996 2011-06-04 11:51:18Z mazze $
 
     Desc:
     Lang: English

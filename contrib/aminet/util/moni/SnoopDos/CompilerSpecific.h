@@ -1,7 +1,7 @@
 #ifndef COMPILERSPECIFIC_H
 #define COMPILERSPECIFIC_H
 /*
-**	$Id$
+**	$Id: CompilerSpecific.h 30794 2009-03-08 02:19:07Z neil $
 **
 **	Copyright (C) 1997 Bernardo Innocenti <bernie@cosmos.it>
 **	All rights reserved.

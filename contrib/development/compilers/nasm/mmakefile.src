@@ -1,15 +1,15 @@
-#   $Id$
+#   $Id: mmakefile.src 52348 2016-03-29 14:28:20Z NicJA $
 #
 #   Makefile to make False.
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES  := nasm nasmlib float insnsa assemble labels \
        parser outform outbin outaout outcoff outelf \
        outobj outas86 outrdf outrdf2 outdbg zoutieee \
        preproc listing eval
 
-EXEDIR := $(AROS_CONTRIB)/$(AROS_DIR_DEVELOPER)/nasm
+EXEDIR := $(AROS_CONTRIB)/Development/nasm
 
 #MM- contrib-development : contrib-development-nasm
 #MM contrib-development-nasm : contrib-development-nasm-setup \

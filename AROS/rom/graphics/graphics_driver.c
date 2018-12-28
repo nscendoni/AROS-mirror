@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: graphics_driver.c 51030 2015-08-29 22:48:21Z NicJA $
 
     Desc: Driver for using gfxhidd for gfx output
     Lang: english
@@ -32,8 +32,10 @@
 #include <utility/tagitem.h>
 #include <aros/asmcall.h>
 
+#include <intuition/intuition.h>
+
 #include <hidd/compositor.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #include <cybergraphx/cybergraphics.h>
 
@@ -84,15 +86,12 @@ struct gfx_driverdata *AllocDriverData(struct RastPort *rp, BOOL alloc, struct G
 
 int driver_init(struct GfxBase * GfxBase)
 {
-    OOP_Class *baseGfx;
 
     EnterFunc(bug("driver_init()\n"));
 
     /* Our underlying RTG subsystem core must be already up and running */
-    if (!OpenLibrary("gfx.hidd", 0))
+    if (!OpenLibrary("graphics.hidd", 0))
         return FALSE;
-
-    baseGfx = OOP_FindClass(CLID_Hidd_Gfx);
 
     /* Initialize the semaphores */
     InitSemaphore(&(PrivGBase(GfxBase)->blit_sema));
@@ -124,8 +123,8 @@ int driver_init(struct GfxBase * GfxBase)
 	CDD(GfxBase)->invalid_id = INVALID_ID;
 	CDD(GfxBase)->last_id = AROS_RTG_MONITOR_ID;
 
-	/* Init software driver */
-	CDD(GfxBase)->memorygfx = HW_AddDriver(PrivGBase(GfxBase)->GfxRoot, baseGfx, NULL);
+	/* Init memory driver */
+	CDD(GfxBase)->memorygfx = OOP_NewObject(NULL, CLID_Hidd_Gfx, NULL);
 	DEBUG_INIT(bug("[driver_init] Memory driver object 0x%p\n", CDD(GfxBase)->memorygfx));
 
 	if (CDD(GfxBase)->memorygfx)

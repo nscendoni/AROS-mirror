@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: locale.h 48076 2013-09-11 10:47:54Z NicJA $
 
     Desc: Locale prefs definitions
     Lang: english

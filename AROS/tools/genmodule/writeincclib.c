@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: writeincclib.c 49552 2014-08-28 15:27:10Z neil $
 
     Function to write clib/modulename_protos.h. Part of genmodule.
 */

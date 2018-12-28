@@ -1,6 +1,6 @@
 /*
     Copyright © 2009-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: prefsdata.c 52763 2016-06-26 16:20:53Z deadwood $
 */
 
 #include <proto/dos.h>

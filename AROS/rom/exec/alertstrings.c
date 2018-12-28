@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2012, The AROS Development Team. All rights reserved.
+    $Id: alertstrings.c 45100 2012-06-18 20:00:13Z jmcmullan $
 */
 
 /*
@@ -14,6 +14,7 @@
 #include <exec/tasks.h>
 #include <libraries/debug.h>
 #include <proto/debug.h>
+#include <proto/kernel.h>
 
 #include "etask.h"
 #include "exec_intern.h"

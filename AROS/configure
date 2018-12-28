@@ -651,7 +651,6 @@ aros_enable_mmu
 aros_nesting_supervisor
 aros_palm_debug_hack
 ENABLE_EXECSMP
-PLATFORM_EXECSMP
 aros_serial_debug
 aros_host_sdl_libs
 aros_host_sdl_cflags
@@ -676,6 +675,7 @@ aros_target_genmap
 aros_debug_ldflags
 aros_debug_aflags
 aros_debug_cflags
+aros_target_cflags
 aros_kernel_ldflags
 aros_kernel_objcflags
 aros_kernel_includes
@@ -683,10 +683,8 @@ aros_kernel_cflags
 aros_kernel_sysroot
 aros_config_ldflags
 aros_config_aflags
-aros_config_cxxflags
 aros_config_cflags
 aros_nowarn_flags
-aros_warn_flags
 aros_config_sysroot
 aros_shared_ldflags
 aros_shared_aflags
@@ -746,7 +744,6 @@ SRCDIR
 AROS_BUILDDIR_UNIX
 AROS_BUILDDIR
 aros_build_host
-aros_toolchain_ld
 aros_target_toolchain
 aros_flavour_uc
 aros_flavour
@@ -905,7 +902,6 @@ with_c_compiler
 with_cxx_compiler
 enable_libpng_config
 with_toolchain
-enable_lto
 enable_build_type
 enable_debug
 enable_distcc
@@ -913,6 +909,7 @@ enable_ccache
 with_kernel_gcc_version
 with_optimization
 with_paranoia
+enable_lto
 enable_target_variant
 with_xcode
 with_sdk_version
@@ -1584,8 +1581,6 @@ Optional Features:
   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
 --disable-libpng-config    disable libpng-config test and configuration
-  --enable-lto=yes|no     Enable link time optimizations if the target
-                          compiler supports them (default=no)
   --enable-build-type=TYPE
                           Select the build type. Available types are:
                           personal, nightly, snapshot, milestone, release. Do
@@ -1601,6 +1596,8 @@ Optional Features:
                           (default=no).
   --enable-ccache         Use ccache as a front end to the compiler
                           (default=no).
+  --enable-lto=yes|no     Enable link time optimizations if the target
+                          compiler supports them (default=yes)
   --enable-target-variant=NAME
                           Enable a specific target variant (default=none)
   --enable-amigaos-compliance=VERSION
@@ -7492,10 +7489,7 @@ aros_nowarn_flags="NOWARN_UNUSED_COMMAND_LINE_ARGUMENT NOWARN_UNKNOWN_WARNING_OP
 
 toolchain_needs_sysroot=no
 
-aros_warn_flags=
-aros_isa_flags=
-aros_config_cflags=
-aros_config_cxxflags=
+aros_config_cflags="-Wall -Werror-implicit-function-declaration"
 aros_config_aflags="-Wall -x assembler-with-cpp -c"
 aros_config_ldflags=""
 
@@ -7549,24 +7543,6 @@ fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $aros_toolchain" >&5
 $as_echo "$aros_toolchain" >&6; }
 
-
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if we should enable link time optimizations (LTO)" >&5
-$as_echo_n "checking if we should enable link time optimizations (LTO)... " >&6; }
-# Check whether --enable-lto was given.
-if test "${enable_lto+set}" = set; then :
-  enableval=$enable_lto; aros_config_lto="$enableval"
-else
-  aros_config_lto="no"
-fi
-
-if test "$aros_config_lto" != "no"; then
-    aros_config_lto="yes"
-fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $aros_config_lto" >&5
-$as_echo "$aros_config_lto" >&6; }
-
-use_ld_wrapper=yes
-
 case "$aros_toolchain" in
     *llvm*)
         # toolchain_needs_sysroot=yes
@@ -7574,7 +7550,6 @@ case "$aros_toolchain" in
         toolchain_cxx_compiler="clang++"
         toolchain_cpp_preprocessor="clang -E"
         toolchain_ld="ld.lld"
-        aros_ld="ld"
         toolchain_as="llvm-as"
         toolchain_ar="llvm-ar"
         toolchain_ranlib="llvm-ranlib"
@@ -7587,19 +7562,11 @@ case "$aros_toolchain" in
         toolchain_c_compiler="gcc"
         toolchain_cxx_compiler="g++"
         toolchain_cpp_preprocessor="gcc -E"
+        toolchain_ld="ld"
         toolchain_as="as"
-        aros_ld="ld"
-        if test "$aros_config_lto" != "yes"; then
-            toolchain_ld="ld"
-            toolchain_ar="ar"
-            toolchain_ranlib="ranlib"
-            toolchain_nm="nm"
-        else
-            toolchain_ld="ld.bfd"
-            toolchain_ar="gcc-ar"
-            toolchain_ranlib="gcc-ranlib"
-            toolchain_nm="gcc-nm"
-        fi
+        toolchain_ar="ar"
+        toolchain_ranlib="ranlib"
+        toolchain_nm="nm"
         toolchain_strip="strip"
         toolchain_objcopy="objcopy"
         toolchain_objdump="objdump"
@@ -7611,7 +7578,6 @@ $as_echo "$as_me: WARNING: \"Unknown toolchain family!\"" >&2;}
         toolchain_cxx_compiler="c++"
         toolchain_cpp_preprocessor="cpp"
         toolchain_ld="ld"
-        aros_ld="ld"
         toolchain_as="as"
         toolchain_ar="ar"
         toolchain_ranlib="ranlib"
@@ -7648,7 +7614,6 @@ else
 fi
 
 aros_config_cflags="$aros_config_cflags -DAROS_BUILD_TYPE=AROS_BUILD_TYPE_$build_type_string"
-aros_config_cxxflags="$aros_config_cxxflags -DAROS_BUILD_TYPE=AROS_BUILD_TYPE_$build_type_string"
 
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $build_type" >&5
 $as_echo "$build_type" >&6; }
@@ -7889,7 +7854,7 @@ else
 fi
 
 if test "$paranoia_flags" = "no"; then
-        paranoia_flags="-Wall -Werror-implicit-function-declaration"
+        paranoia_flags=""
         msg_result="none"
 else
     if test "$paranoia_flags" = "yes"; then
@@ -7899,7 +7864,22 @@ else
 fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $msg_result" >&5
 $as_echo "$msg_result" >&6; }
-aros_warn_flags="$aros_warn_flags $paranoia_flags"
+aros_config_cflags="$aros_config_cflags $paranoia_flags"
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if we should enable link time optimizations (LTO)" >&5
+$as_echo_n "checking if we should enable link time optimizations (LTO)... " >&6; }
+# Check whether --enable-lto was given.
+if test "${enable_lto+set}" = set; then :
+  enableval=$enable_lto; aros_config_lto="$enableval"
+else
+  aros_config_lto="yes"
+fi
+
+if test "$aros_config_lto" != "yes"; then
+    aros_config_lto="no"
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $aros_config_lto" >&5
+$as_echo "$aros_config_lto" >&6; }
 
 #-----------------------------------------------------------------------------
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking what target variant to enable" >&5
@@ -7927,7 +7907,6 @@ $as_echo "$enableval" >&6; }
 #
 # Bootloader name. Currently used by PC target.
 target_bootloader="none"
-PLATFORM_EXECSMP=
 ENABLE_EXECSMP=
 
 #-----------------------------------------------------------------------------
@@ -8188,9 +8167,7 @@ case "$target_os" in
                 aros_object_format="elf_x86_64"
                 aros_flavour="emulation"
                 aros_target_mkdep="$aros_target_mkdep -D__GNUC__ -Dx86_64 -D__linux__"
-                aros_isa_flags="$aros_isa_flags -mcmodel=large -mno-red-zone"
-                aros_config_cflags="$aros_config_cflags -fno-omit-frame-pointer"
-                aros_config_cxxflags="$aros_config_cxxflags -fno-omit-frame-pointer"
+                aros_config_cflags="$aros_config_cflags -mcmodel=large -mno-red-zone -fno-omit-frame-pointer"
                 aros_nominal_depth=8
                 pci_hidd_target="hidd-pci-linux"
                 ;;
@@ -8222,7 +8199,6 @@ case "$target_os" in
                 aros_target_mkdep="$aros_target_mkdep -D__GNUC__ -Darm -D__linux__"
                 gcc_target_cpu="aarch64"
                 aros_config_cflags="$aros_config_cflags -fno-strict-aliasing -fno-omit-frame-pointer"
-                aros_config_cxxflags="$aros_config_cxxflags -fno-strict-aliasing -fno-omit-frame-pointer"
                 aros_config_aflags="$aros_config_aflags -fno-strict-aliasing"
                 aros_arch_libs="-laeabi"
                 gcc_default_float_abi="hard"
@@ -8236,7 +8212,6 @@ case "$target_os" in
                 aros_target_mkdep="$aros_target_mkdep -D__GNUC__ -Darm -D__linux__"
                 gcc_target_cpu="arm"
                 aros_config_cflags="$aros_config_cflags -fno-strict-aliasing -fno-omit-frame-pointer"
-                aros_config_cxxflags="$aros_config_cxxflags -fno-strict-aliasing -fno-omit-frame-pointer"
                 aros_config_aflags="$aros_config_aflags -fno-strict-aliasing"
                 aros_arch_libs="-laeabi"
                 gcc_default_float_abi="hard"
@@ -8252,7 +8227,6 @@ case "$target_os" in
                 aros_target_mkdep="$aros_target_mkdep -D__GNUC__ -Darm -D__linux__"
                 gcc_target_cpu="arm"
                 aros_config_cflags="$aros_config_cflags -fno-strict-aliasing -fno-omit-frame-pointer"
-                aros_config_cxxflags="$aros_config_cxxflags -fno-strict-aliasing -fno-omit-frame-pointer"
                 aros_config_aflags="$aros_config_aflags -fno-strict-aliasing"
                 aros_arch_libs="-laeabi"
                 android_tool_dir_prefix="arm-linux-androideabi"
@@ -8289,7 +8263,7 @@ case "$target_os" in
                 need_x11=no
                 host_android_gfx=yes
                 # Disable implicit PIC mode
-                aros_config_cflags="$aros_config_cflags -fno-pic"
+                aros_target_cflags="$aros_target_cflags -fno-pic"
                 kernel_tool_prefix="$android_tool_prefix-"
             ;;
         esac
@@ -8315,7 +8289,6 @@ case "$target_os" in
                 gcc_target_cpu="i386"
                 ;;
             *x86_64*)
-                PLATFORM_EXECSMP="#define __AROSPLATFORM_SMP__"
                 aros_target_cpu="x86_64"
                 aros_serial_debug=1
                 if test "$aros_object_format" = "" ; then
@@ -8323,9 +8296,7 @@ case "$target_os" in
                 fi
                 aros_flavour="standalone"
                 aros_target_mkdep="$aros_target_mkdep -D__GNUC__ -Dx86_64"
-                aros_isa_flags="$aros_isa_flags -mcmodel=large  -mno-red-zone"
-                aros_config_cflags="$aros_config_cflags -fno-asynchronous-unwind-tables -fno-omit-frame-pointer"
-                aros_config_cxxflags="$aros_config_cxxflags -fno-asynchronous-unwind-tables -fno-omit-frame-pointer"
+                aros_config_cflags="$aros_config_cflags -mcmodel=large -fno-asynchronous-unwind-tables -mno-red-zone -fno-omit-frame-pointer"
                 aros_kernel_ldflags=""
                 aros_nominal_width=640
                 aros_nominal_height=480
@@ -8388,11 +8359,10 @@ case "$target_os" in
                 aros_object_format="elf_x86_64"
                 aros_target_mkdep="$aros_target_mkdep -D__GNUC__ -Dx86_64"
                 aros_macosx_version="10.6"
-                aros_isa_flags="$aros_isa_flags -mcmodel=large"
                 aros_config_cflags="$aros_config_cflags -fno-omit-frame-pointer"
-                aros_config_cxxflags="$aros_config_cxxflags -fno-omit-frame-pointer"
                 aros_kernel_cflags="-m64"
                 aros_kernel_ldflags="-m64"
+                aros_target_cflags="-mcmodel=large"
                 aros_nominal_depth=8
                 aros_kernel_ar="ar"
                 aros_kernel_ar_flags="-cr"
@@ -8472,7 +8442,6 @@ case "$target_os" in
                 ;;
             *x86_64*)
                 aros_config_cflags="$aros_config_cflags -fno-omit-frame-pointer"
-                aros_config_cxxflags="$aros_config_cxxflags -fno-omit-frame-pointer"
                 aros_target_cpu="x86_64"
                 aros_object_format="elf_x86_64"
                 aros_target_mkdep="$aros_target_mkdep -D__GNUC__ -Dx86_64 -D__DragonFly__"
@@ -8554,7 +8523,6 @@ case "$target_os" in
                 ;;
         esac
         aros_config_cflags="$aros_config_cflags -D$aros_target_cpu"
-        aros_config_cxxflags="$aros_config_cxxflags -D$aros_target_cpu"
         aros_flavour="emulation"
         ;;
 
@@ -8579,9 +8547,7 @@ case "$target_os" in
         aros_nominal_width=1024
         aros_nominal_height=768
         aros_nominal_depth=24
-        aros_isa_flags="$aros_isa_flags -mcpu=440fp -mno-toc"
-        aros_config_cflags="$aros_config_cflags -fno-asynchronous-unwind-tables"
-        aros_config_cxxflags="$aros_config_cxxflags -fno-asynchronous-unwind-tables"
+        aros_config_cflags="$aros_config_cflags -mcpu=440fp -mno-toc -fno-asynchronous-unwind-tables"
         gcc_target_cpu="powerpc"
         ;;
 
@@ -8598,10 +8564,8 @@ case "$target_os" in
         aros_arch_libs="-laeabi"
         gcc_default_cpu="armv7-a"
         gcc_default_fpu="vfpv3"
-        aros_isa_flags="$aros_isa_flags -mtune=cortex-a8"
-        aros_config_cflags="$aros_config_cflags -fno-strict-aliasing -fno-asynchronous-unwind-tables"
-        aros_config_cxxflags="$aros_config_cxxflags -fno-strict-aliasing -fno-asynchronous-unwind-tables"
-        aros_config_aflags="$aros_config_aflags -fno-strict-aliasing -fno-asynchronous-unwind-tables"
+        aros_config_cflags="$aros_config_cflags -mtune=cortex-a8 -fno-strict-aliasing -fno-asynchronous-unwind-tables"
+        aros_config_aflags="$aros_config_aflags -mtune=cortex-a8 -fno-strict-aliasing -fno-asynchronous-unwind-tables"
         aros_optimization_cflags="$aros_optimization_cflags -Os"
         case "$target_cpu" in
             *armhf*)
@@ -8628,21 +8592,16 @@ case "$target_os" in
         aros_kernel_ldflags=""
         aros_nominal_width=640
         aros_nominal_height=480
-        aros_isa_flags="$aros_isa_flags -mno-toc"
-        aros_config_cflags="$aros_config_cflags -fno-asynchronous-unwind-tables"
-        aros_config_cxxflags="$aros_config_cxxflags -fno-asynchronous-unwind-tables"
+        aros_config_cflags="$aros_config_cflags -mno-toc -fno-asynchronous-unwind-tables"
         gcc_target_cpu="powerpc"
         case "$aros_target_variant" in
             efika)
-                aros_isa_flags="$aros_isa_flags -mcpu=603e"
-                aros_config_cflags="$aros_config_cflags -DBIG_ENDIAN_OHCI=1"
-                aros_config_cxxflags="$aros_config_cxxflags -DBIG_ENDIAN_OHCI=1"
+                aros_config_cflags="$aros_config_cflags -DBIG_ENDIAN_OHCI=1 -mcpu=603e"
             ;;
         esac
         ;;
 
     r*pi)
-        PLATFORM_EXECSMP="#define __AROSPLATFORM_SMP__"
         aros_flavour="standalone"
         aros_target_arch="raspi"
 
@@ -8661,11 +8620,10 @@ case "$target_os" in
                 gcc_default_cpu="armv6zk"
                 gcc_default_cpu_tune="arm1176jzf-s"
                 aros_object_format="armelf_aros"
-                aros_isa_flags="$aros_isa_flags -marm"
-                aros_config_cflags="$aros_config_cflags"
-                aros_config_cxxflags="$aros_config_cxxflags"
+                aros_config_cflags="$aros_config_cflags -marm"
                 aros_config_aflags="$aros_config_aflags -marm"
                 aros_kernel_cflags="$aros_kernel_cflags -marm"
+                aros_target_cflags="$aros_kernel_cflags -marm"
                 aros_target_mkdep="$aros_target_mkdep -Darm"
                 aros_arch_libs="-laeabi"
                 ;;
@@ -8674,11 +8632,10 @@ case "$target_os" in
                 gcc_default_cpu="armv6zk"
                 gcc_default_cpu_tune="arm1176jzf-s"
                 aros_object_format="armelf_aros"
-                aros_isa_flags="$aros_isa_flags -marm"
-                aros_config_cflags="$aros_config_cflags"
-                aros_config_cxxflags="$aros_config_cxxflags"
+                aros_config_cflags="$aros_config_cflags -marm"
                 aros_config_aflags="$aros_config_aflags -marm"
                 aros_kernel_cflags="$aros_kernel_cflags -marm"
+                aros_target_cflags="$aros_kernel_cflags -marm"
                 aros_target_mkdep="$aros_target_mkdep -Darm"
                 aros_arch_libs="-laeabi"
                 ;;
@@ -8687,10 +8644,10 @@ case "$target_os" in
                 ;;
         esac
 
-        aros_config_cflags="$aros_config_cflags -fno-asynchronous-unwind-tables -fno-exceptions"
-        aros_config_cxxflags="$aros_config_cxxflags -fno-asynchronous-unwind-tables -fno-exceptions"
-        aros_config_aflags="$aros_config_aflags -fno-asynchronous-unwind-tables -fno-exceptions"
-        aros_kernel_cflags="$aros_kernel_cflags -fno-asynchronous-unwind-tables -fno-exceptions"
+        aros_config_cflags="$aros_config_cflags -Wno-error -fno-asynchronous-unwind-tables -fno-exceptions"
+        aros_config_aflags="$aros_config_aflags -Wno-error -fno-asynchronous-unwind-tables -fno-exceptions"
+        aros_kernel_cflags="$aros_kernel_cflags -Wno-error -fno-asynchronous-unwind-tables -fno-exceptions"
+        aros_target_cflags="$aros_kernel_cflags -Wno-error -fno-asynchronous-unwind-tables -fno-exceptions"
 
         case "$aros_target_variant" in
             smp)
@@ -8707,10 +8664,14 @@ case "$target_os" in
         aros_object_format="armelf_aros"
         aros_shared_default="no"
 
+        # stm32f7 has DSP opcode support
         gcc_default_cpu="armv7e-m"
+        # gcc_default_cpu="armv7-m"
         gcc_default_cpu_tune="cortex-m7"
-        gcc_default_fpu="fpv5-sp-d16"
-        gcc_default_float_abi="hard"
+        gcc_default_fpu="fpv4-sp-d16"
+        # GCC does not recognize fpv5-sp-d16 which should be the correct one to use, or not...
+        # gcc_default_fpu="fpv5-sp-d16"
+		gcc_default_float_abi="hard"
 
         aros_target_mkdep="$aros_target_mkdep -D__GNUC__ -Dthumb"
         ;;
@@ -8734,7 +8695,6 @@ fi
                 gcc_target_cpu="m68000"
                 aros_nowarn_flags="$aros_nowarn_flags NOWARN_VOLATILE_REGISTER_VAR"
                 aros_config_cflags="$aros_config_cflags -fno-strict-aliasing -ffreestanding -fomit-frame-pointer -fbuiltin -DNOLIBINLINE"
-                aros_config_cxxflags="$aros_config_cxxflags -fno-strict-aliasing -ffreestanding -fomit-frame-pointer -fbuiltin -DNOLIBINLINE"
                 aros_optimization_cflags="$aros_optimization_cflags -Os"
                 aros_config_aflags="$aros_config_aflags"
                 aros_target_strip_flags="-R.comment --strip-debug"
@@ -8776,7 +8736,6 @@ fi
                 aros_object_format="elf_x86_64"
                 aros_target_mkdep="$aros_target_mkdep -D__GNUC__ -Dx86_64"
                 aros_config_cflags="$aros_config_cflags -fno-omit-frame-pointer"
-                aros_config_cxxflags="$aros_config_cxxflags -fno-omit-frame-pointer"
                 aros_nominal_depth=8
                 kernel_tool_prefix="x86_64-w64-mingw32-"
                 ;;
@@ -8966,7 +8925,7 @@ $as_echo "$AROS_CROSSTOOLSDIR" >&6; }
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking If we need to use --sysroot" >&5
 $as_echo_n "checking If we need to use --sysroot... " >&6; }
 if test "$toolchain_needs_sysroot" = "yes" ; then
-    aros_config_sysroot="--sysroot $AROS_BUILDDIR_UNIX/bin/${aros_target_arch}-${aros_target_cpu}${aros_target_suffix}/AROS/Developer"
+    aros_config_sysroot="--sysroot $AROS_BUILDDIR_UNIX/bin/${aros_target_arch}-${aros_target_cpu}${aros_target_suffix}/AROS/Development"
 fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $toolchain_needs_sysroot" >&5
 $as_echo "$toolchain_needs_sysroot" >&6; }
@@ -9066,11 +9025,11 @@ $as_echo "$target_gcc_version" >&6; }
         case "$aros_target_cpu" in
         *x86_64*)
             aros_kernel_cflags="$aros_kernel_cflags -mno-ms-bitfields"
-            aros_isa_flags="$aros_isa_flags -mno-ms-bitfields"
+            aros_target_cflags="$aros_target_cflags -mno-ms-bitfields"
             ;;
         i386)
             aros_kernel_cflags="$aros_kernel_cflags -mno-ms-bitfields"
-            aros_isa_flags="$aros_isa_flags -mno-ms-bitfields"
+            aros_target_cflags="$aros_target_cflags -mno-ms-bitfields"
             ;;
         esac
     fi
@@ -9186,7 +9145,7 @@ $as_echo "$aros_target_cpu_mode" >&6; }
     case "$aros_target_cpu_mode" in
     arm32)
         gcc_default_mode="arm"
-        aros_isa_flags="$aros_isa_flags -m$gcc_default_mode -mthumb-interwork -march=$aros_gcc_cpu -mfpu=$aros_gcc_fpu -mfloat-abi=$aros_gcc_float_abi"
+        aros_isa_flags="-m$gcc_default_mode -mthumb-interwork -march=$aros_gcc_cpu -mfpu=$aros_gcc_fpu -mfloat-abi=$aros_gcc_float_abi"
     ;;
     arm64)
         as_fn_error $? "ARM 64-bit mode is unsupported" "$LINENO" 5
@@ -9200,7 +9159,7 @@ $as_echo "$aros_target_cpu_mode" >&6; }
     thumb2)
         gcc_default_mode="thumb"
         # Do not specify -mthumb-interwork as it may add extra code to support arm/thumb interwork
-        aros_isa_flags="$aros_isa_flags -m$gcc_default_mode -march=$aros_gcc_cpu -mfpu=$aros_gcc_fpu -mfloat-abi=$aros_gcc_float_abi"
+        aros_isa_flags="-m$gcc_default_mode -march=$aros_gcc_cpu -mfpu=$aros_gcc_fpu -mfloat-abi=$aros_gcc_float_abi"
     ;;
     *)
         as_fn_error $? "Unsupported ARM mode specified $aros_target_cpu_mode" "$LINENO" 5
@@ -9208,11 +9167,10 @@ $as_echo "$aros_target_cpu_mode" >&6; }
     esac
 
     aros_config_cflags="$aros_config_cflags -fno-asynchronous-unwind-tables -fno-exceptions"
-    aros_config_cxxflags="$aros_config_cxxflags -fno-asynchronous-unwind-tables -fno-exceptions"
     aros_config_aflags="$aros_config_aflags -fno-asynchronous-unwind-tables -fno-exceptions"
     ;;
 i386)
-    aros_isa_flags="$aros_isa_flags -m32 -march=i486"
+    aros_isa_flags="-m32 -march=i686"
     aros_kernel_cflags="$aros_kernel_cflags $aros_isa_flags"
     aros_kernel_ldflags="$aros_kernel_ldflags -m32"
     ;;
@@ -13658,7 +13616,7 @@ aros_kernel_ar="$aros_kernel_ar $aros_kernel_ar_flags"
 
 aros_hostcfg_dir="bin/${aros_host_arch}-${aros_host_cpu}/gen/host/config"
 aros_targetcfg_dir="bin/${aros_target_arch}-${aros_target_cpu}${aros_target_suffix}/gen/config"
-aros_inc_dir="bin/${aros_target_arch}-${aros_target_cpu}${aros_target_suffix}/AROS/Developer/include/aros"
+aros_inc_dir="bin/${aros_target_arch}-${aros_target_cpu}${aros_target_suffix}/AROS/Development/include/aros"
 aros_gendir="bin/${aros_target_arch}-${aros_target_cpu}${aros_target_suffix}/gen"
 aros_geninc_dir="bin/${aros_target_arch}-${aros_target_cpu}${aros_target_suffix}/gen/include/aros"
 aros_tools_dir="bin/${aros_host_arch}-${aros_host_cpu}/tools"
@@ -13715,13 +13673,7 @@ aros_target_cpp="${prefix}${toolchain_cpp_preprocessor}"
 aros_target_cc="${prefix}${toolchain_c_compiler}"
 aros_target_cxx="${prefix}${toolchain_cxx_compiler}"
 aros_target_as="${prefix}${toolchain_as}"
-if test "${use_ld_wrapper}" = "yes"; then
-    aros_target_ld="${PWD}/${aros_tools_dir}/${aros_target_cpu}-${aros_target_arch}${aros_target_suffix}-aros-${aros_ld}"
-else
-    aros_target_ld="${prefix}${toolchain_ld}"
-fi
-aros_toolchain_ld="${prefix}${toolchain_ld}"
-
+aros_target_ld="${PWD}/${aros_tools_dir}/${aros_target_cpu}-${aros_target_arch}${aros_target_suffix}-aros-${toolchain_ld}"
 aros_target_ar="${prefix}${toolchain_ar} $aros_target_ar_flags"
 aros_target_objcopy="${prefix}${toolchain_objcopy}"
 aros_target_objdump="${prefix}${toolchain_objdump}"
@@ -14879,7 +14831,6 @@ fi
 
 
 
-
 # Compatability with other Amiga-like operation systems
 
 
@@ -14985,7 +14936,6 @@ fi
 
 
 
-
 # Hosted Graphics Related
 
 
@@ -15005,7 +14955,6 @@ fi
 
 
 # Native version related
-
 
 
 
@@ -15116,16 +15065,15 @@ ac_config_headers="$ac_config_headers ${aros_geninc_dir}/host-conf.h:config/host
 # Generic build tools (metamake, etc)
 ac_config_commands="$ac_config_commands genmf-executable-support"
 
-ac_config_files="$ac_config_files Makefile config/make.cfg ${aros_inc_dir}/config.h:config/config.h.in ${aros_geninc_dir}/config.h:config/config.h.in ${aros_hostcfg_dir}/host.cfg:config/host.cfg.in ${aros_targetcfg_dir}/target.cfg:config/target.cfg.in ${aros_targetcfg_dir}/build.cfg:config/build.cfg.in mmake.config compiler/include/geninc.cfg:compiler/include/geninc.cfg.in ${aros_targetcfg_dir}/make.defaults:config/make.defaults.in ${aros_tools_dir}/genmf.py:tools/genmf/genmf.py ${AROS_CROSSTOOLSDIR}/${aros_target_cpu}-aros-uname:scripts/uname.in tools/collect-aros/env.h"
+ac_config_files="$ac_config_files Makefile config/make.cfg ${aros_inc_dir}/config.h:config/config.h.in ${aros_geninc_dir}/config.h:config/config.h.in ${aros_hostcfg_dir}/host.cfg:config/host.cfg.in ${aros_targetcfg_dir}/target.cfg:config/target.cfg.in ${aros_targetcfg_dir}/build.cfg:config/build.cfg.in mmake.config ${aros_targetcfg_dir}/make.defaults:config/make.defaults.in ${aros_tools_dir}/genmf.py:tools/genmf/genmf.py tools/collect-aros/env.h"
 
 
 # Binutils
 ac_config_commands="$ac_config_commands binutils-support"
 
-if test "${use_ld_wrapper}" = "yes"; then
-    ac_config_files="$ac_config_files ${aros_tools_dir}/${aros_target_cpu}-${aros_target_arch}${aros_target_suffix}-aros-${aros_ld}:scripts/aros-ld.in"
+ac_config_files="$ac_config_files ${aros_tools_dir}/${aros_target_cpu}-${aros_target_arch}${aros_target_suffix}-aros-ld:scripts/aros-ld.in"
 
-fi
+
 # Bare Elf support script and spec
 if test "${use_kernel_cc_wrapper}" = "yes"; then
     ac_config_commands="$ac_config_commands elf-compiler-support"
@@ -15840,10 +15788,7 @@ cat >>$CONFIG_STATUS <<_ACEOF || ac_write_fail=1
 #
 # INIT-COMMANDS
 #
-
-        AROS_CROSSTOOLSDIR=${AROS_CROSSTOOLSDIR}
-        aros_tools_dir=${aros_tools_dir}
-
+aros_tools_dir=${aros_tools_dir}
 
 
         aros_host_exe_suffix=${aros_host_exe_suffix}
@@ -15897,13 +15842,11 @@ do
     "${aros_targetcfg_dir}/target.cfg") CONFIG_FILES="$CONFIG_FILES ${aros_targetcfg_dir}/target.cfg:config/target.cfg.in" ;;
     "${aros_targetcfg_dir}/build.cfg") CONFIG_FILES="$CONFIG_FILES ${aros_targetcfg_dir}/build.cfg:config/build.cfg.in" ;;
     "mmake.config") CONFIG_FILES="$CONFIG_FILES mmake.config" ;;
-    "compiler/include/geninc.cfg") CONFIG_FILES="$CONFIG_FILES compiler/include/geninc.cfg:compiler/include/geninc.cfg.in" ;;
     "${aros_targetcfg_dir}/make.defaults") CONFIG_FILES="$CONFIG_FILES ${aros_targetcfg_dir}/make.defaults:config/make.defaults.in" ;;
     "${aros_tools_dir}/genmf.py") CONFIG_FILES="$CONFIG_FILES ${aros_tools_dir}/genmf.py:tools/genmf/genmf.py" ;;
-    "${AROS_CROSSTOOLSDIR}/${aros_target_cpu}-aros-uname") CONFIG_FILES="$CONFIG_FILES ${AROS_CROSSTOOLSDIR}/${aros_target_cpu}-aros-uname:scripts/uname.in" ;;
     "tools/collect-aros/env.h") CONFIG_FILES="$CONFIG_FILES tools/collect-aros/env.h" ;;
     "binutils-support") CONFIG_COMMANDS="$CONFIG_COMMANDS binutils-support" ;;
-    "${aros_tools_dir}/${aros_target_cpu}-${aros_target_arch}${aros_target_suffix}-aros-${aros_ld}") CONFIG_FILES="$CONFIG_FILES ${aros_tools_dir}/${aros_target_cpu}-${aros_target_arch}${aros_target_suffix}-aros-${aros_ld}:scripts/aros-ld.in" ;;
+    "${aros_tools_dir}/${aros_target_cpu}-${aros_target_arch}${aros_target_suffix}-aros-ld") CONFIG_FILES="$CONFIG_FILES ${aros_tools_dir}/${aros_target_cpu}-${aros_target_arch}${aros_target_suffix}-aros-ld:scripts/aros-ld.in" ;;
     "elf-compiler-support") CONFIG_COMMANDS="$CONFIG_COMMANDS elf-compiler-support" ;;
     "${aros_targetcfg_dir}/elf-specs") CONFIG_FILES="$CONFIG_FILES ${aros_targetcfg_dir}/elf-specs:${elf_specs_in}" ;;
     "${aros_tools_dir}/${aros_target_cpu}-${aros_target_arch}${aros_target_suffix}-elf-gcc") CONFIG_FILES="$CONFIG_FILES ${aros_tools_dir}/${aros_target_cpu}-${aros_target_arch}${aros_target_suffix}-elf-gcc:scripts/elf-gcc.in" ;;
@@ -16464,10 +16407,7 @@ $as_echo "$as_me: executing $ac_file commands" >&6;}
 
 
   case $ac_file$ac_mode in
-    "genmf-executable-support":C)
-        chmod a+x ${AROS_CROSSTOOLSDIR}/${aros_target_cpu}-aros-uname
-        chmod a+x ${aros_tools_dir}/genmf.py
-     ;;
+    "genmf-executable-support":C) chmod a+x ${aros_tools_dir}/genmf.py ;;
     "binutils-support":C)
         prefix=${PWD}/${aros_tools_dir}/${aros_target_cpu}-${aros_target_arch}${aros_target_suffix}
         mkdir -p $prefix

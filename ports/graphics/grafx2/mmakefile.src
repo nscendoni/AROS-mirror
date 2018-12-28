@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 52341 2016-03-29 03:46:55Z NicJA $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- ports-graphics : ports-graphics-grafx2
 
@@ -18,13 +18,12 @@ include $(SRCDIR)/config/aros-contrib.cfg
 REPOSITORIES := http://pulkomandy.tk/projects/GrafX2/downloads
 ARCHBASE     := grafx2-2.4.2035-src
 TARGETDIR    := $(AROS_CONTRIB)/MultiMedia/Gfx/GrafX2
-SDL_PREFIX   := $(AROS_DEVELOPER)
-
-NOWARN_FLAGS := $(NOWARN_MISLEADING_INDENTATION) $(NOWARN_UNUSED_BUT_SET_VARIABLE) $(NOWARN_CPP) $(NOWARN_FORMAT)
+SDL_PREFIX   := $(AROS_DEVELOPMENT)
+NOWARN_FLAGS := $(NOWARN_MISLEADING_INDENTATION) $(NOWARN_CPP)
 USER_CFLAGS  := $(NOWARN_FLAGS) $(shell $(SDL_PREFIX)/bin/sdl-config --prefix=$(SDL_PREFIX) --cflags) \
-    -D__ENABLE_LUA__
-USER_INCLUDES:= -I$(AROS_INCLUDES)/lua -I$(AROS_CONTRIB_INCLUDES)
-USER_LDFLAGS := -L$(AROS_CONTRIB_LIB)
+    -I$(AROS_DEVELOPMENT)/include/lua \
+    -D__ENABLE_LUA__ -Wno-unused-but-set-variable \
+    
 
 FILES := \
 	main \

@@ -3,7 +3,7 @@
     This file is part of the Wanderer Preferences program, which is distributed
     under the terms of version 2 of the GNU General Public License.
 
-    $Id$
+    $Id: locale.c 52450 2016-03-30 16:21:07Z mazze $
 */
 
 #include <exec/types.h>

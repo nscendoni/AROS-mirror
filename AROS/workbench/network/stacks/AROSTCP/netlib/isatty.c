@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: isatty.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      isatty.c - check is a file is a terminal (interactive) or not (SAS/C)
  *

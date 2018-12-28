@@ -1,6 +1,6 @@
 /*
     Copyright © 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bcpl_support.c 44786 2012-05-10 17:34:20Z jmcmullan $
 
     Desc: BCPL support
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: timer_init.c 47625 2013-07-03 18:00:13Z twilen $
 
     Desc: Timer startup and device commands
 */

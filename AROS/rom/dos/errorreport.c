@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: errorreport.c 49950 2015-01-27 03:03:21Z jmcmullan $
 
     Desc:
     Lang: English

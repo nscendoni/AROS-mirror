@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: playossunix.c 30792 2009-03-07 22:40:04Z neil $
     
     Demo for oss.library to playback audio samples.
     It can play raw audio files containing 16 bit signed PCM data in little endian format.

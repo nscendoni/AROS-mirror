@@ -2,7 +2,7 @@
 #define EXEC_MEMHEADEREXT_H
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: memheaderext.h 30800 2009-03-08 17:28:50Z neil $
 
     Desc: Extended memory handling. New in AROS.
     Lang: english

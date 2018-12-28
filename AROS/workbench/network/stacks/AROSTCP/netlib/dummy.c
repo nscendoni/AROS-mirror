@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: dummy.c 37529 2011-03-14 06:53:29Z sonic $
  *
  *      dummy.c - unimplemented netdb functions 
  *

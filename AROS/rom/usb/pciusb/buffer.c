@@ -1,4 +1,3 @@
-#include <aros/debug.h>
 #include <devices/usbhardware.h>
 #include <exec/memory.h>
 #include <proto/exec.h>
@@ -9,13 +8,13 @@ APTR usbGetBuffer(APTR data, ULONG len, UWORD dir)
 {
     APTR ret = data;
 
-    if (len && (((IPTR)data + len - 1) >> 32) != 0)
+    if (((IPTR)data + len - 1) >> 32)
     {
     	ret = AllocVec(len, MEMF_31BIT|MEMF_PUBLIC);
 
 	if (ret && (dir == UHDIR_OUT))
 	    CopyMem(data, ret, len);
-   }
+    }
 
     return ret;
 }
@@ -24,8 +23,8 @@ void usbReleaseBuffer(APTR buffer, APTR data, ULONG len, UWORD dir)
 {
     if (buffer && (buffer != data))
     {
-        if (len && (dir == UHDIR_IN))
-            CopyMem(buffer, data, len);
+    	if (len && (dir == UHDIR_IN))
+    	    CopyMem(buffer, data, len);
 
     	FreeVec(buffer);
     }

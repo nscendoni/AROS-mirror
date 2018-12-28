@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support.c 51744 2016-03-10 00:57:29Z NicJA $
 
     Miscellaneous support functions.
 */

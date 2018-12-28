@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: startup.c 51054 2015-08-31 14:50:49Z NicJA $
 */
 
 /*
@@ -23,7 +23,7 @@
 #include <aros/symbolsets.h>
 #include <graphics/driver.h>
 #include <graphics/gfxbase.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <hidd/hidd.h>
 #include <hidd/keyboard.h>
 #include <hidd/mouse.h>

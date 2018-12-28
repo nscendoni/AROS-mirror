@@ -4,19 +4,6 @@
 #ifndef __EXEC_PLATFORM_H
 #define __EXEC_PLATFORM_H
 
-/*
- * EXPERIMENTAL & Broken:
- * undefine to use semaphore protection instead of
- * Forbid()/Permit() for system memory allocation routines.
- *
- * Many AmigaOS programs assume forbid state won't get broken.
- */
-
-//#define __AROSEXEC_BROKENMEMLOCK__
-
-/* the default Quantum value to use .. */
-#define SCHEDQUANTUM_VALUE      4
-
 struct Exec_PlatformData
 {
     /* No platform-specific data by default */
@@ -44,10 +31,6 @@ struct Exec_PlatformData
 #define FLAG_SCHEDDISPATCH_CLEAR        AROS_ATOMIC_AND(SysBase->AttnResched, ~ARF_AttnDispatch)
 #define FLAG_SCHEDDISPATCH_SET          AROS_ATOMIC_OR(SysBase->AttnResched, ARF_AttnDispatch)
 #endif
-#define SCHEDQUANTUM_SET(val)           (SysBase->Quantum=(val))
-#define SCHEDQUANTUM_GET                (SysBase->Quantum)
-#define SCHEDELAPSED_SET(val)           (SysBase->Elapsed=(val))
-#define SCHEDELAPSED_GET                (SysBase->Elapsed)
 #define IDNESTCOUNT_GET                 (SysBase->IDNestCnt)
 #define IDNESTCOUNT_SET(val)            (SysBase->IDNestCnt=(val))
 #define TDNESTCOUNT_GET                 (SysBase->TDNestCnt)

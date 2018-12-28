@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: libcall.h 33636 2010-06-17 17:14:53Z mazze $
 */
 
 #ifndef AROS_LIBCALL_H
@@ -9,7 +9,7 @@
 /******************************************************************************
 
     MODUL
-	$Id$
+	$Id: libcall.h 33636 2010-06-17 17:14:53Z mazze $
 
     DESCRIPTION
 	Some macros to build functions with registerized parameters on the

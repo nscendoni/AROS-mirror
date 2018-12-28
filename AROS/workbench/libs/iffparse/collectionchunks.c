@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: collectionchunks.c 52756 2016-06-10 17:06:26Z neil $
 */
 
 #define DEBUG 0
@@ -57,7 +57,7 @@
 
 #if DEBUG
     {
-    const LONG * lptr = propArray;
+    LONG * lptr = propArray;
     bug ("CollectionChunks (iff=%p, [\n", iff);
     for (count = 0; count < numPairs; count++)
     {

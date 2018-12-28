@@ -3,7 +3,7 @@
     This file is part of the IconImage class, which is distributed under
     the terms of version 2.1 of the GNU Lesser General Public License.
     
-    $Id$
+    $Id: iconimage.c 45172 2012-07-06 12:05:19Z twilen $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

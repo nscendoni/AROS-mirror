@@ -1,6 +1,6 @@
 /*
-    Copyright © 2003-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2003-2014, The AROS Development Team. All rights reserved.
+    $Id: smproperties.c 52820 2016-08-01 19:59:16Z deadwood $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG
@@ -288,7 +288,7 @@ IPTR ScreenModeProperties__OM_SET(Class *CLASS, Object *self, struct opSet *mess
                     data->VariableDepth = TRUE;
                     GetAttr(MUIA_Numeric_Value, data->depth, &val);
                     /* Original AmigaOS screenmode prefs do not allow to change depth for CyberGFX
-                     * screenmodes if it is high or true color screenmode */
+                     * screnmodes if it is high or true color screenmode. */
                     if (dim.MaxDepth > 8)
                     {
                         data->VariableDepth = FALSE;
@@ -347,7 +347,7 @@ IPTR ScreenModeProperties__OM_SET(Class *CLASS, Object *self, struct opSet *mess
                 width = tag->ti_Data;
 
                 D(bug("[smproperties] Set Width = %ld\n", width));
-                if ((WORD)width == STDSCREENWIDTH)
+                if (width == -1)
                     width = data->DefWidth;
                 else
                     width = AdjustWidth(width, data);
@@ -366,7 +366,7 @@ IPTR ScreenModeProperties__OM_SET(Class *CLASS, Object *self, struct opSet *mess
                 height = tag->ti_Data;
 
                 D(bug("[smproperties] Set Height = %ld\n", height));
-                if ((WORD)height == STDSCREENHEIGHT)
+                if (height == -1)
                     height = data->DefHeight;
                 else
                     height = AdjustHeight(height, data);
@@ -426,14 +426,6 @@ IPTR ScreenModeProperties__OM_GET(Class *CLASS, Object *self, struct opGet *mess
         
         case MUIA_ScreenModeProperties_Autoscroll:
             *message->opg_Storage = XGET(data->autoscroll, MUIA_Selected);
-            break;
-        
-        case MUIA_ScreenModeProperties_DefWidth:
-            *message->opg_Storage = data->DefWidth;
-            break;
-        
-        case MUIA_ScreenModeProperties_DefHeight:
-            *message->opg_Storage = data->DefHeight;
             break;
         
         default:

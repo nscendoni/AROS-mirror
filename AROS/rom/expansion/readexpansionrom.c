@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: readexpansionrom.c 47627 2013-07-03 20:56:37Z mazze $
 
     Desc:
     Lang: english

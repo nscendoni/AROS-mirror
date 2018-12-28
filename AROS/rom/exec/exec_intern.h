@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: exec_intern.h 50740 2015-05-20 22:30:48Z NicJA $
 
     Desc: Private data belonging to exec.library
     Lang:
@@ -21,9 +21,6 @@
 #if defined(__AROSEXEC_SMP__)
 #include <aros/types/spinlock_s.h>
 #endif
-
-#define __KERNEL_NOLIBBASE__
-#include <proto/kernel.h>
 
 #define ALERT_BUFFER_SIZE 2048
 
@@ -50,7 +47,16 @@ struct IntExecBase
     struct Interrupt            WarmResetHandler;               /* Reset handler that causes warm reboot                        */
     struct Interrupt            ShutdownHandler;                /* Reset handler that halts CPU                                 */
     struct MinList              AllocMemList;                   /* Mungwall allocations list                                    */
+    struct SignalSemaphore      MemListSem;                     /* Memory list protection semaphore                             */
     struct SignalSemaphore      LowMemSem;                      /* Lock for single-threading low memory handlers                */
+#if defined(__AROSEXEC_SMP__)
+    spinlock_t                  TaskRunningSpinLock;
+    struct List                 TaskRunning;                    /* Tasks that are running on CPUs                               */
+    spinlock_t                  TaskSpinningLock;
+    struct List                 TaskSpinning;                   /* Tasks that are spinning waiting for a lock                   */
+    spinlock_t                  TaskReadySpinLock;
+    spinlock_t                  TaskWaitSpinLock;
+#endif
     APTR                        KernelBase;                     /* kernel.resource base                                         */
     struct Library              *DebugBase;                     /* debug.library base                                           */
     ULONG                       PageSize;                       /* Memory page size                                             */
@@ -61,43 +67,16 @@ struct IntExecBase
     struct Exec_PlatformData    PlatformData;                   /* Platform-specific stuff                                      */
     struct SupervisorAlertTask  SAT;
     char                        AlertBuffer[ALERT_BUFFER_SIZE]; /* Buffer for alert text                                        */
-#if defined(__AROSEXEC_BROKENMEMLOCK__)
-    struct SignalSemaphore      MemListSem;                     /* Memory list protection semaphore                             */
-#elif defined(__AROSEXEC_SMP__)
-    void *                      ExecLockBase;
-    cpumask_t                   *CPUMask;                       /* bitmap of online core                                        */
-    spinlock_t                  MemListSpinLock;
-    /* First the locks for arbitration of public resources ... */
-    spinlock_t                  ResourceListSpinLock;
-    spinlock_t                  DeviceListSpinLock;
-    spinlock_t                  IntrListSpinLock;
-    spinlock_t                  LibListSpinLock;
-    spinlock_t                  PortListSpinLock;
-    spinlock_t                  SemListSpinLock;
-
-    /* .. and then scheduling related locks ... */
-    spinlock_t                  TaskRunningSpinLock;
-    struct List                 TaskRunning;                    /* Tasks that are currently running on available CPUs           */
-    spinlock_t                  TaskSpinningLock;
-    struct List                 TaskSpinning;                   /* Tasks that are spinning waiting for a lock                   */
-    spinlock_t                  TaskReadySpinLock;
-    spinlock_t                  TaskWaitSpinLock;
-#endif
 };
 
-#define PrivExecBase(base)      ((struct IntExecBase *)(base))
+#define PrivExecBase(base)      ((struct IntExecBase *)base)
 #define PD(base)                PrivExecBase(base)->PlatformData
-#ifndef __AROS_KERNEL__
 #define KernelBase              PrivExecBase(SysBase)->KernelBase
-#else
-#define __kernelBase              PrivExecBase(SysBase)->KernelBase
-#endif
 #define DebugBase               PrivExecBase(SysBase)->DebugBase
 
 /* IntFlags */
 #define EXECF_MungWall          0x0001                          /* This flag can't be changed at runtime                        */
 #define EXECF_StackSnoop        0x0002
-#define EXECF_CPUAffinity       0x0004                          /* Set once the CPU affinity masks should be used               */
 
 /* Additional private task states */
 #define TS_SERVICE              128

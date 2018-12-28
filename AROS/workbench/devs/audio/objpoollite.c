@@ -1,6 +1,6 @@
 /*
      Copyright 2010, The AROS Development Team. All rights reserved.
-     $Id$
+     $Id: objpoollite.c 33712 2010-06-26 20:27:35Z deadwood $
  */
 
 /*
@@ -9,7 +9,7 @@
  * by Nexus Development 2003
  * coded by Emanuele Cesaroni
  *
- * $Id$
+ * $Id: objpoollite.c 33712 2010-06-26 20:27:35Z deadwood $
  */
 
 #include	"audio_intern.h"

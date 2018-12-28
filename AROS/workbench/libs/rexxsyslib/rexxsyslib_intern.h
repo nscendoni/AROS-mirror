@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: rexxsyslib_intern.h 45533 2012-08-13 01:42:18Z jmcmullan $
 */
 
 #ifndef REXXSYSLIB_INTERN_H

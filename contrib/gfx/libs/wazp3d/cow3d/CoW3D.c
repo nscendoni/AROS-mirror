@@ -633,7 +633,7 @@ UBYTE drawname[10];
 	if (++FramesCounted >= (FRAMESCOUNT*2)) 			/* ie after the object turned two times  */
 	{
       now  = clock();
-      FPS = (now - last > 0) ? ((FRAMESCOUNT*2)*CLOCKS_PER_SEC) / (now-last) : 0;
+      FPS = ((FRAMESCOUNT*2)*CLOCKS_PER_SEC) / (now-last) ;
       last = now; FramesCounted = 0;
 	printf("%s\n",FpsText);
 

@@ -53,7 +53,6 @@ the existing commercial status of Directory Opus 5.
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stddef.h>
-#include <stdio.h>
 #include <exec/types.h>
 #include <exec/memory.h>
 #include <exec/execbase.h>

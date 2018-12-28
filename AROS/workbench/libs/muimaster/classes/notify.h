@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2002-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: notify.h 45871 2012-10-08 13:54:39Z neil $
 */
 
 struct MUI_NotifyData

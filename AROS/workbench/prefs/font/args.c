@@ -1,6 +1,6 @@
 /*
     Copyright © 2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: args.c 32284 2010-01-05 16:27:00Z mazze $
 */
 
 #include <dos/rdargs.h>

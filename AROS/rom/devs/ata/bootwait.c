@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bootwait.c 48396 2013-11-08 07:07:27Z neil $
 */
 
 #include <aros/asmcall.h>
@@ -12,12 +12,6 @@
 #include LC_LIBDEFS_FILE
 
 #include "ata.h"
-
-#if defined(__AROSPLATFORM_SMP__)
-#include <aros/types/spinlock_s.h>
-#include <proto/execlock.h>
-#include <resources/execlock.h>
-#endif
 
 extern const char ata_LibName[];
 extern const char ata_LibID[];
@@ -62,31 +56,9 @@ AROS_UFH3(static APTR, ata_Wait,
     AROS_USERFUNC_INIT
 
     struct ataBase *ATABase;
-#if defined(__AROSPLATFORM_SMP__)
-    void *ExecLockBase = OpenResource("execlock.resource");
-#endif
-
-#if defined(__AROSPLATFORM_SMP__)
-    if (ExecLockBase)
-        ObtainSystemLock(&SysBase->DeviceList, SPINLOCK_MODE_READ, LOCKF_FORBID);
-    else
-        Forbid();
-#else
-    Forbid();
-#endif
 
     /* We do not want to deal with IORequest and units, so just FindName() */
     ATABase = (struct ataBase *)FindName(&SysBase->DeviceList, ata_LibName);
-
-#if defined(__AROSPLATFORM_SMP__)
-    if (ExecLockBase)
-        ReleaseSystemLock(&SysBase->DeviceList, LOCKF_FORBID);
-    else
-        Permit();
-#else
-    Permit();
-#endif
-
     if (ATABase)
     {
         D(bug("[ATA  ] Waiting for device detection to complete...\n"));

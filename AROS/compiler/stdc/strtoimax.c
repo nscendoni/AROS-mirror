@@ -1,6 +1,6 @@
 /*
     Copyright © 2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: strtoimax.c 48037 2013-09-08 21:17:44Z verhaegs $
 
     C99 function strtoimax().
 */

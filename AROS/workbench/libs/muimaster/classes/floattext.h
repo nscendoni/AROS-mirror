@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2002-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: floattext.h 49607 2014-09-10 21:58:53Z mazze $
 */
 
 /*** Name *******************************************************************/

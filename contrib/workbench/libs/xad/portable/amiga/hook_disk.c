@@ -1,7 +1,7 @@
 #ifndef XADMASTER_HOOK_DISK_C
 #define XADMASTER_HOOK_DISK_C
 
-/*  $Id$
+/*  $Id: hook_disk.c 43430 2012-01-01 20:12:06Z jmcmullan $
     device IO hooks
 
     XAD library system for archive handling

@@ -62,7 +62,7 @@ AROS Vision
 `AROS Vision`__ is a distribution for M68k Amigas. To run well, it requires
 a powerful Amiga or an emulator such as WinUAE.
 
-__ http://www.aros-platform.de/download.htm
+__ http://www.natami-news.de/html/distribution_download.html
 
 
 
@@ -74,7 +74,7 @@ from the Subversion tree, and they contain the latest code. However,
 they have not been tested in any way and may contain bugs. Most of the
 time, though, they work just fine.
 
-These builds are based on sources of the new `ABI`__. **They are not 
+These builds are based ond sources of the new `ABI`__. **They are not 
 compatible with existing AROS distributions or with the AROS software
 available from The AROS Archives or Aminet.**
 
@@ -83,7 +83,7 @@ Please report bugs you may discover while using these builds through the
 through the `AROS-Exec`__ forums.
 
 __ nightly1
-__ https://en.wikipedia.org/wiki/Application_binary_interface
+__ http://en.wikipedia.org/wiki/Application_binary_interface
 __ http://sourceforge.net/p/aros/bugs/
 __ http://aros-exec.org/
 
@@ -115,6 +115,6 @@ Snapshots (ABIv0)
 =================
 
 As with the nightly builds we keep a set of `snapshots`__ which are based
-on sources of the ABIv0 branch on a separate download page.
+on sources of the ABIv0 branch on a seprate download page.
 
 __ snapshots

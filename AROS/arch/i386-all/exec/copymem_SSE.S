@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: copymem_SSE.S 49013 2014-05-18 18:18:52Z deadwood $
 */
 
 /*****************************************************************************

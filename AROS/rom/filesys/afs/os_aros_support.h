@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: os_aros_support.h 52028 2016-03-17 04:36:20Z jmcmullan $
 */
 
 #include <aros/macros.h>

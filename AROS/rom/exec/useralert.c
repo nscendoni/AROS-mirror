@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2012, The AROS Development Team. All rights reserved.
+    $Id: useralert.c 50481 2015-04-28 10:49:03Z schulz $
 
     Desc: Display an alert in user mode.
     Lang: english
@@ -12,6 +12,7 @@
 #include <intuition/intuition.h>
 #include <proto/exec.h>
 #include <proto/intuition.h>
+#include <proto/kernel.h>
 
 #include "etask.h"
 #include "exec_intern.h"

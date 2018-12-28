@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: colorwheel_intern.h 50127 2015-02-24 16:44:59Z polluks $
 
     Desc: Internal definitions for colorwheel.gadget.
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: audio_commands.c 52756 2016-06-10 17:06:26Z neil $
  */
 
 /*
@@ -9,7 +9,7 @@
  * by Nexus Development 2003
  * coded by Emanuele Cesaroni
  *
- * $Id$
+ * $Id: audio_commands.c 52756 2016-06-10 17:06:26Z neil $
  */
 
 #include "audio_intern.h"

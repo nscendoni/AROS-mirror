@@ -1,10 +1,10 @@
-# Copyright © 2009-2017, The AROS Development Team. All rights reserved.
-# $Id$
+# Copyright © 2009, The AROS Development Team. All rights reserved.
+# $Id: mmakefile.src 52941 2016-09-15 07:31:42Z mmartinka $
 
 include $(SRCDIR)/config/aros.cfg
 
-CATALOGS := czech german italian french
-# other catalogs need updating
+CATALOGS:=german czech
+# other catalogs need update to version 4
 
 %build_catalogs mmake=workbench-prefs-network-catalogs \
     catalogs=$(CATALOGS) \

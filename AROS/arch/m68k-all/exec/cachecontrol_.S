@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cachecontrol_.S 49687 2014-10-04 04:50:45Z jmcmullan $
 
     Desc: CacheControl() - Global control of the system caches.
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: i2c_init.c 34756 2010-10-15 14:58:50Z jmcmullan $
 */
 
 #include <aros/symbolsets.h>

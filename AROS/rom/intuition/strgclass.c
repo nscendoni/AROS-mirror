@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: strgclass.c 48824 2014-02-27 21:49:27Z neil $
 */
 
 #include <proto/graphics.h>

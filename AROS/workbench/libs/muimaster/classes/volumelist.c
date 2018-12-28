@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: volumelist.c 46203 2013-01-03 18:30:08Z mazze $
 */
 
 #define MUIMASTER_YES_INLINE_STDARG

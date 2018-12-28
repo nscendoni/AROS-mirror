@@ -1,6 +1,6 @@
 /*
     Copyright 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: drm_compat_funcs.h 48174 2013-09-28 19:09:29Z deadwood $
 */
 
 #ifndef _DRM_COMPAT_FUNCS_
@@ -372,50 +372,18 @@ int i2c_del_adapter(struct i2c_adapter *);
 #define jiffies get_jiffies()
 unsigned long get_jiffies();
 
-typedef struct {
-    struct MinNode wt_Node;
-    struct Task *   wt_Task;
-} waitqueue_task_t;
-
 /* Wait queue (lame) handling */
-#define init_waitqueue_head(x)  NEWLIST(x)
-#define wake_up_all(x)                          \
-    {                                           \
-        waitqueue_task_t *wt,*next;             \
-        ForeachNodeSafe(x, wt, next) {          \
-            REMOVE(wt);                         \
-            Signal(wt->wt_Task, SIGF_SINGLE);   \
-        }                                       \
-    }
+#define init_waitqueue_head(x)
+#define wake_up_all(x)
+#define wait_event(wq, condition)   \
+    { IMPLEMENT("\n"); }
 
-#define wait_event(wq, condition)       \
-    {                                   \
-        waitqueue_task_t wt;            \
-        wt.wt_Task = FindTask(NULL);    \
-        for(;;) {                       \
-            if (condition)              \
-                break;                  \
-            ADDTAIL(&wq, &wt);          \
-            Wait(SIGF_SINGLE);          \
-        }                               \
-    }
-
-#define wait_event_interruptible(wq, condition)                   \
-    ({                                                            \
-        int __ret = 0;                                            \
-        {                                                         \
-            waitqueue_task_t wt;                                  \
-            wt.wt_Task = FindTask(NULL);                          \
-            for (;;)                                              \
-            {                                                     \
-                if (condition)                                    \
-                    break;                                        \
-                ADDTAIL(&wq, &wt);                                \
-                Wait(SIGF_SINGLE);                                \
-            }                                                     \
-        }                                                         \
-        __ret;                                                    \
-    })
+#define wait_event_interruptible(wq, condition) \
+({                                              \
+    int __ret = 0;                              \
+    IMPLEMENT("\n");                            \
+    __ret;                                      \
+})
 
 /* other */
 #define do_div(n,base) ({ \

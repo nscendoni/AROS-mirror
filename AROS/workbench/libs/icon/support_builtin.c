@@ -1,6 +1,6 @@
 /*
     Copyright © 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support_builtin.c 45383 2012-08-03 14:42:09Z jmcmullan $
     
     Builtin icon images to fall back upon if on-disk icons cannot be opened.
     Icons contributed by Martin "Mason" Merz.

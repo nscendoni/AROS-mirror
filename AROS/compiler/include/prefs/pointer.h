@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pointer.h 32599 2010-02-08 15:55:20Z sonic $
 
     Desc: Pointer prefs definitions
     Lang: english

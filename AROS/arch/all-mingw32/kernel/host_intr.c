@@ -1,9 +1,7 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2014, The AROS Development Team. All rights reserved.
+    $Id: host_intr.c 49667 2014-09-30 17:35:27Z neil $
 */
-
-#define __CRT_INLINE __attribute__ ((__always_inline__))
 
 #include <stddef.h>
 #include <stdio.h>
@@ -339,9 +337,7 @@ int __declspec(dllexport) __aros core_init(unsigned int TimerPeriod)
         }
 #endif
 
-#if (0)
         MainTEB = NtCurrentTeb();
-#endif
         LastErrorPtr = MainTEB + LastErrOffset;
 
         SwitcherThread = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)TaskSwitcher, NULL, 0, &SwitcherId);
@@ -375,7 +371,7 @@ int __declspec(dllexport) __aros core_init(unsigned int TimerPeriod)
  *
  */
 
-int __declspec(dllexport) __aros KrnAllocSystemIRQ(void)
+int __declspec(dllexport) __aros KrnAllocIRQ(void)
 {
     int irq;
 
@@ -403,7 +399,7 @@ int __declspec(dllexport) __aros KrnAllocSystemIRQ(void)
 }
 
 
-void __declspec(dllexport) __aros KrnFreeSystemIRQ(unsigned char irq)
+void __declspec(dllexport) __aros KrnFreeIRQ(unsigned char irq)
 {
     AllocatedInts[irq] = 0;
 
@@ -411,12 +407,12 @@ void __declspec(dllexport) __aros KrnFreeSystemIRQ(unsigned char irq)
         Ints_Num--;
 }
 
-void *__declspec(dllexport) __aros KrnGetSystemIRQObject(unsigned char irq)
+void *__declspec(dllexport) __aros KrnGetIRQObject(unsigned char irq)
 {
     return IntObjects[irq];
 }
 
-unsigned long __declspec(dllexport) __aros KrnCauseSystemIRQ(unsigned char irq)
+unsigned long __declspec(dllexport) __aros KrnCauseIRQ(unsigned char irq)
 {
     unsigned long res;
 

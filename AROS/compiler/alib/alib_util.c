@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: alib_util.c 52027 2016-03-17 04:35:27Z jmcmullan $
 
     Internal utility functions.
 */

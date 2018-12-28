@@ -2,7 +2,7 @@
  * wumpus.c --- a faithful translation of the classic "Hunt The Wumpus" game.
  *
  * Translator: Eric S. Raymond <esr@snark.thyrsus.com>
- * Version: $Id$
+ * Version: $Id: wumpus.c 30794 2009-03-08 02:19:07Z neil $
  *
  * This was the state of the art 20 years ago, in 1972.  We've come a long
  * way, baby.

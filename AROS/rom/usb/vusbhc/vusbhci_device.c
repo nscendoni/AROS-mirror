@@ -1,6 +1,6 @@
 /*
-    Copyright © 2015-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2015-2016, The AROS Development Team. All rights reserved.
+    $Id: vusbhci_device.c 52922 2016-08-31 08:09:52Z dizzyofcrn $
 
     Desc: Virtual USB host controller
     Lang: English
@@ -30,103 +30,56 @@
 #include LC_LIBDEFS_FILE
 
 struct VUSBHCIUnit *VUSBHCI_AddNewUnit200(void);
-struct VUSBHCIUnit *VUSBHCI_AddNewUnit300(void);
 
-static void handler_task(struct Task *parent, struct VUSBHCIUnit *unit) {
-    mybug_unit(-1,("Starting %s handler task\n", unit->name));
-    mybug_unit(-1, ("Sending signal number %ld\n", unit->handler_task_sig_run));
-    Signal(parent, (1L<<unit->handler_task_sig_run) );
+static void handler_task(struct Task *parent, struct VUSBHCIBase *VUSBHCIBase) {
+    Signal(parent, SIGF_CHILD);
 
-    ULONG check_handler = 0;
+    mybug(-1,("[handler_task] Starting\n"));
 
-    unit->mp = CreateMsgPort();
-    if (unit->mp) {
-        unit->tr = (struct timerequest *)CreateIORequest(unit->mp, sizeof(struct timerequest));
-        if (unit->tr) {
-            FreeSignal(unit->mp->mp_SigBit);
-            if (!OpenDevice((STRPTR)"timer.device", UNIT_MICROHZ, (struct IORequest *)unit->tr, 0)) {
+    const char animate[4]={'/','-','\\','|'};
+    static ULONG i;
+
+    struct VUSBHCIUnit *unit = VUSBHCIBase->usbunit200;
+
+    struct timerequest *tr = NULL;
+    struct MsgPort *mp = NULL;
+
+    mp = CreateMsgPort();
+    if (mp) {
+        tr = (struct timerequest *)CreateIORequest(mp, sizeof(struct timerequest));
+        if (tr) {
+            FreeSignal(mp->mp_SigBit);
+            if (!OpenDevice((STRPTR)"timer.device", UNIT_MICROHZ, (struct IORequest *)tr, 0)) {
                 /* Allocate a signal within this task context */
-                unit->tr->tr_node.io_Message.mn_ReplyPort->mp_SigBit = SIGB_SINGLE;
-                unit->tr->tr_node.io_Message.mn_ReplyPort->mp_SigTask = FindTask(NULL);
+                tr->tr_node.io_Message.mn_ReplyPort->mp_SigBit = SIGB_SINGLE;
+                tr->tr_node.io_Message.mn_ReplyPort->mp_SigTask = FindTask(NULL);
                 /* Specify the request */
-                unit->tr->tr_node.io_Command = TR_ADDREQUEST;
+                tr->tr_node.io_Command = TR_ADDREQUEST;
 
                 /* FIXME: Use signals */
-                while(1) {
-                    //mybug(-1,("[handler_task] Ping...\n"));
-
-                    if(!unit->ctrlxfer_pending) {
-                        ObtainSemaphore(&unit->ctrlxfer_queue_lock); {
-                            ForeachNode(&unit->ctrlxfer_queue, unit->ioreq) {
-                                /* Now the iorequest lives only on our pointer */
-                                Remove(&unit->ioreq->iouh_Req.io_Message.mn_Node);
-                                mybug(-1,("[handler_task] Control transfer caught...\n"));
-                                unit->ctrlxfer_pending = TRUE;
-                                do_libusb_ctrl_transfer(unit->ioreq);
-                            }
-                        } ReleaseSemaphore(&unit->ctrlxfer_queue_lock);
+                while(VUSBHCIBase->handler_task_run) {
+                    if(unit->allocated) {
+                        //mybug(-1,("%c\b", animate[(i++)%4]));
                     }
 
-                    if(!unit->intrxfer_pending) {
-                        ObtainSemaphore(&unit->intrxfer_queue_lock); {
-                            ForeachNode(&unit->intrxfer_queue, unit->ioreq) {
-                                /* Now the iorequest lives only on our pointer */
-                                Remove(&unit->ioreq->iouh_Req.io_Message.mn_Node);
-                                unit->intrxfer_pending = TRUE;
-                                do_libusb_intr_transfer(unit->ioreq);
-                            }
-                        } ReleaseSemaphore(&unit->intrxfer_queue_lock);
-                    }
-
-                    if(!unit->bulkxfer_pending) {
-                        ObtainSemaphore(&unit->bulkxfer_queue_lock); {
-                            ForeachNode(&unit->bulkxfer_queue, unit->ioreq) {
-                                /* Now the iorequest lives only on our pointer */
-                                Remove(&unit->ioreq->iouh_Req.io_Message.mn_Node);
-                                unit->bulkxfer_pending = TRUE;
-                                do_libusb_bulk_transfer(unit->ioreq);
-                            }
-                        } ReleaseSemaphore(&unit->bulkxfer_queue_lock);
-                    }
-
-                    if(!unit->isocxfer_pending) {
-                        ObtainSemaphore(&unit->isocxfer_queue_lock); {
-                            ForeachNode(&unit->isocxfer_queue, unit->ioreq) {
-                                /* Now the iorequest lives only on our pointer */
-                                Remove(&unit->ioreq->iouh_Req.io_Message.mn_Node);
-                                unit->isocxfer_pending = TRUE;
-                                do_libusb_isoc_transfer(unit->ioreq);
-                            }
-                        } ReleaseSemaphore(&unit->isocxfer_queue_lock);
-                    }
-
-                    //Forbid();
-                    if((check_handler==0)|(unit->ctrlxfer_pending|unit->intrxfer_pending|unit->bulkxfer_pending|unit->isocxfer_pending)) {
-                        check_handler = 10;
-                        call_libusb_event_handler();
-                    }
-                    //Permit();
+                    call_libusb_event_handler();
 
                     /* Wait */
-                    unit->tr->tr_time.tv_secs = 0;
-                    unit->tr->tr_time.tv_micro = 100000;
-                    DoIO((struct IORequest *)unit->tr);
-
-                    if(check_handler>0) {
-                        check_handler--;
-                    }
+                    tr->tr_time.tv_secs = 0;
+                    tr->tr_time.tv_micro = 5000;
+                    DoIO((struct IORequest *)tr);
                 }
-                CloseDevice((struct IORequest *)unit->tr);
+                CloseDevice((struct IORequest *)tr);
             }
-            DeleteIORequest((struct IORequest *)unit->tr);
-            unit->mp->mp_SigBit = AllocSignal(-1);
+            DeleteIORequest((struct IORequest *)tr);
+            mp->mp_SigBit = AllocSignal(-1);
         }
-        DeleteMsgPort(unit->mp);
+        DeleteMsgPort(mp);
     }
 
-    mybug(-1,("Exiting %s handler task\n", unit->name));
+    mybug(-1,("[handler_task] Exiting\n"));
 
-    //Signal(parent, SIGF_CHILD);
+    Signal(parent, SIGF_CHILD);
 }
 
 static int GM_UNIQUENAME(Init)(LIBBASETYPEPTR VUSBHCIBase) {
@@ -136,15 +89,19 @@ static int GM_UNIQUENAME(Init)(LIBBASETYPEPTR VUSBHCIBase) {
         return FALSE;
     }
 
-    VUSBHCIBase->usbunit200 = VUSBHCI_AddNewUnit200();
-    if(VUSBHCIBase->usbunit200 == NULL) {
-        mybug(-1, ("[VUSBHCI] Init: Failed to create new USB2.0 unit!\n"));
-        return FALSE;
-    }
+    /* Create periodic handler task */
+    VUSBHCIBase->handler_task_run = TRUE;
+    VUSBHCIBase->handler_task = NewCreateTask(TASKTAG_NAME, "libusb handler task",
+                                              TASKTAG_PC, handler_task,
+                                              TASKTAG_ARG1, FindTask(NULL),
+                                              TASKTAG_ARG2, VUSBHCIBase,
+                                              TAG_END);
+    Wait(SIGF_CHILD);
 
-    VUSBHCIBase->usbunit300 = VUSBHCI_AddNewUnit300();
-    if(VUSBHCIBase->usbunit300 == NULL) {
-        mybug(-1, ("[VUSBHCI] Init: Failed to create new USB3.0 unit!\n"));
+    VUSBHCIBase->usbunit200 = VUSBHCI_AddNewUnit200();
+
+    if(VUSBHCIBase->usbunit200 == NULL) {
+        mybug(-1, ("[VUSBHCI] Init: Failed to create new USB unit!\n"));
         return FALSE;
     }
 
@@ -162,33 +119,35 @@ static int GM_UNIQUENAME(Open)(LIBBASETYPEPTR VUSBHCIBase, struct IOUsbHWReq *io
     ioreq->iouh_Req.io_Unit = NULL;
 
     if(unitnum == 0) {
+
         unit = VUSBHCIBase->usbunit200;
-    } else if(unitnum == 1) {
-        unit = VUSBHCIBase->usbunit300;
-    } else {
-        return FALSE;
-    }
-        
-    if(ioreq->iouh_Req.io_Message.mn_Length < sizeof(struct IOUsbHWReq)) {
-        mybug(-1, ("[VUSBHCI] Open: Invalid MN_LENGTH!\n"));
-        ioreq->iouh_Req.io_Error = IOERR_BADLENGTH;
-    }
 
-    ioreq->iouh_Req.io_Unit = NULL;
+        if(ioreq->iouh_Req.io_Message.mn_Length < sizeof(struct IOUsbHWReq)) {
+            mybug(-1, ("[VUSBHCI] Open: Invalid MN_LENGTH!\n"));
+            ioreq->iouh_Req.io_Error = IOERR_BADLENGTH;
+        }
 
-    if(unit->allocated) {
-        ioreq->iouh_Req.io_Error = IOERR_UNITBUSY;
         ioreq->iouh_Req.io_Unit = NULL;
-        mybug(-1, ("Unit already in use!\n\n"));
-        return FALSE;
-    } else {
+
+        if(unit->allocated) {
+            ioreq->iouh_Req.io_Error = IOERR_UNITBUSY;
+            ioreq->iouh_Req.io_Unit = NULL;
+            mybug(-1, ("Unit 0 already in use!\n\n"));
+            return FALSE;
+        }
+
         unit->allocated = TRUE;
         ioreq->iouh_Req.io_Unit = (struct Unit *) unit;
 
-        /* Opened ok! */
-        ioreq->iouh_Req.io_Message.mn_Node.ln_Type = NT_REPLYMSG;
-        ioreq->iouh_Req.io_Error                   = 0;
-        return TRUE;
+        if(ioreq->iouh_Req.io_Unit != NULL) {
+            /* Opened ok! */
+            ioreq->iouh_Req.io_Message.mn_Node.ln_Type = NT_REPLYMSG;
+            ioreq->iouh_Req.io_Error				   = 0;
+
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
     return FALSE;
@@ -244,7 +203,7 @@ AROS_LH1(void, BeginIO, AROS_LHA(struct IOUsbHWReq *, ioreq, A1), struct VUSBHCI
                 mybug_unit(-1, ("CMD_FLUSH\n"));
                 break;
             case UHCMD_QUERYDEVICE:
-                mybug_unit(-1, ("UHCMD_QUERYDEVICE\n"));
+                mybug_unit(0, ("UHCMD_QUERYDEVICE\n"));
                 ret = cmdQueryDevice(ioreq);
                 break;
             case UHCMD_USBRESET:
@@ -344,7 +303,7 @@ AROS_LH1(LONG, AbortIO, AROS_LHA(struct IOUsbHWReq *, ioreq, A1), struct VUSBHCI
 WORD cmdQueryDevice(struct IOUsbHWReq *ioreq) {
     struct VUSBHCIUnit *unit = (struct VUSBHCIUnit *) ioreq->iouh_Req.io_Unit;
 
-    mybug_unit(-1, ("Entering function\n"));
+    mybug_unit(0, ("Entering function\n"));
 
     struct TagItem *taglist = (struct TagItem *) ioreq->iouh_Data;
     struct TagItem *tag;
@@ -365,27 +324,19 @@ WORD cmdQueryDevice(struct IOUsbHWReq *ioreq) {
                 count++;
                 break;
             case UHA_Copyright:
-                *((STRPTR *) tag->ti_Data) = "©2015-2017 The AROS Development Team";
+                *((STRPTR *) tag->ti_Data) ="©2015-2016 The AROS Development Team";
                 count++;
                 break;
             case UHA_ProductName:
-                if(unit->roothub.devdesc.bcdUSB == AROS_WORD2LE(0x0200)) {
-                    *((STRPTR *) tag->ti_Data) = "VUSBHCI Host Controller USB2.0";
-                } else {
-                    *((STRPTR *) tag->ti_Data) = "VUSBHCI Host Controller USB3.0";
-                }
+                *((STRPTR *) tag->ti_Data) ="VUSBHCI Host Controller";
                 count++;
                 break;
             case UHA_Description:
-                *((STRPTR *) tag->ti_Data) = "Hosted Host Controller Interface (libusb)";
+                *((STRPTR *) tag->ti_Data) ="Hosted Host Controller Interface (libusb)";
                 count++;
                 break;
             case UHA_Capabilities:
-                if(unit->roothub.devdesc.bcdUSB == AROS_WORD2LE(0x0200)) {
-                    *((ULONG *) tag->ti_Data) = (UHCF_USB20|UHCF_ISO);
-                } else {
-                    *((ULONG *) tag->ti_Data) = (UHCF_USB30|UHCF_ISO);
-                }
+                *((ULONG *) tag->ti_Data) = (UHCF_USB20|UHCF_ISO);
                 count++;
                 break;
             default:
@@ -393,7 +344,7 @@ WORD cmdQueryDevice(struct IOUsbHWReq *ioreq) {
         }
     }
 
-    mybug_unit(-1, ("Done\n\n"));
+    mybug_unit(0, ("Done\n\n"));
 
     ioreq->iouh_Actual = count;
     return RC_OK;
@@ -414,11 +365,6 @@ struct VUSBHCIUnit *VUSBHCI_AddNewUnit200(void) {
         unit->state = UHSF_SUSPENDED;
         unit->allocated = FALSE;
 
-        unit->ctrlxfer_pending = FALSE;
-        unit->intrxfer_pending = FALSE;
-        unit->bulkxfer_pending = FALSE;
-        unit->isocxfer_pending = FALSE;
-
         NEWLIST(&unit->ctrlxfer_queue);
         NEWLIST(&unit->intrxfer_queue);
         NEWLIST(&unit->bulkxfer_queue);
@@ -433,7 +379,7 @@ struct VUSBHCIUnit *VUSBHCI_AddNewUnit200(void) {
         unit->roothub.devdesc.bDeviceClass                  = HUB_CLASSCODE;
         unit->roothub.devdesc.bDeviceSubClass               = 0;
         unit->roothub.devdesc.bDeviceProtocol               = 0;
-        unit->roothub.devdesc.bMaxPacketSize0               = 64; // Valid values are 8, 9(SuperSpeed), 16, 32, 64
+        unit->roothub.devdesc.bMaxPacketSize0               = 8; // Valid values are 8, 9(SuperSpeed), 16, 32, 64
         unit->roothub.devdesc.idVendor                      = AROS_WORD2LE(0x0000);
         unit->roothub.devdesc.idProduct                     = AROS_WORD2LE(0x0000);
         unit->roothub.devdesc.bcdDevice                     = AROS_WORD2LE(0x0200);
@@ -449,8 +395,8 @@ struct VUSBHCIUnit *VUSBHCI_AddNewUnit200(void) {
         unit->roothub.config.cfgdesc.wTotalLength           = AROS_WORD2LE(sizeof(struct RHConfig));
         unit->roothub.config.cfgdesc.bNumInterfaces         = 1;
         unit->roothub.config.cfgdesc.bConfigurationValue    = 1;
-        unit->roothub.config.cfgdesc.iConfiguration         = 0;
-        unit->roothub.config.cfgdesc.bmAttributes           = (USCAF_SELF_POWERED);
+        unit->roothub.config.cfgdesc.iConfiguration         = 0; //3;
+        unit->roothub.config.cfgdesc.bmAttributes           = (USCAF_ONE|USCAF_SELF_POWERED|USCAF_REMOTE_WAKEUP);
         unit->roothub.config.cfgdesc.bMaxPower              = 0;
 
         unit->roothub.config.ifdesc.bLength                 = sizeof(struct UsbStdIfDesc);
@@ -461,13 +407,13 @@ struct VUSBHCIUnit *VUSBHCI_AddNewUnit200(void) {
         unit->roothub.config.ifdesc.bInterfaceClass         = HUB_CLASSCODE;
         unit->roothub.config.ifdesc.bInterfaceSubClass      = 0;
         unit->roothub.config.ifdesc.bInterfaceProtocol      = 0;
-        unit->roothub.config.ifdesc.iInterface              = 0;
+        unit->roothub.config.ifdesc.iInterface              = 0; //4;
 
         unit->roothub.config.epdesc.bLength                 = sizeof(struct UsbStdEPDesc);
         unit->roothub.config.epdesc.bDescriptorType         = UDT_ENDPOINT;
         unit->roothub.config.epdesc.bEndpointAddress        = (URTF_IN|1);
         unit->roothub.config.epdesc.bmAttributes            = USEAF_INTERRUPT;
-        unit->roothub.config.epdesc.wMaxPacketSize          = AROS_WORD2LE(4);
+        unit->roothub.config.epdesc.wMaxPacketSize          = AROS_WORD2LE(8);
         unit->roothub.config.epdesc.bInterval               = 12;
 
         /* This is our root hub hub descriptor */
@@ -488,141 +434,8 @@ struct VUSBHCIUnit *VUSBHCI_AddNewUnit200(void) {
 
         unit->name = name;
 
-        InitSemaphore(&unit->ctrlxfer_queue_lock);
-        InitSemaphore(&unit->intrxfer_queue_lock);
-        InitSemaphore(&unit->bulkxfer_queue_lock);
-        InitSemaphore(&unit->isocxfer_queue_lock);
-
-        InitSemaphore(&unit->roothub.intrxfer_queue_lock);
-
-        /* Create periodic handler task */
-        if (-1 == (unit->handler_task_sig_run = AllocSignal(-1))) {
-            mybug_unit(-1, ("No signal bits available\n\n"));
-        } else {
-            mybug_unit(-1, ("allocated signal number %ld\n", unit->handler_task_sig_run));
-        }
-
-        unit->handler_task = NewCreateTask(TASKTAG_NAME, "libusb handler task usb 2.0",
-                                           TASKTAG_PC, handler_task,
-                                           TASKTAG_ARG1, FindTask(NULL),
-                                           TASKTAG_ARG2, unit,
-                                           TASKTAG_PRI, 5,
-                                           TAG_END);
-
-        mybug_unit(-1, ("Waiting for %s handler task\n", unit->name));
-        Wait( (1L<<unit->handler_task_sig_run) );
-        mybug_unit(-1, ("%s handler task responded\n\n", unit->name));
-        //FreeSignal(unit->handler_task_sig_run);
-
         return unit;
     }
 }
 
-struct VUSBHCIUnit *VUSBHCI_AddNewUnit300(void) {
 
-    struct VUSBHCIUnit *unit;
-
-    static const char name[] = {"[VUSBHCI3.00]"};
-
-    unit = AllocVec(sizeof(struct VUSBHCIUnit), MEMF_ANY|MEMF_CLEAR);
-
-    if(unit == NULL) {
-        mybug(-1, ("[VUSBHCI] VUSBHCI_AddNewUnit: Failed to create new unit structure\n"));
-        return NULL;
-    } else {
-        unit->state = UHSF_SUSPENDED;
-        unit->allocated = FALSE;
-
-        NEWLIST(&unit->ctrlxfer_queue);
-        NEWLIST(&unit->intrxfer_queue);
-        NEWLIST(&unit->bulkxfer_queue);
-        NEWLIST(&unit->isocxfer_queue);
-
-        NEWLIST(&unit->roothub.intrxfer_queue);
-
-        /* This is our root hub device descriptor */
-        unit->roothub.devdesc.bLength                       = sizeof(struct UsbStdDevDesc);
-        unit->roothub.devdesc.bDescriptorType               = UDT_DEVICE;
-        unit->roothub.devdesc.bcdUSB                        = AROS_WORD2LE(0x0300);
-        unit->roothub.devdesc.bDeviceClass                  = HUB_CLASSCODE;
-        unit->roothub.devdesc.bDeviceSubClass               = 0;
-        unit->roothub.devdesc.bDeviceProtocol               = 0;
-        unit->roothub.devdesc.bMaxPacketSize0               = 9; // Valid values are 8, 9(SuperSpeed), 16, 32, 64
-        unit->roothub.devdesc.idVendor                      = AROS_WORD2LE(0x0000);
-        unit->roothub.devdesc.idProduct                     = AROS_WORD2LE(0x0000);
-        unit->roothub.devdesc.bcdDevice                     = AROS_WORD2LE(0x0300);
-        unit->roothub.devdesc.iManufacturer                 = 1;
-        unit->roothub.devdesc.iProduct                      = 2;
-        unit->roothub.devdesc.iSerialNumber                 = 0;
-        unit->roothub.devdesc.bNumConfigurations            = 1;
-
-        /* This is our root hub config descriptor */
-        unit->roothub.config.cfgdesc.bLength                = sizeof(struct UsbStdCfgDesc);
-        unit->roothub.config.cfgdesc.bLength                = sizeof(struct UsbStdCfgDesc);
-        unit->roothub.config.cfgdesc.bDescriptorType        = UDT_CONFIGURATION;
-        unit->roothub.config.cfgdesc.wTotalLength           = AROS_WORD2LE(sizeof(struct RHConfig));
-        unit->roothub.config.cfgdesc.bNumInterfaces         = 1;
-        unit->roothub.config.cfgdesc.bConfigurationValue    = 1;
-        unit->roothub.config.cfgdesc.iConfiguration         = 0;
-        unit->roothub.config.cfgdesc.bmAttributes           = (USCAF_SELF_POWERED);
-        unit->roothub.config.cfgdesc.bMaxPower              = 0;
-
-        unit->roothub.config.ifdesc.bLength                 = sizeof(struct UsbStdIfDesc);
-        unit->roothub.config.ifdesc.bDescriptorType         = UDT_INTERFACE;
-        unit->roothub.config.ifdesc.bInterfaceNumber        = 0;
-        unit->roothub.config.ifdesc.bAlternateSetting       = 0;
-        unit->roothub.config.ifdesc.bNumEndpoints           = 1;
-        unit->roothub.config.ifdesc.bInterfaceClass         = HUB_CLASSCODE;
-        unit->roothub.config.ifdesc.bInterfaceSubClass      = 0;
-        unit->roothub.config.ifdesc.bInterfaceProtocol      = 0;
-        unit->roothub.config.ifdesc.iInterface              = 0;
-
-        unit->roothub.config.epdesc.bLength                 = sizeof(struct UsbStdEPDesc);
-        unit->roothub.config.epdesc.bDescriptorType         = UDT_ENDPOINT;
-        unit->roothub.config.epdesc.bEndpointAddress        = (URTF_IN|1);
-        unit->roothub.config.epdesc.bmAttributes            = USEAF_INTERRUPT;
-        unit->roothub.config.epdesc.wMaxPacketSize          = AROS_WORD2LE(4);
-        unit->roothub.config.epdesc.bInterval               = 12;
-
-        /* This is our root hub hub descriptor */
-        unit->roothub.sshubdesc.bLength             = sizeof(struct UsbSSHubDesc);
-        unit->roothub.sshubdesc.bDescriptorType     = UDT_SSHUB;
-        unit->roothub.sshubdesc.bNbrPorts           = 1;
-        unit->roothub.sshubdesc.wHubCharacteristics = AROS_WORD2LE(UHCF_INDIVID_POWER|UHCF_INDIVID_OVP);
-        unit->roothub.sshubdesc.bPwrOn2PwrGood      = 1;
-        unit->roothub.sshubdesc.bHubContrCurrent    = 1;
-        unit->roothub.sshubdesc.bHubHdrDecLat       = 0;
-        unit->roothub.sshubdesc.wHubDelay           = 0;
-        unit->roothub.sshubdesc.DeviceRemovable     = 0;
-
-        unit->name = name;
-
-        InitSemaphore(&unit->ctrlxfer_queue_lock);
-        InitSemaphore(&unit->intrxfer_queue_lock);
-        InitSemaphore(&unit->bulkxfer_queue_lock);
-        InitSemaphore(&unit->isocxfer_queue_lock);
-
-        InitSemaphore(&unit->roothub.intrxfer_queue_lock);
-
-        /* Create periodic handler task */
-        if (-1 == (unit->handler_task_sig_run = AllocSignal(-1))) {
-            mybug_unit(-1, ("No signal bits available\n\n"));
-        } else {
-            mybug_unit(-1, ("allocated signal number %ld\n", unit->handler_task_sig_run));
-        }
-
-        unit->handler_task = NewCreateTask(TASKTAG_NAME, "libusb handler task usb 3.0",
-                                           TASKTAG_PC, handler_task,
-                                           TASKTAG_ARG1, FindTask(NULL),
-                                           TASKTAG_ARG2, unit,
-                                           TASKTAG_PRI, 5,
-                                           TAG_END);
-
-        mybug_unit(-1, ("Waiting for %s handler task\n", unit->name));
-        Wait( (1L<<unit->handler_task_sig_run) );
-        mybug_unit(-1, ("%s handler task responded\n\n", unit->name));
-        //FreeSignal(unit->handler_task_sig_run);
-
-        return unit;
-    }
-}

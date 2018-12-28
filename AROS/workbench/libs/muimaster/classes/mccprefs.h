@@ -1,6 +1,6 @@
 /*
     Copyright © 2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mccprefs.h 45798 2012-09-14 19:47:19Z neil $
 */
 
 #ifndef _MUI_CLASSES_MCCPREFS_H

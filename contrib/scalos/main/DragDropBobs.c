@@ -1,6 +1,6 @@
 // DragDropBobs.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-24 01:15:37 +0100 (Thu, 24 Mar 2016) $
+// $Revision: 52212 $
 
 
 #include <exec/types.h>

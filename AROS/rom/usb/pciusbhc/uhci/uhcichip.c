@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2011, The AROS Development Team. All rights reserved
-    $Id$
+    $Id: uhcichip.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <proto/exec.h>
@@ -16,7 +16,8 @@
 #undef HiddAttrBase
 #define HiddAttrBase (hd->hd_HiddAB)
 
-static AROS_INTH1(UhciResetHandler, struct PCIController *, hc)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(UhciResetHandler, struct PCIController *, hc)
 {
     AROS_INTFUNC_INIT
 
@@ -904,7 +905,8 @@ void uhciUpdateFrameCounter(struct PCIController *hc) {
     Enable();
 }
 
-static AROS_INTH1(uhciCompleteInt, struct PCIController *, hc) {
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(uhciCompleteInt, struct PCIController *, hc) {
 
     AROS_INTFUNC_INIT
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mui_releasepen.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <proto/graphics.h>
@@ -21,7 +21,7 @@
         AROS_LHA(LONG, pen, D0),
 
 /*  LOCATION */
-        struct Library *, MUIMasterBase, 27, MUIMaster)
+        struct Library *, MUIMasterBase, 23, MUIMaster)
 
 /*  FUNCTION
 

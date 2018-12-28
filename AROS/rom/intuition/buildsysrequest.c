@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: buildsysrequest.c 48422 2013-11-17 16:07:33Z neil $
 */
 
 #include "requesters.h"

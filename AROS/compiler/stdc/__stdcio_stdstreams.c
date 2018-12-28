@@ -1,6 +1,6 @@
 /*
     Copyright © 2012-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __stdcio_stdstreams.c 48044 2013-09-08 21:18:52Z verhaegs $
 
     Get pointer to standard IO streams.
     These function is both in static linklib as in stdcio.library.

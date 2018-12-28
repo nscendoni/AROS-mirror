@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: dtpic.c 51091 2015-09-15 18:55:48Z neil $
 */
 
 /* Dtpic.mui. Source based on the one from MUIUndoc */

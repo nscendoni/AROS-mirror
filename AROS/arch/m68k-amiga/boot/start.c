@@ -1,15 +1,13 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: start.c 47788 2013-08-02 13:48:41Z twilen $
 
     Desc: m68k-amiga bootstrap to exec.
     Lang: english
  */
 
-#define DEBUG 0
-#include <aros/debug.h>
-
 #include <aros/kernel.h>
+#include <aros/debug.h>
 #include <exec/memory.h>
 #include <exec/resident.h>
 #include <exec/execbase.h>
@@ -21,7 +19,6 @@
 #include "kernel_romtags.h"
 #include "kernel_base.h"
 
-#define __AROS_KERNEL__
 #include "exec_intern.h"
 
 #include "amiga_hwreg.h"
@@ -554,7 +551,7 @@ void doColdCapture(void)
 
 static void RomInfo(IPTR rom)
 {
-#if AROS_SERIAL_DEBUG && (DEBUG > 0)
+#if AROS_SERIAL_DEBUG
     APTR ptr = (APTR)rom;
     CONST_STRPTR str;
 
@@ -587,7 +584,7 @@ static UWORD GetAttnFlags(ULONG *cpupcr)
 {
     /* Convert CPU/FPU flags to AttnFlags */
     UWORD attnflags = cpupcr[0] & 0xffff;
-    if (attnflags & (AFF_68030 | AFF_68040 | AFF_68060 | AFF_68080))
+    if (attnflags & (AFF_68030 | AFF_68040 | AFF_68060))
         attnflags |= AFF_ADDR32;
     if (cpupcr[0] & 0xffff0000) {
         attnflags |= AFF_FPU;
@@ -600,11 +597,9 @@ static UWORD GetAttnFlags(ULONG *cpupcr)
             attnflags |= AFF_68881 | AFF_68882;
     }
 
-#if AROS_SERIAL_DEBUG && (DEBUG > 0)
+#if AROS_SERIAL_DEBUG
     DEBUGPUTS(("CPU: "));
-    if (attnflags & AFF_68080)
-        DEBUGPUTS(("Apollo Core 68080"));
-    else if (attnflags & AFF_68060)
+    if (attnflags & AFF_68060)
         DEBUGPUTS(("68060"));
     else if (attnflags & AFF_68040)
         DEBUGPUTS(("68040"));
@@ -759,7 +754,7 @@ void exec_boot(ULONG *membanks, ULONG *cpupcr)
         membanks[i + 0] = 0x400;
     membanks[i + 1] -= membanks[i + 0];
  
-#if AROS_SERIAL_DEBUG && (DEBUG > 0)
+#if AROS_SERIAL_DEBUG
     for (i = 0; membanks[i + 1]; i += 2) {
         ULONG addr = membanks[i + 0];
         ULONG size = membanks[i + 1];
@@ -781,7 +776,7 @@ void exec_boot(ULONG *membanks, ULONG *cpupcr)
         oldLastAlert[0] = (LONG)-1;
         oldLastAlert[1] = 0;
         oldLastAlert[2] = 0;
-        oldLastAlert[3] = 0;
+        oldLastAlert[2] = 0;
     }
 
     /* Clear alert marker */
@@ -821,7 +816,7 @@ void exec_boot(ULONG *membanks, ULONG *cpupcr)
         Early_Alert(AT_DeadEnd | AG_NoMemory);
     }
 
-#if AROS_SERIAL_DEBUG && (DEBUG > 0)
+#if AROS_SERIAL_DEBUG
     for (i = 0; kickrom [i] != (UWORD*)~0; i += 2) {
         DEBUGPUTHEX(("Resident start", (ULONG)kickrom[i]));
         DEBUGPUTHEX(("Resident end  ", (ULONG)kickrom[i + 1]));

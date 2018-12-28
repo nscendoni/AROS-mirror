@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: deletenv.c 47708 2013-07-17 12:22:32Z verhaegs $
 */
 
 #ifndef  DEBUG

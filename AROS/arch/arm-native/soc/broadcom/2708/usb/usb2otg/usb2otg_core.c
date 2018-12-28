@@ -1,6 +1,6 @@
 /*
     Copyright © 2013-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: usb2otg_core.c 50410 2015-04-18 01:59:28Z NicJA $
 */
 
 #define DEBUG 1

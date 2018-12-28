@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2003-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bzip2.h 49635 2014-09-15 16:02:02Z neil $
 */
 
 #include <exec/types.h>

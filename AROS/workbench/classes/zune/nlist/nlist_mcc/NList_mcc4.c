@@ -19,7 +19,7 @@
 
  NList classes Support Site:  http://www.sf.net/projects/nlist-classes
 
- $Id$
+ $Id: NList_mcc4.c 51650 2016-03-09 05:35:42Z NicJA $
 
 ***************************************************************************/
 

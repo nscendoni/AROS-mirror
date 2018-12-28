@@ -1,6 +1,6 @@
 // plugin-common.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 04:01:56 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51967 $
 
 //----------------------------------------------------------------------------
 // Check the preprocessor symbols provided by plugin_data.h

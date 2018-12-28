@@ -15,7 +15,7 @@ RM=rm -f
 COPY=cp
 
 CPPFLAGS=-I. -DPNG_USER_CONFIG -DNO_GZCOMPRESS -DZ_SOLO -DNO_GZIP
-CFLAGS=-O1 -Wall
+CFLAGS=-O1
 
 C=.c
 O=.o
@@ -81,7 +81,7 @@ OBJS    = $(PROGOBJS) $(PNGOBJS) $(ZOBJS)
 # implicit make rules -------------------------------------------------------
 
 .c$(O):
-	$(CC) -c $(CPPFLAGS) $(CFLAGS) $<
+	$(CC) $(CPPFLAGS) -c $(CFLAGS) $<
 
 # dependencies
 
@@ -99,12 +99,12 @@ $(PNGCONF): $(PNGSRC)/scripts/pnglibconf.mak $(ZH)\
 	$(PNGSRC)/scripts/pnglibconf.dfa \
 	$(PNGSRC)/scripts/options.awk pngusr.h pngusr.dfa
 	$(RM) pnglibconf.h pnglibconf.dfn
-	$(MAKE) -f $(PNGSRC)/scripts/pnglibconf.mak $(MAKEFLAGS)\
+	$(MAKE) $(MAKEFLAGS) -f $(PNGSRC)/scripts/pnglibconf.mak\
 	    srcdir=$(PNGSRC) CPPFLAGS="-DPNG_USER_CONFIG -I."\
 	    DFA_XTRA="pngusr.dfa" $@
 
 clean:
-	$(MAKE) -f $(PNGSRC)/scripts/pnglibconf.mak $(MAKEFLAGS)\
+	$(MAKE) $(MAKEFLAGS) -f $(PNGSRC)/scripts/pnglibconf.mak\
 	    srcdir=$(PNGSRC) clean
 	$(RM) pnm2pngm$(O)
 	$(RM) pnm2pngm$(E)

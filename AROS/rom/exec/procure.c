@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: procure.c 50721 2015-05-20 01:07:11Z NicJA $
 
     Desc: Try to lock a semaphore.
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: emul_handler_native.c 44299 2012-02-29 21:12:47Z jmcmullan $
 
     Desc: Host-side hepler code for Windows emul.handler
     Lang: english
@@ -56,7 +56,7 @@ static DWORD WINAPI EmulThread(struct AsyncReaderControl *emsg)
 	    emsg->actual = actual;
 	    emsg->error = res ? 0 : GetLastError();
 	    DASYNC(printf("[EmulHandler I/O] %lu bytes transferred, result %ld, error %lu\n", emsg->actual, res, emsg->error));
-	    KrnCauseSystemIRQ(emsg->IrqNum);
+	    KrnCauseIRQ(emsg->IrqNum);
 	}
     }
 }
@@ -69,7 +69,7 @@ struct AsyncReaderControl * __declspec(dllexport) __aros Emul_Init_Native(void)
     DWORD id;
     long irq;
 
-    irq = KrnAllocSystemIRQ();
+    irq = KrnAllocIRQ();
     if (irq != -1)
     {
         ControlStruct.IrqNum = irq;

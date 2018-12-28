@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bpfdesc.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: bpfdesc.h,v 1.5 1999/08/08 00:43:00 niklas Exp $	*/

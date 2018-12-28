@@ -1,6 +1,6 @@
 /*
     Copyright © 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fenv_soft.h 52288 2016-03-27 22:17:25Z NicJA $
 
     Desc: ARM floating-point environment for software floating point processing
     Lang: english

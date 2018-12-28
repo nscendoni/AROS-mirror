@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: setconsoletask.c 48397 2013-11-09 03:46:51Z neil $
 
     Desc: Set the console handler for the current process.
     Lang: english

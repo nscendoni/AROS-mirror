@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: stat.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      stat.c - stat() for the netlib
  *

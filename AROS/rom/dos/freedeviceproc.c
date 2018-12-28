@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freedeviceproc.c 46714 2013-02-28 07:10:45Z neil $
 
     Desc: FreeDeviceProc() - Clean up after calls to GetDeviceProc()
     Lang: english

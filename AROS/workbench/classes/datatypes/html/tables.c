@@ -1,7 +1,7 @@
 /*
     Copyright © 2004, Martin Gierich. All rights reserved.
     Licensed under the terms of the AROS Public License (APL)
-    $Id$
+    $Id: tables.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Tables with HTML tags, attributes, character entities and other stuff
 */

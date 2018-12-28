@@ -1,6 +1,6 @@
 /*
 Copyright  2002-2009, The AROS Development Team. All rights reserved.
-$Id$
+$Id: icondrawerlist.c 48185 2013-09-30 20:40:28Z deadwood $
 */
 
 #ifndef __AROS__

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: taiwan.c 52776 2016-07-11 16:34:34Z polluks $
 
     Desc: Country data for Taiwan
 */
@@ -67,6 +67,6 @@ struct IntCountryPrefs taiwanPrefs =
         CT_7SUN
     },
     "$VER: taiwan.country 44.1 (11.07.2016)",
-    NULL,
+    "Taiwan",
     "Countries/Taiwan"
 };

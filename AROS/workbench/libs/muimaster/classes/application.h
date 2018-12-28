@@ -3,7 +3,7 @@
     Copyright © 2002-2003, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: application.h 49528 2014-08-24 13:37:57Z mazze $
 */
 
 #ifndef _MUI_CLASSES_APPLICATION_H

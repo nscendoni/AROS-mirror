@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: makefunctions.c 45416 2012-08-09 03:42:46Z jmcmullan $
 
     Desc: Create the jumptable for a shared library or a device.
     Lang: english

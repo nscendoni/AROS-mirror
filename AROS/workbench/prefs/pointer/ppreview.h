@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ppreview.h 32686 2010-02-17 22:41:04Z mazze $
 */
 
 #include <exec/types.h>

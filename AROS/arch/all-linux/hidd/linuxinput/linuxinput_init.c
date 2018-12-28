@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: linuxinput_init.c 48687 2014-01-07 20:16:11Z jmcmullan $
 
     Desc: LinuxInput hidd initialization code.
     Lang: English.

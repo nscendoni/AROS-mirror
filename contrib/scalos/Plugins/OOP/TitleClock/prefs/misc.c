@@ -1,8 +1,8 @@
 /*
  *  misc.c - routines for misc stuff
  *
- * $Date$
- * $Revision$
+ * $Date: 2013-12-01 23:08:26 +0100 (Sun, 01 Dec 2013) $
+ * $Revision: 48481 $
  *
  *  0.1
  *  20010718 DM Created. Added routines for calculating length of a string in a given font (ignoring underscores) and the longest in an array of values

@@ -1,6 +1,6 @@
 /*
    Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-   $Id$
+   $Id: prefs.c 40049 2011-07-13 01:15:38Z jmcmullan $
 
    Desc:
    Lang: English

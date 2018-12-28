@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __posixc_assert.c 48050 2013-09-08 21:19:42Z verhaegs $
 
     assert()
 */

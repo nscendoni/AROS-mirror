@@ -1,16 +1,10 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: semaphores.h 43363 2011-12-30 09:43:34Z sonic $
 
     Desc: Private definitions of semaphore internals
     Lang:
 */
-
-#include <aros/config.h>
-
-#if defined(__AROSEXEC_SMP__)
-#include <aros/types/spinlock_s.h>
-#endif
 
 struct TraceLocation;
 

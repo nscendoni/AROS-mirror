@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: configchain.c 42273 2011-11-05 09:15:02Z twilen $
 
     Desc:
     Lang: english

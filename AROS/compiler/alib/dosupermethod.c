@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: dosupermethod.c 48312 2013-10-24 02:05:49Z neil $
 */
 
 #define ALIB_NO_INLINE_STDARG

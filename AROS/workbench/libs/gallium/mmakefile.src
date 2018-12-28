@@ -1,4 +1,4 @@
-#   $Id$
+#   $Id: mmakefile.src 52302 2016-03-28 03:42:13Z NicJA $
 #
 
 include $(SRCDIR)/config/aros.cfg
@@ -6,22 +6,21 @@ include $(SRCDIR)/config/aros.cfg
 #MM workbench-libs-gallium : includes hidd-gallium
 
 USER_INCLUDES := \
-            -I$(AROS_DEVELOPER)/include/gallium \
+            -I$(AROS_DEVELOPMENT)/include/gallium \
 
 LIB_GALLIUM_SOURCES = \
-            gallium_init \
-            createpipe \
             createpipescreen \
             destroypipescreen \
-            bltpiperesourcerastport
+            bltpipesurfacerastport \
+            bltpiperesourcerastport \
+            gallium_init \
+            gallium_func
 
 #MM- core-linklibs : linklibs-gallium
 
 %build_module mmake=workbench-libs-gallium \
-   modname=gallium modtype=library \
-   linklibname=gallium \
-   files="$(LIB_GALLIUM_SOURCES)" \
-   uselibs="stdc"
+    modname=gallium modtype=library linklibname=gallium \
+    files="$(LIB_GALLIUM_SOURCES)"
 
 #MM includes-copy
 

@@ -1,6 +1,6 @@
 /*
 
-Copyright (C) 2001-2017 Neil Cafferkey
+Copyright (C) 2001-2012 Neil Cafferkey
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -23,7 +23,6 @@ MA 02111-1307, USA.
 #include <exec/memory.h>
 #include <exec/execbase.h>
 #include <exec/errors.h>
-#include <exec/tasks.h>
 
 #include <proto/exec.h>
 #include <proto/alib.h>
@@ -31,7 +30,6 @@ MA 02111-1307, USA.
 #include <proto/timer.h>
 
 #include "device.h"
-#include "task.h"
 #include "rhine.h"
 
 #include "unit_protos.h"
@@ -43,6 +41,10 @@ MA 02111-1307, USA.
 #define STACK_SIZE 4096
 #define INT_MASK 0xffff
 #define TX_DESC_SIZE (RH_DESCSIZE * 2 + ETH_HEADERSIZE + 2)
+
+#ifndef AbsExecBase
+#define AbsExecBase sys_base
+#endif
 
 VOID DeinitialiseAdapter(struct DevUnit *unit, struct DevBase *base);
 static struct AddressRange *FindMulticastRange(struct DevUnit *unit,
@@ -66,9 +68,24 @@ static VOID ResetHandler(REG(a1, struct DevUnit *unit),
    REG(a6, APTR int_code));
 static VOID ReportEvents(struct DevUnit *unit, ULONG events,
    struct DevBase *base);
-static VOID UnitTask(struct DevUnit *unit);
+static VOID UnitTask(struct ExecBase *sys_base);
 UWORD ReadMII(struct DevUnit *unit, UWORD phy_no, UWORD reg_no,
    struct DevBase *base);
+
+#if !defined(__AROS__)
+static const UBYTE broadcast_address[] =
+   {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
+#endif
+
+#ifdef __AROS__
+#undef AddTask
+#define AddTask(task, initial_pc, final_pc) \
+   ({ \
+      struct TagItem _task_tags[] = \
+         {{TASKTAG_ARG1, (IPTR)SysBase}, {TAG_END, 0}}; \
+      NewAddTask(task, initial_pc, final_pc, _task_tags); \
+   })
+#endif
 
 
 
@@ -92,7 +109,7 @@ UWORD ReadMII(struct DevUnit *unit, UWORD phy_no, UWORD reg_no,
 */
 
 struct DevUnit *CreateUnit(ULONG index, APTR card,
-   const struct TagItem *io_tags, UWORD bus, struct DevBase *base)
+   struct TagItem *io_tags, UWORD bus, struct DevBase *base)
 {
    BOOL success = TRUE;
    struct DevUnit *unit;
@@ -334,13 +351,18 @@ struct DevUnit *CreateUnit(ULONG index, APTR card,
       task->tc_Node.ln_Name = base->device.dd_Library.lib_Node.ln_Name;
       task->tc_SPUpper = stack + STACK_SIZE;
       task->tc_SPLower = stack;
-      task->tc_SPReg = task->tc_SPUpper;
+      task->tc_SPReg = stack + STACK_SIZE;
       NewList(&task->tc_MemEntry);
 
-      if(AddUnitTask(task, UnitTask, unit) != NULL)
-         unit->flags |= UNITF_TASKADDED;
-      else
+      if(AddTask(task, UnitTask, NULL) == NULL)
          success = FALSE;
+   }
+
+   if(success)
+   {
+      /* Send the unit to the new task */
+
+      task->tc_UserData = unit;
    }
 
    if(!success)
@@ -387,9 +409,11 @@ VOID DeleteUnit(struct DevUnit *unit, struct DevBase *base)
       task = unit->task;
       if(task != NULL)
       {
-         if((unit->flags & UNITF_TASKADDED) != 0)
+         if(task->tc_UserData != NULL)
+         {
             RemTask(task);
-         FreeMem(task->tc_SPLower, STACK_SIZE);
+            FreeMem(task->tc_SPLower, STACK_SIZE);
+         }
          FreeMem(task, sizeof(struct Task));
       }
 
@@ -1703,9 +1727,9 @@ static VOID ReportEvents(struct DevUnit *unit, ULONG events,
 *	UnitTask
 *
 *   SYNOPSIS
-*	UnitTask(unit)
+*	UnitTask()
 *
-*	VOID UnitTask(struct DevUnit *);
+*	VOID UnitTask();
 *
 *   FUNCTION
 *	Completes deferred requests, and handles card insertion and removal
@@ -1715,20 +1739,26 @@ static VOID ReportEvents(struct DevUnit *unit, ULONG events,
 *
 */
 
-static VOID UnitTask(struct DevUnit *unit)
+static VOID UnitTask(struct ExecBase *sys_base)
 {
-   struct DevBase *base;
+   struct Task *task;
    struct IORequest *request;
+   struct DevUnit *unit;
+   struct DevBase *base;
    struct MsgPort *general_port;
    ULONG signals = 0, wait_signals, card_removed_signal,
       card_inserted_signal, general_port_signal;
 
+   /* Get parameters */
+
+   task = AbsExecBase->ThisTask;
+   unit = task->tc_UserData;
    base = unit->device;
 
    /* Activate general request port */
 
    general_port = unit->request_ports[GENERAL_QUEUE];
-   general_port->mp_SigTask = unit->task;
+   general_port->mp_SigTask = task;
    general_port->mp_SigBit = AllocSignal(-1);
    general_port_signal = 1 << general_port->mp_SigBit;
    general_port->mp_Flags = PA_SIGNAL;
@@ -1742,7 +1772,7 @@ static VOID UnitTask(struct DevUnit *unit)
 
    /* Tell ourselves to check port for old messages */
 
-   Signal(unit->task, general_port_signal);
+   Signal(task, general_port_signal);
 
    /* Infinite loop to service requests and signals */
 

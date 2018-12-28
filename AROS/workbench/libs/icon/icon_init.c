@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2006, The AROS Development Team. All rights reserved.
+    $Id: icon_init.c 41746 2011-10-04 18:31:17Z jmcmullan $
 
 */
 
@@ -8,9 +8,7 @@
 
 #include <aros/symbolsets.h>
 
-#ifndef __ICON_NOLIBBASE__
 #define __ICON_NOLIBBASE__
-#endif /* !__ICON_NOLIBBASE__ */
 
 #include "icon_intern.h"
 #include "identify.h"

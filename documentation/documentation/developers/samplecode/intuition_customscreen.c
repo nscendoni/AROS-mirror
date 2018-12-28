@@ -101,11 +101,13 @@ static void handle_events(void)
     struct IntuiMessage *imsg;
     struct MsgPort *port = window->UserPort;
 
+    ULONG signals;
+    
     BOOL terminated = FALSE;
     
     while (! terminated)
     {
-        Wait(1L << port->mp_SigBit);
+        signals = Wait(1L << port->mp_SigBit);
 
         while ((imsg = (struct IntuiMessage *)GetMsg(port)) != NULL)
         {

@@ -187,13 +187,13 @@
 struct EhciTD
 {
     struct EhciTD  *etd_Succ;
-    IPTR            etd_Unused0;
+    ULONG           etd_Unused0;
     ULONG           etd_Self;       /* LE PHYSICAL pointer to self */
     ULONG           etd_Length;     /* Number of bytes to transfer within this */
-#if __WORDSIZE == 64
-    IPTR            etd_Unused1;
+    ULONG           etd_Unused[3];
+#if __WORDSIZE != 64
+    ULONG	    etd_Unused1;
 #endif
-    IPTR            etd_Unused[4];
 
     /* aligned to 32 bytes */
     ULONG           etd_NextTD;     /* LE PHYSICAL pointer to next qTD */
@@ -210,9 +210,6 @@ struct EhciQH
     struct EhciQH  *eqh_Succ;
     struct EhciQH  *eqh_Pred;
     ULONG           eqh_Self;       /* LE PHYSICAL pointer to self + UHCI_QHSELECT */
-#if __WORDSIZE == 64
-    ULONG           eqh_Unused1;    // Fill te gap
-#endif
     struct IOUsbHWReq *eqh_IOReq;   /* IO Request this belongs to */
 
     struct EhciTD  *eqh_FirstTD;    /* First TD */

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: czech_republic.c 47219 2013-04-13 16:13:54Z NicJA $
 
     Desc: Country data for Èeská republika (Czech Republic)
 */
@@ -67,6 +67,6 @@ struct IntCountryPrefs czech_republicPrefs =
         CT_7MON
     },
     "$VER: czech_republic.country 44.0 (12.04.2013)",
-    "Cesko",
+    NULL,
     "Countries/Czech_Republic"
 };

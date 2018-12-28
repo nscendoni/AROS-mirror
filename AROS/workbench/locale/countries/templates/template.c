@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: template.c 47214 2013-04-12 20:12:36Z NicJA $
 
     Desc: Country data template.
     Author: Iain Templeton <iain@ugh.net.au>
@@ -82,7 +82,6 @@ struct IntCountryPrefs templatePrefs =
         /* Calendar type */
         CT_7SUN
     },
-    "$VER: template.country 44.0 (12.12.2017)",
-    NULL,
+    "$VER: template.country 44.0 (12.04.2013)",
     "Countries/Template"
 };

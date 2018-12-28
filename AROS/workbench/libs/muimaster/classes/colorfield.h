@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: colorfield.h 50196 2015-03-13 16:19:13Z neil $
 */
 
 #ifndef _MUI_CLASSES_COLORFIELD_H

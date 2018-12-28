@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: copydtmethods.c 39312 2011-06-17 05:49:32Z jmcmullan $
 
     Desc:
     Lang: English

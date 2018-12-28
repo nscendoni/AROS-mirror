@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: common.c 42504 2011-11-17 05:26:25Z sonic $
 
     Desc: Common console output functions.
 */

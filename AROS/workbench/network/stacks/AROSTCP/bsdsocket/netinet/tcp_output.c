@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  *
  *	@(#)tcp_output.c	8.3 (Berkeley) 12/30/93
- * $Id$
+ * $Id: tcp_output.c 51821 2016-03-11 06:53:30Z NicJA $
  */
 
 #include <sys/param.h>

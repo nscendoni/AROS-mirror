@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: showlist.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Rexx stub for AllocMem system function
     Lang: English
@@ -26,12 +26,6 @@
 #   define AROS_BSTR_ADDR(s) (((STRPTR)BADDR(s))+1)
 #endif
 
-#if defined(__AROSPLATFORM_SMP__)
-#include <aros/types/spinlock_s.h>
-#include <proto/execlock.h>
-#include <resources/execlock.h>
-#endif
-
 LONG rxsupp_showlist(struct Library *RexxSupportBase, struct RexxMsg *msg, UBYTE **argstring)
 {
     UBYTE argc = msg->rm_Action & RXARGMASK;
@@ -41,10 +35,6 @@ LONG rxsupp_showlist(struct Library *RexxSupportBase, struct RexxMsg *msg, UBYTE
     ULONG dosflags = 0L;
     UBYTE *string, *name = NULL;
     ULONG ssize;
-
-#if defined(__AROSPLATFORM_SMP__)
-	void *ExecLockBase = OpenResource("execlock.resource");
-#endif
 
     if (RXARG(msg, 1) == NULL || LengthArgstring(RXARG(msg, 1)) == 0)
     {
@@ -137,15 +127,8 @@ LONG rxsupp_showlist(struct Library *RexxSupportBase, struct RexxMsg *msg, UBYTE
 	{
 	    struct Node *n;
 	    ULONG slen, totlen;
-
-#if defined(__AROSPLATFORM_SMP__)
-		if (ExecLockBase)
-			ObtainSystemLock(execl, SPINLOCK_MODE_READ, LOCKF_DISABLE);
-		else
-			Disable();
-#else
-	    Disable();
-#endif
+	    
+	    Forbid();
 	    ForeachNode(execl, n)
 	    {
 		slen = strlen(string);
@@ -167,14 +150,7 @@ LONG rxsupp_showlist(struct Library *RexxSupportBase, struct RexxMsg *msg, UBYTE
 		}
 		strcat(string, n->ln_Name);
 	    }
-#if defined(__AROSPLATFORM_SMP__)
-		if (ExecLockBase)
-			ReleaseSystemLock(execl, LOCKF_DISABLE);
-		else
-			Enable();
-#else
 	    Enable();
-#endif
 	}
 	else
 	{
@@ -216,29 +192,15 @@ LONG rxsupp_showlist(struct Library *RexxSupportBase, struct RexxMsg *msg, UBYTE
 	if (isexec)
 	{
 	    struct Node *n;
-
-#if defined(__AROSPLATFORM_SMP__)
-		if (ExecLockBase)
-			ObtainSystemLock(execl, SPINLOCK_MODE_READ, LOCKF_DISABLE);
-		else
-			Disable();
-#else
-	    Disable();
-#endif
+	    
+	    Forbid();
 	    ForeachNode(execl, n)
 	    {
 		found = strcmp(name, n->ln_Name)==0;
 		if (found)
 		    break;
 	    }
-#if defined(__AROSPLATFORM_SMP__)
-		if (ExecLockBase)
-			ReleaseSystemLock(execl, LOCKF_DISABLE);
-		else
-			Enable();
-#else
 	    Enable();
-#endif
 	}
 	else
 	{

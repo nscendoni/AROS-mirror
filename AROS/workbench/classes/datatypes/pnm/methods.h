@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2005, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: methods.h 33784 2010-07-10 19:38:51Z deadwood $
 */
 
 #include <intuition/imageclass.h>

@@ -1,4 +1,4 @@
-# $Id$
+# $Id: cgi-style.pl 30794 2009-03-08 02:19:07Z neil $
 #
 # Perl routines to encapsulate various elements of HTML page style.
 

@@ -1,6 +1,6 @@
 /*
     Copyright © 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: smattributes.h 35068 2010-11-01 20:28:45Z deadwood $
 */
 
 #ifndef _SMATTRIBUTES_H

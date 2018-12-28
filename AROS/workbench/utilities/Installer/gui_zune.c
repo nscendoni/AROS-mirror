@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gui_zune.c 48912 2014-04-06 17:12:22Z deadwood $
 */
 
 /* gui_zune.c -- here are all functions for the ZUNE gui */

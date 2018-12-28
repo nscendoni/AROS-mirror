@@ -19,7 +19,7 @@
 
  NList classes Support Site:  http://www.sf.net/projects/nlist-classes
 
- $Id$
+ $Id: NBitmap_mcc.h 36648 2011-01-17 14:31:59Z neil $
 
 ***************************************************************************/
 

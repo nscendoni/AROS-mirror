@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: createbehindlayertaglist.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <aros/libcall.h>
@@ -29,7 +29,7 @@
 	AROS_LHA(struct TagItem    *, tagList, A2),
 
 /*  LOCATION */
-	struct LayersBase *, LayersBase, 40, Layers)
+	struct LayersBase *, LayersBase, 43, Layers)
 
 /*  FUNCTION
         Create a new layer according to the tags given.

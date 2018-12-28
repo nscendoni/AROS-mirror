@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fgetpos.c 48031 2013-09-08 21:16:04Z verhaegs $
 
     Get the position in a stream.
 */

@@ -1,6 +1,6 @@
 /*
     Copyright © 2008-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vfork.s 48048 2013-09-08 21:19:29Z verhaegs $
 
     Desc: POSIX function vfork()
     Lang: english

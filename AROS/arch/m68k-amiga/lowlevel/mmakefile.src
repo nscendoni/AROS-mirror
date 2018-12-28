@@ -1,17 +1,12 @@
-# $Id$
+# $Id: mmakefile.src 52311 2016-03-28 13:47:02Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
-FILES := \
-	addtimerint \
-	readjoyport \
-	remtimerint \
-	setjoyportattrsa \
-	starttimerint \
-	stoptimerint \
-	lowlevel_amiga
+FILES := readjoyport \
+         setjoyportattrsa \
+         lowlevel_amiga
 
-USER_INCLUDES += -I$(SRCDIR)/workbench/libs/lowlevel -I$(SRCDIR)/$(CURDIR)/../cia
+USER_INCLUDES += -I$(SRCDIR)/workbench/libs/lowlevel
 
 #MM- workbench-libs-lowlevel-amiga-m68k: kernel-potgo-includes
 

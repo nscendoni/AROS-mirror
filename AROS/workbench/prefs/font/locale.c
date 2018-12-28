@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2004, The AROS Development Team. All rights reserved.
+    $Id: locale.c 52467 2016-03-31 04:59:53Z mazze $
 */
 
 #include <exec/types.h>
@@ -10,7 +10,7 @@
 #include "strings.h"
 
 #define CATALOG_NAME     "System/Prefs/Font.catalog"
-#define CATALOG_VERSION  3
+#define CATALOG_VERSION  2
 
 /*** Variables **************************************************************/
 struct Catalog *catalog;

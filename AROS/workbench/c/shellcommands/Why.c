@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Why.c 42909 2011-12-13 20:55:59Z olivieradam $
 
     Desc: Why CLI command
     Lang: English

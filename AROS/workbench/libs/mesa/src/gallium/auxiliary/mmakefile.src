@@ -1,4 +1,4 @@
-#   $Id$
+#   $Id: mmakefile.src 52302 2016-03-28 03:42:13Z NicJA $
 #
 #   Generate libgalliumauxiliary.a
 #
@@ -188,20 +188,16 @@ GALLIUM_AUXILIARY_GENERATED_SOURCES = \
             $(GENDIR)/$(CURDIR)/util/u_half \
 
 USER_INCLUDES := \
-            -I$(AROS_DEVELOPER)/include/gallium \
+            -I$(AROS_DEVELOPMENT)/include/gallium \
             -I$(SRCDIR)/$(CURDIR)/util \
             -I$(SRCDIR)/$(CURDIR)/indices \
 
-NOWARN_CFLAGS := $(NOWARN_STRINGOP_OVERFLOW) $(NOWARN_ARRAY_BOUNDS)
-
 USER_CFLAGS := -ffast-math
-USER_CFLAGS += $(NOWARN_CFLAGS)
 
 %build_linklib mmake=linklibs-galliumauxiliary libname=galliumauxiliary \
     files="$(GALLIUM_AUXILIARY_SOURCES) $(GALLIUM_AUXILIARY_GENERATED_SOURCES)"
 
-USER_CPPFLAGS := -DHAVE_LLVM=0x0209 -D__STDC_CONSTANT_MACROS
-USER_CFLAGS := -ffast-math
+USER_CFLAGS := -ffast-math -DHAVE_LLVM=0x0209 -D__STDC_CONSTANT_MACROS
 
 %build_linklib mmake=linklibs-galliumvm libname=galliumvm \
     files="$(GALLIVM_SOURCES)" cxxfiles="gallivm/lp_bld_misc" objdir=$(OBJDIR)/galliumvm

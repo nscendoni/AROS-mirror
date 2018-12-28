@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: arexxdispatch.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: The query function called by rexxmast to find the library functions
     Lang: English

@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: raw_cb.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: raw_cb.h,v 1.2 1996/03/03 21:07:17 niklas Exp $	*/

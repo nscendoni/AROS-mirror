@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support.c 49714 2014-10-27 03:38:30Z neil $
 
     Desc: 
     Lang: english

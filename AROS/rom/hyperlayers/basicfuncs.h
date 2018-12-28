@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: basicfuncs.h 47327 2013-04-30 02:40:08Z neil $
 
     Desc: Basic support functions for layers.library.
     Lang: English.

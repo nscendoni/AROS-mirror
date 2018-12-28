@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: lock.c 49086 2014-06-24 07:54:30Z twilen $ */
 /* $Log: lock.c $
  * Revision 11.4  1999/02/22  16:33:43  Michiel
  * Changes for increasing deldir capacity

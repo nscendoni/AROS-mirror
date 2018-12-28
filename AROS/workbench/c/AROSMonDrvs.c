@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2016, The AROS Development Team. All rights reserved.
+    $Id: AROSMonDrvs.c 53068 2016-12-01 00:23:36Z neil $
 
     Desc: Code that loads and initializes necessary HIDDs.
     Lang: english
@@ -116,7 +116,7 @@ static BOOL findMonitors(struct List *monitorsList, struct DosLibrary *DOSBase, 
 	ap->ap_Strlen    = 0;
 	ap->ap_BreakBits = 0;
 
-	error = MatchFirst("~((#?.info)|(#?.dbg))", ap);
+	error = MatchFirst("~(#?.info)", ap);
 	while (!error)
 	{
 	    struct MonitorNode *newnode;

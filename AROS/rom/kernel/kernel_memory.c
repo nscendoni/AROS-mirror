@@ -1,6 +1,6 @@
 /*
     Copyright � 2010-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kernel_memory.c 47486 2013-05-30 20:57:32Z schulz $
 
     Desc: Common memory utility functions
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: tcpip.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: tcpip.h,v 1.4 1997/08/26 20:02:35 deraadt Exp $	*/

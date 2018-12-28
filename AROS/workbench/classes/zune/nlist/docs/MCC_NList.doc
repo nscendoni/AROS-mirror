@@ -135,7 +135,7 @@ NList.mcc/MUIM_NList_UseImage
 
     *******************************************************************
     Copyright (C) 2001-2014 NList Open Source Team
-    $Id$
+    $Id: MCC_NList.doc 52756 2016-06-10 17:06:26Z neil $
 
     This MCC public custom class is very similar to the MUI's list
     class.

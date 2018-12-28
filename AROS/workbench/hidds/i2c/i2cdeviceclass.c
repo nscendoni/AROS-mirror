@@ -1,6 +1,6 @@
 /*
     Copyright © 2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: i2cdeviceclass.c 46472 2013-02-03 03:47:04Z jmcmullan $
 
     Desc: PCI device class
     Lang: English

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: waitblit.c 47343 2013-05-04 10:43:31Z mazze $
 
     Desc: Wait for the Blitter to finish
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: main.c 48304 2013-10-17 19:16:24Z deadwood $
 */
 
 /******************************************************************************

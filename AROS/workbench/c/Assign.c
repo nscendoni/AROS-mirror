@@ -3,7 +3,7 @@
     (C) 1995-2011 The AROS Development Team
     (C) 2002-2005 Harry Sintonen
     (C) 2005-2007 Pavel Fedin
-    $Id$
+    $Id: Assign.c 52028 2016-03-17 04:36:20Z jmcmullan $
 
     Desc: Assign CLI command
     Lang: English

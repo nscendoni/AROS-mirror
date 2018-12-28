@@ -1,7 +1,5 @@
-
-#define DEBUG 1
+#define DEBUG 0
 #include <aros/debug.h>
-
 #include <asm/io.h>
 
 #include "library.h"
@@ -44,18 +42,18 @@ static void i8x0_set_reg(struct ac97Base *ac97Base, ULONG reg, UWORD value)
 {
     int count=1000000;
     
-    while(count-- && (inb((IPTR)ac97Base->dmabase + ACC_SEMA) & 1));
+    while(count-- && (inb(ac97Base->dmabase + ACC_SEMA) & 1));
     
-    outw(value, (IPTR)ac97Base->mixerbase + reg);
+    outw(value, reg+ac97Base->mixerbase);
 }
 
 static UWORD i8x0_get_reg(struct ac97Base *ac97Base, ULONG reg)
 {
     int count=1000000;
     
-    while(count-- && (inb((IPTR)ac97Base->dmabase + ACC_SEMA) & 1));
+    while(count-- && (inb(ac97Base->dmabase + ACC_SEMA) & 1));
 
-    return inw((IPTR)ac97Base->mixerbase + reg);
+    return inw(reg+ac97Base->mixerbase);
 }
 
 /******************************************************************************
@@ -70,15 +68,13 @@ static AROS_UFH3(void, Enumerator,
 {
     AROS_USERFUNC_INIT
 
-    IPTR VendorID = 0, ProductID = 0, value = 0;
+    IPTR VendorID, ProductID, value;
     int i;
-
-    D(bug("[AHI:AC97] %s()\n", __func__));
 
     OOP_GetAttr(device, aHidd_PCIDevice_ProductID, &ProductID);
     OOP_GetAttr(device, aHidd_PCIDevice_VendorID, &VendorID);
 
-    D(bug("[AHI:AC97] %s: Querying PCI 'audio' device %04x:%04x\n", __func__, VendorID, ProductID));
+    D(bug("[ac97] Found audio device %04x:%04x\n", VendorID, ProductID));
 
     for (i=0; support[i].VendorID; i++)
     {
@@ -90,85 +86,68 @@ static AROS_UFH3(void, Enumerator,
 		{ aHidd_PCIDevice_isMaster, TRUE },
 		{ TAG_DONE, 0UL },	
 	    };
-
-	    D(bug("[AHI:AC97] %s: Detected supported '%s' card\n", __func__, support[i].Model));
-
+	    
+	    D(bug("[ac97] Found supported '%s' card\n", support[i].Model));
+	    ac97Base->cardfound = TRUE;
 	    ac97Base->mixer_set_reg = i8x0_set_reg;
 	    ac97Base->mixer_get_reg = i8x0_get_reg;
 
 	    OOP_SetAttrs(device, (struct TagItem *)&attrs);
 
 	    OOP_GetAttr(device, aHidd_PCIDevice_Base0, &value);
-	    ac97Base->mixerbase = (APTR)value;
+	    ac97Base->mixerbase = (ULONG)value;
 	    OOP_GetAttr(device, aHidd_PCIDevice_Base1, &value);
-	    ac97Base->dmabase = (APTR)value;
+	    ac97Base->dmabase = (ULONG)value;
 	    OOP_GetAttr(device, aHidd_PCIDevice_INTLine, &value);
 	    ac97Base->irq_num = (ULONG)value;
 
-	    D(
-                bug("[AHI:AC97] %s: Mixer IO base @ %p\n", __func__, ac97Base->mixerbase);
-                bug("[AHI:AC97] %s: DMA IO base @ %p\n", __func__, ac97Base->dmabase);
-            )
+	    D(bug("[ac97] Mixer IO base %x\n", ac97Base->mixerbase));
+    	D(bug("[ac97] DMA IO base %x\n", ac97Base->dmabase));
 
-            if (VendorID == 0x1039 && ProductID == 0x7012)
-            {
-                /* SIS 7012 */
-                ac97Base->off_po_sr     = DEFAULT_PO_PICB; /* swap registers */
-                ac97Base->off_po_picb   = DEFAULT_PO_SR;
-                ac97Base->size_shift    = 1; /* chip requires size in bytes, not samples */
-            }
-            else
-            {
-                /* All other cards */
-                ac97Base->off_po_sr     = DEFAULT_PO_SR; /* swap registers */
-                ac97Base->off_po_picb   = DEFAULT_PO_PICB;
-                ac97Base->size_shift    = 0;
-            }
+        if (VendorID == 0x1039 && ProductID == 0x7012)
+        {
+            /* SIS 7012 */
+            ac97Base->off_po_sr     = DEFAULT_PO_PICB; /* swap registers */
+            ac97Base->off_po_picb   = DEFAULT_PO_SR;
+            ac97Base->size_shift    = 1; /* chip requires size in bytes, not samples */
+        }
+        else
+        {
+            /* All other cards */
+            ac97Base->off_po_sr     = DEFAULT_PO_SR; /* swap registers */
+            ac97Base->off_po_picb   = DEFAULT_PO_PICB;
+            ac97Base->size_shift    = 0;
+        }
 
-#if defined(__AROS__) && (__WORDSIZE==64)
-            ac97Base->buffer = CreatePool(MEMF_CLEAR | MEMF_31BIT, 131072, 65536);
-#endif
-            if ((value = (IPTR)AllocMem((8*32) + ALIGN_AC97OUT, MEMF_PUBLIC | MEMF_31BIT | MEMF_CLEAR)) != 0)
-            {
-                ac97Base->PCM_out = (APTR)ALIGN_AC97(value);
-                D(bug("[AHI:AC97] %s: PCM_out base @ %p\n", __func__, ac97Base->PCM_out));
+	    outl(2, ac97Base->dmabase + GLOB_CNT);
+	    
+	    ac97Base->mixer_set_reg(ac97Base, AC97_RESET, 0);
+	    ac97Base->mixer_set_reg(ac97Base, AC97_POWERDOWN, 0);
 
-                ac97Base->cardfound = TRUE;
+	    /* Set master volume to no attenuation, mute off */
+	    ac97Base->mixer_set_reg(ac97Base, AC97_MASTER_VOL,	    0x0000);
+	    ac97Base->mixer_set_reg(ac97Base, AC97_HEADPHONE_VOL,   0x0000);
+	    ac97Base->mixer_set_reg(ac97Base, AC97_TONE,	    0x0f0f);
+	    ac97Base->mixer_set_reg(ac97Base, AC97_PCM_VOL,	    0x0000);
 
-                outl(2, (IPTR)ac97Base->dmabase + GLOB_CNT);
-
-                ac97Base->mixer_set_reg(ac97Base, AC97_RESET, 0);
-                ac97Base->mixer_set_reg(ac97Base, AC97_POWERDOWN, 0);
-
-                /* Set master volume to no attenuation, mute off */
-                ac97Base->mixer_set_reg(ac97Base, AC97_MASTER_VOL,	    0x0000);
-                ac97Base->mixer_set_reg(ac97Base, AC97_HEADPHONE_VOL,   0x0000);
-                ac97Base->mixer_set_reg(ac97Base, AC97_TONE,	    0x0f0f);
-                ac97Base->mixer_set_reg(ac97Base, AC97_PCM_VOL,	    0x0000);
-
-                D(
-                    bug("[AHI:AC97] %s:    Powerdown = %02x\n", __func__, ac97Base->mixer_get_reg(ac97Base, AC97_POWERDOWN));
-                    bug("[AHI:AC97] %s:    GLOB_CNT = %08x\n", __func__, inl((IPTR)ac97Base->dmabase + GLOB_CNT));
-                    bug("[AHI:AC97] %s:    GLOB_STA = %08x\n", __func__, inl((IPTR)ac97Base->dmabase + GLOB_STA));
-                )
-
-    /*
-                int i;
-                for (i=0; i < 64; i+=2)
-                {
-                    D(bug("[AHI:AC97] reg %02x = %04x\n", i, ac97Base->mixer_get_reg(ac97Base, i)));
-                }
-    */
-                outl((ULONG)(IPTR)ac97Base->PCM_out, (IPTR)ac97Base->dmabase + PO_BDBAR);
-
-                D(
-                    bug("[AHI:AC97] %s:    PO_BDBAR=%p\n", __func__, (APTR)(IPTR)inl((IPTR)ac97Base->dmabase + PO_BDBAR));
-                    bug("[AHI:AC97] %s:    PO_REGS=%08x\n", __func__, inl((IPTR)ac97Base->dmabase + PO_CIV));
-                    bug("[AHI:AC97] %s:    PO_PICB=%04x\n", __func__, inw((IPTR)ac97Base->dmabase + ac97Base->off_po_picb));
-                    bug("[AHI:AC97] %s:    PO_PIV=%02x\n", __func__, inb((IPTR)ac97Base->dmabase + PO_PIV));
-                    bug("[AHI:AC97] %s:    PO_CR=%02x\n", __func__, inb((IPTR)ac97Base->dmabase + PO_CR));
-                )
-            }
+	    D(bug("[ac97] Powerdown = %02x\n", ac97Base->mixer_get_reg(ac97Base, AC97_POWERDOWN)));
+	    D(bug("[ac97] GLOB_CNT = %08x\n", inl(ac97Base->dmabase + GLOB_CNT)));
+	    D(bug("[ac97] GLOB_STA = %08x\n", inl(ac97Base->dmabase + GLOB_STA)));
+	    
+/*
+	    int i;
+	    for (i=0; i < 64; i+=2)
+	    {
+		D(bug("[ac97] reg %02x = %04x\n", i, ac97Base->mixer_get_reg(ac97Base, i)));
+	    }
+*/
+	    outl((ULONG)ac97Base->PCM_out, ac97Base->dmabase + PO_BDBAR);
+	    
+	    D(bug("[ac97] PO_BDBAR=%08x\n", inl(ac97Base->dmabase + PO_BDBAR)));
+	    D(bug("[ac97] PO_REGS=%08x\n", inl(ac97Base->dmabase + PO_CIV)));
+	    D(bug("[ac97] PO_PICB=%04x\n", inw(ac97Base->dmabase + ac97Base->off_po_picb)));
+	    D(bug("[ac97] PO_PIV=%02x\n", inb(ac97Base->dmabase + PO_PIV)));
+	    D(bug("[ac97] PO_CR=%02x\n", inb(ac97Base->dmabase + PO_CR)));
 	}
     }
 
@@ -184,7 +163,7 @@ BOOL DriverInit( struct DriverBase* AHIsubBase )
     ac97Base->dosbase = OpenLibrary( DOSNAME, 37 );
     ac97Base->sysbase = SysBase;
 
-    D(bug("[AHI:AC97] %s()\n", __func__));
+    D(bug("[ac97] Init\n"));
 
     if(DOSBase)
     {
@@ -193,13 +172,13 @@ BOOL DriverInit( struct DriverBase* AHIsubBase )
 	{
 	    __IHidd_PCIDev = OOP_ObtainAttrBase(IID_Hidd_PCIDevice);
 
-	    D(bug("[AHI:AC97] %s: Libraries opened\n", __func__));
+	    D(bug("[ac97] Libraries opened\n"));
 
 	    if (__IHidd_PCIDev)
 	    {
 		OOP_Object *pci = OOP_NewObject(NULL, CLID_Hidd_PCI, NULL);
 		
-		D(bug("[AHI:AC97] %s: PCIDevice AttrBase = %x\n", __func__, __IHidd_PCIDev));
+		D(bug("[ac97] PCIDevice AttrBase = %x\n",__IHidd_PCIDev));
 		
 		if (pci)
 		{
@@ -219,14 +198,17 @@ BOOL DriverInit( struct DriverBase* AHIsubBase )
 			callback:	&FindHook,
 			requirements:	(struct TagItem *)&Reqs,
 		    }, *msg = &enummsg;
-
-		    D(bug("[AHI:AC97] %s: Got PCI object\n", __func__));
-
+		    
+		    D(bug("[ac97] Got PCI object\n"));
+		    
 		    ac97Base->cardfound = FALSE;
+		    ac97Base->PCM_out = AllocMem(8*32, MEMF_PUBLIC | MEMF_CLEAR);
 
 		    OOP_DoMethod(pci, (OOP_Msg)msg);
-
+		    
 		    OOP_DisposeObject(pci);
+
+		    D(bug("[ac97] PCM out base %08x\n", ac97Base->PCM_out));
 
 		    return ac97Base->cardfound;
 		}

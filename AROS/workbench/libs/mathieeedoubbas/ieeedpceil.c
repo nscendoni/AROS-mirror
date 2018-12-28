@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2003, The AROS Development Team. All rights reserved.
+    $Id: ieeedpceil.c 47354 2013-05-04 17:12:25Z mazze $
 */
 
 #include "mathieeedoubbas_intern.h"
@@ -18,30 +18,23 @@
         struct MathIeeeDoubBasBase *, MathIeeeDoubBasBase, 16, MathIeeeDoubBas)
 
 /*  FUNCTION
-        Calculates the ceiling value of an IEEE double precision number.
+        Calculates the ceil-value of a IEEE double precision number
 
     INPUTS
-        y - IEEE double precision floating point number.
 
     RESULT
-        x - ceiling of y.
-
         Flags:
           zero     : result is zero
           negative : result is negative
           overflow : 0
 
-    NOTES
-
-    EXAMPLE
-
     BUGS
 
     SEE ALSO
-        IEEEDPFloor(), IEEEDPFix()
+        IEEEDPFloor()
 
     INTERNALS
-        Algorithm:
+        ALGORITHM:
         Ceil(y) = - Floor(-y)
 
 *****************************************************************************/

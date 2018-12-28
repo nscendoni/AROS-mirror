@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kbd_common.h 48349 2013-10-30 07:24:21Z neil $
 
     Desc: Low-level definitions for i8042 controller.
     Lang: English.

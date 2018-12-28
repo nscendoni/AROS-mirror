@@ -2,7 +2,7 @@
     Copyright © 2002, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: muimaster_init.c 43552 2012-01-09 16:32:15Z olivieradam $
 */
 
 #include <exec/types.h>

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2004 - 2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: iconwindow.h 43370 2011-12-30 16:16:03Z deadwood $
 */
 
 #include <exec/types.h>

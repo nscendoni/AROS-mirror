@@ -1,6 +1,6 @@
 // ScaLibrary.h
-// $Date$
-// $Revision$
+// $Date: 2016-03-19 21:12:02 +0100 (Sat, 19 Mar 2016) $
+// $Revision: 52067 $
 
 
 #ifndef SCALIBRARY_H

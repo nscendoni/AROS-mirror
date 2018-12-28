@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: writeautoinit.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Function to write module_autoinit.c. Part of genmodule.
 */
@@ -50,24 +50,5 @@ void writeautoinit(struct config *cfg, int is_rel)
             is_rel ? "rel" : ""
     );
 
-    if (cfg->forcelist!=NULL)
-    {
-        struct stringlist * forcelistit;
-
-        fprintf(out, "\n");
-        for (forcelistit = cfg->forcelist;
-             forcelistit!=NULL;
-             forcelistit = forcelistit->next
-            )
-        {
-            /* By bringing in __aros_getbase_XXXBase() we assure parent will open
-               this library */
-            fprintf(
-                out,
-                "AROS_IMPORT_ASM_SYM(void *, __dummy_%s, __aros_getbase_%s);\n",
-                forcelistit->s, forcelistit->s
-            );
-        }
-    }
     fclose(out);
 }

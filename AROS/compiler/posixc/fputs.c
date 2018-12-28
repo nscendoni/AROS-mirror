@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fputs.c 51816 2016-03-11 06:22:46Z NicJA $
 
     C99 function fputs().
 */

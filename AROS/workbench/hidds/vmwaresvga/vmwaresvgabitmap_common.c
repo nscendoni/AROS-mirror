@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vmwaresvgabitmap_common.c 39454 2011-06-21 04:30:28Z jmcmullan $
 
     Desc:
     Lang: English.

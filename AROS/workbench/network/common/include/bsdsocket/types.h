@@ -1,7 +1,7 @@
 #ifndef BSDSOCKET_TYPES_H
 #define BSDSOCKET_TYPES_H
 /*
- * $Id$
+ * $Id: types.h 48699 2014-01-11 17:39:44Z jmcmullan $
  *
  * Common types previously defined in multiple headers.
  *

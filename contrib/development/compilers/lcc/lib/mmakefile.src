@@ -1,5 +1,5 @@
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 NOWARN_FLAGS := $(NOWARN_PARENTHESES) $(NOWARN_UNUSED_VARIABLE)
 USER_CFLAGS	:= $(NOWARN_FLAGS) -Iinclude

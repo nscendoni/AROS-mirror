@@ -3,7 +3,7 @@
 /*
 **    $Filename: clib/reqtools_protos.h $
 **    $Release: 2.5 $
-**    $Revision$
+**    $Revision: 30792 $
 **
 **    C prototypes. For use with 32 bit integers only.
 **

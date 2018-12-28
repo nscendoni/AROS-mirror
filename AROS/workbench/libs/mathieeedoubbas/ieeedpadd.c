@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2003, The AROS Development Team. All rights reserved.
+    $Id: ieeedpadd.c 47354 2013-05-04 17:12:25Z mazze $
 */
 
 #include "mathieeedoubbas_intern.h"
@@ -19,27 +19,19 @@
         struct MathIeeeDoubBasBase *, MathIeeeDoubBasBase, 11, MathIeeeDoubBas)
 
 /*  FUNCTION
-        Calculate the sum of two IEEE double precision numbers.
+        Calculate the sum of two IEEE double precision numbers
 
     INPUTS
-        y - first addend.
-        z - first addend.
 
     RESULT
-        x - sum of y and z.
+        sum of y and z
 
         Flags:
           zero     : result is zero
           negative : result is negative
-          overflow : result is too large or too small for IEEE DP format
-
-    NOTES
-
-    EXAMPLE
+          overflow : result is too large or too small for ffp format
 
     BUGS
-
-    SEE ALSO
 
     INTERNALS
 

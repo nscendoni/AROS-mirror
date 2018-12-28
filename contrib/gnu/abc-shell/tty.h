@@ -4,7 +4,7 @@
         created by DPK, Oct. 1986
 
 */
-/* $Id$ */
+/* $Id: tty.h 36659 2011-01-18 13:26:51Z neil $ */
 
 /* some useful #defines */
 #ifdef EXTERN

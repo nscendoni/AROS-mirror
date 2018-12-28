@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fwrite.c 49136 2014-07-23 01:01:00Z vidarh $
 
     Lang: english
 */

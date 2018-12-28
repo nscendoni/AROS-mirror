@@ -19,7 +19,7 @@
 
  TextEditor class Support Site:  http://www.sf.net/projects/texteditor-mcc
 
- $Id$
+ $Id: TextEditor_mcc.h 49436 2014-08-16 11:30:27Z mazze $
 
 ***************************************************************************/
 

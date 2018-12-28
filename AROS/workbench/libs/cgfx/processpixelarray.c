@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: processpixelarray.c 49625 2014-09-13 23:06:14Z mazze $
 
     Desc:
     Lang: english

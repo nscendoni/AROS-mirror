@@ -16,7 +16,7 @@
 
  TextEditor class Support Site:  http://www.sf.net/projects/texteditor-mcc
 
- $Id$
+ $Id: icon.h 51615 2016-03-06 20:11:17Z mazze $
 
 ***************************************************************************/
 

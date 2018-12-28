@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: extractcolor.c 47438 2013-05-20 02:30:36Z neil $
 
     Desc:
     Lang: english
@@ -8,7 +8,7 @@
 
 #include <aros/debug.h>
 #include <clib/macros.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <proto/exec.h>
 #include <proto/oop.h>
 

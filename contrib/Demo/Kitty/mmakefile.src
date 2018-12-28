@@ -1,8 +1,8 @@
-#   $Id$
+#   $Id: mmakefile.src 52347 2016-03-29 14:21:56Z NicJA $
 #
 #   Makefile to make Kitty demo
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 FILES 	    := main 
 EXEDIR      := $(AROS_CONTRIB)/Demos/Kitty

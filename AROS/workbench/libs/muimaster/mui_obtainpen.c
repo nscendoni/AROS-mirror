@@ -1,6 +1,6 @@
 /*
     Copyright © 2002-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mui_obtainpen.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <exec/types.h>
@@ -25,7 +25,7 @@
         AROS_LHA(ULONG, flags, D0),
 
 /*  LOCATION */
-        struct Library *, MUIMasterBase, 26, MUIMaster)
+        struct Library *, MUIMasterBase, 22, MUIMaster)
 
 /*  FUNCTION
         Turns struct MUI_PenSpec (the result of a Poppen object) into

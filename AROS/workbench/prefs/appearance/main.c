@@ -1,6 +1,6 @@
 /*
     Copyright © 2013-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: main.c 53084 2016-12-20 17:57:04Z neil $
 */
 
 /*********************************************************************************************/
@@ -20,7 +20,7 @@
 #include "args.h"
 #include "locale.h"
 
-#define VERSION "$VER: Appearance 1.1 (12.6.2017) AROS Dev Team"
+#define VERSION "$VER: Appearance 1.0 (04.09.2013) AROS Dev Team"
 /*********************************************************************************************/
 
 int main(int argc, char **argv)

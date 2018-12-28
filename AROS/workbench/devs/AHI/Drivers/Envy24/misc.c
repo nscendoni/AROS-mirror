@@ -1,6 +1,6 @@
 /*
     Copyright © 2004-2014, Davy Wentzler. All rights reserved.
-    $Id$
+    $Id: misc.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <exec/memory.h>
@@ -628,8 +628,8 @@ void pci_free_consistent(void* addr, struct DriverBase* AHIsubBase)
   FreeVec( addr );
 }
 
-
-static AROS_INTH1(ResetHandler, struct CardData *, card)
+/* ABI_V0 compatibility */
+static AROS_SOFTINTH1(ResetHandler, struct CardData *, card)
 {
     AROS_INTFUNC_INIT
 

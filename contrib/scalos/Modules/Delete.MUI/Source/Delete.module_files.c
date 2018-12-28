@@ -1,6 +1,6 @@
 // Delete.module_files.c
-// $Date$
-// $Revision$
+// $Date: 2013-12-01 23:08:26 +0100 (Sun, 01 Dec 2013) $
+// $Revision: 48481 $
 
 
 //     ___       ___.
@@ -759,10 +759,9 @@ LONG DirDelete(STRPTR DirName, BOOL Trash, APTR UndoStep)
 	BPTR              DirLock   = (BPTR)NULL;
 	IPTR              Confirm   = 0;
 
-	d1(
-            kprintf("%s()/%ld: Trying to delete %s\n", __FUNCTION__, __LINE__, DirName);
-            DEBUG_CURRENTDIR;
-        )
+	d1(kprintf("%s()/%ld: Trying to delete %s\n", __FUNCTION__, __LINE__, DirName);)
+
+	DEBUG_CURRENTDIR;
 
 	snprintf(TextBuffer, sizeof(TextBuffer),
 		GetLocString(MSG_BODY_REMOVE), FilePart(DirName));
@@ -830,7 +829,7 @@ LONG DirDelete(STRPTR DirName, BOOL Trash, APTR UndoStep)
 
 		OldDir = CurrentDir(DirLock);
 
-		d1(DEBUG_CURRENTDIR;)
+		DEBUG_CURRENTDIR;
 
 		if(Examine(DirLock, ExFIB))
 			{
@@ -857,15 +856,14 @@ LONG DirDelete(STRPTR DirName, BOOL Trash, APTR UndoStep)
 					}
 				}
 
-			d1(
-                            kprintf("%s()/%ld: Protection stage complete, checking contents\n", __FUNCTION__, __LINE__);
-                            DEBUG_CURRENTDIR;
-                        )
+			d1(kprintf("%s()/%ld: Protection stage complete, checking contents\n", __FUNCTION__, __LINE__);)
+
+			DEBUG_CURRENTDIR;
 
 			if(ExNext(DirLock, ExFIB))
 				{
 				do 	{
-					d1(DEBUG_CURRENTDIR;)
+					DEBUG_CURRENTDIR;
 
 			                DoMethod(MUI_App, MUIM_Application_InputBuffered);
 
@@ -873,10 +871,8 @@ LONG DirDelete(STRPTR DirName, BOOL Trash, APTR UndoStep)
 					OldFIB = *ExFIB;
 					ExNextRtn = ExNext(DirLock, ExFIB);
 
-					d1(
-                                            DEBUG_CURRENTDIR;
-                                            kprintf("%s()/%ld: fib_DirEntryType=%ld\n", __FUNCTION__, __LINE__, OldFIB.fib_DirEntryType);
-                                        )
+					DEBUG_CURRENTDIR;
+					d1(kprintf("%s()/%ld: fib_DirEntryType=%ld\n", __FUNCTION__, __LINE__, OldFIB.fib_DirEntryType);)
 
 					if (ST_SOFTLINK == OldFIB.fib_DirEntryType)
 					{
@@ -994,7 +990,7 @@ LONG DirDelete(STRPTR DirName, BOOL Trash, APTR UndoStep)
 	if(Trash)
 		FileBuffer[Position] = '\0';
 
-	d1(DEBUG_CURRENTDIR;)
+	DEBUG_CURRENTDIR;
 
 	if(Result == RESULT_HALT)
 		return(RESULT_HALT);

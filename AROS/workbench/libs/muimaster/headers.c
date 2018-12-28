@@ -2,7 +2,7 @@
     Copyright © 2002, The AROS Development Team. 
     All rights reserved.
     
-    $Id$
+    $Id: headers.c 36648 2011-01-17 14:31:59Z neil $
 */
 
 #include <stdlib.h>

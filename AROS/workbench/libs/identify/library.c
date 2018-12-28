@@ -19,7 +19,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *   
- * $Id$
+ * $Id: library.c 38930 2011-05-30 18:14:59Z mazze $
  */
 
 #include <aros/symbolsets.h>

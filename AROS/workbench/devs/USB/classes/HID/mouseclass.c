@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2006 by Michal Schulz
-    $Id$
+    $Id: mouseclass.c 45392 2012-08-06 03:07:42Z jmcmullan $
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Library General Public License as

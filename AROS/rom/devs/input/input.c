@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: input.c 49957 2015-01-28 02:09:48Z neil $
 
     Desc: Input device
     Lang: english

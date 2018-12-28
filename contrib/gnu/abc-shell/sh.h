@@ -2,7 +2,7 @@
  * Public Domain Bourne/Korn shell
  */
 
-/* $Id$ */
+/* $Id: sh.h 36659 2011-01-18 13:26:51Z neil $ */
 
 #define ABC_VERSION "52.10"
 #define RELEASE_DATE "12.11.2007"
@@ -120,7 +120,7 @@ extern int dup2(int, int);
 #ifndef EXECSHELL
 /* shell to exec scripts (see also $SHELL initialization in main.c) */
 #ifdef __AROS__
-#  define EXECSHELL     "/Developer/bin/sh"
+#  define EXECSHELL     "/Development/bin/sh"
 #else
 #  define EXECSHELL     "/SDK/C/sh"
 #endif

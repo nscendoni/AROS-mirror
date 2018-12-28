@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2010, The AROS Development Team. All rights reserved.
+    $Id: allocspritedataa.c 47532 2013-06-10 16:46:04Z jmcmullan $
 
     Desc: Graphics function AllocSpriteDataA()
     Lang: english
@@ -14,7 +14,7 @@
 #include <cybergraphx/cybergraphics.h>
 #include <graphics/sprite.h>
 #include <graphics/scale.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <utility/tagitem.h>
 #include <exec/exec.h>
 #include <proto/oop.h>

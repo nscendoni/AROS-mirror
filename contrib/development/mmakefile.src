@@ -1,8 +1,8 @@
-# $Id$
+# $Id: mmakefile.src 52348 2016-03-29 14:28:20Z NicJA $
 #
 # Makefile to contributed development tools.
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM contrib-development : contrib-development-setup
 
@@ -10,6 +10,6 @@ contrib-development : setup
 
 #MM
 contrib-development-setup ::
-	%mkdirs_q $(AROS_CONTRIB)/$(AROS_DIR_DEVELOPER)
+	%mkdirs_q $(AROS_CONTRIB)/Development
 	
 %common

@@ -1,7 +1,7 @@
 # Copyright © 2016, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: mmakefile.src 53095 2016-12-23 13:47:33Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(TOP)/config/make.cfg
 
 #MM- iconset-Gorilla-contrib-icons-extras-games : iconset-Gorilla-contrib-icons-extras-games-misc
 

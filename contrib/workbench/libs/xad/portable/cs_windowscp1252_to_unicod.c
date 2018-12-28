@@ -2,7 +2,7 @@
 #ifndef XADMASTER_CS_WINDOWSCP1252_TO_UNICODE_C
 #define XADMASTER_CS_WINDOWSCP1252_TO_UNICODE_C
 
-/*  $Id$
+/*  $Id: cs_windowscp1252_to_unicod.c 43430 2012-01-01 20:12:06Z jmcmullan $
     Character set conversion from Windows codepage 1252 to Unicode
 
     XAD library system for archive handling

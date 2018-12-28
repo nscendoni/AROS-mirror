@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: iffparse_intern.h 41140 2011-09-06 12:24:53Z sonic $
 */
 
 #ifndef IFFPARSE_INTERN_H

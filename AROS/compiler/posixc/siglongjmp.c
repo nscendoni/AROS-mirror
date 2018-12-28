@@ -1,6 +1,6 @@
 /*
     Copyright © 2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: siglongjmp.c 51070 2015-09-02 20:39:49Z mazze $
 
     Desc: POSIX.1-2008 function siglongjmp()
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: library.c 43842 2012-02-04 01:29:45Z neil $
 */
 
 #include <aros/libcall.h>

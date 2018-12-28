@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: namefromlock.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc: Retrieve the full pathname from a lock.
     Lang: english
@@ -76,7 +76,14 @@
         }
     }
 
-    
+    {
+        /* ABI_V0 compatibility */
+        /* Up to 2010-12-03 NameFromFH was an alias/define to NameFromLock. Example: HFinder */
+        struct FileLock *fl = (struct FileLock *)BADDR(lock);
+        if ((fl->fl_Access != SHARED_LOCK) && (fl->fl_Access != EXCLUSIVE_LOCK))
+            return NameFromFH(lock, buffer, length);
+    }
+
     lock2 = DupLock(lock);
     res = namefrom_internal(DOSBase, lock2, buffer, length);
     UnLock(lock2);

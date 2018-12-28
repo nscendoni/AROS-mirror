@@ -23,16 +23,14 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/msun/src/s_cimagl.c,v 1.3 2009/03/14 18:24:15 das Exp $
+ * $FreeBSD: src/lib/msun/src/s_cimagl.c,v 1.1 2004/05/30 09:21:56 stefanf Exp $
  */
 
 #include <complex.h>
-#include "math_private.h"
+#undef cimagl
 
 long double
 cimagl(long double complex z)
 {
-	const long_double_complex z1 = { .f = z };
-
-	return (IMAGPART(z1));
+	return -z * I;
 }

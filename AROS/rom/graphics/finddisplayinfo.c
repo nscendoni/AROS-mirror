@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2010, The AROS Development Team. All rights reserved.
+    $Id: finddisplayinfo.c 34100 2010-08-11 10:45:44Z sonic $
 
     Desc: Graphics function FindDisplayInfo()
     Lang: english
@@ -8,7 +8,7 @@
 #include <aros/debug.h>
 #include <proto/graphics.h>
 #include <graphics/displayinfo.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 
 #include "graphics_intern.h"
 #include "dispinfo.h"

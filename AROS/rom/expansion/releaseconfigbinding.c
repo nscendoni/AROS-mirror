@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: releaseconfigbinding.c 48810 2014-02-14 03:00:42Z neil $
 
     Desc: Release the lock on the CurrentBinding data.
     Lang: english

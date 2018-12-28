@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2013, The AROS Development Team. All rights reserved.
-# $Id$
+# $Id: gendoc.py 46765 2013-03-02 21:22:37Z mazze $
 
 """Documentation to guide.
 

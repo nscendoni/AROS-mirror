@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: graphics_intern.h 36647 2011-01-17 14:01:23Z neil $
 */
 
 #ifndef GRAPHICS_HIDD_INTERN_H

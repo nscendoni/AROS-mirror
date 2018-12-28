@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: realtime.h 51343 2016-01-18 22:49:50Z NicJA $
 
     Desc: Includes for realtime.library
     Lang: English

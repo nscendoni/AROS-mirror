@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: dosextens.h 49655 2014-09-21 23:01:25Z neil $
 
     Desc: LibBase and some important structures
     Lang: English

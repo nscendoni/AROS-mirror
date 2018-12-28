@@ -24,7 +24,6 @@
  * SUCH DAMAGE.
  */
 
-#include <float.h>
 #include <fenv.h>
 #include <math.h>
 
@@ -34,7 +33,6 @@ __FBSDID("$FreeBSD: src/lib/msun/src/s_lrint.c,v 1.1 2005/01/11 23:12:55 das Exp
 #define	roundit		rint
 #define dtype		long
 #define	fn		lrint
-#define	fnld	lrintl
 #endif
 
 /*
@@ -57,8 +55,3 @@ fn(type x)
 	feupdateenv(&env);
 	return (d);
 }
-
-#if (LDBL_MANT_DIG == DBL_MANT_DIG) && defined(fnld)
-AROS_MAKE_ASM_SYM(typeof(fnld),fnld, AROS_CSYM_FROM_ASM_NAME(fnld), AROS_CSYM_FROM_ASM_NAME(fn));
-AROS_EXPORT_ASM_SYM(AROS_CSYM_FROM_ASM_NAME(fnld));
-#endif

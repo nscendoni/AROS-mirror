@@ -1,6 +1,6 @@
-# $Id$
+# $Id: mmakefile.src 53106 2016-12-26 15:46:50Z mazze $
 
-include $(SRCDIR)/config/aros-contrib.cfg
+include $(SRCDIR)/config/aros.cfg
 
 #MM- ports-game-ltris : ports-game-ltris-icons
 

@@ -2,7 +2,7 @@
 #define	__IP_PROXY_H__
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ip_proxy.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ip_proxy.h,v 1.8 2000/04/05 05:35:27 kjell Exp $	*/

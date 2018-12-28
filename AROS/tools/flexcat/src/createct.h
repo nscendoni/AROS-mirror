@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: createct.h 49325 2014-08-14 00:52:39Z mazze $
  *
  * Copyright (C) 1993-1999 by Jochen Wiedmann and Marcin Orlowski
  * Copygight (C) 2002-2007 by the FlexCat Open Source Team

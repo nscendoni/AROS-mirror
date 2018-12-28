@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2006 by Michal Schulz
-    $Id$
+    $Id: usbprocess.c 44489 2012-04-01 05:14:45Z jmcmullan $
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Library General Public License as

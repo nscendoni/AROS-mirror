@@ -1,8 +1,7 @@
 #!/bin/zsh
 # Creates linux-armhf "hosted" binary packages.
 
-BUILDCPU=armhf
-BUILDTARGET=linux-$BUILDCPU
+BUILDTARGET=linux-armhf
 BUILDTARGETDIR=linux-arm
 BUILDEXTRAOPTS=(--enable-includes=/usr/arm-linux-gnueabihf/include/ --x-includes=/usr/arm-linux-gnueabihf/sysroot/usr/include --x-libraries=/usr/arm-linux-gnueabihf/sysroot/usr/lib)
 

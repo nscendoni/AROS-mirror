@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2018, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: global.h 45722 2012-09-02 19:16:01Z mazze $
 
     Desc:
     Lang: English
@@ -173,7 +173,7 @@
 #define GET_WORD(x) x
 #endif
 
-#define IPREFS_SEM_NAME     "« IPrefs »"
+#define IPREFS_SEM_NAME     "IPrefs >>"
 #define DO_LOCALE_PATCHES   0
 
 struct IPrefsSem

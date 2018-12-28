@@ -1,7 +1,7 @@
 #pragma inline					/* tell turbo assemble to use inline assembly */
 #ifndef LINT
 static char sccsid[]="$Source$\n\
-$Id$";
+$Id: addbftcc.c 30794 2009-03-08 02:19:07Z neil $";
 #endif /* LINT */
 
 extern unsigned int crccode;

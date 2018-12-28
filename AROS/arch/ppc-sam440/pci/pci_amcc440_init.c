@@ -1,6 +1,6 @@
 /*
     Copyright © 2003-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pci_amcc440_init.c 30792 2009-03-07 22:40:04Z neil $
 */
 
 #include <aros/symbolsets.h>

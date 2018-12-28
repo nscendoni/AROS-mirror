@@ -2,7 +2,7 @@
 #define	__IP_AUTH_H__
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ip_auth.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: ip_auth.h,v 1.7 2000/03/13 23:40:17 kjell Exp $	*/

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: shcommands_notembedded.h 48503 2013-12-04 05:09:07Z jmcmullan $
 */
 
 #ifndef SHCOMMANDS_EMBEDDED_H

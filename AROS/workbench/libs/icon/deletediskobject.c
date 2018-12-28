@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: deletediskobject.c 48682 2014-01-05 14:19:54Z mazze $
 
     Desc:
     Lang: english

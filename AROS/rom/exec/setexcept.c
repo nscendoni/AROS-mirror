@@ -1,12 +1,10 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: setexcept.c 50721 2015-05-20 01:07:11Z NicJA $
 
     Desc: Examine and/or modify the signals which cause an exception.
     Lang: english
 */
-
-#define DEBUG 0
 
 #include <exec/execbase.h>
 #include <aros/libcall.h>
@@ -15,7 +13,6 @@
 #include "exec_intern.h"
 #if defined(__AROSEXEC_SMP__)
 #include "etask.h"
-#include "exec_locks.h"
 #endif
 
 /*****************************************************************************
@@ -59,32 +56,32 @@
     AROS_LIBFUNC_INIT
 
     /* Get pointer to current task */
-    struct Task *thisTask = GET_THIS_TASK;
+    struct Task *ThisTask = GET_THIS_TASK;
     ULONG old;
 
     /* Protect mask of sent signals and task lists */
-    Disable();
 #if defined(__AROSEXEC_SMP__)
-    EXEC_LOCK_WRITE(&IntETask(thisTask->tc_UnionETask.tc_ETask)->iet_TaskLock);
+    EXEC_SPINLOCK_LOCK(&IntETask(ThisTask->tc_UnionETask.tc_ETask)->iet_TaskLock, SPINLOCK_MODE_WRITE);
 #endif
+    Disable();
 
     /* Get returncode */
-    old = thisTask->tc_SigExcept;
+    old = ThisTask->tc_SigExcept;
 
     /* Change exception mask */
-    thisTask->tc_SigExcept = (old & ~signalSet) | (newSignals & signalSet);
+    ThisTask->tc_SigExcept = (old & ~signalSet) | (newSignals & signalSet);
 
     /* Does this change include an exception? */
-    if (thisTask->tc_SigExcept & thisTask->tc_SigRecvd)
+    if (ThisTask->tc_SigExcept & ThisTask->tc_SigRecvd)
     {
         /* Yes. Set the exception flag. */
-        thisTask->tc_Flags |= TF_EXCEPT;
+        ThisTask->tc_Flags |= TF_EXCEPT;
 
         /* And order rescheduling */
         Reschedule();
     }
 #if defined(__AROSEXEC_SMP__)
-    EXEC_UNLOCK(&IntETask(thisTask->tc_UnionETask.tc_ETask)->iet_TaskLock);
+    EXEC_SPINLOCK_UNLOCK(&IntETask(ThisTask->tc_UnionETask.tc_ETask)->iet_TaskLock);
 #endif
     Enable();
 

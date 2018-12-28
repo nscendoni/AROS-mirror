@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cpu.h 51367 2016-01-19 09:39:20Z dizzyofcrn $
 
     CPU-specific assembler definitions.
     This file and included one describe hardware-level control structures

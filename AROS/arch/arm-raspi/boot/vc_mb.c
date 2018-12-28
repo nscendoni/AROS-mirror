@@ -1,6 +1,6 @@
 /*
     Copyright � 2013-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vc_mb.c 50277 2015-04-01 01:16:56Z NicJA $
 
     Desc: VideoCore mailbox support routines
     Lang: english

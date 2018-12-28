@@ -1,7 +1,7 @@
 #ifndef XADMASTER_COPYMEM_C
 #define XADMASTER_COPYMEM_C
 
-/*  $Id$
+/*  $Id: copymem.c 43430 2012-01-01 20:12:06Z jmcmullan $
     memory copy function
 
     XAD library system for archive handling

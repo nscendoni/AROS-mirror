@@ -1,6 +1,6 @@
 // PictureDimensions.h
-// $Date$
-// $Revision$
+// $Date: 2013-12-17 00:38:36 +0100 (Tue, 17 Dec 2013) $
+// $Revision: 48586 $
 
 #ifndef PICTUREDIMENSIONS_H
 #define PICTUREDIMENSIONS_H

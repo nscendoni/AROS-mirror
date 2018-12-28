@@ -1,5 +1,5 @@
 /*
-** $Id$
+** $Id: lvm.h 47953 2013-09-02 05:00:46Z mazze $
 ** Lua virtual machine
 ** See Copyright Notice in lua.h
 */

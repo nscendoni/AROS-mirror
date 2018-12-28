@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: vfork_longjmp.s 48048 2013-09-08 21:19:29Z verhaegs $
 
     Desc: longjmp for vfork(), m68k version
     Lang: english

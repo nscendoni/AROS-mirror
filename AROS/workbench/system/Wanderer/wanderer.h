@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2004 - 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: wanderer.h 42335 2011-11-08 20:17:39Z deadwood $
 */
 
 #include <exec/types.h>

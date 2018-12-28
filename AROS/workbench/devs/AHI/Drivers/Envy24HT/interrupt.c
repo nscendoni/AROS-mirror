@@ -1,6 +1,6 @@
 /*
     Copyright © 2005-2013, Davy Wentzler. All rights reserved.
-    $Id$
+    $Id: interrupt.c 52484 2016-03-31 15:25:06Z neil $
 */
 
 #include <config.h>

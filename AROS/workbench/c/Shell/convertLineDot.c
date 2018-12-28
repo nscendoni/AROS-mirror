@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: convertLineDot.c 50899 2015-07-01 00:03:48Z neil $
  */
 
 #include <exec/memory.h>

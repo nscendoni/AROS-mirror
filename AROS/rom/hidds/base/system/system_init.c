@@ -1,11 +1,7 @@
 /*
-    Copyright © 2015-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2015-2016, The AROS Development Team. All rights reserved.
+    $Id: system_init.c 51948 2016-03-14 19:21:58Z neil $
 */
-
-#define DEBUG 0
-#include <aros/debug.h>
-
 #include <stddef.h>
 #include <exec/types.h>
 
@@ -19,37 +15,41 @@
 
 #include LC_LIBDEFS_FILE
 
-static int System_Init(LIBBASETYPEPTR LIBBASE)
+#define DEBUG 1
+#include <aros/debug.h>
+
+
+static int Systsem_Init(LIBBASETYPEPTR LIBBASE)
 {
     struct class_static_data *csd = &LIBBASE->hsi_csd;
     struct Library *OOPBase = csd->cs_OOPBase;
 
-    D(bug("[HiddSystem] %s()\n", __PRETTY_FUNCTION__));
+    D(bug("[HiddSystsem] %s()\n", __PRETTY_FUNCTION__));
 
     OOP_Object *hwroot = OOP_NewObject(NULL, CLID_HW_Root, NULL);
     csd->hwAttrBase = OOP_ObtainAttrBase(IID_HW);
 
     if (HW_AddDriver(hwroot, csd->oopclass, NULL))
     {
-        D(bug("[HiddSystem] %s: initialised\n", __PRETTY_FUNCTION__));
+        D(bug("[HiddSystsem] %s: initialised\n", __PRETTY_FUNCTION__));
         return TRUE;
     }
-    D(bug("[HiddSystem] %s: failed\n", __PRETTY_FUNCTION__));
+    D(bug("[HiddSystsem] %s: failed\n", __PRETTY_FUNCTION__));
     
     return FALSE;
 }
 
-static int System_Expunge(LIBBASETYPEPTR LIBBASE)
+static int Systsem_Expunge(LIBBASETYPEPTR LIBBASE)
 {
-    D(struct class_static_data *csd = &LIBBASE->hsi_csd;)
+    struct class_static_data *csd = &LIBBASE->hsi_csd;
 #if (0)
     struct Library *OOPBase = csd->cs_OOPBase;
 #endif
     
-    D(bug("[HiddSystem] %s(csd=%p)\n", __PRETTY_FUNCTION__, csd));
+    D(bug("[HiddSystsem] %s(csd=%p)\n", __PRETTY_FUNCTION__, csd));
     
     return TRUE;
 }
 
-ADD2INITLIB(System_Init, -2)
-ADD2EXPUNGELIB(System_Expunge, -2)
+ADD2INITLIB(Systsem_Init, -2)
+ADD2EXPUNGELIB(Systsem_Expunge, -2)

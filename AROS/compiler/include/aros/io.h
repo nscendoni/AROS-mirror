@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2006-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: io.h 37974 2011-04-01 06:37:44Z sonic $
 
     Desc: Oldstyle I/O macros
     Lang: english

@@ -1,16 +1,9 @@
-#   $Id$
+#   $Id: mmakefile.src 52814 2016-07-30 13:16:28Z NicJA $
 
 include $(SRCDIR)/config/aros.cfg
 
 include $(SRCDIR)/$(CURDIR)/drm/sources.drm.mak
 
-# Currently only built for x86, because nouveau.hidd uses agp.hidd
-# which fails to build on architectures due to because of missing
-# Wbinvd() implementation.
-
-#MM- workbench-hidds-nouveau : hidd-nouveau-$(AROS_TARGET_CPU)
-#MM- hidd-nouveau-i386 : hidd-nouveau
-#MM- hidd-nouveau-x86_64 : hidd-nouveau
 #MM hidd-nouveau : hidd-i2c hidd-agp hidd-gallium
 
 GALLIUM_NOUVEAU_SOURCES = \
@@ -106,14 +99,14 @@ DRM_PATH = $(SRCDIR)/$(CURDIR)/drm/
 XF86_NOUVEAU_PATH = $(SRCDIR)/$(CURDIR)/xf86-video-nouveau/
 
 NOUVEAU_HIDD_SOURCES := \
-            nouveau_hiddclass \
+            nouveauclass \
             nouveau_init \
-            nouveau_bitmapclass \
-            nouveau_galliumclass \
+            nouveaubitmapclass \
+            nouveaugalliumclass \
             nouveau_accel \
-            nouveau_i2cclass \
+            nouveaui2c \
             arosc_emul \
-            nouveau_compositorclass \
+            compositorclass \
             $(addprefix $(DRM_PATH),$(AROS_DRM_CORE_SOURCES))           \
             $(addprefix $(DRM_PATH),$(AROS_DRM_NVIDIA_SOURCES))         \
             $(addprefix $(DRM_PATH),$(AROS_LIBDRM_CORE_SOURCES))        \
@@ -127,7 +120,7 @@ USER_INCLUDES := \
                 -I$(DRM_PATH)/drm-aros                      \
                 -I$(DRM_PATH)/drm-aros/nouveau              \
                 -I$(GALLIUM_PATH)/drivers                   \
-                -I$(AROS_DEVELOPER)/include/gallium       \
+                -I$(AROS_DEVELOPMENT)/include/gallium       \
                 -I$(GALLIUM_PATH)/include                   \
                 -I$(DRM_PATH)/libdrm                        \
                 -I$(DRM_PATH)/libdrm/nouveau                \

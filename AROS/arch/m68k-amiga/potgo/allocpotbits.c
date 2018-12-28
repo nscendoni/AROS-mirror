@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: allocpotbits.c 36646 2011-01-17 13:48:43Z neil $
 
     Desc: AllocPotBits() function.
     Lang: english

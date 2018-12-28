@@ -7,7 +7,7 @@
  * This program is free software; you can redistribute it and/or modify it
  * under the same terms as AROS itself.
  *
- * $Id$
+ * $Id: packet.c 50975 2015-08-02 05:15:32Z neil $
  */
 
 #include <exec/types.h>

@@ -1,7 +1,7 @@
 #ifndef XADMASTER_DATES_C
 #define XADMASTER_DATES_C
 
-/*  $Id$
+/*  $Id: dates.c 43430 2012-01-01 20:12:06Z jmcmullan $
     date and time conversion stuff
 
     XAD library system for archive handling

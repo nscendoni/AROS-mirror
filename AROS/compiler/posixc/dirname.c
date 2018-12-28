@@ -1,6 +1,6 @@
 /*
     Copyright © 2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: dirname.c 48049 2013-09-08 21:19:37Z verhaegs $
 
     POSIX.1-2008 function dirname().
 */

@@ -1,6 +1,6 @@
 /*
-  Copyright  2004-2018, The AROS Development Team. All rights reserved.
-  $Id$
+  Copyright  2004-2013, The AROS Development Team. All rights reserved.
+  $Id: wandererprefs.c 52028 2016-03-17 04:36:20Z jmcmullan $
 */
 
 #define ZCC_QUIET
@@ -259,7 +259,7 @@ STRPTR ProcessUserScreenTitle(STRPTR screentitle_Template)
   int screentitle_TemplateLen;
   STATIC char title[256];
   char temp[256], buffer[256];
-  char infostr[12];
+  char infostr[10];
   int screentitle_curChar;
 
   if (screentitle_Template == NULL)

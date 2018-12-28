@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cacheclearu.c 41679 2011-09-30 10:24:53Z sonic $
 
     Desc: CacheClearU - Simple way of clearing the caches.
     Lang: english

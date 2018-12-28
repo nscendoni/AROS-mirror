@@ -3,8 +3,8 @@
 /*
 **  $VER: scalos.h 41.9 (13. Mai 2010 15:49:13)
 **
-** $Date$
-** $Revision$
+** $Date: 2016-03-19 17:20:57 +0100 (Sat, 19 Mar 2016) $
+** $Revision: 52065 $
 **
 **	Scalos.library include
 **

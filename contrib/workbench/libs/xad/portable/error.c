@@ -1,7 +1,7 @@
 #ifndef XADMASTER_ERROR_C
 #define XADMASTER_ERROR_C
 
-/*  $Id$
+/*  $Id: error.c 36659 2011-01-18 13:26:51Z neil $
     error text handling stuff
 
     XAD library system for archive handling

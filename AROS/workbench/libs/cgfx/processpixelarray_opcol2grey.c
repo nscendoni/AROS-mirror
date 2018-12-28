@@ -1,6 +1,6 @@
 /*
-    Copyright © 2013-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2013, The AROS Development Team. All rights reserved.
+    $Id: processpixelarray_opcol2grey.c 48674 2014-01-02 17:51:04Z neil $
 */
 
 #include <aros/debug.h>
@@ -9,7 +9,7 @@
 
 #include <proto/cybergraphics.h>
 
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <cybergraphx/cybergraphics.h>
 #include <exec/types.h>
 

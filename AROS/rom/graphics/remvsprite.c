@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: remvsprite.c 52872 2016-08-21 16:16:22Z NicJA $
 
     Desc: Graphics function AddVSprite()
     Lang: english

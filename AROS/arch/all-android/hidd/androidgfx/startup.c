@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: startup.c 51032 2015-08-29 22:49:55Z NicJA $
 */
 
 /*
@@ -32,20 +32,6 @@
 
 static int agfx_Startup(LIBBASETYPEPTR LIBBASE) 
 {
-    struct TagItem kbd_tags[] =
-    {
-        {aHidd_Name        , (IPTR)"AKbd"                 },
-        {aHidd_HardwareName, (IPTR)"Android keyboard input"},
-        {aHidd_ProducerName, (IPTR)"google"       },
-        {TAG_DONE          , 0                              }
-    };
-    struct TagItem mouse_tags[] =
-    {
-        {aHidd_Name        , (IPTR)"AMouse"              },
-        {aHidd_HardwareName, (IPTR)"Android pointer input"},
-        {aHidd_ProducerName, (IPTR)"google"      },
-        {TAG_DONE          , 0                             }
-    };
     struct GfxBase *GfxBase;
     OOP_Object *kbd, *ms;
     OOP_Object *kbdriver;
@@ -67,10 +53,10 @@ static int agfx_Startup(LIBBASETYPEPTR LIBBASE)
         ms = OOP_NewObject(NULL, CLID_Hidd_Mouse, NULL);
 	if (ms)
 	{
-            kbdriver = HIDD_Kbd_AddHardwareDriver(kbd, LIBBASE->xsd.kbdclass, kbd_tags);
+            kbdriver = HIDD_Kbd_AddHardwareDriver(kbd, LIBBASE->xsd.kbdclass, NULL);
 	    if (kbdriver)
 	    {
-		msdriver = HIDD_Mouse_AddHardwareDriver(ms, LIBBASE->xsd.mouseclass, mouse_tags);
+		msdriver = HIDD_Mouse_AddHardwareDriver(ms, LIBBASE->xsd.mouseclass, NULL);
 		if (!msdriver)
 		    HIDD_Kbd_RemHardwareDriver(kbd, kbdriver);
 	    }

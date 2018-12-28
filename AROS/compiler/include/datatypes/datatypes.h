@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: datatypes.h 44142 2012-02-21 23:48:07Z neil $
 */
 
 #ifndef    EXEC_TYPES_H

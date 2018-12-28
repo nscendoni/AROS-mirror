@@ -1,6 +1,6 @@
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: enumeratesymbolsa.c 51695 2016-03-09 20:53:27Z NicJA $
 
     Desc:
     Lang: English

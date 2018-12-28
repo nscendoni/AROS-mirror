@@ -14,9 +14,9 @@ static void UpdateButton( struct IClass *cl,
     if (mbd->mbd_Monitor) {
         disabled = FALSE;
         if (!mbd->mbd_Monitor->ms_Node.xln_Name) {
-            MySetContents(obj, ADDRESS_FORMAT, mbd->mbd_Monitor);
+            MySetContents(obj, "$%08lx", mbd->mbd_Monitor);
         } else {
-            MySetContentsHealed(obj, ADDRESS_FORMAT ": " MUIX_B "%s", mbd->mbd_Monitor, mbd->mbd_Monitor->ms_Node.xln_Name);
+            MySetContentsHealed(obj, "$%08lx: " MUIX_B "%s", mbd->mbd_Monitor, mbd->mbd_Monitor->ms_Node.xln_Name);
         }
     } else
         disabled = TRUE;

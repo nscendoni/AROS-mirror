@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: SerialClass.c 47619 2013-07-02 18:27:20Z neil $
 
     Desc: Serial hidd class implementation.
     Lang: english

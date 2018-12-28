@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: realtime_intern.h 51341 2016-01-18 22:48:14Z NicJA $
 */
 
 #ifndef REALTIME_INTERN_H

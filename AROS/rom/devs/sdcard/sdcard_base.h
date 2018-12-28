@@ -2,7 +2,7 @@
 #define _SDCARD_BASE_H
 /*
     Copyright © 2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sdcard_base.h 47063 2013-03-24 01:06:19Z neil $
 */
 
 #include <exec/types.h>

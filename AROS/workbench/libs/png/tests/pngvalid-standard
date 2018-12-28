@@ -1,2 +1,2 @@
 #!/bin/sh
-exec ./pngvalid --strict --standard
+exec ./pngvalid --standard --progressive-read

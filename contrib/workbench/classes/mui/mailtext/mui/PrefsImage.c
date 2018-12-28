@@ -22,7 +22,7 @@
 
  Mailtext OpenSource project :  http://sourceforge.net/projects/mailtext/
 
- $Id$
+ $Id: PrefsImage.c 36659 2011-01-18 13:26:51Z neil $
 
  PrefsImage to display in MUI prefs for Mailtext.
 

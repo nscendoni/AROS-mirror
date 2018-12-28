@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Blanker.c 31282 2009-05-24 07:34:27Z mazze $
 */
 
 #include <aros/symbolsets.h>

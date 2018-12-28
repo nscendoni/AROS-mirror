@@ -1,6 +1,6 @@
 /*
     Copyright (C) 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: cliNan.c 38776 2011-05-20 21:27:20Z mazze $
  */
 
 #include "Shell.h"

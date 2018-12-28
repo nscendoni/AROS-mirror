@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2013-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ata_class.c 51419 2016-01-25 18:23:25Z NicJA $
 */
 
 #include <aros/debug.h>

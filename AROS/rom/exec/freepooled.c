@@ -1,6 +1,6 @@
 /*
     Copyright � 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freepooled.c 49043 2014-06-03 16:40:14Z deadwood $
 
     Desc: Free memory allocated by AllocPooled().
     Lang: english

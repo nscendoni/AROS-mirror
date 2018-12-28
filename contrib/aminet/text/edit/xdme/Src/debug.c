@@ -1,7 +1,7 @@
 
 /* (C) Copyright by Dirk Heckmann and Aaron Digulla in D-7750 Konstanz
 
-     $Id$
+     $Id: debug.c 36659 2011-01-18 13:26:51Z neil $
 
 	  This module provides everything to write save and clean
 	  programs that allocate memory. This routine handles all

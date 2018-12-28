@@ -1,6 +1,6 @@
 /*
     Copyright © 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: browserpreferences.c 45981 2012-11-02 04:44:01Z jmcmullan $
 */
 
 /* Process this class after all the base

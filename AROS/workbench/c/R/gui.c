@@ -1,6 +1,6 @@
 /*
     Copyright © 2012, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: gui.c 45781 2012-09-12 20:23:19Z mazze $
 */
 
 #define DEBUG 0

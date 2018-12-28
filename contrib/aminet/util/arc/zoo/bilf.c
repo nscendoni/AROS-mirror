@@ -1,5 +1,5 @@
 /* $Source$ */
-/* $Id$ */
+/* $Id: bilf.c 30794 2009-03-08 02:19:07Z neil $ */
 
 /*
 This program performs conversion of files between stream-LF format

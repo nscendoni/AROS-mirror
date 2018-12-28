@@ -1,6 +1,6 @@
 /*
-    Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright Â© 2004, The AROS Development Team. All rights reserved.
+    $Id: radeon_accel.c 30792 2009-03-07 22:40:04Z neil $
 */
 
 #include "ati.h"

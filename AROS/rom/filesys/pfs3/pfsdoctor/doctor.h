@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: doctor.h 49096 2014-07-01 18:48:17Z twilen $
  * $Log: doctor.h $
  * Revision 2.8  1999/09/11  16:45:50  Michiel
  * Versie 1.5 with Unformat and Repair nodos

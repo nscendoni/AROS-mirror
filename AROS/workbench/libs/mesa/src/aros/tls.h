@@ -1,6 +1,6 @@
 /*
     Copyright 2010-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: tls.h 42664 2011-11-30 05:07:48Z jmcmullan $
 */
 
 #ifndef TLS_H

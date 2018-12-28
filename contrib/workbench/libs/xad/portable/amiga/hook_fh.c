@@ -1,7 +1,7 @@
 #ifndef XADMASTER_HOOK_FH_C
 #define XADMASTER_HOOK_FH_C
 
-/*  $Id$
+/*  $Id: hook_fh.c 39571 2011-06-28 01:31:58Z NicJA $
     File IO hooks
 
     XAD library system for archive handling

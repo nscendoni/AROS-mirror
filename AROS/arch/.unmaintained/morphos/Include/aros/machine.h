@@ -4,7 +4,7 @@
 
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: machine.h 36647 2011-01-17 14:01:23Z neil $
 
     NOTE: This file must compile *without* any other header !
 

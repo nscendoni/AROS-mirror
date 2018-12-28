@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: createupfrontlayertaglist.c 39922 2011-07-08 15:35:24Z jmcmullan $
 */
 
 #include <aros/libcall.h>

@@ -54,7 +54,8 @@ void SureCause(struct PCIDevice *base, struct Interrupt *interrupt)
             interrupt->is_Node.ln_Type = NT_SOFTINT;
             Forbid(); // make sure code is not interrupted by other tasks
             Enable();
-            AROS_INTC1(interrupt->is_Code, interrupt->is_Data);
+            /* ABI_V0 compatibility */
+            AROS_SOFTINTC1(interrupt->is_Code, interrupt->is_Data);
             Disable();
             Permit();
         } while(interrupt->is_Node.ln_Type != NT_SOFTINT);
@@ -174,12 +175,11 @@ struct Unit * Open_Unit(struct IOUsbHWReq *ioreq,
             unit->hu_NakTimeoutInt.is_Code = (VOID_FUNC)uhwNakTimeoutInt;
 
             CopyMem(unit->hu_TimerReq, &unit->hu_NakTimeoutReq, sizeof(struct timerequest));
-            memset( &unit->hu_NakTimeoutMsgPort, 0, sizeof( unit->hu_NakTimeoutMsgPort ) );
+            unit->hu_NakTimeoutReq.tr_node.io_Message.mn_ReplyPort = &unit->hu_NakTimeoutMsgPort;
             unit->hu_NakTimeoutMsgPort.mp_Node.ln_Type = NT_MSGPORT;
             unit->hu_NakTimeoutMsgPort.mp_Flags = PA_SOFTINT;
             unit->hu_NakTimeoutMsgPort.mp_SigTask = &unit->hu_NakTimeoutInt;
             NewList(&unit->hu_NakTimeoutMsgPort.mp_MsgList);
-            unit->hu_NakTimeoutReq.tr_node.io_Message.mn_ReplyPort = &unit->hu_NakTimeoutMsgPort;
             Cause(&unit->hu_NakTimeoutInt);
             return(&unit->hu_Unit);
         } else {
@@ -2129,7 +2129,8 @@ void uhwCheckSpecialCtrlTransfers(struct PCIController *hc, struct IOUsbHWReq *i
 /* \\\ */
 
 /* /// "uhwNakTimeoutInt()" */
-AROS_INTH1(uhwNakTimeoutInt, struct PCIUnit *,  unit)
+/* ABI_V0 compatibility */
+AROS_SOFTINTH1(uhwNakTimeoutInt, struct PCIUnit *,  unit)
 {
     AROS_INTFUNC_INIT
 

@@ -1,6 +1,6 @@
 /*
-    Copyright © 2012-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2012, The AROS Development Team. All rights reserved.
+    $Id: unarcgroup_class.c 52316 2016-03-28 15:20:47Z mazze $
 */
 
 #include <proto/dos.h>
@@ -376,36 +376,28 @@ AROS_UFH3S(void, start_func,
                 return;
             }
             D(bug("[start_func] filename %s\n", data->targetpathname));
-            if (entry->fi->xfi_Flags & XADFIF_DIRECTORY)
+            result = xadFileUnArc
+            (
+                data->ai,
+                XAD_ENTRYNUMBER, i + 1,
+                XAD_OUTFILENAME, data->targetpathname,
+                XAD_MAKEDIRECTORY, TRUE,
+                XAD_OVERWRITE, TRUE,
+                TAG_DONE
+            );
+            D(bug("[start_func] xadFileUnArc result %d\n", result));
+            if (result !=0 && result != XADERR_BADPARAMS) // FIXME: why do I have to catch that error?
             {
-                // FIXME: create directory (needed if empty)
-            }
-            else
-            {
-                result = xadFileUnArc
+                if
                 (
-                    data->ai,
-                    XAD_ENTRYNUMBER, i + 1,
-                    XAD_OUTFILENAME, data->targetpathname,
-                    XAD_MAKEDIRECTORY, TRUE,
-                    XAD_OVERWRITE, TRUE,
-                    TAG_DONE
-                );
-                D(bug("[start_func] xadFileUnArc result %d\n", result));
-                if (result !=0 && result != XADERR_BADPARAMS) // FIXME: why do I have to catch that error?
-                {
-                    if
+                    MUI_Request
                     (
-                        MUI_Request
-                        (
-                            _app(obj), _win(obj), 0, _(MSG_ERR),
-                            _(MSG_SKIP_CANCEL), _(MSG_ERR_CANT_UNPACK),
-                            data->targetpathname, xadGetErrorText(result)
-                        ) == 0
-                    )
-                    {
-                        return;
-                    }
+                        _app(obj), _win(obj), 0, _(MSG_ERR),
+                        _(MSG_SKIP_CANCEL), _(MSG_ERR_CANT_UNPACK), data->targetpathname, xadGetErrorText(result)
+                    ) == 0
+                )
+                {
+                    return;
                 }
             }
         }

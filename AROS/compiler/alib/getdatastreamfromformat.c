@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getdatastreamfromformat.c 52230 2016-03-24 20:21:02Z jmcmullan $
 
     Internal utility functions.
 */

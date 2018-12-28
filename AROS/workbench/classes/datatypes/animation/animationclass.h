@@ -1,6 +1,6 @@
 /*
     Copyright © 2015-2016, The AROS Development	Team. All rights reserved.
-    $Id$
+    $Id: animationclass.h 51808 2016-03-11 04:26:55Z NicJA $
 */
 
 #include <graphics/gfx.h>

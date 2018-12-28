@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: miditodriver.c 32231 2009-12-29 13:57:39Z weissms $
 */
 
 

@@ -1,22 +1,21 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: settaskpri.c 51383 2016-01-21 00:29:44Z NicJA $
 
     Desc: Change the priority of a task.
     Lang: english
 */
-
 #define DEBUG 0
-#include <aros/debug.h>
 
+#include <aros/debug.h>
 #include <exec/execbase.h>
 #include <aros/libcall.h>
 #include <proto/exec.h>
 
 #include "exec_intern.h"
 #if defined(__AROSEXEC_SMP__)
+#include <proto/kernel.h>
 #include "etask.h"
-#include "exec_locks.h"
 #endif
 
 /*****************************************************************************
@@ -60,7 +59,6 @@
 {
     AROS_LIBFUNC_INIT
 
-    struct Task *thisTask = GET_THIS_TASK;
 #if defined(__AROSEXEC_SMP__)
     spinlock_t *task_listlock = NULL;
     int cpunum = KrnGetCPUNumber();
@@ -83,14 +81,9 @@
             task_listlock = &PrivExecBase(SysBase)->TaskReadySpinLock;
             break;
     }
+    EXEC_SPINLOCK_LOCK(task_listlock, (task->tc_State == TS_READY) ? SPINLOCK_MODE_WRITE : SPINLOCK_MODE_READ);
 #endif
     Disable();
-#if defined(__AROSEXEC_SMP__)
-    if (task->tc_State == TS_READY) 
-        EXEC_LOCK_WRITE(task_listlock);
-    else
-        EXEC_LOCK_READ(task_listlock);
-#endif
 
     /* Get returncode */
     old = task->tc_Node.ln_Pri;
@@ -108,23 +101,23 @@
             Enqueue(&SysBase->TaskReady, &task->tc_Node);
         }
 
+        if (
 #if defined(__AROSEXEC_SMP__)
-        EXEC_UNLOCK(task_listlock);
-
-        task_listlock = NULL;
-        if (IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuNumber == cpunum) {
+             (IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuNumber == cpunum) && 
 #endif
-        if ( task->tc_Node.ln_Pri > thisTask->tc_Node.ln_Pri)
+            ((task->tc_State == TS_RUN) || ( task->tc_Node.ln_Pri > GET_THIS_TASK->tc_Node.ln_Pri))
+        )
         {
-            D(bug("[Exec] SetTaskPri: Task needs reschedule...\n");)
+#if defined(__AROSEXEC_SMP__)
+            EXEC_SPINLOCK_UNLOCK(task_listlock);
+            task_listlock = NULL;
+#endif
             Reschedule();
         }
 #if defined(__AROSEXEC_SMP__)
-        }
-        else if (task->tc_State == TS_RUN)
+        else
         {
-            D(bug("[Exec] SetTaskPri: changing priority of task running on another cpu (%03u)\n", IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuNumber);)
-            KrnScheduleCPU(IntETask(task->tc_UnionETask.tc_ETask)->iet_CpuAffinity);
+            bug("[Exec] SetTaskPri:\n");
         }
 #endif
     }
@@ -133,7 +126,7 @@
 #if defined(__AROSEXEC_SMP__)
     if (task_listlock)
     {
-        EXEC_UNLOCK(task_listlock);
+        EXEC_SPINLOCK_UNLOCK(task_listlock);
     }
 #endif
     Enable();

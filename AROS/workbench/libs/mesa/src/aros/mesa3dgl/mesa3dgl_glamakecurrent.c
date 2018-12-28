@@ -1,6 +1,6 @@
 /*
     Copyright 2009-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: mesa3dgl_glamakecurrent.c 50857 2015-06-23 22:21:44Z NicJA $
 */
 
 #include <proto/exec.h>

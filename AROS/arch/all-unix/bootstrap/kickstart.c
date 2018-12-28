@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kickstart.c 51202 2015-11-08 17:16:51Z deadwood $
 */
 
 #include <sys/wait.h>

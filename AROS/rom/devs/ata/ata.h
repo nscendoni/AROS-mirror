@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2004-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ata.h 48823 2014-02-26 04:22:45Z neil $
 
     Desc: ata.device main private include file
     Lang: English
@@ -121,7 +121,6 @@ struct ata_Bus
    void                    *pioInterface;   /* PIO interface object     */
    void                    *dmaInterface;   /* DMA interface object     */
    BOOL                    keepEmpty;       /* Whether we should keep empty bus object */
-   BOOL                    haveAltIO;
 
    UBYTE                   ab_Dev[2];  /* Master/Slave type, see below */
    UBYTE                   ab_Flags;   /* Bus flags similar to unit flags */
@@ -139,8 +138,6 @@ struct ata_Bus
    struct IORequest        *ab_Timer;      /* timer stuff */
 
    struct Interrupt        ab_ResetInt;
-
-   APTR                    ab_BounceBufferPool;
 
    /* functions go here */
    void                   (*ab_HandleIRQ)(struct ata_Unit* unit, UBYTE status);

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: aros.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: This is the "boot code" of AROS when it runs as an emulation.
     Lang: english

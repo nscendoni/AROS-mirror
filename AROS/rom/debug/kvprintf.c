@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: kvprintf.c 45599 2012-08-19 07:29:58Z neil $
 
     Desc: Low-level debugging support.
 */

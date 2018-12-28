@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2001, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: addievents.c 32090 2009-12-13 16:42:44Z weissms $
 
     Desc:
     Lang: English

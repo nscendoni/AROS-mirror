@@ -1,6 +1,6 @@
 /*
     Copyright 2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: sisagp3bridgedeviceclass.c 32880 2010-03-25 19:21:29Z deadwood $
 */
 
 #include <hidd/agp.h>

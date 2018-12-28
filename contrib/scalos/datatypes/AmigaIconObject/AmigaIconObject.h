@@ -1,6 +1,6 @@
 // AmigaIconObject.h
-// $Date$
-// $Revision$
+// $Date: 2013-12-20 19:19:18 +0100 (Fri, 20 Dec 2013) $
+// $Revision: 48601 $
 
 
 #ifndef	AMIGAICONOBJECT_H_INCLUDED

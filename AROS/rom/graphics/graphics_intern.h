@@ -1,20 +1,12 @@
 #ifndef GRAPHICS_INTERN_H
 #define GRAPHICS_INTERN_H
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2015, The AROS Development Team. All rights reserved.
+    $Id: graphics_intern.h 51030 2015-08-29 22:48:21Z NicJA $
 
     Desc: Internal header file for graphics.library
     Lang: english
 */
-
-#ifndef __OOP_NOMETHODBASES__
-#define __OOP_NOMETHODBASES__
-#endif
-
-#ifndef __OOP_NOATTRBASES__
-#define __OOP_NOATTRBASES__
-#endif
 
 #include <aros/libcall.h>
 #include <exec/execbase.h>
@@ -27,7 +19,7 @@
 #include <graphics/regions.h>
 #include <oop/oop.h>
 #include <graphics/view.h>
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <exec/memory.h>
 #include <proto/exec.h>
 #include <graphics/scale.h>
@@ -204,11 +196,7 @@ struct GfxBase_intern
     /* Private library bases */
     struct Library	       *CyberGfxBase;
 
-    /* HW Driver root */
-    OOP_Object                  *GfxRoot;
-
     /* Private HIDD method bases */
-    OOP_MethodID                HWBase;
     OOP_MethodID                HiddBitMapBase;
     OOP_MethodID                HiddColorMapBase;
     OOP_MethodID                HiddGCBase;
@@ -227,7 +215,6 @@ struct GfxBase_intern
 /* FIXME: Remove these #define xxxBase hacks
    Do not use this in new code !
 */
-#define HWBase                  (PrivGBase(GfxBase)->HWBase)
 #define HiddBitMapBase		(PrivGBase(GfxBase)->HiddBitMapBase)
 #define HiddColorMapBase	(PrivGBase(GfxBase)->HiddColorMapBase)
 #define HiddGCBase		(PrivGBase(GfxBase)->HiddGCBase)

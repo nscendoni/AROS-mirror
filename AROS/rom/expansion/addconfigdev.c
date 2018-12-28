@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: addconfigdev.c 48810 2014-02-14 03:00:42Z neil $
 
     Desc: Add a ConfigDev struct to the system.
     Lang: english

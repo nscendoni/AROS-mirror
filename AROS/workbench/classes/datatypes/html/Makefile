@@ -1,4 +1,4 @@
-#   $Id$
+#   $Id: Makefile 50099 2015-02-22 01:09:59Z polluks $
 #   This Makefile creates a standalone application for debugging with console only
 
 CFLAGS	+= -O2 #-Wall

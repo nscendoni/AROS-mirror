@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pit.h 48674 2014-01-02 17:51:04Z neil $
  
     Desc: IBM PC-compatible PIT (8253) specific definitions
     Lang: english

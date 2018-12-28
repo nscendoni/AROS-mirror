@@ -2,7 +2,7 @@
 #define _NET_IF_MEDIA_H_
 /*
     Copyright © 2003-2004, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: if_media.h 30794 2009-03-08 02:19:07Z neil $
 */
 
 /*	$OpenBSD: if_media.h,v 1.6 2000/03/21 23:18:13 mickey Exp $	*/

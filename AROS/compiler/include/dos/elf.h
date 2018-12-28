@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: elf.h 48652 2013-12-29 16:19:56Z deadwood $
 
     Desc: Definition of ELF file structures.
     Lang: english

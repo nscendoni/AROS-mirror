@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bullet.c 37702 2011-03-21 14:14:07Z jmcmullan $
 
     Functions for reading .font files
 */

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: preparecontext.c 42527 2011-11-18 05:54:03Z sonic $
 */
 
 #include <aros/libcall.h>

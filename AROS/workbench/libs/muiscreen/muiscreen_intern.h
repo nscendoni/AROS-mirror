@@ -3,7 +3,7 @@
 
 /*
     Copyright © 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: muiscreen_intern.h 36648 2011-01-17 14:31:59Z neil $
 */
 
 #include <exec/types.h>

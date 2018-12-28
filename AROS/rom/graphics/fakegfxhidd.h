@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: fakegfxhidd.h 33938 2010-07-28 09:10:14Z sonic $
 */
 
 #ifndef FAKEGFXHIDD_H

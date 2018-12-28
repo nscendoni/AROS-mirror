@@ -1,11 +1,11 @@
 /*
-    Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2004-2016, The AROS Development Team. All rights reserved.
+    $Id: getpwuid.c 52857 2016-08-14 18:56:26Z deadwood $
 */
 
 #include <aros/debug.h>
+#include <errno.h>
 
-#include "__posixc_intbase.h"
 #include "__usergrp.h"
 
 /*****************************************************************************
@@ -20,15 +20,14 @@
         uid_t uid)
 
 /*  FUNCTION
-	Returns the database entry for the user with specified uid.
 
     INPUTS
 
     RESULT
 
     NOTES
-	Function is not re-entrant. Results will be overwritten by
-	subsequent calls.
+        Function is not re-entrant. Results will be overwritten by
+        subsequent calls.
 
     EXAMPLE
 
@@ -40,13 +39,13 @@
 
 ******************************************************************************/
 {
-    struct PosixCIntBase *PosixCBase =
-        (struct PosixCIntBase *)__aros_getbase_PosixCBase();
+    static struct passwd _return = {0};
 
-    __fill_passwd(&PosixCBase->pwd, uid);
+    if (_return.pw_name == NULL)
+        __fill_passwd(&_return);
 
-    if (PosixCBase->pwd.pw_uid == uid)
-        return &PosixCBase->pwd;
+    if (_return.pw_uid == uid)
+        return &_return;
 
     return NULL;
 }

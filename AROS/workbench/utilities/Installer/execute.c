@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: execute.c 48912 2014-04-06 17:12:22Z deadwood $
 */
 
 /* execute.c -- Here are all functions used to execute the script */

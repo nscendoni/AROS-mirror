@@ -1,6 +1,6 @@
 /*
     Copyright © 2008-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: lowlevel.h 49667 2014-09-30 17:35:27Z neil $
 */
 
 #ifndef LOWLEVEL_H_

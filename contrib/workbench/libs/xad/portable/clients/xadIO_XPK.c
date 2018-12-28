@@ -1,7 +1,7 @@
 #ifndef XADMASTER_XADIO_XPK_C
 #define XADMASTER_XADIO_XPK_C
 
-/*  $Id$
+/*  $Id: xadIO_XPK.c 36659 2011-01-18 13:26:51Z neil $
     XPK files meta archiver
 
     XAD library system for archive handling

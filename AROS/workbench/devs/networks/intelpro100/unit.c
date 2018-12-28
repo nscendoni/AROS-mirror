@@ -1,6 +1,6 @@
 /*
 
-Copyright (C) 2001-2017 Neil Cafferkey
+Copyright (C) 2001-2012 Neil Cafferkey
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -23,7 +23,6 @@ MA 02111-1307, USA.
 #include <exec/memory.h>
 #include <exec/execbase.h>
 #include <exec/errors.h>
-#include <exec/tasks.h>
 
 #include <proto/exec.h>
 #ifndef __amigaos4__
@@ -35,7 +34,6 @@ MA 02111-1307, USA.
 #include <proto/timer.h>
 
 #include "device.h"
-#include "task.h"
 #include "intelpro100.h"
 #include "mii.h"
 #include "dp83840.h"
@@ -51,6 +49,10 @@ MA 02111-1307, USA.
 #define MAX_MCAST_ENTRIES 100
 #define MCAST_CB_SIZE (PROCB_COUNT * sizeof(ULONG) + sizeof(UWORD) \
    + ETH_ADDRESSSIZE * MAX_MCAST_ENTRIES)
+
+#ifndef AbsExecBase
+#define AbsExecBase sys_base
+#endif
 
 static VOID InitialiseAdapter(struct DevUnit *unit, struct DevBase *base);
 static VOID FillConfigData(struct DevUnit *unit, ULONG *tcb,
@@ -71,7 +73,7 @@ static VOID TXEndInt(REG(a1, struct DevUnit *unit),
    REG(a5, APTR int_code));
 static VOID ReportEvents(struct DevUnit *unit, ULONG events,
    struct DevBase *base);
-static VOID UnitTask(struct DevUnit *);
+static VOID UnitTask(struct ExecBase *sys_base);
 static UWORD GetEEPROMAddressSize(struct DevUnit *unit,
    struct DevBase *base);
 static UWORD ReadEEPROM(struct DevUnit *unit, UWORD index,
@@ -103,6 +105,31 @@ static const ULONG config_data[] =
 };
 
 
+#ifdef __amigaos4__
+#undef AddTask
+#define AddTask(task, initial_pc, final_pc) \
+   IExec->AddTask(task, initial_pc, final_pc, NULL)
+#endif
+#ifdef __MORPHOS__
+static const struct EmulLibEntry mos_task_trap =
+{
+   TRAP_LIB,
+   0,
+   (APTR)UnitTask
+};
+#define UnitTask &mos_task_trap
+#endif
+#ifdef __AROS__
+#undef AddTask
+#define AddTask(task, initial_pc, final_pc) \
+   ({ \
+      struct TagItem _task_tags[] = \
+         {{TASKTAG_ARG1, (IPTR)SysBase}, {TAG_END, 0}}; \
+      NewAddTask(task, initial_pc, final_pc, _task_tags); \
+   })
+#endif
+
+
 /****i* intelpro100.device/CreateUnit **************************************
 *
 *   NAME
@@ -121,7 +148,7 @@ static const ULONG config_data[] =
 */
 
 struct DevUnit *CreateUnit(ULONG index, APTR card,
-   const struct TagItem *io_tags, UWORD bus, struct DevBase *base)
+   struct TagItem *io_tags, UWORD bus, struct DevBase *base)
 {
    BOOL success = TRUE;
    struct DevUnit *unit;
@@ -233,9 +260,9 @@ struct DevUnit *CreateUnit(ULONG index, APTR card,
       {
          tcb = next_tcb;
          next_tcb = tcb + TCB_SIZE / sizeof(ULONG);
-         tcb[PROCB_NEXT] = MakeLELong((ULONG)(UPINT)next_tcb);
+         tcb[PROCB_NEXT] = MakeLELong((ULONG)(IPTR)next_tcb);
       }
-      tcb[PROCB_NEXT] = MakeLELong((ULONG)(UPINT)unit->tcbs);
+      tcb[PROCB_NEXT] = MakeLELong((ULONG)(IPTR)unit->tcbs);
       unit->last_tcb = tcb;
 
       /* Construct RX ring */
@@ -244,12 +271,12 @@ struct DevUnit *CreateUnit(ULONG index, APTR card,
       {
          rcb = next_rcb;
          next_rcb = rcb + RCB_SIZE / sizeof(ULONG);
-         rcb[PROCB_NEXT] = MakeLELong((ULONG)(UPINT)next_rcb);
+         rcb[PROCB_NEXT] = MakeLELong((ULONG)(IPTR)next_rcb);
          rcb[PROCB_RXINFO] =
             MakeLELong(ETH_MAXPACKETSIZE << PROCB_RXINFOB_BUFFERSIZE);
       }
       rcb[PROCB_CONTROL] = MakeLELong(PROCB_CONTROLF_SUSPEND);
-      rcb[PROCB_NEXT] = MakeLELong((ULONG)(UPINT)unit->rcbs);
+      rcb[PROCB_NEXT] = MakeLELong((ULONG)(IPTR)unit->rcbs);
       unit->last_rcb = rcb;
       dma_size = RCB_SIZE * RX_SLOT_COUNT;
       CachePreDMA(unit->rcbs, &dma_size, 0);
@@ -313,14 +340,17 @@ struct DevUnit *CreateUnit(ULONG index, APTR card,
          base->device.dd_Library.lib_Node.ln_Name;
       task->tc_SPUpper = stack + STACK_SIZE;
       task->tc_SPLower = stack;
-      task->tc_SPReg = task->tc_SPUpper;
+      task->tc_SPReg = stack + STACK_SIZE;
       NewList(&task->tc_MemEntry);
 
-      if(AddUnitTask(task, UnitTask, unit) != NULL)
-         unit->flags |= UNITF_TASKADDED;
-      else
+      if(AddTask(task, UnitTask, NULL) == NULL)
          success = FALSE;
    }
+
+   /* Send the unit to the new task */
+
+   if(success)
+      task->tc_UserData = unit;
 
    if(!success)
    {
@@ -366,9 +396,10 @@ VOID DeleteUnit(struct DevUnit *unit, struct DevBase *base)
       task = unit->task;
       if(task != NULL)
       {
-         if((unit->flags & UNITF_TASKADDED) != 0)
+         if(task->tc_UserData != NULL)
             RemTask(task);
-         FreeMem(task->tc_SPLower, STACK_SIZE);
+         if(task->tc_SPLower != NULL)
+            FreeMem(task->tc_SPLower, STACK_SIZE);
          FreeMem(task, sizeof(struct Task));
       }
 
@@ -439,7 +470,7 @@ static VOID InitialiseAdapter(struct DevUnit *unit, struct DevBase *base)
 
    /* Set up statistics dump area */
 
-   unit->LELongOut(unit->card, PROREG_GENPTR, (ULONG)(UPINT)unit->stats_buffer);
+   unit->LELongOut(unit->card, PROREG_GENPTR, (ULONG)(IPTR)unit->stats_buffer);
    unit->LEWordOut(unit->card, PROREG_COMMAND, PRO_CUCMD_SETSTATSBUFFER);
    while(unit->LEWordIn(unit->card, PROREG_COMMAND) != 0);
 
@@ -477,13 +508,13 @@ VOID ConfigureAdapter(struct DevUnit *unit, struct DevBase *base)
 
    /* Set MAC address */
 
-   tcb = (ULONG *)(UPINT)LELong(unit->last_tcb[PROCB_NEXT]);
+   tcb = (ULONG *)(IPTR)LELong(unit->last_tcb[PROCB_NEXT]);
    tcb[PROCB_CONTROL] = MakeLELong(PROACT_SETADDRESS);
    CopyMem(&unit->address, tcb + PROCB_ADDRESS, ETH_ADDRESSSIZE);
 
    /* Set other parameters */
 
-   tcb = (ULONG *)(UPINT)LELong(tcb[PROCB_NEXT]);
+   tcb = (ULONG *)(IPTR)LELong(tcb[PROCB_NEXT]);
    tcb[PROCB_CONTROL] =
       MakeLELong(PROACT_CONFIGURE | PROCB_CONTROLF_SUSPEND);
    unit->phy_info = ReadEEPROM(unit, PROROM_PHYINFO0, base);
@@ -506,7 +537,7 @@ VOID ConfigureAdapter(struct DevUnit *unit, struct DevBase *base)
 
    /* Go online */
 
-   unit->LELongOut(unit->card, PROREG_GENPTR, (ULONG)(UPINT)unit->tcbs);
+   unit->LELongOut(unit->card, PROREG_GENPTR, (ULONG)(IPTR)unit->tcbs);
    unit->LEWordOut(unit->card, PROREG_COMMAND, PRO_CUCMD_START);
    while(unit->LEWordIn(unit->card, PROREG_COMMAND) != 0);
    GoOnline(unit, base);
@@ -1071,7 +1102,7 @@ static VOID RXInt(REG(a1, struct DevUnit *unit), REG(a5, APTR int_code))
 
    base = unit->device;
    last_rcb = unit->last_rcb;
-   rcb = (ULONG *)(UPINT)LELong(last_rcb[PROCB_NEXT]);
+   rcb = (ULONG *)(IPTR)LELong(last_rcb[PROCB_NEXT]);
 
    dma_size = RCB_SIZE;
    CachePostDMA(rcb, &dma_size, 0);
@@ -1165,7 +1196,7 @@ static VOID RXInt(REG(a1, struct DevUnit *unit), REG(a5, APTR int_code))
          unit->LEWordOut(unit->card, PROREG_COMMAND, PRO_RUCMD_RESUME);
 
       last_rcb = rcb;
-      rcb = (ULONG *)(UPINT)LELong(rcb[PROCB_NEXT]);
+      rcb = (ULONG *)(IPTR)LELong(rcb[PROCB_NEXT]);
    }
 
    /* Return */
@@ -1362,14 +1393,14 @@ static VOID TXInt(REG(a1, struct DevUnit *unit), REG(a5, APTR int_code))
    while(proceed && !IsMsgPortEmpty(port))
    {
       last_tcb = unit->last_tcb;
-      tcb = (ULONG *)(UPINT)LELong(last_tcb[PROCB_NEXT]);
+      tcb = (ULONG *)(IPTR)LELong(last_tcb[PROCB_NEXT]);
 
       /* Ensure there are at least two free CBs available (two are needed
          for setting the multicast filter) and that neither the TX nor the
          multicast buffer is currently in use */
 
-      if((UPINT)LELong(((ULONG *)(UPINT)LELong(tcb[PROCB_NEXT]))[PROCB_NEXT])
-         != (UPINT)unit->first_tcb
+      if((ULONG *)(IPTR)LELong(((ULONG *)(IPTR)LELong(tcb[PROCB_NEXT]))[PROCB_NEXT])
+         != unit->first_tcb
          && (unit->flags & (UNITF_TXBUFFERINUSE | UNITF_MCASTBUFFERINUSE))
          == 0)
       {
@@ -1403,7 +1434,7 @@ static VOID TXInt(REG(a1, struct DevUnit *unit), REG(a5, APTR int_code))
                MakeLELong(PROACT_TX | PROCB_CONTROLF_SUSPEND
                | PROCB_CONTROLF_INT | PROCB_CONTROLF_FLEXIBLE);
             fragment = tcb + PROCB_EXTFRAGS;
-            tcb[PROCB_FRAGMENTS] = MakeLELong((ULONG)(UPINT)fragment);
+            tcb[PROCB_FRAGMENTS] = MakeLELong((ULONG)(IPTR)fragment);
 
             /* Write packet header */
 
@@ -1414,7 +1445,7 @@ static VOID TXInt(REG(a1, struct DevUnit *unit), REG(a5, APTR int_code))
                   MakeLELong(2 << PROCB_TXINFOB_FRAGCOUNT
                   | 1 << PROCB_TXINFOB_THRESHOLD
                   | PROCB_TXINFOF_EOF);
-               fragment[PROFRAG_ADDR] = MakeLELong((ULONG)(UPINT)buffer);
+               fragment[PROFRAG_ADDR] = MakeLELong((ULONG)(IPTR)buffer);
                fragment[PROFRAG_LEN] = MakeLELong(ETH_HEADERSIZE);
 
                p = (UWORD *)buffer;
@@ -1470,7 +1501,7 @@ static VOID TXInt(REG(a1, struct DevUnit *unit), REG(a5, APTR int_code))
             {
                dma_size = data_size;
                CachePreDMA(buffer, &dma_size, DMA_ReadFromRAM);
-               fragment[PROFRAG_ADDR] = MakeLELong((ULONG)(UPINT)buffer);
+               fragment[PROFRAG_ADDR] = MakeLELong((ULONG)(IPTR)buffer);
                fragment[PROFRAG_LEN] = MakeLELong(data_size);
             }
          }
@@ -1485,9 +1516,9 @@ static VOID TXInt(REG(a1, struct DevUnit *unit), REG(a5, APTR int_code))
                mcast_cb = unit->multicast_cb;
                mcast_cb[PROCB_CONTROL] = MakeLELong(PROACT_SETMCAST);
                mcast_cb[PROCB_NEXT] = tcb[PROCB_NEXT];
-               tcb[PROCB_NEXT] = MakeLELong((ULONG)(UPINT)mcast_cb);
+               tcb[PROCB_NEXT] = MakeLELong((ULONG)(IPTR)mcast_cb);
                unit->link_cb = tcb;
-               tcb = (ULONG *)(UPINT)LELong(mcast_cb[PROCB_NEXT]);
+               tcb = (ULONG *)(IPTR)LELong(mcast_cb[PROCB_NEXT]);
                tcb[PROCB_CONTROL] = MakeLELong(PROACT_CONFIGURE
                   | PROCB_CONTROLF_SUSPEND | PROCB_CONTROLF_INT);
                FillConfigData(unit, tcb, base);
@@ -1591,7 +1622,7 @@ static VOID TXEndInt(REG(a1, struct DevUnit *unit), REG(a5, APTR int_code))
 
    for(tcb = unit->first_tcb;
       (tcb[PROCB_CONTROL] & MakeLELong(PROCB_CONTROLF_DONE)) != 0;
-      tcb = (ULONG *)(UPINT)LELong(tcb[PROCB_NEXT]))
+      tcb = (ULONG *)(IPTR)LELong(tcb[PROCB_NEXT]))
    {
       action = LELong(tcb[PROCB_CONTROL]) & PROCB_CONTROLF_ACTION;
 
@@ -1606,7 +1637,7 @@ static VOID TXEndInt(REG(a1, struct DevUnit *unit), REG(a5, APTR int_code))
             /* Mark end of DMA */
 
             data_size = packet_size = request->ios2_DataLength;
-            fragment = (ULONG *)(UPINT)LELong(tcb[PROCB_FRAGMENTS]);
+            fragment = (ULONG *)(IPTR)LELong(tcb[PROCB_FRAGMENTS]);
 
             if((request->ios2_Req.io_Flags & SANA2IOF_RAW) == 0)
             {
@@ -1614,7 +1645,7 @@ static VOID TXEndInt(REG(a1, struct DevUnit *unit), REG(a5, APTR int_code))
                fragment += PRO_FRAGLEN;
             }
 
-            buffer = (UBYTE *)(UPINT)LELong(fragment[PROFRAG_ADDR]);
+            buffer = (UBYTE *)(IPTR)LELong(fragment[PROFRAG_ADDR]);
             dma_size = data_size;
             CachePostDMA(buffer, &dma_size, DMA_ReadFromRAM);
 
@@ -1639,7 +1670,7 @@ static VOID TXEndInt(REG(a1, struct DevUnit *unit), REG(a5, APTR int_code))
 
             if(unit->link_cb != NULL)
             {
-               unit->link_cb[PROCB_NEXT] = MakeLELong((ULONG)(UPINT)tcb);
+               unit->link_cb[PROCB_NEXT] = MakeLELong((ULONG)(IPTR)tcb);
                unit->flags &= ~UNITF_MCASTBUFFERINUSE;
                unit->link_cb = NULL;
             }
@@ -1776,9 +1807,9 @@ static VOID ReportEvents(struct DevUnit *unit, ULONG events,
 *	UnitTask
 *
 *   SYNOPSIS
-*	UnitTask(unit)
+*	UnitTask()
 *
-*	VOID UnitTask(struct DevUnit *);
+*	VOID UnitTask();
 *
 *   FUNCTION
 *	Completes deferred requests.
@@ -1787,19 +1818,29 @@ static VOID ReportEvents(struct DevUnit *unit, ULONG events,
 *
 */
 
-static VOID UnitTask(struct DevUnit *unit)
+#ifdef __MORPHOS__
+#undef UnitTask
+#endif
+
+static VOID UnitTask(struct ExecBase *sys_base)
 {
-   struct DevBase *base;
+   struct Task *task;
    struct IORequest *request;
+   struct DevUnit *unit;
+   struct DevBase *base;
    struct MsgPort *general_port;
    ULONG signals, wait_signals, general_port_signal;
 
+   /* Get parameters */
+
+   task = AbsExecBase->ThisTask;
+   unit = task->tc_UserData;
    base = unit->device;
 
    /* Activate general request port */
 
    general_port = unit->request_ports[GENERAL_QUEUE];
-   general_port->mp_SigTask = unit->task;
+   general_port->mp_SigTask = task;
    general_port->mp_SigBit = AllocSignal(-1);
    general_port_signal = 1 << general_port->mp_SigBit;
    general_port->mp_Flags = PA_SIGNAL;
@@ -1810,7 +1851,7 @@ static VOID UnitTask(struct DevUnit *unit)
 
    /* Tell ourselves to check port for old messages */
 
-   Signal(unit->task, general_port_signal);
+   Signal(task, general_port_signal);
 
    /* Infinite loop to service requests and signals */
 

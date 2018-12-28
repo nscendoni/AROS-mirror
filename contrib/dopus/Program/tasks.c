@@ -68,7 +68,7 @@ static struct EmulLibEntry GATE_keyhandler = { TRAP_LIB, 0, (void (*)(void))keyh
 struct Gadget
   abortopgad={
     NULL,0,0,104,0,GFLG_GADGHCOMP,GACT_RELVERIFY,GTYP_BOOLGADGET,
-    NULL,NULL,NULL,0,NULL,0,NULL};
+    NULL,NULL,NULL,NULL,NULL,0,NULL};
 
 static struct NewWindow
   progresswindow={
@@ -109,7 +109,7 @@ static IX hotkey_ix={IX_VERSION};
 void __saveds hotkeytaskcode()
 {
   char cxname[20];
-  int top,__unused sig,waitbits,commodity=0,command,x,run=1;
+  int top,sig,waitbits,commodity=0,command,x,run=1;
   struct dopustaskmsg *hmsg;
 #ifdef INPUTDEV_HOTKEY
   struct IOStdReq *inreq;
@@ -140,7 +140,7 @@ void __saveds hotkeytaskcode()
      {
       char tmp[8];
 
-      lsprintf(tmp," (%ld)",(long int)(system_dopus_runcount+1));
+      lsprintf(tmp," (%ld)",system_dopus_runcount+1);
       strcat(cxname,tmp);
      }
     hotkey_broker.nb_Name = cxname;
@@ -855,17 +855,17 @@ void __saveds clocktask()
   s = (config->scrclktype&SCRCLOCK_BYTES)?1:0;
 
   if (config->scrclktype&SCRCLOCK_C_AND_F) {
-    lsprintf(memstring,"%lc:%%-%ldld%s",globstring[STR_CLOCK_CHIP][0],(long int)(chipnum+m),Kstr+s);
+    lsprintf(memstring,"%lc:%%-%ldld%s",globstring[STR_CLOCK_CHIP][0],chipnum+m,Kstr+s);
     if (fastnum>1) {
-      lsprintf(memstring+strlen(memstring),"%lc:%%-%ldld%s",globstring[STR_CLOCK_FAST][0],(long int)(fastnum+m),Kstr+s);
-      lsprintf(memstring+strlen(memstring),"%lc:%%-%ldld%s",globstring[STR_CLOCK_TOTAL][0],(long int)(a+m),Kstr+s);
+      lsprintf(memstring+strlen(memstring),"%lc:%%-%ldld%s",globstring[STR_CLOCK_FAST][0],fastnum+m,Kstr+s);
+      lsprintf(memstring+strlen(memstring),"%lc:%%-%ldld%s",globstring[STR_CLOCK_TOTAL][0],a+m,Kstr+s);
     }
   }
   else {
-    lsprintf(memstring,"%s%%-%ldld%s",globstring[STR_CLOCK_CHIP],(long int)(chipnum+m),Kstr+s);
+    lsprintf(memstring,"%s%%-%ldld%s",globstring[STR_CLOCK_CHIP],chipnum+m,Kstr+s);
     if (fastnum>1) {
-      lsprintf(memstring+strlen(memstring),"%s%%-%ldld%s",globstring[STR_CLOCK_FAST],(long int)(fastnum+m),Kstr+s);
-      lsprintf(memstring+strlen(memstring),"%s%%-%ldld%s",globstring[STR_CLOCK_TOTAL],(long int)(a+m),Kstr+s);
+      lsprintf(memstring+strlen(memstring),"%s%%-%ldld%s",globstring[STR_CLOCK_FAST],fastnum+m,Kstr+s);
+      lsprintf(memstring+strlen(memstring),"%s%%-%ldld%s",globstring[STR_CLOCK_TOTAL],a+m,Kstr+s);
     }
   }
 
@@ -927,7 +927,7 @@ void __saveds clocktask()
                }
               else usage = getusage()/*/10*/;
 
-              lsprintf(buf,"CPU:%3ld%%  ",(long int)usage);
+              lsprintf(buf,"CPU:%3ld%%  ",usage);
               strcat(formstring,buf);
             }
             if (config->scrclktype&(SCRCLOCK_DATE|SCRCLOCK_TIME)) {
@@ -945,7 +945,7 @@ void __saveds clocktask()
                   if (h>11) { ampm='P'; h-=12; }
                   else ampm='A';
                   if (h==0) h=12;
-                  lsprintf(time,"%2ld:%02ld:%02ld%lc",(long int)h,(long int)m,(long int)s,ampm);
+                  lsprintf(time,"%2ld:%02ld:%02ld%lc",h,m,s,ampm);
                 }
                 strcat(formstring,time);
               }

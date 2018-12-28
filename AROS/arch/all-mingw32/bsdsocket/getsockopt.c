@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getsockopt.c 34494 2010-09-24 11:35:48Z sonic $
 
     Desc:
     Lang: English

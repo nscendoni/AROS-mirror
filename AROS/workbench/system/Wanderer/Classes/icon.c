@@ -1,6 +1,6 @@
 /*
     Copyright © 2008-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: icon.c 48117 2013-09-23 16:50:43Z neil $
 */
 
 #include "../portable_macros.h"

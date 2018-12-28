@@ -1,6 +1,6 @@
 // PatternPrefs.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 16:15:27 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51974 $
 
 #ifdef __AROS__
 #define MUIMASTER_YES_INLINE_STDARG

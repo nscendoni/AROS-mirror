@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: rndis.class.h 48424 2013-11-18 09:28:30Z neil $
  */
 
 #ifndef RNDIS_CLASS_H

@@ -1,5 +1,5 @@
 /*
- * $Id$
+ * $Id: errno.h 30794 2009-03-08 02:19:07Z neil $
  *
  * HISTORY
  * $Log$

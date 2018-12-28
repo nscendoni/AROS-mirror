@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2003, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: ieeespasin.c 47351 2013-05-04 15:29:44Z mazze $
 */
 /*
  * ====================================================

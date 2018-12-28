@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: unix_hints.h 49703 2014-10-12 03:53:08Z neil $
 */
 
 /*

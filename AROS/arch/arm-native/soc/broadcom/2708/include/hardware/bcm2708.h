@@ -1,6 +1,6 @@
 /*
     Copyright © 2013-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: bcm2708.h 50526 2015-04-30 15:48:47Z NicJA $
 */
 
 #ifndef BCM2708_H

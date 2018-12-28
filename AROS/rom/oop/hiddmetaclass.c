@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hiddmetaclass.c 42414 2011-11-11 21:33:33Z verhaegs $
 
     Desc: OOP HIDD metaclass
     Lang: english

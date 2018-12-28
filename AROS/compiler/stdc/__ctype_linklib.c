@@ -1,6 +1,6 @@
 /*
     Copyright © 2012-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: __ctype_linklib.c 53132 2016-12-29 10:32:06Z deadwood $
 */
 
 #include <aros/symbolsets.h>
@@ -9,8 +9,8 @@
 #include <libraries/stdc.h>
 
 const unsigned short int * const *__ctype_b_ptr = NULL;
-const unsigned char * const *__ctype_toupper_ptr = NULL;
-const unsigned char * const *__ctype_tolower_ptr = NULL;
+const int * const *__ctype_toupper_ptr = NULL;
+const int * const *__ctype_tolower_ptr = NULL;
 
 static struct StdCBase *_StdCBase;
 static int opened = 0;

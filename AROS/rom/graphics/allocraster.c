@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: allocraster.c 53132 2016-12-29 10:32:06Z deadwood $
 
     Desc:
     Lang: english
@@ -18,8 +18,8 @@
 	AROS_LH2(PLANEPTR, AllocRaster,
 
 /*  SYNOPSIS */
-	AROS_LHA(UWORD          , width, D0),
-	AROS_LHA(UWORD          , height, D1),
+	AROS_LHA(ULONG          , width, D0),
+	AROS_LHA(ULONG          , height, D1),
 
 /*  LOCATION */
 	struct GfxBase *, GfxBase, 82, Graphics)

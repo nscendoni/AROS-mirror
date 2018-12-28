@@ -1,6 +1,6 @@
 // Empty_Trashcan.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 00:21:43 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51952 $
 
 
 #include <stdlib.h>

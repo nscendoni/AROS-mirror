@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: addlibrary.c 40231 2011-07-20 05:35:24Z sonic $
 
     Desc: Add a library to the public list of libraries.
     Lang: english
@@ -14,7 +14,6 @@
 
 #include "exec_intern.h"
 #include "exec_debug.h"
-#include "exec_locks.h"
 
 /*****************************************************************************
 
@@ -67,11 +66,14 @@
     SumLibrary(library);
 
     /* Arbitrate for the library list */
-    EXEC_LOCK_LIST_WRITE_AND_FORBID(&SysBase->LibList);
+    Forbid();
+
     /* And add the library */
     Enqueue(&SysBase->LibList,&library->lib_Node);
-    /* We're done with midifying the LibList */
-    EXEC_UNLOCK_LIST_AND_PERMIT(&SysBase->LibList);
+
+    /* All done. */
+    Permit();
+
     /*
      * When debug.library is added, open it and cache its base instantly.
      * We do it because symbol lookup routines can be called in a system crash

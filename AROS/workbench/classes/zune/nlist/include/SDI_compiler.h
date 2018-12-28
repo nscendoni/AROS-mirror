@@ -9,7 +9,7 @@
         Distribution:   PD
         Project page:   http://sf.net/p/adtools/code/HEAD/tree/trunk/sdi/
         Description:    defines to hide compiler stuff
-        Id:             $Id$
+        Id:             $Id: SDI_compiler.h 49441 2014-08-16 12:12:16Z mazze $
         URL:            $URL: https://svn.code.sf.net/p/adtools/code/trunk/sdi/SDI_compiler.h $
 
  1.1   25.06.98 : created from data made by Gunter Nikl

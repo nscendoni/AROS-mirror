@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2005, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: textclass.c 52028 2016-03-17 04:36:20Z jmcmullan $
  
     Internal GadTools text class (NUMERIC_KIND and TEXT_KIND) .
 */

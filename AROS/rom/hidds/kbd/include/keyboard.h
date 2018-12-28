@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: keyboard.h 46445 2013-02-02 12:21:32Z sonic $
 
     Desc: Include for the keyboard hidd.
     Lang: English.

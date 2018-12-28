@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: misc.h 34357 2010-09-05 19:44:34Z mazze $
 */
 
 /*** Prototypes *************************************************************/

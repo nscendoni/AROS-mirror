@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2010, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: displayinfo.h 33364 2010-05-27 11:26:21Z sonic $
 
     Desc: DisplayInfo definitions and structures.
     Lang: english

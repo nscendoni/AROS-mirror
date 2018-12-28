@@ -1,7 +1,7 @@
 #ifndef XADMASTER_XADCRC_1021_C
 #define XADMASTER_XADCRC_1021_C
 
-/*  $Id$
+/*  $Id: xadCRC_1021.c 36659 2011-01-18 13:26:51Z neil $
     16 bit CRC
 
     XAD library system for archive handling

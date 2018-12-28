@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: harddisks.c 47100 2013-03-30 12:25:35Z neil $
 */
 
 #include <proto/exec.h>

@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: write.c 48951 2014-04-19 09:33:59Z deadwood $
 
     Desc: Write a couple of bytes from a file.
     Lang: english

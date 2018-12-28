@@ -1,14 +1,12 @@
 /*
-    Copyright © 2010-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2010-2011, The AROS Development Team. All rights reserved.
+    $Id: mm_linear.c 43432 2012-01-01 20:15:00Z jmcmullan $
 
     Desc: Page-based memory allocator, linear algorithm.
     Lang: english
 */
 
-#ifndef __KERNEL_NOLIBBASE__
 #define __KERNEL_NOLIBBASE__
-#endif /* !__KERNEL_NOLIBBASE__ */
 
 #include <exec/alerts.h>
 #include <exec/execbase.h>

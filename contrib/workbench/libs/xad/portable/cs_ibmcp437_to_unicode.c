@@ -2,7 +2,7 @@
 #ifndef XADMASTER_CS_IBMPC437_TO_UNICODE_C
 #define XADMASTER_CS_IBMPC437_TO_UNICODE_C
 
-/*  $Id$
+/*  $Id: cs_ibmcp437_to_unicode.c 43430 2012-01-01 20:12:06Z jmcmullan $
     Character set conversion from IBM codepage 437 to Unicode
 
     XAD library system for archive handling

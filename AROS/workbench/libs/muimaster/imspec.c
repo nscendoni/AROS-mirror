@@ -3,7 +3,7 @@
     Copyright  2002-2007, The AROS Development Team.
     All rights reserved.
 
-    $Id$
+    $Id: imspec.c 48582 2013-12-16 02:23:59Z neil $
 */
 
 /* This is the implementation of a MUI-like image engine

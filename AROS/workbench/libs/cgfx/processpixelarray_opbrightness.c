@@ -1,11 +1,11 @@
 /*
-    Copyright © 2013-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2013-2014, The AROS Development Team. All rights reserved.
+    $Id: processpixelarray_opbrightness.c 52799 2016-07-22 18:05:51Z deadwood $
 */
 
 #include <proto/cybergraphics.h>
 
-#include <hidd/gfx.h>
+#include <hidd/graphics.h>
 #include <cybergraphx/cybergraphics.h>
 #include <exec/types.h>
 

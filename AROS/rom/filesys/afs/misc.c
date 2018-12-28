@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2008, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: misc.c 43309 2011-12-29 15:26:08Z olivieradam $
 */
 /*
  * -date------ -name------------------- -description-----------------------------

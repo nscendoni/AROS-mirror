@@ -1,25 +1,18 @@
-# Copyright © 2004-2017, The AROS Development Team. All rights reserved.
-# $Id$
+# Copyright © 2004-2012, The AROS Development Team. All rights reserved.
+# $Id: mmakefile.src 52342 2016-03-29 10:15:57Z mazze $
 
-include $(SRCDIR)/config/aros.cfg
+include $(TOP)/config/make.cfg
 
-BASEICONS := About FixFonts Format FTManager WorkBook Shell
-ADDITIONALICONS := SysMon Snoopy Find
+ICONS := About FixFonts Format FTManager SysMon WorkBook Snoopy Shell Find
+IMGS  := DiskImageGUI-1.png DiskImageGUI-2.png
+DSKIM := DiskImageGUI
 
-DISKIMAGESRCS := DiskImageGUI-1.png DiskImageGUI-2.png
-DISKIMAGEICON := DiskImageGUI
+#MM- iconset-Gorilla-icons-aros-clean : iconset-Gorilla-icons-aros-system-clean
+#MM- iconset-Gorilla-icons-aros : iconset-Gorilla-icons-aros-system
+#MM  iconset-Gorilla-icons-aros-system : iconset-Gorilla-icons-aros-system-diskimage
 
-#MM- iconset-Gorilla-wbench-icons-aros-clean : iconset-Gorilla-wbench-icons-aros-system-clean
-#MM- iconset-Gorilla-additional-icons-aros-clean : iconset-Gorilla-additional-icons-aros-system-clean
-#MM- iconset-Gorilla-wbench-icons-aros : iconset-Gorilla-wbench-icons-aros-system
-#MM- iconset-Gorilla-additional-icons-aros : iconset-Gorilla-additional-icons-aros-system
-#MM  iconset-Gorilla-additional-icons-aros-system : iconset-Gorilla-additional-icons-aros-system-diskimage
-
-%build_icons mmake=iconset-Gorilla-wbench-icons-aros-system icons=$(BASEICONS) \
+%build_icons mmake=iconset-Gorilla-icons-aros-system icons=$(ICONS) \
              dir=$(AROS_SYSTEM)
 
-%build_icons mmake=iconset-Gorilla-additional-icons-aros-system icons=$(ADDITIONALICONS) \
-             dir=$(AROS_SYSTEM)
-
-%build_icons mmake=iconset-Gorilla-additional-icons-aros-system-diskimage \
-             icons=$(DISKIMAGEICON) dir=$(AROS_SYSTEM) image=$(DISKIMAGESRCS)
+%build_icons mmake=iconset-Gorilla-icons-aros-system-diskimage \
+             icons=$(DSKIM) dir=$(AROS_SYSTEM) image=$(IMGS)

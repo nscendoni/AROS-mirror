@@ -1,6 +1,6 @@
 /*
     Copyright © 2009, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: Eject.c 50096 2015-02-19 13:38:23Z polluks $
 
     Desc: Eject/Load CLI command. 
     Lang: English

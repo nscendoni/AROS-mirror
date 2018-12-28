@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2015, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: freebitmap.c 51030 2015-08-29 22:48:21Z NicJA $
 
     Desc: Free the memory occupied by a BitMap.
     Lang: english

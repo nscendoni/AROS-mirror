@@ -1,7 +1,7 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
     Copyright © 2001-2003, The MorphOS Development Team. All Rights Reserved.
-    $Id$
+    $Id: frameiclass.c 49133 2014-07-22 16:19:09Z neil $
 */
 
 #include <exec/types.h>

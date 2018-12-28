@@ -1,6 +1,7 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: openpartitiontable.c 38409 2011-04-28 07:22:27Z sonic $
+
 */
 
 #include <exec/memory.h>
@@ -15,25 +16,25 @@
     NAME */
 #include <libraries/partition.h>
 
-        AROS_LH1(LONG, OpenPartitionTable,
+	AROS_LH1(LONG, OpenPartitionTable,
 
 /*  SYNOPSIS */
-        AROS_LHA(struct PartitionHandle *, root, A1),
+	AROS_LHA(struct PartitionHandle *, root, A1),
 
 /*  LOCATION */
-        struct Library *, PartitionBase, 7, Partition)
+	struct Library *, PartitionBase, 7, Partition)
 
 /*  FUNCTION
-        Open a partition table. On success root->list will be filled with a
-        list of PartitionHandles. If one partition contains more
-        subpartitions, the caller should call OpenPartitionTable() on the
-        PartitionHandle recursively.
+	Open a partition table. On success root->list will be filled with a
+	list of PartitionHandles. If one partition contains more
+	subpartitions, the caller should call OpenPartitionTable() on the
+	PartitionHandle recursively.
 
     INPUTS
-        root - root partition
+	root - root partition
 
     RESULT
-        0 for success; an error code otherwise.
+	0 for success; an error code otherwise.
 
     NOTES
 
@@ -44,6 +45,9 @@
     SEE ALSO
 
     INTERNALS
+
+    HISTORY
+	21-02-02    first version
 
 *****************************************************************************/
 {

@@ -1,6 +1,6 @@
 /*
-    Copyright © 2001-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2001-2011, The AROS Development Team. All rights reserved.
+    $Id: Copy.c 46610 2013-02-15 21:44:26Z jmcmullan $
 
     Desc: Copy CLI command
     Lang: English
@@ -2106,10 +2106,7 @@ void DoWork(STRPTR name, struct CopyData *cd)
             }
         }
 
-        if (cd->Mode != COPYMODE_DELETE)
-        {
-            SetData(cd->DestName, cd);
-        }
+        SetData(cd->DestName, cd);
     }
 
     if (lock)

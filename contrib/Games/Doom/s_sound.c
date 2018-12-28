@@ -1,7 +1,7 @@
 // Emacs style mode select   -*- C++ -*- 
 //-----------------------------------------------------------------------------
 //
-// $Id$
+// $Id: s_sound.c 43434 2012-01-02 08:06:23Z jmcmullan $
 //
 // Copyright (C) 1993-1996 by id Software, Inc.
 //
@@ -25,7 +25,7 @@
 
 
 static const char
-rcsid[] = "$Id$";
+rcsid[] = "$Id: s_sound.c 43434 2012-01-02 08:06:23Z jmcmullan $";
 
 
 

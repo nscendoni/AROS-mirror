@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2016, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: getcolormap.c 52756 2016-06-10 17:06:26Z neil $
 
     Desc: Graphics function GetColorMap()
     Lang: english

@@ -1,8 +1,6 @@
 #ifndef FONTINFO_CLASS_H
 #define FONTINFO_CLASS_H
 
-#include <diskfont/diskfonttag.h>
-
 #define FONTINFO_BASE			TAG_USER
 #define MUIA_FontInfo_Filename		(FONTINFO_BASE + 1)
 #define MUIA_FontInfo_Face		(FONTINFO_BASE + 2)
@@ -18,39 +16,5 @@ struct MUI_CustomClass *FontInfoClass;
 
 void CleanupFontInfoClass(void);
 int InitFontInfoClass(void);
-
-
-struct FontInfoData
-{
-    STRPTR Filename;
-    FT_Face Face;
-    Object *AttachedFile;
-    Object *Name;
-    Object *YSizeFactorHigh;
-    Object *YSizeFactorLow;
-    Object *StemWeight;
-    Object *SlantStyle;
-    Object *HorizStyle;
-    Object *Family;
-    Object *Fixed;
-    Object *Serif;
-    //Object *AlgoStyle;
-    Object *FaceNum;
-    Object *Metric;
-    Object *BBoxYMin;
-    Object *BBoxYMax;
-    Object *SpaceWidth;
-    Object *Preview;
-    Object *PreviewGroup;
-    Object *Gray;
-    Object *TestSize;
-    Object *TestString;
-    struct TagItem OTags[26];
-    UWORD AvailSizes[OT_MAXAVAILSIZES];
-};
-
-typedef struct FontInfoData FontInfoData;
-
-ULONG fiWriteFiles(FontInfoData *dat, STRPTR base, STRPTR target_dir, ULONG size);
 
 #endif

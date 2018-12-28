@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: obtainattrbasesarray.c 48424 2013-11-18 09:28:30Z neil $
 
     Desc: Obtain array of attribute base IDs
     Lang: english

@@ -1,6 +1,6 @@
 /*
     Copyright © 2010-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: support.c 49667 2014-09-30 17:35:27Z neil $
 */
 
 #include "boot.h"

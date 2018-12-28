@@ -2,8 +2,8 @@
 #define GRAPHICS_CLIP_H
 
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2011, The AROS Development Team. All rights reserved.
+    $Id: clip.h 39999 2011-07-11 05:33:16Z sonic $
 
     Desc: Clip descriptions.
     Lang: english
@@ -118,8 +118,7 @@ struct ClipRect
 
 /* This one is used for determining optimal offset for blitting into
 cliprects */
-#define ALIGN_CLIPRECT  16
-#define ALIGN_OFFSET(x) ((x) & (ALIGN_CLIPRECT-1))
+#define ALIGN_OFFSET(x) ((x) & 0x0F)
 
 
 /*

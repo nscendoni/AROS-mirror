@@ -1,7 +1,7 @@
 // Kbdcol_EnglishUnitedStatesColemak_pkf.txt
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: pc105_col.c 51236 2015-12-19 16:58:58Z polluks $
     
     Desc: US Colemak PC105 Keymap (Based on US extended)
     Lang: English

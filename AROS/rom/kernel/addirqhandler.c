@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 1995-2013, The AROS Development Team. All rights reserved.
+    $Id: addirqhandler.c 47708 2013-07-17 12:22:32Z verhaegs $
 
     Desc:
 */
@@ -26,7 +26,7 @@
         AROS_LH4(void *, KrnAddIRQHandler,
 
 /*  SYNOPSIS */
-        AROS_LHA(uint32_t, irq, D0),
+        AROS_LHA(uint8_t, irq, D0),
         AROS_LHA(irqhandler_t *, handler, A0),
         AROS_LHA(void *, handlerData, A1),
         AROS_LHA(void *, handlerData2, A2),
@@ -77,7 +77,7 @@
 
     D(bug("[KRN] KrnAddIRQHandler(%02x, %012p, %012p, %012p):\n", irq, handler, handlerData, handlerData2));
 
-    if (irq < HW_IRQ_COUNT)
+    if (irq < IRQ_COUNT)
     {
         /* Go to supervisor mode */
         (void)goSuper();
@@ -95,7 +95,7 @@
 
             Disable();
 
-            ADDHEAD(&KERNELIRQ_LIST(irq), &handle->in_Node);
+            ADDHEAD(&KernelBase->kb_Interrupts[irq], &handle->in_Node);
 
             ictl_enable_irq(irq, KernelBase);
 
@@ -115,7 +115,7 @@ void krnRunIRQHandlers(struct KernelBase *KernelBase, uint8_t irq)
 {
     struct IntrNode *in, *in2;
 
-    ForeachNodeSafe(&KERNELIRQ_LIST(irq), in, in2)
+    ForeachNodeSafe(&KernelBase->kb_Interrupts[irq], in, in2)
     {
 	irqhandler_t h = in->in_Handler;
 

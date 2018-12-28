@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: SetDate.c 48905 2014-04-03 17:15:39Z neil $
 
     Desc: SetDate CLI command
     Lang: English

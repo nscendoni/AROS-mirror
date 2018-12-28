@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: fhopen.c 36648 2011-01-17 14:31:59Z neil $
  *
  *      fhopen.c - open level 1 file from an AmigaDOS file handle (SAS/C)
  *

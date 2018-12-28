@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: next.c 30792 2009-03-07 22:40:04Z neil $
 
     Desc: Get the pointer value a pointer is pointing to, often used to get
           the next element of a list

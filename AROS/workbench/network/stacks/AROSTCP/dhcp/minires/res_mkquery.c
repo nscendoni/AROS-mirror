@@ -76,7 +76,7 @@
 
 #if defined(LIBC_SCCS) && !defined(lint) && !defined(__AROS__)
 static const char sccsid[] = "@(#)res_mkquery.c	8.1 (Berkeley) 6/4/93";
-static const char rcsid[] = "$Id$";
+static const char rcsid[] = "$Id: res_mkquery.c 51761 2016-03-10 02:16:12Z NicJA $";
 #endif /* LIBC_SCCS and not lint */
 
 #include <sys/types.h>

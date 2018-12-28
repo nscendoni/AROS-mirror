@@ -1,6 +1,6 @@
 // FileTypesPrefs.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-15 06:39:39 +0100 (Tue, 15 Mar 2016) $
+// $Revision: 51970 $
 
 #ifdef __AROS__
 #define MUIMASTER_YES_INLINE_STDARG

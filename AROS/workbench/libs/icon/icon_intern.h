@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: icon_intern.h 48296 2013-10-16 16:26:24Z neil $
 */
 
 #include <exec/memory.h>

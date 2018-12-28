@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: hostdisk_device.h 42764 2011-12-08 09:32:07Z sonic $
 */
 
 #include <aros/libcall.h>

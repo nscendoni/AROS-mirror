@@ -1,6 +1,6 @@
 /*
-    Copyright © 2015-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2015, The AROS Development Team. All rights reserved.
+    $Id: LockTaskList.c 51597 2016-03-03 18:35:26Z mazze $
 */
 
 #define DEBUG 0
@@ -13,7 +13,7 @@
 
 #include <resources/task.h>
 
-#include "task_intern.h"
+#include "taskres_intern.h"
 
 /*****************************************************************************
 
@@ -23,7 +23,7 @@
         AROS_LH1(struct TaskList *, LockTaskList,
 
 /*  SYNOPSIS */
-        AROS_LHA(ULONG, flags, D0),
+        AROS_LHA(ULONG, flags, D1),
 
 /*  LOCATION */
 	struct TaskResBase *, TaskResBase, 1, Task)
@@ -32,14 +32,6 @@
 
     INPUTS
         flags - 
-              LTF_WRITE     Lock The TaskList for writing
-                            NB: In general software SHOULDNT
-                                need to use this!
-
-              LTF_RUNNING   Lock The TaskList to show running tasks.
-              LTF_READY     Lock The TaskList to show ready tasks.
-              LTF_WAITING   Lock The TaskList to show waiting/spinning tasks.
-              LTF_ALL       Lock The TaskList to show all of the above tasks.
 
     RESULT
         Handle to the task list. This is not a direct pointer
@@ -64,7 +56,6 @@
 
     D(bug("[TaskRes] LockTaskList: flags = $%lx\n", flags));
 
-#ifdef TASKRES_ENABLE
     if (flags & LTF_WRITE)
         ObtainSemaphore(&TaskResBase->trb_Sem);
     else
@@ -79,19 +70,6 @@
         taskList->tlp_Next = (struct TaskListEntry *)GetHead(taskList->tlp_Tasks);
         AddTail(&TaskResBase->trb_LockedLists, &taskList->tlp_Node);
     }
-#else
-    Disable();
-    if ((taskList = (struct TaskListPrivate *)AllocVec(sizeof(struct TaskListPrivate), MEMF_PUBLIC)) != NULL)
-    {
-        if (flags & LTF_RUNNING)
-            taskList->tlp_TaskList = NULL;
-        else if (flags & LTF_READY)
-            taskList->tlp_TaskList = &SysBase->TaskReady;
-        else if (flags & LTF_WAITING)
-            taskList->tlp_TaskList = &SysBase->TaskWait;
-        taskList->tlp_Current = NULL;
-    }
-#endif /* TASKRES_ENABLE */
 
     return (struct TaskList *)taskList;
 

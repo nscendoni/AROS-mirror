@@ -5,7 +5,7 @@
  *   Copyright © 2012 Michal Zukowski, Michal Wozniak
  *   All rights reserved.
  *
- *   $Id$
+ *   $Id: locale.c 44996 2012-06-10 16:07:18Z verhaegs $
  */
 
 #include <proto/locale.h>
@@ -38,7 +38,7 @@ void locale_cleanup(void)
 }
 
 
-CONST_STRPTR locale_getstr(ULONG array_id)
+STRPTR locale_getstr(ULONG array_id)
 {
 	const struct CatCompArrayType *t = CatCompArray+array_id;
 

@@ -3,7 +3,7 @@
 
 /*
     Copyright © 1995-2014, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: dostags.h 48685 2014-01-06 18:15:23Z mazze $
 
     Desc: Tags for DOS routines
     Lang: english

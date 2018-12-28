@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2007, The AROS Development Team. All rights reserved.
-    $Id$    $Log
+    $Id: setrast.c 31170 2009-05-05 03:31:47Z rob $    $Log
 
     Desc: Graphics function SetRast()
     Lang: english

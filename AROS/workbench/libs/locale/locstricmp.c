@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2011, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: locstricmp.c 43286 2011-12-29 02:11:58Z neil $
 
     Desc: LocStricmp - locale.library's private replacement
           of utility.library/Stricmp function. IPrefs will install

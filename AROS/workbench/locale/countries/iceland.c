@@ -1,6 +1,6 @@
 /*
     Copyright © 1995-2013, The AROS Development Team. All rights reserved.
-    $Id$
+    $Id: iceland.c 47219 2013-04-13 16:13:54Z NicJA $
 
     Desc: Country data for Ísland (Iceland).
     Author: Stefan Haubenthal <polluks@sdf.lonestar.org>

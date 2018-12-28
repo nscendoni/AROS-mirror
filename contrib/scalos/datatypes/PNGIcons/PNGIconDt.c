@@ -1,6 +1,6 @@
 // PNGIconDt.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-14 00:54:42 +0100 (Mon, 14 Mar 2016) $
+// $Revision: 51941 $
 
 
 #include <exec/types.h>

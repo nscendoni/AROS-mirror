@@ -1,5 +1,5 @@
 ==copyright Copyright © 1994-2005 Martin Blom
-==id $Id$
+==id $Id: ahi_sub_lib.sfd 34106 2010-08-12 07:10:17Z sonic $
 ==base _AHIsubBase
 ==basetype struct Library *
 ==libname ahi_sub.library

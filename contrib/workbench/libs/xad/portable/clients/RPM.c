@@ -1,7 +1,7 @@
 #ifndef XADMASTER_RPM_C
 #define XADMASTER_RPM_C
 
-/*  $Id$
+/*  $Id: RPM.c 43430 2012-01-01 20:12:06Z jmcmullan $
     RPM Package Manager (RPM) extractor
 
     XAD library system for archive handling

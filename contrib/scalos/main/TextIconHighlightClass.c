@@ -1,6 +1,6 @@
 // TextIconHighlightClass.c
-// $Date$
-// $Revision$
+// $Date: 2016-03-14 20:26:50 +0100 (Mon, 14 Mar 2016) $
+// $Revision: 51949 $
 
 
 #include <exec/types.h>

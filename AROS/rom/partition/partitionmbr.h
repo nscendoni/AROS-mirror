@@ -2,12 +2,13 @@
 #define PARTITIONMBR_H
 
 /*
-    Copyright © 2007-2017, The AROS Development Team. All rights reserved.
-    $Id$
+    Copyright © 2007-2012, The AROS Development Team. All rights reserved.
+    $Id: partitionmbr.h 45601 2012-08-19 10:48:41Z neil $
 */
 
 #include <exec/types.h>
 #include <libraries/partition.h>
+#include <utility/tagitem.h>
 
 #include "partition_intern.h"
 

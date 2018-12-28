@@ -1,8 +1,8 @@
 /*
- * $Id$
+ * $Id: scanpo.c 53050 2016-11-22 01:16:00Z neil $
  *
  * Copyright (C) 1993-1999 Jochen Wiedmann and Marcin Orlowski
- * Copyright (C) 2002-2017 FlexCat Open Source Team
+ * Copyright (C) 2002-2014 FlexCat Open Source Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ extern int   CT_Scanned;
                                 ((c) >= 'a' && (c) <= 'z') || \
                                 ((c) >= 'A' && (c) <= 'Z'))
 
-#if defined(__amigaos3__) || defined(__MORPHOS__) || defined(WIN32)
+#if defined(__amigaos3__) || defined(__MORPHOS__) || defined(WIN32) || defined(unix)
 char *strptime(const char *string, const char *fmt, struct tm *res);
 #endif
 
@@ -57,12 +57,13 @@ char *strptime(const char *string, const char *fmt, struct tm *res);
    Inputs: pofile - name of the description/translation file to scan.
    Result: TRUE if successful, FALSE otherwise.
 */
-int ScanPOFile(char *pofile, int verwarning)
+int ScanPOFile(char *pofile)
 {
   FILE *fp;
-  char *readLineBuffer;
+  char *newline, *line;
   int Result = TRUE;
   int CodeSet_checked = FALSE;
+  int revision_found = FALSE;
   int inHeader = TRUE;
   int NextID = 0;
   const char *PoSrcCharset = "utf-8";
@@ -82,51 +83,29 @@ int ScanPOFile(char *pofile, int verwarning)
   if(!NoBufferedIO)
     setvbuf(fp, NULL, _IOFBF, buffer_size);
 
-  // initialize "readLineBuffer" ahead of the loop
-  // the loop will bail out early for empty files
-  readLineBuffer = NULL;
-  while(!feof(fp) && (readLineBuffer = ReadLine(fp, TRUE)) != NULL)
+  while(!feof(fp) && (line = newline = ReadLine(fp, TRUE)) != NULL)
   {
-    // the buffer pointer will be modified all the way down, so better work with a copy,
-    // otherwise the free() call after the loop will free the wrong pointer
-    char *line = readLineBuffer;
-
     if(inHeader == TRUE)
     {
-      if(line[0] == '\0')
+      if(*line == '\0')
       {
         inHeader = FALSE;
 
-        // check that we have a valid verson
-        if(CatVersion == -1)
-        {
-          if(verwarning)
-            ShowWarn(MSG_ERR_NO_CAT_VERSION);
-
-          CatVersion = 0;
-        }
-
         // we found the end of the header so lets check if we have all
         // we require to continue
-        if(CatVersionDate[0] != '\0' && CatProjectName[0] != '\0' &&
+        if(CatVersion > 0 && CatVersionDate[0] != '\0' && CatProjectName[0] != '\0' &&
            CatVersionString == NULL)
         {
           char buf[255];
 
           // warn about missing revision information
-          if(CatRevision == -1)
-          {
-            if(verwarning)
-              ShowWarn(MSG_ERR_NO_CAT_REVISION);
-
-            CatRevision = 0;
-          }
+          if(CatRevision == 0)
+            ShowWarn(MSG_ERR_NO_CAT_REVISION);
 
           if(strstr(CatProjectName, ".catalog") != NULL)
             snprintf(buf, sizeof(buf), "$VER: %s %d.%d (%s)", CatProjectName, CatVersion, CatRevision, CatVersionDate);
           else
             snprintf(buf, sizeof(buf), "$VER: %s.catalog %d.%d (%s)", CatProjectName, CatVersion, CatRevision, CatVersionDate);
-
           CatVersionString = AllocString(buf);
         }
       }
@@ -140,19 +119,20 @@ int ScanPOFile(char *pofile, int verwarning)
           while(*line == '#' || *line == ' ' || *line == '\t')
             ++line;
 
-          if(CatVersion == -1 && Strnicmp(line, "version", 7) == 0)
+          if(Strnicmp(line, "version", 7) == 0)
           {
             line += 8;
             OverSpace(&line);
             CatVersion = strtol(line, &line, 0);
           }
-          else if(CatRevision == -1 && Strnicmp(line, "revision", 8) == 0)
+          else if(Strnicmp(line, "revision", 8) == 0)
           {
             line += 9;
             OverSpace(&line);
             CatRevision = strtol(line, &line, 0);
+            revision_found = TRUE;
           }
-          else if(CatRevision == -1 &&
+          else if(revision_found == FALSE &&
                   Strnicmp(line, "$Id: ", 5) == 0)
           {
             char *p;
@@ -168,7 +148,7 @@ int ScanPOFile(char *pofile, int verwarning)
               CatRevision = strtol(p, &p, 0);
             }
           }
-          else if(CatRevision == -1 &&
+          else if(revision_found == FALSE &&
                   Strnicmp(line, "$Revision: ", 11) == 0)
           {
             line += 12;
@@ -277,7 +257,7 @@ int ScanPOFile(char *pofile, int verwarning)
             else if(Stricmp(line, "pl") == 0) // polish
             {
               language = "polski";
-              CatDstCharset = "iso-8859-2";
+              CatDstCharset = "iso-8859-16";
             }
             else if(Stricmp(line, "pt") == 0) // portuguese
               language = "português";
@@ -296,11 +276,6 @@ int ScanPOFile(char *pofile, int verwarning)
             {
               language = "srpski";
               CatDstCharset = "iso-8859-16";
-            }
-            else if(Stricmp(line, "sk") == 0) // slovakian
-            {
-              language = "slovak";
-              CatDstCharset = "iso-8859-2";
             }
             else if(Stricmp(line, "sl") == 0) // slovenian
             {
@@ -342,7 +317,7 @@ int ScanPOFile(char *pofile, int verwarning)
           {
             char *p;
 
-            line += 15;
+            line += 16;
             p = strstr(line, "charset=");
             if(p != NULL)
             {
@@ -583,7 +558,7 @@ int ScanPOFile(char *pofile, int verwarning)
           memmove(p, p+1, strlen(p));
 
         // unquote the string
-        if(line[0] != '\0' && line[strlen(line)-1] == '"')
+        if(*line != '\0' && line[strlen(line)-1] == '"')
           line[strlen(line)-1] = '\0';
 
         if(Strnicmp(line, "msgid \"", 7) == 0)
@@ -593,13 +568,10 @@ int ScanPOFile(char *pofile, int verwarning)
           // if the string starts with <EMPTY> we out to remove
           // the rest of the string!
           if(strncmp(line, "<EMPTY>", 7) == 0)
-            line[0] = '\0';
+            *line = '\0';
 
           if(strlen(line) > 0)
-          {
-            if((cs->CD_Str = ConvertString(line, PoSrcCharset, CatDstCharset)) == NULL)
-              ShowWarn(MSG_ERR_CONVERSION_FAILED, cs->ID_Str);
-          }
+            cs->CD_Str = ConvertString(line, PoSrcCharset, CatDstCharset);
           else
           {
             cs->CD_Str = malloc(1);
@@ -615,15 +587,8 @@ int ScanPOFile(char *pofile, int verwarning)
         {
           line += 8;
 
-          // don't search for "<EMPTY>" here, this will be done later
-          // during all other checks. If the string would be erased here
-          // we would be no longer able to tell it apart from really
-          // missing translations.
           if(strlen(line) > 0)
-          {
-            if((cs->CT_Str = ConvertString(line, PoSrcCharset, CatDstCharset)) == NULL)
-              ShowWarn(MSG_ERR_CONVERSION_FAILED, cs->ID_Str);
-          }
+            cs->CT_Str = ConvertString(line, PoSrcCharset, CatDstCharset);
           else
           {
             cs->CT_Str = malloc(1);
@@ -643,12 +608,9 @@ int ScanPOFile(char *pofile, int verwarning)
 
           if(inMsgID == TRUE)
           {
-            char *t;
+            char *t = ConvertString(line, PoSrcCharset, CatDstCharset);
 
-            if((t = ConvertString(line, PoSrcCharset, CatDstCharset)) == NULL)
-              ShowWarn(MSG_ERR_CONVERSION_FAILED, cs->ID_Str);
-            else
-              cs->CD_Str = AddString(cs->CD_Str, t);
+            cs->CD_Str = AddString(cs->CD_Str, t);
 
             //printf("CD_Str2: '%s' '%s'\n", cs->CD_Str, line);
 
@@ -656,12 +618,9 @@ int ScanPOFile(char *pofile, int verwarning)
           }
           else if(inMsgSTR == TRUE)
           {
-            char *t;
+            char *t = ConvertString(line, PoSrcCharset, CatDstCharset);
 
-            if((t = ConvertString(line, PoSrcCharset, CatDstCharset)) == NULL)
-              ShowWarn(MSG_ERR_CONVERSION_FAILED, cs->ID_Str);
-            else
-              cs->CT_Str = AddString(cs->CT_Str, t);
+            cs->CT_Str = AddString(cs->CT_Str, t);
 
             //printf("CT_Str2: '%s' '%s'\n", cs->CT_Str, line);
 
@@ -671,9 +630,6 @@ int ScanPOFile(char *pofile, int verwarning)
       }
     }
   }
-
-  free(readLineBuffer);
-  fclose(fp);
 
   /*
   printf("CatVersion: %d.%d\n", CatVersion, CatRevision);
@@ -705,7 +661,7 @@ int ScanPOFile(char *pofile, int verwarning)
     CodeSet = 111;
   else if(Stricmp(CatDstCharset, "iso-8859-16") == 0)
     CodeSet = 112;
-  else if(Stricmp(CatDstCharset, "amiga-1251") == 0 || Stricmp(CatDstCharset, "windows-1251") == 0)
+  else if(Stricmp(CatDstCharset, "amiga-1251") == 0 || Stricmp(CatDstCharset, "windows-1251"))
     CodeSet = 2104;
   else
     CodeSet = 0;
@@ -718,16 +674,10 @@ int ScanPOFile(char *pofile, int verwarning)
     else
     {
       size_t reallen;
-      size_t reallen_utf8;
       size_t cd_len;
 
-      // get string length for both ASCII and UTF8 encoding
-      // the length check must be done against the UTF8 length,
-      // which might be less than the ASCII length due to certain
-      // UTF8 characters which are encoded with up to 3 ASCII
-      // characters
+      /* Get string length */
       reallen = strlen(cs->CT_Str);
-      reallen_utf8 = utf8_strlen(cs->CT_Str);
       cd_len = strlen(cs->CD_Str);
 
       // check for empty translations
@@ -742,19 +692,20 @@ int ScanPOFile(char *pofile, int verwarning)
           cs->NotInCT = TRUE;
           continue;
         }
+        else if(strcmp(cs->CT_Str, "<EMPTY>") == 0)
+        {
+          // string should be intentionally empty
+          cs->CT_Str[0] = '\0';
+        }
       }
 
-      // check for intentionally empty translations
-      if(strncmp(cs->CT_Str, "<EMPTY>", 7) == 0)
-        cs->CT_Str[0] = '\0';
-
-      if(cs->MinLen > 0 && reallen_utf8 < (size_t)cs->MinLen)
+      if(cs->MinLen > 0 && reallen < (size_t)cs->MinLen)
         ShowWarnQuick(MSG_ERR_STRING_TOO_SHORT, cs->ID_Str);
 
-      if(cs->MaxLen > 0 && reallen_utf8 > (size_t)cs->MaxLen)
+      if(cs->MaxLen > 0 && reallen > (size_t)cs->MaxLen)
         ShowWarnQuick(MSG_ERR_STRING_TOO_LONG, cs->ID_Str);
 
-      // check for trailing ellipsis
+      /* Check for trailing ellipsis. */
       if(reallen >= 3 && cd_len >= 3)
       {
         if(strcmp(&cs->CD_Str[cd_len - 3], "...") == 0 &&
@@ -770,7 +721,7 @@ int ScanPOFile(char *pofile, int verwarning)
         }
       }
 
-      // check for trailing spaces
+      /* Check for trailing spaces. */
       if(reallen >= 1 && cd_len >= 1)
       {
         if(strcmp(&cs->CD_Str[cd_len - 1], " ") == 0 &&
@@ -788,7 +739,7 @@ int ScanPOFile(char *pofile, int verwarning)
         }
       }
 
-      // check for matching placeholders
+      /* Check for matching placeholders */
       if(reallen >= 1 && cd_len >= 1)
       {
         char *cdP = cs->CD_Str;
@@ -871,6 +822,11 @@ int ScanPOFile(char *pofile, int verwarning)
       }
     }
   }
+
+  if(line != NULL)
+    free(line);
+
+  fclose(fp);
 
   if(WarnCTGaps)
   {
