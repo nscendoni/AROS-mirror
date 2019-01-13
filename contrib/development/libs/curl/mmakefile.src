@@ -1,21 +1,414 @@
-# Copyright © 2009-2016, The AROS Development Team. All rights reserved.
-# $Id: mmakefile.src 52724 2016-05-13 13:04:17Z neil $
+# Copyright © 2009-2018, The AROS Development Team. All rights reserved.
+# $Id$
 
 include $(SRCDIR)/config/aros.cfg
 
-#MM- contrib-curl : contrib-openssl development-curl
+
+#MM- contrib-curl : development-curl
+#MM- development-curl : contrib-openssl linklibs-pthread
+#MM development-curl-fixconfig : development-curl-pakagefiles
 
 REPOSITORIES := http://curl.haxx.se/download \
  http://ftp.sunet.se/mirror/archive/ftp.sunet.se/pub/www/utilities/curl
 
-%fetch_and_build_gnu_development package=curl version=7.37.1 \
-    patch=yes package_repo="$(REPOSITORIES)" \
-    extraoptions="--without-random --disable-ntlm-wb CPPFLAGS='-D__BSD_VISIBLE=1' --libdir=$(AROS_LIB)" \
-    postconfigure="development-curl-fixconfig"
+CURL_VERSION=7.60.0
+USER_CPPFLAGS=-D__BSD_VISIBLE=1
+CURL_OPTIONS=--disable-shared --without-random --disable-threaded-resolver --disable-ntlm-wb --with-ssl=$(AROS_DEVELOPER) --libdir=$(AROS_LIB)
+
+
+#MM- development : development-curl
+
+
+
+GNU_REPOSITORY := gnu://
+
+
+#MM- development-curl-quick : development-curl--quick
+#MM- development-curl--quick : development-curl--fetch
+#MM- development-curl-fetch : development-curl--fetch
+#MM- development-curl-create-patch : development-curl--create-patch
+ 
+development-curl-archbase  := curl-$(CURL_VERSION)
+
+ifeq (target,host)
+    development-curl-portdir  := $(HOSTDIR)/Ports/host/curl
+else
+    development-curl-portdir  := $(PORTSDIR)/curl
+endif
+
+ifeq ($(AROS_DEVELOPMENT),)
+    development-curl-prefix := $(CONTRIB_DIR)/curl
+else
+    development-curl-prefix := $(AROS_DEVELOPMENT)
+endif
+
+ifneq (,)
+    development-curl--archbase  := curl--$(CURL_VERSION)
+else
+    development-curl--archbase  := curl-$(CURL_VERSION)
+endif
+
+ifneq (,)
+    development-curl--srcdir  := 
+else
+    development-curl--srcdir  := $(development-curl-archbase)
+endif
+
+ifneq (,)
+    development-curl--builddir  := $(development-curl--srcdir)/
+else
+    development-curl--builddir  := $(development-curl--srcdir)
+endif
+
+ifeq (yes,yes)
+    development-curl--patches_specs := $(development-curl--archbase)-aros.diff:$(development-curl--srcdir):-f,-p1
+else
+    development-curl--patches_specs := ::
+endif
+
+
+.PHONY: development-curl--fetch
+
+ifneq ($(PORTSSOURCEDIR),)
+    development-curl--fetch-location := $(PORTSSOURCEDIR)
+else
+    development-curl--fetch-location := $(development-curl-portdir)
+endif
 
 #MM
-development-curl-fixconfig :
-	for file in $(GENDIR)/$(CURDIR)/curl/lib/curl_config.h; \
+development-curl--fetch :
+	$(FETCH) -ao ". $(REPOSITORIES) $(GNU_REPOSITORY)curl" -a $(development-curl--archbase) -s "tar.bz2 tar.gz" -l $(development-curl--fetch-location) \
+        -d $(development-curl-portdir) -po "$(SRCDIR)/$(CURDIR)" -p "$(development-curl--patches_specs)"
+
+
+.PHONY: development-curl--create-patch
+
+ifneq (,)
+    development-curl--create-patch-exclude := -X ./exclude.patterns
+endif
+
+ifneq ($(development-curl--srcdir),)
+    development-curl--create-patch-srcdir := $(development-curl--srcdir)
+else
+    development-curl--create-patch-srcdir := $(development-curl--archbase)
+endif
+
+#MM- development-curl--create-patch : development-curl--create-patch-diff
+#MM- development-curl--create-patch-quick : development-curl--create-patch-diff
+
+#MM
+development-curl--create-patch-diff:
+	@$(FETCH) -a $(development-curl--archbase) -s "tar.bz2 tar.gz" -l $(PORTSSOURCEDIR) -d $(development-curl-portdir)/tmp ; \
+	$(MV) $(development-curl-portdir)/$(development-curl--create-patch-srcdir) $(development-curl-portdir)/tmp/$(development-curl--create-patch-srcdir).aros ; \
+	cd $(development-curl-portdir)/tmp ; \
+	$(FOR) f in  ; do \
+	    $(ECHO) $$f >> ./exclude.patterns ; \
+	done ; \
+	diff -ruN $(development-curl--create-patch-exclude) \
+	    $(development-curl--create-patch-srcdir) \
+	    $(development-curl--create-patch-srcdir).aros \
+	    >$(SRCDIR)/$(CURDIR)/$(development-curl--archbase)-aros-new.diff ; \
+	$(MV) $(development-curl-portdir)/tmp/$(development-curl--create-patch-srcdir).aros $(development-curl-portdir)/$(development-curl--create-patch-srcdir) ; \
+	$(RM) $(development-curl-portdir)/tmp
+
+#MM- development-curl : development-curl-
+
+development-curl--package-dir := $(development-curl-portdir)/$(development-curl--archbase)
+
+development-curl--package-basename := \
+    $(DISTDIR)/Packages/$(development-curl--archbase)-aros.$(AROS_TARGET_CPU)
+
+ifneq (no,no)
+    development-curl--package := $(development-curl--package-basename).tar.bz2
+endif
+
+
+ifneq ($(development-curl-prefix),)
+    development-curl--prefix := $(development-curl-prefix)
+else
+    development-curl--prefix := $(AROS_CONTRIB)
+endif
+
+ifneq (/Development,)
+    development-curl--aros_prefix := /Development
+else
+    development-curl--aros_prefix := $(development-curl--prefix)
+endif
+
+BD_NIXFLAG ?= -nix
+
+ifeq (yes,yes)
+    development-curl--nix    := $(BD_NIXFLAG)
+    development-curl--volpfx := /
+    development-curl--volsfx := /
+    
+    ifeq (,)
+        development-curl--nix_dir_layout := yes
+    endif
+else
+    development-curl--volsfx := :
+    
+    ifeq (,)
+        development-curl--nix_dir_layout := no
+    endif
+endif
+
+development-curl--volfunc = $(development-curl--volpfx)$(notdir $1)$(development-curl--volsfx)
+
+development-curl--install_opts := prefix=$(development-curl--prefix) \
+	exec_prefix=$(development-curl--prefix) 
+
+# Check if chosen compiler is valid
+ifeq ($(findstring target,host target kernel),)
+  $(error unknown compiler target)
+endif
+
+# Set legacy 'host' variable based on chosen compiler
+ifeq (target,host)
+    host := yes
+    ifeq (curl,)
+        development-curl--pkgdir := $(HOSTGENDIR)/$(CURDIR)
+    else
+        development-curl--pkgdir := $(HOSTGENDIR)/$(CURDIR)/curl
+    endif
+else
+    host := no
+    ifeq (curl,)
+        development-curl--pkgdir := $(GENDIR)/$(CURDIR)
+    else
+        development-curl--pkgdir := $(GENDIR)/$(CURDIR)/curl
+    endif
+endif
+ifneq (,)
+    ifeq (curl,)
+        development-curl--pkgdir := /$(CURDIR)
+    else
+        development-curl--pkgdir := /$(CURDIR)/curl
+    endif
+endif
+
+development-curl--configflag := $(development-curl--pkgdir)/.configured
+development-curl--installflag := $(development-curl--pkgdir)/.installed
+
+ifeq ($(filter yes, $(development-curl--nix_dir_layout) $(host)),yes)
+    development-curl--PROGDIR      := $(development-curl--aros_prefix)/bin
+    development-curl--config_opts  := --prefix=$(development-curl--aros_prefix)
+else
+    ifeq (yes,yes)
+        development-curl--config_opts := --prefix=/PROGDIR  --bindir=/PROGDIR --sbindir=/PROGDIR \
+        --libdir=/LIB --includedir=/INCLUDE --oldincludedir=/INCLUDE   
+    else
+        development-curl--config_opts  := --prefix=$(development-curl--aros_prefix)
+    endif
+
+    development-curl--PROGDIR := $(development-curl--aros_prefix)
+    
+    development-curl--install_opts := bindir=$(development-curl--prefix) \
+	sbindir=$(development-curl--prefix) \
+	libdir=$(AROS_LIB) includedir=$(AROS_INCLUDES) \
+	oldincludedir=$(AROS_INCLUDES) 
+endif
+
+ifneq ($(DEBUG),yes)
+    development-curl--s_flag = -s
+endif
+
+# Set up build environment, and options for configure script
+ifeq (target,host)
+    # NB: We need to pass in our crosstoolsdir, but cannot set CFLAGS since it
+    # confused configure scripts. We also cannot pass it via _FOR_BUILD
+    # since that won't get picked up during configure.
+    # We also cannot pass in the compiler including std flags so we need to use
+    # the "plain" host compiler.
+    CONFIG_ENV :=  \
+        CPP="$(HOST_CPP)" \
+        CXXCPP="$(HOST_CPP)" \
+        CC="$(HOST_DEF_CC) $(HOST_CFLAGS) -I$(CROSSTOOLSDIR)/include" \
+        CXX="$(HOST_CXX) $(HOST_CXXFLAGS) -I$(CROSSTOOLSDIR)/include" \
+        LDFLAGS="-L$(CROSSTOOLSDIR)/lib $(USER_LDFLAGS)" \
+        TARGET_CC="$(KERNEL_CC) $(KERNEL_SYSROOT)" \
+        TARGET_CFLAGS="$(KERNEL_CFLAGS) $(development-curl--s_flag)" \
+        TARGET_CXX="$(KERNEL_CXX) $(KERNEL_SYSROOT)" \
+        TARGET_CXXFLAGS="$(KERNEL_CXXFLAGS) $(development-curl--s_flag)" \
+        TARGET_AS="$(TARGET_AS)" \
+        OBJCOPY="$(OBJCOPY)" \
+        TARGET_RANLIB="$(RANLIB)" \
+        TARGET_STRIP="$(STRIP_PLAIN)" \
+        TARGET_NM="$(NM_PLAIN)" \
+        TARGET_OBJCOPY="$(TARGET_OBJCOPY)"
+endif
+ifeq (target,target)
+    CONFIG_ENV :=  \
+        PKG_CONFIG_LIBDIR="$(AROS_DEVELOPMENT)/lib/pkgconfig" \
+        PKG_CONFIG_SYSROOT_DIR="$(AROSDIR)" \
+        CPP="$(TARGET_CPP) $(TARGET_SYSROOT)" \
+        CXXCPP="$(TARGET_CPP) $(TARGET_SYSROOT)" \
+        CC="$(TARGET_CC) $(TARGET_SYSROOT)" \
+        CFLAGS=" $(TARGET_CFLAGS) $(DEBUG_CFLAGS) $(OPTIMIZATION_CFLAGS)  $(ISA_FLAGS) -newclib $(development-curl--nix) $(development-curl--s_flag)" \
+        CXX="$(TARGET_CXX) $(TARGET_SYSROOT)" \
+        CXXFLAGS=" $(TARGET_CXXFLAGS) $(DEBUG_CFLAGS) $(OPTIMIZATION_CFLAGS)  $(ISA_FLAGS) -newclib $(development-curl--nix) $(development-curl--s_flag)" \
+        LDFLAGS="-L$(AROS_DEVELOPMENT)/lib $(USER_LDFLAGS) -newclib $(development-curl--nix) $(development-curl--s_flag)" \
+        AS="$(TARGET_AS)" \
+        CC_FOR_BUILD="$(HOST_DEF_CC)" \
+        CFLAGS_FOR_BUILD="$(HOST_CFLAGS)" \
+        CXX_FOR_BUILD="$(HOST_CXX)" \
+        CXXFLAGS_FOR_BUILD="$(HOST_CXXFLAGS)" \
+        RANLIB="$(RANLIB)" \
+        AR="$(AR_PLAIN)" \
+        STRIP="$(STRIP_PLAIN)" \
+        TARGET_CC="$(KERNEL_CC) $(KERNEL_SYSROOT)" \
+        TARGET_CFLAGS="$(KERNEL_CFLAGS) $(development-curl--s_flag)" \
+        TARGET_CXX="$(KERNEL_CXX) $(KERNEL_SYSROOT)" \
+        TARGET_CXXFLAGS="$(KERNEL_CXXFLAGS) $(development-curl--s_flag)" \
+        TARGET_AS="$(TARGET_AS)" \
+        OBJCOPY="$(OBJCOPY)" \
+        TARGET_RANLIB="$(RANLIB)" \
+        TARGET_STRIP="$(STRIP_PLAIN)" \
+        TARGET_NM="$(NM_PLAIN)" \
+        CC_FOR_TARGET="$(TARGET_CC) $(TARGET_SYSROOT)" \
+        CFLAGS_FOR_TARGET="$(TARGET_CFLAGS) -L$(AROS_DEVELOPMENT)/lib  $(ISA_FLAGS) -newclib $(development-curl--nix) $(development-curl--s_flag)" \
+        CXX_FOR_TARGET="$(TARGET_CXX) $(TARGET_SYSROOT)" \
+        CXXFLAGS_FOR_TARGET="$(TARGET_CFLAGS) -L$(AROS_DEVELOPMENT)/lib  $(ISA_FLAGS) -newclib $(development-curl--nix) $(development-curl--s_flag)"
+ifeq (yes,yes)
+    development-curl--config_opts += --build=$(AROS_HOST_CPU)-$(AROS_HOST_ARCH)\
+        --host=$(AROS_TARGET_CPU)-aros\
+        --target=$(AROS_TARGET_CPU)-aros\
+        --disable-nls\
+        --without-x --without-pic --disable-shared
+endif
+endif
+ifeq (target,kernel)
+    CONFIG_ENV :=  \
+        CPP="$(KERNEL_CPP)" \
+        CXXCPP="$(KERNEL_CPP)" \
+        CC="$(KERNEL_CC) $(KERNEL_SYSROOT)" \
+        CFLAGS="$(KERNEL_CFLAGS)  $(development-curl--s_flag)" \
+        CXX="$(KERNEL_CXX) $(KERNEL_SYSROOT)" \
+        CXXFLAGS="$(KERNEL_CXXFLAGS)  $(development-curl--s_flag)" \
+        AS="$(KERNEL_AS)" \
+        CC_FOR_BUILD="$(HOST_DEF_CC)" \
+        CFLAGS_FOR_BUILD="$(HOST_CFLAGS)" \
+        CXX_FOR_BUILD="$(HOST_CXX)" \
+        CXXFLAGS_FOR_BUILD="$(HOST_CXXFLAGS)" \
+        RANLIB="$(RANLIB)" \
+        TARGET_RANLIB="$(RANLIB)" \
+        TARGET_STRIP="$(STRIP_PLAIN)" \
+        TARGET_NM="$(NM_PLAIN)"
+ifeq (yes,yes)
+    development-curl--config_opts += --build=$(AROS_HOST_CPU)-$(AROS_HOST_ARCH)\
+        --host=$(AROS_TARGET_CPU)-aros\
+        --target=$(AROS_TARGET_CPU)-aros --disable-nls\
+        --without-x --without-pic --disable-shared
+endif
+endif
+
+ifeq (no,yes)
+    BUILD_ENV := $(CONFIG_ENV)
+endif
+
+.PHONY : development-curl- development-curl--clean development-curl--build_and_install-quick
+
+# When building for the host, we don't need to build the
+# linklibs - this is especially true when building the
+# crosstool toolchain on 'foreign' architectures (such as
+# building PPC on x86)
+
+#MM- development-curl--host : setup includes development-curl--quick
+#MM- development-curl--target : setup includes core-linklibs development-curl--quick
+#MM- development-curl-: development-curl--target
+
+# Using -j1 in install_command may result in a warning but finally
+# it does its job. make install for gcc does not work reliably for -jN
+# where N > 1.
+ifneq (install,)
+    development-curl--install_command = \
+        $(MAKE) PROGDIR="$(development-curl--PROGDIR)/" $(development-curl--install_opts) \
+        -C $(development-curl--pkgdir) install -j1
+
+    development-curl--uninstall_command = \
+    $(RM) $(development-curl--installflag) && \
+    $(MAKE) PROGDIR="$(development-curl--PROGDIR)/" \
+    $(development-curl--install_opts) -C $(development-curl--pkgdir) uninstall
+else
+    development-curl--install_command   := true
+    development-curl--uninstall_command := true
+endif
+
+#MM- development-curl--quick :  development-curl--configure development-curl-fixenv development-curl--build_and_install-quick postinstall-curl-delete-la-files development-curl-fixconfig development-curl--make-package
+
+#MM
+development-curl--build_and_install-quick :  $(development-curl--installflag)
+
+$(development-curl--installflag) : $(development-curl--configflag)
+	if ! $(MAKE) PROGDIR="$(call development-curl--volfunc, PROGDIR)" -q -C $(development-curl--pkgdir); then \
+            $(RM)  $(development-curl--installflag) && \
+	    $(BUILD_ENV) $(MAKE) PROGDIR="$(call development-curl--volfunc, PROGDIR)"\
+	     -C $(development-curl--pkgdir) && \
+	    $(development-curl--install_command) && \
+	    $(TOUCH) $@ -r $^; \
+        fi
+
+$(development-curl--pkgdir)/.files-touched:
+	@$(FOR) dir in $(development-curl--pkgdir) ; do \
+	    $(IF) $(TEST) ! -d $$dir ; then $(MKDIR) $$dir ; else $(NOP) ; fi ; \
+	done
+	find $(development-curl-portdir)/$(development-curl--builddir) -exec $(TOUCH) -c -r $(development-curl-portdir)/$(development-curl--builddir)/configure '{}' \; && \
+	$(TOUCH) $@
+
+#MM
+development-curl--uninstall :
+	$(development-curl--uninstall_command)
+
+#MM
+development-curl--configure : $(development-curl--configflag)
+
+$(development-curl--configflag) : TMP_SRCDIR := $(shell echo $(development-curl-portdir)/$(development-curl--builddir) | sed 's/^\(.\):\//\/\1\//')
+$(development-curl--configflag) : $(development-curl--pkgdir)/.files-touched $(TOP)/$(CURDIR)/mmakefile
+	$(RM) $@
+	@$(FOR) dir in $(development-curl--pkgdir) ; do \
+	    $(IF) $(TEST) ! -d $$dir ; then $(MKDIR) $$dir ; else $(NOP) ; fi ; \
+	done
+	cd $(development-curl--pkgdir) && \
+	find . -name config.cache -exec $(RM) '{}' \; && \
+	$(CONFIG_ENV) $(TMP_SRCDIR)/configure $(development-curl--config_opts) \
+	    $(CURL_OPTIONS) && \
+	$(TOUCH) $@
+
+#MM
+development-curl--clean : development-curl--uninstall
+	@$(RM) $(development-curl--pkgdir)
+
+.PHONY : development-curl--make-package development-curl--create-patch
+#MM development-curl--make-package : development-curl--quick
+
+#MM
+development-curl--make-package : $(development-curl--package)
+ 
+#There seems to be a bug, either with my clock or with make, 'cause it may happen
+#that $^ and $@ have exactly the same mtime, and in that case make tries
+#to rebuild $@ again, which would fail because the directory where
+#the package got installed would not exist anymore. 
+#We work this around by using an if statement to manually check the mtimes.
+$(development-curl--package-basename).tar.bz2 :
+	@$(IF) test $(development-curl-installflag) -nt $@ || ! test -f $@; then \
+        $(RM) $@ ; \
+        $(ECHO) "Building   \`$(development-curl--package-basename).tar.bz2'" ; \
+        mkdir -p "$(DISTDIR)/Packages" ; \
+        mkdir -p "$(development-curl-prefix)" ; \
+        cd $(development-curl--package-dir) ; \
+        tar -cvf $(development-curl--package-basename).tar * ; \
+        bzip2 -9 -f $(development-curl--package-basename).tar ; \
+    fi
+
+
+#MM
+postinstall-curl-delete-la-files:
+	$(RM) $(AROS_DEVELOPMENT)/lib/*.la
+
+
+#MM
+development-curl-fixenv :
+	@for file in $(GENDIR)/$(CURDIR)/curl/lib/curl_config.h; \
 	do \
 	$(SED) -i -e 's@/\* #undef HAVE_SOCKET \*/@#define HAVE_SOCKET 1@' $$file; \
 	$(SED) -i -e 's@/\* #undef HAVE_SELECT \*/@#define HAVE_SELECT 1@' $$file; \
@@ -42,4 +435,25 @@ development-curl-fixconfig :
 	$(SED) -i -e 's@#define HAVE_IOCTL 1@/\* #undef HAVE_IOCTL \*/@' $$file; \
 	$(SED) -i -e 's@#define HAVE_IOCTL_FIONBIO 1@/\* #undef HAVE_IOCTL_FIONBIO \*/@' $$file; \
 	$(SED) -i -e 's@#define HAVE_IOCTL_SIOCGIFADDR 1@/\* #undef HAVE_IOCTL_SIOCGIFADDR \*/@' $$file; \
+	done; \
+	for file in $(GENDIR)/$(CURDIR)/curl/src/Makefile; \
+	do \
+	$(SED) -i -e 's@-lssl -lssl -lcrypto -lz@-lssl -lcrypto -lz@' $$file; \
 	done
+
+#MM
+development-curl-fixconfig :
+	@for file in $(AROS_DEVELOPER)/bin/curl-config; \
+	do \
+	$(SED) -i -e 's@-lssl -lssl -lcrypto -lz@-lssl -lcrypto -lz@' $$file; \
+	done; \
+	$(ECHO) "SYS:Developer" > $(AROS_ENVARC)/SYS/Packages/Curl
+
+# Delete generated makefiles
+#MM
+clean ::
+	@$(RM) $(TOP)/$(CURDIR)/mmakefile $(TOP)/$(CURDIR)/mmakefile.bak
+
+include $(SRCDIR)/config/make.tail
+
+BDID := $(BDTARGETID)
