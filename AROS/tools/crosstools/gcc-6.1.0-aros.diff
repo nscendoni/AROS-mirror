@@ -395,7 +395,7 @@ diff -ruN gcc-6.1.0/gcc/config/aros.h gcc-6.1.0.aros/gcc/config/aros.h
 +
 +#undef	LIB_SPEC
 +#define LIB_SPEC \
-+  "--start-group -lmui -larossupport -lamiga %{!nostartfiles:%{!static:%{!nostdc:%{!noposixc:-lposixc} -lstdcio -lstdc}}%{static:%{!nostdc:-lstdc.static}}} -lcodesets -lkeymap -lexpansion -lcommodities -ldiskfont -lasl -lmuimaster -ldatatypes -lcybergraphics -lworkbench -licon -lintuition -lgadtools -llayers -laros -lpartition -liffparse -lgraphics -llocale -ldos -lutility -loop %{!nosysbase:-lexec} -lautoinit -llibinit %{nostartfiles:%{static:-lstdc.static}} --end-group"
++  "--start-group -lmui -larossupport -lamiga %{!nostartfiles:%{!static:%{newclib:%{!nostdc:%{!noposixc:-lposixc} -lstdcio -lstdc}} %{!newclib:%{!nostdc:-larosc}}} %{static:%{!nostdc:-lstdc.static}}} -lcodesets -lkeymap -lexpansion -lcommodities -ldiskfont -lasl -lmuimaster -ldatatypes -lcybergraphics -lworkbench -licon -lintuition -lgadtools -llayers -laros -lpartition -liffparse -lgraphics -llocale -ldos -lutility -loop %{!nosysbase:-lexec} -lautoinit -llibinit %{nostartfiles:%{static:-lstdc.static}} --end-group"
 +
 +#undef	LIBSTDCXX_STATIC
 +#define LIBSTDCXX_STATIC "pthread"
@@ -412,7 +412,7 @@ diff -ruN gcc-6.1.0/gcc/config/aros.h gcc-6.1.0.aros/gcc/config/aros.h
 diff -ruN gcc-6.1.0/gcc/config/aros.opt gcc-6.1.0.aros/gcc/config/aros.opt
 --- gcc-6.1.0/gcc/config/aros.opt	1970-01-01 01:00:00.000000000 +0100
 +++ gcc-6.1.0.aros/gcc/config/aros.opt	2016-04-27 15:13:21.001535038 +0100
-@@ -0,0 +1,35 @@
+@@ -0,0 +1,39 @@
 +; Processor-independent options for AROS.
 +
 +; Copyright (C) 2015 Free Software Foundation, Inc.
@@ -446,6 +446,10 @@ diff -ruN gcc-6.1.0/gcc/config/aros.opt gcc-6.1.0.aros/gcc/config/aros.opt
 +Driver
 +
 +nix
++Driver
++
++
++newclib
 +Driver
 +
 diff -ruN gcc-6.1.0/gcc/config/i386/aros64.h gcc-6.1.0.aros/gcc/config/i386/aros64.h
@@ -1961,3 +1965,15 @@ diff -ruN gcc-6.1.0/libstdc++-v3/include/std/ratio gcc-6.1.0.aros/libstdc++-v3/i
        static constexpr int __shift = __builtin_clzll(__d);
        static constexpr int __coshift_ = sizeof(uintmax_t) * 8 - __shift;
        static constexpr int __coshift = (__shift != 0) ? __coshift_ : 0;
+diff -ruN gcc-6.1.0/gcc/ubsan.c gcc-6.1.0.aros/gcc/ubsan.c
+--- gcc-6.1.0/gcc/ubsan.c	Wed Jan 06 11:24:15 2016
++++ gcc-6.1.0.aros/gcc/ubsan.c	Mon Nov 05 16:07:07 2018
+@@ -1470,7 +1470,7 @@
+
+   expanded_location xloc = expand_location (loc);
+   if (xloc.file == NULL || strncmp (xloc.file, "\1", 2) == 0
+-      || xloc.file == '\0' || xloc.file[0] == '\xff'
++      || xloc.file[0] == '\0' || xloc.file[0] == '\xff'
+       || xloc.file[1] == '\xff')
+     return false;
+
