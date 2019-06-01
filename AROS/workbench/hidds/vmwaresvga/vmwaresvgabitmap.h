@@ -1,6 +1,6 @@
 /*
-    Copyright © 1995-2006, The AROS Development Team. All rights reserved.
-    $Id: vmwaresvgabitmap.h 30792 2009-03-07 22:40:04Z neil $
+    Copyright ï¿½ 1995-2006, The AROS Development Team. All rights reserved.
+    $Id: vmwaresvgabitmap.h 55666 2019-02-05 19:27:57Z IridiumFX $
 */
 
 #ifndef _VMWARESVGA_BITMAP_H
@@ -42,10 +42,6 @@ struct HWRegs {
 	UBYTE clt[768];
 };
 
-/* Only include vmwaresvgahardware.h now so that struct Box is known */
-
-#include "vmwaresvgahardware.h"
-
 struct BitmapData {
 	struct HWRegs       regs;
 	struct HWData       *data;
@@ -58,5 +54,9 @@ struct BitmapData {
 	BYTE                disp;                   /* !=0 - displayable */
 	struct MouseData    *mouse;
 };
+
+/* Only include vmwaresvgahardware.h now so that struct Box is known */
+
+#include "vmwaresvgahardware.h"
 
 #endif /* _VMWARESVGA_BITMAP_H */

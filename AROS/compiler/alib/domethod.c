@@ -51,10 +51,12 @@
 
 ******************************************************************************/
 {
-    ASSERT_VALID_PTR(obj);
+    //DBPRINTF("hello world\n")
 
     if (!obj)
 	return 0L;
+
+    ASSERT_VALID_PTR(obj);
 
     ASSERT_VALID_PTR(OCLASS(obj));
     ASSERT_VALID_PTR(message);
@@ -64,9 +66,10 @@
 
 IPTR DoMethod (Object * obj, IPTR MethodID, ...)
 {
-    ASSERT_VALID_PTR(obj);
     if (!obj)
     	return 0L;
+
+    ASSERT_VALID_PTR(obj);
 
     ASSERT_VALID_PTR(OCLASS(obj));
 

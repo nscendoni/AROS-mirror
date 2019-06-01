@@ -25,6 +25,7 @@ FFMPEG_OPTIONS := \
         --extra-cflags=$(FFMPEG_CFLAGS) \
         --disable-yasm \
         --disable-inline-asm \
+	--enable-debug=3 \
         --disable-programs --disable-doc
 
 NOWARN_FLAGS := $(NOWARN_DEPRECATED_DECLARATIONS) $(NOWARN_UNUSED_RESULT)
